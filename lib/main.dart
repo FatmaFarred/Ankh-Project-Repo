@@ -2,12 +2,15 @@ import 'package:ankh_project/feauture/authentication/register/controller/registe
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
 import 'firebase_options.dart';
+import 'l10n/app_localizations.dart';
+import 'l10n/languge_cubit.dart';
 
 
 
@@ -15,11 +18,17 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await getIt.allReady();
+  await ScreenUtil.ensureScreenSize(); // Initialize ScreenUtil early
+
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MyApp());
+  runApp(  BlocProvider(
+    create: (context) => LanguageCubit(),
+    child:  MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +37,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LanguageCubit>().state;
 
     return ScreenUtilInit(
         designSize: const Size(360, 690), // Your design size (width, height)
@@ -36,6 +46,18 @@ class MyApp extends StatelessWidget {
     builder: (_, child) {
       return
         MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'), // English
+            Locale('es'), // Spanish
+          ],
+          locale:locale,
+
           title: 'Flutter Demo',
           theme: ThemeData(
             // This is the theme of your application.
@@ -55,7 +77,7 @@ class MyApp extends StatelessWidget {
             // tested with just a hot reload.
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          home:  MyHomePage(title: 'Flutter Demo Home Page'),
         );
     }
     );
@@ -98,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LanguageCubit>().state;
 
     return  BlocListener<RegisterCubit, RegisterState>(
         bloc: registerViewModel,
@@ -152,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+             Text(AppLocalizations.of(context)!.language),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
