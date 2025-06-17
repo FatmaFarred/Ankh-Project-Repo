@@ -47,8 +47,12 @@ dependencies:
   shared_preferences:
   firebase_auth:
   firebase_core:
+  cloud_firestore:
   google_sign_in:
+  firebase_messaging:
   logger:
+  rename:
+
 
 dev_dependencies:
   flutter_test:
@@ -56,12 +60,13 @@ dev_dependencies:
   hive_generator:
   build_runner:
   injectable_generator:
+  analyzer: ^6.11.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
