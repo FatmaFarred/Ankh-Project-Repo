@@ -11,6 +11,9 @@ import 'feauture/authentication/register/controller/register_states.dart';
 import 'feauture/authentication/signin/controller/sigin_states.dart';
 import 'feauture/authentication/user_cubit/user_cubit.dart';
 import 'firebase_options.dart';
+import 'firebase_service/notification_service/fcm_api_service.dart';
+import 'firebase_service/notification_service/local notification.dart';
+import 'firebase_service/notification_service/push notification_manager.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n/languge_cubit.dart';
 
@@ -26,6 +29,9 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await LocalNotification().initNotification();
+
+  await FcmApi().initNotification();
   runApp(  MultiBlocProvider(
       providers: [
   BlocProvider(
@@ -73,7 +79,7 @@ class MyApp extends StatelessWidget {
             // state is not lost during the reload. To reset the state, use hot
             // restart instead.
             //
-            // This works for code too, not just values: Most code changes can be
+            // This works for code too, not just values: Mnost code changes can be
             // tested with just a hot reload.
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           ),
@@ -183,7 +189,21 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-          ],
+
+        ElevatedButton(
+
+        onPressed: () async {
+    await FirebaseMessagingService.sendNotification(
+    targetFcmToken: "fSW4MIvMTfW3mStKuFHLPN:APA91bHKwZNOMAmbAhr9sAe1dzBQBBaMoIIKDuA7Nf9f1JX3s5CPh5O2pgvu07kU4tRyScFhABCzuvLbuMshnHQ07lrft5n5S43D3m9yV-U0vPPxmJ2TW_Q"
+      ,
+    title: 'New Task Assigned',
+    body: 'You have a new task to complete!',
+    );
+    },
+      child: Text('Send Notification to User'),
+    )
+
+    ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
