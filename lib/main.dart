@@ -3,7 +3,6 @@ import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cub
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'api_service/di/di.dart';
@@ -46,7 +45,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = context.watch<LanguageCubit>().state;
+    final locale = context.watch<LanguageCubit>().state ;
 
     return ScreenUtilInit(
         designSize: const Size(360, 690),
@@ -129,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return  BlocListener<SignInCubit, SignInState>(
         bloc: signInViewModel,
         listener: (context, state) {
-      if (state is RegisterLoading) {
+      if (state is SignInLoading) {
         CustomDialog.loading(
             context: context,
             message: "LOADING",
@@ -140,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
             context: context,
             title: "error",
             message: state.error.message);
-      } else if (state is RegisterSuccess) {
+      } else if (state is SignInSuccess) {
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
           cancelable: true,
@@ -179,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             Text("AppLocalizations.of(context)!.language"),
+             Text(AppLocalizations.of(context)!.language),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -189,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          signInViewModel.signIn();
+          onSignInClick();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -202,6 +201,8 @@ class _MyHomePageState extends State<MyHomePage> {
        print (user?.name??" user name is empty");
     if (user != null) {
       context.read<UserCubit>().changeUser(user);
+      signInViewModel.signIn();
+
 
 
     }
