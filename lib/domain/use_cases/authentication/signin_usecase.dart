@@ -3,12 +3,12 @@ import 'package:injectable/injectable.dart';
 
 import '../../repositries_and_data_sources/repositries/authentication_repositry.dart';
 @injectable
-class RegisterUseCase {
+class SignInUseCase {
   final AuthenticationRepositry authRepository;
 
-  RegisterUseCase(this.authRepository);
+  SignInUseCase(this.authRepository);
 
-  Future<MyUser?> execute(String email, String password,String name) {
-    return authRepository.register(name, email, password);
+  Future<MyUser?> execute(String email, String password) {
+    return authRepository.signIn(email, password);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
+import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
+import 'feauture/authentication/signin/controller/sigin_states.dart';
+import 'feauture/authentication/user_cubit/user_cubit.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n/languge_cubit.dart';
@@ -18,14 +21,21 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await getIt.allReady();
-  await ScreenUtil.ensureScreenSize(); // Initialize ScreenUtil early
+  await ScreenUtil.ensureScreenSize();
 
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(  BlocProvider(
-    create: (context) => LanguageCubit(),
+  runApp(  MultiBlocProvider(
+      providers: [
+  BlocProvider(
+  create: (context) => LanguageCubit()),
+
+        BlocProvider(
+  create: (context) => UserCubit()),
+  ],
+
     child:  MyApp(),
   ),
   );
@@ -34,28 +44,19 @@ void main() async{
 class MyApp extends StatelessWidget {
    MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final locale = context.watch<LanguageCubit>().state;
 
     return ScreenUtilInit(
-        designSize: const Size(360, 690), // Your design size (width, height)
+        designSize: const Size(360, 690),
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (_, child) {
       return
         MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('en'), // English
-            Locale('es'), // Spanish
-          ],
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           locale:locale,
 
           title: 'Flutter Demo',
@@ -105,6 +106,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   RegisterCubit registerViewModel = getIt<RegisterCubit>();
+  SignInCubit signInViewModel = getIt<SignInCubit>();
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -122,15 +125,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final locale = context.watch<LanguageCubit>().state;
 
-    return  BlocListener<RegisterCubit, RegisterState>(
-        bloc: registerViewModel,
+
+    return  BlocListener<SignInCubit, SignInState>(
+        bloc: signInViewModel,
         listener: (context, state) {
       if (state is RegisterLoading) {
         CustomDialog.loading(
             context: context,
             message: "LOADING",
             cancelable: false);
-      } else if (state is RegisterFailure) {
+      } else if (state is SignInFailure) {
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
             context: context,
@@ -175,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             Text(AppLocalizations.of(context)!.language),
+             Text("AppLocalizations.of(context)!.language"),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -185,12 +189,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          registerViewModel.register();
+          signInViewModel.signIn();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     )
     );
+  }
+  void onSignInClick ()async{
+    final user = await signInViewModel.signIn();
+       print (user?.name??" user name is empty");
+    if (user != null) {
+      context.read<UserCubit>().changeUser(user);
+
+
+    }
   }
 }

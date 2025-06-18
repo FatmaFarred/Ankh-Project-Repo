@@ -20,8 +20,11 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
 import '../../domain/repositries_and_data_sources/repositries/authentication_repositry.dart'
     as _i817;
 import '../../domain/use_cases/authentication/register_usecase.dart' as _i456;
+import '../../domain/use_cases/authentication/signin_usecase.dart' as _i96;
 import '../../feauture/authentication/register/controller/register_cubit.dart'
     as _i257;
+import '../../feauture/authentication/signin/controller/sigin_cubit.dart'
+    as _i938;
 import '../../firebase_service/firestore_service/firestore_service.dart'
     as _i664;
 import '../api_manager.dart' as _i1069;
@@ -39,14 +42,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i1069.ApiManager>(() => _i1069.ApiManager());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
-    gh.factory<_i430.RegisterRemoteDataSource>(
-        () => _i699.RegisterRemoteDataSourceImpl());
-    gh.factory<_i817.RegisterRepositry>(() =>
-        _i972.RegisterRepositryImpl(gh<_i430.RegisterRemoteDataSource>()));
+    gh.factory<_i430.AuthenticationRemoteDataSource>(
+        () => _i699.AuthenticationRemoteDataSourceImpl());
+    gh.factory<_i817.AuthenticationRepositry>(() =>
+        _i972.AuthenticationRepositryImpl(
+            gh<_i430.AuthenticationRemoteDataSource>()));
     gh.factory<_i456.RegisterUseCase>(
-        () => _i456.RegisterUseCase(gh<_i817.RegisterRepositry>()));
+        () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i96.SignInUseCase>(
+        () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i257.RegisterCubit>(
         () => _i257.RegisterCubit(gh<_i456.RegisterUseCase>()));
+    gh.factory<_i938.SignInCubit>(
+        () => _i938.SignInCubit(gh<_i96.SignInUseCase>()));
     return this;
   }
 }
