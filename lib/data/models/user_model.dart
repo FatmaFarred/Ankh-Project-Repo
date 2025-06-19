@@ -5,7 +5,7 @@
   String? name;
   String? email;
   String? uid;
-  String? deviceToken;
+  List<String> deviceTokens;
 
 
 
@@ -14,7 +14,7 @@
   required this.name,
   required this.email,
   required this.uid,
-    required this.deviceToken,
+    required this.deviceTokens,
   });
 
   MyUser.fromFireStore(Map<String, dynamic> dataMap)
@@ -22,14 +22,16 @@
   name: dataMap["name"] ?? 'Unknown',
   email: dataMap["email"] ?? '',
       uid: dataMap["uid"] ?? '',
-      deviceToken: dataMap["deviceToken"] ?? '',
+    deviceTokens: List<String>.from(dataMap["deviceTokens"] ?? []),
   );
 
   Map<String, dynamic> toFireStore() {
   return {
   "name": name,
   "email": email,
-  "uid": uid, "deviceToken":deviceToken,
+  "uid": uid,
+    "deviceTokens":deviceTokens,
+
 
   };
   }

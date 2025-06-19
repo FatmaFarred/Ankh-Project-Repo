@@ -129,6 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final locale = context.watch<LanguageCubit>().state;
+    final currentUser = context.read<UserCubit>().state;
+
 
 
     return  BlocListener<SignInCubit, SignInState>(
@@ -193,14 +195,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ElevatedButton(
 
         onPressed: () async {
-    await FirebaseMessagingService.sendNotification(
-    targetFcmToken: "fSW4MIvMTfW3mStKuFHLPN:APA91bHKwZNOMAmbAhr9sAe1dzBQBBaMoIIKDuA7Nf9f1JX3s5CPh5O2pgvu07kU4tRyScFhABCzuvLbuMshnHQ07lrft5n5S43D3m9yV-U0vPPxmJ2TW_Q"
-      ,
+    await FirebaseMessagingService.sendNotificationToAllDevices(
+
+
+      tokens:["dPjNRYwLQ6mdEwOTYmEZtH:APA91bElaywk1PV2Mr77JoVSubcNS7AZNW4mripBZ9eah-MYVXmhLFLgIuXdmYr9rByCifogqHGcWd9NW79c0V6XhdpTwQENcnq8FZ4YB723H3QEpaaJFS0","fSW4MIvMTfW3mStKuFHLPN:APA91bHKwZNOMAmbAhr9sAe1dzBQBBaMoIIKDuA7Nf9f1JX3s5CPh5O2pgvu07kU4tRyScFhABCzuvLbuMshnHQ07lrft5n5S43D3m9yV-U0vPPxmJ2TW_Q",
+        "ciWUiE_iTs2cX7ZDhIm9BV:APA91bHQkLMEE4emC-NE6pTkpEaWvRMF5FR3aB6rM-vne6-2TS0kgfktS7ajdUQnNHHmAr--JwiPWcguzRRdktg96Oi5X2K83J-Jwf1jD9L_vdekNSVVHmc"
+
+
+      ],
     title: 'New Task Assigned',
-    body: 'You have a new task to complete!',
+    body: 'You have a new task to complete!!!',
     );
     },
       child: Text('Send Notification to User'),
+
     )
 
     ],

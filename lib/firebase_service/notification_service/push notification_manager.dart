@@ -49,4 +49,14 @@ class FirebaseMessagingService {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
+
+  static Future<void> sendNotificationToAllDevices({
+    required List<String> tokens,
+    required String title,
+    required String body,
+  }) async {
+    for (final token in tokens) {
+      await sendNotification(targetFcmToken: token, title: title, body: body);
+    }
+  }
 }

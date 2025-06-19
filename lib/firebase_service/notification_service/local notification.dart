@@ -21,21 +21,21 @@ class LocalNotification {
 }
 
 static void showBasicNotification (RemoteMessage message)async{
-  final http.Response image = await http.get(Uri.parse(message.notification?.android?.imageUrl??""));
+  /*final http.Response image = await http.get(Uri.parse(message.notification?.android?.imageUrl??""));
   BigPictureStyleInformation bigPictureStyleInformation =
   BigPictureStyleInformation(
     ByteArrayAndroidBitmap.fromBase64String(base64Encode(image.bodyBytes)),
     largeIcon: ByteArrayAndroidBitmap.fromBase64String(base64Encode(image.bodyBytes)),
-  );
+  );*/
   NotificationDetails details =NotificationDetails(
     android:AndroidNotificationDetails(
         'channel_id',
         'channel_name',
       importance: Importance.max,
       priority: Priority.high,
-        styleInformation: bigPictureStyleInformation,
+      //  styleInformation: bigPictureStyleInformation,
       playSound: true,
-      sound: RawResourceAndroidNotificationSound('custom_notification'.split('.').first),
+      //sound: RawResourceAndroidNotificationSound('custom_notification'.split('.').first),
 
     ),
 

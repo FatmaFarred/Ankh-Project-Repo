@@ -17,7 +17,8 @@ import '../../models/user_model.dart';
           .createUserWithEmailAndPassword(email: email, password: password);
       final deviceToken = await FirebaseMessaging.instance.getToken();
 
-      MyUser myUser= MyUser(uid: credential.user?.uid??"", name: name, email: email,deviceToken:deviceToken??"empty device token" );
+      MyUser myUser= MyUser(uid: credential.user?.uid??"", name: name, email: email,
+        deviceTokens: deviceToken != null ? [deviceToken] : [], );
       await FireBaseUtilies.addUser(myUser);
 
 
@@ -35,6 +36,8 @@ import '../../models/user_model.dart';
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      final deviceToken = await FirebaseMessaging.instance.getToken();
+      await FireBaseUtilies.addDeviceTokenToUser(credential.user?.uid??"", deviceToken??"");
       MyUser? myUser= await FireBaseUtilies.readUserFromFireStore(credential.user?.uid??"");
       //todo: change the user in presentation layer
       return myUser;

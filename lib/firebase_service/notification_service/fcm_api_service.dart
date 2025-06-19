@@ -15,9 +15,9 @@ import 'local notification.dart';
     FirebaseMessaging.onBackgroundMessage(handleBackGround);
     FirebaseMessaging.onMessage.listen((RemoteMessage message){
       LocalNotification.showBasicNotification(message);
-      firebaseMessaging.subscribeToTopic('all').then((val){
+     /* firebaseMessaging.subscribeToTopic('all').then((val){
         print("subscribed");
-      });
+      });*/
 
     });
   }

@@ -28,6 +28,17 @@ class FireBaseUtilies {
 
   }
 
+  static Future<void> addDeviceTokenToUser(String uid, String token) async {
+    await createUserCollection().doc(uid).update({
+      'deviceTokens': FieldValue.arrayUnion([token])
+    });
+  }
+  static Future<void> removeDeviceTokenFromUser(String uid, String token) async {
+    await createUserCollection().doc(uid).update({
+      'deviceTokens': FieldValue.arrayRemove([token])
+    });
+  }
+
 
 
 
