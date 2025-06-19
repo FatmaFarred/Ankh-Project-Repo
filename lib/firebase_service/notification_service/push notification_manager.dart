@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
+
 class FirebaseMessagingService {
   static Future<void> sendNotification({
     required String targetFcmToken,
@@ -23,26 +24,20 @@ class FirebaseMessagingService {
     final projectId = "ankh-project";
 
     final url = Uri.parse(
-        'https://fcm.googleapis.com/v1/projects/$projectId/messages:send');
+      'https://fcm.googleapis.com/v1/projects/$projectId/messages:send',
+    );
 
     final message = {
       'message': {
         'token': targetFcmToken,
-        'notification': {
-          'title': title,
-          'body': body,
-        },
-        'android': {
-          'priority': 'high',
-        }
-      }
+        'notification': {'title': title, 'body': body},
+        'android': {'priority': 'high'},
+      },
     };
 
     final response = await client.post(
       url,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode(message),
     );
 

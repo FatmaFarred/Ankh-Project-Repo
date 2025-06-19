@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
@@ -8,22 +7,25 @@ import '../../../domain/repositries_and_data_sources/data_sources/remote_data_so
 import '../../../feauture/authentication/user_cubit/user_cubit.dart';
 import '../../../firebase_service/firestore_service/firestore_service.dart';
 import '../../models/user_model.dart';
-@Injectable(as: AuthenticationRemoteDataSource)
- class AuthenticationRemoteDataSourceImpl implements AuthenticationRemoteDataSource {
 
-  Future <MyUser?> register (String name , String email,String password ,)async{
+@Injectable(as: AuthenticationRemoteDataSource)
+class AuthenticationRemoteDataSourceImpl
+    implements AuthenticationRemoteDataSource {
+  Future<MyUser?> register(String name, String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       final deviceToken = await FirebaseMessaging.instance.getToken();
 
-      MyUser myUser= MyUser(uid: credential.user?.uid??"", name: name, email: email,
-        deviceTokens: deviceToken != null ? [deviceToken] : [], );
+      MyUser myUser = MyUser(
+        uid: credential.user?.uid ?? "",
+        name: name,
+        email: email,
+        deviceTokens: deviceToken != null ? [deviceToken] : [],
+      );
       await FireBaseUtilies.addUser(myUser);
 
-
       return myUser;
-
     } on FirebaseAuthException catch (e) {
       throw _mapFirebaseException(e);
     } catch (e) {
@@ -32,13 +34,20 @@ import '../../models/user_model.dart';
   }
 
   @override
-  Future<MyUser?> signIn(String email, String password) async{
+  Future<MyUser?> signIn(String email, String password) async {
     try {
-      final credential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       final deviceToken = await FirebaseMessaging.instance.getToken();
-      await FireBaseUtilies.addDeviceTokenToUser(credential.user?.uid??"", deviceToken??"");
-      MyUser? myUser= await FireBaseUtilies.readUserFromFireStore(credential.user?.uid??"");
+      await FireBaseUtilies.addDeviceTokenToUser(
+        credential.user?.uid ?? "",
+        deviceToken ?? "",
+      );
+      MyUser? myUser = await FireBaseUtilies.readUserFromFireStore(
+        credential.user?.uid ?? "",
+      );
       //todo: change the user in presentation layer
       return myUser;
     } on FirebaseAuthException catch (e) {
@@ -47,20 +56,10 @@ import '../../models/user_model.dart';
       throw AuthFailure("An unknown error occurred. Please try again later.");
     }
   }
+}
 
-
-  }
-
-
-
-
-
-
-
-
-  AuthFailure _mapFirebaseException(FirebaseAuthException e) {
+AuthFailure _mapFirebaseException(FirebaseAuthException e) {
   switch (e.code) {
-
     case 'user-not-found':
       return AuthFailure("لم يتم العثور على مستخدم بهذا البريد الإلكتروني.");
     case 'wrong-password':
@@ -73,6 +72,3 @@ import '../../models/user_model.dart';
       return AuthFailure(e.message ?? "Authentication failed.");
   }
 }
-
-
-

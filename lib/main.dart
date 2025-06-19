@@ -1,5 +1,7 @@
+import 'package:ankh_project/data/models/user_model.dart';
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/firebase_service/firestore_service/firestore_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,52 +19,45 @@ import 'firebase_service/notification_service/push notification_manager.dart';
 import 'l10n/app_localizations.dart';
 import 'l10n/languge_cubit.dart';
 
-
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await getIt.allReady();
   await ScreenUtil.ensureScreenSize();
 
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalNotification().initNotification();
 
   await FcmApi().initNotification();
-  runApp(  MultiBlocProvider(
+  runApp(
+    MultiBlocProvider(
       providers: [
-  BlocProvider(
-  create: (context) => LanguageCubit()),
+        BlocProvider(create: (context) => LanguageCubit()),
 
-        BlocProvider(
-  create: (context) => UserCubit()),
-  ],
+        BlocProvider(create: (context) => UserCubit()),
+      ],
 
-    child:  MyApp(),
-  ),
+      child: MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final locale = context.watch<LanguageCubit>().state ;
+    final locale = context.watch<LanguageCubit>().state;
 
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
-    minTextAdapt: true,
-    splitScreenMode: true,
-    builder: (_, child) {
-      return
-        MaterialApp(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          locale:locale,
+          locale: locale,
 
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -83,15 +78,14 @@ class MyApp extends StatelessWidget {
             // tested with just a hot reload.
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           ),
-          home:  MyHomePage(title: 'Flutter Demo Home Page'),
+          home: MyHomePage(title: 'Flutter Demo Home Page'),
         );
-    }
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-
   const MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -112,6 +106,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   RegisterCubit registerViewModel = getIt<RegisterCubit>();
   SignInCubit signInViewModel = getIt<SignInCubit>();
+  late List<String> devicesToken;
 
   int _counter = 0;
 
@@ -131,108 +126,109 @@ class _MyHomePageState extends State<MyHomePage> {
     final locale = context.watch<LanguageCubit>().state;
     final currentUser = context.read<UserCubit>().state;
 
-
-
-    return  BlocListener<SignInCubit, SignInState>(
-        bloc: signInViewModel,
-        listener: (context, state) {
-      if (state is SignInLoading) {
-        CustomDialog.loading(
+    return BlocListener<SignInCubit, SignInState>(
+      bloc: signInViewModel,
+      listener: (context, state) {
+        if (state is SignInLoading) {
+          CustomDialog.loading(
             context: context,
             message: "LOADING",
-            cancelable: false);
-      } else if (state is SignInFailure) {
-        Navigator.of(context).pop();
-        CustomDialog.positiveButton(
+            cancelable: false,
+          );
+        } else if (state is SignInFailure) {
+          Navigator.of(context).pop();
+          CustomDialog.positiveButton(
             context: context,
             title: "error",
-            message: state.error.message);
-      } else if (state is SignInSuccess) {
-        Navigator.of(context).pop();
-        CustomDialog.positiveButton(
-          cancelable: true,
+            message: state.error.message,
+          );
+        } else if (state is SignInSuccess) {
+          Navigator.of(context).pop();
+          CustomDialog.positiveButton(
+            cancelable: true,
             context: context,
             title: "success",
-            message:"SUCCESS"
-        );
-      }
-    },
-    child:Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             Text(AppLocalizations.of(context)!.language),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-
-        ElevatedButton(
-
-        onPressed: () async {
-    await FirebaseMessagingService.sendNotificationToAllDevices(
-
-
-      tokens:["dPjNRYwLQ6mdEwOTYmEZtH:APA91bElaywk1PV2Mr77JoVSubcNS7AZNW4mripBZ9eah-MYVXmhLFLgIuXdmYr9rByCifogqHGcWd9NW79c0V6XhdpTwQENcnq8FZ4YB723H3QEpaaJFS0","fSW4MIvMTfW3mStKuFHLPN:APA91bHKwZNOMAmbAhr9sAe1dzBQBBaMoIIKDuA7Nf9f1JX3s5CPh5O2pgvu07kU4tRyScFhABCzuvLbuMshnHQ07lrft5n5S43D3m9yV-U0vPPxmJ2TW_Q",
-        "ciWUiE_iTs2cX7ZDhIm9BV:APA91bHQkLMEE4emC-NE6pTkpEaWvRMF5FR3aB6rM-vne6-2TS0kgfktS7ajdUQnNHHmAr--JwiPWcguzRRdktg96Oi5X2K83J-Jwf1jD9L_vdekNSVVHmc"
-
-
-      ],
-    title: 'New Task Assigned',
-    body: 'You have a new task to complete!!!',
-    );
-    },
-      child: Text('Send Notification to User'),
-
-    )
-
-    ],
+            message: "SUCCESS",
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          // TRY THIS: Try changing the color here to a specific color (to
+          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+          // change color while the other colors stay the same.
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
         ),
+        body: Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            //
+            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+            // action in the IDE, or press "p" in the console), to see the
+            // wireframe for each widget.
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(AppLocalizations.of(context)!.language),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+
+              ElevatedButton(
+                onPressed: () async {
+                  final user = await signInViewModel.signIn();
+
+                  var tokens = await FireBaseUtilies.getDeviceToken(
+                    "${user?.uid}",
+                  );
+                  devicesToken = tokens;
+                },
+                child: Text('Get Device Token First'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseMessagingService.sendNotificationToAllDevices(
+                    tokens: devicesToken,
+                    title: 'New Task Assigned',
+                    body: 'You have a new task to complete!!!',
+                  );
+                  print("notification Sent to $devicesToken");
+                },
+                child: Text('Send Notification to User'),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            onSignInClick();
+          },
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          onSignInClick();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    )
     );
   }
-  void onSignInClick ()async{
+
+  void onSignInClick() async {
     final user = await signInViewModel.signIn();
-       print (user?.name??" user name is empty");
+    print(user?.name ?? " user name is empty");
     if (user != null) {
       context.read<UserCubit>().changeUser(user);
       signInViewModel.signIn();
-
-
-
     }
   }
 }
