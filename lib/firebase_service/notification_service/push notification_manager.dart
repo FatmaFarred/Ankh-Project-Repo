@@ -5,7 +5,7 @@ import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
 
 class FirebaseMessagingService {
-  static Future<void> sendNotification({
+   Future<void> sendNotification({
     required String targetFcmToken,
     required String title,
     required String body,
@@ -45,13 +45,5 @@ class FirebaseMessagingService {
     print('Response body: ${response.body}');
   }
 
-  static Future<void> sendNotificationToAllDevices({
-    required List<String> tokens,
-    required String title,
-    required String body,
-  }) async {
-    for (final token in tokens) {
-      await sendNotification(targetFcmToken: token, title: title, body: body);
-    }
-  }
+
 }

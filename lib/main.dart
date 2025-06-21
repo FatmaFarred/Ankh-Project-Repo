@@ -12,6 +12,7 @@ import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
 import 'feauture/authentication/signin/controller/sigin_states.dart';
 import 'feauture/authentication/user_cubit/user_cubit.dart';
+import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
 import 'firebase_options.dart';
 import 'firebase_service/notification_service/fcm_api_service.dart';
 import 'firebase_service/notification_service/local notification.dart';
@@ -106,6 +107,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   RegisterCubit registerViewModel = getIt<RegisterCubit>();
   SignInCubit signInViewModel = getIt<SignInCubit>();
+  PushNotificationCubit pushNotificationCubit  = getIt<PushNotificationCubit>();
+
   late List<String> devicesToken;
 
   int _counter = 0;
@@ -200,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await FirebaseMessagingService.sendNotificationToAllDevices(
+                  await pushNotificationCubit.sendNotificationToAll(
                     tokens: devicesToken,
                     title: 'New Task Assigned',
                     body: 'You have a new task to complete!!!',
