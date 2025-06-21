@@ -34,29 +34,27 @@ class FireBaseUtilies {
 
   static Future<List<String>> getDeviceToken(String uid) async {
     try {
-      final docSnapshot = await FirebaseFirestore.instance
-          .collection('MyUser')
-          .doc(uid)
-          .get();
+      final docSnapshot = await createUserCollection().doc(uid).get();
 
       if (docSnapshot.exists) {
         final data = docSnapshot.data();
-        final rawTokens = data?['deviceTokens'];
-        final tokens = (rawTokens is List)
-            ? rawTokens.whereType<String>().toList()
-            : <String>[];
-        print("this is Device token : $tokens");
+        print(" Document ID: ${docSnapshot.id}");
+        print(" Raw Firestore data: $data");
+
+        final tokens = data?.deviceTokens ?? [];
+       // final allTokens = tokens.map((e) => e.toString()).toList();
+
+        print("📱 Device Tokens: $tokens");
         return tokens;
       } else {
-        print("User document not found.");
+        print("⚠️ User document not found for uid: $uid");
         return [];
       }
     } catch (e) {
-      print("Error getting device tokens: $e");
+      print("❌ Error getting device tokens: $e");
       return [];
     }
   }
-
   static Future<void> removeDeviceTokenFromUser(
     String uid,
     String token,
