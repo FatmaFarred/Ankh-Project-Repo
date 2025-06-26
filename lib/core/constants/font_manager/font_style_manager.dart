@@ -47,11 +47,11 @@ TextStyle getSemiBoldStyle(
 
 TextStyle getTextWithLine() {
   return TextStyle(
-    color: ColorManager.primary,
+    color: ColorManager.lightPrimary,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     decoration: TextDecoration.lineThrough,
-    decorationColor: ColorManager.primary,
+    decorationColor: ColorManager.lightPrimary,
   );
 }
 

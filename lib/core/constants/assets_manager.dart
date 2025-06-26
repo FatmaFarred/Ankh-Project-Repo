@@ -6,6 +6,12 @@ const String lottiePath = "assets/lottie";
 
 
 abstract class ImageAssets {
+  static const String appIcon = "$imagePath/app_icon.png";
+  static const String OnBoardingImage1 = "$imagePath/onboarding1.png";
+  static const String OnBoardingImage2 = "$imagePath/onboarding2.png";
+  static const String OnBoardingImage3 = "$imagePath/onboarding3.png";
+  static const String OnBoardingImage4 = "$imagePath/onboarding4.png";
+  static const String splashScreenImage = "$imagePath/splash_screen.png";
 
 }
 

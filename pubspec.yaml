@@ -77,10 +77,18 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+flutter_native_splash:
+  background_image: assets/images/splash_screen.png
 
-# The following section is specific to Flutter packages.
+  android_12:
+      image: assets/images/app_icon.png
+      color: "#191F18"
+
+  android: true
+  ios: true
+  web: true
+
+
 flutter:
   generate: true
   # The following line ensures that the Material Icons font is
@@ -91,6 +99,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/ankh-project-firebase-adminsdk-fbsvc-3a01e97de6.json
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

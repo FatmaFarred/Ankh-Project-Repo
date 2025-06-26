@@ -22,11 +22,13 @@ import 'l10n/languge_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+
+
+  await Firebase.initializeApp();
+   configureDependencies();
+
   await getIt.allReady();
   await ScreenUtil.ensureScreenSize();
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocalNotification().initNotification();
 
   await FcmApi().initNotification();

@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:injectable/injectable.dart';
+@injectable
 class FirebaseMessagingService {
    Future<void> sendNotification({
     required String targetFcmToken,

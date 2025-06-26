@@ -56,6 +56,8 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i329.FirebaseMessagingService>(
+        () => _i329.FirebaseMessagingService());
     gh.singleton<_i1069.ApiManager>(() => _i1069.ApiManager());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
     gh.singleton<_i470.LocalNotification>(() => _i470.LocalNotification());
