@@ -10,7 +10,6 @@ class FirebaseMessagingService {
     required String title,
     required String body,
   }) async {
-    // Path to the downloaded service account JSON file
     final serviceAccountJson = await rootBundle.loadString(
       'assets/ankh-project-firebase-adminsdk-fbsvc-3a01e97de6.json',
     );
