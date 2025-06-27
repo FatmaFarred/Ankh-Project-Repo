@@ -6,19 +6,19 @@ import '../constants/font_manager/font_style_manager.dart';
 class MyTextTheme {
   MyTextTheme._();
 
-  static TextTheme lightTextTheme=TextTheme(
-    headlineLarge: getBoldStyle(color: ColorManager.black,fontSize: 24),
-    headlineMedium: getSemiBoldStyle(color: ColorManager.black,fontSize: 22),
-    headlineSmall: getMediumStyle(color: ColorManager.black,fontSize: 20),
-    titleLarge:getBoldStyle(color: ColorManager.black,fontSize: 18),
-    titleMedium:getSemiBoldStyle(color: ColorManager.black,fontSize: 18) ,
-    titleSmall: getMediumStyle(color: ColorManager.black,fontSize: 18),
-    bodyLarge: getBoldStyle(color: ColorManager.black,fontSize: 14),
-    bodyMedium: getMediumStyle(color: ColorManager.black,fontSize: 14),
-    bodySmall:getRegularStyle(color:ColorManager.black,fontSize: 14) ,
-    labelLarge: getMediumStyle(color: ColorManager.black,fontSize: 12),
-    labelMedium:getRegularStyle(color:ColorManager.black,fontSize: 12) ,
-    labelSmall: getLightStyle(color:ColorManager.black,fontSize: 12),
+  static TextTheme lightTextTheme(BuildContext context) =>TextTheme(
+    headlineLarge: getBoldStyle(color: ColorManager.black,fontSize: 24,context:context ),
+    headlineMedium: getSemiBoldStyle(color: ColorManager.black,fontSize: 22,context:context),
+    headlineSmall: getMediumStyle(color: ColorManager.black,fontSize: 20,context:context),
+    titleLarge:getBoldStyle(color: ColorManager.black,fontSize: 18,context:context),
+    titleMedium:getSemiBoldStyle(color: ColorManager.black,fontSize: 18,context:context) ,
+    titleSmall: getMediumStyle(color: ColorManager.black,fontSize: 18,context:context),
+    bodyLarge: getBoldStyle(color: ColorManager.black,fontSize: 14,context:context),
+    bodyMedium: getMediumStyle(color: ColorManager.black,fontSize: 14,context:context),
+    bodySmall:getRegularStyle(color:ColorManager.black,fontSize: 14,context:context) ,
+    labelLarge: getMediumStyle(color: ColorManager.black,fontSize: 12,context:context),
+    labelMedium:getRegularStyle(color:ColorManager.black,fontSize: 12,context:context) ,
+    labelSmall: getLightStyle(color:ColorManager.black,fontSize: 12,context:context),
 
 
 
@@ -28,19 +28,19 @@ class MyTextTheme {
 
 
 
-  static TextTheme darkTextTheme=TextTheme(
-    headlineLarge: getBoldStyle(color: ColorManager.white,fontSize: 24),
-    headlineMedium: getSemiBoldStyle(color: ColorManager.white,fontSize: 22),
-    headlineSmall: getMediumStyle(color: ColorManager.white,fontSize: 20),
-    titleLarge:getBoldStyle(color: ColorManager.white,fontSize: 18),
-    titleMedium:getSemiBoldStyle(color: ColorManager.white,fontSize: 18) ,
-    titleSmall: getMediumStyle(color: ColorManager.white,fontSize: 18),
-    bodyLarge: getBoldStyle(color: ColorManager.white,fontSize: 14),
-    bodyMedium: getMediumStyle(color: ColorManager.white,fontSize: 14),
-    bodySmall:getRegularStyle(color:ColorManager.white,fontSize: 14) ,
-    labelLarge: getMediumStyle(color: ColorManager.white,fontSize: 12),
-    labelMedium:getRegularStyle(color:ColorManager.white,fontSize: 12) ,
-    labelSmall: getLightStyle(color:ColorManager.white,fontSize: 12),
+  static TextTheme darkTextTheme(BuildContext context) =>TextTheme(
+    headlineLarge: getBoldStyle(color: ColorManager.white,fontSize: 24,context:context),
+    headlineMedium: getSemiBoldStyle(color: ColorManager.white,fontSize: 22,context:context),
+    headlineSmall: getMediumStyle(color: ColorManager.white,fontSize: 20,context:context),
+    titleLarge:getBoldStyle(color: ColorManager.white,fontSize: 18,context:context),
+    titleMedium:getSemiBoldStyle(color: ColorManager.white,fontSize: 18,context:context) ,
+    titleSmall: getMediumStyle(color: ColorManager.white,fontSize: 18,context:context),
+    bodyLarge: getBoldStyle(color: ColorManager.white,fontSize: 14,context:context),
+    bodyMedium: getMediumStyle(color: ColorManager.white,fontSize: 14,context:context),
+    bodySmall:getRegularStyle(color:ColorManager.white,fontSize: 14,context:context) ,
+    labelLarge: getMediumStyle(color: ColorManager.white,fontSize: 12,context:context),
+    labelMedium:getRegularStyle(color:ColorManager.white,fontSize: 12,context:context) ,
+    labelSmall: getLightStyle(color:ColorManager.white,fontSize: 12,context:context),
 
 
 

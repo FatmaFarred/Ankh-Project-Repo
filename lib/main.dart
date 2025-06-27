@@ -1,6 +1,7 @@
 import 'package:ankh_project/data/models/user_model.dart';
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/feauture/onboarding/onboarding.dart';
 import 'package:ankh_project/firebase_service/firestore_service/firestore_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import 'core/theme/my_app_theme.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
 import 'feauture/authentication/signin/controller/sigin_states.dart';
 import 'feauture/authentication/user_cubit/user_cubit.dart';
+import 'feauture/choose_role/choose_role_screen.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
+import 'feauture/welcome_screen/welcome_screen.dart';
 import 'firebase_options.dart';
 import 'firebase_service/notification_service/fcm_api_service.dart';
 import 'firebase_service/notification_service/local notification.dart';
@@ -53,7 +57,7 @@ class MyApp extends StatelessWidget {
     final locale = context.watch<LanguageCubit>().state;
 
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(428, 926.76),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
@@ -63,25 +67,13 @@ class MyApp extends StatelessWidget {
           locale: locale,
 
           title: 'Flutter Demo',
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // TRY THIS: Try running your application with "flutter run". You'll see
-            // the application has a purple toolbar. Then, without quitting the app,
-            // try changing the seedColor in the colorScheme below to Colors.green
-            // and then invoke "hot reload" (save your changes or press the "hot
-            // reload" button in a Flutter-supported IDE, or press "r" if you used
-            // the command line to start the app).
-            //
-            // Notice that the counter didn't reset back to zero; the application
-            // state is not lost during the reload. To reset the state, use hot
-            // restart instead.
-            //
-            // This works for code too, not just values: Mnost code changes can be
-            // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          ),
-          home: MyHomePage(title: 'Flutter Demo Home Page'),
+          theme: MyAppTheme.lightTheme(context),
+          initialRoute:  OnBoarding.onBoardingRouteName,
+          routes:{
+            OnBoarding.onBoardingRouteName:(context) => const OnBoarding(),
+            WelcomeScreen.welcomeScreenRouteName:(context) => const WelcomeScreen(),
+            ChooseRoleScreen.chooseRoleScreenRouteName:(context) => const ChooseRoleScreen(),
+          } ,
         );
       },
     );

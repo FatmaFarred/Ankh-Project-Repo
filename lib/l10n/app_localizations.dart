@@ -103,6 +103,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @onBoarding1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything You Need to Buy, Sell, and Manage in One App'**
+  String get onBoarding1Title;
+
+  /// No description provided for @onBoarding1SubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect seamlessly with owners, marketers, and inspectors, all in one powerful platform.'**
+  String get onBoarding1SubTitle;
+
+  /// No description provided for @onBoarding2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Easily List Your Property or Car and Stay in Control'**
+  String get onBoarding2Title;
+
+  /// No description provided for @onBoarding2SubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit listings, manage updates, and handle inspections effortlessly from your dashboard.'**
+  String get onBoarding2SubTitle;
+
+  /// No description provided for @onBoarding3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Inspections to Ensure Listing Quality'**
+  String get onBoarding3Title;
+
+  /// No description provided for @onBoarding3SubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified by trusted experts, every listing is thoroughly reviewed for buyer confidence.'**
+  String get onBoarding3SubTitle;
+
+  /// No description provided for @onBoarding4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Verified Listings and Make Confident Purchases'**
+  String get onBoarding4Title;
+
+  /// No description provided for @onBoarding4SubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore only inspected and approved properties and cars no guesswork, just trust.'**
+  String get onBoarding4SubTitle;
+
+  /// No description provided for @welcomeScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome To Ankh'**
+  String get welcomeScreenTitle;
+
+  /// No description provided for @welcomeScreenSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the app and explore trusted services, verified properties, and inspected motors all in one place.'**
+  String get welcomeScreenSubTitle;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @continueAsVisitor.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as visitor'**
+  String get continueAsVisitor;
+
+  /// No description provided for @registerNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Now'**
+  String get registerNow;
+
+  /// No description provided for @chooseRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Role'**
+  String get chooseRole;
+
+  /// No description provided for @chooseRoleDescribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the role that best describes you.'**
+  String get chooseRoleDescribe;
+
+  /// No description provided for @owner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get owner;
+
+  /// No description provided for @inspector.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector'**
+  String get inspector;
+
+  /// No description provided for @inspectorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspect and verify properties or cars'**
+  String get inspectorDescription;
+
+  /// No description provided for @ownerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Property or business owner'**
+  String get ownerDescription;
+
+  /// No description provided for @client.
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get client;
+
+  /// No description provided for @clientDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Looking for services '**
+  String get clientDescription;
+
+  /// No description provided for @cst.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Service'**
+  String get cst;
+
+  /// No description provided for @cstDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Support users and handle inquiries'**
+  String get cstDescription;
+
+  /// No description provided for @selectYourServiceRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Your Service Role'**
+  String get selectYourServiceRole;
+
+  /// No description provided for @selectYourServiceRoleDescribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the role that best describe your work.'**
+  String get selectYourServiceRoleDescribe;
+
+  /// No description provided for @marketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer'**
+  String get marketer;
+
+  /// No description provided for @marketerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Promote listings and grow visibility'**
+  String get marketerDescription;
+
+  /// No description provided for @continu.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continu;
 }
 
 class _AppLocalizationsDelegate
