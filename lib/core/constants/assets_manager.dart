@@ -13,10 +13,10 @@ abstract class ImageAssets {
   static const String OnBoardingImage4 = "$imagePath/onboarding4.png";
   static const String splashScreenImage = "$imagePath/splash_screen.png";
   static const String appLogo = "$imagePath/app_logo.png";
-  static const String clientIcon = "$imagePath/clientIcon.png";
-  static const String cstIcon = "$imagePath/cst.png";
-  static const String inspectorIcon = "$imagePath/ispector.png";
-  static const String marketerIcon = "$imagePath/marketer.png";
+  static const String clientIcon = "$imagePath/cstIcon.png";
+  static const String cstIcon = "$imagePath/csIcon.png";
+  static const String inspectorIcon = "$imagePath/inspector.png";
+  static const String marketerIcon = "$imagePath/markerterIcon.png";
   static const String ownerIcon = "$imagePath/owner.png";
 
 

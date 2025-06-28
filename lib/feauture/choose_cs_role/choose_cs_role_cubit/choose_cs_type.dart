@@ -5,26 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/customized_widgets/reusable_widgets/customized_containers/cutomized_container _with_listile.dart';
-import '../../l10n/app_localizations.dart';
-import '../../l10n/languge_cubit.dart';
-import '../authentication/register/register _screen.dart';
-import '../choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
-import 'choose_role_cubit/choose_role_cubit.dart';
+import '../../../core/customized_widgets/reusable_widgets/customized_containers/cutomized_container _with_listile.dart';
+import '../../../l10n/app_localizations.dart';
+
+import '../../authentication/register/register _screen.dart';
+import 'choose_cs_role_cubit.dart';
 
 
 
-class ChooseRoleScreen extends StatelessWidget {
-  const ChooseRoleScreen({super.key});
-  static String chooseRoleScreenRouteName ="ChooseRoleScreen";
+class ChooseCsTypeScreen extends StatelessWidget {
+  const ChooseCsTypeScreen({super.key});
+  static String chooseCsTypeScreenRouteName ="ChooseCsRoleScreen";
 
 
 
 
   @override
   Widget build(BuildContext context) {
-    final locale = context.watch<LanguageCubit>().state;
-    final selectedRole = context.watch<RoleCubit>().state;
+    final selectedRole = context.watch<RoleCsCubit>().state;
 
 
     return  Scaffold(
@@ -41,39 +39,40 @@ class ChooseRoleScreen extends StatelessWidget {
             Text(AppLocalizations.of(context)!.chooseRoleDescribe,style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 15.6.sp,color: ColorManager.darkGrey ),),
             SizedBox(height: 55.h,),
 
-            ContainerWithListTile(title: AppLocalizations.of(context)!.owner,
-              subtitle: AppLocalizations.of(context)!.ownerDescription,
-              image: ImageAssets.ownerIcon,
-              isSelected: selectedRole == UserRole.owner,
+            ContainerWithListTile(title: AppLocalizations.of(context)!.marketer,
+              subtitle: AppLocalizations.of(context)!.marketerDescription,
+              image: ImageAssets.marketerIcon,
+              isSelected: selectedRole == CsRole.marketer,
               onTap: (){
                 //todo: navigate to owner screen
-                context.read<RoleCubit>().selectRole(UserRole.owner);
+                context.read<RoleCsCubit>().selectCsRole(CsRole.marketer);
               },
             ),
 
             SizedBox(height: 15.h,),
 
-            ContainerWithListTile(title: AppLocalizations.of(context)!.client,
-              subtitle: AppLocalizations.of(context)!.clientDescription,
-              image: ImageAssets.clientIcon,
+            ContainerWithListTile(title: AppLocalizations.of(context)!.inspector,
+              subtitle: AppLocalizations.of(context)!.inspectorDescription,
+              image: ImageAssets.inspectorIcon,
               onTap: (){
-                context.read<RoleCubit>().selectRole(UserRole.client);
+                context.read<RoleCsCubit>().selectCsRole(CsRole.inspector);
 
               },
-              isSelected: selectedRole == UserRole.client,
+              isSelected: selectedRole == CsRole.inspector,
             ),
             SizedBox(height: 15.h,),
             ContainerWithListTile(title: AppLocalizations.of(context)!.cst,
               subtitle: AppLocalizations.of(context)!.cstDescription,
               image: ImageAssets.cstIcon,
               onTap: (){
-                context.read<RoleCubit>().selectRole(UserRole.customerService);
+                context.read<RoleCsCubit>().selectCsRole(CsRole.customerService);
 
               },
-              isSelected: selectedRole == UserRole.customerService,
+              isSelected: selectedRole == CsRole.customerService,
 
             ),
             Spacer(),
+
             CustomizedElevatedButton(bottonWidget: Text(AppLocalizations.of(context)!.continu,style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white),),
               color: ColorManager.lightprimary,
               borderColor: ColorManager.lightprimary,
@@ -87,21 +86,14 @@ class ChooseRoleScreen extends StatelessWidget {
                     return;
                   }
 
-                  if (selectedRole == UserRole.customerService) {
-                    Navigator.of(context).pushNamed(
-                      ChooseCsTypeScreen.chooseCsTypeScreenRouteName,
-                      arguments: selectedRole,
-                    );
-                  } else {
+
                     Navigator.of(context).pushNamed(
                       RegisterScreen.registerScreenRouteName,
                       arguments: selectedRole,
                     );
                   }
-                }
 
             )
-
 
 
           ],),

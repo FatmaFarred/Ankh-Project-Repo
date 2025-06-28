@@ -6,14 +6,19 @@ import 'package:ankh_project/firebase_service/firestore_service/firestore_servic
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'core/theme/my_app_theme.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
+import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/authentication/signin/controller/sigin_states.dart';
 import 'feauture/authentication/user_cubit/user_cubit.dart';
+import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
+import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
+import 'feauture/choose_role/choose_role_cubit/choose_role_cubit.dart';
 import 'feauture/choose_role/choose_role_screen.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
 import 'feauture/welcome_screen/welcome_screen.dart';
@@ -42,6 +47,9 @@ void main() async {
         BlocProvider(create: (context) => LanguageCubit()),
 
         BlocProvider(create: (context) => UserCubit()),
+        BlocProvider(create: (context) => RoleCubit()),
+        BlocProvider(create: (context) => RoleCsCubit()),
+
       ],
 
       child: MyApp(),
@@ -62,7 +70,13 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: [
+            ...AppLocalizations.localizationsDelegates,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+
           supportedLocales: AppLocalizations.supportedLocales,
           locale: locale,
 
@@ -70,9 +84,12 @@ class MyApp extends StatelessWidget {
           theme: MyAppTheme.lightTheme(context),
           initialRoute:  OnBoarding.onBoardingRouteName,
           routes:{
-            OnBoarding.onBoardingRouteName:(context) => const OnBoarding(),
-            WelcomeScreen.welcomeScreenRouteName:(context) => const WelcomeScreen(),
-            ChooseRoleScreen.chooseRoleScreenRouteName:(context) => const ChooseRoleScreen(),
+            OnBoarding.onBoardingRouteName:(context) =>  OnBoarding(),
+            WelcomeScreen.welcomeScreenRouteName:(context) =>  WelcomeScreen(),
+            RegisterScreen.registerScreenRouteName:(context) =>  RegisterScreen(),
+            ChooseRoleScreen.chooseRoleScreenRouteName:(context) =>  ChooseRoleScreen(),
+            ChooseCsTypeScreen.chooseCsTypeScreenRouteName:(context) =>  ChooseCsTypeScreen(),
+
           } ,
         );
       },

@@ -44,8 +44,7 @@ class _OnBoardingView extends StatelessWidget {
 
     return Scaffold(
       body: Column(children: [
-        SizedBox(
-          height:700.h ,
+              Expanded(
           child: BlocBuilder<OnBoardingCubit, int>(
             builder: (context, state) {
               return PageView(
@@ -89,7 +88,7 @@ class _OnBoardingView extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 borderColor: Theme.of(context).primaryColor,
                 onPressed: () {
-                  cubit.skipPage();
+                  //cubit.skipPage();
                   Navigator.pushNamedAndRemoveUntil(context,       WelcomeScreen.welcomeScreenRouteName,
                   (route) => false,);
                 },

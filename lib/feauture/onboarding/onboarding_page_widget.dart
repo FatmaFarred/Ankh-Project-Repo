@@ -13,28 +13,31 @@ class OnBoardingPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(height:527.3.h,width:428.w,
-        child: Image.asset(imagePath,
-        fit: BoxFit.fill,
-        ),),
-      Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 25.w,vertical: 18.26.h),
-        child: Column(children: [
-        Text(text,
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 20.h,),
-        Text(subText,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorManager.darkGrey),
-          textAlign: TextAlign.center,
-        ),
-
-             ]
-        ),
-      )
-
-    ],);
+    return SingleChildScrollView(
+      child: Column(children: [
+        Container(width:428.w,
+          child: Image.asset(imagePath,
+          fit: BoxFit.fill,
+            height: 527.3.h,
+          ),),
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 25.w,vertical: 18.26.h),
+          child: Column(children: [
+          Text(text,
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h,),
+          Text(subText,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorManager.darkGrey),
+            textAlign: TextAlign.center,
+          ),
+      
+               ]
+          ),
+        )
+      
+      ],),
+    );
   }
 }
