@@ -30,11 +30,47 @@
   "selectYourServiceRoleDescribe": "Choose the role that best describe your work.",
   "marketer": "Marketer",
   "marketerDescription": "Promote listings and grow visibility",
-  "continu": "Continue"
+  "continu": "Continue",
+  "createAccount" : "Create Account",
+  "fullName" : "Full Name",
+  "enterYourName" : "Enter Your Name",
+  "email" : "Email",
+  "enterYourEmail" : "Enter Your Email",
+  "password" : "Password",
+  "enterYourPassword" : "Enter Your Password",
+  "confirmPassword" : "Confirm Password",
+  "enterYourConfirmPassword" : "Enter Your Confirm Password",
+  "phoneNumber" : "Phone Number ",
+  "enterYourPhone" : "Enter Your Phone",
+  "createAccountButton" : "Create account",
+  "alreadyHaveAccount" : "Already have an account?",
+  "log" : "Login",
+  "signIn" : "Login to your account",
 
+  "loginNow" : "Login Now",
 
-
-
+  "enterYourEmailOrPhone" : "Enter Your Email or Phone Numbar ",
+  "dontHaveAccount" : "Don't have an account?",
+  "forgotPassword" : "Forgot Password?",
+  "registerSubTitle" : "Enter the following information to create a new account. Get started now!",
+  "signInSubTitle" : "Enter the following information to access your account!",
+  "yourEmailOrPhone" : "Email or Phone Numbar  ",
+  "verifyEmailTitle" : "Verify your email",
+  "verifyEmailSubTitle" : "Enter the verification code that we have sent to your email",
+  "codeWasSentTo" : "A code has been sent to your email",
+  "resendCode" : "resend",
+  "n": "in",
+  "confirm": "confirm",
+  "forgetPasswordSubTitle": "Enter your email to recover your password!",
+  "verifyOtp": "Verify OTP",
+  "setNewPassword": "Set a New Password",
+  "setPasswordSubTitle": "Create a new password. Ensure it differs from previous ones for security",
+  "reEnterNewPassword": "Re-enter Password",
+  "otpEmailSubTitle" : "Enter your OTP which has been sent to your email",
+  "newPassword" : "New Password",
+  "forgotPasswordTitle" : "Forgot Password!",
+  "resetPassword" : "Reset Password",
+  "enterNewPassword" : "Enter New Password"
 
 
 

@@ -59,7 +59,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل دخول';
 
   @override
-  String get register => 'تسجيل دخو';
+  String get register => 'تسجيل دخول';
 
   @override
   String get continueAsVisitor => 'المتابعة كزائر';
@@ -112,4 +112,124 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continu => 'متابعة';
+
+  @override
+  String get createAccount => 'سجّل الدخول الان!';
+
+  @override
+  String get fullName => 'الاسم الكامل';
+
+  @override
+  String get enterYourName => 'ادخل الاسم';
+
+  @override
+  String get email => 'البريد الالكتروني';
+
+  @override
+  String get enterYourEmail => 'ادخل البريد الالكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get enterYourPassword => 'ادخل كلمة المرور ';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get enterYourConfirmPassword => 'ادخل كلمة المرور';
+
+  @override
+  String get phoneNumber => 'كلمة المرور';
+
+  @override
+  String get enterYourPhone => 'ادخل رقم الهاتف';
+
+  @override
+  String get createAccountButton => 'إنشاء حساب ';
+
+  @override
+  String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟';
+
+  @override
+  String get log => 'Login';
+
+  @override
+  String get signIn => 'أهلا بعودتك!';
+
+  @override
+  String get loginNow => 'سجل دخول الان!';
+
+  @override
+  String get enterYourEmailOrPhone => 'ادخل البريد الالكتروني او كلمة المرور ';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور؟';
+
+  @override
+  String get registerSubTitle =>
+      'ادخل البيانات التالية لانشاء حساب جديد، ابدء الان!';
+
+  @override
+  String get signInSubTitle =>
+      'أدخل البيانات التالية لتتمكن من الوصول إلى حسابك!';
+
+  @override
+  String get yourEmailOrPhone => 'البريد الالكتروني او كلمة المرور ';
+
+  @override
+  String get verifyEmailTitle => 'تحقق من بريدك الإلكتروني';
+
+  @override
+  String get verifyEmailSubTitle =>
+      'أدخل رمز التحقق الذي أرسلناه إلى بريدك الالكتروني                                لإكمال عملية توثيق الحساب';
+
+  @override
+  String get codeWasSentTo => 'تم إرسال الرمز إلى بريدك الإلكتروني';
+
+  @override
+  String get resendCode => 'إعادة إلارسال خلال';
+
+  @override
+  String get n => 'خلال';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get forgetPasswordSubTitle =>
+      'قم بادخال بريدك الالكتروني لاستعادة كلمة المرور الخاصة بك!';
+
+  @override
+  String get verifyOtp => 'ادخل رمز التحقق!';
+
+  @override
+  String get setNewPassword => 'ادخل كلمة المرور الجديدة!';
+
+  @override
+  String get setPasswordSubTitle =>
+      'قم بادخال كلمة مرور جديدة وتأكد من أنها تختلف عن السابقة لضمان الأمان';
+
+  @override
+  String get reEnterNewPassword => 'أعد إدخال كلمة المرور';
+
+  @override
+  String get otpEmailSubTitle =>
+      'أدخل رمز التحقق الذي أرسلناه إلى بريدك الالكتروني  ';
+
+  @override
+  String get newPassword => 'كلمة مرور جديدة';
+
+  @override
+  String get forgotPasswordTitle => 'نسيت كلمة المرور!';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get enterNewPassword => 'ادخل كلمة المرور الجديدة';
 }

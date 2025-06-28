@@ -113,4 +113,124 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continu => 'Continue';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get enterYourName => 'Enter Your Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get enterYourEmail => 'Enter Your Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get enterYourPassword => 'Enter Your Password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get enterYourConfirmPassword => 'Enter Your Confirm Password';
+
+  @override
+  String get phoneNumber => 'Phone Number ';
+
+  @override
+  String get enterYourPhone => 'Enter Your Phone';
+
+  @override
+  String get createAccountButton => 'Create account';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get log => 'Login';
+
+  @override
+  String get signIn => 'Login to your account';
+
+  @override
+  String get loginNow => 'Login Now';
+
+  @override
+  String get enterYourEmailOrPhone => 'Enter Your Email or Phone Numbar ';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account?';
+
+  @override
+  String get forgotPassword => 'Forgot Password?';
+
+  @override
+  String get registerSubTitle =>
+      'Enter the following information to create a new account. Get started now!';
+
+  @override
+  String get signInSubTitle =>
+      'Enter the following information to access your account!';
+
+  @override
+  String get yourEmailOrPhone => 'Email or Phone Numbar  ';
+
+  @override
+  String get verifyEmailTitle => 'Verify your email';
+
+  @override
+  String get verifyEmailSubTitle =>
+      'Enter the verification code that we have sent to your email';
+
+  @override
+  String get codeWasSentTo => 'A code has been sent to your email';
+
+  @override
+  String get resendCode => 'resend';
+
+  @override
+  String get n => 'in';
+
+  @override
+  String get confirm => 'confirm';
+
+  @override
+  String get forgetPasswordSubTitle =>
+      'Enter your email to recover your password!';
+
+  @override
+  String get verifyOtp => 'Verify OTP';
+
+  @override
+  String get setNewPassword => 'Set a New Password';
+
+  @override
+  String get setPasswordSubTitle =>
+      'Create a new password. Ensure it differs from previous ones for security';
+
+  @override
+  String get reEnterNewPassword => 'Re-enter Password';
+
+  @override
+  String get otpEmailSubTitle =>
+      'Enter your OTP which has been sent to your email';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get forgotPasswordTitle => 'Forgot Password!';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get enterNewPassword => 'Enter New Password';
 }
