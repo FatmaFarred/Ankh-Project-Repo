@@ -31,7 +31,7 @@ class CustomDialog {
                   Text(
                     message!,
                     style:
-                        getSemiBoldStyle(color:ColorManager.black ),
+                        getSemiBoldStyle(color:ColorManager.white,context:context ),
                   ),
                 ],
               ],
@@ -54,12 +54,12 @@ class CustomDialog {
           return AlertDialog(
             backgroundColor: ColorManager.black,
             title: Text(
-              title ?? "",
-              style: getBoldStyle(color:ColorManager.black ),
+              title ?? "Success",
+              style: getBoldStyle(color:ColorManager.white, context:context),
             ),
             content: Text(
-              message ?? "",
-              style: getBoldStyle(color:ColorManager.black ),
+              message ?? "Success",
+              style: getBoldStyle(color:ColorManager.white, context:context),
             ),
             actions: [
               CustomizedElevatedButton(
@@ -95,11 +95,11 @@ class CustomDialog {
             backgroundColor: ColorManager.black,
             title: Text(
               title ?? "",
-              style: getBoldStyle(color:ColorManager.black ),
+              style: getBoldStyle(color:ColorManager.white ,context:context ),
             ),
             content: Text(
               message ?? "",
-              style: getSemiBoldStyle(color:ColorManager.black ),
+              style: getSemiBoldStyle(color:ColorManager.white, context:context ),
             ),
             actions: [
               Row(
@@ -109,7 +109,7 @@ class CustomDialog {
                     child: CustomizedElevatedButton(
                       color: Colors.transparent,
                       bottonWidget:Text ("no,"),
-                      textStyle: getSemiBoldStyle(color:ColorManager.darkBlue ),
+                      textStyle: getSemiBoldStyle(color:ColorManager.darkBlue ,context:context ),
                       onPressed: () {
                         if (negativeOnClick != null) {
                           negativeOnClick!();

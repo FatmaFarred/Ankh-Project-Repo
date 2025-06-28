@@ -5,15 +5,20 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/repositries_and_data_sources/repositries/authentication_repositry.dart';
 import '../../models/user_model.dart';
-@Injectable(as: RegisterRepositry)
-class RegisterRepositryImpl implements RegisterRepositry {
-  RegisterRemoteDataSource registerRemoteDataSource ;
-  RegisterRepositryImpl(this.registerRemoteDataSource);
+
+@Injectable(as: AuthenticationRepositry)
+class AuthenticationRepositryImpl implements AuthenticationRepositry {
+  AuthenticationRemoteDataSource authRemoteDataSource ;
+  AuthenticationRepositryImpl(this.authRemoteDataSource);
 
   Future <MyUser?> register (String name , String email,String password ,)async{
-    return await registerRemoteDataSource.register(name, email, password);
+    return await authRemoteDataSource.register(name, email, password);
 
   }
 
+  Future <MyUser?> signIn (String email,String password ,)async{
+    return await authRemoteDataSource.signIn(email, password);
+
+  }
 
 }

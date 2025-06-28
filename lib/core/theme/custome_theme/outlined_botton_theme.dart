@@ -6,14 +6,14 @@ import '../../constants/font_manager/font_style_manager.dart';
 class MyOutLinedBottonTheme{
   MyOutLinedBottonTheme._();
 
-  static OutlinedButtonThemeData lightOutlinedButtonTheme =OutlinedButtonThemeData(
+  static OutlinedButtonThemeData lightOutlinedButtonTheme (BuildContext context) =>OutlinedButtonThemeData(
     style:OutlinedButton.styleFrom(
       padding: EdgeInsets.symmetric(vertical: 16,horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       elevation: 0,
       foregroundColor: ColorManager.black,
       side:  BorderSide(color: ColorManager.darkBlue),
-      textStyle: getSemiBoldStyle(color: ColorManager.black,fontSize: 16),
+      textStyle: getSemiBoldStyle(color: ColorManager.black,fontSize: 16,context:context),
 
 
 
@@ -23,14 +23,14 @@ class MyOutLinedBottonTheme{
 
   );
 
-  static OutlinedButtonThemeData darkOutlinedButtonTheme =OutlinedButtonThemeData(
+  static OutlinedButtonThemeData darkOutlinedButtonTheme (BuildContext context) =>OutlinedButtonThemeData(
       style:OutlinedButton.styleFrom(
         padding: EdgeInsets.symmetric(vertical: 16,horizontal: 20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         elevation: 0,
         foregroundColor: ColorManager.white,
         side:  BorderSide(color: ColorManager.darkBlue),
-        textStyle: getSemiBoldStyle(color: ColorManager.white,fontSize: 16),
+        textStyle: getSemiBoldStyle(color: ColorManager.white,fontSize: 16,context:context),
 
 
 
