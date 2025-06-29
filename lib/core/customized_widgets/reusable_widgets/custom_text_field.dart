@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/color_manager.dart';
-import '../../constants/font_manager/font_style_manager.dart';
-
 
 typedef MyValidator = String? Function(String?);
 typedef OnFieldSubmitted = void Function(String?);
@@ -37,23 +35,23 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
-      style: getRegularStyle(color: ColorManager.white,context:context ),
+      style: Theme.of(context).textTheme.bodySmall,
       obscureText: obscureText,
       obscuringCharacter: '*',
-      cursorColor: ColorManager.darkBlue,
+      cursorColor: ColorManager.black,
       decoration: InputDecoration(
-        errorStyle: getRegularStyle(color: ColorManager.error,context:context ),
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorManager.error),
         suffixIcon: suffixIcon,
         suffixIconColor: ColorManager.white,
         prefixIcon: prefixIcon,
-        prefixIconColor: ColorManager.white,
+        prefixIconColor: Theme.of(context).indicatorColor,
         hintText: hintText,
-        hintStyle: getRegularStyle(color: ColorManager.white,context:context ),
+        hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorManager.darkGrey),
         filled: true,
-        fillColor: ColorManager.darkGrey,
+        fillColor: ColorManager.transparent,
         enabledBorder: customOutlineInputBorder(),
         focusedBorder: customOutlineInputBorder(),
-        errorBorder: customOutlineInputBorder(),
+        errorBorder: customOutlineErrorInputBorder(),
         focusedErrorBorder: customOutlineInputBorder(),
       ),
       onFieldSubmitted: onFieldSubmitted,
@@ -64,7 +62,15 @@ class CustomTextField extends StatelessWidget {
     return OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide:  BorderSide(
-          color: ColorManager.darkGrey,
+          color: ColorManager.lightGrey,
+          width: 2,
+        ));
+  }
+  InputBorder customOutlineErrorInputBorder() {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        borderSide:  BorderSide(
+          color: ColorManager.error,
           width: 2,
         ));
   }

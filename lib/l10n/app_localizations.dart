@@ -313,6 +313,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommended Cars'**
   String get recommendedCars;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @enterYourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Name'**
+  String get enterYourName;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @enterYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Email'**
+  String get enterYourEmail;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @enterYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Password'**
+  String get enterYourPassword;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @enterYourConfirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Confirm Password'**
+  String get enterYourConfirmPassword;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number '**
+  String get phoneNumber;
+
+  /// No description provided for @enterYourPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Phone'**
+  String get enterYourPhone;
+
+  /// No description provided for @createAccountButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get createAccountButton;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAccount;
+
+  /// No description provided for @log.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get log;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to your account'**
+  String get signIn;
+
+  /// No description provided for @loginNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Now'**
+  String get loginNow;
+
+  /// No description provided for @enterYourEmailOrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Email or Phone Numbar '**
+  String get enterYourEmailOrPhone;
+
+  /// No description provided for @dontHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get dontHaveAccount;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
+  /// No description provided for @registerSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the following information to create a new account. Get started now!'**
+  String get registerSubTitle;
+
+  /// No description provided for @signInSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the following information to access your account!'**
+  String get signInSubTitle;
+
+  /// No description provided for @yourEmailOrPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Email or Phone Numbar  '**
+  String get yourEmailOrPhone;
+
+  /// No description provided for @verifyEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your email'**
+  String get verifyEmailTitle;
+
+  /// No description provided for @verifyEmailSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the verification code that we have sent to your email'**
+  String get verifyEmailSubTitle;
+
+  /// No description provided for @codeWasSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'A code has been sent to your email'**
+  String get codeWasSentTo;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'resend'**
+  String get resendCode;
+
+  /// No description provided for @n.
+  ///
+  /// In en, this message translates to:
+  /// **'in'**
+  String get n;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'confirm'**
+  String get confirm;
+
+  /// No description provided for @forgetPasswordSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email to recover your password!'**
+  String get forgetPasswordSubTitle;
+
+  /// No description provided for @verifyOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify OTP'**
+  String get verifyOtp;
+
+  /// No description provided for @setNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a New Password'**
+  String get setNewPassword;
+
+  /// No description provided for @setPasswordSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a new password. Ensure it differs from previous ones for security'**
+  String get setPasswordSubTitle;
+
+  /// No description provided for @reEnterNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-enter Password'**
+  String get reEnterNewPassword;
+
+  /// No description provided for @otpEmailSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your OTP which has been sent to your email'**
+  String get otpEmailSubTitle;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password!'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @enterNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter New Password'**
+  String get enterNewPassword;
 }
 
 class _AppLocalizationsDelegate

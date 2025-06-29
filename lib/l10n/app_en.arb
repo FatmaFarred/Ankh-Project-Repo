@@ -36,6 +36,22 @@
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars"
 
+  "continu": "Continue",
+  "createAccount" : "Create Account",
+  "fullName" : "Full Name",
+  "enterYourName" : "Enter Your Name",
+  "email" : "Email",
+  "enterYourEmail" : "Enter Your Email",
+  "password" : "Password",
+  "enterYourPassword" : "Enter Your Password",
+  "confirmPassword" : "Confirm Password",
+  "enterYourConfirmPassword" : "Enter Your Confirm Password",
+  "phoneNumber" : "Phone Number ",
+  "enterYourPhone" : "Enter Your Phone",
+  "createAccountButton" : "Create account",
+  "alreadyHaveAccount" : "Already have an account?",
+  "log" : "Login",
+  "signIn" : "Login to your account",
 
 
 

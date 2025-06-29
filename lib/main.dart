@@ -12,9 +12,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'core/theme/my_app_theme.dart';
+import 'feauture/authentication/email_verfication/email_verfication_screen.dart';
+import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
+import 'feauture/authentication/forgrt_password/set_new_password/set_new_password_screen.dart';
+import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/authentication/signin/controller/sigin_states.dart';
+import 'feauture/authentication/signin/signin_screen.dart';
 import 'feauture/authentication/user_cubit/user_cubit.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
@@ -91,7 +96,11 @@ class MyApp extends StatelessWidget {
             RegisterScreen.registerScreenRouteName:(context) =>  RegisterScreen(),
             ChooseRoleScreen.chooseRoleScreenRouteName:(context) =>  ChooseRoleScreen(),
             ChooseCsTypeScreen.chooseCsTypeScreenRouteName:(context) =>  ChooseCsTypeScreen(),
-
+            SignInScreen.signInScreenRouteName:(context) =>  SignInScreen(),
+            EmailVerficationScreen.emailVerficationScreenRouteName:(context) =>  EmailVerficationScreen(),
+            ForgetPasswordScreen.forgetPasswordScreenRouteName:(context) =>  ForgetPasswordScreen(),
+            OtpVerficationScreen.otpVerficationScreenRouteName:(context) =>  OtpVerficationScreen(),
+            ResetPasswordScreen.resetPasswordScreenRouteName:(context) =>  ResetPasswordScreen(),
           } ,
         );
       },
