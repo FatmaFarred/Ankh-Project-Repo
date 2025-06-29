@@ -232,4 +232,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterNewPassword => 'ادخل كلمة المرور الجديدة';
+
+  @override
+  String get topBrands => 'أفضل العلامات التجارية';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String get popularNewCars => 'السيارات الجديدة الشائعة';
+
+  @override
+  String get recommendedCars => 'السيارات الموصى بها';
 }

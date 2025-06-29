@@ -38,6 +38,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 
+
   await Firebase.initializeApp();
    configureDependencies();
 
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             ...AppLocalizations.localizationsDelegates,
             GlobalMaterialLocalizations.delegate,
