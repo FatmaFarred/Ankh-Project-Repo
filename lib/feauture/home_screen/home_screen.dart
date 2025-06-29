@@ -26,21 +26,20 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               SectionHeader(title: AppLocalizations.of(context)!.topBrands),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               const TopBrandsList(),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               SectionHeader(
                 title: AppLocalizations.of(context)!.popularNewCars,
               ),
               const SizedBox(height: 8),
               const PopularCarsList(),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               SectionHeader(
                 title: AppLocalizations.of(context)!.recommendedCars,
               ),
-              const SizedBox(height: 8),
               const RecommendedCarsList(),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
             ],
           ),
         ),
