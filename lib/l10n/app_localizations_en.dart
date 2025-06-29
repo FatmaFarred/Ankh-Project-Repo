@@ -115,18 +115,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continu => 'Continue';
 
   @override
-  String get topBrands => 'Top Brands';
-
-  @override
-  String get viewAll => 'View All';
-
-  @override
-  String get popularNewCars => 'Popular New Cars';
-
-  @override
-  String get recommendedCars => 'Recommended Cars';
-
-  @override
   String get createAccount => 'Create Account';
 
   @override
@@ -245,4 +233,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterNewPassword => 'Enter New Password';
+
+  @override
+  String get topBrands => 'Top Brands';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get popularNewCars => 'Popular New Cars';
+
+  @override
+  String get recommendedCars => 'Recommended Cars';
 }

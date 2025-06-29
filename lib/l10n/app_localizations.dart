@@ -290,30 +290,6 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get continu;
 
-  /// No description provided for @topBrands.
-  ///
-  /// In en, this message translates to:
-  /// **'Top Brands'**
-  String get topBrands;
-
-  /// No description provided for @viewAll.
-  ///
-  /// In en, this message translates to:
-  /// **'View All'**
-  String get viewAll;
-
-  /// No description provided for @popularNewCars.
-  ///
-  /// In en, this message translates to:
-  /// **'Popular New Cars'**
-  String get popularNewCars;
-
-  /// No description provided for @recommendedCars.
-  ///
-  /// In en, this message translates to:
-  /// **'Recommended Cars'**
-  String get recommendedCars;
-
   /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
@@ -541,6 +517,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter New Password'**
   String get enterNewPassword;
+
+  /// No description provided for @topBrands.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Brands'**
+  String get topBrands;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// No description provided for @popularNewCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular New Cars'**
+  String get popularNewCars;
+
+  /// No description provided for @recommendedCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Cars'**
+  String get recommendedCars;
 }
 
 class _AppLocalizationsDelegate

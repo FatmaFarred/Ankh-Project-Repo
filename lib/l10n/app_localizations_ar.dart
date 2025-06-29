@@ -59,7 +59,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل دخول';
 
   @override
-  String get register => 'تسجيل دخو';
+  String get register => 'تسجيل دخول';
 
   @override
   String get continueAsVisitor => 'المتابعة كزائر';
@@ -112,18 +112,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continu => 'متابعة';
-
-  @override
-  String get topBrands => 'أفضل العلامات التجارية';
-
-  @override
-  String get viewAll => 'عرض الكل';
-
-  @override
-  String get popularNewCars => 'السيارات الجديدة الشائعة';
-
-  @override
-  String get recommendedCars => 'السيارات الموصى بها';
 
   @override
   String get createAccount => 'سجّل الدخول الان!';
@@ -244,4 +232,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterNewPassword => 'ادخل كلمة المرور الجديدة';
+
+  @override
+  String get topBrands => 'أفضل العلامات التجارية';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String get popularNewCars => 'السيارات الجديدة الشائعة';
+
+  @override
+  String get recommendedCars => 'السيارات الموصى بها';
 }
