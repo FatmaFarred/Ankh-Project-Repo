@@ -30,7 +30,11 @@
   "selectYourServiceRoleDescribe": "Choose the role that best describe your work.",
   "marketer": "Marketer",
   "marketerDescription": "Promote listings and grow visibility",
-  "continu": "Continue"
+  "continu": "Continue",
+  "topBrands": "Top Brands",
+  "viewAll": "View All",
+  "popularNewCars": "Popular New Cars",
+  "recommendedCars": "Recommended Cars"
 
 
 
