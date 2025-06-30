@@ -613,6 +613,29 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character'**
   String get invalidPasswordDetails;
+  /// No description provided for @topBrands.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Brands'**
+  String get topBrands;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// No description provided for @popularNewCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular New Cars'**
+  String get popularNewCars;
+
+  /// No description provided for @recommendedCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Cars'**
+  String get recommendedCars;
 }
 
 class _AppLocalizationsDelegate

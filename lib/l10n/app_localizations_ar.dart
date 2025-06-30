@@ -281,4 +281,15 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get invalidPasswordDetails =>
       'كلمة المرور غير صالحة:\n- يجب أن تحتوي على حرف كبير واحد على الأقل\n- يجب أن تحتوي على حرف صغير واحد على الأقل\n- يجب أن تحتوي على رقم واحد على الأقل\n- يجب أن تحتوي على رمز خاص واحد على الأقل';
+
+  String get topBrands => 'أفضل العلامات التجارية';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String get popularNewCars => 'السيارات الجديدة الشائعة';
+
+  @override
+  String get recommendedCars => 'السيارات الموصى بها';
 }
