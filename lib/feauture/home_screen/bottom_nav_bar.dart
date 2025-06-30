@@ -11,6 +11,9 @@ import 'car_brand_item.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
+  static String bottomNavBarRouteName = "BottomNavBar";
+
+
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();

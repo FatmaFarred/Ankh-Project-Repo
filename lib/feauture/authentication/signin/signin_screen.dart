@@ -12,6 +12,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../home_screen/bottom_nav_bar.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
@@ -57,8 +58,8 @@ class _SignInScreenState extends State<SignInScreen> {
             message: state.response?.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-
-                    EmailVerficationScreen.emailVerficationScreenRouteName));
+                    BottomNavBar.bottomNavBarRouteName
+                    ));
       }
     },
 

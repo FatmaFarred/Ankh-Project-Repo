@@ -25,6 +25,7 @@ import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
 import 'feauture/choose_role/choose_role_cubit/choose_role_cubit.dart';
 import 'feauture/choose_role/choose_role_screen.dart';
+import 'feauture/home_screen/bottom_nav_bar.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
 import 'feauture/welcome_screen/welcome_screen.dart';
 import 'firebase_options.dart';
@@ -101,6 +102,8 @@ class MyApp extends StatelessWidget {
             ForgetPasswordScreen.forgetPasswordScreenRouteName:(context) =>  ForgetPasswordScreen(),
             OtpVerficationScreen.otpVerficationScreenRouteName:(context) =>  OtpVerficationScreen(),
             ResetPasswordScreen.resetPasswordScreenRouteName:(context) =>  ResetPasswordScreen(),
+            BottomNavBar.bottomNavBarRouteName:(context) =>  BottomNavBar(),
+
           } ,
         );
       },

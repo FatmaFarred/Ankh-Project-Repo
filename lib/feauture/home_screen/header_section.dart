@@ -47,7 +47,7 @@ class HeaderSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 24.h),
-            const CustomSearchBar(),
+            const CustomSearchBar()
           ],
         ),
       ),
