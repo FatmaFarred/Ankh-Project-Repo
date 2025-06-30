@@ -293,4 +293,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recommendedCars => 'السيارات الموصى بها';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get verified => 'موثوق';
+
+  @override
+  String get online => 'متصل';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get supportTeam => 'فريق الدعم';
+
+  @override
+  String get chatNow => 'ابدأ المحادثة';
+
+  @override
+  String get images => 'الصور';
+
+  @override
+  String get requestInspection => 'طلب فحص';
+
+  @override
+  String get created => 'تم الإنشاء';
+
+  @override
+  String get lastEdited => 'آخر تعديل';
+
+  @override
+  String get batteryCapacity => 'سعة البطارية';
+
+  @override
+  String get transmission => 'ناقل الحركة';
+
+  @override
+  String get horsepower => 'قوة الحصان';
+
+  @override
+  String get engineType => 'نوع المحرك';
 }

@@ -295,4 +295,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recommendedCars => 'Recommended Cars';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get verified => 'Verified';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get supportTeam => 'Support Team';
+
+  @override
+  String get chatNow => 'Chat Now';
+
+  @override
+  String get images => 'Images';
+
+  @override
+  String get requestInspection => 'Request Inspection';
+
+  @override
+  String get created => 'Created';
+
+  @override
+  String get lastEdited => 'Last Edited';
+
+  @override
+  String get batteryCapacity => 'Battery Capacity';
+
+  @override
+  String get transmission => 'Transmission';
+
+  @override
+  String get horsepower => 'Horsepower';
+
+  @override
+  String get engineType => 'Engine Type';
 }

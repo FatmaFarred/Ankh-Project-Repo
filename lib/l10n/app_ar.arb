@@ -88,6 +88,20 @@
   "topBrands": "أفضل العلامات التجارية",
   "viewAll": "عرض الكل",
   "popularNewCars": "السيارات الجديدة الشائعة",
-  "recommendedCars": "السيارات الموصى بها"
+  "recommendedCars": "السيارات الموصى بها",
+  "details": "التفاصيل",
+  "verified": "موثوق",
+  "online": "متصل",
+  "description": "الوصف",
+  "supportTeam": "فريق الدعم",
+  "chatNow": "ابدأ المحادثة",
+  "images": "الصور",
+  "requestInspection": "طلب فحص",
+  "created": "تم الإنشاء",
+  "lastEdited": "آخر تعديل",
+  "batteryCapacity": "سعة البطارية",
+  "transmission": "ناقل الحركة",
+  "horsepower": "قوة الحصان",
+  "engineType": "نوع المحرك"
 
 }

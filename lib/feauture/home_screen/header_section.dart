@@ -41,7 +41,7 @@ class HeaderSection extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Image.asset(ImageAssets.goldMedal, scale: 3),
+                Image.asset(ImageAssets.goldMedal, scale: 6.sp),
                 SizedBox(width: 12.w),
                 ClipRRect(child: Image.asset(ImageAssets.notification, scale: 1.3)),
               ],
