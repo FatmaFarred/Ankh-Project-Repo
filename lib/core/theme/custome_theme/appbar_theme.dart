@@ -7,13 +7,15 @@ class MyAppBarTheme {
   MyAppBarTheme._();
   static AppBarTheme lightAppBarTheme (BuildContext context) =>AppBarTheme(
    elevation: 0,
-    centerTitle: false,
+    centerTitle: true,
     scrolledUnderElevation: 0,
-    backgroundColor: ColorManager.transparent,
+
+    backgroundColor: ColorManager.lightprimary,
     surfaceTintColor: ColorManager.transparent,
-    iconTheme: IconThemeData(color:ColorManager.black,size: 24 ),
+    iconTheme: IconThemeData(color:ColorManager.white,size: 24 ),
     actionsIconTheme: IconThemeData(color:ColorManager.black,size: 24),
-    titleTextStyle: getBoldStyle(color: ColorManager.black,fontSize:18,context:context )
+
+    titleTextStyle: getBoldStyle(color: ColorManager.white,fontSize:20,context:context )
 
 
   );
@@ -21,13 +23,13 @@ class MyAppBarTheme {
 
   static AppBarTheme darkAppBarTheme (BuildContext context) =>AppBarTheme(
       elevation: 0,
-      centerTitle: false,
+      centerTitle: true,
       scrolledUnderElevation: 0,
-      backgroundColor: ColorManager.transparent,
+      backgroundColor: ColorManager.lightprimary,
       surfaceTintColor: ColorManager.transparent,
-      iconTheme: IconThemeData(color:ColorManager.white,size: 24 ),
+      iconTheme: IconThemeData(color:ColorManager.black,size: 24 ),
       actionsIconTheme: IconThemeData(color:ColorManager.white,size: 24),
-      titleTextStyle: getBoldStyle(color: ColorManager.white,fontSize:18 ,context:context)
+      titleTextStyle: getBoldStyle(color: ColorManager.white,fontSize:20 ,context:context)
 
 
   );

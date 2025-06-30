@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RoundedContainerWidget extends StatelessWidget {
   final double width,height;
@@ -15,13 +16,16 @@ class RoundedContainerWidget extends StatelessWidget {
       width: width,
       height:height,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        borderRadius: BorderRadius.circular(16.r),
         color: Theme.of(context).indicatorColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image.asset(
-          imagePath, // Replace with your image path
+          imagePath,
+          height: 54.h,
+          width: 119.w,
+          // Replace with your image path
           fit: BoxFit.contain,
         ),
       ),

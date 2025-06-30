@@ -90,7 +90,12 @@
   "topBrands": "Top Brands",
   "viewAll": "View All",
   "popularNewCars": "Popular New Cars",
-  "recommendedCars": "Recommended Cars"
+  "recommendedCars": "Recommended Cars",
+    "searchRequest": "Search Request",
+  "myRequests": "My Requests",
+  "client": "Client",
+  "created": "Created",
+  "price": "Price"
 
 
 }
