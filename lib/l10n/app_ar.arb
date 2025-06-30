@@ -89,6 +89,11 @@
   "viewAll": "عرض الكل",
   "popularNewCars": "السيارات الجديدة الشائعة",
   "recommendedCars": "السيارات الموصى بها",
+  "myRequests": "طلباتي",
+  "client": "عميل",
+  "created": "تم الإنشاء",
+  "price": "السعر",
+  "searchRequest": "البحث عن طلب "
   "details": "التفاصيل",
   "verified": "موثوق",
   "online": "متصل",

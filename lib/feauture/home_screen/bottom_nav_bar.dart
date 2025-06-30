@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../myrequest/my_request_screen.dart';
 import 'car_brand_item.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -24,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    Center(child: Text("Requests Page")),
+    RequestScreen(),
     Center(child: Text("Balance Page")),
     Center(child: Text("Account Page")),
   ];
