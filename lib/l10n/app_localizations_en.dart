@@ -283,6 +283,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get invalidPasswordDetails =>
       'Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character';
+
+  @override
   String get topBrands => 'Top Brands';
 
   @override

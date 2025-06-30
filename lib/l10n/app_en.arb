@@ -85,18 +85,8 @@
   "invalidPhone" : "Enter a valid phone number",
 
   "confirmPasswordRequired": "confirm password is required",
-  "invalidPasswordDetails": "Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character"
+  "invalidPasswordDetails": "Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character",
 
-
-
-
-
-
-  "otpEmailSubTitle": "Enter your OTP which has been sent to your email",
-  "newPassword": "New Password",
-  "forgotPasswordTitle": "Forgot Password!",
-  "resetPassword": "Reset Password",
-  "enterNewPassword": "Enter New Password",
   "topBrands": "Top Brands",
   "viewAll": "View All",
   "popularNewCars": "Popular New Cars",

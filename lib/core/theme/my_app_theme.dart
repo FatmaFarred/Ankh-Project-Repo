@@ -17,6 +17,7 @@ class MyAppTheme {
     brightness: Brightness.light,
     primaryColor: ColorManager.lightprimary,
     scaffoldBackgroundColor: ColorManager.white,
+    indicatorColor: ColorManager.containerGrey,
     textTheme: MyTextTheme.lightTextTheme(context),
     appBarTheme:MyAppBarTheme.lightAppBarTheme(context),
       bottomSheetTheme:MyBottomSheetTheme.lightBottomSheet,
@@ -32,6 +33,8 @@ class MyAppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       primaryColor: ColorManager.darkBlue,
+      indicatorColor: ColorManager.containerdarkGrey,
+
       scaffoldBackgroundColor: ColorManager.black,
       textTheme: MyTextTheme.darkTextTheme(context),
       appBarTheme:MyAppBarTheme.darkAppBarTheme(context),
