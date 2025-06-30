@@ -96,6 +96,20 @@
   "client": "Client",
   "created": "Created",
   "price": "Price"
+  "details": "Details",
+  "verified": "Verified",
+  "online": "Online",
+  "description": "Description",
+  "supportTeam": "Support Team",
+  "chatNow": "Chat Now",
+  "images": "Images",
+  "requestInspection": "Request Inspection",
+  "created": "Created",
+  "lastEdited": "Last Edited",
+  "batteryCapacity": "Battery Capacity",
+  "transmission": "Transmission",
+  "horsepower": "Horsepower",
+  "engineType": "Engine Type"
 
 
 }

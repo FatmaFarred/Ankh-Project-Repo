@@ -94,4 +94,19 @@
   "created": "تم الإنشاء",
   "price": "السعر",
   "searchRequest": "البحث عن طلب "
+  "details": "التفاصيل",
+  "verified": "موثوق",
+  "online": "متصل",
+  "description": "الوصف",
+  "supportTeam": "فريق الدعم",
+  "chatNow": "ابدأ المحادثة",
+  "images": "الصور",
+  "requestInspection": "طلب فحص",
+  "created": "تم الإنشاء",
+  "lastEdited": "آخر تعديل",
+  "batteryCapacity": "سعة البطارية",
+  "transmission": "ناقل الحركة",
+  "horsepower": "قوة الحصان",
+  "engineType": "نوع المحرك"
+
 }
