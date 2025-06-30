@@ -90,7 +90,21 @@
   "topBrands": "Top Brands",
   "viewAll": "View All",
   "popularNewCars": "Popular New Cars",
-  "recommendedCars": "Recommended Cars"
+  "recommendedCars": "Recommended Cars",
+  "details": "Details",
+  "verified": "Verified",
+  "online": "Online",
+  "description": "Description",
+  "supportTeam": "Support Team",
+  "chatNow": "Chat Now",
+  "images": "Images",
+  "requestInspection": "Request Inspection",
+  "created": "Created",
+  "lastEdited": "Last Edited",
+  "batteryCapacity": "Battery Capacity",
+  "transmission": "Transmission",
+  "horsepower": "Horsepower",
+  "engineType": "Engine Type"
 
 
 }

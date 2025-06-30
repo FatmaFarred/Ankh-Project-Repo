@@ -637,6 +637,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommended Cars'**
   String get recommendedCars;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @verified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verified;
+
+  /// No description provided for @online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @supportTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Support Team'**
+  String get supportTeam;
+
+  /// No description provided for @chatNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat Now'**
+  String get chatNow;
+
+  /// No description provided for @images.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get images;
+
+  /// No description provided for @requestInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Inspection'**
+  String get requestInspection;
+
+  /// No description provided for @created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get created;
+
+  /// No description provided for @lastEdited.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Edited'**
+  String get lastEdited;
+
+  /// No description provided for @batteryCapacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery Capacity'**
+  String get batteryCapacity;
+
+  /// No description provided for @transmission.
+  ///
+  /// In en, this message translates to:
+  /// **'Transmission'**
+  String get transmission;
+
+  /// No description provided for @horsepower.
+  ///
+  /// In en, this message translates to:
+  /// **'Horsepower'**
+  String get horsepower;
+
+  /// No description provided for @engineType.
+  ///
+  /// In en, this message translates to:
+  /// **'Engine Type'**
+  String get engineType;
 }
 
 class _AppLocalizationsDelegate
