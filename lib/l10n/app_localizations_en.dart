@@ -233,4 +233,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterNewPassword => 'Enter New Password';
+
+  @override
+  String get invalidPassword => 'enter a valid password :';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get upperCaesLetter => '- Must contain at least one uppercase letter';
+
+  @override
+  String get lowerCaesLetter => '- Must contain at least one lowercase letter';
+
+  @override
+  String get number => '- Must contain at least one digit';
+
+  @override
+  String get specialCharacter =>
+      '- Must contain at least one special character';
+
+  @override
+  String get minLength => '- Must be at least 8 characters long';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get phoneRequired => 'Phone number is required';
+
+  @override
+  String get invalidEmail => 'Enter a valid email address';
+
+  @override
+  String get invalidName => 'Enter a valid name';
+
+  @override
+  String get invalidPhone => 'Enter a valid phone number';
+
+  @override
+  String get confirmPasswordRequired => 'confirm password is required';
+
+  @override
+  String get invalidPasswordDetails =>
+      'Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character';
 }

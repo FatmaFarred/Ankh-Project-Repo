@@ -11,8 +11,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../data/data_sources/authentication/authentication_remote_data_source_impl.dart'
-    as _i699;
+import '../../data/data_sources/authentication/authentication_remote_data_sourse_impl_with_api.dart'
+    as _i758;
 import '../../data/data_sources/push_notification_data_source_/push_notification_data_sorce_impl.dart'
     as _i71;
 import '../../data/repositries/authentication/authentication%20_repo_impl.dart'
@@ -61,8 +61,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1069.ApiManager>(() => _i1069.ApiManager());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
     gh.singleton<_i470.LocalNotification>(() => _i470.LocalNotification());
-    gh.factory<_i430.AuthenticationRemoteDataSource>(
-        () => _i699.AuthenticationRemoteDataSourceImpl());
+    gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
+        _i758.AuthenticationRemoteDataSourceImplWithApi(
+            gh<_i1069.ApiManager>()));
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
             gh<_i329.FirebaseMessagingService>()));

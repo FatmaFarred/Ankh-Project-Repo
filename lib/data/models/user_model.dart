@@ -4,13 +4,14 @@ class MyUser {
   String? name;
   String? email;
   String? uid;
-  List<String> deviceTokens;
+  String? phoneNumber;
+  List<String> ?deviceTokens;
 
   MyUser({
     required this.name,
     required this.email,
     required this.uid,
-    required this.deviceTokens,
+     this.deviceTokens,
   });
 
   MyUser.fromFireStore(Map<String, dynamic> dataMap)

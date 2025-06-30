@@ -81,7 +81,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                   obscureText: !_isPasswordVisible,
-                  validator: ValidatorUtils.validatePassword,
+                  validator: (value) => ValidatorUtils.validatePassword(value, context),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isPasswordVisible
@@ -112,6 +112,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   obscureText: !_isConfirmPasswordVisible,
                   validator: (value) => ValidatorUtils.validateConfirmPassword(
                     passwordController.text,
+                    context,
+
                     value,
                   ),
                   suffixIcon: IconButton(

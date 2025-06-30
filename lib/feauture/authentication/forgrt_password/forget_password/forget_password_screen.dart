@@ -85,7 +85,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   hintText: AppLocalizations.of(context)!.enterYourName,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  validator: ValidatorUtils.validateEmail,
+                  validator: (value) => ValidatorUtils.validateEmail(value, context),
                 ),
                 SizedBox(height: 20.h),
 

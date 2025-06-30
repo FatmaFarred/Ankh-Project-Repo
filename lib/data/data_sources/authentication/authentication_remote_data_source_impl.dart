@@ -1,3 +1,5 @@
+/*
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
@@ -6,12 +8,12 @@ import '../../../api_service/failure/error_handling.dart';
 import '../../../domain/repositries_and_data_sources/data_sources/remote_data_source/authentication.dart';
 import '../../../feauture/authentication/user_cubit/user_cubit.dart';
 import '../../../firebase_service/firestore_service/firestore_service.dart';
+import '../../models/register_response_dm.dart';
 import '../../models/user_model.dart';
 
 @Injectable(as: AuthenticationRemoteDataSource)
-class AuthenticationRemoteDataSourceImpl
-    implements AuthenticationRemoteDataSource {
-  Future<MyUser?> register(String name, String email, String password) async {
+class AuthenticationRemoteDataSourceImpl implements AuthenticationRemoteDataSource {
+  Future<Either<Failure,RegisterResponseDm>>register(String name, String email, String password,String phone) async {
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -25,7 +27,11 @@ class AuthenticationRemoteDataSourceImpl
       );
       await FireBaseUtilies.addUser(myUser);
 
-      return myUser;
+      // You can use credential.user?.uid or deviceToken as the token if needed
+      return right(RegisterResponseDm(
+        message: "Registration successful",
+        token: deviceToken ?? "",
+      ));
     } on FirebaseAuthException catch (e) {
       throw _mapFirebaseException(e);
     } catch (e) {
@@ -34,7 +40,7 @@ class AuthenticationRemoteDataSourceImpl
   }
 
   @override
-  Future<MyUser?> signIn(String email, String password) async {
+  Future<Either<Failure,RegisterResponseDm>> signIn(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -49,8 +55,10 @@ class AuthenticationRemoteDataSourceImpl
         credential.user?.uid ?? "",
       );
       //todo: change the user in presentation layer
-      return myUser;
-    } on FirebaseAuthException catch (e) {
+      return right(RegisterResponseDm(
+        message: "Registration successful",
+        token: deviceToken ?? "",
+      ));    } on FirebaseAuthException catch (e) {
       throw _mapFirebaseException(e);
     } catch (e) {
       throw AuthFailure("An unknown error occurred. Please try again later.");
@@ -72,3 +80,4 @@ AuthFailure _mapFirebaseException(FirebaseAuthException e) {
       return AuthFailure(e.message ?? "Authentication failed.");
   }
 }
+*/

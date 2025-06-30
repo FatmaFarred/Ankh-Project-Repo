@@ -1,12 +1,18 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_text_field.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/feauture/authentication/signin/controller/sigin_states.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
+import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../email_verfication/email_verfication_screen.dart';
 import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
 
@@ -20,16 +26,45 @@ import '../register/register _screen.dart';
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  SignInCubit signInViewModel = getIt<SignInCubit>();
+
 
   bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<SignInCubit, SignInState>(
+        bloc: signInViewModel,
+        listener: (context, state) {
+      if (state is SignInLoading) {
+        CustomDialog.loading(
+            context: context,
+            message: "loading",
+            cancelable: false);
+      } else if (state is SignInFailure) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveButton(
+            context: context,
+            //title: "error",
+            message: state.error.errorMessage);
+      } else if (state is SignInSuccess) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveButton(
+            context: context,
+            //title: "getTranslations(context).success",
+            message: state.response?.message,
+            positiveOnClick: () =>
+                Navigator.of(context).pushNamed(
+
+                    EmailVerficationScreen.emailVerficationScreenRouteName));
+      }
+    },
+
+
+
+    child:Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -66,7 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 55.h),
                 Text(
-                  AppLocalizations.of(context)!.yourEmailOrPhone,
+                  AppLocalizations.of(context)!.email,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
@@ -75,11 +110,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: emailController,
-                  hintText: AppLocalizations.of(context)!.enterYourEmailOrPhone,
+                  controller: signInViewModel.email,
+                  hintText: AppLocalizations.of(context)!.enterYourEmail,
                   keyboardType: TextInputType.multiline,
                   textInputAction: TextInputAction.next,
-                  validator: ValidatorUtils.validateEmail,
+                  validator: (value) => ValidatorUtils.validateEmail(value, context),
                 ),
                 SizedBox(height: 20.h),
                 Text(
@@ -91,13 +126,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: passwordController,
+                  controller: signInViewModel.password,
                   hintText: AppLocalizations.of(context)!.enterYourPassword,
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                   obscureText: !_isPasswordVisible,
-                  validator:
-                  ValidatorUtils.validatePassword,
+                  validator: (value) => ValidatorUtils.validatePassword(value, context),
                   suffixIcon: IconButton(
                     icon: Icon(
                         _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -130,7 +164,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 CustomizedElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Handle registration logic here
+                      signInViewModel.signIn();
                     }
                   },
                   borderColor: ColorManager.lightprimary,
@@ -175,6 +209,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

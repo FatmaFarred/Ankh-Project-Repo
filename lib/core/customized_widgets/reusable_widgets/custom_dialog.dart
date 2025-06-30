@@ -20,18 +20,19 @@ class CustomDialog {
         barrierDismissible: cancelable,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: ColorManager.black,
+
+            backgroundColor: ColorManager.lightGrey,
             content: Row(
               children: [
                  CircularProgressIndicator(
-                  color: ColorManager.darkBlue,
+                  color: ColorManager.black,
                 ),
                 if (message != null) ...[
                   SizedBox(width: 16.w),
                   Text(
                     message!,
                     style:
-                        getSemiBoldStyle(color:ColorManager.white,context:context ),
+                        getSemiBoldStyle(color:ColorManager.black,context:context ),
                   ),
                 ],
               ],
@@ -52,7 +53,7 @@ class CustomDialog {
         barrierDismissible: cancelable,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: ColorManager.black,
+            backgroundColor: ColorManager.lightGrey,
             title: Text(
               title ?? "Success",
               style: getBoldStyle(color:ColorManager.white, context:context),
@@ -63,8 +64,8 @@ class CustomDialog {
             ),
             actions: [
               CustomizedElevatedButton(
-                color: ColorManager.darkBlue,
-                bottonWidget:Text ("ok"),
+                color: ColorManager.lightprimary,
+                bottonWidget:Text ("ok", style: getSemiBoldStyle(color:ColorManager.white, context:context)),
                 onPressed: () {
                   if (positiveOnClick != null) {
                     positiveOnClick!();
@@ -92,14 +93,14 @@ class CustomDialog {
         barrierDismissible: cancelable,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: ColorManager.black,
+            backgroundColor: ColorManager.lightGrey,
             title: Text(
               title ?? "",
-              style: getBoldStyle(color:ColorManager.white ,context:context ),
+              style: getBoldStyle(color:ColorManager.black ,context:context ),
             ),
             content: Text(
               message ?? "",
-              style: getSemiBoldStyle(color:ColorManager.white, context:context ),
+              style: getSemiBoldStyle(color:ColorManager.black, context:context ),
             ),
             actions: [
               Row(
@@ -109,7 +110,7 @@ class CustomDialog {
                     child: CustomizedElevatedButton(
                       color: Colors.transparent,
                       bottonWidget:Text ("no,"),
-                      textStyle: getSemiBoldStyle(color:ColorManager.darkBlue ,context:context ),
+                      textStyle: getSemiBoldStyle(color:ColorManager.black ,context:context ),
                       onPressed: () {
                         if (negativeOnClick != null) {
                           negativeOnClick!();
@@ -124,7 +125,8 @@ class CustomDialog {
                   ),
                   Expanded(
                     child: CustomizedElevatedButton(
-                      bottonWidget:Text("yes"),
+                      color: ColorManager.lightprimary,
+                      bottonWidget:Text("yes",style: getSemiBoldStyle(color:ColorManager.white ,context:context ),),
                       onPressed: () {
                         if (positiveOnClick != null) {
                           positiveOnClick!();
