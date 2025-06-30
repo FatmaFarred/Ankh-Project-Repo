@@ -25,15 +25,16 @@ class CustomizedElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+
         style: ElevatedButton.styleFrom(
 
 
             elevation: 0,
-            //padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(15.h),
             shape: RoundedRectangleBorder(
 
                 side: BorderSide(color: borderColor ?? ColorManager.darkBlue),
-                borderRadius: BorderRadius.circular(40.r)),
+                borderRadius: BorderRadius.circular(16.r)),
             backgroundColor: color ??  ColorManager.darkBlue),
         onPressed: () {
           if (onPressed != null) {

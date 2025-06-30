@@ -4,24 +4,42 @@ const String iconsPath = "assets/icons";
 const String svgPath = "assets/svg_images";
 const String lottiePath = "assets/lottie";
 
-
 abstract class ImageAssets {
-
+  static const String appIcon = "$imagePath/app_icon.png";
+  static const String OnBoardingImage1 = "$imagePath/onboarding1.png";
+  static const String OnBoardingImage2 = "$imagePath/onboarding2.png";
+  static const String OnBoardingImage3 = "$imagePath/onboarding3.png";
+  static const String OnBoardingImage4 = "$imagePath/onboarding4.png";
+  static const String splashScreenImage = "$imagePath/splash_screen.png";
+  static const String appLogo = "$imagePath/app_logo.png";
+  static const String clientIcon = "$imagePath/cstIcon.png";
+  static const String cstIcon = "$imagePath/csIcon.png";
+  static const String inspectorIcon = "$imagePath/inspector.png";
+  static const String marketerIcon = "$imagePath/markerterIcon.png";
+  static const String ownerIcon = "$imagePath/owner.png";
+  static const String profilePic = "$imagePath/profilePic.png";
+  static const String goldMedal = "$imagePath/GoldMedal.png";
+  static const String notification = "$imagePath/Notice+Avt.png";
+  static const String carBrandLogo = "$imagePath/bmwLogo.png";
+  static const String homeIcon = "$imagePath/homeIcon.png";
+  static const String requestIcon = "$imagePath/requestIcon.png";
+  static const String walletIcon = "$imagePath/walletIcon.png";
+  static const String profileIcon = "$imagePath/profileIcon.png";
+  static const String carPic1 = "$imagePath/car.png";
+  static const String carPic2 = "$imagePath/car2.png";
+  static const String carPic3 = "$imagePath/car3.png";
+  static const String onlineIcon = "$imagePath/online.png";
+  static const String batteryIcon = "$imagePath/batteryIcon.png";
+  static const String hpIcon = "$imagePath/hpIcon.png";
+  static const String transIcon = "$imagePath/transIcon.png";
+  static const String engineIcon = "$imagePath/engineIcon.png";
+  static const String supportTeamIcon = "$imagePath/supportTeamIcon.png";
 }
 
-class SvgAssets{
+class SvgAssets {}
 
-}
+abstract class IconsAssets {}
 
-abstract class IconsAssets {
+class JsonAssets {}
 
-}
-
-
-
-class JsonAssets {
-
-}
-class LottieAssets {
-
-}
+class LottieAssets {}

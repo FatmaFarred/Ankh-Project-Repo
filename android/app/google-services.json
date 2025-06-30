@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864730614736",
+    "project_id": "ankh-project",
+    "storage_bucket": "ankh-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864730614736:android:a9dd2fb56e6ff8908b47d5",
+        "android_client_info": {
+          "package_name": "com.nplanet.ankh_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfWRuc3Jjamw90iWvRZrLBx1Fcpa8Mqs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

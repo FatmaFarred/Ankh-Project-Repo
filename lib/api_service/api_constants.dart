@@ -1,4 +1,4 @@
 abstract class ApiConstant {
-  static const String baseUrl = "";
+  static const String baseUrl = "https://ankhapi.runasp.net/api/";
   static const String test = "";
 }

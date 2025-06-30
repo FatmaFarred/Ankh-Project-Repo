@@ -12,33 +12,36 @@ import 'my_text_theme.dart';
 
 class MyAppTheme {
   MyAppTheme._();
-  static ThemeData lightTheme=ThemeData(
+  static ThemeData lightTheme(BuildContext context) =>ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    primaryColor: ColorManager.darkBlue,
+    primaryColor: ColorManager.lightprimary,
     scaffoldBackgroundColor: ColorManager.white,
-    textTheme: MyTextTheme.lightTextTheme,
-    appBarTheme:MyAppBarTheme.lightAppBarTheme,
+    indicatorColor: ColorManager.containerGrey,
+    textTheme: MyTextTheme.lightTextTheme(context),
+    appBarTheme:MyAppBarTheme.lightAppBarTheme(context),
       bottomSheetTheme:MyBottomSheetTheme.lightBottomSheet,
     checkboxTheme:MyCheckBoxTheme.lightCheckBox,
-    chipTheme:MyChipTheme.lightChipTheme,
-    outlinedButtonTheme:MyOutLinedBottonTheme.lightOutlinedButtonTheme
+    chipTheme:MyChipTheme.lightChipTheme(context),
+    outlinedButtonTheme:MyOutLinedBottonTheme.lightOutlinedButtonTheme(context)
   );
 
 
 
 
-  static ThemeData darkTheme=ThemeData(
+  static ThemeData darkTheme(BuildContext context) =>ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
       primaryColor: ColorManager.darkBlue,
+      indicatorColor: ColorManager.containerdarkGrey,
+
       scaffoldBackgroundColor: ColorManager.black,
-      textTheme: MyTextTheme.darkTextTheme,
-      appBarTheme:MyAppBarTheme.darkAppBarTheme,
+      textTheme: MyTextTheme.darkTextTheme(context),
+      appBarTheme:MyAppBarTheme.darkAppBarTheme(context),
       bottomSheetTheme:MyBottomSheetTheme.darkBottomSheet,
       checkboxTheme:MyCheckBoxTheme.darkCheckBox,
-      chipTheme:MyChipTheme.darkChipTheme,
-      outlinedButtonTheme:MyOutLinedBottonTheme.darkOutlinedButtonTheme
+      chipTheme:MyChipTheme.darkChipTheme(context),
+      outlinedButtonTheme:MyOutLinedBottonTheme.darkOutlinedButtonTheme(context)
 
 
 

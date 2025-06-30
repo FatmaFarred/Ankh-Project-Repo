@@ -11,3 +11,11 @@ class ServerError extends Failure {
 class NetworkError extends Failure {
   NetworkError({required super.errorMessage});
 }
+class AuthFailure implements Exception {
+  final String message;
+
+  AuthFailure(this.message);
+
+  @override
+  String toString() => message;
+}
