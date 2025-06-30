@@ -64,6 +64,34 @@
   "setNewPassword": "Set a New Password",
   "setPasswordSubTitle": "Create a new password. Ensure it differs from previous ones for security",
   "reEnterNewPassword": "Re-enter Password",
+  "otpEmailSubTitle" : "Enter your OTP which has been sent to your email",
+  "newPassword" : "New Password",
+  "forgotPasswordTitle" : "Forgot Password!",
+  "resetPassword" : "Reset Password",
+  "enterNewPassword" : "Enter New Password",
+   "invalidPassword" : "enter a valid password :",
+    "passwordsDoNotMatch" : "Passwords do not match",
+  "upperCaesLetter" : "- Must contain at least one uppercase letter",
+    "lowerCaesLetter" : "- Must contain at least one lowercase letter",
+    "number" : "- Must contain at least one digit",
+    "specialCharacter" : "- Must contain at least one special character",
+    "minLength" : "- Must be at least 8 characters long",
+    "emailRequired" : "Email is required",
+    "passwordRequired" : "Password is required",
+    "nameRequired" : "Name is required",
+    "phoneRequired" : "Phone number is required",
+    "invalidEmail" : "Enter a valid email address",
+  "invalidName" : "Enter a valid name",
+  "invalidPhone" : "Enter a valid phone number",
+
+  "confirmPasswordRequired": "confirm password is required",
+  "invalidPasswordDetails": "Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character"
+
+
+
+
+
+
   "otpEmailSubTitle": "Enter your OTP which has been sent to your email",
   "newPassword": "New Password",
   "forgotPasswordTitle": "Forgot Password!",
@@ -73,5 +101,6 @@
   "viewAll": "View All",
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars"
+
 
 }

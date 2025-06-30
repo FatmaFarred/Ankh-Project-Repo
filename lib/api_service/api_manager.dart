@@ -20,20 +20,31 @@ class ApiManager {
     );
   }
 
-  Future<Response> postData(
-      {required String endPoint,
-        required String url,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        Object? data,
-        Map<String, dynamic>? headers}) {
+  Future<Response> postData({
+    required String endPoint,
+    required String url,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    Object? data,
+    Map<String, dynamic>? headers,
+  }) {
+    // Only set JSON content-type if not using FormData
+    final defaultHeaders = headers ?? {};
+    if (data is! FormData) {
+      defaultHeaders.putIfAbsent('Content-Type', () => 'application/json');
+    }
+
     return dio.post(
       url + endPoint,
       queryParameters: queryParameters,
       data: data,
-      options: Options(validateStatus: (status) => true, headers: headers),
+      options: Options(
+        validateStatus: (status) => true,
+        headers: defaultHeaders,
+      ),
     );
   }
+
 
   Future<Response> patchData(
       {required String endPoint,

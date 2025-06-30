@@ -518,6 +518,101 @@ abstract class AppLocalizations {
   /// **'Enter New Password'**
   String get enterNewPassword;
 
+  /// No description provided for @invalidPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'enter a valid password :'**
+  String get invalidPassword;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @upperCaesLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'- Must contain at least one uppercase letter'**
+  String get upperCaesLetter;
+
+  /// No description provided for @lowerCaesLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'- Must contain at least one lowercase letter'**
+  String get lowerCaesLetter;
+
+  /// No description provided for @number.
+  ///
+  /// In en, this message translates to:
+  /// **'- Must contain at least one digit'**
+  String get number;
+
+  /// No description provided for @specialCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'- Must contain at least one special character'**
+  String get specialCharacter;
+
+  /// No description provided for @minLength.
+  ///
+  /// In en, this message translates to:
+  /// **'- Must be at least 8 characters long'**
+  String get minLength;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @phoneRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number is required'**
+  String get phoneRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get invalidEmail;
+
+  /// No description provided for @invalidName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid name'**
+  String get invalidName;
+
+  /// No description provided for @invalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get invalidPhone;
+
+  /// No description provided for @confirmPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'confirm password is required'**
+  String get confirmPasswordRequired;
+
+  /// No description provided for @invalidPasswordDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character'**
+  String get invalidPasswordDetails;
   /// No description provided for @topBrands.
   ///
   /// In en, this message translates to:

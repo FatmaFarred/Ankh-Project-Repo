@@ -234,6 +234,54 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterNewPassword => 'ادخل كلمة المرور الجديدة';
 
   @override
+  String get invalidPassword => 'ادخل كلمة مرور صالحة :';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمة المرور غير متطابقة';
+
+  @override
+  String get upperCaesLetter => '-يجب أن يحتوي على حرف كبير واحد على الأقل';
+
+  @override
+  String get lowerCaesLetter => '-يجب أن يحتوي على حرف صغير واحد على الأقل';
+
+  @override
+  String get number => '-يجب أن يحتوي على رقم واحد على الأقل';
+
+  @override
+  String get specialCharacter => '-يجب أن يحتوي على رمز خاص واحد على الأقل';
+
+  @override
+  String get minLength => '-يجب أن يكون 8 أحرف على الأقل';
+
+  @override
+  String get emailRequired => '* هذا الحقل مطلوب';
+
+  @override
+  String get passwordRequired => '* هذا الحقل مطلوب';
+
+  @override
+  String get nameRequired => '* هذا الحقل مطلوب';
+
+  @override
+  String get phoneRequired => '* هذا الحقل مطلوب';
+
+  @override
+  String get invalidEmail => 'ادخل بريدًا إلكترونيًا صالحًا';
+
+  @override
+  String get invalidName => 'ادخل اسمًا صالحًا';
+
+  @override
+  String get invalidPhone => 'ادخل رقم هاتف صالح';
+
+  @override
+  String get confirmPasswordRequired => 'confirm password is required';
+
+  @override
+  String get invalidPasswordDetails =>
+      'كلمة المرور غير صالحة:\n- يجب أن تحتوي على حرف كبير واحد على الأقل\n- يجب أن تحتوي على حرف صغير واحد على الأقل\n- يجب أن تحتوي على رقم واحد على الأقل\n- يجب أن تحتوي على رمز خاص واحد على الأقل';
+
   String get topBrands => 'أفضل العلامات التجارية';
 
   @override

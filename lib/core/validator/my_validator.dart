@@ -1,49 +1,62 @@
+import 'package:ankh_project/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
 class ValidatorUtils {
-  static String? validateName(String? name) {
+  static String? validateName(String? name, BuildContext context) {
     if (name == null || name.trim().isEmpty) {
-      return 'Name is required';
+      return AppLocalizations.of(context)!.nameRequired;
     }
-    if (!RegExp(r'^[A-Za-z ]{5,}$').hasMatch(name)) {
-      return 'Enter a valid name (at least 5 letters)';
+    if (!RegExp(r'^[\u0621-\u064A\u0660-\u0669A-Za-z ]{3,}$').hasMatch(name)) {
+      return AppLocalizations.of(context)!.nameRequired;
+    }
+    return null;
+  }
+  static String? validateEmail(String? email, BuildContext context) {
+    if (email == null || email
+        .trim()
+        .isEmpty) {
+      return AppLocalizations.of(context)!.emailRequired;
+    }
+    if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(
+        email)) {
+      return AppLocalizations.of(context)!.invalidEmail;
     }
     return null;
   }
 
-  static String? validateEmail(String? email) {
-    if (email == null || email.trim().isEmpty) {
-      return 'Email is required';
-    }
-    if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
-      return 'Enter a valid email address';
-    }
-    return null;
-  }
-
-  static String? validatePassword(String? password) {
+  static String? validatePassword(String? password, BuildContext context) {
     if (password == null || password.isEmpty) {
-      return 'Password is required';
+      return AppLocalizations.of(context)!.passwordRequired;
     }
-    if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*)(_+؟/\\|]).{8,}$').hasMatch(password)) {
-      return 'Password must be at least 8 characters, include upper and lower case, number, and special character';
+    if (!RegExp(
+        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*)(_+؟/\\|]).{8,}$')
+        .hasMatch(password)) {
+      return AppLocalizations.of(context)!.invalidPasswordDetails;
+          return null;
     }
     return null;
   }
-  static String? validateConfirmPassword(String? password, String? confirmPassword) {
+
+  static String? validateConfirmPassword(String? password,
+      BuildContext context,
+      String? confirmPassword) {
     if (confirmPassword == null || confirmPassword.isEmpty) {
-      return 'Confirm password is required';
+      return AppLocalizations.of(context)!.confirmPasswordRequired;
     }
     if (password != confirmPassword) {
-      return 'Passwords do not match';
+      return AppLocalizations.of(context)!.passwordsDoNotMatch;
     }
     return null;
   }
 
-  static String? validatePhone(String? phone) {
-    if (phone == null || phone.trim().isEmpty) {
-      return 'Phone number is required';
+  static String? validatePhone(String? phone, BuildContext context) {
+    if (phone == null || phone
+        .trim()
+        .isEmpty) {
+      return AppLocalizations.of(context)!.phoneNumber;
     }
-    if (!RegExp(r'^\+20(10|11|12|15)\d{8}$').hasMatch(phone)) {
-      return 'Enter a valid Egyptian phone number';
+    if (!RegExp(r'^(?:\+20|0)(10|11|12|15)\d{8}$').hasMatch(phone)) {
+      return AppLocalizations.of(context)!.invalidPhone;
     }
     return null;
   }
