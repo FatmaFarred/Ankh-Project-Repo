@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'عميل ';
+  String get client => 'عميل';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -295,6 +295,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recommendedCars => 'السيارات الموصى بها';
 
   @override
+  String get searchRequest => 'البحث عن طلب ';
+
+  @override
+  String get myRequests => 'طلباتي';
+
+  @override
+  String get created => 'تم الإنشاء';
+
+  @override
+  String get price => 'السعر';
+
+  @override
   String get details => 'التفاصيل';
 
   @override
@@ -314,9 +326,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get images => 'الصور';
-
-  @override
-  String get created => 'تم الإنشاء';
 
   @override
   String get lastEdited => 'آخر تعديل';

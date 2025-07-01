@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../home_screen/bottom_nav_bar.dart';
+
 class RequestSubmittedScreen extends StatelessWidget {
   const RequestSubmittedScreen({super.key});
 
@@ -66,7 +68,7 @@ class RequestSubmittedScreen extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){return HomeScreen();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
               },
             ),
           ],

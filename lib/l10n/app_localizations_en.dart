@@ -297,6 +297,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendedCars => 'Recommended Cars';
 
   @override
+  String get searchRequest => 'Search Request';
+
+  @override
+  String get myRequests => 'My Requests';
+
+  @override
+  String get created => 'Created';
+
+  @override
+  String get price => 'Price';
+
+  @override
   String get details => 'Details';
 
   @override
@@ -316,9 +328,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get images => 'Images';
-
-  @override
-  String get created => 'Created';
 
   @override
   String get lastEdited => 'Last Edited';
