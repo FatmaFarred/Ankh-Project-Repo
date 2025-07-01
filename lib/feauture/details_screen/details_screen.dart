@@ -1,3 +1,5 @@
+import 'package:ankh_project/feauture/details_screen/widgets/add_comment_section.dart';
+import 'package:ankh_project/feauture/details_screen/widgets/status_section.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/request_inspection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: "Have A deal wid owner",
+        child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
+        backgroundColor: ColorManager.lightprimary,
+      ),
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back), // Cupertino back icon
@@ -109,26 +117,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             itemSize: 16.sp,
                           ),
                           SizedBox(width: 4),
-                          _buildSmallText("5.0", ColorManager.hintColor),
+                          _buildSmallText("5.0   -", ColorManager.hintColor),
                           SizedBox(width: 8),
-                          Icon(
-                            Icons.verified_outlined,
-                            size: 12.sp,
-                            color: ColorManager.lightprimary,
-                          ),
-                          _buildSmallText(
-                            AppLocalizations.of(context)!.verified,
-                            const Color(0xFF4B5563),
-                          ),
-                          SizedBox(width: 8),
-                          ImageIcon(
-                            AssetImage(ImageAssets.onlineIcon),
-                            size: 16,
-                          ),
-                          _buildSmallText(
-                            AppLocalizations.of(context)!.online,
-                            const Color(0xFF4B5563),
-                          ),
+                          _buildSmallText("3 Ratings", ColorManager.hintColor),
                         ],
                       ),
                       _buildSmallText(
@@ -151,8 +142,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             ),
 
-            SizedBox(height: 34.h),
-            _buildSectionDivider(),
+            SizedBox(height: 18.h),
+            StatusSection(),
+
+            SizedBox(height: 17.h),
 
             SectionTitle(title: AppLocalizations.of(context)!.description),
             SizedBox(height: 4.h),
@@ -172,7 +165,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
               "${AppLocalizations.of(context)!.lastEdited}: 6/20/2025",
               const Color(0xff6B7280),
             ),
-            _buildSectionDivider(),
 
             SizedBox(height: 24.h),
             SectionTitle(title: AppLocalizations.of(context)!.details),
@@ -199,6 +191,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
 
             SizedBox(height: 16.h),
+            SectionTitle(title: "Comments"),
+            SizedBox(height: 12.h),
+            AddCommentSection(),
+
+            SizedBox(height: 16.h),
             SectionTitle(title: AppLocalizations.of(context)!.supportTeam),
             SizedBox(height: 12.h),
             const SupportTeamSection(),
@@ -215,7 +212,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){return RequestInspectionScreen();}));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return RequestInspectionScreen();
+                    },
+                  ),
+                );
               },
             ),
           ],

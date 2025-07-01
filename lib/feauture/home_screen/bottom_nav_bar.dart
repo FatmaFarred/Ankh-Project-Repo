@@ -1,6 +1,7 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
+import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -26,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     HomeScreen(),
     RequestScreen(),
-    Center(child: Text("Balance Page")),
+    BalanceScreen(),
     Center(child: Text("Account Page")),
   ];
 

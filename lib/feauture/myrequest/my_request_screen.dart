@@ -19,7 +19,7 @@ class RequestModel {
   final RequestStatus status;
   final String? imagePath;
 
-  RequestModel( {
+  RequestModel({
     required this.carName,
     required this.clientName,
     required this.createdAt,
@@ -71,7 +71,6 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.8M - 2.1M',
     status: RequestStatus.done,
     imagePath: 'assets/images/car.png',
-
   ),
   RequestModel(
     carName: 'Toyota EX50',
@@ -80,7 +79,6 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.2M - 1.8M',
     status: RequestStatus.delayed,
     imagePath: 'assets/images/car.png',
-
   ),
   RequestModel(
     carName: 'Toyota EX30',
@@ -89,7 +87,6 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.9M - 2.3M',
     status: RequestStatus.notResponded,
     imagePath: 'assets/images/car.png',
-
   ),
 ];
 
@@ -100,8 +97,6 @@ class RequestScreen extends StatefulWidget {
   @override
   State<RequestScreen> createState() => _RequestScreenState();
 }
-
-
 
 class _RequestScreenState extends State<RequestScreen>
     with SingleTickerProviderStateMixin {
@@ -117,12 +112,21 @@ class _RequestScreenState extends State<RequestScreen>
   List<RequestModel> getFilteredRequests(int index) {
     List<RequestModel> filtered = index == 0
         ? mockRequests
-        : mockRequests.where((r) => r.status == RequestStatus.values[index - 1]).toList();
+        : mockRequests
+              .where((r) => r.status == RequestStatus.values[index - 1])
+              .toList();
     if (_searchController.text.isNotEmpty) {
-      filtered = filtered.where((r) =>
-      r.carName.toLowerCase().contains(_searchController.text.toLowerCase()) ||
-          r.clientName.toLowerCase().contains(_searchController.text.toLowerCase())
-      ).toList();
+      filtered = filtered
+          .where(
+            (r) =>
+                r.carName.toLowerCase().contains(
+                  _searchController.text.toLowerCase(),
+                ) ||
+                r.clientName.toLowerCase().contains(
+                  _searchController.text.toLowerCase(),
+                ),
+          )
+          .toList();
     }
     return filtered;
   }
@@ -132,39 +136,43 @@ class _RequestScreenState extends State<RequestScreen>
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        appBar: AppBar(
-          title:  Text(AppLocalizations.of(context)!.myRequests),
-        ),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.myRequests)),
         body: Column(
           children: [
-
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: 26.h,horizontal: 20.w),
+              padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 20.w),
               child: TextFormField(
                 controller: _searchController,
                 decoration: InputDecoration(
                   hintText: '${AppLocalizations.of(context)!.searchRequest}...',
-                  hintStyle: getRegularStyle(color: ColorManager.darkGrey,fontSize: 14,context: context),
+                  hintStyle: getRegularStyle(
+                    color: ColorManager.darkGrey,
+                    fontSize: 14,
+                    context: context,
+                  ),
                   prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r),borderSide: BorderSide(color: ColorManager.lightGrey))
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                  ),
                 ),
                 onChanged: (_) => setState(() {}),
               ),
             ),
             Container(
-
               color: ColorManager.transparent, // Optional background
               child: TabBar(
                 tabAlignment: TabAlignment.center,
-                dividerColor:ColorManager.transparent ,
+                dividerColor: ColorManager.transparent,
                 controller: _tabController,
                 isScrollable: true,
-                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                labelStyle: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
                 unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
 
                 indicator: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-
 
                   borderRadius: BorderRadius.circular(16.r), // Rounded corners
                 ),
@@ -189,7 +197,7 @@ class _RequestScreenState extends State<RequestScreen>
 
                     itemBuilder: (context, index) {
                       final request = filteredRequests[index];
-                       return CarRequestCard(request: request);
+                      return CarRequestCard(request: request);
                       ;
                     },
                   );
@@ -207,7 +215,7 @@ class CarRequestCard extends StatelessWidget {
   const CarRequestCard({
     super.key,
     required this.request,
-     this.showLabel= true,
+    this.showLabel = true,
   });
 
   final RequestModel request;
@@ -217,79 +225,103 @@ class CarRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: ColorManager.white,
-     elevation: 2,
-     margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
-     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r),side:  BorderSide(color:ColorManager.lightGrey)),
-     child: Padding(
-       padding: EdgeInsets.all(12.w),
-       child: Row(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: [
-           // Image (Leading)
-           RoundedContainerWidget(
-             width: 138.w,
-             height: 114.h,
-             imagePath: request.imagePath ?? "",
-           ),
+      elevation: 2,
+      margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        side: BorderSide(color: ColorManager.lightGrey),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(12.w),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image (Leading)
+            RoundedContainerWidget(
+              width: 138.w,
+              height: 114.h,
+              imagePath: request.imagePath ?? "",
+            ),
 
-           SizedBox(width: 12.w),
+            SizedBox(width: 12.w),
 
-           // Details and Status
-           Expanded(
-             child: Stack(
-               children: [
-                 // Info
-                 Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     SizedBox(height: 4.h), // spacing below chip
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         Text(
-                           request.carName,
-                           style: Theme.of(context).textTheme.bodyLarge,
-                         ),
-                         showLabel?
-                         Chip(
-                           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
-                           shape: RoundedRectangleBorder(
-                             borderRadius: BorderRadius.circular(25.r),
-                           ),
-                           backgroundColor: getStatusColor(request.status),
-                           label: Text(
-                             getStatusLabel(request.status),
-                             style: getBoldStyle(fontSize: 12.sp, color: getStatusColor(request.status).withOpacity(1), context: context),
-                           ),
-                         ):
-                         SizedBox()
-                       ],
-                     ),
-                     SizedBox(height: 4.h),
-                     Text("${AppLocalizations.of(context)!.client}: ${request.clientName}",
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-                     ),
-                     Text(  "${AppLocalizations.of(context)!.created}: ${DateFormat('dd MMM yyyy, hh:mm a').format(request.createdAt)}",
+            // Details and Status
+            Expanded(
+              child: Stack(
+                children: [
+                  // Info
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 4.h), // spacing below chip
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            request.carName,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          showLabel
+                              ? Chip(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 5.w,
+                                    vertical: 4.h,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.r),
+                                  ),
+                                  backgroundColor: getStatusColor(
+                                    request.status,
+                                  ),
+                                  label: Text(
+                                    getStatusLabel(request.status),
+                                    style: getBoldStyle(
+                                      fontSize: 12.sp,
+                                      color: getStatusColor(
+                                        request.status,
+                                      ).withOpacity(1),
+                                      context: context,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                        ],
+                      ),
+                      SizedBox(height: 4.h),
+                      Text(
+                        "${AppLocalizations.of(context)!.client}: ${request.clientName}",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: ColorManager.darkGrey,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Text(
+                        "${AppLocalizations.of(context)!.created}: ${DateFormat('dd MMM yyyy, hh:mm a').format(request.createdAt)}",
 
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-                     ),
-                     Text(AppLocalizations.of(context)!.price,
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-                     ),
-                     Text(request.priceRange,
-                       style: Theme.of(context).textTheme.bodyLarge,
-                     ),
-                   ],
-                 ),
-
-               ],
-             ),
-           ),
-         ],
-       ),
-     ),
-                          );
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: ColorManager.darkGrey,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.price,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: ColorManager.darkGrey,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Text(
+                        request.priceRange,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

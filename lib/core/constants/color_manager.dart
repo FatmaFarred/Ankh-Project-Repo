@@ -7,6 +7,7 @@ abstract class ColorManager {
   static Color splashBg = const Color(0xFF191F18);
 
   static Color hintColor = const Color(0xFF919295);
+  static Color balanceColor = const Color(0xFF2B3728);
 
   static Color darkGrey = const Color(0xff777777);
   static Color lightGrey = const Color(0xffF1F2F4);
