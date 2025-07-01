@@ -1,3 +1,4 @@
+import 'package:ankh_project/feauture/request_inspection_screen/request_inspection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -214,7 +215,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                // TODO: Navigate to inspection screen
+                Navigator.push(context, MaterialPageRoute(builder: (context){return RequestInspectionScreen();}));
               },
             ),
           ],
