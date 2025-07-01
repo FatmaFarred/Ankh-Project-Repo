@@ -680,12 +680,6 @@ abstract class AppLocalizations {
   /// **'Images'**
   String get images;
 
-  /// No description provided for @requestInspection.
-  ///
-  /// In en, this message translates to:
-  /// **'Request Inspection'**
-  String get requestInspection;
-
   /// No description provided for @created.
   ///
   /// In en, this message translates to:
@@ -721,6 +715,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Engine Type'**
   String get engineType;
+
+  /// No description provided for @whatAreYouLookingFor.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you looking for?'**
+  String get whatAreYouLookingFor;
+
+  /// No description provided for @clientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Name'**
+  String get clientName;
+
+  /// No description provided for @enterClientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Client Name'**
+  String get enterClientName;
+
+  /// No description provided for @enterPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Phone Number'**
+  String get enterPhoneNumber;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @enterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Address'**
+  String get enterAddress;
+
+  /// No description provided for @preferredDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Date'**
+  String get preferredDate;
+
+  /// No description provided for @datePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'MM/DD/YYYY'**
+  String get datePlaceholder;
+
+  /// No description provided for @preferredTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Time'**
+  String get preferredTime;
+
+  /// No description provided for @selectTimeSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a time slot'**
+  String get selectTimeSlot;
+
+  /// No description provided for @requestInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Inspection'**
+  String get requestInspection;
+
+  /// No description provided for @requestSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Summary'**
+  String get requestSummary;
+
+  /// No description provided for @requestSummaryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review the details below before submitting your inspection request.'**
+  String get requestSummaryNote;
+
+  /// No description provided for @productName.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Name'**
+  String get productName;
+
+  /// No description provided for @clientInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Information'**
+  String get clientInformation;
+
+  /// No description provided for @inspectionSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Schedule'**
+  String get inspectionSchedule;
+
+  /// No description provided for @statusTracker.
+  ///
+  /// In en, this message translates to:
+  /// **'Status Tracker'**
+  String get statusTracker;
+
+  /// No description provided for @submitRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Request'**
+  String get submitRequest;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @delayed.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed'**
+  String get delayed;
+
+  /// No description provided for @notResponding.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Responding'**
+  String get notResponding;
+
+  /// No description provided for @requestSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Submitted'**
+  String get requestSubmitted;
+
+  /// No description provided for @requestSubmittedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Submitted Successfully!'**
+  String get requestSubmittedSuccessfully;
+
+  /// No description provided for @requestSubmittedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.'**
+  String get requestSubmittedNote;
+
+  /// No description provided for @goToMyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to My Requests'**
+  String get goToMyRequests;
+
+  /// No description provided for @saveInfoForLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Save info for later'**
+  String get saveInfoForLater;
+
+  /// No description provided for @confirmRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Request'**
+  String get confirmRequest;
 }
 
 class _AppLocalizationsDelegate
