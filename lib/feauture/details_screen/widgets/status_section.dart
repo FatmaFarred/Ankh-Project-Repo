@@ -47,7 +47,7 @@ class StatusSection extends StatelessWidget {
             children: [
               Icon(Icons.remove_red_eye_outlined),
               Text(
-                " 754 Views",
+                " 754 ${ AppLocalizations.of(context)!.views}",
                 style: GoogleFonts.inter(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,

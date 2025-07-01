@@ -132,6 +132,22 @@
   "requestSubmittedNote": "تم إرسال طلب الفحص الخاص بك إلى النظام. سنخطرك بمجرد معالجته. يمكنك تتبع حالة طلبك في أي وقت.",
   "goToMyRequests": "الانتقال إلى طلباتي",
   "saveInfoForLater": "حفظ المعلومات لاحقًا",
-  "confirmRequest": "تأكيد الطلب"
-
+  "confirmRequest": "تأكيد الطلب",
+  "views": "المشاهدات",
+  "addComment": "أضف تعليقًا",
+  "comments": "التعليقات",
+  "post": "نشر",
+  "haveADeal": "تم الاتفاق مع المالك",
+  "myBalance": "رصيدي",
+  "availableBalance": "الرصيد المتاح",
+  "totalPoints": "إجمالي النقاط",
+  "perPoint": "لكل نقطة",
+  "egp": "ج.م",
+  "all": "الكل",
+  "paid": "مدفوع",
+  "transactionHistory": "سجل المعاملات",
+  "home": "الرئيسية",
+  "requests": "الطلبات",
+  "balance": "الرصيد",
+  "account": "الحساب"
 }

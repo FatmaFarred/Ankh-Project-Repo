@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +41,7 @@ class AddCommentSection extends StatelessWidget {
                   child: TextField(
                     maxLines: 4,
                     decoration: InputDecoration(
-                      hintText: 'Add Comment',
+                      hintText:  AppLocalizations.of(context)!.addComment,
                       border: InputBorder.none,
                       isDense: true,
                     ),
@@ -65,7 +66,7 @@ class AddCommentSection extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Post',
+                  AppLocalizations.of(context)!.post,
                   style: GoogleFonts.cairo(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w700,

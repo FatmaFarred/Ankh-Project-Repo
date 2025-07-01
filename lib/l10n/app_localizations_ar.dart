@@ -427,4 +427,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirmRequest => 'تأكيد الطلب';
+
+  @override
+  String get views => 'المشاهدات';
+
+  @override
+  String get addComment => 'أضف تعليقًا';
+
+  @override
+  String get comments => 'التعليقات';
+
+  @override
+  String get post => 'نشر';
+
+  @override
+  String get haveADeal => 'تم الاتفاق مع المالك';
+
+  @override
+  String get myBalance => 'رصيدي';
+
+  @override
+  String get availableBalance => 'الرصيد المتاح';
+
+  @override
+  String get totalPoints => 'إجمالي النقاط';
+
+  @override
+  String get perPoint => 'لكل نقطة';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get paid => 'مدفوع';
+
+  @override
+  String get egp => 'ج.م';
+
+  @override
+  String get transactionHistory => 'سجل المعاملات';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get requests => 'الطلبات';
+
+  @override
+  String get balance => 'الرصيد';
+
+  @override
+  String get account => 'الحساب';
 }

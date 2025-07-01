@@ -901,6 +901,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm Request'**
   String get confirmRequest;
+
+  /// No description provided for @views.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get views;
+
+  /// No description provided for @addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Comment'**
+  String get addComment;
+
+  /// No description provided for @comments.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get comments;
+
+  /// No description provided for @post.
+  ///
+  /// In en, this message translates to:
+  /// **'Post'**
+  String get post;
+
+  /// No description provided for @haveADeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a deal with owner'**
+  String get haveADeal;
+
+  /// No description provided for @myBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'My Balance'**
+  String get myBalance;
+
+  /// No description provided for @availableBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get availableBalance;
+
+  /// No description provided for @totalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get totalPoints;
+
+  /// No description provided for @perPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Per Point'**
+  String get perPoint;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @paid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paid;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @transactionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction History'**
+  String get transactionHistory;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Requests'**
+  String get requests;
+
+  /// No description provided for @balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get balance;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
 }
 
 class _AppLocalizationsDelegate

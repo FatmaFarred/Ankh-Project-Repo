@@ -58,7 +58,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        tooltip: "Have A deal wid owner",
+        tooltip:  AppLocalizations.of(context)!.haveADeal,
         child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
         backgroundColor: ColorManager.lightprimary,
       ),
@@ -131,7 +131,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    "EGP 1.9M",
+                    "${ AppLocalizations.of(context)!.egp} 1.9M",
                     style: GoogleFonts.poppins(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
 
             SizedBox(height: 16.h),
-            SectionTitle(title: "Comments"),
+            SectionTitle(title:  AppLocalizations.of(context)!.comments),
             SizedBox(height: 12.h),
             AddCommentSection(),
 

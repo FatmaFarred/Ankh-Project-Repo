@@ -21,7 +21,7 @@ class BalanceScreen extends StatelessWidget {
             color: Colors.white, // White color
             onPressed: () => Navigator.pop(context),
           ),
-          title: Text("My Balance"),
+          title: Text(AppLocalizations.of(context)!.myBalance),
           centerTitle: true,
           backgroundColor: ColorManager.balanceColor,
           titleTextStyle: GoogleFonts.poppins(
@@ -43,7 +43,7 @@ class BalanceScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Available Balance",
+                      AppLocalizations.of(context)!.availableBalance,
                       style: GoogleFonts.inter(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
@@ -56,7 +56,7 @@ class BalanceScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "EGP",
+                          AppLocalizations.of(context)!.egp,
                           style: GoogleFonts.inter(
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w700,
@@ -84,7 +84,7 @@ class BalanceScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                "Total Points",
+                                AppLocalizations.of(context)!.totalPoints,
                                 style: GoogleFonts.inter(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -96,7 +96,7 @@ class BalanceScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "EGP",
+                                    AppLocalizations.of(context)!.egp,
                                     style: GoogleFonts.inter(
                                       fontSize: 24.sp,
                                       fontWeight: FontWeight.w700,
@@ -127,7 +127,7 @@ class BalanceScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                "Per Point",
+                                AppLocalizations.of(context)!.perPoint,
                                 style: GoogleFonts.inter(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -139,7 +139,7 @@ class BalanceScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "EGP",
+                                    AppLocalizations.of(context)!.egp,
                                     style: GoogleFonts.inter(
                                       fontSize: 24.sp,
                                       fontWeight: FontWeight.w700,
@@ -182,9 +182,9 @@ class BalanceScreen extends StatelessWidget {
                   ),
                 ),
                 tabs: [
-                  Tab(text: 'All'),
-                  Tab(text: 'Paid'),
-                  Tab(text: 'Pending'),
+                  Tab(text:  AppLocalizations.of(context)!.all),
+                  Tab(text:  AppLocalizations.of(context)!.paid),
+                  Tab(text: AppLocalizations.of(context)!.pending),
                 ],
               ),
               const Expanded(
