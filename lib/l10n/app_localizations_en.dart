@@ -303,6 +303,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myRequests => 'My Requests';
 
   @override
+  String get created => 'Created';
+
+  @override
+  String get price => 'Price';
+
+  @override
+  String get searchRequest => 'Search Request';
+
+  @override
+  String get myRequests => 'My Requests';
+
+  @override
   String get price => 'Price';
 
   @override
