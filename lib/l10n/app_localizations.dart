@@ -638,6 +638,24 @@ abstract class AppLocalizations {
   /// **'Recommended Cars'**
   String get recommendedCars;
 
+  /// No description provided for @searchRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Request'**
+  String get searchRequest;
+
+  /// No description provided for @myRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Requests'**
+  String get myRequests;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
+
   /// No description provided for @details.
   ///
   /// In en, this message translates to:

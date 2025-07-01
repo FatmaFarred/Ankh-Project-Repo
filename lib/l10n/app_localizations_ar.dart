@@ -295,6 +295,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recommendedCars => 'السيارات الموصى بها';
 
   @override
+  String get searchRequest => 'البحث عن طلب ';
+
+  @override
+  String get myRequests => 'طلباتي';
+
+  @override
+  String get price => 'السعر';
+
+  @override
   String get details => 'التفاصيل';
 
   @override

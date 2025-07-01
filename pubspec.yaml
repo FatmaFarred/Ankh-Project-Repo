@@ -61,7 +61,8 @@ dependencies:
   smooth_page_indicator:
   flutter_rating_bar: ^4.0.1
   google_fonts: ^6.2.1
-
+  app_links:
+  go_router:
 
 
 

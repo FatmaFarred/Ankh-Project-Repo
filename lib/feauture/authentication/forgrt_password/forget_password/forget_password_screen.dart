@@ -1,11 +1,16 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_text_field.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/feauture/authentication/forgrt_password/forget_password/controller/forget_passwors_cubit.dart';
+import 'package:ankh_project/feauture/authentication/forgrt_password/forget_password/controller/forget_passwors_states.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../api_service/di/di.dart';
 import '../../../../core/constants/assets_manager.dart';
+import '../../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../../core/validator/my_validator.dart';
 import '../../email_verfication/email_verfication_screen.dart';
 import '../../signin/signin_screen.dart';
@@ -22,13 +27,47 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
+  ForgetPassworsCubit forgetPassworsCubit = getIt<ForgetPassworsCubit>();
 
-  final TextEditingController emailController = TextEditingController();
+
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<ForgetPassworsCubit, ForgetPasswordState>(
+        bloc: forgetPassworsCubit,
+        listener: (context, state) {
+          if (state is ForgetPasswordLoading) {
+            CustomDialog.loading(
+                context: context,
+                message: "loading",
+                cancelable: false);
+          } else if (state is ForgetPasswordFailure) {
+            Navigator.of(context).pop();
+            CustomDialog.positiveButton(
+                context: context,
+                title: "error",
+                message: state.errorMessage);
+          } else if (state is ForgetPasswordSuccess) {
+            Navigator.of(context).pop();
+            CustomDialog.positiveButton(
+                context: context,
+                title: "getTranslations(context).success",
+                message: state.message,
+                positiveOnClick: () =>
+                    Navigator.of(context).pushNamed(
+                     // print("${state.message}");
+                        OtpVerficationScreen.otpVerficationScreenRouteName,
+                      arguments: forgetPassworsCubit.emailController.text
+
+                    ));
+          }
+        },
+
+
+
+        child:
+         Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -81,7 +120,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: emailController,
+                  controller: forgetPassworsCubit.emailController,
                   hintText: AppLocalizations.of(context)!.enterYourName,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
@@ -95,7 +134,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Handle registration logic here
-                      Navigator.of(context).pushNamed(OtpVerficationScreen.otpVerficationScreenRouteName);
+                      forgetPassworsCubit.forgetPassword();
                     }
                   },
                   borderColor: ColorManager.lightprimary,
@@ -115,6 +154,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

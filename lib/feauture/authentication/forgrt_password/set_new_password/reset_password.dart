@@ -8,10 +8,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/assets_manager.dart';
 import '../../../../core/validator/my_validator.dart';
 import '../../email_verfication/email_verfication_screen.dart';
+import '../../signin/signin_screen.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
-  static String resetPasswordScreenRouteName = "ResetPasswordScreen";
+  const ResetPasswordScreen({
+    super.key,
+    required this.email,
+    required this.token,
+  });
+
+  final String email;
+  final String token;
+  static String resetPasswordScreenRouteName = '/reset-password';
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -20,11 +28,18 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    print('Initializing ResetPasswordScreen with:');
+    print('Email: ${widget.email}');
+    print('Token: ${widget.token}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +69,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(height: 15.h),
                 Text(
                   AppLocalizations.of(context)!.setNewPassword,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineLarge?.copyWith(fontSize: 24.sp),
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 24.sp),
                 ),
                 SizedBox(height: 25.h),
                 Text(
@@ -67,12 +80,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                 ),
                 SizedBox(height: 55.h),
-
                 Text(
                   AppLocalizations.of(context)!.newPassword,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
@@ -84,9 +94,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   validator: (value) => ValidatorUtils.validatePassword(value, context),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                       color: ColorManager.darkGrey,
                     ),
                     onPressed: () {
@@ -99,9 +107,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(height: 20.h),
                 Text(
                   AppLocalizations.of(context)!.confirmPassword,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 16.sp),
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
@@ -113,14 +119,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   validator: (value) => ValidatorUtils.validateConfirmPassword(
                     passwordController.text,
                     context,
-
                     value,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _isConfirmPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+                      _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
                       color: ColorManager.darkGrey,
                     ),
                     onPressed: () {
@@ -134,9 +137,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 CustomizedElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Handle registration logic here
+                      // Here you would typically call your API to reset the password
+                      // using widget.email, widget.token, and passwordController.text
+                      print('Resetting password for: ${widget.email}');
+                      print('Using token: ${widget.token}');
+                      print('New password: ${passwordController.text}');
+
+                      // After successful reset, navigate to login
                       Navigator.of(context).pushNamed(
-                        EmailVerficationScreen.emailVerficationScreenRouteName,
+                        SignInScreen.signInScreenRouteName,
                       );
                     }
                   },

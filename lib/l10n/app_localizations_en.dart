@@ -297,6 +297,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recommendedCars => 'Recommended Cars';
 
   @override
+  String get searchRequest => 'Search Request';
+
+  @override
+  String get myRequests => 'My Requests';
+
+  @override
+  String get price => 'Price';
+
+  @override
   String get details => 'Details';
 
   @override
