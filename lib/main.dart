@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ankh_project/data/models/user_model.dart';
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
 import 'package:ankh_project/feauture/onboarding/onboarding.dart';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -161,6 +162,7 @@ class _MyAppState extends State<MyApp> {
               );
             },
             BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
+            MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
           },
         );
       },
