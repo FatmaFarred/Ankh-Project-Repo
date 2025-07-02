@@ -8,6 +8,8 @@ abstract class ColorManager {
 
   static Color hintColor = const Color(0xFF919295);
 
+  static Color darkestGrey = const Color(0xFF414141);
+  static Color iconGrey = const Color(0xFFF5F5F5);
   static Color darkGrey = const Color(0xff777777);
   static Color lightGrey = const Color(0xffF1F2F4);
   static Color lightgreen = const Color(0xffD4AF37);

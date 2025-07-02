@@ -444,4 +444,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lastUpdated => 'Last Updated';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get response => 'Response';
+
+  @override
+  String get manageAccount => 'Manage Account';
+
+  @override
+  String get personalDetails => 'Personal Details';
+
+  @override
+  String get securitySettings => 'Security Settings';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get paymentAndWallets => 'Payment & Wallet';
+
+  @override
+  String get walletAndCommissions => 'Wallet & Commissions';
+
+  @override
+  String get paymentMethods => 'Payment Methods';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get devicePreferences => 'Device Preferences';
+
+  @override
+  String get myFavorites => 'My Favorites';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get helpAndSupport => 'Help & Support';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get saftyCenter => 'Safety Center';
+
+  @override
+  String get logout => 'Logout';
 }

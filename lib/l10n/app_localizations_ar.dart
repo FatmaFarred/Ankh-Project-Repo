@@ -442,4 +442,64 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lastUpdated => 'آخر تحديث';
+
+  @override
+  String get account => 'الحساب الشخصى';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get rating => 'التقييم';
+
+  @override
+  String get response => 'الاستجابة';
+
+  @override
+  String get manageAccount => 'إدارة الحساب';
+
+  @override
+  String get personalDetails => 'التفاصيل الشخصية';
+
+  @override
+  String get securitySettings => 'إعدادات الأمان';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get paymentAndWallets => 'الدفع والمحفظة';
+
+  @override
+  String get walletAndCommissions => 'المحفظة والعمولات';
+
+  @override
+  String get paymentMethods => 'طرق الدفع';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get devicePreferences => 'تفضيلات الجهاز';
+
+  @override
+  String get myFavorites => 'المفضلة';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get helpAndSupport => 'المساعدة والدعم';
+
+  @override
+  String get contactSupport => 'اتصل بالدعم';
+
+  @override
+  String get saftyCenter => 'مركز الأمان';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 }

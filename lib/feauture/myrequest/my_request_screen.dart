@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -180,6 +181,11 @@ class _RequestScreenState extends State<RequestScreen>
       length: 5,
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.back),
+            color: Colors.white, // White color
+            onPressed: () => Navigator.pop(context),
+          ),
           title:  Text(AppLocalizations.of(context)!.myRequests),
         ),
         body: Column(
@@ -190,10 +196,10 @@ class _RequestScreenState extends State<RequestScreen>
               child: TextFormField(
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: '${AppLocalizations.of(context)!}...',
+                  hintText: '${AppLocalizations.of(context)!.searchRequest}...',
                   hintStyle: getRegularStyle(color: ColorManager.darkGrey,fontSize: 14,context: context),
                   prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r),borderSide: BorderSide(color: ColorManager.lightGrey))
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r),borderSide: BorderSide(color: ColorManager.lightGrey, width: 1.w)),
                 ),
                 onChanged: (_) => setState(() {}),
               ),
@@ -211,6 +217,7 @@ class _RequestScreenState extends State<RequestScreen>
 
                 indicator: BoxDecoration(
                   color: Theme.of(context).primaryColor,
+
 
 
                   borderRadius: BorderRadius.circular(16.r), // Rounded corners
@@ -304,17 +311,28 @@ class CarRequestCard extends StatelessWidget {
                            style: Theme.of(context).textTheme.bodyLarge,
                          ),
                          showLabel?
-                         Chip(
-                           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
-                           shape: RoundedRectangleBorder(
-                             borderRadius: BorderRadius.circular(25.r),
+                         Flexible(
+                           child: Chip(
+                             backgroundColor: getStatusColor(request.status),
+                             padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                             shape: const StadiumBorder(
+                               side: BorderSide(
+                                 color: Colors.transparent, // ✅ Remove border completely
+                               ),
+                             ),
+                             label: Text(
+                               getStatusLabel(request.status),
+                               style: getBoldStyle(
+                                 fontSize: 10.sp,
+                                 color: getTextStatusColor(request.status),
+                                 context: context,
+                               ),
+                               overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
+                               softWrap: false,
+                             ),
                            ),
-                           backgroundColor: getStatusColor(request.status),
-                           label: Text(
-                             getStatusLabel(request.status),
-                             style: getBoldStyle(fontSize: 12.sp, color: getTextStatusColor(request.status), context: context),
-                           ),
-                         ):
+                         )
+                   :
                          SizedBox()
                        ],
                      ),

@@ -136,7 +136,30 @@
   "currrentStatus": "الحالة الحالية",
   "productInfo": "معلومات المنتج",
   "notAvailable": "غير متوفر",
-  "lastUpdated": "آخر تحديث"
+  "lastUpdated": "آخر تحديث",
+  "account": "الحساب الشخصى",
+  "editProfile": "تعديل الملف الشخصي",
+  "completed": "مكتمل",
+  "rating": "التقييم",
+  "response": "الاستجابة",
+  "manageAccount": "إدارة الحساب",
+  "personalDetails": "التفاصيل الشخصية",
+  "securitySettings": "إعدادات الأمان",
+  "notifications": "الإشعارات",
+  "paymentAndWallets": "الدفع والمحفظة",
+  "walletAndCommissions": "المحفظة والعمولات",
+  "paymentMethods": "طرق الدفع",
+  "preferences": "التفضيلات",
+  "devicePreferences": "تفضيلات الجهاز",
+  "myFavorites": "المفضلة",
+   "darkMode": "الوضع الداكن",
+  "helpAndSupport": "المساعدة والدعم",
+  "contactSupport": "اتصل بالدعم",
+  "saftyCenter": "مركز الأمان",
+  "logout": "تسجيل الخروج"
+
+
+
 
 
 

@@ -62,6 +62,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   google_fonts: ^6.2.1
   easy_stepper: ^0.8.5+1
+  iconsax:
 
   app_links:
   go_router:
