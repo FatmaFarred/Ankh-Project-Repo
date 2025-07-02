@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'عميل ';
+  String get client => 'Client';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -295,6 +295,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recommendedCars => 'السيارات الموصى بها';
 
   @override
+  String get searchRequest => 'البحث عن طلب ';
+
+  @override
+  String get myRequests => 'طلباتي';
+
+  @override
+  String get price => 'السعر';
+
+  @override
   String get details => 'التفاصيل';
 
   @override
@@ -316,9 +325,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get images => 'الصور';
 
   @override
-  String get requestInspection => 'طلب فحص';
-
-  @override
   String get created => 'تم الإنشاء';
 
   @override
@@ -335,4 +341,105 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get engineType => 'نوع المحرك';
+
+  @override
+  String get whatAreYouLookingFor => 'ما الذي تبحث عنه؟';
+
+  @override
+  String get clientName => 'اسم العميل';
+
+  @override
+  String get enterClientName => 'أدخل اسم العميل';
+
+  @override
+  String get enterPhoneNumber => 'أدخل رقم الهاتف';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get enterAddress => 'أدخل العنوان';
+
+  @override
+  String get preferredDate => 'التاريخ المفضل';
+
+  @override
+  String get datePlaceholder => 'يوم/شهر/سنة';
+
+  @override
+  String get preferredTime => 'الوقت المفضل';
+
+  @override
+  String get selectTimeSlot => 'اختر وقتًا';
+
+  @override
+  String get requestInspection => 'طلب فحص';
+
+  @override
+  String get requestSummary => 'ملخص الطلب';
+
+  @override
+  String get requestSummaryNote =>
+      'يرجى مراجعة التفاصيل أدناه قبل إرسال طلب الفحص الخاص بك.';
+
+  @override
+  String get productName => 'اسم المنتج';
+
+  @override
+  String get clientInformation => 'معلومات العميل';
+
+  @override
+  String get inspectionSchedule => 'جدول الفحص';
+
+  @override
+  String get statusTracker => 'تتبع الحالة';
+
+  @override
+  String get submitRequest => 'إرسال الطلب';
+
+  @override
+  String get pending => 'قيد الانتظار';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get delayed => 'متأخر';
+
+  @override
+  String get notResponding => 'لم يتم الرد';
+
+  @override
+  String get requestSubmitted => 'تم إرسال الطلب';
+
+  @override
+  String get requestSubmittedSuccessfully => 'تم إرسال الطلب بنجاح!';
+
+  @override
+  String get requestSubmittedNote =>
+      'تم إرسال طلب الفحص الخاص بك إلى النظام. سنخطرك بمجرد معالجته. يمكنك تتبع حالة طلبك في أي وقت.';
+
+  @override
+  String get goToMyRequests => 'الانتقال إلى طلباتي';
+
+  @override
+  String get saveInfoForLater => 'حفظ المعلومات لاحقًا';
+
+  @override
+  String get confirmRequest => 'تأكيد الطلب';
+
+  @override
+  String get requestDetails => 'تفاصيل الطلب';
+
+  @override
+  String get currrentStatus => 'الحالة الحالية';
+
+  @override
+  String get productInfo => 'معلومات المنتج';
+
+  @override
+  String get notAvailable => 'غير متوفر';
+
+  @override
+  String get lastUpdated => 'آخر تحديث';
 }

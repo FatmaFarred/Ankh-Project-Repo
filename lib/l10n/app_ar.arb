@@ -131,6 +131,16 @@
   "requestSubmittedNote": "تم إرسال طلب الفحص الخاص بك إلى النظام. سنخطرك بمجرد معالجته. يمكنك تتبع حالة طلبك في أي وقت.",
   "goToMyRequests": "الانتقال إلى طلباتي",
   "saveInfoForLater": "حفظ المعلومات لاحقًا",
-  "confirmRequest": "تأكيد الطلب"
+  "confirmRequest":"تأكيد الطلب",
+  "requestDetails": "تفاصيل الطلب",
+  "currrentStatus": "الحالة الحالية",
+  "productInfo": "معلومات المنتج",
+  "notAvailable": "غير متوفر",
+  "lastUpdated": "آخر تحديث"
+
+
+
+
+
 
 }
