@@ -431,6 +431,57 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmRequest => 'Confirm Request';
 
   @override
+
+  String get views => 'Views';
+
+  @override
+  String get addComment => 'Add Comment';
+
+  @override
+  String get comments => 'Comments';
+
+  @override
+  String get post => 'Post';
+
+  @override
+  String get haveADeal => 'Have a deal with owner';
+
+  @override
+  String get myBalance => 'My Balance';
+
+  @override
+  String get availableBalance => 'Available Balance';
+
+  @override
+  String get totalPoints => 'Total Points';
+
+  @override
+  String get perPoint => 'Per Point';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get paid => 'Paid';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get transactionHistory => 'Transaction History';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get requests => 'Requests';
+
+  @override
+  String get balance => 'Balance';
+
+  @override
+  String get account => 'Account';
+
   String get requestDetails => 'Request Details';
 
   @override
@@ -504,4 +555,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
 }
