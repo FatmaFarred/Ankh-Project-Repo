@@ -303,9 +303,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myRequests => 'My Requests';
 
   @override
-  String get created => 'Created';
-
-  @override
   String get price => 'Price';
 
   @override
@@ -328,6 +325,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get images => 'Images';
+
+  @override
+  String get created => 'Created';
 
   @override
   String get lastEdited => 'Last Edited';
@@ -429,4 +429,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmRequest => 'Confirm Request';
+
+  @override
+  String get requestDetails => 'Request Details';
+
+  @override
+  String get currrentStatus => 'Current Status';
+
+  @override
+  String get productInfo => 'Product information';
+
+  @override
+  String get notAvailable => 'Not Available';
+
+  @override
+  String get lastUpdated => 'Last Updated';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get response => 'Response';
+
+  @override
+  String get manageAccount => 'Manage Account';
+
+  @override
+  String get personalDetails => 'Personal Details';
+
+  @override
+  String get securitySettings => 'Security Settings';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get paymentAndWallets => 'Payment & Wallet';
+
+  @override
+  String get walletAndCommissions => 'Wallet & Commissions';
+
+  @override
+  String get paymentMethods => 'Payment Methods';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get devicePreferences => 'Device Preferences';
+
+  @override
+  String get myFavorites => 'My Favorites';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get helpAndSupport => 'Help & Support';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get saftyCenter => 'Safety Center';
+
+  @override
+  String get logout => 'Logout';
 }

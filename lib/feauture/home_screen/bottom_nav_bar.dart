@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../myrequest/my_request_screen.dart';
+import '../profile/profile_screen.dart';
 import 'car_brand_item.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -27,7 +28,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomeScreen(),
     RequestScreen(),
     Center(child: Text("Balance Page")),
-    Center(child: Text("Account Page")),
+    AccountScreen(),
   ];
 
   @override
