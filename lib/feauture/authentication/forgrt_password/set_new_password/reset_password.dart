@@ -3,12 +3,17 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_tex
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../api_service/di/di.dart';
 import '../../../../core/constants/assets_manager.dart';
+import '../../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../../core/validator/my_validator.dart';
 import '../../email_verfication/email_verfication_screen.dart';
 import '../../signin/signin_screen.dart';
+import 'controller/reset_password_cubit.dart';
+import 'controller/reset_password_states.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({
@@ -26,9 +31,9 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  ResetPasswordCubit resetPassworsCubit = getIt<ResetPasswordCubit>();
+
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
 
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
@@ -43,7 +48,38 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<ResetPasswordCubit, ResetPasswordState>(
+        bloc: resetPassworsCubit,
+        listener: (context, state) {
+          if (state is ResetPasswordLoading) {
+            CustomDialog.loading(
+                context: context,
+                message: "loading",
+                cancelable: false);
+          } else if (state is ResetPasswordFailure) {
+            Navigator.of(context).pop();
+            CustomDialog.positiveButton(
+                context: context,
+                title: "error",
+                message: state.errorMessage);
+          } else if (state is ResetPasswordSuccess) {
+            Navigator.of(context).pop();
+            CustomDialog.positiveButton(
+                context: context,
+                title: "getTranslations(context).success",
+                message: state.message,
+                positiveOnClick: () {}
+                      // print("${state.message}");
+
+                    );
+          }
+        },
+
+
+
+        child:
+
+     Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -86,7 +122,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: passwordController,
+                  controller: resetPassworsCubit.passwordController,
                   hintText: AppLocalizations.of(context)!.enterNewPassword,
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
@@ -111,13 +147,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: confirmPasswordController,
+                  controller: resetPassworsCubit.passwordController,
                   hintText: AppLocalizations.of(context)!.reEnterNewPassword,
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                   obscureText: !_isConfirmPasswordVisible,
                   validator: (value) => ValidatorUtils.validateConfirmPassword(
-                    passwordController.text,
+    resetPassworsCubit.passwordController.text,
                     context,
                     value,
                   ),
@@ -141,7 +177,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       // using widget.email, widget.token, and passwordController.text
                       print('Resetting password for: ${widget.email}');
                       print('Using token: ${widget.token}');
-                      print('New password: ${passwordController.text}');
+                      print('New password: ${resetPassworsCubit.passwordController.text}');
 
                       // After successful reset, navigate to login
                       Navigator.of(context).pushNamed(
@@ -164,6 +200,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
         ),
       ),
+     )
     );
   }
 }

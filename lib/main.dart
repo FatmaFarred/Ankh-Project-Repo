@@ -7,6 +7,7 @@ import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_de
 import 'package:ankh_project/feauture/onboarding/onboarding.dart';
 import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -68,44 +69,46 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppLinks _appLinks = AppLinks();
-  StreamSubscription<Uri>? _linkSubscription;
 
   @override
   void initState() {
     super.initState();
-    _initDeepLinks();
+    _initDynamicLinks();
   }
 
-  @override
-  void dispose() {
-    _linkSubscription?.cancel();
-    super.dispose();
-  }
+  Future<void> _initDynamicLinks() async {
+    // Handle dynamic link when app is opened from terminated state
+    final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
+    _handleDynamicLink(initialLink?.link);
 
-  Future<void> _initDeepLinks() async {
-    final initialUri = await _appLinks.getInitialLink();
-    if (initialUri != null) {
-      _handleDeepLink(initialUri);
-    }
-
-    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
-      _handleDeepLink(uri);
+    // Handle dynamic link when app is opened from background
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+      _handleDynamicLink(dynamicLinkData.link);
+    }).onError((error) {
+      print('Dynamic Link Failed: $error');
     });
   }
 
-  void _handleDeepLink(Uri uri) {
-    print('Received deep link: $uri');
-    print('Path: ${uri.path}');
-    print('Query parameters: ${uri.queryParameters}');
+  void _handleDynamicLink(Uri? uri) {
+    if (uri == null) return;
 
-    if (uri.path.startsWith('/reset-password')) {
+    print('Received dynamic link: $uri');
+
+    // Unwrap Firebase link if needed
+    final deepLink = uri.queryParameters['link'];
+    if (deepLink != null) {
+      final innerUri = Uri.parse(deepLink);
+      print('Unwrapped deep link: $innerUri');
+      _handleDynamicLink(innerUri);
+      return;
+    }
+
+    if (uri.path == '/reset-password') {
       final token = uri.queryParameters['token'];
       final email = uri.queryParameters['email'];
 
       if (token != null && email != null) {
-        print('Deep Link Received - Email: $email, Token: $token');
-
+        print('Deep Link - Email: $email, Token: $token');
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Navigator.of(context).pushNamed(
             ResetPasswordScreen.resetPasswordScreenRouteName,
@@ -116,7 +119,7 @@ class _MyAppState extends State<MyApp> {
           );
         });
       } else {
-        print('Invalid deep link - missing token or email');
+        print('Invalid link: missing token or eemail');
       }
     }
   }

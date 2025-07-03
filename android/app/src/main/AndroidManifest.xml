@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:scheme="https"
-                    android:host="your-frontend.com"
+                    android:host="nplanet.page.link"
                     android:pathPrefix="/reset-password" />
             </intent-filter>
 
