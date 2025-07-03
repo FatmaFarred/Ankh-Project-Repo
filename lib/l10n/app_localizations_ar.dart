@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'عميل';
+  String get client => 'Client';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -301,9 +301,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get myRequests => 'طلباتي';
 
   @override
-  String get created => 'تم الإنشاء';
-
-  @override
   String get price => 'السعر';
 
   @override
@@ -326,6 +323,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get images => 'الصور';
+
+  @override
+  String get created => 'تم الإنشاء';
 
   @override
   String get lastEdited => 'آخر تعديل';
@@ -429,6 +429,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmRequest => 'تأكيد الطلب';
 
   @override
+
   String get views => 'المشاهدات';
 
   @override
@@ -478,4 +479,79 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get account => 'الحساب';
+
+  String get requestDetails => 'تفاصيل الطلب';
+
+  @override
+  String get currrentStatus => 'الحالة الحالية';
+
+  @override
+  String get productInfo => 'معلومات المنتج';
+
+  @override
+  String get notAvailable => 'غير متوفر';
+
+  @override
+  String get lastUpdated => 'آخر تحديث';
+
+  @override
+  String get account => 'الحساب الشخصى';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get rating => 'التقييم';
+
+  @override
+  String get response => 'الاستجابة';
+
+  @override
+  String get manageAccount => 'إدارة الحساب';
+
+  @override
+  String get personalDetails => 'التفاصيل الشخصية';
+
+  @override
+  String get securitySettings => 'إعدادات الأمان';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get paymentAndWallets => 'الدفع والمحفظة';
+
+  @override
+  String get walletAndCommissions => 'المحفظة والعمولات';
+
+  @override
+  String get paymentMethods => 'طرق الدفع';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get devicePreferences => 'تفضيلات الجهاز';
+
+  @override
+  String get myFavorites => 'المفضلة';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get helpAndSupport => 'المساعدة والدعم';
+
+  @override
+  String get contactSupport => 'اتصل بالدعم';
+
+  @override
+  String get saftyCenter => 'مركز الأمان';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
 }

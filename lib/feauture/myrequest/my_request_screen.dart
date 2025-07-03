@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -14,31 +16,57 @@ enum RequestStatus { pending, done, delayed, notResponded }
 class RequestModel {
   final String carName;
   final String clientName;
-  final DateTime createdAt;
+  final String? clientPhone;
+  final String? address;
+  final DateTime? inspectionDate;
+  final DateTime? inspectionStartTime;
+  final DateTime? inspectionEndTime;
+
+
+
+  final DateTime? createdAt;
   final String priceRange;
   final RequestStatus status;
   final String? imagePath;
 
-  RequestModel({
+
+  RequestModel(  {
     required this.carName,
     required this.clientName,
     required this.createdAt,
     required this.priceRange,
     required this.status,
     required this.imagePath,
+    this.clientPhone,
+    this.address,
+    this.inspectionDate,
+    this.inspectionStartTime,
+    this.inspectionEndTime,
   });
 }
 
 Color getStatusColor(RequestStatus status) {
   switch (status) {
     case RequestStatus.pending:
-      return Colors.amber.withOpacity(0.2);
+      return ColorManager.lightYellow;
     case RequestStatus.done:
-      return Colors.green.withOpacity(0.2);
+      return ColorManager.lightGreen;
     case RequestStatus.delayed:
-      return Colors.redAccent.withOpacity(0.2);
+      return ColorManager.lightOrange;
     case RequestStatus.notResponded:
-      return Colors.grey.withOpacity(0.2);
+      return ColorManager.lightBlack;
+  }
+}
+Color getTextStatusColor(RequestStatus status) {
+  switch (status) {
+    case RequestStatus.pending:
+      return ColorManager.darkYellow;
+    case RequestStatus.done:
+      return ColorManager.darkGreen;
+    case RequestStatus.delayed:
+      return ColorManager.darkOrange;
+    case RequestStatus.notResponded:
+      return ColorManager.darkBlack;
   }
 }
 
@@ -63,6 +91,12 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.9M - 2.3M',
     status: RequestStatus.pending,
     imagePath: 'assets/images/car.png',
+    clientPhone: '0123456789',
+    address: '123 Main St, Cairo',
+    inspectionDate: DateTime(2025, 12, 15, 10, 0),
+    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
+    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
+
   ),
   RequestModel(
     carName: 'Toyota EX40',
@@ -71,6 +105,12 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.8M - 2.1M',
     status: RequestStatus.done,
     imagePath: 'assets/images/car.png',
+    clientPhone: '0123456789',
+    address: '123 Main St, Cairo',
+    inspectionDate: DateTime(2025, 12, 15, 10, 0),
+    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
+    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
+
   ),
   RequestModel(
     carName: 'Toyota EX50',
@@ -79,6 +119,13 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.2M - 1.8M',
     status: RequestStatus.delayed,
     imagePath: 'assets/images/car.png',
+
+    clientPhone: '0123456789',
+    address: '123 Main St, Cairo',
+    inspectionDate: DateTime(2025, 12, 15, 10, 0),
+    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
+    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
+
   ),
   RequestModel(
     carName: 'Toyota EX30',
@@ -87,6 +134,13 @@ final List<RequestModel> mockRequests = [
     priceRange: 'EGP 1.9M - 2.3M',
     status: RequestStatus.notResponded,
     imagePath: 'assets/images/car.png',
+
+    clientPhone: '0123456789',
+    address: '123 Main St, Cairo',
+    inspectionDate: DateTime(2025, 12, 15, 10, 0),
+    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
+    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
+
   ),
 ];
 
@@ -136,7 +190,15 @@ class _RequestScreenState extends State<RequestScreen>
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.myRequests)),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.back),
+            color: Colors.white, // White color
+            onPressed: () => Navigator.pop(context),
+          ),
+          title:  Text(AppLocalizations.of(context)!.myRequests),
+        ),
+
         body: Column(
           children: [
             Padding(
@@ -151,15 +213,16 @@ class _RequestScreenState extends State<RequestScreen>
                     context: context,
                   ),
                   prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                    borderSide: BorderSide(color: ColorManager.lightGrey),
-                  ),
+
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r),borderSide: BorderSide(color: ColorManager.lightGrey, width: 1.w)),
+
                 ),
                 onChanged: (_) => setState(() {}),
               ),
             ),
             Container(
+
+                margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
               color: ColorManager.transparent, // Optional background
               child: TabBar(
                 tabAlignment: TabAlignment.center,
@@ -173,7 +236,6 @@ class _RequestScreenState extends State<RequestScreen>
 
                 indicator: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-
                   borderRadius: BorderRadius.circular(16.r), // Rounded corners
                 ),
                 indicatorSize: TabBarIndicatorSize.tab,
@@ -193,11 +255,18 @@ class _RequestScreenState extends State<RequestScreen>
                 children: List.generate(5, (tabIndex) {
                   final filteredRequests = getFilteredRequests(tabIndex);
                   return ListView.builder(
+
                     itemCount: filteredRequests.length,
 
                     itemBuilder: (context, index) {
                       final request = filteredRequests[index];
-                      return CarRequestCard(request: request);
+
+                       return InkWell(onTap: ()=>Navigator.of(context).pushNamed(MyRequestDetails.myRequestDetailsRouteName,
+
+                       arguments: request),
+
+                           child: CarRequestCard(request: request,paddingHorizontal: 20.w,paddingVertical: 12.h,));
+
                       ;
                     },
                   );
@@ -215,33 +284,93 @@ class CarRequestCard extends StatelessWidget {
   const CarRequestCard({
     super.key,
     required this.request,
-    this.showLabel = true,
+
+     this.showLabel= true, required this.paddingVertical, required this.paddingHorizontal,
   });
 
   final RequestModel request;
   final bool showLabel;
+  final double paddingVertical,paddingHorizontal;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: ColorManager.white,
-      elevation: 2,
-      margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.r),
-        side: BorderSide(color: ColorManager.lightGrey),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(12.w),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image (Leading)
-            RoundedContainerWidget(
-              width: 138.w,
-              height: 114.h,
-              imagePath: request.imagePath ?? "",
-            ),
+
+
+     elevation: 2,
+     margin: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
+     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r),side:  BorderSide(color:ColorManager.lightGrey)),
+     child: Padding(
+       padding: EdgeInsets.all(12.w),
+       child: Row(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           // Image (Leading)
+           RoundedContainerWidget(
+             width: 138.w,
+             height: 114.h,
+             imagePath: request.imagePath ?? "",
+           ),
+
+           SizedBox(width: 12.w),
+
+           // Details and Status
+           Expanded(
+             child: Stack(
+               children: [
+                 // Info
+                 Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     SizedBox(height: 4.h), // spacing below chip
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Text(
+                           request.carName,
+                           style: Theme.of(context).textTheme.bodyLarge,
+                         ),
+                         showLabel?
+                         Flexible(
+                           child: Chip(
+                             backgroundColor: getStatusColor(request.status),
+                             padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                             shape: const StadiumBorder(
+                               side: BorderSide(
+                                 color: Colors.transparent, // ✅ Remove border completely
+                               ),
+                             ),
+                             label: Text(
+                               getStatusLabel(request.status),
+                               style: getBoldStyle(
+                                 fontSize: 10.sp,
+                                 color: getTextStatusColor(request.status),
+                                 context: context,
+                               ),
+                               overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
+                               softWrap: false,
+                             ),
+                           ),
+                         )
+                   :
+                         SizedBox()
+                       ],
+                     ),
+                     SizedBox(height: 4.h),
+                     Text("${AppLocalizations.of(context)!.client}: ${request.clientName}",
+                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+                     ),
+                     Text(  "${AppLocalizations.of(context)!.created}: ${request.createdAt != null
+                         ? DateFormat('dd MMM yyyy, hh:mm a').format(request.createdAt!)
+                         : AppLocalizations.of(context)!.searchRequest}",
+
+                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+
+                     ),
+                     Text(AppLocalizations.of(context)!.price,
+                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+
 
             SizedBox(width: 12.w),
 

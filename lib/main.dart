@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:ankh_project/data/models/user_model.dart';
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
 import 'package:ankh_project/feauture/onboarding/onboarding.dart';
-import 'package:ankh_project/firebase_service/firestore_service/firestore_service.dart';
+import 'package:app_links/app_links.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +18,7 @@ import 'core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'core/theme/my_app_theme.dart';
 import 'feauture/authentication/email_verfication/email_verfication_screen.dart';
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
-import 'feauture/authentication/forgrt_password/set_new_password/set_new_password_screen.dart';
+import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
 import 'feauture/authentication/register/controller/register_states.dart';
 import 'feauture/authentication/register/register _screen.dart';
@@ -37,35 +41,88 @@ import 'l10n/languge_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-
-
   await Firebase.initializeApp();
-   configureDependencies();
-
+  configureDependencies();
   await getIt.allReady();
   await ScreenUtil.ensureScreenSize();
   await LocalNotification().initNotification();
-
   await FcmApi().initNotification();
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LanguageCubit()),
-
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => RoleCubit()),
         BlocProvider(create: (context) => RoleCsCubit()),
-
       ],
-
       child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    _initDynamicLinks();
+  }
+
+  Future<void> _initDynamicLinks() async {
+    // Handle dynamic link when app is opened from terminated state
+    final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
+    _handleDynamicLink(initialLink?.link);
+
+    // Handle dynamic link when app is opened from background
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+      _handleDynamicLink(dynamicLinkData.link);
+    }).onError((error) {
+      print('Dynamic Link Failed: $error');
+    });
+  }
+
+  void _handleDynamicLink(Uri? uri) {
+    if (uri == null) return;
+
+    print('Received dynamic link: $uri');
+
+    // Unwrap Firebase link if needed
+    final deepLink = uri.queryParameters['link'];
+    if (deepLink != null) {
+      final innerUri = Uri.parse(deepLink);
+      print('Unwrapped deep link: $innerUri');
+      _handleDynamicLink(innerUri);
+      return;
+    }
+
+    if (uri.path == '/reset-password') {
+      final token = uri.queryParameters['token'];
+      final email = uri.queryParameters['email'];
+
+      if (token != null && email != null) {
+        print('Deep Link - Email: $email, Token: $token');
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushNamed(
+            ResetPasswordScreen.resetPasswordScreenRouteName,
+            arguments: {
+              'email': email,
+              'token': token,
+            },
+          );
+        });
+      } else {
+        print('Invalid link: missing token or eemail');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,27 +141,32 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-
           supportedLocales: AppLocalizations.supportedLocales,
           locale: locale,
-
           title: 'Flutter Demo',
           theme: MyAppTheme.lightTheme(context),
-          initialRoute:  OnBoarding.onBoardingRouteName,
-          routes:{
-            OnBoarding.onBoardingRouteName:(context) =>  OnBoarding(),
-            WelcomeScreen.welcomeScreenRouteName:(context) =>  WelcomeScreen(),
-            RegisterScreen.registerScreenRouteName:(context) =>  RegisterScreen(),
-            ChooseRoleScreen.chooseRoleScreenRouteName:(context) =>  ChooseRoleScreen(),
-            ChooseCsTypeScreen.chooseCsTypeScreenRouteName:(context) =>  ChooseCsTypeScreen(),
-            SignInScreen.signInScreenRouteName:(context) =>  SignInScreen(),
-            EmailVerficationScreen.emailVerficationScreenRouteName:(context) =>  EmailVerficationScreen(),
-            ForgetPasswordScreen.forgetPasswordScreenRouteName:(context) =>  ForgetPasswordScreen(),
-            OtpVerficationScreen.otpVerficationScreenRouteName:(context) =>  OtpVerficationScreen(),
-            ResetPasswordScreen.resetPasswordScreenRouteName:(context) =>  ResetPasswordScreen(),
-            BottomNavBar.bottomNavBarRouteName:(context) =>  BottomNavBar(),
-
-          } ,
+          initialRoute: '/', // 👈 Make sure '/' route is defined below
+          routes: {
+            '/': (context) => OnBoarding(), // ✅ root fallback
+            OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
+            WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
+            RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
+            ChooseRoleScreen.chooseRoleScreenRouteName: (context) => ChooseRoleScreen(),
+            ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) => ChooseCsTypeScreen(),
+            SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
+            EmailVerficationScreen.emailVerficationScreenRouteName: (context) => EmailVerficationScreen(),
+            ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) => ForgetPasswordScreen(),
+            OtpVerficationScreen.otpVerficationScreenRouteName: (context) => OtpVerficationScreen(),
+            ResetPasswordScreen.resetPasswordScreenRouteName: (context) {
+              final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+              return ResetPasswordScreen(
+                email: args['email']!,
+                token: args['token']!,
+              );
+            },
+            BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
+            MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+          },
         );
       },
     );

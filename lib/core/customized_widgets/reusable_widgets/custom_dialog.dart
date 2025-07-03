@@ -56,11 +56,11 @@ class CustomDialog {
             backgroundColor: ColorManager.lightGrey,
             title: Text(
               title ?? "Success",
-              style: getBoldStyle(color:ColorManager.white, context:context),
+              style: getBoldStyle(color:ColorManager.black, context:context),
             ),
             content: Text(
               message ?? "Success",
-              style: getBoldStyle(color:ColorManager.white, context:context),
+              style: getBoldStyle(color:ColorManager.black, context:context),
             ),
             actions: [
               CustomizedElevatedButton(
