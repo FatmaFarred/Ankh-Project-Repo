@@ -87,6 +87,8 @@
   "invalidPasswordDetails": "Invalid password:\n- Must contain at least one uppercase letter\n- Must contain at least one lowercase letter\n- Must include at least one digit\n- Must have 1 special character",
   "topBrands": "Top Brands",
   "viewAll": "View All",
+  "noDataFound": "No Data Found",
+
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars",
   "searchRequest": "Search Request",

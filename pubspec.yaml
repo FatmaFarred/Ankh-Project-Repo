@@ -64,6 +64,7 @@ dependencies:
   easy_stepper: ^0.8.5+1
   iconsax:
   firebase_dynamic_links:
+  cached_network_image:
 
 
   app_links:

@@ -1,150 +1,21 @@
 import 'dart:ui';
 
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/core/constants/font_manager/font_style_manager.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
+import 'package:ankh_project/domain/entities/marketer_requests_for_inspection_entity.dart';
 import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
+import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-
-import '../../core/constants/font_manager/font_style_manager.dart';
-import '../../core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
 import '../../l10n/app_localizations.dart';
-
-enum RequestStatus { pending, done, delayed, notResponded }
-
-class RequestModel {
-  final String carName;
-  final String clientName;
-  final String? clientPhone;
-  final String? address;
-  final DateTime? inspectionDate;
-  final DateTime? inspectionStartTime;
-  final DateTime? inspectionEndTime;
+import 'controller/cubit.dart';
+import 'controller/request_states.dart';
 
 
-
-  final DateTime? createdAt;
-  final String priceRange;
-  final RequestStatus status;
-  final String? imagePath;
-
-
-  RequestModel(  {
-    required this.carName,
-    required this.clientName,
-    required this.createdAt,
-    required this.priceRange,
-    required this.status,
-    required this.imagePath,
-    this.clientPhone,
-    this.address,
-    this.inspectionDate,
-    this.inspectionStartTime,
-    this.inspectionEndTime,
-  });
-}
-
-Color getStatusColor(RequestStatus status) {
-  switch (status) {
-    case RequestStatus.pending:
-      return ColorManager.lightYellow;
-    case RequestStatus.done:
-      return ColorManager.lightGreen;
-    case RequestStatus.delayed:
-      return ColorManager.lightOrange;
-    case RequestStatus.notResponded:
-      return ColorManager.lightBlack;
-  }
-}
-Color getTextStatusColor(RequestStatus status) {
-  switch (status) {
-    case RequestStatus.pending:
-      return ColorManager.darkYellow;
-    case RequestStatus.done:
-      return ColorManager.darkGreen;
-    case RequestStatus.delayed:
-      return ColorManager.darkOrange;
-    case RequestStatus.notResponded:
-      return ColorManager.darkBlack;
-  }
-}
-
-String getStatusLabel(RequestStatus status) {
-  switch (status) {
-    case RequestStatus.pending:
-      return 'Pending';
-    case RequestStatus.done:
-      return 'Done';
-    case RequestStatus.delayed:
-      return 'Delayed';
-    case RequestStatus.notResponded:
-      return 'Not Responded';
-  }
-}
-
-final List<RequestModel> mockRequests = [
-  RequestModel(
-    carName: 'Toyota EX30',
-    clientName: 'John Smith',
-    createdAt: DateTime(2025, 12, 10, 14),
-    priceRange: 'EGP 1.9M - 2.3M',
-    status: RequestStatus.pending,
-    imagePath: 'assets/images/car.png',
-    clientPhone: '0123456789',
-    address: '123 Main St, Cairo',
-    inspectionDate: DateTime(2025, 12, 15, 10, 0),
-    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
-    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
-
-  ),
-  RequestModel(
-    carName: 'Toyota EX40',
-    clientName: 'Alex Doe',
-    createdAt: DateTime(2025, 1, 12, 15, 3),
-    priceRange: 'EGP 1.8M - 2.1M',
-    status: RequestStatus.done,
-    imagePath: 'assets/images/car.png',
-    clientPhone: '0123456789',
-    address: '123 Main St, Cairo',
-    inspectionDate: DateTime(2025, 12, 15, 10, 0),
-    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
-    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
-
-  ),
-  RequestModel(
-    carName: 'Toyota EX50',
-    clientName: 'Sara Fade',
-    createdAt: DateTime(2025, 2, 8, 7, 21),
-    priceRange: 'EGP 1.2M - 1.8M',
-    status: RequestStatus.delayed,
-    imagePath: 'assets/images/car.png',
-
-    clientPhone: '0123456789',
-    address: '123 Main St, Cairo',
-    inspectionDate: DateTime(2025, 12, 15, 10, 0),
-    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
-    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
-
-  ),
-  RequestModel(
-    carName: 'Toyota EX30',
-    clientName: 'John Smith',
-    createdAt: DateTime(2025, 12, 10, 14),
-    priceRange: 'EGP 1.9M - 2.3M',
-    status: RequestStatus.notResponded,
-    imagePath: 'assets/images/car.png',
-
-    clientPhone: '0123456789',
-    address: '123 Main St, Cairo',
-    inspectionDate: DateTime(2025, 12, 15, 10, 0),
-    inspectionStartTime: DateTime(2025, 12, 15, 10, 0),
-    inspectionEndTime: DateTime(2025, 12, 15, 11, 0),
-
-  ),
-];
-
-// UI
 class RequestScreen extends StatefulWidget {
   const RequestScreen({super.key});
 
@@ -163,26 +34,32 @@ class _RequestScreenState extends State<RequestScreen>
     _tabController = TabController(length: 5, vsync: this);
   }
 
-  List<RequestModel> getFilteredRequests(int index) {
-    List<RequestModel> filtered = index == 0
-        ? mockRequests
-        : mockRequests
-              .where((r) => r.status == RequestStatus.values[index - 1])
-              .toList();
+  List<MarketerRequestsForInspectionEntity> filterRequests(List<MarketerRequestsForInspectionEntity> all, int index) {
+    List<MarketerRequestsForInspectionEntity> filtered = index == 0
+        ? all
+        : all.where((r) => r.status?.toLowerCase() == getStatusLabelIndex(index).toLowerCase()).toList();
     if (_searchController.text.isNotEmpty) {
-      filtered = filtered
-          .where(
-            (r) =>
-                r.carName.toLowerCase().contains(
-                  _searchController.text.toLowerCase(),
-                ) ||
-                r.clientName.toLowerCase().contains(
-                  _searchController.text.toLowerCase(),
-                ),
-          )
-          .toList();
+      filtered = filtered.where((r) =>
+      r.productName!.toLowerCase().contains(_searchController.text.toLowerCase()) ||
+          r.clientName!.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+
     }
     return filtered;
+  }
+
+  String getStatusLabelIndex(int index) {
+    switch (index) {
+      case 1:
+        return 'Pending';
+      case 2:
+        return 'Done';
+      case 3:
+        return 'Delayed';
+      case 4:
+        return 'Not Responded';
+      default:
+        return '';
+    }
   }
 
   @override
@@ -193,87 +70,100 @@ class _RequestScreenState extends State<RequestScreen>
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(CupertinoIcons.back),
-            color: Colors.white, // White color
+            color: Colors.white,
             onPressed: () => Navigator.pop(context),
           ),
-          title:  Text(AppLocalizations.of(context)!.myRequests),
+          title: Text(AppLocalizations.of(context)!.myRequests),
         ),
-
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 20.w),
-              child: TextFormField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: '${AppLocalizations.of(context)!.searchRequest}...',
-                  hintStyle: getRegularStyle(
-                    color: ColorManager.darkGrey,
-                    fontSize: 14,
-                    context: context,
+        body: BlocBuilder<MarketerRequestCubit, MarketerRequestState>(
+          builder: (context, state) {
+            if (state is MarketerRequestLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is MarketerRequestError) {
+              return Center(child: Text(state.error?.errorMessage??""));
+            } else if (state is MarketerRequestEmpty) {
+              return Center(child: Text("No requests found"));
+            } else if (state is MarketerRequestSuccess) {
+              final allRequests = state.requests;
+              return Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 20.w),
+                    child: TextFormField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: '${AppLocalizations.of(context)!.searchRequest}...',
+                        hintStyle: getRegularStyle(color: ColorManager.darkGrey, fontSize: 14, context: context),
+                        prefixIcon: const Icon(Icons.search),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.r),
+                            borderSide: BorderSide(color: ColorManager.lightGrey, width: 1.w)),
+                      ),
+                      onChanged: (_) => setState(() {}),
+                    ),
                   ),
-                  prefixIcon: const Icon(Icons.search),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
+                    color: ColorManager.transparent,
+                    child: TabBar(
+                      controller: _tabController,
+                      tabAlignment: TabAlignment.center,
+                      dividerColor: ColorManager.transparent,                      isScrollable: true,
+                      indicator: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      labelStyle: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                      unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
 
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r),borderSide: BorderSide(color: ColorManager.lightGrey, width: 1.w)),
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      tabs: const [
+                        Tab(text: 'All'),
+                        Tab(text: 'Pending'),
+                        Tab(text: 'Done'),
+                        Tab(text: 'Delayed'),
+                        Tab(text: 'Not Responded'),
+                      ],
+                      onTap: (_) => setState(() {}),
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: List.generate(5, (tabIndex) {
+                        final filteredRequests = filterRequests(allRequests, tabIndex);
+                        if (filteredRequests.isEmpty) {
+                          return Center(child: Text("No requests found"));
+                        }
+                        return ListView.builder(
+                          itemCount: filteredRequests.length,
+                          itemBuilder: (context, index) {
+                            final request = filteredRequests[index];
+                            return InkWell(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                MyRequestDetails.myRequestDetailsRouteName,
+                                arguments: request.id,
 
-                ),
-                onChanged: (_) => setState(() {}),
-              ),
-            ),
-            Container(
-
-                margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
-              color: ColorManager.transparent, // Optional background
-              child: TabBar(
-                tabAlignment: TabAlignment.center,
-                dividerColor: ColorManager.transparent,
-                controller: _tabController,
-                isScrollable: true,
-                labelStyle: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
-                unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
-
-                indicator: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(16.r), // Rounded corners
-                ),
-                indicatorSize: TabBarIndicatorSize.tab,
-                tabs: const [
-                  Tab(text: 'All'),
-                  Tab(text: 'Pending'),
-                  Tab(text: 'Done'),
-                  Tab(text: 'Delayed'),
-                  Tab(text: 'Not Responded'),
+                              ),
+                              child: CarRequestCard(
+                                request: request,
+                                paddingHorizontal: 20.w,
+                                paddingVertical: 12.h,
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                    ),
+                  ),
                 ],
-                onTap: (_) => setState(() {}),
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: List.generate(5, (tabIndex) {
-                  final filteredRequests = getFilteredRequests(tabIndex);
-                  return ListView.builder(
+              );
+            }
+            return const SizedBox.shrink();
+          },
 
-                    itemCount: filteredRequests.length,
-
-                    itemBuilder: (context, index) {
-                      final request = filteredRequests[index];
-
-                       return InkWell(onTap: ()=>Navigator.of(context).pushNamed(MyRequestDetails.myRequestDetailsRouteName,
-
-                       arguments: request),
-
-                           child: CarRequestCard(request: request,paddingHorizontal: 20.w,paddingVertical: 12.h,));
-
-                      ;
-                    },
-                  );
-                }),
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -281,167 +171,103 @@ class _RequestScreenState extends State<RequestScreen>
 }
 
 class CarRequestCard extends StatelessWidget {
-  const CarRequestCard({
+   CarRequestCard({
     super.key,
     required this.request,
+    this.showLabel = true,
+    required this.paddingVertical,
+    required this.paddingHorizontal,
 
-     this.showLabel= true, required this.paddingVertical, required this.paddingHorizontal,
   });
 
-  final RequestModel request;
+  var  request;
   final bool showLabel;
-  final double paddingVertical,paddingHorizontal;
+  final double paddingVertical, paddingHorizontal;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: ColorManager.white,
-
-
-     elevation: 2,
-     margin: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
-     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r),side:  BorderSide(color:ColorManager.lightGrey)),
-     child: Padding(
-       padding: EdgeInsets.all(12.w),
-       child: Row(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: [
-           // Image (Leading)
-           RoundedContainerWidget(
-             width: 138.w,
-             height: 114.h,
-             imagePath: request.imagePath ?? "",
-           ),
-
-           SizedBox(width: 12.w),
-
-           // Details and Status
-           Expanded(
-             child: Stack(
-               children: [
-                 // Info
-                 Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     SizedBox(height: 4.h), // spacing below chip
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         Text(
-                           request.carName,
-                           style: Theme.of(context).textTheme.bodyLarge,
-                         ),
-                         showLabel?
-                         Flexible(
-                           child: Chip(
-                             backgroundColor: getStatusColor(request.status),
-                             padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-                             shape: const StadiumBorder(
-                               side: BorderSide(
-                                 color: Colors.transparent, // ✅ Remove border completely
-                               ),
-                             ),
-                             label: Text(
-                               getStatusLabel(request.status),
-                               style: getBoldStyle(
-                                 fontSize: 10.sp,
-                                 color: getTextStatusColor(request.status),
-                                 context: context,
-                               ),
-                               overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
-                               softWrap: false,
-                             ),
-                           ),
-                         )
-                   :
-                         SizedBox()
-                       ],
-                     ),
-                     SizedBox(height: 4.h),
-                     Text("${AppLocalizations.of(context)!.client}: ${request.clientName}",
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-                     ),
-                     Text(  "${AppLocalizations.of(context)!.created}: ${request.createdAt != null
-                         ? DateFormat('dd MMM yyyy, hh:mm a').format(request.createdAt!)
-                         : AppLocalizations.of(context)!.searchRequest}",
-
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-                     ),
-                     Text(AppLocalizations.of(context)!.price,
-                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-
+      elevation: 2,
+      margin: EdgeInsets.symmetric(horizontal: paddingHorizontal, vertical: paddingVertical),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r), side: BorderSide(color: ColorManager.lightGrey)),
+      child: Padding(
+        padding: EdgeInsets.all(12.w),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            RoundedContainerWidget(
+              width: 138.w,
+              height: 114.h,
+              imagePath: request.productImage ?? '',
+            ),
             SizedBox(width: 12.w),
-
-            // Details and Status
             Expanded(
               child: Stack(
                 children: [
-                  // Info
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 4.h), // spacing below chip
+                      SizedBox(height: 4.h),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            request.carName,
+                            request?.productName??"",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
-                          showLabel
-                              ? Chip(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 5.w,
-                                    vertical: 4.h,
+                          if (showLabel)
+                            Flexible(
+                              child: Chip(
+                                backgroundColor: getStatusColor(
+                                  getRequestStatusFromString(request.status) ?? RequestStatus.pending,
+                                ),
+                                label: Text(
+                                  getStatusLabel(getRequestStatusFromString(request.status)?? RequestStatus.pending),
+                                     style: getBoldStyle(
+                                    fontSize: 10.sp,
+                                       color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
+                                    context: context,
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25.r),
+                                  overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
+                                  softWrap: false,
+
+
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+
+                                shape: const StadiumBorder(
+                                  side: BorderSide(
+                                    color: Colors.transparent, // ✅ Remove border completely
                                   ),
-                                  backgroundColor: getStatusColor(
-                                    request.status,
-                                  ),
-                                  label: Text(
-                                    getStatusLabel(request.status),
-                                    style: getBoldStyle(
-                                      fontSize: 12.sp,
-                                      color: getStatusColor(
-                                        request.status,
-                                      ).withOpacity(1),
-                                      context: context,
-                                    ),
-                                  ),
-                                )
-                              : SizedBox(),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        "${AppLocalizations.of(context)!.client}: ${request.clientName}",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: ColorManager.darkGrey,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                      Text(
-                        "${AppLocalizations.of(context)!.created}: ${DateFormat('dd MMM yyyy, hh:mm a').format(request.createdAt)}",
 
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: ColorManager.darkGrey,
-                          fontSize: 12.sp,
-                        ),
+                      Text("${AppLocalizations.of(context)!.client}: ${request.clientName}",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+
                       ),
+
                       Text(
-                        AppLocalizations.of(context)!.price,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: ColorManager.darkGrey,
-                          fontSize: 12.sp,
-                        ),
+                          "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
+                              ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
+                              : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
+                              ? formatTime(request.preferredTime!)
+                              : AppLocalizations.of(context)!.noDataFound}",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+
                       ),
-                      Text(
-                        request.priceRange,
+                      Text(AppLocalizations.of(context)!.price,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),),
+
+                      Text("Not specified",
                         style: Theme.of(context).textTheme.bodyLarge,
+
                       ),
                     ],
                   ),
@@ -454,3 +280,18 @@ class CarRequestCard extends StatelessWidget {
     );
   }
 }
+String formatTime(String timeStr) {
+  try {
+    final parts = timeStr.split(':');
+    if (parts.length == 2) {
+      final hour = int.parse(parts[0]);
+      final minute = int.parse(parts[1]);
+
+      final now = DateTime.now();
+      final dt = DateTime(now.year, now.month, now.day, hour, minute);
+      return DateFormat('hh:mm a').format(dt); // --> "03:00 AM"
+    }
+  } catch (_) {}
+  return timeStr; // fallback to original if something goes wrong
+}
+

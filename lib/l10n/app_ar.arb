@@ -93,6 +93,7 @@
   "price": "السعر",
   "searchRequest": "البحث عن طلب ",
   "details": "التفاصيل",
+  "noDataFound": "لا توجد بيانات",
   "verified": "موثوق",
   "online": "متصل",
   "description": "الوصف",
