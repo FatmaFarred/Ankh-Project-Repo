@@ -89,6 +89,8 @@
 
   "topBrands": "Top Brands",
   "viewAll": "View All",
+  "noDataFound": "No Data Found",
+
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars",
     "searchRequest": "Search Request",

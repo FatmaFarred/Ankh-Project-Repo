@@ -289,6 +289,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewAll => 'عرض الكل';
 
   @override
+  String get noDataFound => 'لا توجد بيانات';
+
+  @override
   String get popularNewCars => 'السيارات الجديدة الشائعة';
 
   @override

@@ -626,6 +626,12 @@ abstract class AppLocalizations {
   /// **'View All'**
   String get viewAll;
 
+  /// No description provided for @noDataFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data Found'**
+  String get noDataFound;
+
   /// No description provided for @popularNewCars.
   ///
   /// In en, this message translates to:

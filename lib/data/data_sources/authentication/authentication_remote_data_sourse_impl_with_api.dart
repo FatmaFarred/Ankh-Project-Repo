@@ -98,7 +98,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           },);
         var loginResponse = LoginResponseDm.fromJson(response.data);
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
-          final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+         /* final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: email,
             password: password,
           );
@@ -109,7 +109,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           );
           MyUser? myUser = await FireBaseUtilies.readUserFromFireStore(
             credential.user?.uid ?? "",
-          );
+          );*/
           return right(loginResponse);
         } else {
           return left(ServerError(errorMessage: loginResponse.message));

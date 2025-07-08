@@ -10,6 +10,7 @@ class ApiManager {
   Future<Response> getData(
       {required String endPoint,
         required String url,
+
         Map<String, dynamic>? queryParameters,
         Options? options,
         Map<String, dynamic>? headers}) {
