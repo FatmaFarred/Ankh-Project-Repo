@@ -1,7 +1,9 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
+import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
+import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -29,11 +31,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
+
     BlocProvider(
       create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
       child: RequestScreen(),
     ),
     Center(child: Text("Balance Page")),
+
+    BalanceScreen(),
+
     AccountScreen(),
   ];
 
@@ -45,15 +51,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorManager.lightprimary,
-        selectedLabelStyle: GoogleFonts.poppins(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
+        selectedLabelStyle: GoogleFonts.cairo(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w700,
           color: ColorManager.lightprimary,
         ),
         unselectedItemColor: ColorManager.darkGrey,
-        unselectedLabelStyle: GoogleFonts.poppins(
+        unselectedLabelStyle: GoogleFonts.cairo(
           fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
           color: ColorManager.darkGrey,
         ),
         backgroundColor: Colors.white,
@@ -63,19 +69,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items:  [
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
-            label: 'Home',
+            label:  AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
-            label: 'Requests',
+            label:  AppLocalizations.of(context)!.requests,
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
-            label: 'Balance',
+            label: AppLocalizations.of(context)!.balance,
           ),
           BottomNavigationBarItem(
             icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
-            label: 'Account',
+            label: AppLocalizations.of(context)!.account,
+
           ),
         ],
       ),

@@ -15,6 +15,7 @@ import '../../l10n/app_localizations.dart';
 import 'controller/cubit.dart';
 import 'controller/request_states.dart';
 
+
 class RequestScreen extends StatefulWidget {
   const RequestScreen({super.key});
 
@@ -41,6 +42,7 @@ class _RequestScreenState extends State<RequestScreen>
       filtered = filtered.where((r) =>
       r.productName!.toLowerCase().contains(_searchController.text.toLowerCase()) ||
           r.clientName!.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+
     }
     return filtered;
   }
@@ -161,6 +163,7 @@ class _RequestScreenState extends State<RequestScreen>
             }
             return const SizedBox.shrink();
           },
+
         ),
       ),
     );
@@ -174,6 +177,7 @@ class CarRequestCard extends StatelessWidget {
     this.showLabel = true,
     required this.paddingVertical,
     required this.paddingHorizontal,
+
   });
 
   var  request;
@@ -206,6 +210,7 @@ class CarRequestCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 4.h),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -289,3 +294,4 @@ String formatTime(String timeStr) {
   } catch (_) {}
   return timeStr; // fallback to original if something goes wrong
 }
+
