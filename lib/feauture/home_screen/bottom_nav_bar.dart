@@ -5,10 +5,13 @@ import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../api_service/di/di.dart';
+import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 import '../profile/profile_screen.dart';
 import 'car_brand_item.dart';
@@ -28,8 +31,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    RequestScreen(),
+
+    BlocProvider(
+      create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+      child: RequestScreen(),
+    ),
+    Center(child: Text("Balance Page")),
+
     BalanceScreen(),
+
     AccountScreen(),
   ];
 

@@ -1,116 +1,169 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/request_submitted.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../../api_service/di/di.dart';
 import '../my_request_screen.dart';
+import 'details_controller/details_request_cubit.dart';
+import 'details_controller/request_details_states.dart';
 
 class MyRequestDetails extends StatelessWidget {
   static const String myRequestDetailsRouteName = "myRequestDetails";
-  final DateTime scheduleDate = DateTime(2025, 6, 24);
 
-  final TimeOfDay startTime = TimeOfDay(hour: 13, minute: 0);
-
-  final TimeOfDay endTime = TimeOfDay(hour: 14, minute: 0);
-
-  MyRequestDetails({super.key});
+  const MyRequestDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final request = ModalRoute.of(context)!.settings.arguments as RequestModel;
-    final String formattedDate = DateFormat('yyyy-MM-dd').format(scheduleDate);
-    final String formattedTime =
-        '${startTime.format(context)} - ${endTime.format(context)}';
+    final num? requestId = ModalRoute.of(context)?.settings.arguments as num?;
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(CupertinoIcons.back),
-          color: Colors.white, // White color
-          onPressed: () => Navigator.pop(context),
+    if (requestId == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.requestDetails),
         ),
-        title: Text(AppLocalizations.of(context)!.requestDetails),
-
-      ),
-      body: ListView(
-        padding: EdgeInsets.all(20.w),
-        children: [
-          SizedBox(height: 20),
-          Text(AppLocalizations.of(context)!.productInfo,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14.sp
-          ),),
-          CarRequestCard(request: request,paddingHorizontal: 0,paddingVertical: 12.h,),
+        body: Center(child: Text(AppLocalizations.of(context)!.noDataFound)),
+      );
+  }
 
 
-
-
-          _tableSection(
-            title: AppLocalizations.of(context)!.clientInformation,
-            rows: [
-              _infoRow(Icons.person_2_outlined, request.clientName),
-
-              _infoRow(Icons.phone_outlined, request?.clientPhone??""),
-              _infoRow(Icons.location_on_outlined,request?.address??""),
-            ],
+    
+    return BlocProvider(
+      create: (context) => getIt<MarketerRequestDetailsCubit>()..fetchRequests(productId: requestId),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.back),
+            color: Colors.white, // White color
+            onPressed: () => Navigator.pop(context),
           ),
-
-          /// Schedule
-          _tableSection(
-            title: AppLocalizations.of(context)!.inspectionSchedule,
-            rows: [
-              _infoRow(Icons.calendar_today, request.inspectionDate != null
-                  ? DateFormat('dd MMM yyyy').format(request.inspectionDate!)
-                  : AppLocalizations.of(context)!.notAvailable,),
-              _infoRow(Icons.access_time,  (request.inspectionStartTime != null && request.inspectionEndTime != null)
-                  ? '${DateFormat('hh:mm a').format(request.inspectionStartTime!)} - ${DateFormat('hh:mm a').format(request.inspectionEndTime!)}'
-                  : AppLocalizations.of(context)!.notAvailable,
-              ),
-            ],
-          ),
-          Text(
-            AppLocalizations.of(context)!.currrentStatus,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14.sp),
-
-          ),
-          ListTile(
-            leading: CircleAvatar(backgroundColor:getStatusColor(request.status),radius: 20.r,child:Icon(Icons.access_time,size: 20.sp,color: getTextStatusColor(request.status).withOpacity(1)),),
-            title: Text(
-              getStatusLabel(request.status),
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16.sp,color: getTextStatusColor(request.status)),
-
-            ),
-            subtitle: Text('${AppLocalizations.of(context)!.lastUpdated} '
-                '${(request.createdAt != null)
-                ? DateFormat('dd/MM/yyyy').format(request.createdAt!)
-                : AppLocalizations.of(context)!.notAvailable}',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12.sp,color: ColorManager.darkGrey),
-            ),
-          ),
+          title: Text(AppLocalizations.of(context)!.requestDetails),
+      
+        ),
+    body: BlocBuilder<MarketerRequestDetailsCubit, MarketerRequestDetailsState>(
+    builder: (context, state) {
+    if (state is MarketerRequestDetailsLoading) {
+    return const Center(child: CircularProgressIndicator());
+    } else if (state is MarketerRequestDetailsError) {
+    return Center(child: Text(state.error?.errorMessage??""));
+    } else if (state is MarketerRequestDetailsSuccess) {
+    final request = state.requestDetails;
 
 
-          /// Status Tracker
-          Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 12),
-            child: Text(
-              AppLocalizations.of(context)!.statusTracker,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          statusTracker(context),
+    return ListView(
+    padding: EdgeInsets.all(20.w),
+    children: [
+    SizedBox(height: 20),
+    Text(AppLocalizations.of(context)!.productInfo,
+    style: Theme
+        .of(context)
+        .textTheme
+        .bodyLarge
+        ?.copyWith(fontSize: 14.sp
+    ),),
+    CarRequestCard(
+    request: request, paddingHorizontal: 0, paddingVertical: 12.h,),
 
-          SizedBox(height: 24),
-        ],
-      ),
+
+    _tableSection(
+    title: AppLocalizations.of(context)!.clientInformation,
+    rows: [
+    _infoRow(Icons.person_2_outlined, request?.clientName ?? ""),
+
+    _infoRow(Icons.phone_outlined, request?.phoneNumber ?? ""),
+    _infoRow(Icons.location_on_outlined, request?.address ?? ""),
+    ],
+    ),
+
+    /// Schedule
+    _tableSection(
+    title: AppLocalizations.of(context)!.inspectionSchedule,
+    rows: [
+    _infoRow(Icons.calendar_today, request.preferredDate != null
+    ? DateFormat('dd/MM/yyyy').format(DateTime.parse(
+    request.preferredDate!))
+        : AppLocalizations.of(context)!.notAvailable,),
+    _infoRow(Icons.access_time, request.preferredTime != null
+    ? formatTime(request.preferredTime!)
+        : AppLocalizations.of(context)!.notAvailable,
+    ),
+    ],
+    ),
+    Text(
+    AppLocalizations.of(context)!.currrentStatus,
+    style: Theme
+        .of(context)
+        .textTheme
+        .bodyLarge
+        ?.copyWith(fontSize: 14.sp),
+
+    ),
+    ListTile(
+    leading: CircleAvatar(
+    backgroundColor: getStatusColor(getRequestStatusFromString(request
+        .status) ?? RequestStatus.pending),
+    radius: 20.r,
+    child: Icon(
+    Icons.access_time, size: 20.sp, color: getTextStatusColor(
+    getRequestStatusFromString(request.status) ??
+    RequestStatus.pending).withOpacity(1)),),
+    title: Text(
+    getStatusLabel(getRequestStatusFromString(request.status) ??
+    RequestStatus.pending),
+    style: Theme
+        .of(context)
+        .textTheme
+        .bodyMedium
+        ?.copyWith(fontSize: 16.sp, color: getTextStatusColor(
+    getRequestStatusFromString(request.status) ??
+    RequestStatus.pending)),
+
+    ),
+    subtitle: Text('${AppLocalizations.of(context)!.lastUpdated} '
+    '${(request.preferredDate != null)
+    ? DateFormat('dd/MM/yyyy').format(DateTime.parse(
+    request.preferredDate!))
+        : AppLocalizations.of(context)!.notAvailable}',
+    style: Theme
+        .of(context)
+        .textTheme
+        .bodySmall
+        ?.copyWith(fontSize: 12.sp, color: ColorManager.darkGrey),
+    ),
+    ),
+
+
+    /// Status Tracker
+    Padding(
+    padding: const EdgeInsets.only(top: 20, bottom: 12),
+    child: Text(
+    AppLocalizations.of(context)!.statusTracker,
+    style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    ),
+    statusTracker(context),
+
+    SizedBox(height: 24),
+    ],
+    );
+    }
+    return const SizedBox.shrink();
+
+    }
+      )
+    ),
     );
   }
-  
+
 
   Widget _tableSection({required String title, required List<Widget> rows}) {
     return Padding(

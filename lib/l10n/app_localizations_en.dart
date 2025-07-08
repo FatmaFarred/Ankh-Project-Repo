@@ -291,6 +291,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAll => 'View All';
 
   @override
+  String get noDataFound => 'No Data Found';
+
+  @override
   String get popularNewCars => 'Popular New Cars';
 
   @override

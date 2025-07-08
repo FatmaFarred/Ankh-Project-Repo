@@ -29,7 +29,7 @@
                     android:scheme="https"
                     android:host="nplanet.page.link"
                     android:pathPrefix="/reset-password" />
-            </intent-filter>
+            </intent-filter>0
 
             <!-- 📱 Default app launcher -->
             <intent-filter>
