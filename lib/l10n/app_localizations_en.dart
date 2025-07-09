@@ -434,7 +434,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirmRequest => 'Confirm Request';
 
   @override
-
   String get views => 'Views';
 
   @override
@@ -485,6 +484,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get account => 'Account';
 
+  @override
   String get requestDetails => 'Request Details';
 
   @override
@@ -498,9 +498,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lastUpdated => 'Last Updated';
-
-  @override
-  String get account => 'Account';
 
   @override
   String get editProfile => 'Edit Profile';
@@ -558,5 +555,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
-
 }

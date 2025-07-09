@@ -36,7 +36,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
       child: RequestScreen(),
     ),
-    Center(child: Text("Balance Page")),
 
     BalanceScreen(),
 

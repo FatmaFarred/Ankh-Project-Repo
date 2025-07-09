@@ -1,3 +1,5 @@
+import 'package:ankh_project/core/constants/assets_manager.dart';
+import 'package:ankh_project/domain/entities/product_entity.dart';
 import 'package:ankh_project/feauture/details_screen/widgets/add_comment_section.dart';
 import 'package:ankh_project/feauture/details_screen/widgets/status_section.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/request_inspection_screen.dart';
@@ -7,19 +9,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/feauture/home_screen/section_header.dart';
 
 import '../../l10n/app_localizations.dart';
-import 'widgets/car_image_slider.dart';
 import 'widgets/car_detail_info.dart';
 import 'widgets/section_title.dart';
 import 'widgets/support_team_section.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  final ProductEntity product;
+
+  const DetailsScreen({super.key, required this.product});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -27,12 +29,6 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   final PageController _pageController = PageController();
-  final List<String> images = [
-    ImageAssets.carPic1,
-    ImageAssets.carPic2,
-    ImageAssets.carPic3,
-    ImageAssets.carPic1,
-  ];
   int _currentIndex = 0;
 
   @override
@@ -55,38 +51,78 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final product = widget.product;
+    final List<String> images = [];
+
+    if (product.image != null && product.image.isNotEmpty) {
+      images.add("https://ankhapi.runasp.net/${product.image}");
+    } else {
+      images.add(ImageAssets.brokenImage); // local asset like assets/images/no_image.png
+
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        tooltip:  AppLocalizations.of(context)!.haveADeal,
-        child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
+        tooltip: AppLocalizations.of(context)!.haveADeal,
         backgroundColor: ColorManager.lightprimary,
+        child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
       ),
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(CupertinoIcons.back), // Cupertino back icon
-          color: Colors.white, // White color
+          icon: const Icon(CupertinoIcons.back),
+          color: Colors.white,
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(AppLocalizations.of(context)!.details),
         centerTitle: true,
         backgroundColor: ColorManager.lightprimary,
-        titleTextStyle: GoogleFonts.poppins(
-          fontWeight: FontWeight.w500,
-          fontSize: 20.sp,
-        ),
       ),
       body: SingleChildScrollView(
         padding: REdgeInsets.all(22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CarImageSlider(
-              pageController: _pageController,
-              images: images,
-              currentIndex: _currentIndex,
-              onPageChanged: (index) => setState(() => _currentIndex = index),
+            // Image Slider (just the main image shown)
+            SizedBox(
+              height: 200.h,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: images.length,
+                onPageChanged: (index) => setState(() => _currentIndex = index),
+                itemBuilder: (context, index) => ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.network(
+                    images[index],
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                    errorBuilder: (_, __, ___) =>
+                        Image.asset(ImageAssets.brokenImage, fit: BoxFit.scaleDown),
+                  ),
+                ),
+              ),
             ),
+            if (images.length > 1)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  images.length,
+                  (index) => Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 4.w,
+                      vertical: 8.h,
+                    ),
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentIndex == index
+                          ? ColorManager.lightprimary
+                          : Colors.grey,
+                    ),
+                  ),
+                ),
+              ),
             SizedBox(height: 16.h),
 
             // Title & Rating
@@ -98,7 +134,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Toyota EX30",
+                        product.title,
                         style: GoogleFonts.manrope(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
@@ -108,22 +144,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Row(
                         children: [
                           RatingBarIndicator(
-                            rating: 5,
+                            rating: product.rating,
                             itemBuilder: (context, index) => const Icon(
                               Icons.star,
                               color: ColorManager.starRateColor,
                             ),
-                            itemCount: 1,
+                            itemCount: 5,
                             itemSize: 16.sp,
                           ),
                           SizedBox(width: 4),
-                          _buildSmallText("5.0   -", ColorManager.hintColor),
+                          _buildSmallText(
+                            "${product.rating}   -",
+                            ColorManager.hintColor,
+                          ),
                           SizedBox(width: 8),
                           _buildSmallText("3 Ratings", ColorManager.hintColor),
                         ],
                       ),
                       _buildSmallText(
-                        "Automatic - Electric",
+                        product.transmission,
                         const Color(0xFF404147),
                       ),
                     ],
@@ -131,7 +170,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    "${ AppLocalizations.of(context)!.egp} 1.9M",
+                    "${AppLocalizations.of(context)!.egp} ${product.price}",
                     style: GoogleFonts.poppins(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
@@ -143,8 +182,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
 
             SizedBox(height: 18.h),
-            StatusSection(),
-
+            const StatusSection(),
             SizedBox(height: 17.h),
 
             SectionTitle(title: AppLocalizations.of(context)!.description),
@@ -169,7 +207,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             SizedBox(height: 24.h),
             SectionTitle(title: AppLocalizations.of(context)!.details),
             SizedBox(height: 12.h),
-            const CarDetailInfo(),
+             CarDetailInfo(product: product,),
 
             SizedBox(height: 16.h),
             SectionHeader(title: AppLocalizations.of(context)!.images),
@@ -177,23 +215,28 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: 115.h,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: images.length,
+                itemCount: 4,
                 itemBuilder: (context, index) => Container(
                   width: 115.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.r),
                     color: const Color(0xFFF9FAFB),
                   ),
-                  child: Image.asset(images[index], fit: BoxFit.contain),
+                  child: Image.network(
+                    'https://ankhapi.runasp.net/${product.image}',
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, __, ___) =>
+                        Image.asset(ImageAssets.brokenImage, fit: BoxFit.scaleDown),
+                  ),
                 ),
                 separatorBuilder: (context, index) => SizedBox(width: 20.w),
               ),
             ),
 
             SizedBox(height: 16.h),
-            SectionTitle(title:  AppLocalizations.of(context)!.comments),
+            SectionTitle(title: AppLocalizations.of(context)!.comments),
             SizedBox(height: 12.h),
-            AddCommentSection(),
+            const AddCommentSection(),
 
             SizedBox(height: 16.h),
             SectionTitle(title: AppLocalizations.of(context)!.supportTeam),
@@ -215,9 +258,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) {
-                      return RequestInspectionScreen();
-                    },
+                    builder: (context) => const RequestInspectionScreen(),
                   ),
                 );
               },

@@ -171,7 +171,7 @@ class _RequestScreenState extends State<RequestScreen>
 }
 
 class CarRequestCard extends StatelessWidget {
-   CarRequestCard({
+  CarRequestCard({
     super.key,
     required this.request,
     this.showLabel = true,
@@ -226,9 +226,9 @@ class CarRequestCard extends StatelessWidget {
                                 ),
                                 label: Text(
                                   getStatusLabel(getRequestStatusFromString(request.status)?? RequestStatus.pending),
-                                     style: getBoldStyle(
+                                  style: getBoldStyle(
                                     fontSize: 10.sp,
-                                       color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
+                                    color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
                                     context: context,
                                   ),
                                   overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
@@ -254,11 +254,11 @@ class CarRequestCard extends StatelessWidget {
                       ),
 
                       Text(
-                          "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
-                              ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
-                              : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
-                              ? formatTime(request.preferredTime!)
-                              : AppLocalizations.of(context)!.noDataFound}",
+                        "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
+                            ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
+                            : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
+                            ? formatTime(request.preferredTime!)
+                            : AppLocalizations.of(context)!.noDataFound}",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
 
                       ),
@@ -294,4 +294,3 @@ String formatTime(String timeStr) {
   } catch (_) {}
   return timeStr; // fallback to original if something goes wrong
 }
-
