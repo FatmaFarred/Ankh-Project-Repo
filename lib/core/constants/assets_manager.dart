@@ -35,6 +35,7 @@ abstract class ImageAssets {
   static const String engineIcon = "$imagePath/engineIcon.png";
   static const String supportTeamIcon = "$imagePath/supportTeamIcon.png";
   static const String successIcon = "$imagePath/successIcon.png";
+  static const String brokenImage = "$imagePath/broken-image.png";
 }
 
 class SvgAssets {}

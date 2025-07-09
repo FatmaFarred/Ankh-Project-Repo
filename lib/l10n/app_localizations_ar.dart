@@ -432,7 +432,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmRequest => 'تأكيد الطلب';
 
   @override
-
   String get views => 'المشاهدات';
 
   @override
@@ -481,8 +480,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'الحساب';
+  String get account => 'الحساب الشخصى';
 
+  @override
   String get requestDetails => 'تفاصيل الطلب';
 
   @override
@@ -496,9 +496,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lastUpdated => 'آخر تحديث';
-
-  @override
-  String get account => 'الحساب الشخصى';
 
   @override
   String get editProfile => 'تعديل الملف الشخصي';
@@ -556,5 +553,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
-
 }

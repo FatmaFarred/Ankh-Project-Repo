@@ -24,10 +24,6 @@ class BalanceScreen extends StatelessWidget {
           title: Text(AppLocalizations.of(context)!.myBalance),
           centerTitle: true,
           backgroundColor: ColorManager.balanceColor,
-          titleTextStyle: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            fontSize: 20.sp,
-          ),
         ),
         body: Padding(
           padding: REdgeInsets.all(20.0),
