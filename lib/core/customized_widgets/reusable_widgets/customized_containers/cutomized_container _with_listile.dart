@@ -1,6 +1,7 @@
 
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +21,18 @@ class ContainerWithListTile extends StatelessWidget {
       height: 80.h,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.r) ,
         border: Border.all(color: isSelected?ColorManager.lightprimary:ColorManager.lightGrey,width: 2.w)),
-      child: ListTile(leading: Image.asset(image),
+      child: ListTile(leading: SizedBox(
+        width: 30.w,
+        height: 30.h,
+        child: image.startsWith('http')
+            ? CachedNetworkImage(
+          imageUrl: image,
+          placeholder: (context, url) => CircularProgressIndicator(),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+          fit: BoxFit.cover,
+        )
+            : Image.asset(image, fit: BoxFit.cover),
+      ),
       title: Text(title,style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16.sp),),
         subtitle:Text (subtitle,style: Theme.of(context).textTheme.labelMedium?.copyWith(color: ColorManager.darkGrey)),
           trailing: isSelected?Icon(Icons.check_circle,color: ColorManager.lightprimary,):Icon(Icons.circle_outlined,color:ColorManager. lightGrey,),

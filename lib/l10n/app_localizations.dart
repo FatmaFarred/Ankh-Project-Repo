@@ -908,7 +908,6 @@ abstract class AppLocalizations {
   /// **'Confirm Request'**
   String get confirmRequest;
 
-
   /// No description provided for @views.
   ///
   /// In en, this message translates to:
@@ -1041,11 +1040,11 @@ abstract class AppLocalizations {
   /// **'Last Updated'**
   String get lastUpdated;
 
-  /// No description provided for @account.
+  /// No description provided for @personalAccount.
   ///
   /// In en, this message translates to:
   /// **'Account'**
-  String get account;
+  String get personalAccount;
 
   /// No description provided for @editProfile.
   ///
@@ -1160,7 +1159,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
-
 }
 
 class _AppLocalizationsDelegate

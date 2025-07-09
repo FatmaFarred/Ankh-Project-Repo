@@ -54,7 +54,6 @@ void main() async {
         BlocProvider(create: (context) => LanguageCubit()),
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => RoleCubit()),
-        BlocProvider(create: (context) => RoleCsCubit()),
       ],
       child: MyApp(),
     ),

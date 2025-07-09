@@ -1,29 +1,31 @@
 import 'dart:io';
 
+import 'package:ankh_project/feauture/authentication/user_cubit/user_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../data/models/authentication_response_dm.dart';
 import '../../data/models/user_model.dart';
 
 @singleton
 class FireBaseUtilies {
-  static Future<MyUser?> readUserFromFireStore(String id) async {
+  static Future<UserDm?> readUserFromFireStore(String id) async {
     var querySnapshot = await createUserCollection().doc(id).get();
     return querySnapshot.data();
   }
 
-  static CollectionReference<MyUser> createUserCollection() {
+  static CollectionReference<UserDm> createUserCollection() {
     return FirebaseFirestore.instance
         .collection(MyUser.collectionName)
-        .withConverter<MyUser>(
+        .withConverter<UserDm>(
           fromFirestore: (snapshot, options) =>
-              MyUser.fromFireStore(snapshot.data()!),
-          toFirestore: (myuser, options) => myuser.toFireStore(),
+              UserDm.fromJson(snapshot.data()!),
+          toFirestore: (myuser, options) => myuser.toJson(),
         );
   }
 
-  static Future<void> addUser(MyUser myuser) {
-    return createUserCollection().doc(myuser.uid).set(myuser);
+  static Future<void> addUser(UserDm myuser) {
+    return createUserCollection().doc(myuser.id).set(myuser);
   }
 
   static Future<void> addDeviceTokenToUser(String uid, String token) async {

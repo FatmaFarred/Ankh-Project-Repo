@@ -149,7 +149,7 @@
   "home": "الرئيسية",
   "requests": "الطلبات",
   "balance": "الرصيد",
-  "account": "الحساب"
+  "account": "الحساب",
 
   "confirmRequest":"تأكيد الطلب",
   "requestDetails": "تفاصيل الطلب",
@@ -157,7 +157,7 @@
   "productInfo": "معلومات المنتج",
   "notAvailable": "غير متوفر",
   "lastUpdated": "آخر تحديث",
-  "account": "الحساب الشخصى",
+  "personalAccount": "الحساب الشخصى",
   "editProfile": "تعديل الملف الشخصي",
   "completed": "مكتمل",
   "rating": "التقييم",

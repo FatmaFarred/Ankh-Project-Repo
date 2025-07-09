@@ -15,7 +15,6 @@ import '../../l10n/app_localizations.dart';
 import 'controller/cubit.dart';
 import 'controller/request_states.dart';
 
-
 class RequestScreen extends StatefulWidget {
   const RequestScreen({super.key});
 
@@ -42,7 +41,6 @@ class _RequestScreenState extends State<RequestScreen>
       filtered = filtered.where((r) =>
       r.productName!.toLowerCase().contains(_searchController.text.toLowerCase()) ||
           r.clientName!.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
-
     }
     return filtered;
   }
@@ -163,7 +161,6 @@ class _RequestScreenState extends State<RequestScreen>
             }
             return const SizedBox.shrink();
           },
-
         ),
       ),
     );
@@ -171,13 +168,12 @@ class _RequestScreenState extends State<RequestScreen>
 }
 
 class CarRequestCard extends StatelessWidget {
-   CarRequestCard({
+  CarRequestCard({
     super.key,
     required this.request,
     this.showLabel = true,
     required this.paddingVertical,
     required this.paddingHorizontal,
-
   });
 
   var  request;
@@ -210,7 +206,6 @@ class CarRequestCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 4.h),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -226,9 +221,9 @@ class CarRequestCard extends StatelessWidget {
                                 ),
                                 label: Text(
                                   getStatusLabel(getRequestStatusFromString(request.status)?? RequestStatus.pending),
-                                     style: getBoldStyle(
+                                  style: getBoldStyle(
                                     fontSize: 10.sp,
-                                       color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
+                                    color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
                                     context: context,
                                   ),
                                   overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
@@ -254,11 +249,11 @@ class CarRequestCard extends StatelessWidget {
                       ),
 
                       Text(
-                          "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
-                              ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
-                              : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
-                              ? formatTime(request.preferredTime!)
-                              : AppLocalizations.of(context)!.noDataFound}",
+                        "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
+                            ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
+                            : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
+                            ? formatTime(request.preferredTime!)
+                            : AppLocalizations.of(context)!.noDataFound}",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
 
                       ),
@@ -294,4 +289,3 @@ String formatTime(String timeStr) {
   } catch (_) {}
   return timeStr; // fallback to original if something goes wrong
 }
-

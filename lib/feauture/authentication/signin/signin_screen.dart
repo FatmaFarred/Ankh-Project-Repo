@@ -51,11 +51,15 @@ class _SignInScreenState extends State<SignInScreen> {
             //title: "error",
             message: state.error.errorMessage);
       } else if (state is SignInSuccess) {
+        print("ttttttttttttttttt${state.response?.user?.deviceTokens}");
+        print("message: ${state.response.message}");
+        print("token: ${state.response.token}");
+        print("user: ${state.response.user}");
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
             context: context,
             //title: "getTranslations(context).success",
-            message: state.response?.message,
+            message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
                     BottomNavBar.bottomNavBarRouteName

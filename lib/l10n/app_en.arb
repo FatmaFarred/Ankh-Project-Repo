@@ -152,14 +152,14 @@
   "home": "Home",
   "requests": "Requests",
   "balance": "Balance",
-  "account": "Account"
+  "account": "Account",
 
   "requestDetails": "Request Details",
   "currrentStatus": "Current Status",
     "productInfo": "Product information",
     "notAvailable": "Not Available",
   "lastUpdated": "Last Updated",
-  "account": "Account",
+  "personalAccount": "Account",
   "editProfile": "Edit Profile",
   "completed": "Completed",
   "rating": "Rating",
