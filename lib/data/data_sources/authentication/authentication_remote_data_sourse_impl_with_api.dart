@@ -9,10 +9,12 @@ import 'package:injectable/injectable.dart';
 
 import '../../../api_service/api_constants.dart';
 import '../../../api_service/api_manager.dart';
+import '../../../api_service/di/di.dart';
 import '../../../api_service/end_points.dart';
 import '../../../api_service/failure/error_handling.dart';
+import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../domain/repositries_and_data_sources/data_sources/remote_data_source/authentication.dart';
-import '../../../feauture/authentication/user_cubit/user_cubit.dart';
+import '../../../feauture/authentication/user_controller/user_cubit.dart';
 import '../../../firebase_service/firestore_service/firestore_service.dart';
 import '../../models/authentication_response_dm.dart';
 import '../../models/register_response_dm.dart';
@@ -41,7 +43,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           "Email": email,
           "Password": password,
           "Phone": phone,
-          "DeviceToken": deviceToken,
+          "deviceToken": deviceToken != null ? [deviceToken] : [],
         });
 
         var response = await apiManager.postData(
@@ -68,6 +70,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
             deviceTokens: deviceToken != null ? [deviceToken] : [],
             roles: registerResponse.user?.roles
           );
+
           await FireBaseUtilies.addUser(myUser);
 
           // Return success
@@ -100,10 +103,24 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           data: {
             "email": email,
             "password": password,
-            "deviceToken": deviceToken,
+            "deviceToken": deviceToken != null ? [deviceToken] : [],
           },);
         var loginResponse = AuthenticationResponseDm.fromJson(response.data);
+
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          UserDm myUser = UserDm(
+              id: loginResponse.user?.id,
+              fullName: loginResponse.user?.fullName,
+              email: email,
+              phoneNumber:  loginResponse.user?.phoneNumber,
+              deviceTokens: deviceToken != null ? [deviceToken] : [],
+              roles: loginResponse.user?.roles
+          );
+          final userCubit = getIt<UserCubit>();
+          userCubit.setUser(myUser);
+          print("User logged in: ${myUser.fullName}");
+          await SharedPrefsManager.saveData(key: 'user_token', value: loginResponse.token);
+
 
           return right(loginResponse);
         } else {

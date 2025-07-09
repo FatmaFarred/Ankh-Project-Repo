@@ -13,7 +13,8 @@ class AuthenticationResponseDm extends AuthenticationResponseEntity {
   AuthenticationResponseDm.fromJson(dynamic json) {
     message = json['message'];
     token = json['token'];
-    user = json['user'] != null ? UserDm.fromJson(json['user']) : null;
+    final userJson = json['user'] ?? json['userInfo'];
+    user = userJson != null ? UserDm.fromJson(userJson) : null;
   }
 
 

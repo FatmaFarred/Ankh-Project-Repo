@@ -36,7 +36,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
       child: RequestScreen(),
     ),
-    Center(child: Text("Balance Page")),
 
     BalanceScreen(),
 
@@ -46,7 +45,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,

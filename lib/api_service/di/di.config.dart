@@ -77,6 +77,7 @@ import '../../feauture/authentication/register/controller/register_cubit.dart'
     as _i257;
 import '../../feauture/authentication/signin/controller/sigin_cubit.dart'
     as _i938;
+import '../../feauture/authentication/user_controller/user_cubit.dart' as _i354;
 import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart'
     as _i495;
 import '../../feauture/myrequest/controller/cubit.dart' as _i789;
@@ -108,6 +109,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1069.ApiManager>(() => _i1069.ApiManager());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
     gh.singleton<_i470.LocalNotification>(() => _i470.LocalNotification());
+    gh.singleton<_i354.UserCubit>(() => _i354.UserCubit());
     gh.factory<_i460.CsRolesRemoteDataSource>(
         () => _i1067.CsRolesRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i822.ForgrtPasswordRemoteDataSource>(() =>
