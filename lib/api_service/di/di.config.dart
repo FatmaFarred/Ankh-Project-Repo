@@ -19,6 +19,8 @@ import '../../data/data_sources/forget_reset_password_remote_data_sourse/forget_
     as _i767;
 import '../../data/data_sources/forget_reset_password_remote_data_sourse/reset_password_data_sourse_impl.dart'
     as _i1065;
+import '../../data/data_sources/marketer_products_remote_data_source_impl.dart'
+    as _i843;
 import '../../data/data_sources/marketer_requsts_for_inspection_remote_data_source_impl.dart'
     as _i976;
 import '../../data/data_sources/push_notification_data_source_/push_notification_data_sorce_impl.dart'
@@ -27,6 +29,7 @@ import '../../data/repositries/authentication/authentication%20_repo_impl.dart'
     as _i972;
 import '../../data/repositries/cs_roles_repositry_impl.dart' as _i551;
 import '../../data/repositries/forget_password_repositry_impl.dart' as _i423;
+import '../../data/repositries/marketer_products_repositry_impl.dart' as _i742;
 import '../../data/repositries/marketer_requsts_for_inspection_repositry_impl.dart'
     as _i942;
 import '../../data/repositries/push_notification_repositry/push_notification_repositry_impl.dart'
@@ -38,6 +41,8 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
     as _i460;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/forget_reset_password_remote_data_sourse.dart'
     as _i822;
+import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_products_remote_data_source.dart'
+    as _i344;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_requsts_for_inspection_remote_data_sourse.dart'
     as _i44;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/push_notification_data_sourse.dart'
@@ -50,6 +55,8 @@ import '../../domain/repositries_and_data_sources/repositries/cs_roles_repositry
     as _i203;
 import '../../domain/repositries_and_data_sources/repositries/forget_reset_password_repositry.dart'
     as _i255;
+import '../../domain/repositries_and_data_sources/repositries/marketer_products_repositry.dart'
+    as _i348;
 import '../../domain/repositries_and_data_sources/repositries/marketer_requsts_for_inspection_repositry.dart'
     as _i1072;
 import '../../domain/repositries_and_data_sources/repositries/push%20_notification_%20repositry.dart'
@@ -63,6 +70,7 @@ import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usec
     as _i458;
 import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_case.dart'
     as _i416;
+import '../../domain/use_cases/marketer_products_use_case.dart' as _i527;
 import '../../domain/use_cases/marketer_request_inspection_details_usecase.dart'
     as _i805;
 import '../../domain/use_cases/marketer_requsts_for_inspection_usecase.dart'
@@ -80,6 +88,9 @@ import '../../feauture/authentication/signin/controller/sigin_cubit.dart'
 import '../../feauture/authentication/user_controller/user_cubit.dart' as _i354;
 import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart'
     as _i495;
+
+import '../../feauture/marketer_products/controller/marketer_product_cubit.dart'
+    as _i70;
 import '../../feauture/myrequest/controller/cubit.dart' as _i789;
 import '../../feauture/myrequest/my_request_details/details_controller/details_request_cubit.dart'
     as _i214;
@@ -117,6 +128,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
         _i758.AuthenticationRemoteDataSourceImplWithApi(
             gh<_i1069.ApiManager>()));
+    gh.factory<_i344.MarketerProductsRemoteDataSource>(() =>
+        _i843.MarketerProductsRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
+    gh.factory<_i348.MarketerProductsRepositry>(() =>
+        _i742.MarketerProductsRepositryImpl(
+            gh<_i344.MarketerProductsRemoteDataSource>()));
     gh.factory<_i223.ResetPasswordRemoteDataSourse>(
         () => _i1065.ResetPasswordDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i44.MarketerRequestsForInspectionRemoteDataSource>(() =>
@@ -142,10 +158,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i749.MarketerRequestsForInspectionUseCase>(() =>
         _i749.MarketerRequestsForInspectionUseCase(
             gh<_i1072.MarketerRequestsForInspectionRepositry>()));
+    gh.factory<_i527.MarketerProductsUseCase>(() =>
+        _i527.MarketerProductsUseCase(gh<_i348.MarketerProductsRepositry>()));
     gh.factory<_i456.RegisterUseCase>(
         () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i96.SignInUseCase>(
         () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i70.MarketerProductCubit>(
+        () => _i70.MarketerProductCubit(gh<_i527.MarketerProductsUseCase>()));
     gh.factory<_i789.MarketerRequestCubit>(() => _i789.MarketerRequestCubit(
         gh<_i749.MarketerRequestsForInspectionUseCase>()));
     gh.factory<_i255.ForgetPasswordRepositry>(() =>

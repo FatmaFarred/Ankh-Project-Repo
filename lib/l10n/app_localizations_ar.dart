@@ -480,7 +480,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'الحساب';
+  String get account => 'الحساب الشخصى';
 
   @override
   String get requestDetails => 'تفاصيل الطلب';
@@ -501,6 +501,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get personalAccount => 'الحساب الشخصى';
 
   @override
+
   String get editProfile => 'تعديل الملف الشخصي';
 
   @override
@@ -556,4 +557,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+
+  @override
+  String get myProducts => 'منتجاتي';
 }
