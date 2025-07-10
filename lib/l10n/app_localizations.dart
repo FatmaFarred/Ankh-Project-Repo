@@ -1040,6 +1040,13 @@ abstract class AppLocalizations {
   /// **'Last Updated'**
   String get lastUpdated;
 
+  /// No description provided for @personalAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get personalAccount;
+
+
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:

@@ -88,9 +88,10 @@ class ChooseRoleScreen extends StatelessWidget {
                   }
 
                   if (selectedRole == UserRole.customerService) {
-                    Navigator.of(context).pushNamed(
-                      ChooseCsTypeScreen.chooseCsTypeScreenRouteName,
-                      arguments: selectedRole,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ChooseCsTypeScreen.withProvider(),
+                      ),
                     );
                   } else {
                     Navigator.of(context).pushNamed(

@@ -500,6 +500,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lastUpdated => 'Last Updated';
 
   @override
+  String get personalAccount => 'Account';
+
+  @override
+
   String get editProfile => 'Edit Profile';
 
   @override
@@ -555,6 +559,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
 
   @override
   String get myProducts => 'My Products';

@@ -10,6 +10,8 @@ abstract class ColorManager {
   static Color balanceColor = const Color(0xFF2B3728);
   static Color productContainerGrey = const Color(0xffE5E7EB);
 
+  static Color lighterColor = const Color(0xFF2B7728);
+
   static Color darkestGrey = const Color(0xFF414141);
   static Color iconGrey = const Color(0xFFF5F5F5);
   static Color darkGrey = const Color(0xff777777);

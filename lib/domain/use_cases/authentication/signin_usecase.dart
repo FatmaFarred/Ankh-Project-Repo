@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../api_service/failure/error_handling.dart';
+import '../../entities/authentication_response_entity.dart';
 import '../../entities/register_response_entity.dart';
 import '../../repositries_and_data_sources/repositries/authentication_repositry.dart';
 @injectable
@@ -12,7 +13,7 @@ class SignInUseCase {
 
   SignInUseCase(this.authRepository);
 
-  Future <Either<Failure,LoginResponseEntity>>execute(String email, String password) {
+  Future <Either<Failure,AuthenticationResponseEntity>>execute(String email, String password) {
     return authRepository.signIn(email, password);
   }
 }

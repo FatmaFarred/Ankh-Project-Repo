@@ -498,6 +498,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get lastUpdated => 'آخر تحديث';
 
   @override
+  String get personalAccount => 'الحساب الشخصى';
+
+  @override
+
   String get editProfile => 'تعديل الملف الشخصي';
 
   @override
@@ -553,6 +557,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
 
   @override
   String get myProducts => 'منتجاتي';

@@ -13,6 +13,8 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/data_sources/authentication/authentication_remote_data_sourse_impl_with_api.dart'
     as _i758;
+import '../../data/data_sources/cs_roles_remote_data_source_impl.dart'
+    as _i1067;
 import '../../data/data_sources/forget_reset_password_remote_data_sourse/forget_reset_password_remote_data_Sourse_impl.dart'
     as _i767;
 import '../../data/data_sources/forget_reset_password_remote_data_sourse/reset_password_data_sourse_impl.dart'
@@ -25,6 +27,7 @@ import '../../data/data_sources/push_notification_data_source_/push_notification
     as _i71;
 import '../../data/repositries/authentication/authentication%20_repo_impl.dart'
     as _i972;
+import '../../data/repositries/cs_roles_repositry_impl.dart' as _i551;
 import '../../data/repositries/forget_password_repositry_impl.dart' as _i423;
 import '../../data/repositries/marketer_products_repositry_impl.dart' as _i742;
 import '../../data/repositries/marketer_requsts_for_inspection_repositry_impl.dart'
@@ -34,6 +37,8 @@ import '../../data/repositries/push_notification_repositry/push_notification_rep
 import '../../data/repositries/reset_passwors_repositry_impl.dart' as _i584;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/authentication.dart'
     as _i430;
+import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/cs_roles_remote_data_source.dart'
+    as _i460;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/forget_reset_password_remote_data_sourse.dart'
     as _i822;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_products_remote_data_source.dart'
@@ -46,6 +51,8 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
     as _i223;
 import '../../domain/repositries_and_data_sources/repositries/authentication_repositry.dart'
     as _i817;
+import '../../domain/repositries_and_data_sources/repositries/cs_roles_repositry.dart'
+    as _i203;
 import '../../domain/repositries_and_data_sources/repositries/forget_reset_password_repositry.dart'
     as _i255;
 import '../../domain/repositries_and_data_sources/repositries/marketer_products_repositry.dart'
@@ -58,6 +65,7 @@ import '../../domain/repositries_and_data_sources/repositries/reset_password_rep
     as _i234;
 import '../../domain/use_cases/authentication/register_usecase.dart' as _i456;
 import '../../domain/use_cases/authentication/signin_usecase.dart' as _i96;
+import '../../domain/use_cases/cs_roles_usecase.dart' as _i941;
 import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usecase.dart'
     as _i458;
 import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_case.dart'
@@ -77,6 +85,10 @@ import '../../feauture/authentication/register/controller/register_cubit.dart'
     as _i257;
 import '../../feauture/authentication/signin/controller/sigin_cubit.dart'
     as _i938;
+import '../../feauture/authentication/user_controller/user_cubit.dart' as _i354;
+import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart'
+    as _i495;
+
 import '../../feauture/marketer_products/controller/marketer_product_cubit.dart'
     as _i70;
 import '../../feauture/myrequest/controller/cubit.dart' as _i789;
@@ -108,6 +120,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1069.ApiManager>(() => _i1069.ApiManager());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
     gh.singleton<_i470.LocalNotification>(() => _i470.LocalNotification());
+    gh.singleton<_i354.UserCubit>(() => _i354.UserCubit());
+    gh.factory<_i460.CsRolesRemoteDataSource>(
+        () => _i1067.CsRolesRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i822.ForgrtPasswordRemoteDataSource>(() =>
         _i767.ForgetResetPasswordRemoteDataSourseImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
@@ -129,6 +144,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i817.AuthenticationRepositry>(() =>
         _i972.AuthenticationRepositryImpl(
             gh<_i430.AuthenticationRemoteDataSource>()));
+    gh.factory<_i203.CsRolesRepositry>(
+        () => _i551.CsRolesRepositryImpl(gh<_i460.CsRolesRemoteDataSource>()));
     gh.factory<_i234.ResetPasswordRepositry>(() =>
         _i584.ResetPasswordsRepositryImpl(
             gh<_i223.ResetPasswordRemoteDataSourse>()));
@@ -168,6 +185,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i805.MarketerRequestsInspectionDetailsUseCase>()));
     gh.factory<_i458.ForgetPasswordUseCase>(
         () => _i458.ForgetPasswordUseCase(gh<_i255.ForgetPasswordRepositry>()));
+    gh.factory<_i941.CsRolesUseCase>(
+        () => _i941.CsRolesUseCase(gh<_i203.CsRolesRepositry>()));
     gh.factory<_i172.PushNotificationUseCase>(() =>
         _i172.PushNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i809.ResetPasswordCubit>(
@@ -176,6 +195,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i155.ForgetPassworsCubit(gh<_i458.ForgetPasswordUseCase>()));
     gh.factory<_i901.PushNotificationCubit>(
         () => _i901.PushNotificationCubit(gh<_i172.PushNotificationUseCase>()));
+    gh.factory<_i495.RoleCsCubit>(
+        () => _i495.RoleCsCubit(csRolesUseCase: gh<_i941.CsRolesUseCase>()));
     return this;
   }
 }
