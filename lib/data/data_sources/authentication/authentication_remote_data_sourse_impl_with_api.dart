@@ -9,11 +9,14 @@ import 'package:injectable/injectable.dart';
 
 import '../../../api_service/api_constants.dart';
 import '../../../api_service/api_manager.dart';
+import '../../../api_service/di/di.dart';
 import '../../../api_service/end_points.dart';
 import '../../../api_service/failure/error_handling.dart';
+import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../domain/repositries_and_data_sources/data_sources/remote_data_source/authentication.dart';
-import '../../../feauture/authentication/user_cubit/user_cubit.dart';
+import '../../../feauture/authentication/user_controller/user_cubit.dart';
 import '../../../firebase_service/firestore_service/firestore_service.dart';
+import '../../models/authentication_response_dm.dart';
 import '../../models/register_response_dm.dart';
 import '../../models/user_model.dart';
 
@@ -24,7 +27,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
   AuthenticationRemoteDataSourceImplWithApi(this.apiManager);
 
   @override
-  Future<Either<Failure, RegisterResponseDm>> register(String name,
+  Future<Either<Failure, AuthenticationResponseDm>> register(String name,
       String email, String password, String phone) async {
     try {
       final List<ConnectivityResult> connectivityResult =
@@ -32,11 +35,15 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
 
       if (connectivityResult.contains(ConnectivityResult.wifi) ||
           connectivityResult.contains(ConnectivityResult.mobile)) {
+        final deviceToken = await FirebaseMessaging.instance.getToken();
+
+
         FormData formData = FormData.fromMap({
           "Name": name,
           "Email": email,
           "Password": password,
           "Phone": phone,
+          "deviceToken": deviceToken != null ? [deviceToken] : [],
         });
 
         var response = await apiManager.postData(
@@ -49,23 +56,21 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           print(response.data);
         }
 
-        var registerResponse = RegisterResponseDm.fromJson(response.data);
+        var registerResponse = AuthenticationResponseDm.fromJson(response.data);
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
-          // Register in Firebase Auth
-          final credential = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(email: email, password: password);
 
-          // Get device token
-          final deviceToken = await FirebaseMessaging.instance.getToken();
 
           // Save user to Firestore
-          MyUser myUser = MyUser(
-            uid: credential.user?.uid ?? "",
-            name: name,
+          UserDm myUser = UserDm(
+            id: registerResponse.user?.id,
+            fullName: name,
             email: email,
+            phoneNumber: phone,
             deviceTokens: deviceToken != null ? [deviceToken] : [],
+            roles: registerResponse.user?.roles
           );
+
           await FireBaseUtilies.addUser(myUser);
 
           // Return success
@@ -83,33 +88,40 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
   }
 
   @override
-  Future<Either<Failure, LoginResponseDm>> signIn(String email,
+  Future<Either<Failure, AuthenticationResponseDm>> signIn(String email,
       String password) async {
     try {
       final List<ConnectivityResult> connectivityResult = await Connectivity()
           .checkConnectivity();
       if (connectivityResult.contains(ConnectivityResult.wifi) ||
           connectivityResult.contains(ConnectivityResult.mobile)) {
+        final deviceToken = await FirebaseMessaging.instance.getToken();
+
+
         var response = await apiManager.postData(endPoint: EndPoints.loginEndPoint,
           url: ApiConstant.baseUrl,
           data: {
             "email": email,
-            "password": password
+            "password": password,
+            "deviceToken": deviceToken != null ? [deviceToken] : [],
           },);
-        var loginResponse = LoginResponseDm.fromJson(response.data);
+        var loginResponse = AuthenticationResponseDm.fromJson(response.data);
+
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
-          final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: email,
-            password: password,
+          UserDm myUser = UserDm(
+              id: loginResponse.user?.id,
+              fullName: loginResponse.user?.fullName,
+              email: email,
+              phoneNumber:  loginResponse.user?.phoneNumber,
+              deviceTokens: deviceToken != null ? [deviceToken] : [],
+              roles: loginResponse.user?.roles
           );
-          final deviceToken = await FirebaseMessaging.instance.getToken();
-          await FireBaseUtilies.addDeviceTokenToUser(
-            credential.user?.uid ?? "",
-            deviceToken ?? "",
-          );
-          MyUser? myUser = await FireBaseUtilies.readUserFromFireStore(
-            credential.user?.uid ?? "",
-          );
+          final userCubit = getIt<UserCubit>();
+          userCubit.setUser(myUser);
+          print("User logged in: ${myUser.fullName}");
+          await SharedPrefsManager.saveData(key: 'user_token', value: loginResponse.token);
+
+
           return right(loginResponse);
         } else {
           return left(ServerError(errorMessage: loginResponse.message));

@@ -291,10 +291,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAll => 'View All';
 
   @override
+  String get noDataFound => 'No Data Found';
+
+  @override
   String get popularNewCars => 'Popular New Cars';
 
   @override
   String get recommendedCars => 'Recommended Cars';
+
+  @override
+  String get searchRequest => 'Search Request';
+
+  @override
+  String get myRequests => 'My Requests';
+
+  @override
+  String get price => 'Price';
 
   @override
   String get details => 'Details';
@@ -318,9 +330,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get images => 'Images';
 
   @override
-  String get requestInspection => 'Request Inspection';
-
-  @override
   String get created => 'Created';
 
   @override
@@ -337,4 +346,216 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get engineType => 'Engine Type';
+
+  @override
+  String get whatAreYouLookingFor => 'What are you looking for?';
+
+  @override
+  String get clientName => 'Client Name';
+
+  @override
+  String get enterClientName => 'Enter Client Name';
+
+  @override
+  String get enterPhoneNumber => 'Enter Phone Number';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get enterAddress => 'Enter Address';
+
+  @override
+  String get preferredDate => 'Preferred Date';
+
+  @override
+  String get datePlaceholder => 'MM/DD/YYYY';
+
+  @override
+  String get preferredTime => 'Preferred Time';
+
+  @override
+  String get selectTimeSlot => 'Select a time slot';
+
+  @override
+  String get requestInspection => 'Request Inspection';
+
+  @override
+  String get requestSummary => 'Request Summary';
+
+  @override
+  String get requestSummaryNote =>
+      'Please review the details below before submitting your inspection request.';
+
+  @override
+  String get productName => 'Product Name';
+
+  @override
+  String get clientInformation => 'Client Information';
+
+  @override
+  String get inspectionSchedule => 'Inspection Schedule';
+
+  @override
+  String get statusTracker => 'Status Tracker';
+
+  @override
+  String get submitRequest => 'Submit Request';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get delayed => 'Delayed';
+
+  @override
+  String get notResponding => 'Not Responding';
+
+  @override
+  String get requestSubmitted => 'Request Submitted';
+
+  @override
+  String get requestSubmittedSuccessfully => 'Request Submitted Successfully!';
+
+  @override
+  String get requestSubmittedNote =>
+      'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.';
+
+  @override
+  String get goToMyRequests => 'Go to My Requests';
+
+  @override
+  String get saveInfoForLater => 'Save info for later';
+
+  @override
+  String get confirmRequest => 'Confirm Request';
+
+  @override
+  String get views => 'Views';
+
+  @override
+  String get addComment => 'Add Comment';
+
+  @override
+  String get comments => 'Comments';
+
+  @override
+  String get post => 'Post';
+
+  @override
+  String get haveADeal => 'Have a deal with owner';
+
+  @override
+  String get myBalance => 'My Balance';
+
+  @override
+  String get availableBalance => 'Available Balance';
+
+  @override
+  String get totalPoints => 'Total Points';
+
+  @override
+  String get perPoint => 'Per Point';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get paid => 'Paid';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get transactionHistory => 'Transaction History';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get requests => 'Requests';
+
+  @override
+  String get balance => 'Balance';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get requestDetails => 'Request Details';
+
+  @override
+  String get currrentStatus => 'Current Status';
+
+  @override
+  String get productInfo => 'Product information';
+
+  @override
+  String get notAvailable => 'Not Available';
+
+  @override
+  String get lastUpdated => 'Last Updated';
+
+  @override
+  String get personalAccount => 'Account';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get response => 'Response';
+
+  @override
+  String get manageAccount => 'Manage Account';
+
+  @override
+  String get personalDetails => 'Personal Details';
+
+  @override
+  String get securitySettings => 'Security Settings';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get paymentAndWallets => 'Payment & Wallet';
+
+  @override
+  String get walletAndCommissions => 'Wallet & Commissions';
+
+  @override
+  String get paymentMethods => 'Payment Methods';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get devicePreferences => 'Device Preferences';
+
+  @override
+  String get myFavorites => 'My Favorites';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get helpAndSupport => 'Help & Support';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get saftyCenter => 'Safety Center';
+
+  @override
+  String get logout => 'Logout';
 }

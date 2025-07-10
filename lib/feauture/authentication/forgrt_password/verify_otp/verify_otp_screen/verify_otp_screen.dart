@@ -4,9 +4,14 @@ import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../set_new_password/set_new_password_screen.dart';
+import '../../../../../api_service/di/di.dart';
+import '../../../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import '../../forget_password/controller/forget_passwors_cubit.dart';
+import '../../forget_password/controller/forget_passwors_states.dart';
+import '../../set_new_password/reset_password.dart';
 
 class OtpVerficationScreen extends StatefulWidget {
   const OtpVerficationScreen({super.key});
@@ -17,6 +22,8 @@ class OtpVerficationScreen extends StatefulWidget {
 }
 
 class _OtpVerficationScreenState extends State<OtpVerficationScreen> {
+  ForgetPassworsCubit forgetPassworsCubit = getIt<ForgetPassworsCubit>();
+
   final List<TextEditingController> _codeControllers =
   List.generate(6, (_) => TextEditingController());
   Timer? _timer;
@@ -62,14 +69,56 @@ class _OtpVerficationScreenState extends State<OtpVerficationScreen> {
     Navigator.of(context).pushNamed(ResetPasswordScreen.resetPasswordScreenRouteName);
   }
 
-  void _onResend() {
+  void _onResend(email)async {
+
     // TODO: Implement resend logic
     _startTimer();
+
+
+  }
+  String maskEmail(String email) {
+    final parts = email.split('@');
+    if (parts.length != 2 || parts[0].length < 2) return email;
+    final first = parts[0][0];
+    final masked = '*' * (parts[0].length - 1);
+    return '$first$masked@${parts[1]}';
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final String? email = ModalRoute.of(context)!.settings.arguments as String?;
+
+    return
+      BlocListener<ForgetPassworsCubit, ForgetPasswordState>(
+        bloc: forgetPassworsCubit,
+        listener: (context, state) {
+      if (state is ForgetPasswordLoading) {
+        CustomDialog.loading(
+            context: context,
+            message: "loading",
+            cancelable: false);
+      } else if (state is ForgetPasswordFailure) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveButton(
+            context: context,
+            title: "error",
+            message: state.errorMessage);
+      } else if (state is ForgetPasswordSuccess) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveButton(
+            context: context,
+            title: "getTranslations(context).success",
+            message: state.message,
+            positiveOnClick: () =>Navigator.of(context).pop()
+
+                );
+      }
+    },
+
+
+
+    child:
+      Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -112,34 +161,16 @@ class _OtpVerficationScreenState extends State<OtpVerficationScreen> {
                     ?.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 40.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(6, (index) {
-                  return Container(
-                    width: 40.w,
-                    margin: EdgeInsets.symmetric(horizontal: 4.w),
-                    child: TextField(
-                      controller: _codeControllers[index],
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      decoration: InputDecoration(
-                        counterText: "",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        if (value.isNotEmpty && index < 5) {
-                          FocusScope.of(context).nextFocus();
-                        }
-                      },
-                    ),
-                  );
-                }),
+              Text(
+                email != null ? maskEmail(email) : "",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 15.h),
+
+              SizedBox(height: 40.h),
               Text(AppLocalizations.of(context)!.codeWasSentTo,style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -148,7 +179,13 @@ class _OtpVerficationScreenState extends State<OtpVerficationScreen> {
               _canResend
                   ?
               TextButton(
-                onPressed: _onResend,
+                onPressed:(){
+                  if (email != null) {
+                    forgetPassworsCubit.emailController.text = email!;
+                    forgetPassworsCubit.forgetPassword();
+                  }
+                },
+
                 child: Text(
                   AppLocalizations.of(context)!.resendCode,
                   style: TextStyle(
@@ -182,6 +219,7 @@ class _OtpVerficationScreenState extends State<OtpVerficationScreen> {
           ),
         ),
       ),
+      )
     );
   }
 }

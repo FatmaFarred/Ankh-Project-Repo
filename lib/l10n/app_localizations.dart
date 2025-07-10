@@ -626,6 +626,12 @@ abstract class AppLocalizations {
   /// **'View All'**
   String get viewAll;
 
+  /// No description provided for @noDataFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data Found'**
+  String get noDataFound;
+
   /// No description provided for @popularNewCars.
   ///
   /// In en, this message translates to:
@@ -637,6 +643,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recommended Cars'**
   String get recommendedCars;
+
+  /// No description provided for @searchRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Request'**
+  String get searchRequest;
+
+  /// No description provided for @myRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Requests'**
+  String get myRequests;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
 
   /// No description provided for @details.
   ///
@@ -680,12 +704,6 @@ abstract class AppLocalizations {
   /// **'Images'**
   String get images;
 
-  /// No description provided for @requestInspection.
-  ///
-  /// In en, this message translates to:
-  /// **'Request Inspection'**
-  String get requestInspection;
-
   /// No description provided for @created.
   ///
   /// In en, this message translates to:
@@ -721,6 +739,426 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Engine Type'**
   String get engineType;
+
+  /// No description provided for @whatAreYouLookingFor.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you looking for?'**
+  String get whatAreYouLookingFor;
+
+  /// No description provided for @clientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Name'**
+  String get clientName;
+
+  /// No description provided for @enterClientName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Client Name'**
+  String get enterClientName;
+
+  /// No description provided for @enterPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Phone Number'**
+  String get enterPhoneNumber;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @enterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Address'**
+  String get enterAddress;
+
+  /// No description provided for @preferredDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Date'**
+  String get preferredDate;
+
+  /// No description provided for @datePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'MM/DD/YYYY'**
+  String get datePlaceholder;
+
+  /// No description provided for @preferredTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Time'**
+  String get preferredTime;
+
+  /// No description provided for @selectTimeSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a time slot'**
+  String get selectTimeSlot;
+
+  /// No description provided for @requestInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Inspection'**
+  String get requestInspection;
+
+  /// No description provided for @requestSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Summary'**
+  String get requestSummary;
+
+  /// No description provided for @requestSummaryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review the details below before submitting your inspection request.'**
+  String get requestSummaryNote;
+
+  /// No description provided for @productName.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Name'**
+  String get productName;
+
+  /// No description provided for @clientInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Information'**
+  String get clientInformation;
+
+  /// No description provided for @inspectionSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Schedule'**
+  String get inspectionSchedule;
+
+  /// No description provided for @statusTracker.
+  ///
+  /// In en, this message translates to:
+  /// **'Status Tracker'**
+  String get statusTracker;
+
+  /// No description provided for @submitRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Request'**
+  String get submitRequest;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @delayed.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed'**
+  String get delayed;
+
+  /// No description provided for @notResponding.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Responding'**
+  String get notResponding;
+
+  /// No description provided for @requestSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Submitted'**
+  String get requestSubmitted;
+
+  /// No description provided for @requestSubmittedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Submitted Successfully!'**
+  String get requestSubmittedSuccessfully;
+
+  /// No description provided for @requestSubmittedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.'**
+  String get requestSubmittedNote;
+
+  /// No description provided for @goToMyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to My Requests'**
+  String get goToMyRequests;
+
+  /// No description provided for @saveInfoForLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Save info for later'**
+  String get saveInfoForLater;
+
+  /// No description provided for @confirmRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Request'**
+  String get confirmRequest;
+
+  /// No description provided for @views.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get views;
+
+  /// No description provided for @addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Comment'**
+  String get addComment;
+
+  /// No description provided for @comments.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get comments;
+
+  /// No description provided for @post.
+  ///
+  /// In en, this message translates to:
+  /// **'Post'**
+  String get post;
+
+  /// No description provided for @haveADeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a deal with owner'**
+  String get haveADeal;
+
+  /// No description provided for @myBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'My Balance'**
+  String get myBalance;
+
+  /// No description provided for @availableBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get availableBalance;
+
+  /// No description provided for @totalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get totalPoints;
+
+  /// No description provided for @perPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Per Point'**
+  String get perPoint;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @paid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get paid;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @transactionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction History'**
+  String get transactionHistory;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @requests.
+  ///
+  /// In en, this message translates to:
+  /// **'Requests'**
+  String get requests;
+
+  /// No description provided for @balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get balance;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @requestDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Details'**
+  String get requestDetails;
+
+  /// No description provided for @currrentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Status'**
+  String get currrentStatus;
+
+  /// No description provided for @productInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Product information'**
+  String get productInfo;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Available'**
+  String get notAvailable;
+
+  /// No description provided for @lastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Updated'**
+  String get lastUpdated;
+
+  /// No description provided for @personalAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get personalAccount;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @response.
+  ///
+  /// In en, this message translates to:
+  /// **'Response'**
+  String get response;
+
+  /// No description provided for @manageAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Account'**
+  String get manageAccount;
+
+  /// No description provided for @personalDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Details'**
+  String get personalDetails;
+
+  /// No description provided for @securitySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Security Settings'**
+  String get securitySettings;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @paymentAndWallets.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment & Wallet'**
+  String get paymentAndWallets;
+
+  /// No description provided for @walletAndCommissions.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet & Commissions'**
+  String get walletAndCommissions;
+
+  /// No description provided for @paymentMethods.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Methods'**
+  String get paymentMethods;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @devicePreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Device Preferences'**
+  String get devicePreferences;
+
+  /// No description provided for @myFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorites'**
+  String get myFavorites;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @helpAndSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get helpAndSupport;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
+
+  /// No description provided for @saftyCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Center'**
+  String get saftyCenter;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 }
 
 class _AppLocalizationsDelegate

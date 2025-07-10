@@ -1,4 +1,5 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +17,7 @@ class CustomSearchBar extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
           prefixIcon:  Icon(Icons.search, color: ColorManager.hintColor),
-          hintText: 'What are you looking for?',
+          hintText: AppLocalizations.of(context)!.whatAreYouLookingFor,
           hintStyle:  GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w400,color: ColorManager.hintColor),
           border: InputBorder.none,
           contentPadding:  REdgeInsets.symmetric(vertical: 14),

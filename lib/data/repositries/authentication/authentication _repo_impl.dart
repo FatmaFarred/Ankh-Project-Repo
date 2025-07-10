@@ -8,6 +8,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../api_service/failure/error_handling.dart';
+import '../../../domain/entities/authentication_response_entity.dart';
 import '../../../domain/repositries_and_data_sources/repositries/authentication_repositry.dart';
 import '../../models/login_response_dm.dart';
 import '../../models/user_model.dart';
@@ -17,7 +18,7 @@ class AuthenticationRepositryImpl implements AuthenticationRepositry {
   AuthenticationRemoteDataSource authRemoteDataSource ;
   AuthenticationRepositryImpl(this.authRemoteDataSource);
 
-  Future <Either<Failure,RegisterResponseEntity>> register (String name , String email,String password ,String phone)async{
+  Future <Either<Failure,AuthenticationResponseEntity>> register (String name , String email,String password ,String phone)async{
 
     var either = await authRemoteDataSource.register(
     name, email, password,  phone);
@@ -25,7 +26,7 @@ class AuthenticationRepositryImpl implements AuthenticationRepositry {
     }
 
   @override
-  Future<Either<Failure, LoginResponseEntity>> signIn(String email, String password) async{
+  Future<Either<Failure, AuthenticationResponseEntity>> signIn(String email, String password) async{
     var either = await authRemoteDataSource.signIn(
         email, password);
     return either.fold((error) => left(error), (response) => right(response));

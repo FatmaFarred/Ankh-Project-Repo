@@ -13,10 +13,10 @@ import '../../../../domain/use_cases/authentication/register_usecase.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase registerUseCase;
 
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController(text: "fares");
+  final TextEditingController phoneController = TextEditingController(text:"01277165514");
+  final TextEditingController emailController = TextEditingController(text:"faresfaread34@gmail.com");
+  final TextEditingController passwordController = TextEditingController(text:"Fares1234@");
 
   bool isPasswordVisible = false;
 

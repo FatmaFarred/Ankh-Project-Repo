@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'عميل ';
+  String get client => 'Client';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -289,10 +289,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewAll => 'عرض الكل';
 
   @override
+  String get noDataFound => 'لا توجد بيانات';
+
+  @override
   String get popularNewCars => 'السيارات الجديدة الشائعة';
 
   @override
   String get recommendedCars => 'السيارات الموصى بها';
+
+  @override
+  String get searchRequest => 'البحث عن طلب ';
+
+  @override
+  String get myRequests => 'طلباتي';
+
+  @override
+  String get price => 'السعر';
 
   @override
   String get details => 'التفاصيل';
@@ -316,9 +328,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get images => 'الصور';
 
   @override
-  String get requestInspection => 'طلب فحص';
-
-  @override
   String get created => 'تم الإنشاء';
 
   @override
@@ -335,4 +344,216 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get engineType => 'نوع المحرك';
+
+  @override
+  String get whatAreYouLookingFor => 'ما الذي تبحث عنه؟';
+
+  @override
+  String get clientName => 'اسم العميل';
+
+  @override
+  String get enterClientName => 'أدخل اسم العميل';
+
+  @override
+  String get enterPhoneNumber => 'أدخل رقم الهاتف';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get enterAddress => 'أدخل العنوان';
+
+  @override
+  String get preferredDate => 'التاريخ المفضل';
+
+  @override
+  String get datePlaceholder => 'يوم/شهر/سنة';
+
+  @override
+  String get preferredTime => 'الوقت المفضل';
+
+  @override
+  String get selectTimeSlot => 'اختر وقتًا';
+
+  @override
+  String get requestInspection => 'طلب فحص';
+
+  @override
+  String get requestSummary => 'ملخص الطلب';
+
+  @override
+  String get requestSummaryNote =>
+      'يرجى مراجعة التفاصيل أدناه قبل إرسال طلب الفحص الخاص بك.';
+
+  @override
+  String get productName => 'اسم المنتج';
+
+  @override
+  String get clientInformation => 'معلومات العميل';
+
+  @override
+  String get inspectionSchedule => 'جدول الفحص';
+
+  @override
+  String get statusTracker => 'تتبع الحالة';
+
+  @override
+  String get submitRequest => 'إرسال الطلب';
+
+  @override
+  String get pending => 'قيد الانتظار';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get delayed => 'متأخر';
+
+  @override
+  String get notResponding => 'لم يتم الرد';
+
+  @override
+  String get requestSubmitted => 'تم إرسال الطلب';
+
+  @override
+  String get requestSubmittedSuccessfully => 'تم إرسال الطلب بنجاح!';
+
+  @override
+  String get requestSubmittedNote =>
+      'تم إرسال طلب الفحص الخاص بك إلى النظام. سنخطرك بمجرد معالجته. يمكنك تتبع حالة طلبك في أي وقت.';
+
+  @override
+  String get goToMyRequests => 'الانتقال إلى طلباتي';
+
+  @override
+  String get saveInfoForLater => 'حفظ المعلومات لاحقًا';
+
+  @override
+  String get confirmRequest => 'تأكيد الطلب';
+
+  @override
+  String get views => 'المشاهدات';
+
+  @override
+  String get addComment => 'أضف تعليقًا';
+
+  @override
+  String get comments => 'التعليقات';
+
+  @override
+  String get post => 'نشر';
+
+  @override
+  String get haveADeal => 'تم الاتفاق مع المالك';
+
+  @override
+  String get myBalance => 'رصيدي';
+
+  @override
+  String get availableBalance => 'الرصيد المتاح';
+
+  @override
+  String get totalPoints => 'إجمالي النقاط';
+
+  @override
+  String get perPoint => 'لكل نقطة';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get paid => 'مدفوع';
+
+  @override
+  String get egp => 'ج.م';
+
+  @override
+  String get transactionHistory => 'سجل المعاملات';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get requests => 'الطلبات';
+
+  @override
+  String get balance => 'الرصيد';
+
+  @override
+  String get account => 'الحساب';
+
+  @override
+  String get requestDetails => 'تفاصيل الطلب';
+
+  @override
+  String get currrentStatus => 'الحالة الحالية';
+
+  @override
+  String get productInfo => 'معلومات المنتج';
+
+  @override
+  String get notAvailable => 'غير متوفر';
+
+  @override
+  String get lastUpdated => 'آخر تحديث';
+
+  @override
+  String get personalAccount => 'الحساب الشخصى';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get rating => 'التقييم';
+
+  @override
+  String get response => 'الاستجابة';
+
+  @override
+  String get manageAccount => 'إدارة الحساب';
+
+  @override
+  String get personalDetails => 'التفاصيل الشخصية';
+
+  @override
+  String get securitySettings => 'إعدادات الأمان';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get paymentAndWallets => 'الدفع والمحفظة';
+
+  @override
+  String get walletAndCommissions => 'المحفظة والعمولات';
+
+  @override
+  String get paymentMethods => 'طرق الدفع';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get devicePreferences => 'تفضيلات الجهاز';
+
+  @override
+  String get myFavorites => 'المفضلة';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get helpAndSupport => 'المساعدة والدعم';
+
+  @override
+  String get contactSupport => 'اتصل بالدعم';
+
+  @override
+  String get saftyCenter => 'مركز الأمان';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 }

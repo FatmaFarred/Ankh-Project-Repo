@@ -61,7 +61,14 @@ dependencies:
   smooth_page_indicator:
   flutter_rating_bar: ^4.0.1
   google_fonts: ^6.2.1
+  easy_stepper: ^0.8.5+1
+  iconsax:
+  firebase_dynamic_links:
+  cached_network_image:
 
+
+  app_links:
+  go_router:
 
 
 
