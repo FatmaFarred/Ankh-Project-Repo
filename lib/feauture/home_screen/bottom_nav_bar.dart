@@ -3,6 +3,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
 import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
+import 'package:ankh_project/feauture/marketer_products/marketer_product_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
       child: RequestScreen(),
     ),
+    MarketerProductScreen(),
 
     BalanceScreen(),
 
@@ -73,6 +75,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
             label:  AppLocalizations.of(context)!.requests,
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageAssets.cstIcon), size: 20.sp),
+            label: AppLocalizations.of(context)!.myProducts,
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),

@@ -1153,6 +1153,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @myProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'My Products'**
+  String get myProducts;
 }
 
 class _AppLocalizationsDelegate

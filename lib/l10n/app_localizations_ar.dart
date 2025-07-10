@@ -553,4 +553,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+  @override
+  String get myProducts => 'منتجاتي';
 }
