@@ -81,7 +81,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label:  AppLocalizations.of(context)!.requests,
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.cstIcon), size: 20.sp),
+            icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
             label: AppLocalizations.of(context)!.myProducts,
           ),
           BottomNavigationBarItem(

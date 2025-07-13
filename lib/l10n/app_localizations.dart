@@ -1046,7 +1046,6 @@ abstract class AppLocalizations {
   /// **'Account'**
   String get personalAccount;
 
-
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:
