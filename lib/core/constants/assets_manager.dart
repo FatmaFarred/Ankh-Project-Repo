@@ -28,6 +28,7 @@ abstract class ImageAssets {
   static const String carPic1 = "$imagePath/car.png";
   static const String carPic2 = "$imagePath/car2.png";
   static const String carPic3 = "$imagePath/car3.png";
+  static const String carPic4 = "$imagePath/carPic4.png";
   static const String onlineIcon = "$imagePath/online.png";
   static const String batteryIcon = "$imagePath/batteryIcon.png";
   static const String hpIcon = "$imagePath/hpIcon.png";

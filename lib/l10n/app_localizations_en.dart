@@ -560,5 +560,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Logout';
 
   @override
+  String get today => 'Today';
+
+  @override
+  String get tomorrow => 'Tomorrow';
+
+  @override
+  String get postponed => 'Completed';
+
+  @override
+  String get returned => 'Postponed';
+
+  @override
+  String get notResponded => 'Not responded';
+
+  @override
+  String get inspectionDetails => 'Inspection Details';
+
+  @override
+  String get startInspect => 'Start Inspect';
+
+  @override
+  String get appointment => 'Appointment';
+
+  @override
+  String get myfavorites => 'My Favorites';
+
+  @override
+  String get favorite => 'Favorite';
+
+  @override
+  String get chats => 'Chats';
+
+  @override
+  String get message => 'Message';
+
   String get myProducts => 'My Products';
 }

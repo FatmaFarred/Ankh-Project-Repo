@@ -1,5 +1,6 @@
 import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
                 //todo: navigate to visitor home
-                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return ClientBottomNavBar();}));
 
 
               },

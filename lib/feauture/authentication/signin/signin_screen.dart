@@ -62,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    BottomNavBar.bottomNavBarRouteName
+                    ClientBottomNavBar.bottomNavBarRouteName
                     ));
       }
     },

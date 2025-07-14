@@ -31,6 +31,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               SectionHeader(
                 title: AppLocalizations.of(context)!.popularNewCars,
+
               ),
               const SizedBox(height: 8),
               const PopularCarsList(),

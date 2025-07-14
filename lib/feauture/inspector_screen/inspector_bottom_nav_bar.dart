@@ -1,52 +1,39 @@
-import 'package:ankh_project/chats_screen/chats_screen.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
-import 'package:ankh_project/feauture/client_favourite_screen/client_favourite_screen.dart';
-import 'package:ankh_project/feauture/home_screen/home_screen.dart';
-import 'package:ankh_project/feauture/marketer_products/marketer_product_screen.dart';
+import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/inspector_home_screen.dart';
+import 'package:ankh_project/feauture/profile/profile_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../profile/profile_screen.dart';
-
-class ClientBottomNavBar extends StatefulWidget {
-  const ClientBottomNavBar({super.key});
-  static String bottomNavBarRouteName = "BottomNavBar";
-
+class InspectorBottomNavBar extends StatefulWidget {
+  const InspectorBottomNavBar({super.key});
+  static String inspectorBottomNavBarRouteName = "InspectorBottomNavBar";
 
 
   @override
-  State<ClientBottomNavBar> createState() => _ClientBottomNavBarState();
+  State<InspectorBottomNavBar> createState() => _InspectorBottomNavBarState();
 }
 
-class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
+class _InspectorBottomNavBarState extends State<InspectorBottomNavBar> {
+
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
+    InspectorHomeScreen(),
 
-    ClientFavouriteScreen(),
-    
-    // BlocProvider(
-    //   create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
-    //   child: RequestScreen(),
-    // ),
+    Center(child: Text("Inspector reports Screen")),
 
-    ChatsScreen(),
-
+    BalanceScreen(),
 
     AccountScreen(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -72,14 +59,12 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
             label:  AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
-            label:  AppLocalizations.of(context)!.favorite,
+            icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
+            label:  AppLocalizations.of(context)!.requests,
           ),
           BottomNavigationBarItem(
-
-            icon: Icon(Icons.wechat_sharp, size: 20.sp),
-            label: AppLocalizations.of(context)!.chats,
-
+            icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
+            label: AppLocalizations.of(context)!.balance,
           ),
           BottomNavigationBarItem(
             icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),

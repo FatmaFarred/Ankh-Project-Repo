@@ -1,3 +1,4 @@
+
     import 'dart:async';
     import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
     import 'package:ankh_project/feauture/onboarding/onboarding.dart';
@@ -117,6 +118,12 @@ import 'core/theme/my_app_theme.dart';
                   'token': token,
                 },
               );
+            },
+            ClientBottomNavBar.bottomNavBarRouteName: (context) => ClientBottomNavBar(),
+            // AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(),
+            MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+            InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar()
+
             });
           } else {
             print('Invalid link: missing token or eemail');
