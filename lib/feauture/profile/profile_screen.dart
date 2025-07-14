@@ -1,4 +1,5 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/core/customized_widgets/shared_preferences%20.dart';
 import 'package:ankh_project/feauture/authentication/signin/signin_screen.dart';
 import 'package:ankh_project/feauture/profile/widegts/setting_tile.dart';
 import 'package:flutter/material.dart';
@@ -169,6 +170,8 @@ class AccountScreen extends StatelessWidget {
                   _tableSection(title:"",
                       rows: [
                         SettingsTile(title:AppLocalizations.of(context)!.logout, icon: Iconsax.logout,onTap:(){
+                          SharedPrefsManager.removeData(key: 'user_token');
+                          SharedPrefsManager.removeData(key:  'currentUser');
                           context.read<UserCubit>().clearUser();
                           Navigator.of(context).pushNamedAndRemoveUntil(
                             SignInScreen.signInScreenRouteName,

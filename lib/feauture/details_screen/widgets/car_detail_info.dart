@@ -5,10 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 
+import '../../../domain/entities/all_products_entity.dart';
 import '../../../domain/entities/product_entity.dart';
 
 class CarDetailInfo extends StatelessWidget {
-  final ProductEntity product;
+  final AllProductsEntity product;
 
   const CarDetailInfo({super.key, required this.product});
 
@@ -28,7 +29,7 @@ class CarDetailInfo extends StatelessWidget {
               value,
               style: GoogleFonts.poppins(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
@@ -46,9 +47,11 @@ class CarDetailInfo extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              _buildDetailItem(ImageAssets.batteryIcon, AppLocalizations.of(context)!.batteryCapacity, "75 KWh"),
+              _buildDetailItem(ImageAssets.batteryIcon, AppLocalizations.of(context)!.batteryCapacity,
+                "${product?.batteryCapacity ?? ""} kwh",),
               SizedBox(height: 16.h),
-              _buildDetailItem(ImageAssets.hpIcon, AppLocalizations.of(context)!.horsepower, "184 bhp"),
+              _buildDetailItem(ImageAssets.hpIcon, AppLocalizations.of(context)!.horsepower,
+                "${product?.horsepower ?? 0} bhp",),
             ],
           ),
         ),
@@ -56,9 +59,9 @@ class CarDetailInfo extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              _buildDetailItem(ImageAssets.transIcon, AppLocalizations.of(context)!.transmission, product.transmission,),
+              _buildDetailItem(ImageAssets.transIcon, AppLocalizations.of(context)!.transmission, product?.transmission??"",),
               SizedBox(height: 16.h),
-              _buildDetailItem(ImageAssets.engineIcon, AppLocalizations.of(context)!.engineType, "Petrol"),
+              _buildDetailItem(ImageAssets.engineIcon, AppLocalizations.of(context)!.engineType,  product?.engineType??"",),
             ],
           ),
         ),

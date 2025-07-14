@@ -22,7 +22,8 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
     import 'feauture/choose_role/choose_role_cubit/choose_role_cubit.dart';
     import 'feauture/choose_role/choose_role_screen.dart';
-    import 'feauture/home_screen/bottom_nav_bar.dart';
+    import 'feauture/details_screen/details_screen.dart';
+import 'feauture/home_screen/bottom_nav_bar.dart';
     import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
     import 'feauture/welcome_screen/welcome_screen.dart';
     import 'firebase_options.dart';
@@ -37,6 +38,8 @@ import 'core/theme/my_app_theme.dart';
       await Firebase.initializeApp();
       configureDependencies();
       await getIt.allReady();
+      await getIt<UserCubit>().loadUserFromPrefs();
+
       await ScreenUtil.ensureScreenSize();
       await LocalNotification().initNotification();
       await FcmApi().initNotification();
@@ -49,8 +52,8 @@ import 'core/theme/my_app_theme.dart';
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => LanguageCubit()),
-            BlocProvider<UserCubit>(
-              create: (context) => getIt<UserCubit>(),
+            BlocProvider<UserCubit>.value(
+              value: getIt<UserCubit>(), // ✅ Already loaded with loadUserFromPrefs
             ),
             BlocProvider(create: (context) => RoleCubit()),
 
@@ -169,6 +172,7 @@ import 'core/theme/my_app_theme.dart';
                 },
                 BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+                DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen()
               },
             );
           },

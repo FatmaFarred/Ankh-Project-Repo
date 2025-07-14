@@ -561,4 +561,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myProducts => 'My Products';
+
+  @override
+  String get active => 'Active';
 }

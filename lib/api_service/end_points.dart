@@ -8,6 +8,8 @@ abstract class EndPoints {
   static const String getCsRoles = "Roles/all-roles";
 
   static const String getMarketerProductsById = "Product/by-marketer";
+  static const String getProductDetailsById = "Product";
+
 
 
 

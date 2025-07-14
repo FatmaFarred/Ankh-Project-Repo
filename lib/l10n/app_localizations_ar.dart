@@ -559,4 +559,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get myProducts => 'منتجاتي';
+
+  @override
+  String get active => 'نشط';
 }
