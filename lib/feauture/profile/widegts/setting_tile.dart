@@ -5,8 +5,9 @@ import '../../../core/constants/color_manager.dart';
 class SettingsTile extends StatelessWidget {
   final String title;
   final IconData icon;
+  final VoidCallback? onTap;
 
-  const SettingsTile({super.key, required this.title, required this.icon});
+  const SettingsTile({super.key, required this.title, required this.icon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class SettingsTile extends StatelessWidget {
 
       ),
       trailing:  Icon(Icons.chevron_right, color: ColorManager.darkGrey),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

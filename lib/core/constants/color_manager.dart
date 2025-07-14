@@ -6,8 +6,13 @@ abstract class ColorManager {
   static Color primaryDark = const Color(0xFF06004F);
   static Color splashBg = const Color(0xFF191F18);
 
+
   static Color hintColor = const Color(0xFF919295);
   static Color balanceColor = const Color(0xFF2B3728);
+  static Color productContainerGrey = const Color(0xffF9FAFB);
+  static Color rateContainer = const Color(0xffE5E7EB);
+
+  static Color lighterColor = const Color(0xFF2B7728);
 
   static Color darkestGrey = const Color(0xFF414141);
   static Color iconGrey = const Color(0xFFF5F5F5);
@@ -24,6 +29,7 @@ abstract class ColorManager {
   static Color lightOrange = const Color(0xffFFEDD5);
   static Color darkBlack = const Color(0xff1F2937);
   static Color lightBlack = const Color(0xffF3F4F6);
+  static Color rateColor = const Color(0xffE7B008);
 
 
 
@@ -32,7 +38,7 @@ abstract class ColorManager {
   static Color black = const Color(0xff000000);
   static Color transparent =  Colors.transparent;
 
-  static const Color starRateColor = Color(0XFFE7B008);
+  static const Color starRateColor = Color(0XffE7B008);
   static const Color textColor = Color(0xff06004F);
   static Color darkBlue = const Color(0xff06004F);
   static Color purple = const Color(0xd52a81c8);

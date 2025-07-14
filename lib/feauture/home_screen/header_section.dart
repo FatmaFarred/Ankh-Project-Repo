@@ -3,15 +3,20 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
 import 'package:ankh_project/feauture/client_notification_screen/client_notification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../authentication/user_controller/user_cubit.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
+
     return Container(
       padding: REdgeInsets.all(22),
       width: double.infinity,
@@ -28,14 +33,13 @@ class HeaderSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Alexander Hipp",
-                      style: GoogleFonts.poppins(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ),
+
+                    Text(user?.fullName??"guest",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        )),
                     RatingBarIndicator(
                       rating: 5,
                       itemBuilder: (context, _) => const Icon(

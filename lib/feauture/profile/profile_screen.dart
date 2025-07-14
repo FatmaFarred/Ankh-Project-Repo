@@ -1,18 +1,23 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/feauture/authentication/signin/signin_screen.dart';
 import 'package:ankh_project/feauture/profile/widegts/setting_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../core/constants/assets_manager.dart';
 import '../../l10n/app_localizations.dart';
+import '../authentication/user_controller/user_cubit.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorManager.balanceColor,
@@ -68,15 +73,29 @@ class AccountScreen extends StatelessWidget {
                                 ), // Replace with your asset
                               ),
                               const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Alexander Hipp",
-                                    style: Theme.of(context).textTheme.bodyLarge
-                                        ?.copyWith(fontSize: 16.sp),
-                                  ),
-                                ],
+
+                               Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   Text( user?.fullName ?? "Guest",
+                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp,)
+                                                               ),
+                                   Image.asset(ImageAssets.goldMedal,
+                                      scale: 6.sp,
+                                      height: 24.h,
+                                      width: 18.w,
+
+                                   )
+
+                                 ],
+                               ),
+                              const SizedBox(height: 4),
+                              RatingBarIndicator(
+                                rating: 5,
+                                itemBuilder: (context, _) => const Icon(Icons.star, color: ColorManager.starRateColor),
+                                itemCount: 5,
+                                itemSize: 14.sp,
+                                direction: Axis.horizontal,
                               ),
                               const SizedBox(height: 4),
                               TextButton(
@@ -197,14 +216,19 @@ class AccountScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  _tableSection(
-                    title: "",
-                    rows: [
-                      SettingsTile(
-                        title: AppLocalizations.of(context)!.logout,
-                        icon: Iconsax.logout,
-                      ),
-                    ],
+
+                  _tableSection(title:"",
+                      rows: [
+                        SettingsTile(title:AppLocalizations.of(context)!.logout, icon: Iconsax.logout,onTap:(){
+                          context.read<UserCubit>().clearUser();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            SignInScreen.signInScreenRouteName,
+                                  (route) => false
+
+                          );
+
+                        } ,),
+                      ]
                   ),
                 ],
               ),
@@ -297,6 +321,7 @@ class _DarkModeSwitchTileState extends State<DarkModeSwitchTile> {
 
   @override
   Widget build(BuildContext context) {
+
     return ListTile(
       leading: const Icon(Icons.nightlight_round),
       title: Text(AppLocalizations.of(context)!.darkMode),

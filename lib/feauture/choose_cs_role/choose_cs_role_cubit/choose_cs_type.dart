@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../api_service/di/di.dart';
 import '../../../core/customized_widgets/reusable_widgets/customized_containers/cutomized_container _with_listile.dart';
+import '../../../domain/entities/cs_roles_response_entity.dart';
 import '../../../l10n/app_localizations.dart';
 
 import '../../authentication/register/register _screen.dart';
 import 'choose_cs_role_cubit.dart';
+import 'choose_cs_roles_states.dart';
 
 
 
@@ -18,11 +21,17 @@ class ChooseCsTypeScreen extends StatelessWidget {
   static String chooseCsTypeScreenRouteName ="ChooseCsRoleScreen";
 
 
+  static Widget withProvider() {
+    return BlocProvider(
+      create: (context) => getIt<RoleCsCubit>()..fetchRoles(),
+      child: const ChooseCsTypeScreen(),
+    );
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    final selectedRole = context.watch<RoleCsCubit>().state;
+    final cubit = context.read<RoleCsCubit>();
 
 
     return  Scaffold(
@@ -38,68 +47,71 @@ class ChooseCsTypeScreen extends StatelessWidget {
             SizedBox(height: 15.h,),
             Text(AppLocalizations.of(context)!.chooseRoleDescribe,style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 15.6.sp,color: ColorManager.darkGrey ),),
             SizedBox(height: 55.h,),
+    Expanded(
+    child: BlocBuilder<RoleCsCubit, RoleCsState>(
+    builder: (context, state) {
 
-            ContainerWithListTile(title: AppLocalizations.of(context)!.marketer,
-              subtitle: AppLocalizations.of(context)!.marketerDescription,
-              image: ImageAssets.marketerIcon,
-              isSelected: selectedRole == CsRole.marketer,
-              onTap: (){
-                //todo: navigate to owner screen
-                context.read<RoleCsCubit>().selectCsRole(CsRole.marketer);
-              },
-            ),
+   if (state is RoleCsLoading) {
+    return const Center(child: CircularProgressIndicator());
+    } else if (state is RoleCsError) {
+    return Center(child: Text(state.error?.errorMessage??""));
+    }else if (state is RoleCsSuccess) {
+     final rolesList = state.rolesList;
+     final  selectedRole = state.selectedRole;
 
-            SizedBox(height: 15.h,),
 
-            ContainerWithListTile(title: AppLocalizations.of(context)!.inspector,
-              subtitle: AppLocalizations.of(context)!.inspectorDescription,
-              image: ImageAssets.inspectorIcon,
-              onTap: (){
-                context.read<RoleCsCubit>().selectCsRole(CsRole.inspector);
+    return ListView.separated(
+                      itemCount: rolesList.length,
+                      separatorBuilder: (_, __) => SizedBox(height: 15.h),
+                      itemBuilder: (context, index) {
+                        final role = rolesList[index];
+                        final imageUrl = role.imageUrl != null && role.imageUrl!.isNotEmpty
+                            ? 'https://ankhapi.runasp.net${role.imageUrl}' // Replace with real base URL
+                            :"";
+                          print(imageUrl);
+                        return ContainerWithListTile(
+                          title: role.name ?? '',
+                          subtitle: role.description ?? '',
+                          image: imageUrl,
+                          isSelected: selectedRole?.id == role.id,
+                          onTap: () => cubit.selectRole(role),
+                        );
+                      },
+               );
+    }else {
+     return SizedBox();
+   }
+    },
+    ),
+    ),
 
-              },
-              isSelected: selectedRole == CsRole.inspector,
-            ),
-            SizedBox(height: 15.h,),
-            ContainerWithListTile(title: AppLocalizations.of(context)!.cst,
-              subtitle: AppLocalizations.of(context)!.cstDescription,
-              image: ImageAssets.cstIcon,
-              onTap: (){
-                context.read<RoleCsCubit>().selectCsRole(CsRole.customerService);
-
-              },
-              isSelected: selectedRole == CsRole.customerService,
-
-            ),
-            Spacer(),
-
-            CustomizedElevatedButton(bottonWidget: Text(AppLocalizations.of(context)!.continu,style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white),),
+            // Continue button
+            CustomizedElevatedButton(
+              bottonWidget: Text(
+                AppLocalizations.of(context)!.continu,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white),
+              ),
               color: ColorManager.lightprimary,
               borderColor: ColorManager.lightprimary,
-                onPressed: () {
-                  print('Selected Role: $selectedRole');
-
-                  if (selectedRole == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(AppLocalizations.of(context)!.chooseRole)),
-                    );
-                    return;
-                  }
-
-
-                    Navigator.of(context).pushNamed(
-                      RegisterScreen.registerScreenRouteName,
-                      arguments: selectedRole,
-                    );
-                  }
-
+              onPressed: () {
+                final state = cubit.state;
+                if (state is RoleCsSuccess && state.selectedRole != null) {
+                  Navigator.of(context).pushNamed(
+                    RegisterScreen.registerScreenRouteName,
+                    arguments: state.selectedRole,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(
+                        AppLocalizations.of(context)!.chooseRole)),
+                  );
+                }
+              }
             )
 
-
-          ],),
+          ],
+        ),
       ),
-
-
     );
   }
 }

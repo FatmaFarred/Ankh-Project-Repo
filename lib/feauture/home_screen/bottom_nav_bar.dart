@@ -3,6 +3,7 @@ import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/client_favourite_screen/client_favourite_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
+import 'package:ankh_project/feauture/marketer_products/marketer_product_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +28,7 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
     HomeScreen(),
 
     ClientFavouriteScreen(),
+    
     // BlocProvider(
     //   create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
     //   child: RequestScreen(),
@@ -34,13 +36,17 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
 
     ChatsScreen(),
 
+
     AccountScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -70,8 +76,10 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
             label:  AppLocalizations.of(context)!.favorite,
           ),
           BottomNavigationBarItem(
+
             icon: Icon(Icons.wechat_sharp, size: 20.sp),
             label: AppLocalizations.of(context)!.chats,
+
           ),
           BottomNavigationBarItem(
             icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),

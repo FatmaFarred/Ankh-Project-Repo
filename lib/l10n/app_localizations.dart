@@ -1040,6 +1040,12 @@ abstract class AppLocalizations {
   /// **'Last Updated'**
   String get lastUpdated;
 
+  /// No description provided for @personalAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get personalAccount;
+
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:
@@ -1225,6 +1231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Message'**
   String get message;
+
+  /// No description provided for @myProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'My Products'**
+  String get myProducts;
 }
 
 class _AppLocalizationsDelegate
