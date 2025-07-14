@@ -560,6 +560,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Logout';
 
   @override
+  String get myProducts => 'My Products';
+
+  @override
+  String get active => 'Active';
+
+  @override
   String get today => 'Today';
 
   @override
@@ -595,8 +601,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get message => 'Message';
 
-  String get myProducts => 'My Products';
-
   @override
-  String get active => 'Active';
+  String get visitor => 'Visitor';
 }

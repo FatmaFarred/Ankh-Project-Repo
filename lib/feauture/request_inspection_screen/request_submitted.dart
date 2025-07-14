@@ -68,7 +68,7 @@ class RequestSubmittedScreen extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){return ClientBottomNavBar();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
               },
             ),
           ],

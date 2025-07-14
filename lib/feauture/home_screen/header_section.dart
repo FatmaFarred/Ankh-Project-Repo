@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 
 class HeaderSection extends StatelessWidget {
@@ -34,7 +35,7 @@ class HeaderSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Text(user?.fullName??"guest",
+                    Text(user?.fullName??AppLocalizations.of(context)!.visitor,
                         style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,

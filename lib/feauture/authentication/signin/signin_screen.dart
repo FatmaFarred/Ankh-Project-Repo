@@ -62,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    ClientBottomNavBar.bottomNavBarRouteName
+                    BottomNavBar.bottomNavBarRouteName
                     ));
       }
     },
@@ -174,7 +174,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                   borderColor: ColorManager.lightprimary,
                   color: ColorManager.lightprimary,
-                  bottonWidget: Text(AppLocalizations.of(context)!.log,
+                  bottonWidget: Text(AppLocalizations.of(context)!.login,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge

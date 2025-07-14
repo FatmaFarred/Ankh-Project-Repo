@@ -480,7 +480,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'الحساب';
+  String get account => 'Account';
 
   @override
   String get requestDetails => 'تفاصيل الطلب';
@@ -555,7 +555,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saftyCenter => 'مركز الأمان';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get myProducts => 'منتجاتي';
+
+  @override
+  String get active => 'نشط';
 
   @override
   String get today => 'اليوم';
@@ -592,11 +598,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get message => 'رسالة';
-  String get logout => 'تسجيل الخروج';
 
   @override
-  String get myProducts => 'منتجاتي';
-
-  @override
-  String get active => 'نشط';
+  String get visitor => 'زائر';
 }

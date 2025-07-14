@@ -1160,6 +1160,18 @@ abstract class AppLocalizations {
   /// **'Logout'**
   String get logout;
 
+  /// No description provided for @myProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'My Products'**
+  String get myProducts;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
   /// No description provided for @today.
   ///
   /// In en, this message translates to:
@@ -1232,17 +1244,11 @@ abstract class AppLocalizations {
   /// **'Message'**
   String get message;
 
-  /// No description provided for @myProducts.
+  /// No description provided for @visitor.
   ///
   /// In en, this message translates to:
-  /// **'My Products'**
-  String get myProducts;
-
-  /// No description provided for @active.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get active;
+  /// **'Visitor'**
+  String get visitor;
 }
 
 class _AppLocalizationsDelegate

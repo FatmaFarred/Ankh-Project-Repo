@@ -6,12 +6,14 @@ import 'package:ankh_project/feauture/home_screen/home_screen.dart';
 import 'package:ankh_project/feauture/marketer_products/marketer_product_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
 import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../balance_screen/balance_screen.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 
@@ -26,10 +28,10 @@ class BottomNavBar extends StatefulWidget {
 
 
   @override
-  State<ClientBottomNavBar> createState() => _ClientBottomNavBarState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
 
   @override
@@ -49,18 +51,15 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
     ]:[
       HomeScreen(),
 
+      ClientFavouriteScreen(),
 
-      BlocProvider(
-        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
-        child: RequestScreen(),
-      ),
 
-      MarketerProductScreen(),
+      ChatsScreen(),
 
-      BalanceScreen(),
 
       AccountScreen(),
     ];
+
 
     return Scaffold(
       body: IndexedStack(

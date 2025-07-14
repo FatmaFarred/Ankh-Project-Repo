@@ -187,11 +187,13 @@
   "favorite": "مفضل",
   "notifications": "الإشعارات",
   "chats": "الدردشات",
-  "message": "رسالة"
+  "message": "رسالة",
 
   "logout": "تسجيل الخروج",
   "myProducts": "منتجاتي",
-  "active": "نشط"
+  "active": "نشط",
+  "visitor": "زائر"
+
 
 
 

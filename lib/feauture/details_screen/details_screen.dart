@@ -96,12 +96,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:(user?.roles?[0] == "Marketer")?null: FloatingActionButton(
         onPressed: () {},
         tooltip: AppLocalizations.of(context)!.haveADeal,
         backgroundColor: ColorManager.lightprimary,
         child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
-      ),
+      ) ,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back),
@@ -211,7 +211,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   Row(
                     children: [
                       Expanded(
-                        flex: 2,
+                        flex: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -319,9 +319,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
 
                   SizedBox(height: 16.h),
-                  SectionTitle(title: AppLocalizations.of(context)!.comments),
-                  SizedBox(height: 12.h),
-                  const AddCommentSection(),
+                 // SectionTitle(title: AppLocalizations.of(context)!.comments),
+                 // SizedBox(height: 12.h),
+                  //const AddCommentSection(),
 
                   SizedBox(height: 16.h),
                   SectionTitle(

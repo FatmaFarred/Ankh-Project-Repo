@@ -23,9 +23,11 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
     import 'feauture/choose_role/choose_role_cubit/choose_role_cubit.dart';
     import 'feauture/choose_role/choose_role_screen.dart';
-    import 'feauture/details_screen/details_screen.dart';
+    import 'feauture/details_screen/all_Images_screen.dart';
+import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
-    import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
+    import 'feauture/inspector_screen/inspector_bottom_nav_bar.dart';
+import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
     import 'feauture/welcome_screen/welcome_screen.dart';
     import 'firebase_options.dart';
     import 'firebase_service/notification_service/fcm_api_service.dart';
@@ -121,12 +123,6 @@ import 'feauture/home_screen/bottom_nav_bar.dart';
                   'token': token,
                 },
               );
-            },
-            ClientBottomNavBar.bottomNavBarRouteName: (context) => ClientBottomNavBar(),
-            // AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(),
-            MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
-            InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar()
-
             });
           } else {
             print('Invalid link: missing token or eemail');
@@ -179,7 +175,12 @@ import 'feauture/home_screen/bottom_nav_bar.dart';
                 },
                 BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
-                DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen()
+                DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
+                 //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
+                MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+                InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar(),
+
+
               },
             );
           },

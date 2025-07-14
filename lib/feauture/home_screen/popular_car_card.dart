@@ -14,12 +14,10 @@ class PopularCarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      /*onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  DetailsScreen(product: product,)),
-        );
-      },*/
+      onTap: () {
+        Navigator.pushNamed(context, DetailsScreen.detailsScreenRouteName,
+            arguments: product.id);
+      },
       child: Container(
         width: 240.w,
         padding: REdgeInsets.all(16),

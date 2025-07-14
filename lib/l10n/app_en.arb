@@ -194,8 +194,9 @@
   "favorite": "Favorite",
   "notifications": "Notifications",
   "chats": "Chats",
-  "message": "Message"
-  "myProducts": "My Products"
+  "message": "Message",
+  "myProducts": "My Products",
+  "visitor": "Visitor"
 
 
 
