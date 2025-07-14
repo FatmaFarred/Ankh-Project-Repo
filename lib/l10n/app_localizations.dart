@@ -1160,6 +1160,78 @@ abstract class AppLocalizations {
   /// **'Logout'**
   String get logout;
 
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @tomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow'**
+  String get tomorrow;
+
+  /// No description provided for @postponed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get postponed;
+
+  /// No description provided for @returned.
+  ///
+  /// In en, this message translates to:
+  /// **'Postponed'**
+  String get returned;
+
+  /// No description provided for @notResponded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not responded'**
+  String get notResponded;
+
+  /// No description provided for @inspectionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Details'**
+  String get inspectionDetails;
+
+  /// No description provided for @startInspect.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Inspect'**
+  String get startInspect;
+
+  /// No description provided for @appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment'**
+  String get appointment;
+
+  /// No description provided for @myfavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorites'**
+  String get myfavorites;
+
+  /// No description provided for @favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get favorite;
+
+  /// No description provided for @chats.
+  ///
+  /// In en, this message translates to:
+  /// **'Chats'**
+  String get chats;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
   /// No description provided for @myProducts.
   ///
   /// In en, this message translates to:

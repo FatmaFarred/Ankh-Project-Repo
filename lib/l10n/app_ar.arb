@@ -39,7 +39,7 @@
   "enterYourPassword": "ادخل كلمة المرور ",
   "confirmPassword": "تأكيد كلمة المرور",
   "enterYourConfirmPassword": "ادخل كلمة المرور",
-  "phoneNumber": "كلمة المرور",
+  "phoneNumber": "رقم الهاتف",
   "enterYourPhone": "ادخل رقم الهاتف",
   "createAccountButton": "إنشاء حساب ",
   "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
@@ -149,7 +149,6 @@
   "home": "الرئيسية",
   "requests": "الطلبات",
   "balance": "الرصيد",
-  "account": "الحساب",
 
   "confirmRequest":"تأكيد الطلب",
   "requestDetails": "تفاصيل الطلب",
@@ -165,7 +164,6 @@
   "manageAccount": "إدارة الحساب",
   "personalDetails": "التفاصيل الشخصية",
   "securitySettings": "إعدادات الأمان",
-  "notifications": "الإشعارات",
   "paymentAndWallets": "الدفع والمحفظة",
   "walletAndCommissions": "المحفظة والعمولات",
   "paymentMethods": "طرق الدفع",
@@ -176,6 +174,21 @@
   "helpAndSupport": "المساعدة والدعم",
   "contactSupport": "اتصل بالدعم",
   "saftyCenter": "مركز الأمان",
+
+  "today": "اليوم",
+  "tomorrow": "غداً",
+  "postponed": "مؤجل",
+  "returned": "مُعاد",
+  "notResponded": "لم يتم الرد",
+  "inspectionDetails": "تفاصيل الفحص",
+  "startInspect": "ابدأ الفحص",
+  "appointment": "الموعد",
+  "myfavorites": "مفضلتي",
+  "favorite": "مفضل",
+  "notifications": "الإشعارات",
+  "chats": "الدردشات",
+  "message": "رسالة"
+
   "logout": "تسجيل الخروج",
   "myProducts": "منتجاتي",
   "active": "نشط"

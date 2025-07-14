@@ -180,8 +180,22 @@
   "saftyCenter": "Safety Center",
   "logout": "Logout",
   "myProducts": "My Products",
-  "active": "Active"
+  "active": "Active",
 
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "postponed": "Completed",
+  "returned": "Postponed",
+  "notResponded": "Not responded",
+  "inspectionDetails": "Inspection Details",
+  "startInspect": "Start Inspect",
+  "appointment": "Appointment",
+  "myfavorites": "My Favorites",
+  "favorite": "Favorite",
+  "notifications": "Notifications",
+  "chats": "Chats",
+  "message": "Message"
+  "myProducts": "My Products"
 
 
 

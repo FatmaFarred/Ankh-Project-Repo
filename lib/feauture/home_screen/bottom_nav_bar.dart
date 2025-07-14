@@ -1,34 +1,35 @@
+import 'package:ankh_project/chats_screen/chats_screen.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
-import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
-import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
+import 'package:ankh_project/feauture/client_favourite_screen/client_favourite_screen.dart';
 import 'package:ankh_project/feauture/home_screen/home_screen.dart';
 import 'package:ankh_project/feauture/marketer_products/marketer_product_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
+
+
 import '../profile/profile_screen.dart';
-import 'car_brand_item.dart';
 
 class BottomNavBar extends StatefulWidget {
    BottomNavBar({super.key});
+
   static String bottomNavBarRouteName = "BottomNavBar";
 
 
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  State<ClientBottomNavBar> createState() => _ClientBottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
   int _currentIndex = 0;
 
   @override
@@ -47,6 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       AccountScreen(),
     ]:[
       HomeScreen(),
+
 
       BlocProvider(
         create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
@@ -111,16 +113,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label:  AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
-            label:  AppLocalizations.of(context)!.requests,
+            icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
+            label:  AppLocalizations.of(context)!.favorite,
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.myProducts,
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.balance,
+
+            icon: Icon(Icons.wechat_sharp, size: 20.sp),
+            label: AppLocalizations.of(context)!.chats,
+
           ),
           BottomNavigationBarItem(
             icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
