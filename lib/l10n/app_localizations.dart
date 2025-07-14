@@ -1237,6 +1237,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My Products'**
   String get myProducts;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
 }
 
 class _AppLocalizationsDelegate

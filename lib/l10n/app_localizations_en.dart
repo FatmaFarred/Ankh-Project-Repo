@@ -596,4 +596,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get message => 'Message';
 
   String get myProducts => 'My Products';
+
+  @override
+  String get active => 'Active';
 }

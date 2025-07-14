@@ -13,10 +13,10 @@ class RecommendedCarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      /*onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) =>  DetailsScreen(product: product,)));
-      },
+      },*/
       child: Container(
         padding: REdgeInsets.symmetric(vertical: 18, horizontal: 12),
         decoration: BoxDecoration(

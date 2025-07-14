@@ -9,10 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+import '../../api_service/di/di.dart';
+import '../authentication/user_controller/user_cubit.dart';
+import '../myrequest/controller/cubit.dart';
+import '../myrequest/my_request_screen.dart';
+
+
 import '../profile/profile_screen.dart';
 
-class ClientBottomNavBar extends StatefulWidget {
-  const ClientBottomNavBar({super.key});
+class BottomNavBar extends StatefulWidget {
+   BottomNavBar({super.key});
+
   static String bottomNavBarRouteName = "BottomNavBar";
 
 
@@ -24,24 +32,36 @@ class ClientBottomNavBar extends StatefulWidget {
 class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    HomeScreen(),
-
-    ClientFavouriteScreen(),
-    
-    // BlocProvider(
-    //   create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
-    //   child: RequestScreen(),
-    // ),
-
-    ChatsScreen(),
-
-
-    AccountScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
+
+
+    final List<Widget> _pages =user?.roles?[0] == "Marketer" ?[
+      MarketerProductScreen(),
+      BalanceScreen(),
+      BlocProvider(
+        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+        child: RequestScreen(),
+      ),
+
+      AccountScreen(),
+    ]:[
+      HomeScreen(),
+
+
+      BlocProvider(
+        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+        child: RequestScreen(),
+      ),
+
+      MarketerProductScreen(),
+
+      BalanceScreen(),
+
+      AccountScreen(),
+    ];
+
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
@@ -66,7 +86,28 @@ class _ClientBottomNavBarState extends State<ClientBottomNavBar> {
         elevation: 0.7,
         showUnselectedLabels: true,
         onTap: (index) => setState(() => _currentIndex = index),
-        items:  [
+        items: user?.roles?[0] == "Marketer" ? [
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
+            label: AppLocalizations.of(context)!.myProducts,
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
+            label: AppLocalizations.of(context)!.balance,
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
+            label:  AppLocalizations.of(context)!.requests,
+          ),
+
+
+          BottomNavigationBarItem(
+            icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+            label: AppLocalizations.of(context)!.account,
+
+          ),
+        ]:
+        [
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
             label:  AppLocalizations.of(context)!.home,

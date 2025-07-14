@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../api_service/di/di.dart';
 import '../../data/data_sources/get_popular_product_remote_data_source_impl.dart' hide ProductRemoteDataSource;
 import '../../l10n/app_localizations.dart';
+import '../details_screen/details_screen.dart';
 
 class MarketerProductScreen extends StatefulWidget {
   MarketerProductScreen({super.key});
@@ -42,7 +43,7 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
           color: Colors.white,
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(AppLocalizations.of(context)!.myRequests),
+        title: Text(AppLocalizations.of(context)!.myProducts),
       ),
 
       body: BlocBuilder<MarketerProductCubit, MarketerProductState>(
@@ -57,18 +58,32 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
           } else if (state is MarketerProductSuccess) {
             final allRequests = state.requestList;
             return
-              SizedBox(
-                height: 260.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: allRequests.length,
-                  itemBuilder: (context, index) {
-                    final product = allRequests[index];
-                    return Padding(
-                      padding: EdgeInsets.only(right: 12.w),
-                      child: MyProductCarCard(product: product),
-                    );
-                  },
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 24.h),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 260.h,
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+
+                          crossAxisSpacing: 9.w,
+                          //mainAxisSpacing: 16.h,
+                          childAspectRatio: 198 / 248, // width / height of each card
+                          mainAxisExtent: 248.h
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: allRequests.length,
+                        itemBuilder: (context, index) {
+                          final product = allRequests[index];
+                          return InkWell(
+                            onTap: ()=>Navigator.pushNamed(context, DetailsScreen.detailsScreenRouteName,arguments:product.id ),
+                              child: MyProductCarCard(product: product));
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               );
           }
