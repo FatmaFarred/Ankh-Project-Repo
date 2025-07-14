@@ -178,10 +178,19 @@
   "helpAndSupport": "Help & Support",
   "contactSupport": "Contact Support",
   "saftyCenter": "Safety Center",
-  "logout": "Logout"
-
-
-
-
+  "logout": "Logout",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "postponed": "Completed",
+  "returned": "Postponed",
+  "notResponded": "Not responded",
+  "inspectionDetails": "Inspection Details",
+  "startInspect": "Start Inspect",
+  "appointment": "Appointment",
+  "myfavorites": "My Favorites",
+  "favorite": "Favorite",
+  "notifications": "Notifications",
+  "chats": "Chats",
+  "message": "Message"
 
 }

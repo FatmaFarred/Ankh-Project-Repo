@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:ankh_project/data/models/user_model.dart';
 import 'package:ankh_project/feauture/authentication/register/controller/register_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
+import 'package:ankh_project/feauture/details_screen/all_Images_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
 import 'package:ankh_project/feauture/onboarding/onboarding.dart';
 import 'package:app_links/app_links.dart';
@@ -164,8 +166,10 @@ class _MyAppState extends State<MyApp> {
                 token: args['token']!,
               );
             },
-            BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
+            ClientBottomNavBar.bottomNavBarRouteName: (context) => ClientBottomNavBar(),
+            // AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(),
             MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+            InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar()
           },
         );
       },

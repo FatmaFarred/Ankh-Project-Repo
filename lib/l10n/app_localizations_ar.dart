@@ -141,7 +141,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterYourConfirmPassword => 'ادخل كلمة المرور';
 
   @override
-  String get phoneNumber => 'كلمة المرور';
+  String get phoneNumber => 'رقم الهاتف';
 
   @override
   String get enterYourPhone => 'ادخل رقم الهاتف';
@@ -552,5 +552,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saftyCenter => 'مركز الأمان';
 
   @override
-  String get logout => 'تسجيل الخروج';
+  String get logout => 'Logout';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get tomorrow => 'غداً';
+
+  @override
+  String get postponed => 'مؤجل';
+
+  @override
+  String get returned => 'مُعاد';
+
+  @override
+  String get notResponded => 'لم يتم الرد';
+
+  @override
+  String get inspectionDetails => 'تفاصيل الفحص';
+
+  @override
+  String get startInspect => 'ابدأ الفحص';
+
+  @override
+  String get appointment => 'الموعد';
+
+  @override
+  String get myfavorites => 'مفضلتي';
+
+  @override
+  String get favorite => 'مفضل';
+
+  @override
+  String get chats => 'الدردشات';
+
+  @override
+  String get message => 'رسالة';
 }
