@@ -13,9 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../data/data_sources/get_popular_product_remote_data_source_impl.dart' hide ProductRemoteDataSource;
 import '../../l10n/app_localizations.dart';
 import '../details_screen/details_screen.dart';
+import '../home_screen/header_section.dart';
 
 class MarketerProductScreen extends StatefulWidget {
   MarketerProductScreen({super.key});
@@ -37,59 +39,67 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(CupertinoIcons.back),
-          color: Colors.white,
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(AppLocalizations.of(context)!.myProducts),
-      ),
-
-      body: BlocBuilder<MarketerProductCubit, MarketerProductState>(
-        bloc: marketerProductCubit,
-        builder: (context, state) {
-          if (state is MarketerProductLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is MarketerProductError) {
-            return Center(child: Text(state.error?.errorMessage ?? ""));
-          } else if (state is MarketerProductEmpty) {
-            return Center(child: Text("No requests found"));
-          } else if (state is MarketerProductSuccess) {
-            final allRequests = state.requestList;
-            return
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 24.h),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 260.h,
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-
-                          crossAxisSpacing: 9.w,
-                          //mainAxisSpacing: 16.h,
-                          childAspectRatio: 198 / 248, // width / height of each card
-                          mainAxisExtent: 248.h
-                        ),
-                        scrollDirection: Axis.vertical,
-                        itemCount: allRequests.length,
-                        itemBuilder: (context, index) {
-                          final product = allRequests[index];
-                          return InkWell(
-                            onTap: ()=>Navigator.pushNamed(context, DetailsScreen.detailsScreenRouteName,arguments:product.id ),
-                              child: MyProductCarCard(product: product));
-                        },
+      body: Column(
+        children: [
+          HeaderSection(),
+          Expanded( // ✅ Let the product area take remaining space
+            child: BlocBuilder<MarketerProductCubit, MarketerProductState>(
+              bloc: marketerProductCubit,
+              builder: (context, state) {
+                if (state is MarketerProductLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is MarketerProductError) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.error?.errorMessage ?? ""),
+                          CustomizedElevatedButton(
+                            bottonWidget: Text(AppLocalizations.of(context)!.tryAgain),
+                            color: ColorManager.lightprimary,
+                            borderColor: ColorManager.lightprimary,
+                            onPressed: () => marketerProductCubit.fetchProducts("1ad0f91f-5bcb-450d-92cf-105b88792d9b"),
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              );
-          }
-          return const SizedBox.shrink();
-        },
+                  );
+                } else if (state is MarketerProductEmpty) {
+                  return Center(child: Text(AppLocalizations.of(context)!.message));
+                } else if (state is MarketerProductSuccess) {
+                  final allRequests = state.requestList;
 
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 24.h),
+                    child: GridView.builder(
+                      itemCount: allRequests.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 9.w,
+                        mainAxisExtent: 248.h,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = allRequests[index];
+                        return InkWell(
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            DetailsScreen.detailsScreenRouteName,
+                            arguments: product.id,
+                          ),
+                          child: MyProductCarCard(product: product),
+                        );
+                      },
+                    ),
+                  );
+                }
+
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

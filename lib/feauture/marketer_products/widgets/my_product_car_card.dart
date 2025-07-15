@@ -83,7 +83,7 @@ class MyProductCarCard extends StatelessWidget {
                 style:  Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 14.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-          SizedBox(height: 10.h),
+          SizedBox(height: 5.h),
 
 
 
@@ -93,7 +93,7 @@ class MyProductCarCard extends StatelessWidget {
 
 
           ),
-          SizedBox(height: 10.h),
+          SizedBox(height: 5.h),
 
           Text(
             AppLocalizations.of(context)!.price,

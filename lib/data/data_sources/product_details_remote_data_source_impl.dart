@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 import '../../api_service/api_constants.dart';
 import '../../api_service/end_points.dart';
 import '../../api_service/failure/error_handling.dart';
+import '../../l10n/global_localization_helper.dart';
 @Injectable(as: ProductDetailsRemoteDataSource)
 class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSource{
   ApiManager apiManager;
@@ -48,7 +49,7 @@ class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSour
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
+import '../../../l10n/app_localizations.dart';
 import '../../constants/color_manager.dart';
 import '../../constants/font_manager/font_style_manager.dart';
 import 'customized_elevated_button.dart';
@@ -55,17 +56,17 @@ class CustomDialog {
           return AlertDialog(
             backgroundColor: ColorManager.lightGrey,
             title: Text(
-              title ?? "Success",
+              title ?? AppLocalizations.of(context)!.success,
               style: getBoldStyle(color:ColorManager.black, context:context),
             ),
             content: Text(
-              message ?? "Success",
+              message ?? AppLocalizations.of(context)!.success,
               style: getBoldStyle(color:ColorManager.black, context:context),
             ),
             actions: [
               CustomizedElevatedButton(
                 color: ColorManager.lightprimary,
-                bottonWidget:Text ("ok", style: getSemiBoldStyle(color:ColorManager.white, context:context)),
+                bottonWidget:Text (AppLocalizations.of(context)!.ok, style: getSemiBoldStyle(color:ColorManager.white, context:context)),
                 onPressed: () {
                   if (positiveOnClick != null) {
                     positiveOnClick!();
@@ -109,7 +110,7 @@ class CustomDialog {
                   Expanded(
                     child: CustomizedElevatedButton(
                       color: Colors.transparent,
-                      bottonWidget:Text ("no,"),
+                      bottonWidget:Text (negativeText??AppLocalizations.of(context)!.no),
                       textStyle: getSemiBoldStyle(color:ColorManager.black ,context:context ),
                       onPressed: () {
                         if (negativeOnClick != null) {
@@ -126,7 +127,7 @@ class CustomDialog {
                   Expanded(
                     child: CustomizedElevatedButton(
                       color: ColorManager.lightprimary,
-                      bottonWidget:Text("yes",style: getSemiBoldStyle(color:ColorManager.white ,context:context ),),
+                      bottonWidget:Text(positiveText??AppLocalizations.of(context)!.yes,style: getSemiBoldStyle(color:ColorManager.white ,context:context ),),
                       onPressed: () {
                         if (positiveOnClick != null) {
                           positiveOnClick!();

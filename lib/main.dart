@@ -36,6 +36,8 @@ import 'feauture/push_notification/push_notification_controller/push_notificatio
     import 'l10n/app_localizations.dart';
     import 'l10n/languge_cubit.dart';
 
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
     void main() async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
@@ -140,6 +142,7 @@ import 'feauture/push_notification/push_notification_controller/push_notificatio
           splitScreenMode: true,
           builder: (_, child) {
             return MaterialApp(
+              navigatorKey: navigatorKey,
               debugShowCheckedModeBanner: false,
               localizationsDelegates: [
                 ...AppLocalizations.localizationsDelegates,

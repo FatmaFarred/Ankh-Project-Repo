@@ -601,4 +601,54 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get visitor => 'زائر';
+
+  @override
+  String get noInternetConnection =>
+      'لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get passwordResetEmailSentSuccessfully =>
+      'تم إرسال بريد إعادة تعيين كلمة المرور بنجاح';
+
+  @override
+  String get failedToSendPasswordResetEmail =>
+      '`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get ok => 'حسناً';
+
+  @override
+  String get failedToLoadRecommendedBrands =>
+      'فشل في تحميل العلامات التجارية الموصى بها، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get failedToLoadPopularProducts =>
+      ' فشل في تحميل المنتجات الشائعة، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get success => ' تم بنجاح ';
+
+  @override
+  String get error => 'خطأ';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get loading => 'جار التحميل...';
+
+  @override
+  String get thereIsNoImages => 'لا توجد صور متاحة للعرض';
+
+  @override
+  String get noRequestsFound => 'لا توجد طلبات متاحة';
+
+  @override
+  String get noProductsFound => 'لا توجد منتجات متاحة';
 }

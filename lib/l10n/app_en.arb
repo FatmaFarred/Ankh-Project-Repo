@@ -196,7 +196,23 @@
   "chats": "Chats",
   "message": "Message",
   "myProducts": "My Products",
-  "visitor": "Visitor"
+  "visitor": "Visitor",
+  "noInternetConnection": "No internet connection. Please try again later.",
+  "passwordResetEmailSentSuccessfully": "Password reset email sent successfully.",
+  "failedToSendPasswordResetEmail": "`Failed to send password reset email:",
+  "ok": "Ok",
+  "failedToLoadRecommendedBrands": "Failed to load recommended brands, please try again later.",
+  "failedToLoadPopularProducts":"Failed to load popular products, please try again later.",
+  "success":" Success ",
+  "error":"Error",
+  "yes": "Yes",
+  "no": "No",
+  "tryAgain": "Try Again",
+    "loading": "Loading...",
+  "thereIsNoImages": "there is no images",
+  "noRequestsFound": "No requests found",
+  "noProductsFound": "No products found"
+
 
 
 

@@ -603,4 +603,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get visitor => 'Visitor';
+
+  @override
+  String get noInternetConnection =>
+      'No internet connection. Please try again later.';
+
+  @override
+  String get passwordResetEmailSentSuccessfully =>
+      'Password reset email sent successfully.';
+
+  @override
+  String get failedToSendPasswordResetEmail =>
+      '`Failed to send password reset email:';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get failedToLoadRecommendedBrands =>
+      'Failed to load recommended brands, please try again later.';
+
+  @override
+  String get failedToLoadPopularProducts =>
+      'Failed to load popular products, please try again later.';
+
+  @override
+  String get success => ' Success ';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get thereIsNoImages => 'there is no images';
+
+  @override
+  String get noRequestsFound => 'No requests found';
+
+  @override
+  String get noProductsFound => 'No products found';
 }

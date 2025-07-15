@@ -192,17 +192,22 @@
   "logout": "تسجيل الخروج",
   "myProducts": "منتجاتي",
   "active": "نشط",
-  "visitor": "زائر"
-
-
-
-
-
-
-
-
-
-
+  "visitor": "زائر",
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى",
+  "ok": "حسناً",
+  "passwordResetEmailSentSuccessfully": "تم إرسال بريد إعادة تعيين كلمة المرور بنجاح",
+  "failedToSendPasswordResetEmail": "`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا",
+  "failedToLoadRecommendedBrands": "فشل في تحميل العلامات التجارية الموصى بها، يرجى المحاولة مرة أخرى لاحقًا",
+  "failedToLoadPopularProducts":" فشل في تحميل المنتجات الشائعة، يرجى المحاولة مرة أخرى",
+  "success":" تم بنجاح ",
+    "error":"خطأ",
+  "yes": "نعم",
+  "no": "لا",
+  "tryAgain": "حاول مرة أخرى",
+  "loading": "جار التحميل...",
+  "thereIsNoImages": "لا توجد صور متاحة للعرض",
+  "noRequestsFound": "لا توجد طلبات متاحة",
+  "noProductsFound": "لا توجد منتجات متاحة"
 
 
 }

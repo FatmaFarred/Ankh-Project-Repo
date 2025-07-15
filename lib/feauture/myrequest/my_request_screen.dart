@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../l10n/app_localizations.dart';
 import 'controller/cubit.dart';
 import 'controller/request_states.dart';
@@ -78,9 +80,28 @@ class _RequestScreenState extends State<RequestScreen>
             if (state is MarketerRequestLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MarketerRequestError) {
-              return Center(child: Text(state.error?.errorMessage??""));
+              return Center(child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(state.error?.errorMessage??"",
+                      style: Theme.of(context).textTheme.bodyMedium,
+
+                    ),
+                    CustomizedElevatedButton(
+                      bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white,fontSize: 14.sp),
+                      ),
+                      color: ColorManager.lightprimary,
+                      borderColor: ColorManager.lightprimary,
+                      onPressed: () => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+                    )
+                  ],
+                ),
+              ));
             } else if (state is MarketerRequestEmpty) {
-              return Center(child: Text("No requests found"));
+              return Center(child: Text(AppLocalizations.of(context)!.noRequestsFound));
             } else if (state is MarketerRequestSuccess) {
               final allRequests = state.requests;
               return Column(

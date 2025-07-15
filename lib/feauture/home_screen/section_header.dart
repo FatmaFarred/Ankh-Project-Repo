@@ -7,7 +7,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
-  final String? imageUrl ;
+  final List<String>?  imageUrl ;
 
   const SectionHeader({super.key, required this.title,this.imageUrl});
 
@@ -27,7 +27,7 @@ class SectionHeader extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => AllImagesScreen(imageUrl:imageUrl!,),
+                builder: (_) => AllImagesScreen(imageUrl:imageUrl??[],),
               ),
             );
           },

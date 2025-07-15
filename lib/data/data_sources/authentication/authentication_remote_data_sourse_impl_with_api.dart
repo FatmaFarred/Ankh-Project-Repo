@@ -16,6 +16,8 @@ import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../domain/repositries_and_data_sources/data_sources/remote_data_source/authentication.dart';
 import '../../../feauture/authentication/user_controller/user_cubit.dart';
 import '../../../firebase_service/firestore_service/firestore_service.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../l10n/global_localization_helper.dart';
 import '../../models/authentication_response_dm.dart';
 import '../../models/register_response_dm.dart';
 import '../../models/user_model.dart';
@@ -80,7 +82,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));
@@ -129,7 +131,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
         }
       } else {
         return left(
-            NetworkError(errorMessage: "No internet connection. Please try again later."));
+            NetworkError(errorMessage: GlobalLocalization.noInternet));
       }
     }
     catch (e) {

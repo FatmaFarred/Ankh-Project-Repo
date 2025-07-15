@@ -1,4 +1,3 @@
-import 'package:ankh_project/chats_screen/chats_screen.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/client_favourite_screen/client_favourite_screen.dart';
@@ -14,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
+import '../chats_screen/chats_screen.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 
@@ -47,6 +47,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: RequestScreen(),
       ),
 
+      ChatsScreen(),
+
       AccountScreen(),
     ]:[
       HomeScreen(),
@@ -60,6 +62,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
       AccountScreen(),
     ];
 
+    if (_currentIndex >= _pages.length) {
+      _currentIndex = 0;
+    }
 
     return Scaffold(
       body: IndexedStack(
@@ -98,6 +103,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
             label:  AppLocalizations.of(context)!.requests,
           ),
+          BottomNavigationBarItem(
+
+            icon: Icon(Icons.wechat_sharp, size: 20.sp),
+            label: AppLocalizations.of(context)!.chats,
+
+          ),
+
 
 
           BottomNavigationBarItem(

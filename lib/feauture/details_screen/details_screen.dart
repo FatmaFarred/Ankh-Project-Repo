@@ -118,7 +118,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
           if (state is ProductDetailsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProductDetailsError) {
-            return Center(child: Text(state.error?.errorMessage ?? ""));
+            return  Center(child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(state.error?.errorMessage??"",
+                    style: Theme.of(context).textTheme.bodyMedium,
+
+                  ),
+                  CustomizedElevatedButton(
+                    bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white,fontSize: 14.sp),
+                    ),
+                    color: ColorManager.lightprimary,
+                    borderColor: ColorManager.lightprimary,
+                    onPressed: () => productDetailsCubit.fetchDetails(productId:productId!),
+                  )
+                ],
+              ),
+            ));
           } else if (state is ProductDetailsSuccess) {
             final product = state.productDetails;
             final List<String> images = (product.images?.isNotEmpty ?? false)
@@ -156,8 +175,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       
 
                       ),
-                      Positioned(
+
+                      product.status =="Online"? Positioned(
                         right: 13.w,
+                        child: Chip(label: Text(AppLocalizations.of(context)!.active,style:
+                          Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp,color: ColorManager.darkGreen)
+                          ,),backgroundColor: ColorManager.lightGreen,
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+
+                          shape: const StadiumBorder( side: BorderSide(color: Colors.transparent) ), // makes it circular
+
+                        ),
+                      ):SizedBox.shrink(),
+                      Positioned(
+                        left: 13.w,
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -172,14 +203,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
                       ),
-                      product.status =="Online"? Chip(label: Text(AppLocalizations.of(context)!.active,style:
-                        Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp,color: ColorManager.darkGreen)
-                        ,),backgroundColor: ColorManager.lightGreen,
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-
-                        shape: const StadiumBorder( side: BorderSide(color: Colors.transparent) ), // makes it circular
-
-                      ):SizedBox.shrink(),
 
                     ],
                   ),
@@ -292,7 +315,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   CarDetailInfo(product: product),
 
                   SizedBox(height: 16.h),
-                  SectionHeader(title: AppLocalizations.of(context)!.images),
+                  SectionHeader(title: AppLocalizations.of(context)!.images,imageUrl:product.images ,),
                   SizedBox(
                     height: 115.h,
                     child: ListView.separated(

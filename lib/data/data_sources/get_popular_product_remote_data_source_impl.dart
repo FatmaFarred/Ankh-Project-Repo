@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:ankh_project/data/models/product_model.dart';
 import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/product_remote_data_source.dart';
 
+import '../../l10n/global_localization_helper.dart';
+
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   final String baseUrl = 'https://ankhapi.runasp.net/';
 
@@ -14,7 +16,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       final List data = json.decode(response.body);
       return data.map((json) => ProductModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load popular products');
+      throw Exception(GlobalLocalization.failedToLoadPopularProducts);
     }
   }
 
@@ -26,7 +28,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       final List jsonData = json.decode(response.body);
       return jsonData.map((json) => ProductModel.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load recommended brands');
+      throw Exception(GlobalLocalization.failedToLoadRecommendedBrands);
     }
   }
 }

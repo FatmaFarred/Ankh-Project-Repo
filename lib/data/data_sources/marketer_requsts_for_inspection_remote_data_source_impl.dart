@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import '../../api_service/api_constants.dart';
 import '../../api_service/end_points.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_requsts_for_inspection_remote_data_sourse.dart';
+import '../../l10n/global_localization_helper.dart';
 import '../models/marketer_request_inspection_details_dm.dart';
 @Injectable(as: MarketerRequestsForInspectionRemoteDataSource)
 class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerRequestsForInspectionRemoteDataSource {
@@ -58,7 +59,7 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));
@@ -94,7 +95,7 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));

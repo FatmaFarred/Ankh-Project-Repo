@@ -1249,6 +1249,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Visitor'**
   String get visitor;
+
+  /// No description provided for @noInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Please try again later.'**
+  String get noInternetConnection;
+
+  /// No description provided for @passwordResetEmailSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent successfully.'**
+  String get passwordResetEmailSentSuccessfully;
+
+  /// No description provided for @failedToSendPasswordResetEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'`Failed to send password reset email:'**
+  String get failedToSendPasswordResetEmail;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
+
+  /// No description provided for @failedToLoadRecommendedBrands.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load recommended brands, please try again later.'**
+  String get failedToLoadRecommendedBrands;
+
+  /// No description provided for @failedToLoadPopularProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load popular products, please try again later.'**
+  String get failedToLoadPopularProducts;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **' Success '**
+  String get success;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @thereIsNoImages.
+  ///
+  /// In en, this message translates to:
+  /// **'there is no images'**
+  String get thereIsNoImages;
+
+  /// No description provided for @noRequestsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No requests found'**
+  String get noRequestsFound;
+
+  /// No description provided for @noProductsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No products found'**
+  String get noProductsFound;
 }
 
 class _AppLocalizationsDelegate
