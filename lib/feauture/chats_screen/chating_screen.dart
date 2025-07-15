@@ -1,13 +1,14 @@
-import 'package:ankh_project/chats_screen/widgets/input_field.dart';
-import 'package:ankh_project/chats_screen/widgets/message_widget.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
+import 'package:ankh_project/feauture/chats_screen/widgets/input_field.dart';
+import 'package:ankh_project/feauture/chats_screen/widgets/message_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../core/constants/color_manager.dart';
-import '../l10n/app_localizations.dart';
+import '../../core/constants/color_manager.dart';
+import '../../l10n/app_localizations.dart';
+
 
 class ChatingScreen extends StatelessWidget {
   const ChatingScreen({super.key});

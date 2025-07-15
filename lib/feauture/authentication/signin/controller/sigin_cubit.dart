@@ -11,8 +11,8 @@ import '../../../../domain/use_cases/authentication/signin_usecase.dart';
 class SignInCubit extends Cubit<SignInState> {
   final SignInUseCase signInUseCase;
 
-  final email = TextEditingController(text: "faresfaread34@gmail.com");
-  final password = TextEditingController(text: "Fares1234@");
+  final email = TextEditingController(text: "fahmyroma690@gmail.com");
+  final password = TextEditingController(text: "Fahmy690@@");
   bool isPasswordVisible = false;
 
   SignInCubit(this.signInUseCase) : super(SignInInitial());

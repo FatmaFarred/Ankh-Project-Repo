@@ -39,19 +39,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (state is RegisterLoading) {
         CustomDialog.loading(
             context: context,
-            message: "loading",
+            message: AppLocalizations.of(context)!.loading,
             cancelable: false);
       } else if (state is RegisterFailure) {
         Navigator.of(context).pop();
-        CustomDialog.positiveButton(
+        CustomDialog.positiveAndNegativeButton(
             context: context,
-            title: "error",
+            positiveText:  AppLocalizations.of(context)!.tryAgain,
+            positiveOnClick: () {
+              Navigator.of(context).pop();
+              registerViewModel.register();
+
+            },
+            title: AppLocalizations.of(context)!.error,
             message: state.error.errorMessage);
       } else if (state is RegisterSuccess) {
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
             context: context,
-            title: "getTranslations(context).success",
+            title: AppLocalizations.of(context)!.success,
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(

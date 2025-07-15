@@ -10,6 +10,7 @@ import '../../../../api_service/failure/error_handling.dart';
 import '../../api_service/api_constants.dart';
 import '../../api_service/end_points.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_products_remote_data_source.dart';
+import '../../l10n/global_localization_helper.dart';
 import '../models/all_prosucts_dm.dart';
 
 
@@ -54,7 +55,7 @@ import '../models/all_prosucts_dm.dart';
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));

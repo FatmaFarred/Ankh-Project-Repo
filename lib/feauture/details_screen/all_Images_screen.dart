@@ -5,16 +5,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../core/constants/assets_manager.dart';
+
 class AllImagesScreen extends StatelessWidget {
   static String allImagesScreenRouteName = "allImagesScreen";
 
-  final String imageUrl;
+  final List<String>  imageUrl;
 
   const AllImagesScreen({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> images = imageUrl.isNotEmpty ? [imageUrl] : [];
+    final List<String> images =  imageUrl ?? [];
+    final imageList = (images.isNotEmpty ?? false)
+        ? images!.map((imageUrl) => "https://ankhapi.runasp.net/$imageUrl").toList()
+        : [ImageAssets.brokenImage];
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +37,7 @@ class AllImagesScreen extends StatelessWidget {
         child: images.isEmpty
             ? Center(
           child: Text(
-            "there is no images ",
+            AppLocalizations.of(context)!.thereIsNoImages,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: Colors.grey,
             ),
@@ -47,13 +52,13 @@ class AllImagesScreen extends StatelessWidget {
             childAspectRatio: 1,
           ),
             itemBuilder: (context, index) {
-              final img = images[index];
+              final img = imageList[index];
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => FullImageViewScreen(images: images,initialIndex: index,),
+                      builder: (_) => FullImageViewScreen(images: imageList,initialIndex: index,),
                     ),
                   );
                 },

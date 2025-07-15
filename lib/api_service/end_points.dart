@@ -9,6 +9,7 @@ abstract class EndPoints {
 
   static const String getMarketerProductsById = "Product/by-marketer";
   static const String getProductDetailsById = "Product";
+  static const String MarketerAddRequestIspection = "RequestInspections/add";
 
 
 
