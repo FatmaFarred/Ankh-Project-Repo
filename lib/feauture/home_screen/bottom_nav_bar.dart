@@ -43,7 +43,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       MarketerProductScreen(),
       BalanceScreen(),
       BlocProvider(
-        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
         child: RequestScreen(),
       ),
 

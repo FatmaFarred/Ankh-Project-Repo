@@ -653,4 +653,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noProductsFound => 'No products found';
+
+  @override
+  String get fieldRequired => 'This field is required';
 }

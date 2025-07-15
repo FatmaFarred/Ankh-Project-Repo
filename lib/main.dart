@@ -28,7 +28,9 @@ import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
     import 'feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
-    import 'feauture/welcome_screen/welcome_screen.dart';
+    import 'feauture/request_inspection_screen/confirm_request_screen.dart';
+import 'feauture/request_inspection_screen/request_inspection_screen.dart';
+import 'feauture/welcome_screen/welcome_screen.dart';
     import 'firebase_options.dart';
     import 'firebase_service/notification_service/fcm_api_service.dart';
     import 'firebase_service/notification_service/local notification.dart';
@@ -182,7 +184,8 @@ import 'feauture/push_notification/push_notification_controller/push_notificatio
                  //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
                 InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar(),
-
+                RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
+                ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
 
               },
             );

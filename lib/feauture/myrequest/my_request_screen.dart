@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../l10n/app_localizations.dart';
+import '../authentication/user_controller/user_cubit.dart';
 import 'controller/cubit.dart';
 import 'controller/request_states.dart';
 
@@ -64,6 +65,7 @@ class _RequestScreenState extends State<RequestScreen>
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -95,7 +97,7 @@ class _RequestScreenState extends State<RequestScreen>
                       ),
                       color: ColorManager.lightprimary,
                       borderColor: ColorManager.lightprimary,
-                      onPressed: () => getIt<MarketerRequestCubit>()..fetchRequests("f4af7724-4d57-46d9-bb77-93bc1b53964c", "roleId"),
+                      onPressed: () => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
                     )
                   ],
                 ),

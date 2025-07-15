@@ -651,4 +651,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noProductsFound => 'لا توجد منتجات متاحة';
+
+  @override
+  String get fieldRequired => 'هذا الحقل مطلوب';
 }

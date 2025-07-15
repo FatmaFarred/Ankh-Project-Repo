@@ -16,6 +16,7 @@ import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../data/data_sources/get_popular_product_remote_data_source_impl.dart' hide ProductRemoteDataSource;
 import '../../l10n/app_localizations.dart';
+import '../authentication/user_controller/user_cubit.dart';
 import '../details_screen/details_screen.dart';
 import '../home_screen/header_section.dart';
 
@@ -28,16 +29,26 @@ class MarketerProductScreen extends StatefulWidget {
 
 class _MarketerProductScreenState extends State<MarketerProductScreen> {
   MarketerProductCubit marketerProductCubit = getIt<MarketerProductCubit>();
-  @override
   void initState() {
     super.initState();
-    // Replace with actual user ID (from auth or shared prefs)
-    marketerProductCubit.fetchProducts("1ad0f91f-5bcb-450d-92cf-105b88792d9b");
+
+    Future.microtask(() {
+      final user = context.read<UserCubit>().state;
+      final userId = user?.id;
+
+      if (userId != null && userId.isNotEmpty) {
+        marketerProductCubit.fetchProducts(userId);
+      } else {
+        // Optional: show error/snackbar if user not found
+        debugPrint("User ID is null or empty");
+      }
+    });
   }
 
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
     return Scaffold(
       body: Column(
         children: [
@@ -60,7 +71,7 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                             bottonWidget: Text(AppLocalizations.of(context)!.tryAgain),
                             color: ColorManager.lightprimary,
                             borderColor: ColorManager.lightprimary,
-                            onPressed: () => marketerProductCubit.fetchProducts("1ad0f91f-5bcb-450d-92cf-105b88792d9b"),
+                            onPressed: () => marketerProductCubit.fetchProducts(user?.id??""),
                           )
                         ],
                       ),
@@ -72,12 +83,13 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                   final allRequests = state.requestList;
 
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 24.h),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 18.h),
                     child: GridView.builder(
                       itemCount: allRequests.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 9.w,
+                        mainAxisSpacing: 15.h,
                         mainAxisExtent: 248.h,
                       ),
                       itemBuilder: (context, index) {

@@ -207,7 +207,8 @@
   "loading": "جار التحميل...",
   "thereIsNoImages": "لا توجد صور متاحة للعرض",
   "noRequestsFound": "لا توجد طلبات متاحة",
-  "noProductsFound": "لا توجد منتجات متاحة"
+  "noProductsFound": "لا توجد منتجات متاحة",
+  "fieldRequired": "هذا الحقل مطلوب"
 
 
 }

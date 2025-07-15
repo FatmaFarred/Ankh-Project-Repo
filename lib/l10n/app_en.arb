@@ -211,7 +211,9 @@
     "loading": "Loading...",
   "thereIsNoImages": "there is no images",
   "noRequestsFound": "No requests found",
-  "noProductsFound": "No products found"
+  "noProductsFound": "No products found",
+  "fieldRequired": "This field is required"
+
 
 
 

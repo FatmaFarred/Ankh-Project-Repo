@@ -372,13 +372,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     borderColor: Theme
                         .of(context)
                         .primaryColor,
+                    //todo: add the request inspection screen
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RequestInspectionScreen(),
-                        ),
+                      Navigator.pushNamed(context, RequestInspectionScreen.requestInspectionScreenRouteName,
+                      arguments: product
                       );
+
                     },
                   ):
                   const SizedBox.shrink()

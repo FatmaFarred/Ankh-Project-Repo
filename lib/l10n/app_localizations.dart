@@ -1339,6 +1339,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No products found'**
   String get noProductsFound;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get fieldRequired;
 }
 
 class _AppLocalizationsDelegate
