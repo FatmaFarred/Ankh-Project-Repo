@@ -21,11 +21,19 @@ class AccountScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.account),
+        title: Text(AppLocalizations.of(context)!.personalAccount),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.white,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            // Navigate to home screen (index 0) instead of popping
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            } else {
+              // If we're in the bottom nav bar, navigate to home
+              Navigator.pushReplacementNamed(context, 'BottomNavBar');
+            }
+          },
         ),
       ),
       backgroundColor: ColorManager.containerGrey,

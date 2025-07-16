@@ -273,8 +273,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Expanded(
                         child: Text(
-                          "${AppLocalizations.of(context)!.egp} ${product
-                              .price}",
+                          "${AppLocalizations.of(context)!.egp} ${product.price}",
                           style: GoogleFonts.poppins(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,

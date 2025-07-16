@@ -29,6 +29,7 @@ class MarketerProductScreen extends StatefulWidget {
 
 class _MarketerProductScreenState extends State<MarketerProductScreen> {
   MarketerProductCubit marketerProductCubit = getIt<MarketerProductCubit>();
+  
   void initState() {
     super.initState();
 
@@ -45,11 +46,23 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
     });
   }
 
+  Future<void> _refreshData() async {
+    print("🔄 Marketer Products Refresh triggered!"); // Debug print
+    final user = context.read<UserCubit>().state;
+    final userId = user?.id;
+    print("👤 User ID: $userId"); // Debug print
+    if (userId != null && userId.isNotEmpty) {
+      await marketerProductCubit.fetchProducts(userId);
+    }
+    print("✅ Marketer Products Refresh completed!"); // Debug print
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
     return Scaffold(
+
       body: Column(
         children: [
           HeaderSection(),
@@ -78,31 +91,66 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                     ),
                   );
                 } else if (state is MarketerProductEmpty) {
-                  return Center(child: Text(AppLocalizations.of(context)!.message));
+                  return RefreshIndicator(
+                    color: ColorManager.lightprimary,
+                    onRefresh: _refreshData,
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.inbox_outlined,
+                                  size: 64,
+                                  color: ColorManager.darkGrey,
+                                ),
+                                SizedBox(height: 16),
+                                Text(
+                                  AppLocalizations.of(context)!.message,
+                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: ColorManager.darkGrey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 } else if (state is MarketerProductSuccess) {
                   final allRequests = state.requestList;
 
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 18.h),
-                    child: GridView.builder(
-                      itemCount: allRequests.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 9.w,
-                        mainAxisSpacing: 15.h,
-                        mainAxisExtent: 248.h,
+                    child: RefreshIndicator(
+                      color: ColorManager.lightprimary,
+                      onRefresh: _refreshData,
+                      child: GridView.builder(
+                        itemCount: allRequests.length,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 9.w,
+                          mainAxisSpacing: 15.h,
+                          mainAxisExtent: 248.h,
+
+                        ),
+                        itemBuilder: (context, index) {
+                          final product = allRequests[index];
+                          return InkWell(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              DetailsScreen.detailsScreenRouteName,
+                              arguments: product.id,
+                            ),
+                            child: MyProductCarCard(product: product),
+                          );
+                        },
                       ),
-                      itemBuilder: (context, index) {
-                        final product = allRequests[index];
-                        return InkWell(
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            DetailsScreen.detailsScreenRouteName,
-                            arguments: product.id,
-                          ),
-                          child: MyProductCarCard(product: product),
-                        );
-                      },
                     ),
                   );
                 }

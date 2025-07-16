@@ -16,7 +16,15 @@ class ChatsScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back),
           color: Colors.white,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            // Navigate to home screen (index 0) instead of popping
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            } else {
+              // If we're in the bottom nav bar, navigate to home
+              Navigator.pushReplacementNamed(context, 'BottomNavBar');
+            }
+          },
         ),
         title: Text(AppLocalizations.of(context)!.chats),
         centerTitle: true,

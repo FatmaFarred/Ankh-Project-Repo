@@ -38,7 +38,7 @@ class MyProductCarCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              RoundedContainerWidget(width: 165.w, height: 114.h, imagePath:  "https://ankhapi.runasp.net/${product.images?[0]}",
+              RoundedContainerWidget(width: 165.w, height: 114.h, imagePath:  "${product.images?[0]}",
               imageheight: 68.h,
                 imagewidth: 152.w,
               ),
