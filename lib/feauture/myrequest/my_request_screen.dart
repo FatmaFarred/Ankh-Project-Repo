@@ -63,6 +63,14 @@ class _RequestScreenState extends State<RequestScreen>
     }
   }
 
+  Future<void> _refreshData() async {
+    print("🔄 Refresh triggered!"); // Debug print
+    final user = context.read<UserCubit>().state;
+    print("👤 User ID: ${user?.id}"); // Debug print
+    await context.read<MarketerRequestCubit>().fetchRequests(user?.id ?? "", "roleId");
+    print("✅ Refresh completed!"); // Debug print
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
@@ -73,7 +81,15 @@ class _RequestScreenState extends State<RequestScreen>
           leading: IconButton(
             icon: const Icon(CupertinoIcons.back),
             color: Colors.white,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              // Navigate to home screen (index 0) instead of popping
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              } else {
+                // If we're in the bottom nav bar, navigate to home
+                Navigator.pushReplacementNamed(context, 'BottomNavBar');
+              }
+            },
           ),
           title: Text(AppLocalizations.of(context)!.myRequests),
         ),
@@ -97,7 +113,7 @@ class _RequestScreenState extends State<RequestScreen>
                       ),
                       color: ColorManager.lightprimary,
                       borderColor: ColorManager.lightprimary,
-                      onPressed: () => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
+                      onPressed: () => context.read<MarketerRequestCubit>().fetchRequests(user?.id??"", "roleId"),
                     )
                   ],
                 ),
@@ -155,26 +171,50 @@ class _RequestScreenState extends State<RequestScreen>
                       controller: _tabController,
                       children: List.generate(5, (tabIndex) {
                         final filteredRequests = filterRequests(allRequests, tabIndex);
-                        if (filteredRequests.isEmpty) {
-                          return Center(child: Text("No requests found"));
-                        }
-                        return ListView.builder(
-                          itemCount: filteredRequests.length,
-                          itemBuilder: (context, index) {
-                            final request = filteredRequests[index];
-                            return InkWell(
-                              onTap: () => Navigator.of(context).pushNamed(
-                                MyRequestDetails.myRequestDetailsRouteName,
-                                arguments: request.id,
-
-                              ),
-                              child: CarRequestCard(
-                                request: request,
-                                paddingHorizontal: 20.w,
-                                paddingVertical: 12.h,
-                              ),
-                            );
-                          },
+                        return RefreshIndicator(
+                          color: ColorManager.lightprimary,
+                          onRefresh: _refreshData,
+                          child: ListView.builder(
+                            itemCount: filteredRequests.isEmpty ? 1 : filteredRequests.length,
+                            itemBuilder: (context, index) {
+                              if (filteredRequests.isEmpty) {
+                                return Container(
+                                  height: MediaQuery.of(context).size.height * 0.5,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.inbox_outlined,
+                                          size: 64,
+                                          color: ColorManager.darkGrey,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "No requests found",
+                                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                            color: ColorManager.darkGrey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                              final request = filteredRequests[index];
+                              return InkWell(
+                                onTap: () => Navigator.of(context).pushNamed(
+                                  MyRequestDetails.myRequestDetailsRouteName,
+                                  arguments: request.id,
+                                ),
+                                child: CarRequestCard(
+                                  request: request,
+                                  paddingHorizontal: 20.w,
+                                  paddingVertical: 12.h,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       }),
                     ),

@@ -72,74 +72,75 @@ class _BottomNavBarState extends State<BottomNavBar> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorManager.lightprimary,
-        selectedLabelStyle: GoogleFonts.cairo(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w700,
-          color: ColorManager.lightprimary,
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: ColorManager.lightprimary,
+          selectedLabelStyle: GoogleFonts.cairo(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w700,
+            color: ColorManager.lightprimary,
+          ),
+          unselectedItemColor: ColorManager.darkGrey,
+          unselectedLabelStyle: GoogleFonts.cairo(
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+            color: ColorManager.darkGrey,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0.7,
+          showUnselectedLabels: true,
+          onTap: (index) => setState(() => _currentIndex = index),
+          items: user?.roles?[0] == "Marketer" ? [
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
+              label: AppLocalizations.of(context)!.myProducts,
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
+              label: AppLocalizations.of(context)!.balance,
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
+              label:  AppLocalizations.of(context)!.requests,
+            ),
+            BottomNavigationBarItem(
+
+              icon: Icon(Icons.wechat_sharp, size: 20.sp),
+              label: AppLocalizations.of(context)!.chats,
+
+            ),
+
+
+
+            BottomNavigationBarItem(
+              icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+              label: AppLocalizations.of(context)!.accoun,
+
+            ),
+          ]:
+          [
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+              label:  AppLocalizations.of(context)!.home,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
+              label:  AppLocalizations.of(context)!.favorite,
+            ),
+            BottomNavigationBarItem(
+
+              icon: Icon(Icons.wechat_sharp, size: 20.sp),
+              label: AppLocalizations.of(context)!.chats,
+
+            ),
+            BottomNavigationBarItem(
+              icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+              label: AppLocalizations.of(context)!.accoun,
+
+            ),
+          ],
         ),
-        unselectedItemColor: ColorManager.darkGrey,
-        unselectedLabelStyle: GoogleFonts.cairo(
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w600,
-          color: ColorManager.darkGrey,
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0.7,
-        showUnselectedLabels: true,
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: user?.roles?[0] == "Marketer" ? [
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.myProducts,
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.balance,
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
-            label:  AppLocalizations.of(context)!.requests,
-          ),
-          BottomNavigationBarItem(
+      );
 
-            icon: Icon(Icons.wechat_sharp, size: 20.sp),
-            label: AppLocalizations.of(context)!.chats,
-
-          ),
-
-
-
-          BottomNavigationBarItem(
-            icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.account,
-
-          ),
-        ]:
-        [
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
-            label:  AppLocalizations.of(context)!.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
-            label:  AppLocalizations.of(context)!.favorite,
-          ),
-          BottomNavigationBarItem(
-
-            icon: Icon(Icons.wechat_sharp, size: 20.sp),
-            label: AppLocalizations.of(context)!.chats,
-
-          ),
-          BottomNavigationBarItem(
-            icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
-            label: AppLocalizations.of(context)!.account,
-
-          ),
-        ],
-      ),
-    );
   }
 }

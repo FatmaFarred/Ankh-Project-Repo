@@ -1345,6 +1345,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This field is required'**
   String get fieldRequired;
+
+  /// No description provided for @accoun.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accoun;
 }
 
 class _AppLocalizationsDelegate
