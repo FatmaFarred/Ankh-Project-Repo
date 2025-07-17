@@ -9,12 +9,15 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: GoogleFonts.poppins(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
-        color: ColorManager.black,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        title,
+        style: GoogleFonts.poppins(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+          color: ColorManager.black,
+        ),
       ),
     );
   }

@@ -1,27 +1,25 @@
-import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
-import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
-import 'package:ankh_project/feauture/inspector_screen/request_submitted_screen.dart';
-
+import 'package:ankh_project/feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/CustomRadioGroup.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/client_product_info_card.dart';
-import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
-import 'package:ankh_project/feauture/inspector_screen/widgets/custom_upload_take_photo_row.dart';
+import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart' show CustomTextFormField;
 import 'package:ankh_project/feauture/inspector_screen/widgets/photo_list_view.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class InspectionDetailsScreen extends StatefulWidget {
-  const InspectionDetailsScreen({super.key});
+import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+
+class InspectionReport extends StatefulWidget {
+  const InspectionReport({super.key});
 
   @override
-  State<InspectionDetailsScreen> createState() =>
-      _InspectionDetailsScreenState();
+  State<InspectionReport> createState() => _InspectionReportState();
 }
 
-class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
+class _InspectionReportState extends State<InspectionReport> {
+
   String? selectedStatus;
   final List<String> statusOptions = [
     'Completed',
@@ -48,7 +46,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
           color: Colors.white,
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(AppLocalizations.of(context)!.inspectionDetails),
+        title: Text("Reports Screen"),
         centerTitle: true,
         backgroundColor: ColorManager.lightprimary,
       ),
@@ -75,11 +73,6 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
             ),
             SizedBox(height: 20.h),
 
-
-                 CustomPhotoButtons(),
-                // Upload & Take Photo
-            SizedBox(height: 20.h),
-
             CustomTextFormField(
               controller: commentController,
               hintText: "Write your comments or notes here...",
@@ -89,7 +82,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
 
             CustomizedElevatedButton(
               bottonWidget: Text(
-                AppLocalizations.of(context)!.submitRequest,
+                "Back To home",
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge
@@ -102,8 +95,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return RequestSubmittedScreen();
-
+                      return InspectorBottomNavBar();
                     },
                   ),
                 );
