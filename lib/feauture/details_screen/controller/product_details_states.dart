@@ -1,4 +1,4 @@
-import 'package:ankh_project/domain/entities/all_products_entity.dart';
+import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:ankh_project/domain/entities/marketer_request_inspection_details_entity.dart';
 import 'package:ankh_project/domain/entities/marketer_requests_for_inspection_entity.dart';
 
@@ -11,7 +11,7 @@ class ProductDetailsInitial extends ProductDetailsStates {}
 class ProductDetailsLoading extends ProductDetailsStates {}
 
 class ProductDetailsSuccess extends ProductDetailsStates {
-  final AllProductsEntity productDetails;
+  final ProductDetailsEntity productDetails;
   ProductDetailsSuccess({ required this.productDetails});
 }
 

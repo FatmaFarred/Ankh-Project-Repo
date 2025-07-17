@@ -657,4 +657,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get accoun => 'الحساب';
+
+  @override
+  String get addToMyProducts => 'إضافة إلى منتجاتي';
+
+  @override
+  String get reports => 'التقارير';
 }

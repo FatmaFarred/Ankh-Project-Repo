@@ -1351,6 +1351,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account'**
   String get accoun;
+
+  /// No description provided for @addToMyProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to My Products'**
+  String get addToMyProducts;
+
+  /// No description provided for @reports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reports;
 }
 
 class _AppLocalizationsDelegate

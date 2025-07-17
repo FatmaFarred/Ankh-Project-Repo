@@ -6,13 +6,13 @@ import '../../api_service/failure/error_handling.dart';
 import '../entities/product_details_entity.dart';
 import 'package:injectable/injectable.dart';
 @injectable
-class MarketerProductsUseCase {
+class MarketerAssignProductUseCase {
   MarketerAssignGetProductsRepositry repository;
 
-  MarketerProductsUseCase(this.repository);
+  MarketerAssignProductUseCase(this.repository);
 
-  Future <Either<Failure,List<AllProductsEntity>>> getAllMarketerProducts(
+  Future <Either<Failure,String?>> execute (num productId,
       String userId) {
-    return repository.getMarketerProducts(userId);
+    return repository.assignProduct(productId, userId);
   }
 }

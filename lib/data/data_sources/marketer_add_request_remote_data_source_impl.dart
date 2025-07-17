@@ -44,7 +44,7 @@ class MarketerAddRequestInspectionRemoteDataSourseImpl
           // Return success
           return right(myResponse);
         } else {
-          return left(ServerError(errorMessage: response.data['message']));
+          return left(ServerError(errorMessage: response.data));
         }
       } else {
         return left(NetworkError(errorMessage: GlobalLocalization.noInternet));

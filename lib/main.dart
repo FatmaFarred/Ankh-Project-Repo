@@ -1,6 +1,5 @@
 
     import 'dart:async';
-    import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
     import 'package:ankh_project/feauture/onboarding/onboarding.dart';
     import 'package:app_links/app_links.dart';
     import 'package:firebase_core/firebase_core.dart';
@@ -27,6 +26,7 @@ import 'core/theme/my_app_theme.dart';
 import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
     import 'feauture/inspector_screen/inspector_bottom_nav_bar.dart';
+import 'feauture/myrequest/my_request_details/my_request_details.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
     import 'feauture/request_inspection_screen/confirm_request_screen.dart';
 import 'feauture/request_inspection_screen/request_inspection_screen.dart';
@@ -182,7 +182,6 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
                 DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
                  //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
-                MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
                 InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar(),
                 RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
                 ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),

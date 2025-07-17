@@ -14,6 +14,7 @@ import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
+import '../marketer_home/marketer_home_screen.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 
@@ -40,6 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 
     final List<Widget> _pages =user?.roles?[0] == "Marketer" ?[
+      MarketerHomeScreen(),
       MarketerProductScreen(),
       BalanceScreen(),
       BlocProvider(
@@ -91,6 +93,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           showUnselectedLabels: true,
           onTap: (index) => setState(() => _currentIndex = index),
           items: user?.roles?[0] == "Marketer" ? [
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+              label:  AppLocalizations.of(context)!.home,
+            ),
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
               label: AppLocalizations.of(context)!.myProducts,

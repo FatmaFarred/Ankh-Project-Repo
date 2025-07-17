@@ -2,7 +2,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_text_field.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/core/validator/my_validator.dart';
-import 'package:ankh_project/domain/entities/all_products_entity.dart';
+import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/confirm_request_screen.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/confrim_requests_arg.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
@@ -39,7 +39,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
-    final  product = ModalRoute.of(context)?.settings.arguments as AllProductsEntity;
+    final  product = ModalRoute.of(context)?.settings.arguments as ProductDetailsEntity;
 
     if (product == null) {
       print("product is null, returning empty widget");

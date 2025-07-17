@@ -1,11 +1,9 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/data/repositries/product_repository_impl.dart';
-import 'package:ankh_project/domain/entities/all_products_entity.dart';
+import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/product_remote_data_source.dart';
 import 'package:ankh_project/domain/use_cases/get_popular_products_use_case.dart';
 import 'package:ankh_project/feauture/home_screen/popular_car_card.dart';
-import 'package:ankh_project/feauture/marketer_products/controller/marketer_product_cubit.dart';
-import 'package:ankh_project/feauture/marketer_products/controller/states.dart';
 import 'package:ankh_project/feauture/marketer_products/widgets/my_product_car_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +17,8 @@ import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../details_screen/details_screen.dart';
 import '../home_screen/header_section.dart';
+import 'get_product_controller/marketer_product_cubit.dart';
+import 'get_product_controller/states.dart';
 
 class MarketerProductScreen extends StatefulWidget {
   MarketerProductScreen({super.key});
@@ -77,11 +77,13 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(state.error?.errorMessage ?? ""),
                           CustomizedElevatedButton(
-                            bottonWidget: Text(AppLocalizations.of(context)!.tryAgain),
+                            bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                            ),
                             color: ColorManager.lightprimary,
                             borderColor: ColorManager.lightprimary,
                             onPressed: () => marketerProductCubit.fetchProducts(user?.id??""),
@@ -103,13 +105,13 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  Icons.inbox_outlined,
+                                  Icons.hourglass_empty,
                                   size: 64,
                                   color: ColorManager.darkGrey,
                                 ),
                                 SizedBox(height: 16),
                                 Text(
-                                  AppLocalizations.of(context)!.message,
+                                  AppLocalizations.of(context)!.noProductsFound,
                                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: ColorManager.darkGrey,
                                   ),
@@ -122,7 +124,7 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                     ),
                   );
                 } else if (state is MarketerProductSuccess) {
-                  final allRequests = state.requestList;
+                  final allRequests = state.productList;
 
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 18.h),

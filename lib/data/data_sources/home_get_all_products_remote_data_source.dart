@@ -1,5 +1,6 @@
-import 'package:ankh_project/api_service/api_manager.dart';
+
 import 'package:ankh_project/domain/entities/all_products_entity.dart';
+import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -8,20 +9,21 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../api_service/failure/error_handling.dart';
 import '../../api_service/api_constants.dart';
+import '../../api_service/api_manager.dart';
 import '../../api_service/end_points.dart';
-import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_products_remote_data_source.dart';
+import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/home_get_all_products_remote_data_source.dart';
 import '../../l10n/global_localization_helper.dart';
-import '../models/all_prosucts_dm.dart';
+import '../models/all_products_dm.dart';
 
+@Injectable(as: HomeGetAllProductsRemoteDataSource)
+ class HomeGetAllProductsRemoteDataSourceImpl implements HomeGetAllProductsRemoteDataSource {
 
-@Injectable(as: MarketerProductsRemoteDataSource)
- class MarketerProductsRemoteDataSourceImpl implements MarketerProductsRemoteDataSource {
   ApiManager apiManager;
 
-  MarketerProductsRemoteDataSourceImpl(this.apiManager);
+  HomeGetAllProductsRemoteDataSourceImpl(this.apiManager);
 
-  Future <Either<Failure, List<AllProductsDm>>> getAllMarketerProducts(
-      String userId) async {
+  Future <Either<Failure,List<AllProductsDm>>>getHomeAllProducts () async{
+
     try {
       final List<ConnectivityResult> connectivityResult =
       await Connectivity().checkConnectivity();
@@ -30,7 +32,7 @@ import '../models/all_prosucts_dm.dart';
           connectivityResult.contains(ConnectivityResult.mobile)) {
         var response = await apiManager.getData(
           url: ApiConstant.baseUrl,
-          endPoint: "${EndPoints.getMarketerProductsById}/$userId",
+          endPoint: EndPoints.getHomeAllProducts,
 
           options: Options(validateStatus: (_) => true),
 
@@ -61,4 +63,5 @@ import '../models/all_prosucts_dm.dart';
       return left(ServerError(errorMessage: e.toString()));
     }
   }
-}
+  }
+

@@ -1,4 +1,4 @@
-import 'package:ankh_project/feauture/marketer_products/controller/states.dart';
+import 'package:ankh_project/feauture/marketer_products/get_product_controller/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -20,7 +20,7 @@ class MarketerProductCubit extends Cubit<MarketerProductState> {
     }, (response) {
       (response.isEmpty)
           ? emit(MarketerProductEmpty())
-          : emit(MarketerProductSuccess(requestList: response));
+          : emit(MarketerProductSuccess(productList: response));
 
     });
   }

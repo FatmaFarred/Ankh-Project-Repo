@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
-import 'package:ankh_project/domain/entities/all_products_entity.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:ankh_project/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,12 +9,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/details_screen/details_screen.dart';
 
+import '../../../domain/entities/all_products_entity.dart';
 import '../../../l10n/app_localizations.dart';
 
 class MyProductCarCard extends StatelessWidget {
   final AllProductsEntity product;
+  final bool showAddButton;
+  final VoidCallback? onAddPressed;
 
-  const MyProductCarCard({super.key, required this.product});
+  const MyProductCarCard({
+    super.key,
+    required this.product,
+    this.showAddButton = false,
+    this.onAddPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,7 @@ class MyProductCarCard extends StatelessWidget {
     child: Container(
 
       width: 198.w,
-      height: 248.h,
+      height: showAddButton?285.5.h:248.h,
       padding: EdgeInsets.symmetric(horizontal: 17.5.w, vertical: 13.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.5.r),
@@ -33,12 +42,12 @@ class MyProductCarCard extends StatelessWidget {
           width: 0.9.w,
         ),
       ),
-      child: ListView(
-       // crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
-              RoundedContainerWidget(width: 165.w, height: 114.h, imagePath:  "${product.images?[0]}",
+              RoundedContainerWidget(width: 165.w, height: 114.h, imagePath:  "${product.image}",
               imageheight: 68.h,
                 imagewidth: 152.w,
               ),
@@ -108,6 +117,26 @@ class MyProductCarCard extends StatelessWidget {
             "EGP ${product.price}",
             style:Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11.sp,color: ColorManager.lightprimary),
           ),
+          if (showAddButton) ...[
+            SizedBox(height: 12.h),
+            SizedBox(
+              height: 50.h,
+              child: CustomizedElevatedButton(
+                onPressed: onAddPressed,
+                color:ColorManager.lightprimary ,
+                borderColor:ColorManager.lightprimary ,
+
+                bottonWidget: Text(
+                  AppLocalizations.of(context)!.addToMyProducts,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     ),

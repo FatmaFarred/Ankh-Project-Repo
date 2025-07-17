@@ -1,4 +1,4 @@
-import '../../domain/entities/all_products_entity.dart';
+import '../../domain/entities/product_details_entity.dart';
 
 /// id : 4
 /// title : "test5"
@@ -17,8 +17,8 @@ import '../../domain/entities/all_products_entity.dart';
 /// marketerName : "Omar"
 /// images : ["uploads/vehicles/c40c1555-5882-42b8-b89c-b67697d2eec7.jpg","uploads/vehicles/3b5c8a61-7aa8-4844-ba7a-3882b359606b.jpg"]
 
-class AllProductsDm extends AllProductsEntity {
-  AllProductsDm({
+class ProductDetailsDm extends ProductDetailsEntity {
+  ProductDetailsDm({
     super.id,
     super.title,
     super.description,
@@ -37,7 +37,7 @@ class AllProductsDm extends AllProductsEntity {
     super.images,
   });
 
-  AllProductsDm.fromJson(dynamic json) {
+  ProductDetailsDm.fromJson(dynamic json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];

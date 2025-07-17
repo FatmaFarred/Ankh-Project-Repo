@@ -1,5 +1,5 @@
 import 'package:ankh_project/api_service/api_manager.dart';
-import 'package:ankh_project/data/models/all_prosucts_dm.dart';
+import 'package:ankh_project/data/models/product_details_dm.dart';
 import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 import '../../api_service/api_constants.dart';
 import '../../api_service/end_points.dart';
 import '../../api_service/failure/error_handling.dart';
+import '../../domain/entities/product_details_entity.dart';
 import '../../l10n/global_localization_helper.dart';
 @Injectable(as: ProductDetailsRemoteDataSource)
 class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSource{
@@ -18,7 +19,7 @@ class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSour
 
 
   @override
-  Future<Either<Failure, AllProductsDm>> getProductDetails(num productId) async{
+  Future<Either<Failure, ProductDetailsEntity>> getProductDetails(num productId) async{
     try {
       final List<ConnectivityResult> connectivityResult =
           await Connectivity().checkConnectivity();
@@ -38,14 +39,14 @@ class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSour
         }
         final  myResponse = response.data;
 
-         var requestResponse = AllProductsDm.fromJson(myResponse);
+         var requestResponse = ProductDetailsDm.fromJson(myResponse);
 
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           // Return success
           return right(requestResponse);
         } else {
-          return left(ServerError(errorMessage: response.data['message']));
+          return left(ServerError(errorMessage: response.data));
         }
       } else {
         return left(NetworkError(
