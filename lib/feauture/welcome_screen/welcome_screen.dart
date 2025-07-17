@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
                 //todo: navigate to visitor home
-                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return InspectorBottomNavBar();}));
 
 
               },
