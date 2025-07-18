@@ -163,7 +163,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
 
               initialRoute:widget.isLoggedIn?BottomNavBar.bottomNavBarRouteName:'/', // 👈 Make sure '/' route is defined below
               routes: {
-                '/': (context) => OnBoarding(), // ✅ root fallback
+                '/': (context) => OnBoarding(),
                 OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
                 WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
                 RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
