@@ -7,6 +7,9 @@ import 'package:ankh_project/feauture/client_notification_screen/client_notifica
 import 'package:ankh_project/feauture/profile/profile_screen.dart';
 import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 
+import 'package:ankh_project/feauture/client_search_screen/client_search_screen.dart';
+import 'package:ankh_project/feauture/client_search_screen/client_search_screen_wrapper.dart';
+import 'package:ankh_project/feauture/client_search_screen/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -40,7 +43,7 @@ class HeaderSection extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (user?.roles?[0] == "Marketer") {
-                      Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
+                     Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
                     }
                   },
                   child: ClipRRect(
