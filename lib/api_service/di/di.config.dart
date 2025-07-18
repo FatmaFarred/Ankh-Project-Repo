@@ -168,7 +168,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i354.UserCubit>(() => _i354.UserCubit());
     gh.singleton<_i664.FireBaseUtilies>(() => _i664.FireBaseUtilies());
     gh.singleton<_i470.LocalNotification>(() => _i470.LocalNotification());
-    gh.singleton<_i354.UserCubit>(() => _i354.UserCubit());
     gh.factory<_i686.MarketerAssignGetProductsRemoteDataSource>(() =>
         _i407.MarketerAssignGetProductsRemoteDataSourceImpl(
             gh<_i1069.ApiManager>()));

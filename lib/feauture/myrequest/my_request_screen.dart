@@ -83,14 +83,10 @@ class _RequestScreenState extends State<RequestScreen>
             icon: const Icon(CupertinoIcons.back),
             color: Colors.white,
             onPressed: () {
-              // Navigate to home screen (index 0) instead of popping
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              } else {
-                // If we're in the bottom nav bar, navigate to home
+
                 Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
               }
-            },
+
           ),
           title: Text(AppLocalizations.of(context)!.myRequests),
         ),

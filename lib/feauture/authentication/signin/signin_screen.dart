@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
             title: AppLocalizations.of(context)!.success,
             message: state.response.message,
             positiveOnClick: () =>
-                Navigator.of(context).pushNamed(
+                Navigator.of(context).pushReplacementNamed(
                     BottomNavBar.bottomNavBarRouteName
                     ));
       }

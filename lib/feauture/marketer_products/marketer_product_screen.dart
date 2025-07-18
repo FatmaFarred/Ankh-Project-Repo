@@ -16,6 +16,7 @@ import '../../data/data_sources/get_popular_product_remote_data_source_impl.dart
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../details_screen/details_screen.dart';
+import '../home_screen/bottom_nav_bar.dart';
 import '../home_screen/header_section.dart';
 import 'get_product_controller/marketer_product_cubit.dart';
 import 'get_product_controller/states.dart';
@@ -67,11 +68,11 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
           icon: const Icon(CupertinoIcons.back),
           color: Colors.white,
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'BottomNavBar');
+            Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
 
           },
         ),
-        title: Text(AppLocalizations.of(context)!.myRequests),
+        title: Text(AppLocalizations.of(context)!.myProducts),
       ),
 
       body: Column(

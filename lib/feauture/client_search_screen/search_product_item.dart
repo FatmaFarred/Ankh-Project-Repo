@@ -15,8 +15,8 @@ class SearchProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = product.images?.isNotEmpty == true
-        ? 'https://ankhapi.runasp.net/${product.images!.first}'
+    final imageUrl = product.image?.isNotEmpty == true
+        ? 'https://ankhapi.runasp.net/${product.image}'
         : null;
 
     return InkWell(

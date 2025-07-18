@@ -1,8 +1,8 @@
 import 'package:ankh_project/api_service/api_constants.dart';
-import 'package:ankh_project/data/models/all_prosucts_dm.dart';
 import 'package:injectable/injectable.dart';
 import '../../api_service/api_manager.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/all_products_remote_data_source.dart';
+import '../models/all_products_dm.dart';
 import 'all_products_remote_data_source.dart';
 
 @LazySingleton(as: AllProductsRemoteDataSource)
