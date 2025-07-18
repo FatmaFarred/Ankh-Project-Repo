@@ -213,7 +213,10 @@
   "noRequestsFound": "No requests found",
   "noProductsFound": "No products found",
   "fieldRequired": "This field is required",
-  "accoun": "Account"
+  "accoun": "Account",
+  "addToMyProducts": "Add to My Products",
+  "reports": "Reports"
+
 
 
 

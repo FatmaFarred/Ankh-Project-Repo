@@ -12,6 +12,7 @@ import '../home_screen/bottom_nav_bar.dart';
 
 class RequestSubmittedScreen extends StatelessWidget {
   const RequestSubmittedScreen({super.key});
+  static const String requestSubmittedRouteName = "requestSubmitted";
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,11 @@ class RequestSubmittedScreen extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
+                Navigator.pushReplacementNamed(
+                  context,
+                  BottomNavBar.bottomNavBarRouteName,
+                  arguments: {'initialIndex': 1}
+                );
               },
             ),
           ],

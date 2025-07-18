@@ -14,6 +14,7 @@ import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
+import '../marketer_home/marketer_home_screen.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 
@@ -21,45 +22,45 @@ import '../myrequest/my_request_screen.dart';
 import '../profile/profile_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
-   BottomNavBar({super.key});
+   BottomNavBar({this.initialIndex = 0}) ;
 
   static String bottomNavBarRouteName = "BottomNavBar";
-
-
+  final int initialIndex;
+  
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
+  late int _currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+  }
+
+  // Public method to navigate to a specific index
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
 
-
-    final List<Widget> _pages =user?.roles?[0] == "Marketer" ?[
+    final List<Widget> _pages = user?.roles?[0] == "Marketer" ? [
+      MarketerHomeScreen(),
       MarketerProductScreen(),
       BalanceScreen(),
       BlocProvider(
         create: (_) => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
         child: RequestScreen(),
       ),
-
       ChatsScreen(),
-
-      AccountScreen(),
-    ]:[
+      AccountScreen(), // Keep AccountScreen in pages but hide from navigation
+    ] : [
       HomeScreen(),
-
       ClientFavouriteScreen(),
-
-
       ChatsScreen(),
-
-
-      AccountScreen(),
     ];
 
     if (_currentIndex >= _pages.length) {
@@ -92,6 +93,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           onTap: (index) => setState(() => _currentIndex = index),
           items: user?.roles?[0] == "Marketer" ? [
             BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+              label:  AppLocalizations.of(context)!.home,
+            ),
+            BottomNavigationBarItem(
               icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
               label: AppLocalizations.of(context)!.myProducts,
             ),
@@ -107,14 +112,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
               icon: Icon(Icons.wechat_sharp, size: 20.sp),
               label: AppLocalizations.of(context)!.chats,
-
-            ),
-
-
-
-            BottomNavigationBarItem(
-              icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
-              label: AppLocalizations.of(context)!.accoun,
 
             ),
           ]:

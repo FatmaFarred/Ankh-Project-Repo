@@ -140,8 +140,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ));
           } else if (state is ProductDetailsSuccess) {
             final product = state.productDetails;
-            final List<String> images = (product.images?.isNotEmpty ?? false)
-                ? product.images!.map((img) => "https://ankhapi.runasp.net/$img").toList()
+            final List<String> images = (product.imageUrls?.isNotEmpty ?? false)
+                ? product.imageUrls!.map((img) => "https://ankhapi.runasp.net/$img").toList()
                 : [ImageAssets.brokenImage];
             return SingleChildScrollView(
               padding: REdgeInsets.all(22),
@@ -176,7 +176,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                       ),
 
-                      product.status =="Online"? Positioned(
+                      product.status =="Available"? Positioned(
                         right: 13.w,
                         child: Chip(label: Text(AppLocalizations.of(context)!.active,style:
                           Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14.sp,color: ColorManager.darkGreen)
@@ -285,7 +285,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
 
                   SizedBox(height: 18.h),
-                  const StatusSection(),
+                   StatusSection(product: product,),
                   SizedBox(height: 17.h),
 
                   SectionTitle(
@@ -314,12 +314,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   CarDetailInfo(product: product),
 
                   SizedBox(height: 16.h),
-                  SectionHeader(title: AppLocalizations.of(context)!.images,imageUrl:product.images ,),
+                  SectionHeader(title: AppLocalizations.of(context)!.images,imageUrl:product.imageUrls ,),
                   SizedBox(
                     height: 115.h,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: product.images?.length?? 0,
+                      itemCount: product.imageUrls?.length?? 0,
                       itemBuilder: (context, index) =>
                           Container(
                             width: 115.w,
@@ -328,7 +328,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               color: const Color(0xFFF9FAFB),
                             ),
                             child: Image.network(
-                              'https://ankhapi.runasp.net/${product.images?[index]}',
+                              'https://ankhapi.runasp.net/${product.imageUrls?[index]}',
                               fit: BoxFit.contain,
                               errorBuilder: (_, __, ___) =>
                                   Image.asset(ImageAssets.brokenImage,

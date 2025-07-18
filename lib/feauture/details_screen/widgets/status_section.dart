@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../domain/entities/product_details_entity.dart';
+
 class StatusSection extends StatelessWidget {
-  const StatusSection({super.key});
+   StatusSection({super.key, required this.product});
+  ProductDetailsEntity product;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class StatusSection extends StatelessWidget {
                 color: Colors.green,
               ),
               Text(
-                AppLocalizations.of(context)!.online,
+                product?.status??"",
                 style: GoogleFonts.inter(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
@@ -47,7 +50,7 @@ class StatusSection extends StatelessWidget {
             children: [
               Icon(Icons.remove_red_eye_outlined),
               Text(
-                " 754 ${ AppLocalizations.of(context)!.views}",
+                "${product.views} ${ AppLocalizations.of(context)!.views}",
                 style: GoogleFonts.inter(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,

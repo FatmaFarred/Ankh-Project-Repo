@@ -4,6 +4,9 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
 import 'package:ankh_project/domain/entities/product_entity.dart';
 import 'package:ankh_project/feauture/client_notification_screen/client_notification_screen.dart';
+import 'package:ankh_project/feauture/profile/profile_screen.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
+
 import 'package:ankh_project/feauture/client_search_screen/client_search_screen.dart';
 import 'package:ankh_project/feauture/client_search_screen/client_search_screen_wrapper.dart';
 import 'package:ankh_project/feauture/client_search_screen/cubit/search_cubit.dart';
@@ -13,11 +16,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/customized_widgets/reusable_widgets/customized_search_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 
+typedef OnSearchCallback = void Function(String keyword);
+
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  final OnSearchCallback? onSearch;
+  const HeaderSection({super.key, this.onSearch});
 
 
   @override
@@ -33,8 +40,15 @@ class HeaderSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClipRRect(
-                  child: Image.asset(ImageAssets.profilePic, scale: 1.2),
+                InkWell(
+                  onTap: () {
+                    if (user?.roles?[0] == "Marketer") {
+                     Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
+                    }
+                  },
+                  child: ClipRRect(
+                    child: Image.asset(ImageAssets.profilePic, scale: 1.2),
+                  ),
                 ),
                 SizedBox(width: 12.w),
                 Column(
@@ -80,6 +94,7 @@ class HeaderSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 24.h),
+
             InkWell(
               onTap: (){
                 Navigator.push(
@@ -111,6 +126,7 @@ class HeaderSection extends StatelessWidget {
                 ),
               ),
             ),
+
           ],
         ),
       ),

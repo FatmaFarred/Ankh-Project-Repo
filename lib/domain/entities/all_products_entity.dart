@@ -1,55 +1,31 @@
-/// id : 4
-/// title : "test5"
-/// description : "test5"
-/// views : 0
-/// fuelType : "Petrol"
-/// transmission : "Automatic"
-/// status : "Online"
+/// id : 14
+/// title : "Toyota EX30\t"
+/// status : "Available"
+/// price : "1000000"
 /// rating : 0
-/// engineType : "ddd"
-/// horsepower : 500
-/// batteryCapacity : "666"
-/// price : "500000 - 1000000"
-/// createdAt : "2025-07-03T22:30:57.0089671"
-/// lastEditedAt : "2025-07-03T22:30:57.0089677"
-/// marketerName : "Omar"
-/// images : ["uploads/vehicles/c40c1555-5882-42b8-b89c-b67697d2eec7.jpg","uploads/vehicles/3b5c8a61-7aa8-4844-ba7a-3882b359606b.jpg"]
+/// isUsedVehicle : true
+/// transmission : "Automatic"
+/// image : "uploads/vehicles/f6b68b72-2390-44a5-b03b-3c373226fd30.jpg"
 
 class AllProductsEntity {
   AllProductsEntity({
       this.id, 
       this.title, 
-      this.description, 
-      this.views, 
-      this.fuelType, 
-      this.transmission, 
       this.status, 
-      this.rating, 
-      this.engineType, 
-      this.horsepower, 
-      this.batteryCapacity, 
       this.price, 
-      this.createdAt, 
-      this.lastEditedAt, 
-      this.marketerName, 
-      this.images,});
+      this.rating, 
+      this.isUsedVehicle, 
+      this.transmission, 
+      this.image,});
 
   num? id;
   String? title;
-  String? description;
-  num? views;
-  String? fuelType;
-  String? transmission;
   String? status;
-  num? rating;
-  String? engineType;
-  num? horsepower;
-  String? batteryCapacity;
   String? price;
-  String? createdAt;
-  String? lastEditedAt;
-  String? marketerName;
-  List<String>? images;
+  num? rating;
+  bool? isUsedVehicle;
+  String? transmission;
+  String? image;
 
 
 }

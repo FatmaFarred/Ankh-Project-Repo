@@ -7,9 +7,13 @@ abstract class EndPoints {
   static const String getMarketerRequestById = "RequestInspections";
   static const String getCsRoles = "Roles/all-roles";
 
-  static const String getMarketerProductsById = "Product/by-marketer";
+  static const String getMarketerProductsById = "Marketers/marketer";
   static const String getProductDetailsById = "Product";
   static const String MarketerAddRequestIspection = "RequestInspections/add";
+  static const String getHomeAllProducts = "Home/get-all";
+  static const String marketerAssignProduct = "Marketers/assign";
+  static const String searchHome = "Home/search";
+
 
 
 

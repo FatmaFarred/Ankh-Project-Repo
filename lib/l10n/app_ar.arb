@@ -209,7 +209,10 @@
   "noRequestsFound": "لا توجد طلبات متاحة",
   "noProductsFound": "لا توجد منتجات متاحة",
   "fieldRequired": "هذا الحقل مطلوب",
-  "accoun": "الحساب"
+  "accoun": "الحساب",
+  "addToMyProducts": "إضافة إلى منتجاتي",
+  "reports": "التقارير"
+
 
 
 }

@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../data/models/add_inspection _request.dart';
-import '../../domain/entities/all_products_entity.dart';
+import '../../domain/entities/product_details_entity.dart';
 import '../authentication/email_verfication/email_verfication_screen.dart';
 import 'confrim_requests_arg.dart';
 import 'cubit/marketer_add_request_cubit.dart';
@@ -30,7 +30,7 @@ class ConfirmRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as ConfirmRequestArgs;
-    final AllProductsEntity product = args.product;
+    final ProductDetailsEntity product = args.product;
     final InspectionRequest request = args.request;
     print(request.preferredDate);
     print(request.marketerId);
@@ -64,7 +64,7 @@ class ConfirmRequestScreen extends StatelessWidget {
             message: state.response,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    EmailVerficationScreen.emailVerficationScreenRouteName));
+                    RequestSubmittedScreen.requestSubmittedRouteName));
       }
     },
 
@@ -130,7 +130,7 @@ class ConfirmRequestScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Image.network(
-                      'https://ankhapi.runasp.net/${product.images?[0]}',
+                      'https://ankhapi.runasp.net/${product.imageUrls?[0]}',
                       height: 60,
                       width: 60,
 
