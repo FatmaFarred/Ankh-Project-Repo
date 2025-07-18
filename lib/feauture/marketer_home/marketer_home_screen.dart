@@ -23,6 +23,7 @@ import 'assign_product_controller/marketer_product_cubit.dart';
 import 'assign_product_controller/states.dart';
 import 'controller/marketer_home_product_cubit.dart';
 import 'controller/states.dart';
+import 'home_app_bar.dart';
 
 class MarketerHomeScreen extends StatefulWidget {
   MarketerHomeScreen({super.key});
@@ -74,7 +75,7 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
 
       body: Column(
         children: [
-          HeaderSection(
+          HomeAppBar(
             onSearch: (keyword) {
               if (keyword.isNotEmpty) {
                 marketerHomeProductCubit.searchProducts(keyword);
