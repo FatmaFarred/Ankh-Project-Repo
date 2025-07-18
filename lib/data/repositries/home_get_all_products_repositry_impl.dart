@@ -22,4 +22,10 @@ import '../../domain/repositries_and_data_sources/repositries/home_get_all_produ
 
   }
 
+  Future <Either<Failure,List<AllProductsEntity>>>searchAllProducts (String keyWord)async{
+    var either =await homeGetAllProductsRemoteDataSource.searchAllProducts(keyWord);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
 }

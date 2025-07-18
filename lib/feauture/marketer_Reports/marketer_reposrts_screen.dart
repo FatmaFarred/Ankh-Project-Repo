@@ -4,6 +4,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/constants/font_manager/font_style_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
 import 'package:ankh_project/domain/entities/marketer_requests_for_inspection_entity.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
 import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,13 +84,7 @@ class _RequestScreenState extends State<RequestScreen>
             icon: const Icon(CupertinoIcons.back),
             color: Colors.white,
             onPressed: () {
-              // Navigate to home screen (index 0) instead of popping
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              } else {
-                // If we're in the bottom nav bar, navigate to home
-                Navigator.pushReplacementNamed(context, 'BottomNavBar');
-              }
+              Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
             },
           ),
           title: Text(AppLocalizations.of(context)!.myRequests),

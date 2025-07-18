@@ -27,9 +27,11 @@ import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
     import 'feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'feauture/myrequest/my_request_details/my_request_details.dart';
+import 'feauture/profile/profile_screen.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
     import 'feauture/request_inspection_screen/confirm_request_screen.dart';
 import 'feauture/request_inspection_screen/request_inspection_screen.dart';
+import 'feauture/request_inspection_screen/request_submitted.dart';
 import 'feauture/welcome_screen/welcome_screen.dart';
     import 'firebase_options.dart';
     import 'firebase_service/notification_service/fcm_api_service.dart';
@@ -178,13 +180,19 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                     token: args['token']!,
                   );
                 },
-                BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
+                BottomNavBar.bottomNavBarRouteName: (context) {
+                  final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+                  final initialIndex = args?['initialIndex'] as int? ?? 0;
+                  return BottomNavBar(initialIndex: initialIndex);
+                },
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
                 DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
                  //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
                 InspectorBottomNavBar.inspectorBottomNavBarRouteName: (context)=> InspectorBottomNavBar(),
                 RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
                 ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
+                RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
+                AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
 
               },
             );

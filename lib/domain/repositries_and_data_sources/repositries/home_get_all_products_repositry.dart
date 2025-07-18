@@ -9,5 +9,7 @@ import '../../../../api_service/failure/error_handling.dart';
 abstract class HomeGetAllProductsRepositry{
 
   Future <Either<Failure,List<AllProductsEntity>>>getHomeAllProducts ( );
+  Future <Either<Failure,List<AllProductsEntity>>>searchAllProducts (String keyWord);
+
 
 }

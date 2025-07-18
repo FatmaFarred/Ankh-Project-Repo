@@ -5,7 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  const CustomSearchBar({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +20,21 @@ class CustomSearchBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: ColorManager.hintColor, width: 1.2.w),
       ),
       child: TextFormField(
+        controller: controller,
+        onChanged: onChanged,
         decoration: InputDecoration(
-          prefixIcon:  Icon(Icons.search, color: ColorManager.hintColor),
+          prefixIcon: Icon(Icons.search, color: ColorManager.hintColor),
           hintText: AppLocalizations.of(context)!.whatAreYouLookingFor,
-          hintStyle:  GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w400,color: ColorManager.hintColor),
+          hintStyle: GoogleFonts.poppins(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+            color: ColorManager.hintColor,
+          ),
           border: InputBorder.none,
-          contentPadding:  REdgeInsets.symmetric(vertical: 14),
+          contentPadding: REdgeInsets.symmetric(vertical: 14),
         ),
       ),
     );

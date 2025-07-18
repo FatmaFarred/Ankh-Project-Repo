@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/authentication/signin/signin_screen.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/profile/widegts/setting_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ import '../authentication/user_controller/user_cubit.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
-
+static  String accountScreenRouteName = "AccountScreen";
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
@@ -26,13 +27,7 @@ class AccountScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            // Navigate to home screen (index 0) instead of popping
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
-            } else {
-              // If we're in the bottom nav bar, navigate to home
-              Navigator.pushReplacementNamed(context, 'BottomNavBar');
-            }
+            Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
           },
         ),
       ),

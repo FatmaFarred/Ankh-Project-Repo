@@ -64,7 +64,7 @@ class ConfirmRequestScreen extends StatelessWidget {
             message: state.response,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    EmailVerficationScreen.emailVerficationScreenRouteName));
+                    RequestSubmittedScreen.requestSubmittedRouteName));
       }
     },
 
@@ -130,7 +130,7 @@ class ConfirmRequestScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Image.network(
-                      'https://ankhapi.runasp.net/${product.images?[0]}',
+                      'https://ankhapi.runasp.net/${product.imageUrls?[0]}',
                       height: 60,
                       width: 60,
 

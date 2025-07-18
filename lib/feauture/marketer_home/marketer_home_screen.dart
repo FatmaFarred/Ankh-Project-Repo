@@ -35,6 +35,8 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
   MarketerHomeProductCubit marketerHomeProductCubit = getIt<MarketerHomeProductCubit>();
   MarketerAssignProductCubit marketerAssignProductCubit = getIt<MarketerAssignProductCubit>();
   
+  final TextEditingController _searchController = TextEditingController();
+
   void initState() {
     super.initState();
 
@@ -72,7 +74,15 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
 
       body: Column(
         children: [
-          HeaderSection(),
+          HeaderSection(
+            onSearch: (keyword) {
+              if (keyword.isNotEmpty) {
+                marketerHomeProductCubit.searchProducts(keyword);
+              } else {
+                marketerHomeProductCubit.fetchProducts();
+              }
+            },
+          ),
           Expanded(
             // ✅ Let the product area take remaining space
             child:BlocConsumer<MarketerAssignProductCubit, MarketerAssignProductState>(

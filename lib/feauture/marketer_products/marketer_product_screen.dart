@@ -62,10 +62,20 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(CupertinoIcons.back),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, 'BottomNavBar');
+
+          },
+        ),
+        title: Text(AppLocalizations.of(context)!.myRequests),
+      ),
 
       body: Column(
         children: [
-          HeaderSection(),
           Expanded( // ✅ Let the product area take remaining space
             child: BlocBuilder<MarketerProductCubit, MarketerProductState>(
               bloc: marketerProductCubit,

@@ -103,6 +103,7 @@ import '../../domain/use_cases/marketer_request_inspection_details_usecase.dart'
     as _i805;
 import '../../domain/use_cases/marketer_requsts_for_inspection_usecase.dart'
     as _i749;
+import '../../domain/use_cases/marketer_serach_home_usecase.dart' as _i43;
 import '../../domain/use_cases/product_details_use_case.dart' as _i385;
 import '../../domain/use_cases/push_notification_use_case/push_notification_use_case.dart'
     as _i172;
@@ -170,7 +171,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
         _i758.AuthenticationRemoteDataSourceImplWithApi(
             gh<_i1069.ApiManager>()));
-
     gh.factory<_i583.MarketerAddRequestInspectionRemoteDataSource>(() =>
         _i0.MarketerAddRequestInspectionRemoteDataSourseImpl(
             apiManager: gh<_i1069.ApiManager>()));
@@ -264,16 +264,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i873.HomeGetAllProductsUseCase>(() =>
         _i873.HomeGetAllProductsUseCase(
             gh<_i77.HomeGetAllProductsRepositry>()));
+    gh.factory<_i43.MarketerSearchProductsUseCase>(() =>
+        _i43.MarketerSearchProductsUseCase(
+            gh<_i77.HomeGetAllProductsRepositry>()));
     gh.factory<_i809.ResetPasswordCubit>(
         () => _i809.ResetPasswordCubit(gh<_i416.ResetPasswordUseCase>()));
-    gh.factory<_i158.MarketerHomeProductCubit>(() =>
-        _i158.MarketerHomeProductCubit(gh<_i873.HomeGetAllProductsUseCase>()));
     gh.factory<_i155.ForgetPassworsCubit>(
         () => _i155.ForgetPassworsCubit(gh<_i458.ForgetPasswordUseCase>()));
     gh.factory<_i901.PushNotificationCubit>(
         () => _i901.PushNotificationCubit(gh<_i172.PushNotificationUseCase>()));
     gh.factory<_i495.RoleCsCubit>(
         () => _i495.RoleCsCubit(csRolesUseCase: gh<_i941.CsRolesUseCase>()));
+    gh.factory<_i158.MarketerHomeProductCubit>(
+        () => _i158.MarketerHomeProductCubit(
+              gh<_i873.HomeGetAllProductsUseCase>(),
+              gh<_i43.MarketerSearchProductsUseCase>(),
+            ));
     return this;
   }
 }
