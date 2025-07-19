@@ -665,4 +665,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reports => 'Reports';
+
+  @override
+  String get viewReport => 'View Report';
+
+  @override
+  String get acceptInspection => 'Accept Inspection';
 }

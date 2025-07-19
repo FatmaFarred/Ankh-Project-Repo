@@ -215,7 +215,10 @@
   "fieldRequired": "This field is required",
   "accoun": "Account",
   "addToMyProducts": "Add to My Products",
-  "reports": "Reports"
+  "reports": "Reports",
+    "viewReport": "View Report",
+  "acceptInspection": "Accept Inspection"
+
 
 
 

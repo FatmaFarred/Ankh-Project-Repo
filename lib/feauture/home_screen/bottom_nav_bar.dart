@@ -14,6 +14,7 @@ import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
+import '../marketer_Reports/marketer_reports_screen.dart';
 import '../marketer_home/marketer_home_screen.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
@@ -53,7 +54,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       BalanceScreen(),
       BlocProvider(
         create: (_) => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
-        child: RequestScreen(),
+        child: MarketerReportsScreen(),
       ),
       ChatsScreen(),
       AccountScreen(), // Keep AccountScreen in pages but hide from navigation
@@ -106,7 +107,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
-              label:  AppLocalizations.of(context)!.requests,
+              label:  AppLocalizations.of(context)!.reports,
             ),
             BottomNavigationBarItem(
 

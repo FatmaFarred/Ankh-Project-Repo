@@ -48,7 +48,6 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
       if (userId != null && userId.isNotEmpty) {
         marketerHomeProductCubit.fetchProducts();
       } else {
-        // Optional: show error/snackbar if user not found
         debugPrint("User ID is null or empty");
       }
     });

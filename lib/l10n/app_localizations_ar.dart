@@ -663,4 +663,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reports => 'التقارير';
+
+  @override
+  String get viewReport => 'عرض التقرير';
+
+  @override
+  String get acceptInspection => 'قبول الفحص';
 }
