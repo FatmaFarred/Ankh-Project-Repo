@@ -1363,6 +1363,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reports'**
   String get reports;
+
+  /// No description provided for @viewReport.
+  ///
+  /// In en, this message translates to:
+  /// **'View Report'**
+  String get viewReport;
+
+  /// No description provided for @acceptInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept Inspection'**
+  String get acceptInspection;
 }
 
 class _AppLocalizationsDelegate

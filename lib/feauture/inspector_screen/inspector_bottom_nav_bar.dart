@@ -1,7 +1,7 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/balance_screen/balance_screen.dart';
-import 'package:ankh_project/feauture/inspector_screen/inspector_home_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/inspector_home/inspector_home_screen.dart';
 import 'package:ankh_project/feauture/inspector_screen/inspector_reports_screen.dart';
 import 'package:ankh_project/feauture/inspector_screen/my_inspections_screen.dart';
 import 'package:ankh_project/feauture/profile/profile_screen.dart';

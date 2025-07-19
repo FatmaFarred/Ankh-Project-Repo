@@ -211,7 +211,9 @@
   "fieldRequired": "هذا الحقل مطلوب",
   "accoun": "الحساب",
   "addToMyProducts": "إضافة إلى منتجاتي",
-  "reports": "التقارير"
+  "reports": "التقارير",
+  "viewReport": "عرض التقرير",
+  "acceptInspection": "قبول الفحص"
 
 
 

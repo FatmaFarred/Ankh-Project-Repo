@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
@@ -18,16 +19,16 @@ import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../myrequest/controller/cubit.dart';
 import '../myrequest/controller/request_states.dart';
-import '../myrequest/my_request_screen.dart';
+import 'marketer_report_details/report_details.dart';
 
-class RequestScreen extends StatefulWidget {
-  const RequestScreen({super.key});
+class MarketerReportsScreen extends StatefulWidget {
+  const MarketerReportsScreen({super.key});
 
   @override
-  State<RequestScreen> createState() => _RequestScreenState();
+  State<MarketerReportsScreen> createState() => _MarketerReportsScreenState();
 }
 
-class _RequestScreenState extends State<RequestScreen>
+class _MarketerReportsScreenState extends State<MarketerReportsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
@@ -81,13 +82,15 @@ class _RequestScreenState extends State<RequestScreen>
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(CupertinoIcons.back),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
-            },
+              icon: const Icon(CupertinoIcons.back),
+              color: Colors.white,
+              onPressed: () {
+
+                Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+              }
+
           ),
-          title: Text(AppLocalizations.of(context)!.myRequests),
+          title: Text(AppLocalizations.of(context)!.reports),
         ),
         body: BlocBuilder<MarketerRequestCubit, MarketerRequestState>(
           builder: (context, state) {
@@ -120,21 +123,7 @@ class _RequestScreenState extends State<RequestScreen>
               final allRequests = state.requests;
               return Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 20.w),
-                    child: TextFormField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: '${AppLocalizations.of(context)!.searchRequest}...',
-                        hintStyle: getRegularStyle(color: ColorManager.darkGrey, fontSize: 14, context: context),
-                        prefixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.r),
-                            borderSide: BorderSide(color: ColorManager.lightGrey, width: 1.w)),
-                      ),
-                      onChanged: (_) => setState(() {}),
-                    ),
-                  ),
+                 
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
                     color: ColorManager.transparent,
@@ -187,7 +176,7 @@ class _RequestScreenState extends State<RequestScreen>
                                         ),
                                         SizedBox(height: 16),
                                         Text(
-                                          "No requests found",
+                                        AppLocalizations.of(context)!.noRequestsFound,
                                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                             color: ColorManager.darkGrey,
                                           ),
@@ -201,9 +190,9 @@ class _RequestScreenState extends State<RequestScreen>
                               return InkWell(
                                 onTap: () => Navigator.of(context).pushNamed(
                                   MyRequestDetails.myRequestDetailsRouteName,
-                                  arguments: request.id,
+                                  arguments: request,
                                 ),
-                                child: CarRequestCard(
+                                child: CarReportCard(
                                   request: request,
                                   paddingHorizontal: 20.w,
                                   paddingVertical: 12.h,
@@ -233,11 +222,13 @@ class CarReportCard extends StatelessWidget {
     this.showLabel = true,
     required this.paddingVertical,
     required this.paddingHorizontal,
+    this.showBotton=true,
   });
 
-  var  request;
+  final MarketerRequestsForInspectionEntity request;
   final bool showLabel;
   final double paddingVertical, paddingHorizontal;
+  final bool showBotton;
 
   @override
   Widget build(BuildContext context) {
@@ -248,83 +239,146 @@ class CarReportCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.r), side: BorderSide(color: ColorManager.lightGrey)),
       child: Padding(
-        padding: EdgeInsets.all(12.w),
-        child: Row(
+        padding: EdgeInsets.symmetric( horizontal: 16.w, vertical: 12.h),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 4.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        request?.productName??"",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      if (showLabel)
-                        Flexible(
-                          child: Chip(
-                            backgroundColor: getStatusColor(
-                              getRequestStatusFromString(request.status) ?? RequestStatus.pending,
-                            ),
-                            label: Text(
-                              getStatusLabel(getRequestStatusFromString(request.status)?? RequestStatus.pending),
-                              style: getBoldStyle(
-                                fontSize: 10.sp,
-                                color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
-                                context: context,
-                              ),
-                              overflow: TextOverflow.ellipsis, // ✅ Optional: adds "..." if still too long
-                              softWrap: false,
-
-
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-
-                            shape: const StadiumBorder(
-                              side: BorderSide(
-                                color: Colors.transparent, // ✅ Remove border completely
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-
-                  Text("${AppLocalizations.of(context)!.client}: ${request.clientName}",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-                  ),
-
-                  Text(
-                    "${AppLocalizations.of(context)!.created}: ${request.preferredDate != null
-                        ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
-                        : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
-                        ? formatTime(request.preferredTime!)
-                        : AppLocalizations.of(context)!.noDataFound}",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-
-                  ),
-                  Text(AppLocalizations.of(context)!.price,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),),
-
-                  Text("Not specified",
-                    style: Theme.of(context).textTheme.bodyLarge,
-
-                  ),
-                ],
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      request?.productName??"",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Text(" ${request.clientName}",
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+                    ),
+                  ],
+                ),
+                Text(
+                  " ${request.preferredDate != null
+                      ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
+                      : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
+                      ? formatTime(request.preferredTime!)
+                      : AppLocalizations.of(context)!.noDataFound}",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+                ),
+              ],
             ),
+            SizedBox(height: 8.h),
+            Row(children: [
+              Icon(Icons.person_rounded,
+
+              color: ColorManager.lightprimary,
+                size: 20.sp,
+
+              ),
+              SizedBox(width: 8.w),
+
+              Text(
+                request?.productName??"",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+              ),
+            ],),
+            SizedBox(height: 8.h),
+
+            Row(children: [
+              Icon(Icons.visibility,
+              color: ColorManager.lightprimary,
+                size: 20.sp,
+
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                request?.productName??"",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+              ),
+            ],),
+            SizedBox(height: 8.h),
+
+            Row(children: [
+             Icon(Icons.access_time_rounded,
+              color: ColorManager.lightprimary,
+                size: 20.sp,
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                request?.productName??"",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+              ),
+            ],),
+            SizedBox(height: 8.h),
+
+            Row(children: [
+              Icon(Icons.location_on_rounded,
+              color: ColorManager.lightprimary,
+                size: 20.sp,
+
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                request?.productName??"",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
+              ),
+            ],),
+            SizedBox(height: 8.h),
+
+            Row(
+              children: [
+                if (showLabel)
+                  Flexible(
+                    child: Chip(
+                      backgroundColor: getStatusColor(
+                        getRequestStatusFromString(request.status) ?? RequestStatus.pending,
+                      ),
+                      label: Text(
+                        getStatusLabel(getRequestStatusFromString(request.status)?? RequestStatus.pending),
+                        style: getBoldStyle(
+                          fontSize: 10.sp,
+                          color: getTextStatusColor(getRequestStatusFromString(request.status)??RequestStatus.pending),
+                          context: context,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                      shape: const StadiumBorder(
+                        side: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            SizedBox(height: 12.h),
+           showBotton? CustomizedElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  ReportDetailsScreen.reportDetailsRouteName,
+                  arguments: request,
+                );
+              },
+              color: ColorManager.darkGrey,
+
+              borderColor: ColorManager.darkGrey,
+              bottonWidget: Text(
+                AppLocalizations.of(context)!.viewReport,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ):SizedBox.shrink() ,
           ],
         ),
       ),
     );
   }
 }
+
 String formatTime(String timeStr) {
   try {
     final parts = timeStr.split(':');
@@ -334,8 +388,8 @@ String formatTime(String timeStr) {
 
       final now = DateTime.now();
       final dt = DateTime(now.year, now.month, now.day, hour, minute);
-      return DateFormat('hh:mm a').format(dt); // --> "03:00 AM"
+      return DateFormat('hh:mm a').format(dt);
     }
   } catch (_) {}
-  return timeStr; // fallback to original if something goes wrong
+  return timeStr;
 }

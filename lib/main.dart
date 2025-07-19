@@ -26,6 +26,7 @@ import 'core/theme/my_app_theme.dart';
 import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
     import 'feauture/inspector_screen/inspector_bottom_nav_bar.dart';
+import 'feauture/marketer_Reports/marketer_report_details/report_details.dart';
 import 'feauture/myrequest/my_request_details/my_request_details.dart';
 import 'feauture/profile/profile_screen.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
@@ -193,6 +194,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
                 RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
                 AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
+                ReportDetailsScreen.reportDetailsRouteName: (context) => ReportDetailsScreen(),
 
               },
             );
