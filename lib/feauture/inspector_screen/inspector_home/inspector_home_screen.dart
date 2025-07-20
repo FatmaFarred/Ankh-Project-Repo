@@ -22,14 +22,15 @@ import 'controller/states.dart';
 class InspectorHomeScreen extends StatefulWidget {
   const InspectorHomeScreen({super.key});
 
-
   @override
   State<InspectorHomeScreen> createState() => _InspectorHomeScreenState();
 }
 
 class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
-  InspectorHomeProductCubit inspectorHomeProductCubit = getIt<InspectorHomeProductCubit>();
-  InspectorAssignProductCubit inspectorAssignProductCubit = getIt<InspectorAssignProductCubit>();
+  InspectorHomeProductCubit inspectorHomeProductCubit =
+      getIt<InspectorHomeProductCubit>();
+  InspectorAssignProductCubit inspectorAssignProductCubit =
+      getIt<InspectorAssignProductCubit>();
   String? currentKeyword;
 
   final TextEditingController _searchController = TextEditingController();
@@ -52,9 +53,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
 
   Future<void> _refreshData() async {
     print("🔄 Marketer Products Refresh triggered!"); // Debug print
-    final user = context
-        .read<UserCubit>()
-        .state;
+    final user = context.read<UserCubit>().state;
     final userId = user?.id;
     await inspectorHomeProductCubit.fetchProducts();
 
@@ -67,14 +66,11 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
   }*/
   }
 
-
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
 
-
     return Scaffold(
-
       body: Column(
         children: [
           HomeAppBar(
@@ -86,165 +82,180 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
                 inspectorHomeProductCubit.fetchProducts();
               }
             },
-          ),          SizedBox(height: 12.h),
+          ),
+          SizedBox(height: 12.h),
           Expanded(
-            child: BlocConsumer<InspectorAssignProductCubit, InspectorAssignProductState>(
-    bloc: inspectorAssignProductCubit,
-    listener: (context, state) {
-    if (state is InspectorAssignProductLoading) {
+            child:
+                BlocConsumer<
+                  InspectorAssignProductCubit,
+                  InspectorAssignProductState
+                >(
+                  bloc: inspectorAssignProductCubit,
+                  listener: (context, state) {
+                    if (state is InspectorAssignProductLoading) {
+                      CustomDialog.loading(
+                        context: context,
+                        message: AppLocalizations.of(context)!.loading,
+                        cancelable: false,
+                      );
+                    } else if (state is InspectorAssignProductSuccess) {
+                      Navigator.of(context).pop();
+                      CustomDialog.positiveButton(
+                        context: context,
+                        title: AppLocalizations.of(context)!.success,
+                        message: state.message,
+                      );
+                    } else if (state is InspectorAssignProductError) {
+                      Navigator.of(context).pop();
+                      CustomDialog.positiveAndNegativeButton(
+                        context: context,
 
-    CustomDialog.loading(
-    context: context,
-    message: AppLocalizations.of(context)!.loading,
-    cancelable: false);
-    }else if (state is InspectorAssignProductSuccess) {
-    Navigator.of(context).pop();
-    CustomDialog.positiveButton(
-    context: context,
-    title: AppLocalizations.of(context)!.success,
-    message: state.message,
-    );
+                        positiveText: AppLocalizations.of(context)!.tryAgain,
+                        negativeText: AppLocalizations.of(context)!.ok,
+                        positiveOnClick: () {
+                          Navigator.of(context).pop();
+                          final storedProductId =
+                              inspectorAssignProductCubit.currentProductId;
 
+                          // Use the stored product ID from the cubit
+                          if (storedProductId != null) {
+                            print("🔄 !$storedProductId"); // Debug print
+                            print("👤 User ID: ${user?.id}"); // Debug print
+                            //todo: use the user id from the cubit
+                            inspectorAssignProductCubit.assignProduct(
+                              productId: storedProductId,
+                              inspectorId:
+                                  "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3" ?? "",
+                            );
+                          }
+                        },
+                        title: AppLocalizations.of(context)!.error,
+                        message: state.error.errorMessage,
+                      );
+                    }
+                  },
 
-    } else if (state is InspectorAssignProductError) {
-    Navigator.of(context).pop();
-    CustomDialog.positiveAndNegativeButton(
-    context: context,
+                  builder: (context, assignState) {
+                    return BlocBuilder<
+                      InspectorHomeProductCubit,
+                      InspectorHomeProductState
+                    >(
+                      bloc: inspectorHomeProductCubit,
+                      builder: (context, state) {
+                        if (state is InspectorHomeProductLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is InspectorHomeProductError) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(state.error?.errorMessage ?? ""),
+                                  CustomizedElevatedButton(
+                                    bottonWidget: Text(
+                                      AppLocalizations.of(context)!.tryAgain,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(color: ColorManager.white),
+                                    ),
+                                    color: ColorManager.lightprimary,
+                                    borderColor: ColorManager.lightprimary,
+                                    onPressed: () => inspectorHomeProductCubit
+                                        .fetchProducts(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        } else if (state is InspectorHomeProductEmpty) {
+                          return RefreshIndicator(
+                            color: ColorManager.lightprimary,
+                            onRefresh: _refreshData,
+                            child: ListView(
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.hourglass_empty,
+                                          size: 64,
+                                          color: ColorManager.darkGrey,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.noProductsFound,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                                color: ColorManager.darkGrey,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else if (state is InspectorHomeProductSuccess) {
+                          final allRequests = state.productList;
 
-    positiveText:  AppLocalizations.of(context)!.tryAgain,
-    negativeText: AppLocalizations.of(context)!.ok,
-    positiveOnClick: () {
-    Navigator.of(context).pop();
-    final storedProductId = inspectorAssignProductCubit.currentProductId;
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12.w,
+                              vertical: 18.h,
+                            ),
+                            child: RefreshIndicator(
+                              color: ColorManager.lightprimary,
+                              onRefresh: _refreshData,
+                              child: Padding(
+                                padding: REdgeInsets.symmetric(horizontal: 16),
+                                child: ListView.separated(
+                                  itemCount: allRequests.length,
 
-    // Use the stored product ID from the cubit
-    if (storedProductId != null) {
-    print("🔄 !$storedProductId"); // Debug print
-    print("👤 User ID: ${user?.id}");// Debug print
-    //todo: use the user id from the cubit
-    inspectorAssignProductCubit.assignProduct(
-    productId: storedProductId,
-    inspectorId: "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3"?? "");
+                                  separatorBuilder: (context, index) {
+                                    return SizedBox(height: 12.h);
+                                  },
+                                  itemBuilder: (context, index) {
+                                    final request = allRequests[index];
 
-    }
-    },
-    title: AppLocalizations.of(context)!.error,
-    message: state.error.errorMessage);
-    }
-    },
+                                    return InspectionRequestCard(
+                                      inspectionRequest: request,
+                                      currentKeyword: currentKeyword,
+                                      onAcceptInspection: () {
+                                        inspectorAssignProductCubit.assignProduct(
+                                          productId: request?.id ?? 0,
+                                          inspectorId:
+                                              "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3",
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        }
 
-    builder: (context, assignState) {
-    return BlocBuilder<InspectorHomeProductCubit, InspectorHomeProductState>(
-    bloc: inspectorHomeProductCubit,
-    builder: (context, state) {
-    if (state is InspectorHomeProductLoading) {
-    return const Center(child: CircularProgressIndicator());
-    } else if (state is InspectorHomeProductError) {
-    return Center(
-    child: Padding(
-    padding: const EdgeInsets.all(16.0),
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-    Text(state.error?.errorMessage ?? ""),
-    CustomizedElevatedButton(
-    bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
-    style: Theme
-        .of(context)
-        .textTheme
-        .bodyLarge
-        ?.copyWith(color: ColorManager.white),
-
-    ),
-    color: ColorManager.lightprimary,
-    borderColor: ColorManager.lightprimary,
-    onPressed: () => inspectorHomeProductCubit.fetchProducts(),
-    )
-    ],
-    ),
-    ),
-    );
-    } else if (state is InspectorHomeProductEmpty) {
-    return RefreshIndicator(
-    color: ColorManager.lightprimary,
-    onRefresh: _refreshData,
-    child: ListView(
-    children: [
-    Container(
-    height: MediaQuery
-        .of(context)
-        .size
-        .height * 0.5,
-    child: Center(
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    Icon(
-    Icons.hourglass_empty,
-    size: 64,
-    color: ColorManager.darkGrey,
-    ),
-    SizedBox(height: 16),
-    Text(
-    AppLocalizations.of(context)!.noProductsFound,
-    style: Theme
-        .of(context)
-        .textTheme
-        .bodyLarge
-        ?.copyWith(
-    color: ColorManager.darkGrey,
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
-    ],
-    ),
-    );
-    } else if (state is InspectorHomeProductSuccess) {
-    final allRequests = state.productList;
-
-    return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 18.h),
-    child: RefreshIndicator(
-    color: ColorManager.lightprimary,
-    onRefresh: _refreshData,
-    child:
-            Padding(
-              padding: REdgeInsets.symmetric(horizontal: 16),
-              child: ListView.separated(
-            itemCount: allRequests.length,
-
-                   separatorBuilder: (context, index) {
-                  return SizedBox(height: 12.h);
-                },
-                itemBuilder: (context, index) {
-                  final request = allRequests[index];
-
-
-                  return InspectionRequestCard(inspectionRequest: request, currentKeyword: currentKeyword,
-                      onAcceptInspection: () {
-                    inspectorAssignProductCubit.assignProduct(productId: request?.id??0, inspectorId: "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3");}
-
-    );
-                  }
-
-    )
-    )
-    )
-    );
-
-
-    }
-
-    return const SizedBox.shrink();
-    },
-    );
-                },
-              ),
-            ),
-
+                        return const SizedBox.shrink();
+                      },
+                    );
+                  },
+                ),
+          ),
         ],
       ),
     );
@@ -252,12 +263,12 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
 }
 
 class InspectionRequestCard extends StatelessWidget {
-   InspectionRequestCard({
+  InspectionRequestCard({
     required this.inspectionRequest,
     required this.onAcceptInspection,
-     required this.currentKeyword,
+    required this.currentKeyword,
   });
-   AllInpectionEntity inspectionRequest;
+  AllInpectionEntity inspectionRequest;
   final VoidCallback? onAcceptInspection;
   final String? currentKeyword;
 
@@ -266,9 +277,7 @@ class InspectionRequestCard extends StatelessWidget {
     return Container(
       padding: REdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Color(0xFF777777).withOpacity(0.5),
-        ),
+        border: Border.all(color: Color(0xFF777777).withOpacity(0.5)),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
@@ -278,14 +287,11 @@ class InspectionRequestCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inspectionRequest?.marketerName??"",
+                inspectionRequest?.marketerName ?? "",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 10,
-                ),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.r),
                   color: Color(0xFFC5FEC3),
@@ -302,7 +308,7 @@ class InspectionRequestCard extends StatelessWidget {
             ],
           ),
           Text(
-           inspectionRequest?.productName??"",
+            inspectionRequest?.productName ?? "",
             style: GoogleFonts.poppins(
               fontSize: 14.sp,
               fontWeight: FontWeight.w300,
@@ -317,22 +323,16 @@ class InspectionRequestCard extends StatelessWidget {
                 color: ColorManager.lightprimary,
               ),
               SizedBox(width: 6.w),
-                              Text(
-                (currentKeyword != null && currentKeyword!.isNotEmpty) ? "${inspectionRequest.date != null
-                       ? DateFormat('MMMM d yyyy').format(DateTime.parse(inspectionRequest.date!))
-                       : AppLocalizations.of(context)!.noDataFound} ${inspectionRequest.time != null
-                       ? formatTime(inspectionRequest.time!)
-                       : AppLocalizations.of(context)!.noDataFound}" : "${inspectionRequest.preferredDate != null
-     ? DateFormat('MMMM d yyyy').format(DateTime.parse(inspectionRequest.preferredDate!))
-         : AppLocalizations.of(context)!.noDataFound} ${inspectionRequest.preferredTime != null
-     ? formatTime(inspectionRequest.preferredTime!)
-         : AppLocalizations.of(context)!.noDataFound}",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFF4f4f4f),
-                  ),
+              Text(
+                (currentKeyword != null && currentKeyword!.isNotEmpty)
+                    ? "${inspectionRequest.date != null ? DateFormat('MMMM d yyyy').format(DateTime.parse(inspectionRequest.date!)) : AppLocalizations.of(context)!.noDataFound} ${inspectionRequest.time != null ? formatTime(inspectionRequest.time!) : AppLocalizations.of(context)!.noDataFound}"
+                    : "${inspectionRequest.preferredDate != null ? DateFormat('MMMM d yyyy').format(DateTime.parse(inspectionRequest.preferredDate!)) : AppLocalizations.of(context)!.noDataFound} ${inspectionRequest.preferredTime != null ? formatTime(inspectionRequest.preferredTime!) : AppLocalizations.of(context)!.noDataFound}",
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF4f4f4f),
                 ),
+              ),
             ],
           ),
           Row(
@@ -344,9 +344,7 @@ class InspectionRequestCard extends StatelessWidget {
               ),
               SizedBox(width: 6.w),
               Text(
-            inspectionRequest?.address??"",
-
-
+                inspectionRequest?.address ?? "",
 
                 style: GoogleFonts.poppins(
                   fontSize: 14.sp,
@@ -360,16 +358,14 @@ class InspectionRequestCard extends StatelessWidget {
           CustomizedElevatedButton(
             bottonWidget: Text(
               "Accept Inspection",
-              style: Theme.of(context).textTheme.bodyLarge
-                  ?.copyWith(
-                    color: ColorManager.white,
-                    fontSize: 16.sp,
-                  ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ColorManager.white,
+                fontSize: 16.sp,
+              ),
             ),
             color: Theme.of(context).primaryColor,
             borderColor: Theme.of(context).primaryColor,
-            onPressed: onAcceptInspection
-
+            onPressed: onAcceptInspection,
           ),
         ],
       ),

@@ -17,6 +17,8 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
     import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
     import 'feauture/authentication/register/register _screen.dart';
+    import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
+import 'feauture/inspector_screen/authentication/inspector_register_screen.dart';
     import 'feauture/authentication/signin/signin_screen.dart';
     import 'feauture/authentication/user_controller/user_cubit.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
@@ -66,6 +68,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
               value: getIt<UserCubit>(), // ✅ Already loaded with loadUserFromPrefs
             ),
             BlocProvider(create: (context) => RoleCubit()),
+            BlocProvider(create: (context) => getIt<RoleCsCubit>()),
 
           ],
           child: MyApp(isLoggedIn:token!=null ,),
@@ -168,6 +171,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
                 WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
                 RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
+                InspectorRegisterScreen.inspectorRegisterScreenRouteName: (context) => InspectorRegisterScreen(),
                 ChooseRoleScreen.chooseRoleScreenRouteName: (context) => ChooseRoleScreen(),
                 ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) => ChooseCsTypeScreen(),
                 SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
@@ -195,7 +199,6 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
                 AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
                 ReportDetailsScreen.reportDetailsRouteName: (context) => ReportDetailsScreen(),
-
               },
             );
           },

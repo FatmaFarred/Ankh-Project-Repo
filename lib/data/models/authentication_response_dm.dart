@@ -58,4 +58,9 @@ class UserDm extends UserEntity {
     return map;
   }
 
+  // Add toFirestore method for Firestore compatibility
+  Map<String, dynamic> toFirestore() {
+    return toJson();
+  }
+
 }

@@ -3,6 +3,8 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_tex
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_cubit.dart';
 import 'package:ankh_project/feauture/authentication/signin/controller/sigin_states.dart';
+import 'package:ankh_project/feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
+import 'package:ankh_project/feauture/welcome_screen/welcome_screen.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,11 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
+import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../home_screen/bottom_nav_bar.dart';
+import '../../inspector_screen/authentication/inspector_register_screen.dart';
+import '../../inspector_screen/inspector_bottom_nav_bar.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
@@ -27,15 +33,15 @@ import '../register/register _screen.dart';
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
   SignInCubit signInViewModel = getIt<SignInCubit>();
-
+  RoleCsCubit roleCubit = getIt<RoleCsCubit>();
 
   bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
+    final currentRole = roleCubit.state;
+
     return BlocListener<SignInCubit, SignInState>(
         bloc: signInViewModel,
         listener: (context, state) {
@@ -66,17 +72,40 @@ class _SignInScreenState extends State<SignInScreen> {
             context: context,
             title: AppLocalizations.of(context)!.success,
             message: state.response.message,
-            positiveOnClick: () =>
+            positiveOnClick: () {
+              // Navigate based on user role
+              final userRoles = state.response.user?.roles;
+              if (userRoles != null && userRoles.isNotEmpty) {
+                if (userRoles.contains("Inspector")) {
+                  Navigator.of(context).pushReplacementNamed(
+                    InspectorBottomNavBar.inspectorBottomNavBarRouteName,
+                  );
+                } else {
+                  Navigator.of(context).pushReplacementNamed(
+                    BottomNavBar.bottomNavBarRouteName,
+                  );
+                }
+              } else {
+                // Default navigation if no roles found
                 Navigator.of(context).pushReplacementNamed(
-                    BottomNavBar.bottomNavBarRouteName
-                    ));
+                  BottomNavBar.bottomNavBarRouteName,
+                );
+              }
+            });
       }
     },
 
 
 
     child:Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pushReplacementNamed(context,
+              WelcomeScreen.welcomeScreenRouteName
+          );
+        },
+            icon: Icon(Icons.arrow_back_ios)),
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -123,7 +152,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 CustomTextField(
                   controller: signInViewModel.email,
                   hintText: AppLocalizations.of(context)!.enterYourEmail,
-                  keyboardType: TextInputType.multiline,
+                  keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   validator: (value) => ValidatorUtils.validateEmail(value, context),
                 ),
@@ -202,7 +231,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterScreen.registerScreenRouteName);
+                        // Check if user is an inspector and navigate accordingly
+                        if (RoleCsCubit.isRoleSelected("Inspector")) {
+                          Navigator.of(context).pushNamed(InspectorRegisterScreen.inspectorRegisterScreenRouteName);
+                        } else if (RoleCsCubit.isRoleSelected("Marketer")) {
+                          // If CS role is marketer, navigate to inspector registration
+                          Navigator.of(context).pushNamed(RegisterScreen.registerScreenRouteName);
+                        }
                       },
                       child: Text(
                         AppLocalizations.of(context)!.registerNow,

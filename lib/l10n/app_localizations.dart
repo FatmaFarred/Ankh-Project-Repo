@@ -1375,6 +1375,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Accept Inspection'**
   String get acceptInspection;
+
+  /// No description provided for @licenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'License Number'**
+  String get licenseNumber;
+
+  /// No description provided for @enterLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter License Number'**
+  String get enterLicenseNumber;
+
+  /// No description provided for @vehicleLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License Number'**
+  String get vehicleLicenseNumber;
+
+  /// No description provided for @enterVehicleLicenceNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Vehicle License Number'**
+  String get enterVehicleLicenceNumber;
+
+  /// No description provided for @workArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Area'**
+  String get workArea;
+
+  /// No description provided for @enterWorkArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Work Area'**
+  String get enterWorkArea;
+
+  /// No description provided for @vehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Type'**
+  String get vehicleType;
+
+  /// No description provided for @enterVehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Car, Motorcycle, Truck'**
+  String get enterVehicleType;
+
+  /// No description provided for @licenseImage.
+  ///
+  /// In en, this message translates to:
+  /// **'License Image '**
+  String get licenseImage;
+
+  /// No description provided for @uploadLicenseImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload License Image'**
+  String get uploadLicenseImage;
+
+  /// No description provided for @vehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Image'**
+  String get vehicleImage;
+
+  /// No description provided for @uploadVehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Vehicle Image'**
+  String get uploadVehicleImage;
 }
 
 class _AppLocalizationsDelegate

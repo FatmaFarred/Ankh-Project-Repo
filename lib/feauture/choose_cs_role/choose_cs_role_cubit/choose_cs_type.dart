@@ -11,6 +11,7 @@ import '../../../domain/entities/cs_roles_response_entity.dart';
 import '../../../l10n/app_localizations.dart';
 
 import '../../authentication/register/register _screen.dart';
+import '../../inspector_screen/authentication/inspector_register_screen.dart';
 import 'choose_cs_role_cubit.dart';
 import 'choose_cs_roles_states.dart';
 
@@ -111,12 +112,17 @@ class ChooseCsTypeScreen extends StatelessWidget {
             borderColor: ColorManager.lightprimary,
             onPressed: () {
               final state = cubit.state;
-              if (state is RoleCsSuccess && state.selectedRole != null) {
+              if (state is RoleCsSuccess && state.selectedRole != null&& state.selectedRole!.name=="Marketer") {
                 Navigator.of(context).pushNamed(
                   RegisterScreen.registerScreenRouteName,
                   arguments: state.selectedRole,
                 );
-              } else {
+              } else  if (state is RoleCsSuccess && state.selectedRole != null&& state.selectedRole!.name=="Inspector") {
+    Navigator.of(context).pushNamed(
+    InspectorRegisterScreen.inspectorRegisterScreenRouteName,
+    arguments: state.selectedRole,
+    );
+    }else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(
                       AppLocalizations.of(context)!.chooseRole)),

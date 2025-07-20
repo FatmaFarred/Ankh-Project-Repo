@@ -10,6 +10,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../welcome_screen/welcome_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../signin/signin_screen.dart';
 import 'controller/register_cubit.dart';
@@ -72,7 +73,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pushReplacementNamed(context,
+                  WelcomeScreen.welcomeScreenRouteName
+              );
             },
           ),
         ),
@@ -218,9 +221,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
+                          Navigator.of(context).pushNamed(
                             SignInScreen.signInScreenRouteName,
-                                (route) => false,
                           );
                         },
                         child: Text(

@@ -9,6 +9,7 @@ import '../../core/customized_widgets/reusable_widgets/customized_containers/cut
 import '../../l10n/app_localizations.dart';
 import '../../l10n/languge_cubit.dart';
 import '../authentication/register/register _screen.dart';
+import '../inspector_screen/authentication/inspector_register_screen.dart';
 import '../choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
 import 'choose_role_cubit/choose_role_cubit.dart';
 
@@ -92,6 +93,10 @@ class ChooseRoleScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (_) => ChooseCsTypeScreen.withProvider(),
                       ),
+                    );
+                  } else if (selectedRole == UserRole.inspector) {
+                    Navigator.of(context).pushNamed(
+                      InspectorRegisterScreen.inspectorRegisterScreenRouteName,
                     );
                   } else {
                     Navigator.of(context).pushNamed(

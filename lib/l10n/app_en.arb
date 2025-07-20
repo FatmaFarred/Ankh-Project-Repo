@@ -217,7 +217,28 @@
   "addToMyProducts": "Add to My Products",
   "reports": "Reports",
     "viewReport": "View Report",
-  "acceptInspection": "Accept Inspection"
+  "acceptInspection": "Accept Inspection",
+  "licenseNumber": "License Number",
+    "enterLicenseNumber": "Enter License Number",
+  "vehicleLicenseNumber": "Vehicle License Number",
+  "enterVehicleLicenceNumber": "Enter Vehicle License Number",
+  "workArea": "Work Area",
+  "enterWorkArea": "Enter Work Area",
+  "vehicleType": "Vehicle Type",
+  "enterVehicleType": "e.g., Car, Motorcycle, Truck",
+  "licenseImage": "License Image ",
+  "uploadLicenseImage": "Upload License Image",
+  "vehicleImage": "Vehicle Image",
+  "uploadVehicleImage": "Upload Vehicle Image"
+
+
+
+
+
+
+
+
+
 
 
 
