@@ -69,6 +69,7 @@ dependencies:
 
   app_links:
   go_router:
+  image_picker:
 
 
 

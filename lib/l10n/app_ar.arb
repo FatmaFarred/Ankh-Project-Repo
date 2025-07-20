@@ -213,7 +213,20 @@
   "addToMyProducts": "إضافة إلى منتجاتي",
   "reports": "التقارير",
   "viewReport": "عرض التقرير",
-  "acceptInspection": "قبول الفحص"
+  "acceptInspection": "قبول الفحص",
+  "licenseNumber": "رقم الرخصة",
+  "enterLicenseNumber": "ادخل رقم الرخصة",
+  "vehicleLicenseNumber": "رقم رخصة المركبة",
+  "enterVehicleLicenceNumber": "ادخل رقم رخصة المركبة",
+  "workArea": "مكان العمل",
+  "enterWorkArea": "ادخل مكان العمل",
+  "vehicleType": "نوع المركبة",
+  "enterVehicleType": "سيارة، دراجة نارية، شاحنة، إلخ",
+  "licenseImage": "صورة الرخصة ",
+  "uploadLicenseImage": "ارفع صورة الرخصة",
+  "vehicleImage": "صورة المركبة",
+  "uploadVehicleImage": "ارفع صورة المركبة"
+
 
 
 

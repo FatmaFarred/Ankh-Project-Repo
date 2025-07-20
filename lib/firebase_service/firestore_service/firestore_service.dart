@@ -15,11 +15,11 @@ class FireBaseUtilies {
 
   static CollectionReference<UserDm> createUserCollection() {
     return FirebaseFirestore.instance
-        .collection(MyUser.collectionName)
+        .collection("users") // Use a standard collection name
         .withConverter<UserDm>(
           fromFirestore: (snapshot, options) =>
               UserDm.fromJson(snapshot.data()!),
-          toFirestore: (myuser, options) => myuser.toJson(),
+          toFirestore: (myuser, options) => myuser.toFirestore(),
         );
   }
 

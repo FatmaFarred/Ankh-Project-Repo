@@ -10,6 +10,7 @@ import '../../core/constants/color_manager.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/languge_cubit.dart';
+import '../authentication/signin/signin_screen.dart';
 import '../choose_role/choose_role_screen.dart';
 import '../onboarding/onboarding_page_widget.dart';
 
@@ -47,8 +48,8 @@ class WelcomeScreen extends StatelessWidget {
 
               },
             ),
-            SizedBox(height: 13.7.h,),
 
+            SizedBox(height: 13.7.h,),
             CustomizedElevatedButton(
 
               bottonWidget: Text(AppLocalizations.of(context)!.registerNow,style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.lightprimary,fontSize: 16.sp),),

@@ -14,6 +14,7 @@ class RoleCsCubit extends Cubit<RoleCsState> {
   RoleCsCubit({required this.csRolesUseCase}) : super(RoleCsInitial());
 
   CsRolesResponseEntity? selectedRole;
+  static CsRolesResponseEntity? currentSelectedRole; // Static variable to store current role
 
   Future<void> fetchRoles() async {
     emit(RoleCsLoading());
@@ -30,10 +31,31 @@ class RoleCsCubit extends Cubit<RoleCsState> {
     final currentState = state;
 
     if (currentState is RoleCsSuccess) {
+      selectedRole = role; // Update instance variable
+      currentSelectedRole = role; // Save to static variable for global access
+      
+      print("Selected CS Role: ${role.name}"); // Debug print
+      
       emit(RoleCsSuccess(
         rolesList: currentState.rolesList,
         selectedRole: role,
       ));
     }
+  }
+
+  // Method to get current selected role
+  static CsRolesResponseEntity? getCurrentSelectedRole() {
+    return currentSelectedRole;
+  }
+
+  // Method to clear current selected role
+  static void clearCurrentSelectedRole() {
+    currentSelectedRole = null;
+    print("Cleared CS Role selection");
+  }
+
+  // Method to check if a specific role is selected
+  static bool isRoleSelected(String roleName) {
+    return currentSelectedRole?.name == roleName;
   }
 }

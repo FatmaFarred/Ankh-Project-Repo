@@ -671,4 +671,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get acceptInspection => 'Accept Inspection';
+
+  @override
+  String get licenseNumber => 'License Number';
+
+  @override
+  String get enterLicenseNumber => 'Enter License Number';
+
+  @override
+  String get vehicleLicenseNumber => 'Vehicle License Number';
+
+  @override
+  String get enterVehicleLicenceNumber => 'Enter Vehicle License Number';
+
+  @override
+  String get workArea => 'Work Area';
+
+  @override
+  String get enterWorkArea => 'Enter Work Area';
+
+  @override
+  String get vehicleType => 'Vehicle Type';
+
+  @override
+  String get enterVehicleType => 'e.g., Car, Motorcycle, Truck';
+
+  @override
+  String get licenseImage => 'License Image ';
+
+  @override
+  String get uploadLicenseImage => 'Upload License Image';
+
+  @override
+  String get vehicleImage => 'Vehicle Image';
+
+  @override
+  String get uploadVehicleImage => 'Upload Vehicle Image';
 }

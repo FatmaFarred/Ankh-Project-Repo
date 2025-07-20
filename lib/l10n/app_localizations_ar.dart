@@ -669,4 +669,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get acceptInspection => 'قبول الفحص';
+
+  @override
+  String get licenseNumber => 'رقم الرخصة';
+
+  @override
+  String get enterLicenseNumber => 'ادخل رقم الرخصة';
+
+  @override
+  String get vehicleLicenseNumber => 'رقم رخصة المركبة';
+
+  @override
+  String get enterVehicleLicenceNumber => 'ادخل رقم رخصة المركبة';
+
+  @override
+  String get workArea => 'مكان العمل';
+
+  @override
+  String get enterWorkArea => 'ادخل مكان العمل';
+
+  @override
+  String get vehicleType => 'نوع المركبة';
+
+  @override
+  String get enterVehicleType => 'سيارة، دراجة نارية، شاحنة، إلخ';
+
+  @override
+  String get licenseImage => 'صورة الرخصة ';
+
+  @override
+  String get uploadLicenseImage => 'ارفع صورة الرخصة';
+
+  @override
+  String get vehicleImage => 'صورة المركبة';
+
+  @override
+  String get uploadVehicleImage => 'ارفع صورة المركبة';
 }
