@@ -4,9 +4,28 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 
 class ClientProductInfoCard extends StatelessWidget {
-  const ClientProductInfoCard({super.key});
+  final String productName;
+  final String clientName;
+  final String phoneNumber;
+  final String address;
+  final String appointment;
 
-  Widget infoRow(IconData icon, String label, String value, Color bgColor, Color iconColor) {
+  const ClientProductInfoCard({
+    super.key,
+    required this.productName,
+    required this.clientName,
+    required this.phoneNumber,
+    required this.address,
+    required this.appointment,
+  });
+
+  Widget infoRow(
+      IconData icon,
+      String label,
+      String value,
+      Color bgColor,
+      Color iconColor,
+      ) {
     return Row(
       children: [
         Container(
@@ -21,18 +40,22 @@ class ClientProductInfoCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label,
-                style: GoogleFonts.poppins(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w300,
-                  color: const Color(0xFF4f4f4f),
-                )),
-            Text(value,
-                style: GoogleFonts.poppins(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF1e1e1e),
-                )),
+            Text(
+              label,
+              style: GoogleFonts.poppins(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w300,
+                color: const Color(0xFF4f4f4f),
+              ),
+            ),
+            Text(
+              value,
+              style: GoogleFonts.poppins(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF1e1e1e),
+              ),
+            ),
           ],
         ),
       ],
@@ -53,15 +76,16 @@ class ClientProductInfoCard extends StatelessWidget {
           Text("Client & Product Information",
               style: Theme.of(context).textTheme.bodyLarge),
           SizedBox(height: 16.h),
-          infoRow(Icons.directions_car_filled, AppLocalizations.of(context)!.productName, "Toyota Corolla 2023", const Color(0xffDBEAFE), Colors.blue),
           SizedBox(height: 16.h),
-          infoRow(Icons.person, AppLocalizations.of(context)!.clientName, "Mohamed Khaled", const Color(0xffDBEAFE), Colors.blue),
+          infoRow(Icons.directions_car_filled, AppLocalizations.of(context)!.productName, productName, const Color(0xffDBEAFE), Colors.blue),
           SizedBox(height: 16.h),
-          infoRow(Icons.phone, AppLocalizations.of(context)!.phoneNumber, "01061056458", const Color(0xffDBEAFE), Colors.blue),
+          infoRow(Icons.person, AppLocalizations.of(context)!.clientName, clientName, const Color(0xffDBEAFE), Colors.blue),
           SizedBox(height: 16.h),
-          infoRow(Icons.pin_drop, AppLocalizations.of(context)!.address, "15 El-Tahrir St., Cairo", const Color(0xffFFEDD5), Colors.red),
+          infoRow(Icons.phone, AppLocalizations.of(context)!.phoneNumber, phoneNumber, const Color(0xffDBEAFE), Colors.blue),
           SizedBox(height: 16.h),
-          infoRow(Icons.calendar_today_rounded, AppLocalizations.of(context)!.appointment, "July 7, 2025 – 3:00 PM", const Color(0xffDBEAFE), Colors.blue),
+          infoRow(Icons.pin_drop, AppLocalizations.of(context)!.address, address, const Color(0xffFFEDD5), Colors.red),
+          SizedBox(height: 16.h),
+          infoRow(Icons.calendar_today_rounded, AppLocalizations.of(context)!.appointment, appointment, const Color(0xffDBEAFE), Colors.blue),
         ],
       ),
     );

@@ -1,9 +1,39 @@
 import 'package:ankh_project/feauture/details_screen/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CustomPhotoButtons extends StatelessWidget {
-  const CustomPhotoButtons({super.key});
+  final void Function(List<XFile>) onImagesSelected;
+
+  const CustomPhotoButtons({
+    Key? key,
+    required this.onImagesSelected,
+  }) : super(key: key);
+
+  Future<void> _pickImages(BuildContext context) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final List<XFile>? pickedFiles = await picker.pickMultiImage();
+      if (pickedFiles != null && pickedFiles.isNotEmpty) {
+        onImagesSelected(pickedFiles);
+      }
+    } catch (e) {
+      debugPrint("Error picking images: $e");
+    }
+  }
+
+  Future<void> _takePhoto(BuildContext context) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+      if (photo != null) {
+        onImagesSelected([photo]);
+      }
+    } catch (e) {
+      debugPrint("Error taking photo: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +52,7 @@ class CustomPhotoButtons extends StatelessWidget {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    // TODO: Upload handler
-                  },
+                  onTap: () => _pickImages(context),
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                     decoration: BoxDecoration(
@@ -35,7 +63,7 @@ class CustomPhotoButtons extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.upload, color: Colors.green),
+                        const Icon(Icons.upload, color: Colors.green),
                         SizedBox(width: 8.w),
                         Text(
                           "Upload",
@@ -53,9 +81,7 @@ class CustomPhotoButtons extends StatelessWidget {
               SizedBox(width: 12.w),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    // TODO: Camera handler
-                  },
+                  onTap: () => _takePhoto(context),
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                     decoration: BoxDecoration(
@@ -66,7 +92,7 @@ class CustomPhotoButtons extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.camera_alt, color: Colors.blue),
+                        const Icon(Icons.camera_alt, color: Colors.blue),
                         SizedBox(width: 8.w),
                         Text(
                           "Take Photo",

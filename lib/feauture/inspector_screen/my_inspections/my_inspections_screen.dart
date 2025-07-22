@@ -1,7 +1,7 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/core/customized_widgets/shared_preferences .dart';
-import 'package:ankh_project/feauture/inspector_screen/inspection_details_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/inspection_details/inspection_details_screen.dart';
 import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
 import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_state.dart';
 import 'package:ankh_project/feauture/marketer_home/home_app_bar.dart';
@@ -312,7 +312,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InspectionDetailsScreen(),
+                  builder: (context) => InspectionDetailsScreen(requestId:inspection.id ,),
                 ),
               );
             },

@@ -55,10 +55,10 @@ class _InspectionReportState extends State<InspectionReport> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ClientProductInfoCard(),
+            // const ClientProductInfoCard(),
             SizedBox(height: 20.h),
 
-            const PhotoListView(), // Product Images
+            // const PhotoListView(), // Product Images
             SizedBox(height: 20.h),
 
             RadioStatusGroup(
