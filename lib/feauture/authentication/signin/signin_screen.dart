@@ -18,7 +18,6 @@ import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../home_screen/bottom_nav_bar.dart';
 import '../../inspector_screen/authentication/inspector_register_screen.dart';
-import '../../inspector_screen/inspector_bottom_nav_bar.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
@@ -76,16 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
               // Navigate based on user role
               final userRoles = state.response.user?.roles;
               if (userRoles != null && userRoles.isNotEmpty) {
-                if (userRoles.contains("Inspector")) {
-                  Navigator.of(context).pushReplacementNamed(
-                    InspectorBottomNavBar.inspectorBottomNavBarRouteName,
-                  );
-                } else {
-                  Navigator.of(context).pushReplacementNamed(
-                    BottomNavBar.bottomNavBarRouteName,
-                  );
-                }
-              } else {
+
                 // Default navigation if no roles found
                 Navigator.of(context).pushReplacementNamed(
                   BottomNavBar.bottomNavBarRouteName,

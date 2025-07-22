@@ -11,10 +11,9 @@ import '../../../../domain/use_cases/inspector_get_all_inspection_use_case.dart'
 
 class InspectorHomeProductCubit extends Cubit<InspectorHomeProductState> {
   InspectorHomeGetAllInspectionUseCase  productsUseCase;
-  InspectorHomeSearchUseCase searchProductsUseCase;
 
 
-  InspectorHomeProductCubit(this.productsUseCase,this.searchProductsUseCase) : super(InspectorHomeProductInitial());
+  InspectorHomeProductCubit(this.productsUseCase) : super(InspectorHomeProductInitial());
 
   Future<void> fetchProducts() async {
     emit(InspectorHomeProductLoading());
@@ -29,15 +28,4 @@ class InspectorHomeProductCubit extends Cubit<InspectorHomeProductState> {
     });
   }
 
-  Future<void> searchProducts(String keyword) async {
-    emit(InspectorHomeProductLoading());
-    var either = await searchProductsUseCase.execute(keyword);
-    either.fold((error) {
-      emit(InspectorHomeProductError(error: error));
-    }, (response) {
-      (response.isEmpty)
-          ? emit(InspectorHomeProductEmpty())
-          : emit(InspectorHomeProductSuccess(productList: response));
-    });
-  }
 }

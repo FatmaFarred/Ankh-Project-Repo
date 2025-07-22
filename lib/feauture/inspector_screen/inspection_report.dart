@@ -1,5 +1,4 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
-import 'package:ankh_project/feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/CustomRadioGroup.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/client_product_info_card.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart' show CustomTextFormField;
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import '../home_screen/bottom_nav_bar.dart';
 
 class InspectionReport extends StatefulWidget {
   const InspectionReport({super.key});
@@ -95,7 +95,7 @@ class _InspectionReportState extends State<InspectionReport> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return InspectorBottomNavBar();
+                      return BottomNavBar();
                     },
                   ),
                 );

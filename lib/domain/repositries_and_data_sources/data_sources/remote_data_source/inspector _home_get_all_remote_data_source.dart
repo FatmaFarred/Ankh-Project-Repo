@@ -9,7 +9,7 @@ import '../../../../api_service/failure/error_handling.dart';
 abstract class HomeGetAllInspectionRemoteDataSource {
 
   Future <Either<Failure,List<AllInpectionEntity>>>getHomeAllInspection ( );
-  Future <Either<Failure,List<AllInpectionEntity>>>searchAllInspection (String keyWord );
+  Future <Either<Failure,List<AllInpectionEntity>>>searchAllInspection (String keyWord,String token);
   Future <Either<Failure,String?>>assignProdcutToInspector(num productId, String inspectorId);
 
 

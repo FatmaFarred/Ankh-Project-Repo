@@ -705,4 +705,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get uploadVehicleImage => 'ارفع صورة المركبة';
+
+  @override
+  String get myInspections => 'فحوصاتي';
+
+  @override
+  String get clientDidNotRespond => 'لم يرد العميل';
+
+  @override
+  String get returnedToMarketer => 'أعيد إلى المسوّق';
+
+  @override
+  String get clientRejected => 'رفض العميل';
+
+  @override
+  String get noInspectionsFound => 'لا توجد فحوصات متاحة';
 }

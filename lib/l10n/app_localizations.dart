@@ -1447,6 +1447,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Upload Vehicle Image'**
   String get uploadVehicleImage;
+
+  /// No description provided for @myInspections.
+  ///
+  /// In en, this message translates to:
+  /// **'My Inspections'**
+  String get myInspections;
+
+  /// No description provided for @clientDidNotRespond.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Did Not Respond'**
+  String get clientDidNotRespond;
+
+  /// No description provided for @returnedToMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned to Marketer'**
+  String get returnedToMarketer;
+
+  /// No description provided for @clientRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Rejected'**
+  String get clientRejected;
+
+  /// No description provided for @noInspectionsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Inspections Found'**
+  String get noInspectionsFound;
 }
 
 class _AppLocalizationsDelegate

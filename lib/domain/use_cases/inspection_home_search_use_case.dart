@@ -14,8 +14,8 @@ class InspectorHomeSearchUseCase {
 
   InspectorHomeSearchUseCase(this.repository);
 
-  Future<Either<Failure, List<AllInpectionEntity>>> execute(String keyWord) {
-    return repository.searchAllInspection(keyWord);
+  Future<Either<Failure, List<AllInpectionEntity>>> execute(String keyWord,String token) {
+    return repository.searchAllInspection(keyWord,token);
   }
 
 }

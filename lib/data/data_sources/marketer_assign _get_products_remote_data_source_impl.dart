@@ -53,7 +53,7 @@ import '../models/product_details_dm.dart';
           // Return success
           return right(requestResponse);
         } else {
-          return left(ServerError(errorMessage: response.data['message']));
+          return left(ServerError(errorMessage: response.data));
         }
       } else {
         return left(NetworkError(

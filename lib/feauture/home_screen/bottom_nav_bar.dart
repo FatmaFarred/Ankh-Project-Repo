@@ -14,6 +14,9 @@ import '../../api_service/di/di.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
+import '../inspector_screen/inspector_home/inspector_home_screen.dart';
+import '../inspector_screen/inspector_reports_screen.dart';
+import '../inspector_screen/my_inspections/my_inspections_screen.dart';
 import '../marketer_Reports/marketer_reports_screen.dart';
 import '../marketer_home/marketer_home_screen.dart';
 import '../myrequest/controller/cubit.dart';
@@ -42,103 +45,133 @@ class _BottomNavBarState extends State<BottomNavBar> {
     _currentIndex = widget.initialIndex;
   }
 
-  // Public method to navigate to a specific index
-
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
 
-    final List<Widget> _pages = user?.roles?[0] == "Marketer" ? [
-      MarketerHomeScreen(),
-      MarketerProductScreen(),
-      BalanceScreen(),
-      BlocProvider(
-        create: (_) => getIt<MarketerRequestCubit>()..fetchRequests(user?.id??"", "roleId"),
-        child: MarketerReportsScreen(),
-      ),
-      ChatsScreen(),
-      AccountScreen(), // Keep AccountScreen in pages but hide from navigation
-    ] : [
-      HomeScreen(),
-      ClientFavouriteScreen(),
-      ChatsScreen(),
-    ];
+    late final List<Widget> pages;
+    late final List<BottomNavigationBarItem> items;
 
-    if (_currentIndex >= _pages.length) {
-      _currentIndex = 0;
+    if (user?.roles?[0]=="Marketer") {
+      pages = [
+        MarketerHomeScreen(),
+        MarketerProductScreen(),
+        BalanceScreen(),
+        BlocProvider(
+          create: (_) => getIt<MarketerRequestCubit>()
+            ..fetchRequests(user?.id??"", 'roleId'),
+          child: MarketerReportsScreen(),
+        ),
+        ChatsScreen(),
+        AccountScreen(),
+      ];
+      items = [
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.home,
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.myProducts,
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.balance,
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.reports,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.wechat_sharp, size: 20.sp),
+          label: AppLocalizations.of(context)!.chats,
+        ),
+      ];
     }
+    else  if (user?.roles?[0]=="Inspector")  {
+      pages = [
+        InspectorHomeScreen(),
+        MyInspectionsScreen( ),
+
+        InspectorReportsScreen(),
+
+        BalanceScreen(),
+
+        AccountScreen(),
+      ];
+      items = [
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.home,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.remove_red_eye_outlined, size: 20.sp),
+          label:  AppLocalizations.of(context)!.myInspections,
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
+          label:  AppLocalizations.of(context)!.reports,
+        ),
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.balance,
+        ),
+        BottomNavigationBarItem(
+          icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.account,
+        ),
+      ];
+    }
+    else  {
+      pages = [
+        HomeScreen(),
+        ClientFavouriteScreen(),
+        ChatsScreen(),
+        AccountScreen(),
+      ];
+      items = [
+        BottomNavigationBarItem(
+          icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.home,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
+          label: AppLocalizations.of(context)!.favorite,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.wechat_sharp, size: 20.sp),
+          label: AppLocalizations.of(context)!.chats,
+        ),
+        BottomNavigationBarItem(
+          icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+          label: AppLocalizations.of(context)!.accoun,
+        ),
+      ];
+    }
+
+    // Ensure index is valid
+    if (_currentIndex >= pages.length) _currentIndex = 0;
 
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: _pages,
+        children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: ColorManager.lightprimary,
-          selectedLabelStyle: GoogleFonts.cairo(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w700,
-            color: ColorManager.lightprimary,
-          ),
-          unselectedItemColor: ColorManager.darkGrey,
-          unselectedLabelStyle: GoogleFonts.cairo(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w600,
-            color: ColorManager.darkGrey,
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.7,
-          showUnselectedLabels: true,
-          onTap: (index) => setState(() => _currentIndex = index),
-          items: user?.roles?[0] == "Marketer" ? [
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
-              label:  AppLocalizations.of(context)!.home,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(ImageAssets.carIcon), size: 20.sp),
-              label: AppLocalizations.of(context)!.myProducts,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(ImageAssets.walletIcon), size: 20.sp),
-              label: AppLocalizations.of(context)!.balance,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(ImageAssets.requestIcon), size: 20.sp),
-              label:  AppLocalizations.of(context)!.reports,
-            ),
-            BottomNavigationBarItem(
-
-              icon: Icon(Icons.wechat_sharp, size: 20.sp),
-              label: AppLocalizations.of(context)!.chats,
-
-            ),
-          ]:
-          [
-            BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(ImageAssets.homeIcon), size: 20.sp),
-              label:  AppLocalizations.of(context)!.home,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border_rounded, size: 20.sp),
-              label:  AppLocalizations.of(context)!.favorite,
-            ),
-            BottomNavigationBarItem(
-
-              icon: Icon(Icons.wechat_sharp, size: 20.sp),
-              label: AppLocalizations.of(context)!.chats,
-
-            ),
-            BottomNavigationBarItem(
-              icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
-              label: AppLocalizations.of(context)!.accoun,
-
-            ),
-          ],
-        ),
-      );
-
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: ColorManager.lightprimary,
+        unselectedItemColor: ColorManager.darkGrey,
+        selectedLabelStyle: GoogleFonts.cairo(
+            fontSize: 14.sp, fontWeight: FontWeight.w700),
+        unselectedLabelStyle: GoogleFonts.cairo(
+            fontSize: 12.sp, fontWeight: FontWeight.w600),
+        backgroundColor: Colors.white,
+        elevation: 0.7,
+        showUnselectedLabels: true,
+        onTap: (i) => setState(() => _currentIndex = i),
+        items: items,
+      ),
+    );
   }
 }
