@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:ankh_project/feauture/details_screen/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CustomPhotoButtons extends StatelessWidget {
+class CustomPhotoButtons extends StatefulWidget {
   final void Function(List<XFile>) onImagesSelected;
 
   const CustomPhotoButtons({
@@ -11,24 +13,37 @@ class CustomPhotoButtons extends StatelessWidget {
     required this.onImagesSelected,
   }) : super(key: key);
 
-  Future<void> _pickImages(BuildContext context) async {
+  @override
+  State<CustomPhotoButtons> createState() => _CustomPhotoButtonsState();
+}
+
+class _CustomPhotoButtonsState extends State<CustomPhotoButtons> {
+  List<XFile> _selectedImages = [];
+
+  Future<void> _pickImages() async {
     try {
       final ImagePicker picker = ImagePicker();
       final List<XFile>? pickedFiles = await picker.pickMultiImage();
       if (pickedFiles != null && pickedFiles.isNotEmpty) {
-        onImagesSelected(pickedFiles);
+        setState(() {
+          _selectedImages = pickedFiles;
+        });
+        widget.onImagesSelected(pickedFiles);
       }
     } catch (e) {
       debugPrint("Error picking images: $e");
     }
   }
 
-  Future<void> _takePhoto(BuildContext context) async {
+  Future<void> _takePhoto() async {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? photo = await picker.pickImage(source: ImageSource.camera);
       if (photo != null) {
-        onImagesSelected([photo]);
+        setState(() {
+          _selectedImages = [photo];
+        });
+        widget.onImagesSelected([photo]);
       }
     } catch (e) {
       debugPrint("Error taking photo: $e");
@@ -48,67 +63,86 @@ class CustomPhotoButtons extends StatelessWidget {
         children: [
           SectionTitle(title: "Inspector Details"),
           SizedBox(height: 20.h),
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => _pickImages(context),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE6F4EA),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.green),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.upload, color: Colors.green),
-                        SizedBox(width: 8.w),
-                        Text(
-                          "Upload",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
+          if (_selectedImages.isEmpty)
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: _pickImages,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE6F4EA),
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.upload, color: Colors.green),
+                          SizedBox(width: 8.w),
+                          Text(
+                            "Upload",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => _takePhoto(context),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE8F0FE),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.blue),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.camera_alt, color: Colors.blue),
-                        SizedBox(width: 8.w),
-                        Text(
-                          "Take Photo",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: _takePhoto,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE8F0FE),
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(color: Colors.blue),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.camera_alt, color: Colors.blue),
+                          SizedBox(width: 8.w),
+                          Text(
+                            "Take Photo",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          else
+            Wrap(
+              spacing: 10.w,
+              runSpacing: 10.h,
+              children: _selectedImages.map((img) {
+                return Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: Image.file(
+                      File(img.path),
+                      width: 100.w,
+                      height: 100.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
         ],
       ),
     );
