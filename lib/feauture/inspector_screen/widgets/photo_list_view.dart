@@ -1,11 +1,11 @@
 import 'package:ankh_project/feauture/home_screen/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ankh_project/core/constants/assets_manager.dart';
-import '../../details_screen/widgets/section_title.dart';
 
 class PhotoListView extends StatelessWidget {
-  const PhotoListView({super.key});
+  final List<String> imageUrls;
+
+  const PhotoListView({super.key, required this.imageUrls});
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +20,40 @@ class PhotoListView extends StatelessWidget {
         children: [
           const SectionHeader(title: "Product Photos"),
           SizedBox(height: 8.h),
-          SizedBox(
-            height: 90.h,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              itemBuilder: (_, index) => Container(
-                width: 120.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
-                  color: const Color(0xFFF9FAFB),
+          if (imageUrls.isEmpty)
+            Center(
+              child: Text(
+                'No photos available',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
                 ),
-                child: Image.asset(ImageAssets.brokenImage),
               ),
-              separatorBuilder: (_, __) => SizedBox(width: 10.w),
+            )
+          else
+            SizedBox(
+              height: 90.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: imageUrls.length,
+                itemBuilder: (_, index) => Container(
+                  width: 120.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.r),
+                    color: const Color(0xFFF9FAFB),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16.r),
+                    child: Image.network(
+                      imageUrls[index],
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                    ),
+                  ),
+                ),
+                separatorBuilder: (_, __) => SizedBox(width: 10.w),
+              ),
             ),
-          ),
         ],
       ),
     );
