@@ -225,7 +225,12 @@
   "licenseImage": "صورة الرخصة ",
   "uploadLicenseImage": "ارفع صورة الرخصة",
   "vehicleImage": "صورة المركبة",
-  "uploadVehicleImage": "ارفع صورة المركبة"
+  "uploadVehicleImage": "ارفع صورة المركبة",
+  "myInspections": "فحوصاتي",
+  "clientDidNotRespond": "لم يرد العميل",
+  "returnedToMarketer": "أعيد إلى المسوّق",
+  "clientRejected": "رفض العميل",
+  "noInspectionsFound": "لا توجد فحوصات متاحة",
 
 
 

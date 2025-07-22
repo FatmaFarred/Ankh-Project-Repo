@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/entities/marketer_requests_for_inspection_entity.dart';
-import '../../inspector_screen/inspector_bottom_nav_bar.dart';
+import '../../home_screen/bottom_nav_bar.dart';
 
 class ReportDetailsScreen extends StatefulWidget {
   static const String reportDetailsRouteName = "ReportDetailsScreen";
@@ -105,7 +105,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return InspectorBottomNavBar();
+                      return BottomNavBar();
                     },
                   ),
                 );

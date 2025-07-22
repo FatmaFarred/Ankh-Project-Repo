@@ -229,8 +229,12 @@
   "licenseImage": "License Image ",
   "uploadLicenseImage": "Upload License Image",
   "vehicleImage": "Vehicle Image",
-  "uploadVehicleImage": "Upload Vehicle Image"
-
+  "uploadVehicleImage": "Upload Vehicle Image",
+  "myInspections": "My Inspections",
+  "clientDidNotRespond": "Client Did Not Respond",
+  "returnedToMarketer": "Returned to Marketer",
+  "clientRejected": "Client Rejected",
+  "noInspectionsFound": "No Inspections Found"
 
 
 

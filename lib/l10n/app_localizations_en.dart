@@ -707,4 +707,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get uploadVehicleImage => 'Upload Vehicle Image';
+
+  @override
+  String get myInspections => 'My Inspections';
+
+  @override
+  String get clientDidNotRespond => 'Client Did Not Respond';
+
+  @override
+  String get returnedToMarketer => 'Returned to Marketer';
+
+  @override
+  String get clientRejected => 'Client Rejected';
+
+  @override
+  String get noInspectionsFound => 'No Inspections Found';
 }

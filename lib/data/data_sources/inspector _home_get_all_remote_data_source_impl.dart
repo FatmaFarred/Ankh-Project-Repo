@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 import '../../api_service/api_constants.dart';
 import '../../api_service/api_manager.dart';
@@ -34,6 +35,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
           url: ApiConstant.baseUrl,
           endPoint: EndPoints.inspectorGetAllInspection,
 
+
           options: Options(validateStatus: (_) => true),
 
         );
@@ -64,7 +66,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
     }
   }
 
-  Future <Either<Failure, List<AllInpectionDm>>> searchAllInspection(String keyWord) async {
+  Future <Either<Failure, List<AllInpectionDm>>> searchAllInspection(String keyWord,String token) async {
     try {
       final List<ConnectivityResult> connectivityResult =
       await Connectivity().checkConnectivity();
@@ -72,21 +74,30 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
       if (connectivityResult.contains(ConnectivityResult.wifi) ||
           connectivityResult.contains(ConnectivityResult.mobile)) {
 
-        final lowerInput = keyWord.toLowerCase().trim();
+        final originalInput = keyWord.trim();       // Keep Arabic/English characters intact
+        final lowerInput = originalInput.toLowerCase();  // Use for logic checks
         String? search = '';
         String? status = '';
         String? date = '';
 
-        final dateRegex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+        final dateInputRegex = RegExp(r'^\d{1,2}-\d{1,2}-\d{4}$'); // Accepts 22-7-2025 or 01-01-2025
         const knownStatuses = ['Pending', 'Completed', 'Rejected', 'Cancelled','Not Responded', 'Postponed', 'In Progress'];
 
-        if (dateRegex.hasMatch(lowerInput)) {
-          date = keyWord;
+        if (dateInputRegex.hasMatch(lowerInput)) {
+          try {
+            final parsedDate = DateFormat('d-M-yyyy').parseStrict(originalInput);
+            date = DateFormat('yyyy-MM-dd').format(parsedDate);
+          } catch (e) {
+            return left(ServerError(errorMessage: "Invalid date format. Use dd-MM-yyyy."));
+          }
         } else if (knownStatuses.contains(lowerInput)) {
-          status = keyWord;
+          status = lowerInput;
+        // Convert Arabic or lowercase to backend status
         } else {
-          search = keyWord;
+          search = originalInput; // ✅ Accept Arabic or English name
         }
+
+        print("Search: $search, Status: $status, Date: $date");
         var response = await apiManager.getData(
           url: ApiConstant.baseUrl,
           endPoint: EndPoints.searchHomeInspection,
@@ -95,6 +106,10 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
             'Status': status,
             'Date': date,
           },
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+          },
           options: Options(validateStatus: (_) => true),
 
         );
@@ -102,16 +117,18 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
-        final requestResponse = myResponse
-            .map((json) => AllInpectionDm.fromJson(json))
-            .toList();
-
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+          final requestResponse = myResponse.map((json) =>
+              AllInpectionDm.fromJson(json))
+              .toList();
           // Return success
           return right(requestResponse);
-        } else {
+        }
+        else {
           return left(ServerError(errorMessage: response.data['message']));
         }
       } else {
@@ -122,6 +139,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
       return left(ServerError(errorMessage: e.toString()));
     }
   }
+
 
   @override
   Future<Either<Failure, String?>> assignProdcutToInspector(num productId, String inspectorId) async{

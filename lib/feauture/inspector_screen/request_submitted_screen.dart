@@ -1,6 +1,5 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
-import 'package:ankh_project/feauture/inspector_screen/inspector_bottom_nav_bar.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import '../home_screen/bottom_nav_bar.dart';
 
 class RequestSubmittedScreen extends StatelessWidget {
   const RequestSubmittedScreen({super.key});
@@ -63,7 +63,7 @@ class RequestSubmittedScreen extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){return InspectorBottomNavBar();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavBar();}));
               },
             ),
           ],

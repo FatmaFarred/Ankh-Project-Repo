@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/core/customized_widgets/shared_preferences%20.dart';
 import 'package:ankh_project/feauture/home_screen/header_section.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,9 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
   InspectorAssignProductCubit inspectorAssignProductCubit =
       getIt<InspectorAssignProductCubit>();
   String? currentKeyword;
+  String? token;
 
-  final TextEditingController _searchController = TextEditingController();
+
 
   void initState() {
     super.initState();
@@ -41,6 +43,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
     Future.microtask(() {
       final user = context.read<UserCubit>().state;
       final userId = user?.id;
+      print("👤 User: $userId"); // Debug print
       inspectorHomeProductCubit.fetchProducts();
 
       /*if (userId != null && userId.isNotEmpty) {
@@ -49,7 +52,17 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
         debugPrint("User ID is null or empty");
       }*/
     });
+    _loadToken();
+
   }
+  Future<void> _loadToken() async {
+    final fetchedToken = await SharedPrefsManager.getData(key: 'user_token');
+    setState(() {
+      token = fetchedToken;
+    });
+    print("👤 User ID: $token");
+  }
+
 
   Future<void> _refreshData() async {
     print("🔄 Marketer Products Refresh triggered!"); // Debug print
@@ -69,19 +82,13 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
+    print("👤 User ID: $token"); // Debug print
 
     return Scaffold(
       body: Column(
         children: [
           HomeAppBar(
-            onSearch: (keyword) {
-              currentKeyword = keyword; // Store the current keyword
-              if (keyword.isNotEmpty) {
-                inspectorHomeProductCubit.searchProducts(keyword);
-              } else {
-                inspectorHomeProductCubit.fetchProducts();
-              }
-            },
+            showSearchBar: false,
           ),
           SizedBox(height: 12.h),
           Expanded(
@@ -125,7 +132,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
                             inspectorAssignProductCubit.assignProduct(
                               productId: storedProductId,
                               inspectorId:
-                                  "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3" ?? "",
+                                  user?.id ?? "",
                             );
                           }
                         },
@@ -175,7 +182,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
                         } else if (state is InspectorHomeProductEmpty) {
                           return RefreshIndicator(
                             color: ColorManager.lightprimary,
-                            onRefresh: _refreshData,
+                              onRefresh: _refreshData,
                             child: ListView(
                               children: [
                                 Container(
@@ -236,10 +243,11 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
                                       inspectionRequest: request,
                                       currentKeyword: currentKeyword,
                                       onAcceptInspection: () {
+                                        print("the address $request.address");
                                         inspectorAssignProductCubit.assignProduct(
                                           productId: request?.id ?? 0,
                                           inspectorId:
-                                              "bf3ad5ae-2b75-45a7-99cc-2b5a39e341a3",
+                                          user?.id ?? "",
                                         );
                                       },
                                     );
@@ -287,7 +295,7 @@ class InspectionRequestCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inspectionRequest?.marketerName ?? "",
+                inspectionRequest?.clientName ?? "",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Container(
@@ -357,7 +365,7 @@ class InspectionRequestCard extends StatelessWidget {
           SizedBox(height: 26.h),
           CustomizedElevatedButton(
             bottonWidget: Text(
-              "Accept Inspection",
+              AppLocalizations.of(context)!.acceptInspection,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ColorManager.white,
                 fontSize: 16.sp,

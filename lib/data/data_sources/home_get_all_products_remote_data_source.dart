@@ -82,16 +82,18 @@ import '../models/all_products_dm.dart';
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
-        final requestResponse = myResponse
-            .map((json) => AllProductsDm.fromJson(json))
-            .toList();
-
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+          final requestResponse = myResponse.map((json) =>
+              AllProductsDm.fromJson(json))
+              .toList();
           // Return success
           return right(requestResponse);
-        } else {
+        }
+        else {
           return left(ServerError(errorMessage: response.data['message']));
         }
       } else {

@@ -24,9 +24,9 @@ import '../../domain/repositries_and_data_sources/repositries/inspector _home_ge
 
   @override
   Future<Either<Failure, List<AllInpectionEntity>>> searchAllInspection(
-      String keyWord) async {
+      String keyWord,String token) async {
     var either = await homeGetAllInspectionRemoteDataSource.searchAllInspection(
-        keyWord);
+        keyWord, token);
     return either.fold((error) => left(error), (response) => right(response));
   }
 

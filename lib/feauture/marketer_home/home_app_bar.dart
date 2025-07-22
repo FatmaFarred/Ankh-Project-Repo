@@ -18,7 +18,8 @@ typedef OnSearchCallback = void Function(String keyword);
 
 class HomeAppBar extends StatelessWidget {
   final OnSearchCallback? onSearch;
-  const HomeAppBar({super.key, this.onSearch});
+  final bool showSearchBar;
+  const HomeAppBar({super.key, this.onSearch, this.showSearchBar= true});
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class HomeAppBar extends StatelessWidget {
               ],
             ),
             SizedBox(height: 24.h),
-            CustomizedSearchBar(onSearch: onSearch),
+            showSearchBar?CustomizedSearchBar(onSearch: onSearch):SizedBox.shrink(),
           ],
         ),
       ),
