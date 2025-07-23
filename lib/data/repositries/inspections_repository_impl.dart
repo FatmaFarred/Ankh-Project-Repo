@@ -5,6 +5,7 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
 import '../../domain/repositries_and_data_sources/repositries/inspections_repository.dart';
 import '../../api_service/failure/error_handling.dart';
 import '../data_sources/inspections_remote_data_source_impl.dart';
+import '../../domain/entities/inspection_report_details_entity.dart';
 @Injectable(as: MyInspectionsRepository)
 class MyInspectionsRepositoryImpl implements MyInspectionsRepository {
   MyInspectionsRemoteDataSource remoteDataSource;
@@ -21,5 +22,17 @@ class MyInspectionsRepositoryImpl implements MyInspectionsRepository {
       (error) => left(error),
       (response) => right(response),
     );
+  }
+
+  @override
+  Future<Either<Failure, InspectionReportDetailsEntity>> getReportDetails({
+    required num requestId,
+  }) async {
+    var either= await remoteDataSource.getReportDetails(requestId: requestId);
+    return either.fold(
+          (error) => left(error),
+          (response) => right(response),
+    );
+
   }
 } 

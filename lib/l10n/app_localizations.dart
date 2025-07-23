@@ -1477,6 +1477,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Inspections Found'**
   String get noInspectionsFound;
+
+  /// No description provided for @inspectionResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Results'**
+  String get inspectionResults;
+
+  /// No description provided for @noPhotosAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No Photos Available'**
+  String get noPhotosAvailable;
+
+  /// No description provided for @productPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Photos'**
+  String get productPhotos;
+
+  /// No description provided for @inspectionReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Report'**
+  String get inspectionReport;
+
+  /// No description provided for @inspectionReportDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' تفاصيل تقرير الفحص'**
+  String get inspectionReportDetails;
 }
 
 class _AppLocalizationsDelegate

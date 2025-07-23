@@ -162,6 +162,8 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                   if (state is MyInspectionsLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is MyInspectionsError) {
+                    print('--- MyInspectionsError State ---');
+                    print(StackTrace.current);
                     return Center(
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -178,14 +180,20 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                               ),
                               color: ColorManager.lightprimary,
                               borderColor: ColorManager.lightprimary,
-                              onPressed: () =>
-                                  _fetchForTab(_tabController.index),
+                              onPressed: () {
+                                print('--- Try Again Button Pressed ---');
+                                print(StackTrace.current);
+                                _fetchForTab(_tabController.index);
+                              },
+
                             ),
                           ],
                         ),
                       ),
                     );
                   } else if (state is MyInspectionsEmpty) {
+                    print('--- MyInspectionsEmpty State ---');
+                    print(StackTrace.current);
                     return RefreshIndicator(
                       onRefresh: () => _refreshData(_tabController.index),
                       child: ListView(

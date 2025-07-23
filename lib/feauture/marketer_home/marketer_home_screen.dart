@@ -68,6 +68,7 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
+    print("👤 User ID: ${user?.id}"); // Debug print
 
 
     return Scaffold(
@@ -219,12 +220,16 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
                   itemBuilder: (context, index) {
                     final product = allRequests[index];
                     return InkWell(
-                      onTap: () =>
-                          Navigator.pushNamed(
-                            context,
-                            DetailsScreen.detailsScreenRouteName,
-                            arguments: product.id,
-                          ),
+                      onTap: () {
+                        print("🔄 Product ID: ${product.id}"); // Debug print
+                        Navigator.pushNamed(
+                          context,
+                          DetailsScreen.detailsScreenRouteName,
+                          arguments: product.id,
+
+                        );
+
+                      },
                       child: MyProductCarCard(
                         product: product,
                         showAddButton: true,

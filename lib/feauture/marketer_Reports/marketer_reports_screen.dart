@@ -187,16 +187,10 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
                                 );
                               }
                               final request = filteredRequests[index];
-                              return InkWell(
-                                onTap: () => Navigator.of(context).pushNamed(
-                                  MyRequestDetails.myRequestDetailsRouteName,
-                                  arguments: request,
-                                ),
-                                child: CarReportCard(
-                                  request: request,
-                                  paddingHorizontal: 20.w,
-                                  paddingVertical: 12.h,
-                                ),
+                              return CarReportCard(
+                                request: request,
+                                paddingHorizontal: 20.w,
+                                paddingVertical: 12.h,
                               );
                             },
                           ),
@@ -243,32 +237,11 @@ class CarReportCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      request?.productName??"",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    Text(" ${request.clientName}",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-                    ),
-                  ],
-                ),
-                Text(
-                  " ${request.preferredDate != null
-                      ? DateFormat('dd MMM yyyy, hh:mm a').format(DateTime.parse(request.preferredDate!))
-                      : AppLocalizations.of(context)!.noDataFound} ${request.preferredTime != null
-                      ? formatTime(request.preferredTime!)
-                      : AppLocalizations.of(context)!.noDataFound}",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
-                ),
-              ],
+            Text(
+              request?.productName??"",
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 12.h),
             Row(children: [
               Icon(Icons.person_rounded,
 
@@ -279,7 +252,7 @@ class CarReportCard extends StatelessWidget {
               SizedBox(width: 8.w),
 
               Text(
-                request?.productName??"",
+                request?.clientName??"",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
               ),
             ],),
@@ -293,7 +266,7 @@ class CarReportCard extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                request?.productName??"",
+                request?.inspectorName??"",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
               ),
             ],),
@@ -306,7 +279,11 @@ class CarReportCard extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                request?.productName??"",
+                " ${request.preferredDate != null
+                    ? DateFormat('MMM dd,  yyyy').format(DateTime.parse(request.preferredDate!))
+                    : AppLocalizations.of(context)!.noDataFound}_ ${request.preferredTime != null
+                    ? formatTime(request.preferredTime!)
+                    : AppLocalizations.of(context)!.noDataFound}",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
               ),
             ],),
@@ -320,7 +297,7 @@ class CarReportCard extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                request?.productName??"",
+                request?.address??"",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 12.sp),
               ),
             ],),
@@ -356,10 +333,12 @@ class CarReportCard extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
            showBotton? CustomizedElevatedButton(
+
               onPressed: () {
+                print("request id :${request.id}");
                 Navigator.of(context).pushNamed(
-                  ReportDetailsScreen.reportDetailsRouteName,
-                  arguments: request,
+                  MarketerReportDetails.reportDetailsRouteName,
+                  arguments: request.id,
                 );
               },
               color: ColorManager.darkGrey,

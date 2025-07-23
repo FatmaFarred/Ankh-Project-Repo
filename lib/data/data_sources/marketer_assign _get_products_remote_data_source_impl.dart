@@ -41,15 +41,16 @@ import '../models/product_details_dm.dart';
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
-
-
-        final requestResponse = myResponse
-            .map((json) => AllProductsDm.fromJson(json))
-            .toList();
 
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => AllProductsDm.fromJson(json))
+              .toList();
+
           // Return success
           return right(requestResponse);
         } else {

@@ -142,6 +142,7 @@ import '../../domain/use_cases/get_all_products_use_case.dart' as _i939;
 import '../../domain/use_cases/get_inspection_request_details_use_case.dart'
     as _i194;
 import '../../domain/use_cases/get_inspections_use_case.dart' as _i147;
+import '../../domain/use_cases/get_report_details_use_case.dart' as _i708;
 import '../../domain/use_cases/home_get_all_products_use_case.dart' as _i873;
 import '../../domain/use_cases/inspection_home_search_use_case.dart' as _i826;
 import '../../domain/use_cases/inspector_assign_inspection_use_case.dart'
@@ -193,6 +194,8 @@ import '../../feauture/marketer_home/controller/marketer_home_product_cubit.dart
     as _i158;
 import '../../feauture/marketer_products/get_product_controller/marketer_product_cubit.dart'
     as _i954;
+import '../../feauture/marketer_Reports/marketer_report_details/report_details/report_details_cubit.dart'
+    as _i356;
 import '../../feauture/myrequest/controller/cubit.dart' as _i789;
 import '../../feauture/myrequest/my_request_details/details_controller/details_request_cubit.dart'
     as _i214;
@@ -330,6 +333,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i233.MarketerAddRequestInspectionRepositry>()));
     gh.factory<_i147.GetMyInspectionsUseCase>(() =>
         _i147.GetMyInspectionsUseCase(gh<_i17.MyInspectionsRepository>()));
+    gh.factory<_i708.GetReportDetailsUseCase>(() =>
+        _i708.GetReportDetailsUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.lazySingleton<_i110.InspectionRequestDetailsRepository>(() =>
         _i413.InspectionRequestDetailsRepositoryImpl(
             gh<_i147.InspectionRequestDetailsRemoteDataSource>()));
@@ -393,6 +398,8 @@ extension GetItInjectableX on _i174.GetIt {
           getInspectionsUseCase: gh<_i147.GetMyInspectionsUseCase>(),
           searchProductsUseCase: gh<_i826.InspectorHomeSearchUseCase>(),
         ));
+    gh.factory<_i356.MarketerReportDetailsCubit>(() =>
+        _i356.MarketerReportDetailsCubit(gh<_i708.GetReportDetailsUseCase>()));
     gh.factory<_i447.ProductDetailsCubit>(
         () => _i447.ProductDetailsCubit(gh<_i385.ProductDetailsUseCase>()));
     gh.factory<_i1049.InspectorAssignProductCubit>(() =>
