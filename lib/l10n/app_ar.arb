@@ -230,7 +230,15 @@
   "clientDidNotRespond": "لم يرد العميل",
   "returnedToMarketer": "أعيد إلى المسوّق",
   "clientRejected": "رفض العميل",
-  "noInspectionsFound": "لا توجد فحوصات متاحة"
+  "noInspectionsFound": "لا توجد فحوصات متاحة",
+  "inspectionResults": "نتائج الفحص",
+  "noPhotosAvailable": "لا توجد صور متاحة",
+   "productPhotos": "صور المنتج",
+    "inspectionPhotos": "صور الفحص",
+    "inspectionReport": "تقرير الفحص",
+    "inspectionReportDetails": "تفاصيل تقرير الفحص",
+  "inspectionReport": "تقرير الفحص"
+
 
 
 

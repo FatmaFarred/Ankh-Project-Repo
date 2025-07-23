@@ -23,6 +23,7 @@ class MarketerRequestsForInspectionDm extends MarketerRequestsForInspectionEntit
     super.preferredDate,
     super.preferredTime,
     super.status,
+    super.address,
   });
 
   MarketerRequestsForInspectionDm.fromJson(dynamic json) {
@@ -36,6 +37,7 @@ class MarketerRequestsForInspectionDm extends MarketerRequestsForInspectionEntit
     preferredDate = json['preferredDate'];
     preferredTime = json['preferredTime'];
     status = json['status'];
+    address = json['address'] ;
   }
 
 
@@ -51,6 +53,7 @@ class MarketerRequestsForInspectionDm extends MarketerRequestsForInspectionEntit
     map['preferredDate'] = preferredDate;
     map['preferredTime'] = preferredTime;
     map['status'] = status;
+    map['address'] = address;
     return map;
   }
 

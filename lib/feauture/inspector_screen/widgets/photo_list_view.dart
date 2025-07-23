@@ -2,6 +2,8 @@ import 'package:ankh_project/feauture/home_screen/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class PhotoListView extends StatelessWidget {
   final List<String> imageUrls;
 
@@ -18,12 +20,12 @@ class PhotoListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeader(title: "Product Photos"),
+           SectionHeader(title: AppLocalizations.of(context)!.productPhotos,imageUrl:imageUrls,),
           SizedBox(height: 8.h),
           if (imageUrls.isEmpty)
             Center(
               child: Text(
-                'No photos available',
+                AppLocalizations.of(context)!.noPhotosAvailable,
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: Colors.grey,
@@ -45,7 +47,7 @@ class PhotoListView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16.r),
                     child: Image.network(
-                      imageUrls[index],
+                      "https://ankhapi.runasp.net/${imageUrls[index]}",
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
                     ),

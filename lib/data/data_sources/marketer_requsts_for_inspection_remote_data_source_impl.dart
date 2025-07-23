@@ -41,8 +41,12 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
         );
 
         if (kDebugMode) {
-          print(response.data);
+          print( " the response data ${response.data}");
         }
+        print('Status code: ${response.statusCode}');
+        print('Headers: ${response.headers}');
+        print('Raw response: ${response.data}');
+        print('Type: ${response.data.runtimeType}');
         final List<dynamic> myResponse = response.data;
 
 
@@ -55,7 +59,9 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
           // Return success
           return right(requestResponse);
         } else {
-          return left(ServerError(errorMessage: response.data));
+          return left(ServerError(errorMessage: response.data)
+
+          );
         }
       } else {
         return left(NetworkError(
@@ -84,6 +90,7 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
           print(response.data);
         }
 
+
         final requestResponse = MarketerRequestInspectionDetailsDm.fromJson(
             response.data);
 
@@ -91,7 +98,7 @@ class MarkertRequestsForInspectionRemoteDataSourceImpl implements MarketerReques
           // Return success
           return right(requestResponse);
         } else {
-          return left(ServerError(errorMessage: response.data['message']));
+          return left(ServerError(errorMessage: response.data));
         }
       } else {
         return left(NetworkError(

@@ -48,7 +48,8 @@ abstract class ColorManager {
 
 
   static Color white = const Color(0xffFFFFFF);
-  static Color error = const Color(0xffe61f34); // red color
+  static Color error = const Color(0xffe61f34);
+  static Color textBlack = const Color(0xff1E1E1E);
 
 
 

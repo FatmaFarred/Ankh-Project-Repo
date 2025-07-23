@@ -720,4 +720,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noInspectionsFound => 'لا توجد فحوصات متاحة';
+
+  @override
+  String get inspectionResults => 'نتائج الفحص';
+
+  @override
+  String get noPhotosAvailable => 'لا توجد صور متاحة';
+
+  @override
+  String get productPhotos => 'صور المنتج';
+
+  @override
+  String get inspectionReport => 'تقرير الفحص';
+
+  @override
+  String get inspectionReportDetails => 'تفاصيل تقرير الفحص';
 }

@@ -234,22 +234,13 @@
   "clientDidNotRespond": "Client Did Not Respond",
   "returnedToMarketer": "Returned to Marketer",
   "clientRejected": "Client Rejected",
-  "noInspectionsFound": "No Inspections Found"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "noInspectionsFound": "No Inspections Found",
+  "inspectionResults": "Inspection Results",
+  "noPhotosAvailable": "No Photos Available",
+  "productPhotos": "Product Photos",
+  "inspectionReport": "Inspection Report",
+  "inspectionReportDetails": " تفاصيل تقرير الفحص",
+  "inspectionReport": "Inspection Report"
 
 
 

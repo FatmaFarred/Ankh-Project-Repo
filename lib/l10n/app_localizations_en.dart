@@ -722,4 +722,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noInspectionsFound => 'No Inspections Found';
+
+  @override
+  String get inspectionResults => 'Inspection Results';
+
+  @override
+  String get noPhotosAvailable => 'No Photos Available';
+
+  @override
+  String get productPhotos => 'Product Photos';
+
+  @override
+  String get inspectionReport => 'Inspection Report';
+
+  @override
+  String get inspectionReportDetails => ' تفاصيل تقرير الفحص';
 }

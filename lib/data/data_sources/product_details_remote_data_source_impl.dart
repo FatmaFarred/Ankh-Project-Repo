@@ -34,9 +34,14 @@ class ProductDetailsRemoteDataSourceImpl implements ProductDetailsRemoteDataSour
 
         );
 
+
         if (kDebugMode) {
-          print(response.data);
+          print( " the response data ${response.data}");
         }
+        print('Status code: ${response.statusCode}');
+        print('Headers: ${response.headers}');
+        print('Raw response: ${response.data}');
+        print('Type: ${response.data.runtimeType}');
         final  myResponse = response.data;
 
          var requestResponse = ProductDetailsDm.fromJson(myResponse);
