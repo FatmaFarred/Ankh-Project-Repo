@@ -134,14 +134,17 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                     PhotoListView(
                       imageUrls: details?.productImages ?? [],
                     ),
-                    RadioStatusGroup(
-                      title: AppLocalizations.of(context)!.inspectionResults,
-                      statusOptions: statusOptions,
-                      selectedValue: selectedStatus,
-                      onChanged: (value) {
-                        // Empty function - no action taken, making it read-only
-                      },
-                    ),
+                    (details.inspectionImages == null || details.inspectionImages!.isEmpty || details.inspectorComment == null)?SizedBox():Column(
+                      children: [
+                        RadioStatusGroup(
+                          title: AppLocalizations.of(context)!.inspectionResults,
+                          statusOptions: statusOptions,
+                          selectedValue: selectedStatus,
+                          onChanged: (value) {
+                            // Empty function - no action taken, making it read-only
+                          },
+                        ),
+
                     SizedBox(height: 20.h),
                     CustomTextFormField(
                       hintText: "",
@@ -150,6 +153,8 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                       initialValue: details?.inspectorComment ?? "", // Display comment from API
                     ),
                     SizedBox(height: 64.h),
+                      ],
+                    ),
                   ],
                 ),
               ),
