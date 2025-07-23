@@ -40,7 +40,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     'ClientDidNotRespond',
     'Postponed',
     'ReturnedToMarketer',
-    'ClientRejected'
+    'ClientRejected',
   ];
 
   @override
@@ -67,7 +67,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
 
   void _fetchForTab(int index) {
     if (token != null) {
-      myInspectionsCubit.fetchInspections(token: token!, filter:filters[index] );
+      myInspectionsCubit.fetchInspections(
+        token: token!,
+        filter: filters[index],
+      );
     }
   }
 
@@ -82,8 +85,11 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     print("🔄 inspector Products Refresh triggered!"); // Debug print
     final user = context.read<UserCubit>().state;
     final userId = user?.id;
-    if (token!= null ) {
-      await myInspectionsCubit.fetchInspections(token: token!, filter: filters[index]);
+    if (token != null) {
+      await myInspectionsCubit.fetchInspections(
+        token: token!,
+        filter: filters[index],
+      );
     }
     /* print("👤 User ID: $userId"); // Debug print
     if (userId != null && userId.isNotEmpty) {
@@ -99,16 +105,23 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, _) => [
-          SliverToBoxAdapter(child: HomeAppBar(
-            onSearch: (keyword) {
-              if (keyword.isNotEmpty) {
-                myInspectionsCubit.searchProducts(keyword: keyword, token: token!);
-              } else {
-                myInspectionsCubit.fetchInspections(token : token!, filter: filters[_tabController.index]);
-              }
-            },
-
-          )),
+          SliverToBoxAdapter(
+            child: HomeAppBar(
+              onSearch: (keyword) {
+                if (keyword.isNotEmpty) {
+                  myInspectionsCubit.searchProducts(
+                    keyword: keyword,
+                    token: token!,
+                  );
+                } else {
+                  myInspectionsCubit.fetchInspections(
+                    token: token!,
+                    filter: filters[_tabController.index],
+                  );
+                }
+              },
+            ),
+          ),
           SliverToBoxAdapter(child: SizedBox(height: 12.h)),
         ],
         body: Column(
@@ -124,7 +137,9 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
-                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                labelStyle: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
                 unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
@@ -158,8 +173,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                             Text(state.error.errorMessage ?? 'Error'),
                             SizedBox(height: 16),
                             CustomizedElevatedButton(
-                              bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                              bottonWidget: Text(
+                                AppLocalizations.of(context)!.tryAgain,
+                                style: Theme.of(context).textTheme.bodyLarge
+                                    ?.copyWith(color: ColorManager.white),
                               ),
                               color: ColorManager.lightprimary,
                               borderColor: ColorManager.lightprimary,
@@ -168,6 +185,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                                 print(StackTrace.current);
                                 _fetchForTab(_tabController.index);
                               },
+
                             ),
                           ],
                         ),
@@ -179,17 +197,25 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                     return RefreshIndicator(
                       onRefresh: () => _refreshData(_tabController.index),
                       child: ListView(
-                        physics: const AlwaysScrollableScrollPhysics(), // Ensures it can always be pulled
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        // Ensures it can always be pulled
                         children: [
                           Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.hourglass_empty, size: 64, color: ColorManager.darkGrey),
+                                Icon(
+                                  Icons.hourglass_empty,
+                                  size: 64,
+                                  color: ColorManager.darkGrey,
+                                ),
                                 SizedBox(height: 16),
                                 Text(
-                                  AppLocalizations.of(context)!.noInspectionsFound,
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.darkGrey),
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.noInspectionsFound,
+                                  style: Theme.of(context).textTheme.bodyLarge
+                                      ?.copyWith(color: ColorManager.darkGrey),
                                 ),
                               ],
                             ),
@@ -205,7 +231,8 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                         padding: REdgeInsets.symmetric(horizontal: 16),
                         child: ListView.separated(
                           itemCount: inspections.length,
-                          separatorBuilder: (context, index) => SizedBox(height: 12.h),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: 12.h),
                           itemBuilder: (context, index) {
                             final inspection = inspections[index];
                             return _buildInspectionCard(context, inspection);
@@ -224,7 +251,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     );
   }
 
-  Widget _buildInspectionCard(BuildContext context, AllInpectionEntity inspection) {
+  Widget _buildInspectionCard(
+    BuildContext context,
+    AllInpectionEntity inspection,
+  ) {
     return Container(
       padding: REdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -276,7 +306,8 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               SizedBox(width: 6.w),
               Text(
-                (inspection.preferredDate != null && inspection.preferredTime != null)
+                (inspection.preferredDate != null &&
+                        inspection.preferredTime != null)
                     ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(inspection.preferredDate!))} – ${inspection.preferredTime}"
                     : AppLocalizations.of(context)!.noDataFound,
                 style: GoogleFonts.poppins(
@@ -306,25 +337,102 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
             ],
           ),
           SizedBox(height: 26.h),
-          CustomizedElevatedButton(
-            bottonWidget: Text(
-              AppLocalizations.of(context)!.startInspect,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorManager.white,
-                fontSize: 16.sp,
-              ),
-            ),
-            color: Theme.of(context).primaryColor,
-            borderColor: Theme.of(context).primaryColor,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InspectionDetailsScreen(requestId:inspection.id ,),
+          switch (inspection.status) {
+            "Postponed" => CustomizedElevatedButton(
+              bottonWidget: Text(
+                "Reschedule",
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.white,
+                  fontSize: 16.sp,
                 ),
-              );
-            },
-          ),
+              ),
+              color: Theme.of(context).primaryColor,
+              borderColor: Theme.of(context).primaryColor,
+              onPressed: () {},
+            ),
+            "Completed" => CustomizedElevatedButton(
+              bottonWidget: Text(
+                "View Report",
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.white,
+                  fontSize: 16.sp,
+                ),
+              ),
+              color: ColorManager.darkGrey,
+              borderColor: ColorManager.darkGrey,
+              onPressed: () {},
+            ),
+            "Not Respond" => Row(
+              children: [
+                Expanded(
+                  child: CustomizedElevatedButton(
+                    bottonWidget: Text(
+                      "Call",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ColorManager.white,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    borderColor: Theme.of(context).primaryColor,
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(width: 16.w,),
+                Expanded(
+                  child: CustomizedElevatedButton(
+                    bottonWidget: Text(
+                      "Message",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ColorManager.white,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    color: ColorManager.darkGrey,
+                    borderColor: ColorManager.darkGrey,
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+            "Pending" => CustomizedElevatedButton(
+              bottonWidget: Text(
+                AppLocalizations.of(context)!.startInspect,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.white,
+                  fontSize: 16.sp,
+                ),
+              ),
+              color: Theme.of(context).primaryColor,
+              borderColor: Theme.of(context).primaryColor,
+              onPressed: () {},
+            ),
+
+            // TODO: Handle this case.
+            String() => throw UnimplementedError(),
+            // TODO: Handle this case.
+            null => throw UnimplementedError(),
+          },
+          // CustomizedElevatedButton(
+          //   bottonWidget: Text(
+          //     AppLocalizations.of(context)!.startInspect,
+          //     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          //       color: ColorManager.white,
+          //       fontSize: 16.sp,
+          //     ),
+          //   ),
+          //   color: Theme.of(context).primaryColor,
+          //   borderColor: Theme.of(context).primaryColor,
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) =>
+          //             InspectionDetailsScreen(requestId: inspection.id),
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/feauture/inspector_screen/inspection_details/submit_inspection_cubit.dart';
@@ -41,7 +43,6 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
   ];
 
   final TextEditingController commentController = TextEditingController();
-  List<String> imagePaths = []; // File paths of picked images
 
   @override
   void dispose() {
@@ -49,15 +50,8 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
     super.dispose();
   }
 
-  void addImages(List<String> paths) {
-    setState(() {
-      imagePaths.addAll(paths);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("Inspection Id : ${widget.requestId}");
     return MultiBlocProvider(
       providers: [
         BlocProvider<InspectionRequestDetailsCubit>(
@@ -131,9 +125,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                           appointment: details.appointmentTime,
                         ),
                         SizedBox(height: 20.h),
-                        PhotoListView(
-                          imageUrls: details.productImages,
-                        ),
+                        PhotoListView(imageUrls: details.productImages),
                         SizedBox(height: 20.h),
                         RadioStatusGroup(
                           title: "Inspection result",
@@ -146,13 +138,49 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                           },
                         ),
                         SizedBox(height: 20.h),
-                        CustomPhotoButtons(
-                          onImagesSelected: (List<XFile> images) {
-                            setState(() {
-                              _selectedImages = images;
-                            });
-                          },
-                        ),
+
+                        /// Image Preview or Upload
+                        _selectedImages.isEmpty
+                            ? CustomPhotoButtons(
+                                onImagesSelected: (List<XFile> images) {
+                                  setState(() {
+                                    _selectedImages = images;
+                                  });
+                                },
+                              )
+                            : Container(
+                                padding: REdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(
+                                      0xff777777,
+                                    ).withOpacity(0.5),
+                                  ),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                child: Wrap(
+                                  spacing: 10,
+                                  runSpacing: 10,
+                                  children: _selectedImages
+                                      .map(
+                                        (img) => Center(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            child: Image.file(
+                                              File(img.path),
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+
                         SizedBox(height: 20.h),
                         CustomTextFormField(
                           controller: commentController,
@@ -163,52 +191,56 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                         CustomizedElevatedButton(
                           bottonWidget: submitState is SubmitInspectionLoading
                               ? const CircularProgressIndicator(
-                            color: Colors.white,
-                          )
+                                  color: Colors.white,
+                                )
                               : Text(
-                            AppLocalizations.of(context)!.submitRequest,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: ColorManager.white,
-                              fontSize: 16.sp,
-                            ),
-                          ),
+                                  AppLocalizations.of(context)!.submitRequest,
+                                  style: Theme.of(context).textTheme.bodyLarge
+                                      ?.copyWith(
+                                        color: ColorManager.white,
+                                        fontSize: 16.sp,
+                                      ),
+                                ),
                           color: Theme.of(context).primaryColor,
                           borderColor: Theme.of(context).primaryColor,
                           onPressed: submitState is SubmitInspectionLoading
                               ? null
                               : () {
-                            if (selectedStatus == null || commentController.text.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Please complete all fields"),
-                                ),
-                              );
-                              return;
-                            }
+                                  if (selectedStatus == null ||
+                                      commentController.text.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          "Please complete all fields",
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  print("clicked");
+                                  print("inspection Id: ${widget.requestId}");
+                                  print("result status : $selectedStatus");
+                                  print(
+                                    "selected images : ${_selectedImages.map((file) => file.path).toList()}",
+                                  );
+                                  print("comment : ${commentController.text}");
 
-                            final entity = InspectionSubmissionEntity(
-                              requestInspectionId: widget.requestId!.toInt(),
-                              status: selectedStatus!,
-                              inspectorComment: commentController.text.trim(),
-                              images: imagePaths,
-                            );
+                                  final entity = InspectionSubmissionEntity(
+                                    requestInspectionId: widget.requestId!
+                                        .toInt(),
+                                    status: selectedStatus!,
+                                    inspectorComment: commentController.text
+                                        .trim(),
+                                    images: _selectedImages
+                                        .map((file) => file.path)
+                                        .toList(),
+                                  );
 
-                            context.read<SubmitInspectionCubit>().submitReport(entity);
-                          },
+                                  context
+                                      .read<SubmitInspectionCubit>()
+                                      .submitReport(entity);
+                                },
                         ),
-
-                        /// Display error text if there's an error state
-                        if (submitState is SubmitInspectionError)
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.h),
-                            child: Text(
-                              (submitState as SubmitInspectionError).message,
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ),
                       ],
                     ),
                   ),
