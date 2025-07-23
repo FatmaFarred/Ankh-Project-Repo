@@ -405,7 +405,15 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        InspectionDetailsScreen(requestId: inspection.id),
+                  ),
+                );
+              },
             ),
 
             // TODO: Handle this case.

@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../api_service/di/di.dart';
+import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../domain/entities/inspection_submission_entity.dart';
 import 'inspection_request_details_cubit.dart';
 import 'inspection_request_details_state.dart';
@@ -208,13 +209,25 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                               : () {
                                   if (selectedStatus == null ||
                                       commentController.text.isEmpty) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "Please complete all fields",
-                                        ),
-                                      ),
+
+                                    String missing = '';
+                                    if (selectedStatus == null && commentController.text.isEmpty) {
+                                      missing = 'status and comment';
+                                    } else if (selectedStatus == null) {
+                                      missing = 'status';
+                                    } else {
+                                      missing = 'comment';
+                                    }
+                                    CustomDialog.positiveButton(
+                                      context: context,
+                                      title: "attention", // you may define this key in your l10n
+                                      message: "Please provide the $missing before submitting.",
+                                      positiveText: "OK",
+                                      positiveOnClick: () {
+                                        Navigator.of(context).pop();
+                                      },
                                     );
+
                                     return;
                                   }
                                   print("clicked");

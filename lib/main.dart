@@ -27,6 +27,7 @@ import 'feauture/inspector_screen/authentication/inspector_register_screen.dart'
     import 'feauture/details_screen/all_Images_screen.dart';
 import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
+import 'feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
 import 'feauture/marketer_Reports/marketer_report_details/report_details.dart';
 import 'feauture/marketer_Reports/marketer_reports_screen.dart';
 import 'feauture/myrequest/my_request_details/my_request_details.dart';
@@ -69,6 +70,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
             ),
             BlocProvider(create: (context) => RoleCubit()),
             BlocProvider(create: (context) => getIt<RoleCsCubit>()),
+            BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
 
           ],
           child: MyApp(isLoggedIn:token!=null ,),
