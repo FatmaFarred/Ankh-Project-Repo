@@ -263,7 +263,14 @@
   "addNewUser": "Add New User",
   "interestedCars": "Favorite Cars",
   "assignedMarketer": "Assigned Marketer",
-  "suspendAccount": "Suspend Account"
+  "suspendAccount": "Suspend Account",
+  "productsManagement": "Products Management",
+  "addNewProduct": "Add New Product",
+  "unassign": "Unassign",
+  "unassignConfirmation": "Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.",
+
+
+
 
 
 

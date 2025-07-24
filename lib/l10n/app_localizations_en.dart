@@ -808,4 +808,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get suspendAccount => 'Suspend Account';
+
+  @override
+  String get productsManagement => 'Products Management';
+
+  @override
+  String get addNewProduct => 'Add New Product';
+
+  @override
+  String get unassign => 'Unassign';
+
+  @override
+  String unassignConfirmation(Object clientName, Object productName) {
+    return 'Are you sure you want to unassign “$productName” from $clientName? This product will be marked as Available again.';
+  }
 }

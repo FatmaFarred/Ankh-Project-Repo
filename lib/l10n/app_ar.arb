@@ -260,6 +260,13 @@
   "addNewUser": "إضافة مستخدم جديد",
   "interestedCars": "السيارات المفضلة ",
     "assignedMarketer": "المسوّق المعين",
-  "suspendAccount": "تعليق الحساب"
+  "suspendAccount": "تعليق الحساب",
+  "productsManagement": "إدارة المنتجات",
+  "addNewProduct": "إضافة منتج جديد",
+  "unassign": "إلغاء التعيين",
+  "unassignConfirmation": "هل أنت متأكد أنك تريد إلغاء تعيين \"{productName}\" من {clientName}؟ سيتم تمييز هذا المنتج كمتاح مرة أخرى.",
+
+
+
 
 }

@@ -1645,6 +1645,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Suspend Account'**
   String get suspendAccount;
+
+  /// No description provided for @productsManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Products Management'**
+  String get productsManagement;
+
+  /// No description provided for @addNewProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Product'**
+  String get addNewProduct;
+
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
+  /// No description provided for @unassignConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.'**
+  String unassignConfirmation(Object clientName, Object productName);
 }
 
 class _AppLocalizationsDelegate

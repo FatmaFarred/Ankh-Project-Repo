@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/feauture/dashboard/products_management/products_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    Center(child: Text('🏠 Product Screen')),
+    Center(child: ProductsManagementScreen()),
     Center(child: UsersManagementScreen()),
     Center(child: Text('⚙️ Marketers Screen')),
     Center(child: Text('👁️ Inspectors Screen')),
@@ -44,12 +45,11 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: SvgPicture.asset(
-              ImageAssets.drawerIcon,
-
+            icon: Icon(
+              Icons.menu_rounded,
               color: Colors.white,
+              size: 24.sp,
             ),
-            iconSize: 24.w,
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
