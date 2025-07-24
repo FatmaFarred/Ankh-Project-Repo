@@ -264,6 +264,11 @@
   "interestedCars": "Favorite Cars",
   "assignedMarketer": "Assigned Marketer",
   "suspendAccount": "Suspend Account",
+  "productsManagement": "Products Management",
+  "addNewProduct": "Add New Product",
+  "unassign": "Unassign",
+  "unassignConfirmation": "Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.",
+
   "marketerManagement": "Marketers Management",
   "assignedProducts":"Assigned Products",
   "marketerInfo": "Marketer Info",
@@ -279,4 +284,5 @@
   "inspectionHistory": "Inspections History",
   "resultSubmitted": "Result Submitted",
   "deleteInspector": "Delete Inspector "
+
 }

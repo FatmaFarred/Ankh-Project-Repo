@@ -808,6 +808,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get suspendAccount => 'تعليق الحساب';
 
   @override
+  String get productsManagement => 'إدارة المنتجات';
+
+  @override
+  String get addNewProduct => 'إضافة منتج جديد';
+
+  @override
+  String get unassign => 'إلغاء التعيين';
+
+  @override
+  String unassignConfirmation(Object clientName, Object productName) {
+    return 'هل أنت متأكد أنك تريد إلغاء تعيين \"$productName\" من $clientName؟ سيتم تمييز هذا المنتج كمتاح مرة أخرى.';
+  }
   String get marketerManagement => 'إدارة المسوقين';
 
   @override
