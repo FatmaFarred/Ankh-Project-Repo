@@ -10,6 +10,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../welcome_screen/welcome_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../signin/signin_screen.dart';
 import 'controller/register_cubit.dart';
@@ -39,23 +40,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (state is RegisterLoading) {
         CustomDialog.loading(
             context: context,
-            message: "loading",
+            message: AppLocalizations.of(context)!.loading,
             cancelable: false);
       } else if (state is RegisterFailure) {
         Navigator.of(context).pop();
-        CustomDialog.positiveButton(
+        CustomDialog.positiveAndNegativeButton(
             context: context,
-            title: "error",
+            positiveText:  AppLocalizations.of(context)!.tryAgain,
+            positiveOnClick: () {
+              Navigator.of(context).pop();
+              registerViewModel.register();
+
+            },
+            title: AppLocalizations.of(context)!.error,
             message: state.error.errorMessage);
       } else if (state is RegisterSuccess) {
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
             context: context,
-            title: "getTranslations(context).success",
+            title: AppLocalizations.of(context)!.success,
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    EmailVerficationScreen.emailVerficationScreenRouteName));
+                    SignInScreen.signInScreenRouteName,
+                ));
       }
         },
 
@@ -66,7 +74,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pushReplacementNamed(context,
+                  WelcomeScreen.welcomeScreenRouteName
+              );
             },
           ),
         ),
@@ -212,9 +222,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
+                          Navigator.of(context).pushNamed(
                             SignInScreen.signInScreenRouteName,
-                                (route) => false,
                           );
                         },
                         child: Text(

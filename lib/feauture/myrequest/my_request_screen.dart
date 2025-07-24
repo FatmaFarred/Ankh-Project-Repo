@@ -4,6 +4,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/constants/font_manager/font_style_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
 import 'package:ankh_project/domain/entities/marketer_requests_for_inspection_entity.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
 import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../l10n/app_localizations.dart';
+import '../authentication/user_controller/user_cubit.dart';
 import 'controller/cubit.dart';
 import 'controller/request_states.dart';
 
@@ -60,8 +64,17 @@ class _RequestScreenState extends State<RequestScreen>
     }
   }
 
+  Future<void> _refreshData() async {
+    print("🔄 Refresh triggered!"); // Debug print
+    final user = context.read<UserCubit>().state;
+    print("👤 User ID: ${user?.id}"); // Debug print
+    await context.read<MarketerRequestCubit>().fetchRequests(user?.id ?? "", "roleId");
+    print("✅ Refresh completed!"); // Debug print
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -69,7 +82,11 @@ class _RequestScreenState extends State<RequestScreen>
           leading: IconButton(
             icon: const Icon(CupertinoIcons.back),
             color: Colors.white,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+
+                Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+              }
+
           ),
           title: Text(AppLocalizations.of(context)!.myRequests),
         ),
@@ -78,9 +95,28 @@ class _RequestScreenState extends State<RequestScreen>
             if (state is MarketerRequestLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MarketerRequestError) {
-              return Center(child: Text(state.error?.errorMessage??""));
+              return Center(child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(state.error?.errorMessage??"",
+                      style: Theme.of(context).textTheme.bodyMedium,
+
+                    ),
+                    CustomizedElevatedButton(
+                      bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(color: ColorManager.white,fontSize: 14.sp),
+                      ),
+                      color: ColorManager.lightprimary,
+                      borderColor: ColorManager.lightprimary,
+                      onPressed: () => context.read<MarketerRequestCubit>().fetchRequests(user?.id??"", "roleId"),
+                    )
+                  ],
+                ),
+              ));
             } else if (state is MarketerRequestEmpty) {
-              return Center(child: Text("No requests found"));
+              return Center(child: Text(AppLocalizations.of(context)!.noRequestsFound));
             } else if (state is MarketerRequestSuccess) {
               final allRequests = state.requests;
               return Column(
@@ -103,6 +139,7 @@ class _RequestScreenState extends State<RequestScreen>
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
                     color: ColorManager.transparent,
+
                     child: TabBar(
                       controller: _tabController,
                       tabAlignment: TabAlignment.center,
@@ -132,26 +169,50 @@ class _RequestScreenState extends State<RequestScreen>
                       controller: _tabController,
                       children: List.generate(5, (tabIndex) {
                         final filteredRequests = filterRequests(allRequests, tabIndex);
-                        if (filteredRequests.isEmpty) {
-                          return Center(child: Text("No requests found"));
-                        }
-                        return ListView.builder(
-                          itemCount: filteredRequests.length,
-                          itemBuilder: (context, index) {
-                            final request = filteredRequests[index];
-                            return InkWell(
-                              onTap: () => Navigator.of(context).pushNamed(
-                                MyRequestDetails.myRequestDetailsRouteName,
-                                arguments: request.id,
-
-                              ),
-                              child: CarRequestCard(
-                                request: request,
-                                paddingHorizontal: 20.w,
-                                paddingVertical: 12.h,
-                              ),
-                            );
-                          },
+                        return RefreshIndicator(
+                          color: ColorManager.lightprimary,
+                          onRefresh: _refreshData,
+                          child: ListView.builder(
+                            itemCount: filteredRequests.isEmpty ? 1 : filteredRequests.length,
+                            itemBuilder: (context, index) {
+                              if (filteredRequests.isEmpty) {
+                                return Container(
+                                  height: MediaQuery.of(context).size.height * 0.5,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.inbox_outlined,
+                                          size: 64,
+                                          color: ColorManager.darkGrey,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "No requests found",
+                                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                            color: ColorManager.darkGrey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                              final request = filteredRequests[index];
+                              return InkWell(
+                                onTap: () => Navigator.of(context).pushNamed(
+                                  MyRequestDetails.myRequestDetailsRouteName,
+                                  arguments: request.id,
+                                ),
+                                child: CarRequestCard(
+                                  request: request,
+                                  paddingHorizontal: 20.w,
+                                  paddingVertical: 12.h,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       }),
                     ),

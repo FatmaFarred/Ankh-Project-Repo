@@ -89,7 +89,7 @@ class _OnBoardingView extends StatelessWidget {
                 borderColor: Theme.of(context).primaryColor,
                 onPressed: () {
                   //cubit.skipPage();
-                  Navigator.pushNamedAndRemoveUntil(context,       WelcomeScreen.welcomeScreenRouteName,
+                  Navigator.pushNamedAndRemoveUntil(context,  WelcomeScreen.welcomeScreenRouteName,
                   (route) => false,);
                 },
               ),

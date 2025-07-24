@@ -1,4 +1,5 @@
 import 'package:ankh_project/feauture/balance_screen/transaction_card.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +18,15 @@ class BalanceScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(CupertinoIcons.back), // Cupertino back icon
-            color: Colors.white, // White color
-            onPressed: () => Navigator.pop(context),
+            icon: const Icon(CupertinoIcons.back),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+            },
           ),
           title: Text(AppLocalizations.of(context)!.myBalance),
           centerTitle: true,
           backgroundColor: ColorManager.balanceColor,
-          titleTextStyle: GoogleFonts.poppins(
-            fontWeight: FontWeight.w500,
-            fontSize: 20.sp,
-          ),
         ),
         body: Padding(
           padding: REdgeInsets.all(20.0),

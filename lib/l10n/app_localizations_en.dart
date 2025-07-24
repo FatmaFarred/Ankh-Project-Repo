@@ -558,4 +558,299 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get myProducts => 'My Products';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get tomorrow => 'Tomorrow';
+
+  @override
+  String get postponed => 'Completed';
+
+  @override
+  String get returned => 'Postponed';
+
+  @override
+  String get notResponded => 'Not responded';
+
+  @override
+  String get inspectionDetails => 'Inspection Details';
+
+  @override
+  String get startInspect => 'Start Inspect';
+
+  @override
+  String get appointment => 'Appointment';
+
+  @override
+  String get myfavorites => 'My Favorites';
+
+  @override
+  String get favorite => 'Favorite';
+
+  @override
+  String get chats => 'Chats';
+
+  @override
+  String get message => 'Message';
+
+  @override
+  String get visitor => 'Visitor';
+
+  @override
+  String get noInternetConnection =>
+      'No internet connection. Please try again later.';
+
+  @override
+  String get passwordResetEmailSentSuccessfully =>
+      'Password reset email sent successfully.';
+
+  @override
+  String get failedToSendPasswordResetEmail =>
+      '`Failed to send password reset email:';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get failedToLoadRecommendedBrands =>
+      'Failed to load recommended brands, please try again later.';
+
+  @override
+  String get failedToLoadPopularProducts =>
+      'Failed to load popular products, please try again later.';
+
+  @override
+  String get success => ' Success ';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get tryAgain => 'Try Again';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get thereIsNoImages => 'there is no images';
+
+  @override
+  String get noRequestsFound => 'No requests found';
+
+  @override
+  String get noProductsFound => 'No products found';
+
+  @override
+  String get fieldRequired => 'This field is required';
+
+  @override
+  String get accoun => 'Account';
+
+  @override
+  String get addToMyProducts => 'Add to My Products';
+
+  @override
+  String get reports => 'Reports';
+
+  @override
+  String get viewReport => 'View Report';
+
+  @override
+  String get acceptInspection => 'Accept Inspection';
+
+  @override
+  String get licenseNumber => 'License Number';
+
+  @override
+  String get enterLicenseNumber => 'Enter License Number';
+
+  @override
+  String get vehicleLicenseNumber => 'Vehicle License Number';
+
+  @override
+  String get enterVehicleLicenceNumber => 'Enter Vehicle License Number';
+
+  @override
+  String get workArea => 'Work Area';
+
+  @override
+  String get enterWorkArea => 'Enter Work Area';
+
+  @override
+  String get vehicleType => 'Vehicle Type';
+
+  @override
+  String get enterVehicleType => 'e.g., Car, Motorcycle, Truck';
+
+  @override
+  String get licenseImage => 'License Image ';
+
+  @override
+  String get uploadLicenseImage => 'Upload License Image';
+
+  @override
+  String get vehicleImage => 'Vehicle Image';
+
+  @override
+  String get uploadVehicleImage => 'Upload Vehicle Image';
+
+  @override
+  String get myInspections => 'My Inspections';
+
+  @override
+  String get clientDidNotRespond => 'Client Did Not Respond';
+
+  @override
+  String get returnedToMarketer => 'Returned to Marketer';
+
+  @override
+  String get clientRejected => 'Client Rejected';
+
+  @override
+  String get noInspectionsFound => 'No Inspections Found';
+
+  @override
+  String get inspectionResults => 'Inspection Results';
+
+  @override
+  String get noPhotosAvailable => 'No Photos Available';
+
+  @override
+  String get productPhotos => 'Product Photos';
+
+  @override
+  String get inspectionReport => 'Inspection Report';
+
+  @override
+  String get inspectionReportDetails => ' Inspection Report Details';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get marketers => 'Marketers';
+
+  @override
+  String get inspectors => 'Inspectors';
+
+  @override
+  String get inspections => 'Inspections';
+
+  @override
+  String get usersManagement => 'Users Management';
+
+  @override
+  String get search => 'Search....';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get suspend => 'Suspend';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get unsuspend => 'Unsuspend';
+
+  @override
+  String get suspendUserAccount => 'Suspend User Account';
+
+  @override
+  String get suspendUserAccountSubtitle =>
+      'Are you sure you want to suspend this user? They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.';
+
+  @override
+  String get deleteUserAccount => 'Delete User Account';
+
+  @override
+  String get deleteUserAccountSubtitle =>
+      'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.';
+
+  @override
+  String get userDetails => 'User Details';
+
+  @override
+  String get addNewUser => 'Add New User';
+
+  @override
+  String get interestedCars => 'Favorite Cars';
+
+  @override
+  String get assignedMarketer => 'Assigned Marketer';
+
+  @override
+  String get suspendAccount => 'Suspend Account';
+
+  @override
+  String get marketerManagement => 'Marketers Management';
+
+  @override
+  String get assignedProducts => 'Assigned Products';
+
+  @override
+  String get marketerInfo => 'Marketer Info';
+
+  @override
+  String get marketerName => 'Marketer Name ';
+
+  @override
+  String get joiningCode => 'Joining Code ';
+
+  @override
+  String get deleteMarketer => 'Delete Marketer';
+
+  @override
+  String get assignNewProduct => 'Assign New Product';
+
+  @override
+  String get marketerDetails => 'Marketer Details';
+
+  @override
+  String get unassign => 'Unassign';
+
+  @override
+  String get inspectorManagement => 'Inspectors Management ';
+
+  @override
+  String get totalInspections => 'Total Inspections';
+
+  @override
+  String get inpectorDetails => 'Inspector Details';
+
+  @override
+  String get inspectionHistory => 'Inspections History';
+
+  @override
+  String get resultSubmitted => 'Result Submitted';
+
+  @override
+  String get deleteInspector => 'Delete Inspector ';
 }

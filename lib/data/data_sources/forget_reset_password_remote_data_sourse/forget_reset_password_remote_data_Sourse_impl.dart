@@ -8,6 +8,8 @@ import '../../../api_service/failure/error_handling.dart';
 import '../../../domain/repositries_and_data_sources/data_sources/remote_data_source/forget_reset_password_remote_data_sourse.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../l10n/global_localization_helper.dart';
+
 @Injectable(as: ForgrtPasswordRemoteDataSource)
 //
 class ForgetResetPasswordRemoteDataSourseImpl implements ForgrtPasswordRemoteDataSource {
@@ -31,14 +33,14 @@ class ForgetResetPasswordRemoteDataSourseImpl implements ForgrtPasswordRemoteDat
           await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
           print("${response.data['message']}sssssssssssssssssss");
           // Handle success response
-          return(response.data['message'] ?? "Password reset email sent successfully.");
+          return(response.data['message'] ?? GlobalLocalization.passwordResetEmailSentSuccessfully);
         } else {
           // Handle error response
-         return("Failed to send password reset email: ${response.statusMessage}");
+         return("${GlobalLocalization.failedToSendPasswordResetEmail} ${response.statusMessage}");
         }
       } else {
         return
-          ( "No internet connection. Please try again later.");
+          ( GlobalLocalization.noInternet);
       }
     }
     catch (e) {

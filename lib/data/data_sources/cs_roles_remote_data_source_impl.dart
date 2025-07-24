@@ -11,6 +11,7 @@ import '../../api_service/api_constants.dart';
 import '../../api_service/api_manager.dart';
 import '../../api_service/end_points.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/cs_roles_remote_data_source.dart';
+import '../../l10n/global_localization_helper.dart';
 
 @Injectable(as: CsRolesRemoteDataSource)
  class CsRolesRemoteDataSourceImpl implements CsRolesRemoteDataSource {
@@ -36,15 +37,16 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
 
-
-        final requestResponse = myResponse
-            .map((json) => CsRolesResponseDm.fromJson(json))
-            .toList();
 
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => CsRolesResponseDm.fromJson(json))
+              .toList();
           // Return success
           return right(requestResponse);
         } else {
@@ -52,7 +54,7 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
         }
       } else {
         return left(NetworkError(
-            errorMessage: "No internet connection. Please try again later."));
+            errorMessage: GlobalLocalization.noInternet));
       }
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));

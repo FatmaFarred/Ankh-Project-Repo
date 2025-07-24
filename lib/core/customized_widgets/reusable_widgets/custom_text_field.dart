@@ -16,6 +16,8 @@ class CustomTextField extends StatelessWidget {
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
   OnFieldSubmitted? onFieldSubmitted;
+  VoidCallback? onTap;
+  bool? readOnly;
   CustomTextField({
     super.key,
     this.suffixIcon,
@@ -27,6 +29,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.onFieldSubmitted,
+    this.onTap,
+    this.readOnly,
   });
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,8 @@ class CustomTextField extends StatelessWidget {
       style: Theme.of(context).textTheme.bodySmall,
       obscureText: obscureText,
       obscuringCharacter: '*',
+      onTap: onTap,
+      readOnly: readOnly??false,
       cursorColor: ColorManager.black,
       decoration: InputDecoration(
         errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: ColorManager.error),
@@ -62,7 +68,7 @@ class CustomTextField extends StatelessWidget {
     return OutlineInputBorder(
         borderRadius: BorderRadius.circular(16.r),
         borderSide:  BorderSide(
-          color: ColorManager.lightGrey,
+          color: ColorManager.lightGreyShade2,
           width: 2,
         ));
   }

@@ -1,11 +1,26 @@
 abstract class EndPoints {
   static const String marketerRegisterEndPoint = "Auth/register-marketer";
+  static const String inspectorRegisterEndPoint = "Auth/register-inspector";
   static const String loginEndPoint = "Auth/login";
   static const String forgetPasswordEndPoint = "Auth/forgot-password";
   static const String resetPasswordEndPoint = "Auth/reset-password";
   static const String getMarketerRequests = "Marketers/Requests-Sent-By-The-Marketer";
   static const String getMarketerRequestById = "RequestInspections";
-  static const String getCsRoles = "Roles/all-roles";
+  static const String getCsRoles = "Roles/all-roles-users";
+
+  static const String getMarketerProductsById = "Marketers/marketer";
+  static const String getProductDetailsById = "Product";
+  static const String MarketerAddRequestIspection = "RequestInspections/add";
+  static const String getHomeAllProducts = "Home/get-all";
+  static const String marketerAssignProduct = "Marketers/assign";
+  static const String searchHome = "Home/search";
+  static const String inspectorGetAllInspection = "RequestInspections/all";
+  static const String inspectorGetInspectionByS = "Inspections";
+  static const String searchHomeInspection= "Inspections/search";
+  static const String inspectorAssignInspection = "RequestInspections/assign-inspector";
+  static const String getReportDetails = "Marketers/report-details";
+
+
 
 
 

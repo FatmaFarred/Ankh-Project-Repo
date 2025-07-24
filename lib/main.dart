@@ -1,5 +1,5 @@
+
     import 'dart:async';
-    import 'package:ankh_project/feauture/myrequest/my_request_details/my_request_details.dart';
     import 'package:ankh_project/feauture/onboarding/onboarding.dart';
     import 'package:app_links/app_links.dart';
     import 'package:firebase_core/firebase_core.dart';
@@ -17,14 +17,30 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
     import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
     import 'feauture/authentication/register/register _screen.dart';
+    import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
+import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
+import 'feauture/dashboard/marketer_mangemnet/marketer_details_screen.dart';
+import 'feauture/dashboard/users_management/user_details_screen.dart';
+import 'feauture/inspector_screen/authentication/inspector_register_screen.dart';
     import 'feauture/authentication/signin/signin_screen.dart';
     import 'feauture/authentication/user_controller/user_cubit.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_type.dart';
     import 'feauture/choose_role/choose_role_cubit/choose_role_cubit.dart';
     import 'feauture/choose_role/choose_role_screen.dart';
-    import 'feauture/home_screen/bottom_nav_bar.dart';
-    import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
-    import 'feauture/welcome_screen/welcome_screen.dart';
+    import 'feauture/details_screen/all_Images_screen.dart';
+import 'feauture/details_screen/details_screen.dart';
+import 'feauture/home_screen/bottom_nav_bar.dart';
+import 'feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
+import 'feauture/marketer_Reports/marketer_report_details/report_details.dart';
+import 'feauture/marketer_Reports/marketer_reports_screen.dart';
+import 'feauture/myrequest/my_request_details/my_request_details.dart';
+import 'feauture/profile/profile_screen.dart';
+import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
+    import 'feauture/request_inspection_screen/confirm_request_screen.dart';
+import 'feauture/request_inspection_screen/request_inspection_screen.dart';
+import 'feauture/request_inspection_screen/request_submitted.dart';
+import 'feauture/welcome_screen/welcome_screen.dart';
     import 'firebase_options.dart';
     import 'firebase_service/notification_service/fcm_api_service.dart';
     import 'firebase_service/notification_service/local notification.dart';
@@ -32,37 +48,45 @@ import 'core/theme/my_app_theme.dart';
     import 'l10n/app_localizations.dart';
     import 'l10n/languge_cubit.dart';
 
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
     void main() async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       configureDependencies();
       await getIt.allReady();
+      await getIt<UserCubit>().loadUserFromPrefs();
+
       await ScreenUtil.ensureScreenSize();
       await LocalNotification().initNotification();
       await FcmApi().initNotification();
 
       final String? token = await SharedPrefsManager.getData(key: 'user_token');
-
-
+      final user = getIt<UserCubit>().state;
+      final String? role = user?.roles?.isNotEmpty == true ? user!.roles!.first : null;
 
       runApp(
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => LanguageCubit()),
-            BlocProvider<UserCubit>(
-              create: (context) => getIt<UserCubit>(),
+            BlocProvider<UserCubit>.value(
+              value: getIt<UserCubit>(),
             ),
             BlocProvider(create: (context) => RoleCubit()),
+            BlocProvider(create: (context) => getIt<RoleCsCubit>()),
+
+            BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
 
           ],
-          child: MyApp(isLoggedIn:token!=null ,),
+          child: MyApp(isLoggedIn: token != null, userRole: role),
         ),
       );
     }
 
     class MyApp extends StatefulWidget {
-      const MyApp({super.key , required this.isLoggedIn});
+      const MyApp({super.key, required this.isLoggedIn, this.userRole});
       final bool isLoggedIn;
+      final String? userRole;
 
       @override
       State<MyApp> createState() => _MyAppState();
@@ -127,6 +151,14 @@ import 'core/theme/my_app_theme.dart';
       @override
       Widget build(BuildContext context) {
         final locale = context.watch<LanguageCubit>().state;
+        String initialRoute;
+        if (!widget.isLoggedIn) {
+          initialRoute = '/';
+        } else if (widget.userRole == 'Admin') {
+          initialRoute = DashboardMainScreen.mainScreenRouteName;
+        } else {
+          initialRoute = BottomNavBar.bottomNavBarRouteName;
+        }
 
         return ScreenUtilInit(
           designSize: const Size(428, 926.76),
@@ -134,6 +166,7 @@ import 'core/theme/my_app_theme.dart';
           splitScreenMode: true,
           builder: (_, child) {
             return MaterialApp(
+              navigatorKey: navigatorKey,
               debugShowCheckedModeBanner: false,
               localizationsDelegates: [
                 ...AppLocalizations.localizationsDelegates,
@@ -148,12 +181,13 @@ import 'core/theme/my_app_theme.dart';
               builder: (context, child) => child!,
 
 
-              initialRoute:widget.isLoggedIn?BottomNavBar.bottomNavBarRouteName:'/', // 👈 Make sure '/' route is defined below
+              initialRoute: initialRoute,
               routes: {
-                '/': (context) => OnBoarding(), // ✅ root fallback
+                '/': (context) => OnBoarding(),
                 OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
                 WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
                 RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
+                InspectorRegisterScreen.inspectorRegisterScreenRouteName: (context) => InspectorRegisterScreen(),
                 ChooseRoleScreen.chooseRoleScreenRouteName: (context) => ChooseRoleScreen(),
                 ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) => ChooseCsTypeScreen(),
                 SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
@@ -167,8 +201,24 @@ import 'core/theme/my_app_theme.dart';
                     token: args['token']!,
                   );
                 },
-                BottomNavBar.bottomNavBarRouteName: (context) => BottomNavBar(),
+                BottomNavBar.bottomNavBarRouteName: (context) {
+                  final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+                  final initialIndex = args?['initialIndex'] as int? ?? 0;
+                  return BottomNavBar(initialIndex: initialIndex);
+                },
                 MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+                DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
+                 //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
+                RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
+                ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
+                RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
+                AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
+                MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
+            DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
+                UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
+                MarketerDetailsScreen.routeName:(context)=>MarketerDetailsScreen(),
+                InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
+
               },
             );
           },

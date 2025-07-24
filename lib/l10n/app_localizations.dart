@@ -1159,6 +1159,582 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @myProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'My Products'**
+  String get myProducts;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @tomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow'**
+  String get tomorrow;
+
+  /// No description provided for @postponed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get postponed;
+
+  /// No description provided for @returned.
+  ///
+  /// In en, this message translates to:
+  /// **'Postponed'**
+  String get returned;
+
+  /// No description provided for @notResponded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not responded'**
+  String get notResponded;
+
+  /// No description provided for @inspectionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Details'**
+  String get inspectionDetails;
+
+  /// No description provided for @startInspect.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Inspect'**
+  String get startInspect;
+
+  /// No description provided for @appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment'**
+  String get appointment;
+
+  /// No description provided for @myfavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorites'**
+  String get myfavorites;
+
+  /// No description provided for @favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get favorite;
+
+  /// No description provided for @chats.
+  ///
+  /// In en, this message translates to:
+  /// **'Chats'**
+  String get chats;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @visitor.
+  ///
+  /// In en, this message translates to:
+  /// **'Visitor'**
+  String get visitor;
+
+  /// No description provided for @noInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Please try again later.'**
+  String get noInternetConnection;
+
+  /// No description provided for @passwordResetEmailSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent successfully.'**
+  String get passwordResetEmailSentSuccessfully;
+
+  /// No description provided for @failedToSendPasswordResetEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'`Failed to send password reset email:'**
+  String get failedToSendPasswordResetEmail;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
+
+  /// No description provided for @failedToLoadRecommendedBrands.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load recommended brands, please try again later.'**
+  String get failedToLoadRecommendedBrands;
+
+  /// No description provided for @failedToLoadPopularProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load popular products, please try again later.'**
+  String get failedToLoadPopularProducts;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **' Success '**
+  String get success;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @thereIsNoImages.
+  ///
+  /// In en, this message translates to:
+  /// **'there is no images'**
+  String get thereIsNoImages;
+
+  /// No description provided for @noRequestsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No requests found'**
+  String get noRequestsFound;
+
+  /// No description provided for @noProductsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No products found'**
+  String get noProductsFound;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get fieldRequired;
+
+  /// No description provided for @accoun.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accoun;
+
+  /// No description provided for @addToMyProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to My Products'**
+  String get addToMyProducts;
+
+  /// No description provided for @reports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reports;
+
+  /// No description provided for @viewReport.
+  ///
+  /// In en, this message translates to:
+  /// **'View Report'**
+  String get viewReport;
+
+  /// No description provided for @acceptInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept Inspection'**
+  String get acceptInspection;
+
+  /// No description provided for @licenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'License Number'**
+  String get licenseNumber;
+
+  /// No description provided for @enterLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter License Number'**
+  String get enterLicenseNumber;
+
+  /// No description provided for @vehicleLicenseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle License Number'**
+  String get vehicleLicenseNumber;
+
+  /// No description provided for @enterVehicleLicenceNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Vehicle License Number'**
+  String get enterVehicleLicenceNumber;
+
+  /// No description provided for @workArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Area'**
+  String get workArea;
+
+  /// No description provided for @enterWorkArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Work Area'**
+  String get enterWorkArea;
+
+  /// No description provided for @vehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Type'**
+  String get vehicleType;
+
+  /// No description provided for @enterVehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Car, Motorcycle, Truck'**
+  String get enterVehicleType;
+
+  /// No description provided for @licenseImage.
+  ///
+  /// In en, this message translates to:
+  /// **'License Image '**
+  String get licenseImage;
+
+  /// No description provided for @uploadLicenseImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload License Image'**
+  String get uploadLicenseImage;
+
+  /// No description provided for @vehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Image'**
+  String get vehicleImage;
+
+  /// No description provided for @uploadVehicleImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Vehicle Image'**
+  String get uploadVehicleImage;
+
+  /// No description provided for @myInspections.
+  ///
+  /// In en, this message translates to:
+  /// **'My Inspections'**
+  String get myInspections;
+
+  /// No description provided for @clientDidNotRespond.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Did Not Respond'**
+  String get clientDidNotRespond;
+
+  /// No description provided for @returnedToMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned to Marketer'**
+  String get returnedToMarketer;
+
+  /// No description provided for @clientRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Rejected'**
+  String get clientRejected;
+
+  /// No description provided for @noInspectionsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Inspections Found'**
+  String get noInspectionsFound;
+
+  /// No description provided for @inspectionResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Results'**
+  String get inspectionResults;
+
+  /// No description provided for @noPhotosAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No Photos Available'**
+  String get noPhotosAvailable;
+
+  /// No description provided for @productPhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Photos'**
+  String get productPhotos;
+
+  /// No description provided for @inspectionReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Report'**
+  String get inspectionReport;
+
+  /// No description provided for @inspectionReportDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Inspection Report Details'**
+  String get inspectionReportDetails;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
+  /// No description provided for @marketers.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketers'**
+  String get marketers;
+
+  /// No description provided for @inspectors.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspectors'**
+  String get inspectors;
+
+  /// No description provided for @inspections.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspections'**
+  String get inspections;
+
+  /// No description provided for @usersManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Users Management'**
+  String get usersManagement;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search....'**
+  String get search;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @suspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend'**
+  String get suspend;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @unsuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsuspend'**
+  String get unsuspend;
+
+  /// No description provided for @suspendUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend User Account'**
+  String get suspendUserAccount;
+
+  /// No description provided for @suspendUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to suspend this user? They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.'**
+  String get suspendUserAccountSubtitle;
+
+  /// No description provided for @deleteUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User Account'**
+  String get deleteUserAccount;
+
+  /// No description provided for @deleteUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.'**
+  String get deleteUserAccountSubtitle;
+
+  /// No description provided for @userDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'User Details'**
+  String get userDetails;
+
+  /// No description provided for @addNewUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New User'**
+  String get addNewUser;
+
+  /// No description provided for @interestedCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Cars'**
+  String get interestedCars;
+
+  /// No description provided for @assignedMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Marketer'**
+  String get assignedMarketer;
+
+  /// No description provided for @suspendAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend Account'**
+  String get suspendAccount;
+
+  /// No description provided for @marketerManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketers Management'**
+  String get marketerManagement;
+
+  /// No description provided for @assignedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Products'**
+  String get assignedProducts;
+
+  /// No description provided for @marketerInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Info'**
+  String get marketerInfo;
+
+  /// No description provided for @marketerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Name '**
+  String get marketerName;
+
+  /// No description provided for @joiningCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Joining Code '**
+  String get joiningCode;
+
+  /// No description provided for @deleteMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Marketer'**
+  String get deleteMarketer;
+
+  /// No description provided for @assignNewProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign New Product'**
+  String get assignNewProduct;
+
+  /// No description provided for @marketerDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Details'**
+  String get marketerDetails;
+
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
+  /// No description provided for @inspectorManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspectors Management '**
+  String get inspectorManagement;
+
+  /// No description provided for @totalInspections.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Inspections'**
+  String get totalInspections;
+
+  /// No description provided for @inpectorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Details'**
+  String get inpectorDetails;
+
+  /// No description provided for @inspectionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspections History'**
+  String get inspectionHistory;
+
+  /// No description provided for @resultSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Result Submitted'**
+  String get resultSubmitted;
+
+  /// No description provided for @deleteInspector.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Inspector '**
+  String get deleteInspector;
 }
 
 class _AppLocalizationsDelegate

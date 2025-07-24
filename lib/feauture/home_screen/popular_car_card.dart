@@ -1,19 +1,22 @@
-import 'package:ankh_project/feauture/details_screen/details_screen.dart';
+import 'package:ankh_project/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/feauture/details_screen/details_screen.dart';
 
 class PopularCarCard extends StatelessWidget {
-  const PopularCarCard({super.key});
+  final ProductEntity product;
+
+  const PopularCarCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context){return DetailsScreen();}));
+      onTap: () {
+        Navigator.pushNamed(context, DetailsScreen.detailsScreenRouteName,
+            arguments: product.id);
       },
       child: Container(
         width: 240.w,
@@ -28,30 +31,46 @@ class PopularCarCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: Image.asset(ImageAssets.carPic1)),
-
+            Expanded(
+              flex: 2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.r),
+                child: Image.network(
+                  "https://ankhapi.runasp.net/${product.image}",
+                  width: double.infinity,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) =>
+                  Center(child: const Icon(Icons.broken_image, size: 40)),
+                ),
+              ),
+            ),
+            SizedBox(height: 8.h),
             Row(
               children: [
-                Text(
-                  "Toyota EX30",
-                  style: GoogleFonts.inter(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: ColorManager.black,
+                Expanded(
+                  child: Text(
+                    product.title,
+                    style: GoogleFonts.inter(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: ColorManager.black,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Spacer(),
                 RatingBarIndicator(
-                  rating: 5,
-                  itemBuilder: (context, index) =>
-                      const Icon(Icons.star, color: ColorManager.starRateColor),
+                  rating: product.rating,
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: ColorManager.starRateColor,
+                  ),
                   itemCount: 1,
                   itemSize: 16.sp,
                   direction: Axis.horizontal,
                 ),
                 SizedBox(width: 4.w),
                 Text(
-                  "5.0",
+                  product.rating.toStringAsFixed(1),
                   style: GoogleFonts.inter(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
@@ -61,7 +80,7 @@ class PopularCarCard extends StatelessWidget {
               ],
             ),
             Text(
-              "Automatic - Electric",
+              "${product.transmission} - ${product.status}",
               style: GoogleFonts.inter(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w400,
@@ -69,7 +88,7 @@ class PopularCarCard extends StatelessWidget {
               ),
             ),
             Text(
-              "EGP 1.9M - 2.3M",
+              "EGP ${product.price}",
               style: GoogleFonts.poppins(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,

@@ -1,16 +1,31 @@
+import 'package:ankh_project/api_service/di/di.dart';
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_search_bar.dart';
+import 'package:ankh_project/domain/entities/product_entity.dart';
+import 'package:ankh_project/feauture/client_notification_screen/client_notification_screen.dart';
+import 'package:ankh_project/feauture/profile/profile_screen.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
+
+import 'package:ankh_project/feauture/client_search_screen/client_search_screen.dart';
+import 'package:ankh_project/feauture/client_search_screen/client_search_screen_wrapper.dart';
+import 'package:ankh_project/feauture/client_search_screen/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/customized_widgets/reusable_widgets/customized_search_bar.dart';
+import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 
+typedef OnSearchCallback = void Function(String keyword);
+
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  final OnSearchCallback? onSearch;
+  const HeaderSection({super.key, this.onSearch});
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +40,22 @@ class HeaderSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClipRRect(child: Image.asset(ImageAssets.profilePic, scale: 1.2)),
+                InkWell(
+                  onTap: () {
+                    if (user?.roles?[0] == "Marketer") {
+                     Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
+                    }
+                  },
+                  child: ClipRRect(
+                    child: Image.asset(ImageAssets.profilePic, scale: 1.2),
+                  ),
+                ),
                 SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(user?.fullName??"guest",
+
+                    Text(user?.fullName??AppLocalizations.of(context)!.visitor,
                         style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
@@ -38,7 +63,10 @@ class HeaderSection extends StatelessWidget {
                         )),
                     RatingBarIndicator(
                       rating: 5,
-                      itemBuilder: (context, _) => const Icon(Icons.star, color: ColorManager.starRateColor),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: ColorManager.starRateColor,
+                      ),
                       itemCount: 5,
                       itemSize: 12.sp,
                       direction: Axis.horizontal,
@@ -48,11 +76,57 @@ class HeaderSection extends StatelessWidget {
                 const Spacer(),
                 Image.asset(ImageAssets.goldMedal, scale: 6.sp),
                 SizedBox(width: 12.w),
-                ClipRRect(child: Image.asset(ImageAssets.notification, scale: 1.3)),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ClientNotificationScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    child: Image.asset(ImageAssets.notification, scale: 1.3),
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 24.h),
-            const CustomSearchBar()
+
+            InkWell(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ClientSearchScreenWrapper(),
+                  ),
+                );              },
+              child: Container(
+                padding: REdgeInsets.symmetric(vertical: 14),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(width: 14.w,),
+                    Icon(Icons.search, color: ColorManager.hintColor),
+                    SizedBox(width: 14.w,),
+                    Text(
+                      AppLocalizations.of(context)!.whatAreYouLookingFor,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: ColorManager.hintColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

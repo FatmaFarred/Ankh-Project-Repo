@@ -6,26 +6,71 @@ import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import '../../data/models/add_inspection _request.dart';
+import '../../domain/entities/product_details_entity.dart';
+import '../authentication/email_verfication/email_verfication_screen.dart';
+import 'confrim_requests_arg.dart';
+import 'cubit/marketer_add_request_cubit.dart';
+import 'cubit/states.dart';
+
 class ConfirmRequestScreen extends StatelessWidget {
-  final DateTime scheduleDate = DateTime(2025, 6, 24);
+  static const String confirmRequestRouteName = "confirmRequest";
 
-  final TimeOfDay startTime = TimeOfDay(hour: 13, minute: 0);
-
-  final TimeOfDay endTime = TimeOfDay(hour: 14, minute: 0);
 
   ConfirmRequestScreen({super.key});
+  final addRequestCubit = getIt<MarketerAddRequestCubit>();
 
   @override
   Widget build(BuildContext context) {
-    final String formattedDate = DateFormat('yyyy-MM-dd').format(scheduleDate);
-    final String formattedTime =
-        '${startTime.format(context)} - ${endTime.format(context)}';
+    final args = ModalRoute.of(context)?.settings.arguments as ConfirmRequestArgs;
+    final ProductDetailsEntity product = args.product;
+    final InspectionRequest request = args.request;
+    print(request.preferredDate);
+    print(request.marketerId);
 
-    return Scaffold(
+
+    return BlocListener<MarketerAddRequestCubit, MarketerAddRequestState>(
+        bloc: addRequestCubit,
+        listener: (context, state) {
+      if (state is MarketerAddRequestLoading) {
+        CustomDialog.loading(
+            context: context,
+            message: AppLocalizations.of(context)!.loading,
+            cancelable: false);
+      } else if (state is MarketerAddRequestError) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveAndNegativeButton(
+            context: context,
+            positiveText:  AppLocalizations.of(context)!.tryAgain,
+            positiveOnClick: () {
+              Navigator.of(context).pop();
+              addRequestCubit.sendRequest(request);
+
+            },
+            title: AppLocalizations.of(context)!.error,
+            message: state.error.errorMessage);
+      } else if (state is MarketerAddRequestSuccess) {
+        Navigator.of(context).pop();
+        CustomDialog.positiveButton(
+            context: context,
+            title: AppLocalizations.of(context)!.success,
+            message: state.response,
+            positiveOnClick: () =>
+                Navigator.of(context).pushNamed(
+                    RequestSubmittedScreen.requestSubmittedRouteName));
+      }
+    },
+
+
+
+    child:Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back), // Cupertino back icon
@@ -84,10 +129,11 @@ class ConfirmRequestScreen extends StatelessWidget {
                       color: Color(0xFFF9FAFB),
                       borderRadius: BorderRadius.circular(16.r),
                     ),
-                    child: Image.asset(
-                      ImageAssets.carPic1,
+                    child: Image.network(
+                      'https://ankhapi.runasp.net/${product.imageUrls?[0]}',
                       height: 60,
                       width: 60,
+
                     ),
                   ),
                   SizedBox(width: 10),
@@ -95,11 +141,11 @@ class ConfirmRequestScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Toyota EX30",
+                        product?.title??"",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Automatic - Electric",
+                        product?.transmission??"",
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -113,10 +159,10 @@ class ConfirmRequestScreen extends StatelessWidget {
           _tableSection(
             title: AppLocalizations.of(context)!.clientInformation,
             rows: [
-              _infoRow(Icons.person, "Aya Ali"),
+              _infoRow(Icons.person, request.clientName),
 
-              _infoRow(Icons.phone, "01143267979"),
-              _infoRow(Icons.location_on, "Nasr City"),
+              _infoRow(Icons.phone, request.phoneNumber),
+              _infoRow(Icons.location_on, request.address),
             ],
           ),
 
@@ -124,8 +170,8 @@ class ConfirmRequestScreen extends StatelessWidget {
           _tableSection(
             title: AppLocalizations.of(context)!.inspectionSchedule,
             rows: [
-              _infoRow(Icons.calendar_today, formattedDate),
-              _infoRow(Icons.access_time, formattedTime),
+              _infoRow(Icons.calendar_today, DateFormat('yyyy-MM-dd').format(request.preferredDate)),
+              _infoRow(Icons.access_time, request.preferredTime),
             ],
           ),
 
@@ -151,18 +197,12 @@ class ConfirmRequestScreen extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             borderColor: Theme.of(context).primaryColor,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return RequestSubmittedScreen();
-                  },
-                ),
-              );
+              addRequestCubit.sendRequest(request);
             },
           ),
         ],
-      ),
+      )
+    ),
     );
   }
 

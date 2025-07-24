@@ -10,8 +10,10 @@ class SharedPrefsManager {
       return await prefs.setString(key, value);
     } else if (value is double) {
       return await prefs.setDouble(key, value);
+    } else if (value is bool) {
+      return prefs.setBool(key, value);
     } else {
-      return await prefs.setBool(key, value);
+      return prefs.setString(key, value.toString());
     }
   }
 

@@ -15,7 +15,7 @@ class MyAppBarTheme {
     iconTheme: IconThemeData(color:ColorManager.white,size: 24 ),
     actionsIconTheme: IconThemeData(color:ColorManager.black,size: 24),
 
-    titleTextStyle: getBoldStyle(color: ColorManager.white,fontSize:20,context:context )
+    titleTextStyle: getBoldStyle(color: ColorManager.white,fontSize:18,context:context )
 
 
   );

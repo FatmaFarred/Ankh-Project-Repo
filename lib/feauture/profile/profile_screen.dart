@@ -1,6 +1,8 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/authentication/signin/signin_screen.dart';
+import 'package:ankh_project/feauture/home_screen/bottom_nav_bar.dart';
 import 'package:ankh_project/feauture/profile/widegts/setting_tile.dart';
+import 'package:ankh_project/feauture/welcome_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,23 +10,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../core/constants/assets_manager.dart';
+import '../../core/customized_widgets/shared_preferences .dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
-
+static  String accountScreenRouteName = "AccountScreen";
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.account),
+        title: Text(AppLocalizations.of(context)!.personalAccount),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.white,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+          },
         ),
       ),
       backgroundColor: ColorManager.containerGrey,
@@ -40,8 +45,8 @@ class AccountScreen extends StatelessWidget {
                 ),
                   Container(height: 90.h,
                     decoration: BoxDecoration(
-                      color: ColorManager.containerGrey,
-                      borderRadius: BorderRadius.circular(20.r)
+                        color: ColorManager.containerGrey,
+                        borderRadius: BorderRadius.circular(20.r)
                     ),
                   )
                 ],),
@@ -67,21 +72,21 @@ class AccountScreen extends StatelessWidget {
                                 AssetImage(ImageAssets.profilePic,), // Replace with your asset
                               ),
                               const SizedBox(height: 10),
-                               Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                   Text( user?.fullName ?? "Guest",
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text( user?.fullName ?? "Guest",
                                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp,)
-                                                               ),
-                                   Image.asset(ImageAssets.goldMedal,
-                                      scale: 6.sp,
-                                      height: 24.h,
-                                      width: 18.w,
+                                  ),
+                                  Image.asset(ImageAssets.goldMedal,
+                                    scale: 6.sp,
+                                    height: 24.h,
+                                    width: 18.w,
 
-                                   )
+                                  )
 
-                                 ],
-                               ),
+                                ],
+                              ),
                               const SizedBox(height: 4),
                               RatingBarIndicator(
                                 rating: 5,
@@ -98,30 +103,31 @@ class AccountScreen extends StatelessWidget {
                                 ),
 
                               ),
-                               Divider(color: ColorManager.darkGrey, thickness: 1),
-                              const SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children:  [
-                                  ProfileStat(label: "Completed", value: "234"),
-                                  SizedBox(
-                                    height: 40.h, // must give height
-                                    child: VerticalDivider(
-                                      color: ColorManager.darkGrey,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                  ProfileStat(label: "Rating", value: "4.9/5.0"),
-                                  SizedBox(
-                                    height: 40.h, // must give height
-                                    child: VerticalDivider(
-                                      color: ColorManager.darkGrey,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                  ProfileStat(label: "Response", value: "98%"),
+                                  user?.roles?[0]=="Marketer"
+                                  ? Column(
+                                children: [
+                                  Divider(color: ColorManager.darkGrey, thickness: 1),
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ProfileStat(label: AppLocalizations.of(context)!.completed, value: "234"),
+                                      SizedBox(
+                                        height: 40.h,
+                                        child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
+                                      ),
+                                      ProfileStat(label: AppLocalizations.of(context)!.rating, value: "4.9/5.0"),
+                                      SizedBox(
+                                        height: 40.h,
+                                        child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
+                                      ),
+                                      ProfileStat(label: AppLocalizations.of(context)!.response, value: "98%"),
+                                    ],
+                                  )
                                 ],
                               )
+                                  : const SizedBox.shrink(),
+
                             ],
                           ),
                         ),
@@ -141,7 +147,7 @@ class AccountScreen extends StatelessWidget {
                 children:  [
                   _tableSection(title: AppLocalizations.of(context)!.manageAccount,
                       rows: [
-                        SettingsTile(title:  AppLocalizations.of(context)!.personalDetails, icon: Iconsax.user),
+                       // SettingsTile(title:  AppLocalizations.of(context)!.personalDetails, icon: Iconsax.user),
                         SettingsTile(title: AppLocalizations.of(context)!.securitySettings, icon: Iconsax.lock),
                         SettingsTile(title: AppLocalizations.of(context)!.notifications, icon: Iconsax.notification),
                       ]
@@ -154,10 +160,10 @@ class AccountScreen extends StatelessWidget {
                   ),
                   _tableSection(title:AppLocalizations.of(context)!.preferences,
                       rows: [
-                        SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
+                       // SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
                         SettingsTile(title: AppLocalizations.of(context)!.myFavorites, icon: Iconsax.heart),
                         DarkModeSwitchTile(),
-                        SettingsTile(title: "Language", icon: Icons.language),
+                        SettingsTile(title: AppLocalizations.of(context)!.language, icon: Icons.language),
                       ]
                   ),
                   _tableSection(title:AppLocalizations.of(context)!.helpAndSupport,
@@ -170,8 +176,11 @@ class AccountScreen extends StatelessWidget {
                       rows: [
                         SettingsTile(title:AppLocalizations.of(context)!.logout, icon: Iconsax.logout,onTap:(){
                           context.read<UserCubit>().clearUser();
+                          SharedPrefsManager.removeData(key: 'user_token');
+                          SharedPrefsManager.removeData(key:  'currentUser');
+                          context.read<UserCubit>().clearUser();
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            SignInScreen.signInScreenRouteName,
+                              WelcomeScreen.welcomeScreenRouteName,
                                   (route) => false
 
                           );
@@ -210,7 +219,7 @@ class ProfileStat extends StatelessWidget {
         ),
         Text(value,
             style:Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14.sp)
-            ),
+        ),
 
       ],
     );

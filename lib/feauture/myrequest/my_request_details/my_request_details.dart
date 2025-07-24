@@ -1,4 +1,3 @@
-import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
@@ -36,7 +35,7 @@ class MyRequestDetails extends StatelessWidget {
   }
 
 
-    
+
     return BlocProvider(
       create: (context) => getIt<MarketerRequestDetailsCubit>()..fetchRequests(productId: requestId),
       child: Scaffold(
@@ -47,7 +46,7 @@ class MyRequestDetails extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           title: Text(AppLocalizations.of(context)!.requestDetails),
-      
+
         ),
     body: BlocBuilder<MarketerRequestDetailsCubit, MarketerRequestDetailsState>(
     builder: (context, state) {

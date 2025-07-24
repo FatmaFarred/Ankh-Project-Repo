@@ -141,7 +141,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterYourConfirmPassword => 'ادخل كلمة المرور';
 
   @override
-  String get phoneNumber => 'كلمة المرور';
+  String get phoneNumber => 'رقم الهاتف';
 
   @override
   String get enterYourPhone => 'ادخل رقم الهاتف';
@@ -480,7 +480,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'الحساب';
+  String get account => 'Account';
 
   @override
   String get requestDetails => 'تفاصيل الطلب';
@@ -556,4 +556,299 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logout => 'تسجيل الخروج';
+
+  @override
+  String get myProducts => 'منتجاتي';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get tomorrow => 'غداً';
+
+  @override
+  String get postponed => 'مؤجل';
+
+  @override
+  String get returned => 'مُعاد';
+
+  @override
+  String get notResponded => 'لم يتم الرد';
+
+  @override
+  String get inspectionDetails => 'تفاصيل الفحص';
+
+  @override
+  String get startInspect => 'ابدأ الفحص';
+
+  @override
+  String get appointment => 'الموعد';
+
+  @override
+  String get myfavorites => 'مفضلتي';
+
+  @override
+  String get favorite => 'مفضل';
+
+  @override
+  String get chats => 'الدردشات';
+
+  @override
+  String get message => 'رسالة';
+
+  @override
+  String get visitor => 'زائر';
+
+  @override
+  String get noInternetConnection =>
+      'لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get passwordResetEmailSentSuccessfully =>
+      'تم إرسال بريد إعادة تعيين كلمة المرور بنجاح';
+
+  @override
+  String get failedToSendPasswordResetEmail =>
+      '`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get ok => 'حسناً';
+
+  @override
+  String get failedToLoadRecommendedBrands =>
+      'فشل في تحميل العلامات التجارية الموصى بها، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get failedToLoadPopularProducts =>
+      ' فشل في تحميل المنتجات الشائعة، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get success => ' تم بنجاح ';
+
+  @override
+  String get error => 'خطأ';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get loading => 'جار التحميل...';
+
+  @override
+  String get thereIsNoImages => 'لا توجد صور متاحة للعرض';
+
+  @override
+  String get noRequestsFound => 'لا توجد طلبات متاحة';
+
+  @override
+  String get noProductsFound => 'لا توجد منتجات متاحة';
+
+  @override
+  String get fieldRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get accoun => 'الحساب';
+
+  @override
+  String get addToMyProducts => 'إضافة إلى منتجاتي';
+
+  @override
+  String get reports => 'التقارير';
+
+  @override
+  String get viewReport => 'عرض التقرير';
+
+  @override
+  String get acceptInspection => 'قبول الفحص';
+
+  @override
+  String get licenseNumber => 'رقم الرخصة';
+
+  @override
+  String get enterLicenseNumber => 'ادخل رقم الرخصة';
+
+  @override
+  String get vehicleLicenseNumber => 'رقم رخصة المركبة';
+
+  @override
+  String get enterVehicleLicenceNumber => 'ادخل رقم رخصة المركبة';
+
+  @override
+  String get workArea => 'مكان العمل';
+
+  @override
+  String get enterWorkArea => 'ادخل مكان العمل';
+
+  @override
+  String get vehicleType => 'نوع المركبة';
+
+  @override
+  String get enterVehicleType => 'سيارة، دراجة نارية، شاحنة، إلخ';
+
+  @override
+  String get licenseImage => 'صورة الرخصة ';
+
+  @override
+  String get uploadLicenseImage => 'ارفع صورة الرخصة';
+
+  @override
+  String get vehicleImage => 'صورة المركبة';
+
+  @override
+  String get uploadVehicleImage => 'ارفع صورة المركبة';
+
+  @override
+  String get myInspections => 'فحوصاتي';
+
+  @override
+  String get clientDidNotRespond => 'لم يرد العميل';
+
+  @override
+  String get returnedToMarketer => 'أعيد إلى المسوّق';
+
+  @override
+  String get clientRejected => 'رفض العميل';
+
+  @override
+  String get noInspectionsFound => 'لا توجد فحوصات متاحة';
+
+  @override
+  String get inspectionResults => 'نتائج الفحص';
+
+  @override
+  String get noPhotosAvailable => 'لا توجد صور متاحة';
+
+  @override
+  String get productPhotos => 'صور المنتج';
+
+  @override
+  String get inspectionReport => 'تقرير الفحص';
+
+  @override
+  String get inspectionReportDetails => 'تفاصيل تقرير الفحص';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get users => 'المستخدمين';
+
+  @override
+  String get marketers => 'المسوّقين';
+
+  @override
+  String get inspectors => 'المفتشين';
+
+  @override
+  String get inspections => 'الفحوصات';
+
+  @override
+  String get usersManagement => 'إدارة المستخدمين';
+
+  @override
+  String get search => 'ابحث....';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get view => 'عرض';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get add => 'إضافة';
+
+  @override
+  String get suspend => 'تعليق';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get unsuspend => 'إلغاء التعليق';
+
+  @override
+  String get suspendUserAccount => 'تعليق حساب المستخدم';
+
+  @override
+  String get suspendUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد تعليق هذا المستخدم؟ لن يتمكن من تسجيل الدخول أو الوصول إلى النظام حتى يتم إعادة تفعيله.\nيمكن عكس هذا الإجراء في أي وقت.';
+
+  @override
+  String get deleteUserAccount => 'حذف حساب المستخدم';
+
+  @override
+  String get deleteUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
+
+  @override
+  String get userDetails => 'بيانات المستخدم';
+
+  @override
+  String get addNewUser => 'إضافة مستخدم جديد';
+
+  @override
+  String get interestedCars => 'السيارات المفضلة ';
+
+  @override
+  String get assignedMarketer => 'المسوّق المعين';
+
+  @override
+  String get suspendAccount => 'تعليق الحساب';
+
+  @override
+  String get marketerManagement => 'إدارة المسوقين';
+
+  @override
+  String get assignedProducts => 'المنتجات المُسندة';
+
+  @override
+  String get marketerInfo => 'معلومات المسوق';
+
+  @override
+  String get marketerName => 'اسم المسوق ';
+
+  @override
+  String get joiningCode => 'كود الانضمام ';
+
+  @override
+  String get deleteMarketer => 'حذف المسوق';
+
+  @override
+  String get assignNewProduct => 'إسناد منتج جديد';
+
+  @override
+  String get marketerDetails => 'بيانات المسوق';
+
+  @override
+  String get unassign => ' إلغاء الإسناد';
+
+  @override
+  String get inspectorManagement => 'إدارة المعاينين';
+
+  @override
+  String get totalInspections => 'إجمالي المعاينات';
+
+  @override
+  String get inpectorDetails => 'بيانات المعاين';
+
+  @override
+  String get inspectionHistory => 'تاريخ المعاينات';
+
+  @override
+  String get resultSubmitted => 'تم تقديم التقرير';
+
+  @override
+  String get deleteInspector => 'حذف المعاين ';
 }

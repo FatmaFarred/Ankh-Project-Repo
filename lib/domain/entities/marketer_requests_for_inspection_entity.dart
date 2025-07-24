@@ -20,7 +20,10 @@ class MarketerRequestsForInspectionEntity {
       this.phoneNumber, 
       this.preferredDate, 
       this.preferredTime, 
-      this.status,});
+      this.status,
+    this.address
+
+  });
 
   num? id;
   String? productName;
@@ -32,6 +35,7 @@ class MarketerRequestsForInspectionEntity {
   String? preferredDate;
   String? preferredTime;
   String? status;
+  String? address;
 
 
 }
