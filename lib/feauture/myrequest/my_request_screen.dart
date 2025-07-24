@@ -139,6 +139,7 @@ class _RequestScreenState extends State<RequestScreen>
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 17.w, vertical: 13.h),
                     color: ColorManager.transparent,
+
                     child: TabBar(
                       controller: _tabController,
                       tabAlignment: TabAlignment.center,

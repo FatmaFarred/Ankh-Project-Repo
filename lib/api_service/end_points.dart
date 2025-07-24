@@ -6,7 +6,7 @@ abstract class EndPoints {
   static const String resetPasswordEndPoint = "Auth/reset-password";
   static const String getMarketerRequests = "Marketers/Requests-Sent-By-The-Marketer";
   static const String getMarketerRequestById = "RequestInspections";
-  static const String getCsRoles = "Roles/all-roles";
+  static const String getCsRoles = "Roles/all-roles-users";
 
   static const String getMarketerProductsById = "Marketers/marketer";
   static const String getProductDetailsById = "Product";

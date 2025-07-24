@@ -237,10 +237,29 @@
     "inspectionPhotos": "صور الفحص",
     "inspectionReport": "تقرير الفحص",
     "inspectionReportDetails": "تفاصيل تقرير الفحص",
-  "inspectionReport": "تقرير الفحص"
-
-
-
-
+  "inspectionReport": "تقرير الفحص",
+  "products": "المنتجات",
+  "users": "المستخدمين",
+  "marketers": "المسوّقين",
+  "inspectors": "المفتشين",
+  "inspections": "الفحوصات",
+  "usersManagement": "إدارة المستخدمين",
+  "search": "ابحث....",
+  "delete": "حذف",
+  "view": "عرض",
+    "edit": "تعديل",
+    "add": "إضافة",
+  "suspend": "تعليق",
+  "unsuspend": "إلغاء التعليق",
+  "suspendUserAccount": "تعليق حساب المستخدم",
+  "suspendUserAccountSubtitle": "هل أنت متأكد أنك تريد تعليق هذا المستخدم؟\u2028لن يتمكن من تسجيل الدخول أو الوصول إلى النظام حتى يتم إعادة تفعيله.\nيمكن عكس هذا الإجراء في أي وقت.",
+"deleteUserAccount": "حذف حساب المستخدم",
+  "deleteUserAccountSubtitle":"هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟\u2028لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.",
+  "cancel": "إلغاء",
+  "userDetails": "تفاصيل المستخدم",
+  "addNewUser": "إضافة مستخدم جديد",
+  "interestedCars": "السيارات المفضلة ",
+    "assignedMarketer": "المسوّق المعين",
+  "suspendAccount": "تعليق الحساب"
 
 }

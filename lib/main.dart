@@ -18,6 +18,8 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
     import 'feauture/authentication/register/register _screen.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
+import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import 'feauture/dashboard/users_management/user_details_screen.dart';
 import 'feauture/inspector_screen/authentication/inspector_register_screen.dart';
     import 'feauture/authentication/signin/signin_screen.dart';
     import 'feauture/authentication/user_controller/user_cubit.dart';
@@ -58,29 +60,31 @@ import 'feauture/welcome_screen/welcome_screen.dart';
       await FcmApi().initNotification();
 
       final String? token = await SharedPrefsManager.getData(key: 'user_token');
-
-
+      final user = getIt<UserCubit>().state;
+      final String? role = user?.roles?.isNotEmpty == true ? user!.roles!.first : null;
 
       runApp(
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => LanguageCubit()),
             BlocProvider<UserCubit>.value(
-              value: getIt<UserCubit>(), // ✅ Already loaded with loadUserFromPrefs
+              value: getIt<UserCubit>(),
             ),
             BlocProvider(create: (context) => RoleCubit()),
             BlocProvider(create: (context) => getIt<RoleCsCubit>()),
+
             BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
 
           ],
-          child: MyApp(isLoggedIn:token!=null ,),
+          child: MyApp(isLoggedIn: token != null, userRole: role),
         ),
       );
     }
 
     class MyApp extends StatefulWidget {
-      const MyApp({super.key , required this.isLoggedIn});
+      const MyApp({super.key, required this.isLoggedIn, this.userRole});
       final bool isLoggedIn;
+      final String? userRole;
 
       @override
       State<MyApp> createState() => _MyAppState();
@@ -145,6 +149,14 @@ import 'feauture/welcome_screen/welcome_screen.dart';
       @override
       Widget build(BuildContext context) {
         final locale = context.watch<LanguageCubit>().state;
+        String initialRoute;
+        if (!widget.isLoggedIn) {
+          initialRoute = '/';
+        } else if (widget.userRole == 'Admin') {
+          initialRoute = DashboardMainScreen.mainScreenRouteName;
+        } else {
+          initialRoute = BottomNavBar.bottomNavBarRouteName;
+        }
 
         return ScreenUtilInit(
           designSize: const Size(428, 926.76),
@@ -167,7 +179,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
               builder: (context, child) => child!,
 
 
-              initialRoute:widget.isLoggedIn?BottomNavBar.bottomNavBarRouteName:'/', // 👈 Make sure '/' route is defined below
+              initialRoute: initialRoute,
               routes: {
                 '/': (context) => OnBoarding(),
                 OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
@@ -199,7 +211,10 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
                 RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
                 AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
-                MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails()
+                MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
+            DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
+                UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
+
               },
             );
           },

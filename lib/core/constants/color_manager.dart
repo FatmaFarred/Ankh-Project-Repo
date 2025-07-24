@@ -11,6 +11,7 @@ abstract class ColorManager {
   static Color balanceColor = const Color(0xFF2B3728);
   static Color productContainerGrey = const Color(0xffF9FAFB);
   static Color rateContainer = const Color(0xffE5E7EB);
+  static Color neutralLight = const Color(0xffF0F0EC);
 
   static Color lighterColor = const Color(0xFF2B7728);
 
@@ -19,7 +20,8 @@ abstract class ColorManager {
   static Color darkGrey = const Color(0xff777777);
   static Color grey = const Color(0xffa8a7a7);
 
-  static Color lightGrey = const Color(0xffF1F2F4);
+  static Color lightGrey = const Color(0xffDADADA);
+  static Color lightGreyShade2 = const Color(0xff9A9A9A);
   static Color lightgreen = const Color(0xffD4AF37);
   static Color containerGrey = const Color(0xffF9FAFB);
   static Color containerdarkGrey = const Color(0xff5c5c5e);
