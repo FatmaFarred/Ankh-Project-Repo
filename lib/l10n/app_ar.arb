@@ -256,10 +256,26 @@
 "deleteUserAccount": "حذف حساب المستخدم",
   "deleteUserAccountSubtitle":"هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟\u2028لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.",
   "cancel": "إلغاء",
-  "userDetails": "تفاصيل المستخدم",
+  "userDetails": "بيانات المستخدم",
+  "marketerDetails": "بيانات المسوق",
   "addNewUser": "إضافة مستخدم جديد",
   "interestedCars": "السيارات المفضلة ",
     "assignedMarketer": "المسوّق المعين",
-  "suspendAccount": "تعليق الحساب"
+  "suspendAccount": "تعليق الحساب",
+  "marketerManagement": "إدارة المسوقين",
+  "assignedProducts":"المنتجات المُسندة",
+  "marketerInfo": "معلومات المسوق",
+  "marketerName": "اسم المسوق ",
+  "joiningCode": "كود الانضمام ",
+  "deleteMarketer": "حذف المسوق",
+  "assignNewProduct": "إسناد منتج جديد",
+  "unassign": " إلغاء الإسناد",
+  "inspectorManagement": "إدارة المعاينين",
+  "totalInspections": "إجمالي المعاينات",
+  "inpectorDetails": "بيانات المعاين",
+  "inspectionHistory": "تاريخ المعاينات",
+  "resultSubmitted": "تم تقديم التقرير",
+  "deleteInspector": "حذف المعاين "
+
 
 }

@@ -62,7 +62,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    EmailVerficationScreen.emailVerficationScreenRouteName));
+                    SignInScreen.signInScreenRouteName,
+                ));
       }
         },
 

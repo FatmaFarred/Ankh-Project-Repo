@@ -24,6 +24,7 @@ class UsersManagementScreen extends StatelessWidget {
       'status': 'Active',
       'assignedmarketer': 'Yasser Mohamed',
       'interestedCar': "2",
+      "AssignedProductsNum":"5"
     },
     {
       'name': 'Ali Ahmed',
@@ -33,7 +34,9 @@ class UsersManagementScreen extends StatelessWidget {
       'status': 'Suspended',
       'assignedmarketer': 'Yasser Mohamed',
 
-      'interestedCar': "2"
+      'interestedCar': "2",
+    "AssignedProductsNum":"5"
+
     },
     {
       'name': 'Ali Ahmed',
@@ -43,7 +46,9 @@ class UsersManagementScreen extends StatelessWidget {
       'status': 'Active',
       'assignedmarketer': 'Yasser Mohamed',
 
-      'interestedCar': "2"
+      'interestedCar': "2",
+      "AssignedProductsNum":"5"
+
     },
     {
       'name': 'Ali Ahmed',
@@ -53,7 +58,9 @@ class UsersManagementScreen extends StatelessWidget {
       'status': 'Active',
       'assignedmarketer': 'Yasser Mohamed',
 
-      'interestedCar': "2"
+      'interestedCar': "2",
+      "AssignedProductsNum":"5"
+
     },
   ];
 
@@ -86,7 +93,8 @@ class UsersManagementScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: CustomizedElevatedButton(bottonWidget: Row(
               children: [
-                Icon(Icons.add, color: ColorManager.white, size: 20.sp),
+                Icon(Icons.add_circle_outline, color: ColorManager.white, size: 24.sp),
+                SizedBox(width: 8.w,),
                 Text(AppLocalizations.of(context)!.addNewUser,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontSize: 16.sp,
@@ -112,7 +120,12 @@ class UsersManagementScreen extends StatelessWidget {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
-                return UserCard(user: user);
+                return UserCard(user: user,onViewPressed: () {
+                  Navigator.of(context).pushNamed(
+                    UserDetailsScreen.routeName,
+                    arguments: user,
+                  );
+                },);
               },
             ),
           ),
@@ -124,7 +137,9 @@ class UsersManagementScreen extends StatelessWidget {
 
 class UserCard extends StatelessWidget {
   final Map<String, dynamic> user;
-  const UserCard({Key? key, required this.user}) : super(key: key);
+  final bool showAssignedProductsNum;
+  final VoidCallback onViewPressed;
+  const UserCard({Key? key, required this.user, this.showAssignedProductsNum=false, required this.onViewPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +211,21 @@ class UserCard extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 10.h),
+           showAssignedProductsNum? Row(
+              children: [
+                SvgPicture.asset(ImageAssets.assignedIcon, height: 18.h,width: 18.w,),
+
+                SizedBox(width: 6.w),
+                Text("${AppLocalizations.of(context)!.assignedProducts} :",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+
+                Text(user['AssignedProductsNum'],
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+              ],
+            ):SizedBox.shrink(),
              SizedBox(height: 10.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,12 +237,7 @@ class UserCard extends StatelessWidget {
 
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: ColorManager.darkGrey)),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      UserDetailsScreen.routeName,
-                      arguments: user,
-                    );
-                  },
+                  onPressed: onViewPressed,
                   icon: Icon(Icons.visibility, color: Color(0xffD4AF37), size: 20.sp),
 
                   label:Text(AppLocalizations.of(context)!.view,
@@ -262,6 +287,7 @@ class UserCard extends StatelessWidget {
                   ),
                 ),
               ],
+
             ),
           ],
         ),

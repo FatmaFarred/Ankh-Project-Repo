@@ -14,6 +14,8 @@ import '../../../domain/entities/all_inpection_entity.dart';
 import '../../../domain/entities/inspection_request_details_entity.dart';
 import '../my_inspections/my_inspections_cubit.dart';
 import '../my_inspections/my_inspections_state.dart';
+import 'package:ankh_project/feauture/marketer_Reports/marketer_report_details/report_details/report_details_cubit.dart';
+import 'package:ankh_project/feauture/marketer_Reports/marketer_report_details/report_details/report_details_state.dart';
 
 class InspectorReportsScreen extends StatefulWidget {
   const InspectorReportsScreen({super.key});
@@ -82,7 +84,7 @@ class _InspectorReportsScreenState extends State<InspectorReportsScreen> {
                 color: ColorManager.lightprimary,
                 onRefresh: _onRefresh,
                 child: Padding(
-                  padding: REdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  padding: REdgeInsets.symmetric(horizontal: 14, vertical: 20),
                   child: ListView.separated(
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: state.inspections.length,
@@ -211,7 +213,10 @@ class _InspectorReportsScreenState extends State<InspectorReportsScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => InspectionReportDetails(requestId: inspection.id ,selectedStatus: inspection.status),
+                  builder: (_) => BlocProvider<MarketerReportDetailsCubit>(
+                    create: (context) => getIt<MarketerReportDetailsCubit>(),
+                    child: InspectionReportDetails(requestId: inspection.id, selectedStatus: inspection.status),
+                  ),
                 ),
               );
             },

@@ -808,4 +808,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get suspendAccount => 'Suspend Account';
+
+  @override
+  String get marketerManagement => 'Marketers Management';
+
+  @override
+  String get assignedProducts => 'Assigned Products';
+
+  @override
+  String get marketerInfo => 'Marketer Info';
+
+  @override
+  String get marketerName => 'Marketer Name ';
+
+  @override
+  String get joiningCode => 'Joining Code ';
+
+  @override
+  String get deleteMarketer => 'Delete Marketer';
+
+  @override
+  String get assignNewProduct => 'Assign New Product';
+
+  @override
+  String get marketerDetails => 'Marketer Details';
+
+  @override
+  String get unassign => 'Unassign';
+
+  @override
+  String get inspectorManagement => 'Inspectors Management ';
+
+  @override
+  String get totalInspections => 'Total Inspections';
+
+  @override
+  String get inpectorDetails => 'Inspector Details';
+
+  @override
+  String get inspectionHistory => 'Inspections History';
+
+  @override
+  String get resultSubmitted => 'Result Submitted';
+
+  @override
+  String get deleteInspector => 'Delete Inspector ';
 }
