@@ -263,14 +263,20 @@
   "addNewUser": "Add New User",
   "interestedCars": "Favorite Cars",
   "assignedMarketer": "Assigned Marketer",
-  "suspendAccount": "Suspend Account"
-
-
-
-
-
-
-
-
-
+  "suspendAccount": "Suspend Account",
+  "marketerManagement": "Marketers Management",
+  "assignedProducts":"Assigned Products",
+  "marketerInfo": "Marketer Info",
+  "marketerName": "Marketer Name ",
+  "joiningCode": "Joining Code ",
+  "deleteMarketer": "Delete Marketer",
+  "assignNewProduct": "Assign New Product",
+  "marketerDetails": "Marketer Details",
+  "unassign": "Unassign",
+  "inspectorManagement": "Inspectors Management ",
+  "totalInspections": "Total Inspections",
+  "inpectorDetails": "Inspector Details",
+  "inspectionHistory": "Inspections History",
+  "resultSubmitted": "Result Submitted",
+  "deleteInspector": "Delete Inspector "
 }

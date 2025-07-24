@@ -1645,6 +1645,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Suspend Account'**
   String get suspendAccount;
+
+  /// No description provided for @marketerManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketers Management'**
+  String get marketerManagement;
+
+  /// No description provided for @assignedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Products'**
+  String get assignedProducts;
+
+  /// No description provided for @marketerInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Info'**
+  String get marketerInfo;
+
+  /// No description provided for @marketerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Name '**
+  String get marketerName;
+
+  /// No description provided for @joiningCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Joining Code '**
+  String get joiningCode;
+
+  /// No description provided for @deleteMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Marketer'**
+  String get deleteMarketer;
+
+  /// No description provided for @assignNewProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign New Product'**
+  String get assignNewProduct;
+
+  /// No description provided for @marketerDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Details'**
+  String get marketerDetails;
+
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
+  /// No description provided for @inspectorManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspectors Management '**
+  String get inspectorManagement;
+
+  /// No description provided for @totalInspections.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Inspections'**
+  String get totalInspections;
+
+  /// No description provided for @inpectorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Details'**
+  String get inpectorDetails;
+
+  /// No description provided for @inspectionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspections History'**
+  String get inspectionHistory;
+
+  /// No description provided for @resultSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Result Submitted'**
+  String get resultSubmitted;
+
+  /// No description provided for @deleteInspector.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Inspector '**
+  String get deleteInspector;
 }
 
 class _AppLocalizationsDelegate
