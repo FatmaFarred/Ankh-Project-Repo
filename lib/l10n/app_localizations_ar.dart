@@ -735,4 +735,75 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get inspectionReportDetails => 'تفاصيل تقرير الفحص';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get users => 'المستخدمين';
+
+  @override
+  String get marketers => 'المسوّقين';
+
+  @override
+  String get inspectors => 'المفتشين';
+
+  @override
+  String get inspections => 'الفحوصات';
+
+  @override
+  String get usersManagement => 'إدارة المستخدمين';
+
+  @override
+  String get search => 'ابحث....';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get view => 'عرض';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get add => 'إضافة';
+
+  @override
+  String get suspend => 'تعليق';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get unsuspend => 'إلغاء التعليق';
+
+  @override
+  String get suspendUserAccount => 'تعليق حساب المستخدم';
+
+  @override
+  String get suspendUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد تعليق هذا المستخدم؟ لن يتمكن من تسجيل الدخول أو الوصول إلى النظام حتى يتم إعادة تفعيله.\nيمكن عكس هذا الإجراء في أي وقت.';
+
+  @override
+  String get deleteUserAccount => 'حذف حساب المستخدم';
+
+  @override
+  String get deleteUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
+
+  @override
+  String get userDetails => 'تفاصيل المستخدم';
+
+  @override
+  String get addNewUser => 'إضافة مستخدم جديد';
+
+  @override
+  String get interestedCars => 'السيارات المفضلة ';
+
+  @override
+  String get assignedMarketer => 'المسوّق المعين';
+
+  @override
+  String get suspendAccount => 'تعليق الحساب';
 }

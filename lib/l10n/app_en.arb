@@ -239,8 +239,37 @@
   "noPhotosAvailable": "No Photos Available",
   "productPhotos": "Product Photos",
   "inspectionReport": "Inspection Report",
-  "inspectionReportDetails": " تفاصيل تقرير الفحص",
-  "inspectionReport": "Inspection Report"
+  "inspectionReportDetails": " Inspection Report Details",
+  "inspectionReport": "Inspection Report",
+  "products": "Products",
+  "users": "Users",
+  "marketers": "Marketers",
+  "inspectors": "Inspectors",
+  "inspections": "Inspections",
+  "usersManagement": "Users Management",
+  "search": "Search....",
+  "delete": "Delete",
+  "view": "View",
+  "edit": "Edit",
+  "add": "Add",
+  "suspend": "Suspend",
+  "cancel": "Cancel",
+  "unsuspend": "Unsuspend",
+  "suspendUserAccount": "Suspend User Account",
+  "suspendUserAccountSubtitle": "Are you sure you want to suspend this user?\u2028They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.",
+  "deleteUserAccount": "Delete User Account",
+  "deleteUserAccountSubtitle":"Are you sure you want to permanently delete this user?\u2028This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.",
+  "userDetails": "User Details",
+  "addNewUser": "Add New User",
+  "interestedCars": "Favorite Cars",
+  "assignedMarketer": "Assigned Marketer",
+  "suspendAccount": "Suspend Account"
+
+
+
+
+
+
 
 
 

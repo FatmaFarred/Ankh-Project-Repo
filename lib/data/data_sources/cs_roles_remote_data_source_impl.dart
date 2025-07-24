@@ -37,15 +37,16 @@ import '../../l10n/global_localization_helper.dart';
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
 
-
-        final requestResponse = myResponse
-            .map((json) => CsRolesResponseDm.fromJson(json))
-            .toList();
 
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => CsRolesResponseDm.fromJson(json))
+              .toList();
           // Return success
           return right(requestResponse);
         } else {

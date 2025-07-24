@@ -38,6 +38,30 @@ abstract class ImageAssets {
   static const String successIcon = "$imagePath/successIcon.png";
   static const String brokenImage = "$imagePath/broken-image.png";
   static const String carIcon="$imagePath/caricon.png";
+  static const String assignedIcon = "$imagePath/assigned.svg";
+  static const String completedIcon = "$imagePath/comleted.svg";
+  static const String calenderIcon = "$imagePath/calender.svg";
+  static const String usersIcon = "$imagePath/clarity_users-solid.svg";
+  static const String carIcon2 = "$imagePath/f7_car-fill.svg";
+  static const String marketerIcon2 = "$imagePath/fluent-mdl2_telemarketer.svg";
+  static const String notifactionIcon2 = "$imagePath/fluent_alert-16-filled.svg";
+  static const String ImageIcon = "$imagePath/Frame.svg";
+  static const String refreshIcon = "$imagePath/humbleicons_refresh.svg";
+  static const String infoIcon = "$imagePath/info.svg";
+  static const String inspectionIcon = "$imagePath/inspections.svg";
+  static const String callIcon = "$imagePath/ion_call.svg";
+  static const String productIcon = "$imagePath/ix_product.svg";
+  static const String mailIcon = "$imagePath/mail.svg";
+  static const String tagPriceIcon = "$imagePath/solar_tag-price-bold.svg";
+  static const String userIcon = "$imagePath/userIcon.svg";
+  static const String drawerIcon = "$imagePath/solar_hamburger-menu-broken.svg";
+  static const String imageIcon = "$imagePath/Frame.svg";
+
+
+
+
+
+
 }
 
 class SvgAssets {}

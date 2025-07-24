@@ -736,5 +736,76 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inspectionReport => 'Inspection Report';
 
   @override
-  String get inspectionReportDetails => ' تفاصيل تقرير الفحص';
+  String get inspectionReportDetails => ' Inspection Report Details';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get marketers => 'Marketers';
+
+  @override
+  String get inspectors => 'Inspectors';
+
+  @override
+  String get inspections => 'Inspections';
+
+  @override
+  String get usersManagement => 'Users Management';
+
+  @override
+  String get search => 'Search....';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get suspend => 'Suspend';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get unsuspend => 'Unsuspend';
+
+  @override
+  String get suspendUserAccount => 'Suspend User Account';
+
+  @override
+  String get suspendUserAccountSubtitle =>
+      'Are you sure you want to suspend this user? They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.';
+
+  @override
+  String get deleteUserAccount => 'Delete User Account';
+
+  @override
+  String get deleteUserAccountSubtitle =>
+      'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.';
+
+  @override
+  String get userDetails => 'User Details';
+
+  @override
+  String get addNewUser => 'Add New User';
+
+  @override
+  String get interestedCars => 'Favorite Cars';
+
+  @override
+  String get assignedMarketer => 'Assigned Marketer';
+
+  @override
+  String get suspendAccount => 'Suspend Account';
 }

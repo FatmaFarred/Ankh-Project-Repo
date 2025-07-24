@@ -1505,8 +1505,146 @@ abstract class AppLocalizations {
   /// No description provided for @inspectionReportDetails.
   ///
   /// In en, this message translates to:
-  /// **' تفاصيل تقرير الفحص'**
+  /// **' Inspection Report Details'**
   String get inspectionReportDetails;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
+  /// No description provided for @marketers.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketers'**
+  String get marketers;
+
+  /// No description provided for @inspectors.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspectors'**
+  String get inspectors;
+
+  /// No description provided for @inspections.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspections'**
+  String get inspections;
+
+  /// No description provided for @usersManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Users Management'**
+  String get usersManagement;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search....'**
+  String get search;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @suspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend'**
+  String get suspend;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @unsuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsuspend'**
+  String get unsuspend;
+
+  /// No description provided for @suspendUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend User Account'**
+  String get suspendUserAccount;
+
+  /// No description provided for @suspendUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to suspend this user? They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.'**
+  String get suspendUserAccountSubtitle;
+
+  /// No description provided for @deleteUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User Account'**
+  String get deleteUserAccount;
+
+  /// No description provided for @deleteUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.'**
+  String get deleteUserAccountSubtitle;
+
+  /// No description provided for @userDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'User Details'**
+  String get userDetails;
+
+  /// No description provided for @addNewUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New User'**
+  String get addNewUser;
+
+  /// No description provided for @interestedCars.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Cars'**
+  String get interestedCars;
+
+  /// No description provided for @assignedMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Marketer'**
+  String get assignedMarketer;
+
+  /// No description provided for @suspendAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend Account'**
+  String get suspendAccount;
 }
 
 class _AppLocalizationsDelegate

@@ -16,6 +16,7 @@ import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
 import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
+import '../../dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import '../../home_screen/bottom_nav_bar.dart';
 import '../../inspector_screen/authentication/inspector_register_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
@@ -66,17 +67,30 @@ class _SignInScreenState extends State<SignInScreen> {
         print("message: ${state.response.message}");
         print("token: ${state.response.token}");
         print("user: ${state.response.user}");
+        print("userRoles: ${state.response.user?.roles}");
+
         Navigator.of(context).pop();
         CustomDialog.positiveButton(
             context: context,
             title: AppLocalizations.of(context)!.success,
             message: state.response.message,
             positiveOnClick: () {
+
               // Navigate based on user role
               final userRoles = state.response.user?.roles;
-              if (userRoles != null && userRoles.isNotEmpty) {
+              if (userRoles != null && userRoles.isNotEmpty&& userRoles[0] != "Admin") {
 
                 // Default navigation if no roles found
+                Navigator.of(context).pushReplacementNamed(
+                  BottomNavBar.bottomNavBarRouteName,
+                );
+              }else if (userRoles?[0]=="Admin") {
+                // If CS role is selected, navigate to CS home
+                Navigator.of(context).pushReplacementNamed(
+                  DashboardMainScreen.mainScreenRouteName,
+                );
+              } else {
+                // Default navigation to home screen
                 Navigator.of(context).pushReplacementNamed(
                   BottomNavBar.bottomNavBarRouteName,
                 );
@@ -227,6 +241,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         } else if (RoleCsCubit.isRoleSelected("Marketer")) {
                           // If CS role is marketer, navigate to inspector registration
                           Navigator.of(context).pushNamed(RegisterScreen.registerScreenRouteName);
+                        }else{
+                          // Default navigation to registration screen
+                          Navigator.of(context).pushNamed(RegisterScreen.registerScreenRouteName);
+
                         }
                       },
                       child: Text(
