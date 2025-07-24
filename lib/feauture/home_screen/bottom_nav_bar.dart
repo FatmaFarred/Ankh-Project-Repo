@@ -15,7 +15,7 @@ import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
 import '../inspector_screen/inspector_home/inspector_home_screen.dart';
-import '../inspector_screen/inspector_reports_screen.dart';
+import '../inspector_screen/inspection_reports/inspector_reports_screen.dart';
 import '../inspector_screen/my_inspections/my_inspections_screen.dart';
 import '../marketer_Reports/marketer_reports_screen.dart';
 import '../marketer_home/marketer_home_screen.dart';
