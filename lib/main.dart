@@ -19,6 +19,8 @@ import 'core/theme/my_app_theme.dart';
     import 'feauture/authentication/register/register _screen.dart';
     import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
+import 'feauture/dashboard/marketer_mangemnet/marketer_details_screen.dart';
 import 'feauture/dashboard/users_management/user_details_screen.dart';
 import 'feauture/inspector_screen/authentication/inspector_register_screen.dart';
     import 'feauture/authentication/signin/signin_screen.dart';
@@ -214,6 +216,8 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
             DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
                 UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
+                MarketerDetailsScreen.routeName:(context)=>MarketerDetailsScreen(),
+                InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
 
               },
             );

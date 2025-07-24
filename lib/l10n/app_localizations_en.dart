@@ -815,6 +815,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get addNewProduct => 'Add New Product';
 
+  String get marketerManagement => 'Marketers Management';
+
+  @override
+  String get assignedProducts => 'Assigned Products';
+
+  @override
+  String get marketerInfo => 'Marketer Info';
+
+  @override
+  String get marketerName => 'Marketer Name ';
+
+  @override
+  String get joiningCode => 'Joining Code ';
+
+  @override
+  String get deleteMarketer => 'Delete Marketer';
+
+  @override
+  String get assignNewProduct => 'Assign New Product';
+
+  @override
+  String get marketerDetails => 'Marketer Details';
+
   @override
   String get unassign => 'Unassign';
 
@@ -822,4 +845,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String unassignConfirmation(Object clientName, Object productName) {
     return 'Are you sure you want to unassign “$productName” from $clientName? This product will be marked as Available again.';
   }
+  String get inspectorManagement => 'Inspectors Management ';
+
+  @override
+  String get totalInspections => 'Total Inspections';
+
+  @override
+  String get inpectorDetails => 'Inspector Details';
+
+  @override
+  String get inspectionHistory => 'Inspections History';
+
+  @override
+  String get resultSubmitted => 'Result Submitted';
+
+  @override
+  String get deleteInspector => 'Delete Inspector ';
 }

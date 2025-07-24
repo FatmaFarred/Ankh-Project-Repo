@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/feauture/home_screen/header_section.dart';
@@ -45,7 +47,7 @@ class UserDetailsScreen extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Details'),
+        title:  Text(AppLocalizations.of(context)!.userDetails),
         backgroundColor: ColorManager.lightprimary,
         leading: IconButton(onPressed: ()=>Navigator.pop(context), icon:Icon (Icons.arrow_back_ios)),
       ),
@@ -86,8 +88,15 @@ class UserDetailsScreen extends StatelessWidget {
                     image: product['image']!,
                     name: product['name']!,
                     price: product['price']!,
-                    onDelete: () {  },
+                    onButtonClick: () {  },
+                    TextButton: AppLocalizations.of(context)!.delete,
+                    TextColor:  ColorManager.error,
+
+                    
+                    backgroundColor:Color(0xffFCD5D5),
                   );
+
+
                 },
               ),
               SizedBox(height: 24.h),
@@ -333,13 +342,19 @@ class AssignedProductCard extends StatelessWidget {
   final String image;
   final String name;
   final String price;
-  final VoidCallback onDelete;
+  final VoidCallback onButtonClick;
+  final String TextButton;
+  final Color TextColor;
+  final Color backgroundColor;
 
   const AssignedProductCard({
     required this.image,
     required this.name,
     required this.price,
-    required this.onDelete,
+    required this.onButtonClick,
+    required this.TextButton,
+    required this.TextColor,
+    required  this.backgroundColor,
     Key? key,
   }) : super(key: key);
 
@@ -382,19 +397,19 @@ class AssignedProductCard extends StatelessWidget {
             ),
             SizedBox(width: 12),
             ElevatedButton(
-              onPressed: onDelete,
+              onPressed: onButtonClick,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffFCD5D5),
-                foregroundColor: ColorManager.error,
+                backgroundColor:backgroundColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 elevation: 0,
-                padding: EdgeInsets.symmetric( vertical: 3),
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
               ),
 
-              child: Text(AppLocalizations.of(context)!.delete, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 14.sp,color: ColorManager.error),
+              child: Text(TextButton, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 12.sp,color: TextColor,
               ),
+
             ),
-          ],
+            )],
         ),
       ),
     );

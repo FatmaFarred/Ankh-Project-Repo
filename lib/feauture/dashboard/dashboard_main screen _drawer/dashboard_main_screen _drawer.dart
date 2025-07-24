@@ -11,6 +11,8 @@ import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../l10n/app_localizations.dart';
 import '../../authentication/user_controller/user_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
+import '../inspector_management/inspector_management_screen.dart';
+import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -25,8 +27,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   final List<Widget> _screens = [
     Center(child: ProductsManagementScreen()),
     Center(child: UsersManagementScreen()),
-    Center(child: Text('⚙️ Marketers Screen')),
-    Center(child: Text('👁️ Inspectors Screen')),
+    Center(child: MarketersManagementScreen()),
+    Center(child: InspectorManagementScreen()),
     Center(child: Text('📊 Inspections Screen')),
     Center(child: Text('⚙️ Notification Screen')),
   ];
@@ -42,6 +44,10 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
+          child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
+        )],
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(
           builder: (context) => IconButton(

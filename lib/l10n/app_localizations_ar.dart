@@ -793,7 +793,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
 
   @override
-  String get userDetails => 'تفاصيل المستخدم';
+  String get userDetails => 'بيانات المستخدم';
 
   @override
   String get addNewUser => 'إضافة مستخدم جديد';
@@ -820,4 +820,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String unassignConfirmation(Object clientName, Object productName) {
     return 'هل أنت متأكد أنك تريد إلغاء تعيين \"$productName\" من $clientName؟ سيتم تمييز هذا المنتج كمتاح مرة أخرى.';
   }
+  String get marketerManagement => 'إدارة المسوقين';
+
+  @override
+  String get assignedProducts => 'المنتجات المُسندة';
+
+  @override
+  String get marketerInfo => 'معلومات المسوق';
+
+  @override
+  String get marketerName => 'اسم المسوق ';
+
+  @override
+  String get joiningCode => 'كود الانضمام ';
+
+  @override
+  String get deleteMarketer => 'حذف المسوق';
+
+  @override
+  String get assignNewProduct => 'إسناد منتج جديد';
+
+  @override
+  String get marketerDetails => 'بيانات المسوق';
+
+  @override
+  String get unassign => ' إلغاء الإسناد';
+
+  @override
+  String get inspectorManagement => 'إدارة المعاينين';
+
+  @override
+  String get totalInspections => 'إجمالي المعاينات';
+
+  @override
+  String get inpectorDetails => 'بيانات المعاين';
+
+  @override
+  String get inspectionHistory => 'تاريخ المعاينات';
+
+  @override
+  String get resultSubmitted => 'تم تقديم التقرير';
+
+  @override
+  String get deleteInspector => 'حذف المعاين ';
 }
