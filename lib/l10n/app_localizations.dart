@@ -1657,6 +1657,19 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add New Product'**
   String get addNewProduct;
+
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
+  /// No description provided for @unassignConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.'**
+  String unassignConfirmation(Object clientName, Object productName);
+
   /// No description provided for @marketerManagement.
   ///
   /// In en, this message translates to:
@@ -1704,18 +1717,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Marketer Details'**
   String get marketerDetails;
-
-  /// No description provided for @unassign.
-  ///
-  /// In en, this message translates to:
-  /// **'Unassign'**
-  String get unassign;
-
-  /// No description provided for @unassignConfirmation.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.'**
-  String unassignConfirmation(Object clientName, Object productName);
 
   /// No description provided for @inspectorManagement.
   ///

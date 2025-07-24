@@ -814,12 +814,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addNewProduct => 'إضافة منتج جديد';
 
   @override
-  String get unassign => 'إلغاء التعيين';
+  String get unassign => ' إلغاء الإسناد';
 
   @override
   String unassignConfirmation(Object clientName, Object productName) {
     return 'هل أنت متأكد أنك تريد إلغاء تعيين \"$productName\" من $clientName؟ سيتم تمييز هذا المنتج كمتاح مرة أخرى.';
   }
+
+  @override
   String get marketerManagement => 'إدارة المسوقين';
 
   @override
@@ -842,9 +844,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get marketerDetails => 'بيانات المسوق';
-
-  @override
-  String get unassign => ' إلغاء الإسناد';
 
   @override
   String get inspectorManagement => 'إدارة المعاينين';

@@ -815,6 +815,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get addNewProduct => 'Add New Product';
 
+  @override
+  String get unassign => 'Unassign';
+
+  @override
+  String unassignConfirmation(Object clientName, Object productName) {
+    return 'Are you sure you want to unassign “$productName” from $clientName? This product will be marked as Available again.';
+  }
+
+  @override
   String get marketerManagement => 'Marketers Management';
 
   @override
@@ -839,12 +848,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marketerDetails => 'Marketer Details';
 
   @override
-  String get unassign => 'Unassign';
-
-  @override
-  String unassignConfirmation(Object clientName, Object productName) {
-    return 'Are you sure you want to unassign “$productName” from $clientName? This product will be marked as Available again.';
-  }
   String get inspectorManagement => 'Inspectors Management ';
 
   @override
