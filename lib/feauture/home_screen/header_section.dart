@@ -47,7 +47,7 @@ class HeaderSection extends StatelessWidget {
                     }
                   },
                   child: ClipRRect(
-                    child: Image.asset(ImageAssets.profilePic, scale: 1.2),
+                    child: Image.asset(ImageAssets.appLogo, scale: 1.2),
                   ),
                 ),
                 SizedBox(width: 12.w),
@@ -61,20 +61,20 @@ class HeaderSection extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
                         )),
-                    RatingBarIndicator(
-                      rating: 5,
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: ColorManager.starRateColor,
-                      ),
-                      itemCount: 5,
-                      itemSize: 12.sp,
-                      direction: Axis.horizontal,
-                    ),
+                    // RatingBarIndicator(
+                    //   rating: 5,
+                    //   itemBuilder: (context, _) => const Icon(
+                    //     Icons.star,
+                    //     color: ColorManager.starRateColor,
+                    //   ),
+                    //   itemCount: 5,
+                    //   itemSize: 12.sp,
+                    //   direction: Axis.horizontal,
+                    // ),
                   ],
                 ),
                 const Spacer(),
-                Image.asset(ImageAssets.goldMedal, scale: 6.sp),
+                // Image.asset(ImageAssets.goldMedal, scale: 6.sp),
                 SizedBox(width: 12.w),
                 InkWell(
                   onTap: () {

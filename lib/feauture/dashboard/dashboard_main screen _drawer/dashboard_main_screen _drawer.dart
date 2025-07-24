@@ -70,7 +70,6 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
 
 
         child: Padding(
-
           padding:  EdgeInsets.symmetric(horizontal: 22.w,
           vertical: 42.h
           ),

@@ -341,9 +341,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
 
                   SizedBox(height: 16.h),
-                 // SectionTitle(title: AppLocalizations.of(context)!.comments),
-                 // SizedBox(height: 12.h),
-                  //const AddCommentSection(),
+                 SectionTitle(title: AppLocalizations.of(context)!.comments),
+                 SizedBox(height: 12.h),
+                  const AddCommentSection(),
 
                   SizedBox(height: 16.h),
                   SectionTitle(

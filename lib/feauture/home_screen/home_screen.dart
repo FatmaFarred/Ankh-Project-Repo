@@ -1,3 +1,4 @@
+import 'package:ankh_project/feauture/details_screen/widgets/section_title.dart';
 import 'package:ankh_project/feauture/home_screen/popular_cars_list.dart';
 import 'package:ankh_project/feauture/home_screen/recommended_cars_list.dart';
 import 'package:ankh_project/feauture/home_screen/section_header.dart';
@@ -24,19 +25,20 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           padding: REdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SectionHeader(title: AppLocalizations.of(context)!.topBrands),
+              SectionTitle(title: AppLocalizations.of(context)!.topBrands),
               SizedBox(height: 8.h),
-              const TopBrandsList(),
+                 TopBrandsList(),
               SizedBox(height: 20.h),
-              SectionHeader(
+              SectionTitle(
                 title: AppLocalizations.of(context)!.popularNewCars,
 
               ),
               const SizedBox(height: 8),
               const PopularCarsList(),
               SizedBox(height: 20.h),
-              SectionHeader(
+              SectionTitle(
                 title: AppLocalizations.of(context)!.recommendedCars,
               ),
               const RecommendedCarsList(),

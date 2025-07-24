@@ -89,31 +89,31 @@ class UsersManagementScreen extends StatelessWidget {
                 prefixIcon: Icon(Icons.search, color: ColorManager.lightGreyShade2),
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: CustomizedElevatedButton(bottonWidget: Row(
-              children: [
-                Icon(Icons.add_circle_outline, color: ColorManager.white, size: 24.sp),
-                SizedBox(width: 8.w,),
-                Text(AppLocalizations.of(context)!.addNewUser,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontSize: 16.sp,
-                    color: ColorManager.white,
-                  ),
-                ),
-              ],
-            )
-              , onPressed: () {
-                // Handle suspend account action
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: CustomizedElevatedButton(bottonWidget: Row(
+          //     children: [
+          //       Icon(Icons.add_circle_outline, color: ColorManager.white, size: 24.sp),
+          //       SizedBox(width: 8.w,),
+          //       Text(AppLocalizations.of(context)!.addNewUser,
+          //         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          //           fontSize: 16.sp,
+          //           color: ColorManager.white,
+          //         ),
+          //       ),
+          //     ],
+          //   )
+          //     , onPressed: () {
+          //       // Handle suspend account action
+          //
+          //     },
+          //     color:  ColorManager.lightprimary ,
+          //     borderColor:  ColorManager.lightprimary ,
+          //
+          //
+          //   ),
+          // )
 
-              },
-              color:  ColorManager.lightprimary ,
-              borderColor:  ColorManager.lightprimary ,
-
-
-            ),
-          )
-          ,
           Expanded(
             child: ListView.builder(
               padding:  EdgeInsets.symmetric(horizontal: 16.w),

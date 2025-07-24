@@ -360,7 +360,15 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               color: ColorManager.darkGrey,
               borderColor: ColorManager.darkGrey,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        InspectionDetailsScreen(requestId: inspection.id),
+                  ),
+                );
+              },
             ),
             "Not Respond" => Row(
               children: [
