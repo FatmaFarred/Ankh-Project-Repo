@@ -1,3 +1,5 @@
+import 'package:ankh_project/feauture/dashboard/products_management/add_new_product_screen.dart';
+import 'package:ankh_project/feauture/dashboard/products_management/edit_product_screen.dart';
 import 'package:ankh_project/feauture/dashboard/products_management/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -96,7 +98,7 @@ class ProductsManagementScreen extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                // Handle suspend account action
+                Navigator.push(context, MaterialPageRoute(builder: (context){return AddNewProductScreen();}));
               },
               color: ColorManager.lightprimary,
               borderColor: ColorManager.lightprimary,
@@ -378,21 +380,23 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    _showBottomSheet(
-                      context: context,
-                      title: AppLocalizations.of(context)!.edit,
-                      description: AppLocalizations.of(
-                        context,
-                      )!.suspendUserAccountSubtitle,
-                      cancelText: AppLocalizations.of(context)!.cancel,
-                      confirmText: AppLocalizations.of(context)!.confirm,
-                      onCancel: () => Navigator.pop(context),
-                      onConfirm: () {},
-                      icon: Icon(
-                        Icons.edit_note_rounded,
-                        color: ColorManager.darkBlue,
-                      ),
-                    );
+                    // _showBottomSheet(
+                    //   context: context,
+                    //   title: AppLocalizations.of(context)!.edit,
+                    //   description: AppLocalizations.of(
+                    //     context,
+                    //   )!.suspendUserAccountSubtitle,
+                    //   cancelText: AppLocalizations.of(context)!.cancel,
+                    //   confirmText: AppLocalizations.of(context)!.confirm,
+                    //   onCancel: () => Navigator.pop(context),
+                    //   onConfirm: () {},
+                    //   icon: Icon(
+                    //     Icons.edit_note_rounded,
+                    //     color: ColorManager.darkBlue,
+                    //   ),
+                    // );
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return EditProductScreen();}));
+
                   },
                   icon: Icon(
                     Icons.edit_note_rounded,
