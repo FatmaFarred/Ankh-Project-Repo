@@ -254,7 +254,7 @@ class UserCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),side: BorderSide(color: ColorManager.darkGrey)),
                   ),
                   onPressed: () {
-                    _showBottomSheet(context: context, title: AppLocalizations.of(context)!.deleteUserAccount, description: AppLocalizations.of(context)!.deleteUserAccountSubtitle, cancelText: AppLocalizations.of(context)!.cancel, confirmText:AppLocalizations.of(context)!.delete , onCancel: ()=>Navigator.pop(context), onConfirm: (){},
+                    _showBottomSheet(context: context, title: AppLocalizations.of(context)!.rejectUserAccount, description: AppLocalizations.of(context)!.rejectUserAccountSubtitle, cancelText: AppLocalizations.of(context)!.cancel, confirmText:AppLocalizations.of(context)!.reject , onCancel: ()=>Navigator.pop(context), onConfirm: (){},
                       icon: Icon(Icons.delete, color: ColorManager.error),
 
                     );

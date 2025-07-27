@@ -1610,11 +1610,17 @@ abstract class AppLocalizations {
   /// **'Delete User Account'**
   String get deleteUserAccount;
 
-  /// No description provided for @deleteUserAccountSubtitle.
+  /// No description provided for @rejectUserAccountSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.'**
-  String get deleteUserAccountSubtitle;
+  /// **'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.'**
+  String get rejectUserAccountSubtitle;
+
+  /// No description provided for @acceptUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.'**
+  String get acceptUserAccountSubtitle;
 
   /// No description provided for @userDetails.
   ///
@@ -1657,12 +1663,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add New Product'**
   String get addNewProduct;
-
-  /// No description provided for @unassign.
-  ///
-  /// In en, this message translates to:
-  /// **'Unassign'**
-  String get unassign;
 
   /// No description provided for @unassignConfirmation.
   ///
@@ -1718,6 +1718,12 @@ abstract class AppLocalizations {
   /// **'Marketer Details'**
   String get marketerDetails;
 
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
   /// No description provided for @inspectorManagement.
   ///
   /// In en, this message translates to:
@@ -1753,6 +1759,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete Inspector '**
   String get deleteInspector;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @acceptUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept User Account'**
+  String get acceptUserAccount;
+
+  /// No description provided for @rejectUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject User Account'**
+  String get rejectUserAccount;
 }
 
 class _AppLocalizationsDelegate

@@ -313,11 +313,11 @@ class InspectorCard extends StatelessWidget {
                   onPressed: () {
                     _showBottomSheet(
                       context: context,
-                      title: AppLocalizations.of(context)!.deleteUserAccount,
+                      title: AppLocalizations.of(context)!.rejectUserAccount,
                       description: AppLocalizations.of(context)!
-                          .deleteUserAccountSubtitle,
+                          .rejectUserAccountSubtitle,
                       cancelText: AppLocalizations.of(context)!.cancel,
-                      confirmText: AppLocalizations.of(context)!.delete,
+                      confirmText: AppLocalizations.of(context)!.reject,
                       onCancel: () => Navigator.pop(context),
                       onConfirm: () {},
                       icon: Icon(Icons.delete, color: ColorManager.error),
