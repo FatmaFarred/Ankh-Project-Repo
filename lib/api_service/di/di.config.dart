@@ -138,6 +138,7 @@ import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usec
     as _i458;
 import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_case.dart'
     as _i416;
+import '../../domain/use_cases/get_all_marketers_use_case.dart' as _i91;
 import '../../domain/use_cases/get_all_products_use_case.dart' as _i939;
 import '../../domain/use_cases/get_inspection_request_details_use_case.dart'
     as _i194;
@@ -161,7 +162,10 @@ import '../../domain/use_cases/marketer_serach_home_usecase.dart' as _i43;
 import '../../domain/use_cases/product_details_use_case.dart' as _i385;
 import '../../domain/use_cases/push_notification_use_case/push_notification_use_case.dart'
     as _i172;
+import '../../domain/use_cases/search_marketers_use_case.dart' as _i871;
 import '../../domain/use_cases/submit_inspection_report_usecase.dart' as _i1015;
+import '../../domain/use_cases/update_marketer_account_status_use_case.dart'
+    as _i598;
 import '../../feauture/authentication/forgrt_password/forget_password/controller/forget_passwors_cubit.dart'
     as _i155;
 import '../../feauture/authentication/forgrt_password/set_new_password/controller/reset_password_cubit.dart'
@@ -174,6 +178,10 @@ import '../../feauture/authentication/user_controller/user_cubit.dart' as _i354;
 import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart'
     as _i495;
 import '../../feauture/client_search_screen/cubit/search_cubit.dart' as _i355;
+import '../../feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cubit.dart'
+    as _i956;
+import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
+    as _i42;
 import '../../feauture/details_screen/controller/product_details_cubit.dart'
     as _i447;
 import '../../feauture/inspector_screen/authentication/inspector_register_controller/inspector_register_cubit.dart'
@@ -246,6 +254,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
         _i758.AuthenticationRemoteDataSourceImplWithApi(
             gh<_i1069.ApiManager>()));
+    gh.factory<_i91.GetAllMarketersUseCase>(() => _i91.GetAllMarketersUseCase(
+        gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i362.MyInspectionsRemoteDataSource>(
         () => _i422.MyInspectionsRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i583.MarketerAddRequestInspectionRemoteDataSource>(() =>
@@ -279,6 +289,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i527.MarketerProductsUseCase>(() =>
         _i527.MarketerProductsUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
+        _i598.UpdateMarketerAccountStatusUseCase(
+            gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i871.MarketerSearchUseCase>(() => _i871.MarketerSearchUseCase(
+        gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
             gh<_i329.FirebaseMessagingService>()));
@@ -314,6 +329,11 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i1072.MarketerRequestsForInspectionRepositry>()));
     gh.lazySingleton<_i147.InspectionRequestDetailsRemoteDataSource>(() =>
         _i147.InspectionRequestDetailsRemoteDataSourceImpl(gh<_i519.Client>()));
+    gh.factory<_i956.MarketerManagementCubit>(
+        () => _i956.MarketerManagementCubit(
+              gh<_i91.GetAllMarketersUseCase>(),
+              gh<_i871.MarketerSearchUseCase>(),
+            ));
     gh.factory<_i300.MarketerAssignProductCubit>(() =>
         _i300.MarketerAssignProductCubit(
             gh<_i674.MarketerAssignProductUseCase>()));
@@ -344,6 +364,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i194.GetInspectionRequestDetailsUseCase>(() =>
         _i194.GetInspectionRequestDetailsUseCase(
             gh<_i110.InspectionRequestDetailsRepository>()));
+    gh.factory<_i42.UpdateMarketerStatusCubit>(() =>
+        _i42.UpdateMarketerStatusCubit(
+            gh<_i598.UpdateMarketerAccountStatusUseCase>()));
     gh.factory<_i385.ProductDetailsUseCase>(
         () => _i385.ProductDetailsUseCase(gh<_i404.ProductDetailsRepositry>()));
     gh.factory<_i280.MarketerAddRequestCubit>(() =>

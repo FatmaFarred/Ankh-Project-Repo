@@ -789,8 +789,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteUserAccount => 'حذف حساب المستخدم';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
+  String get rejectUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد رفض هذا المستخدم؟\nيمكن تعديل هذا القرار لاحقًا، ولكن قد يتم تعطيل وصوله مؤقتًا أو تعليق بياناته. ';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد قبول هذا المستخدم؟\n سيمنحه هذا الإجراء صلاحيات الوصول إلى النظام.\n يمكنك تعديل هذا القرار لاحقًا من خلال تعليق الحساب.';
 
   @override
   String get userDetails => 'بيانات المستخدم';
@@ -812,9 +816,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addNewProduct => 'إضافة منتج جديد';
-
-  @override
-  String get unassign => ' إلغاء الإسناد';
 
   @override
   String unassignConfirmation(Object clientName, Object productName) {
@@ -846,6 +847,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerDetails => 'بيانات المسوق';
 
   @override
+  String get unassign => 'إلغاء التعيين';
+
+  @override
   String get inspectorManagement => 'إدارة المعاينين';
 
   @override
@@ -862,4 +866,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deleteInspector => 'حذف المعاين ';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get acceptUserAccount => 'قبول حساب المستخدم';
+
+  @override
+  String get rejectUserAccount => 'رفض حساب المستخدم';
 }

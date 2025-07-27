@@ -258,7 +258,9 @@
   "suspendUserAccount": "Suspend User Account",
   "suspendUserAccountSubtitle": "Are you sure you want to suspend this user?\u2028They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.",
   "deleteUserAccount": "Delete User Account",
-  "deleteUserAccountSubtitle":"Are you sure you want to permanently delete this user?\u2028This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.",
+  "rejectUserAccountSubtitle": "Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.",
+
+  "acceptUserAccountSubtitle": "Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.",
   "userDetails": "User Details",
   "addNewUser": "Add New User",
   "interestedCars": "Favorite Cars",
@@ -266,7 +268,6 @@
   "suspendAccount": "Suspend Account",
   "productsManagement": "Products Management",
   "addNewProduct": "Add New Product",
-  "unassign": "Unassign",
   "unassignConfirmation": "Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.",
 
   "marketerManagement": "Marketers Management",
@@ -283,6 +284,11 @@
   "inpectorDetails": "Inspector Details",
   "inspectionHistory": "Inspections History",
   "resultSubmitted": "Result Submitted",
-  "deleteInspector": "Delete Inspector "
+  "deleteInspector": "Delete Inspector ",
+  "reject": "Reject",
+  "accept": "Accept",
+    "acceptUserAccount": "Accept User Account",
+    "rejectUserAccount": "Reject User Account"
+
 
 }

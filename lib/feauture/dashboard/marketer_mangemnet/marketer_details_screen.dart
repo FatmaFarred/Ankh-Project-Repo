@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/domain/entities/all_marketers_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,9 +26,9 @@ class MarketerDetailsScreen extends StatefulWidget {
 class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    final user =
-    ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final isActive = user['status'] == 'Active';
+    final marketer =
+    ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
+    final isActive = marketer.accountStatus == 'Active';
     final List<Map<String, String>> assignedProducts = [
       {
         'image': ImageAssets.carPic1, // Use your actual image asset
@@ -83,10 +84,10 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                         ],
                       ),
                       SizedBox(height: 16),
-                      _readonlyField(AppLocalizations.of(context)!.marketerName, user['name'] ?? ''),
-                      _readonlyField(AppLocalizations.of(context)!.email, user['email'] ?? ''),
-                      _readonlyField(AppLocalizations.of(context)!.phoneNumber, user['phone'] ?? ''),
-                      _readonlyField(AppLocalizations.of(context)!.joiningCode, user['joiningCode'] ),
+                      _readonlyField(AppLocalizations.of(context)!.marketerName, marketer.fullName ?? ''),
+                      _readonlyField(AppLocalizations.of(context)!.email, marketer.email ?? ''),
+                      _readonlyField(AppLocalizations.of(context)!.phoneNumber, marketer.phoneNumber ?? ''),
+                      _readonlyField(AppLocalizations.of(context)!.joiningCode, marketer.code ?? ''),
                     ],
                   ),
                 ),

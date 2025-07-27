@@ -791,8 +791,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteUserAccount => 'Delete User Account';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.';
+  String get rejectUserAccountSubtitle =>
+      'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.';
 
   @override
   String get userDetails => 'User Details';
@@ -814,9 +818,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addNewProduct => 'Add New Product';
-
-  @override
-  String get unassign => 'Unassign';
 
   @override
   String unassignConfirmation(Object clientName, Object productName) {
@@ -848,6 +849,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marketerDetails => 'Marketer Details';
 
   @override
+  String get unassign => 'Unassign';
+
+  @override
   String get inspectorManagement => 'Inspectors Management ';
 
   @override
@@ -864,4 +868,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteInspector => 'Delete Inspector ';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get acceptUserAccount => 'Accept User Account';
+
+  @override
+  String get rejectUserAccount => 'Reject User Account';
 }

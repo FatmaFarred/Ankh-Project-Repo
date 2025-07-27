@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import '../../core/constants/color_manager.dart';
 
-enum RequestStatus { pending, done, delayed, notResponded }
+enum RequestStatus { pending, done, delayed, notResponded,active }
 Color getStatusColor(RequestStatus status) {
   switch (status) {
     case RequestStatus.pending:
@@ -13,7 +13,8 @@ Color getStatusColor(RequestStatus status) {
       return ColorManager.lightOrange;
     case RequestStatus.notResponded:
       return ColorManager.lightBlack;
-  }
+    case RequestStatus.active:
+      return ColorManager.lightGreen;  }
 }
 Color getTextStatusColor(RequestStatus status) {
   switch (status) {
@@ -25,6 +26,8 @@ Color getTextStatusColor(RequestStatus status) {
       return ColorManager.darkOrange;
     case RequestStatus.notResponded:
       return ColorManager.darkBlack;
+    case RequestStatus.active:
+      return ColorManager.darkGreen;
   }
 }
 
@@ -38,7 +41,10 @@ String getStatusLabel(RequestStatus status) {
       return 'Delayed';
     case RequestStatus.notResponded:
       return 'Not Responded';
+    case RequestStatus.active:
+      return 'Active';
   }
+
 }
 
 RequestStatus? getRequestStatusFromString(String? status) {
@@ -51,6 +57,8 @@ RequestStatus? getRequestStatusFromString(String? status) {
       return RequestStatus.delayed;
     case 'not responded':
       return RequestStatus.notResponded;
+    case 'active':
+      return RequestStatus.active;
     default:
       return null;
   }
