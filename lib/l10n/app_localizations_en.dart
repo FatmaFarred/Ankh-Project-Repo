@@ -892,4 +892,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assign => 'Assign';
+
+  @override
+  String get blockUser => 'Block User';
+
+  @override
+  String get unblockUser => 'Unblock User';
+
+  @override
+  String get blockUserSubtitle =>
+      'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.';
+
+  @override
+  String get unblockUserSubtitle =>
+      ' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.';
+
+  @override
+  String get blockUserAccount => 'Block User Account';
+
+  @override
+  String get unblockUserAccount => ' Unblock User Account';
+
+  @override
+  String get reasonForBlocking => ' Reason for Blocking';
+
+  @override
+  String get enterReasonForBlocking => ' Enter Reason for Blocking';
+
+  @override
+  String get blockDaysCount => ' Block Days Count';
+
+  @override
+  String get enterBlockDaysCount => ' Enter Block Days Count';
+
+  @override
+  String get block => 'Block';
+
+  @override
+  String get unblock => 'Unblock';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      ' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.';
 }

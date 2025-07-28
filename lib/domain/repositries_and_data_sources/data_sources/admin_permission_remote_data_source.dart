@@ -1,0 +1,18 @@
+
+import 'package:dartz/dartz.dart';
+
+import '../../../api_service/failure/error_handling.dart';
+import '../../../data/models/user_model.dart';
+import '../../entities/authentication_response_entity.dart';
+import '../../entities/login_response_entity.dart';
+import '../../entities/register_response_entity.dart';
+
+abstract class AdminPermissionsRemoteDataSource {
+
+  Future <Either<Failure,String?>>blockUser (num days,String reason, String userId);
+  Future <Either<Failure,String?>>unBlockUser (String userId);
+  Future <Either<Failure,String?>>appointAsTeamLeader (String userId, String role, String token);
+
+
+
+}

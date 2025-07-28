@@ -890,4 +890,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get assign => 'تعيين';
+
+  @override
+  String get blockUser => 'حظر المستخدم';
+
+  @override
+  String get unblockUser => 'إلغاء حظر المستخدم';
+
+  @override
+  String get blockUserSubtitle =>
+      'هل أنت متأكد أنك تريد حظر هذا المستخدم؟\nسيمنعه هذا الإجراء من تسجيل الدخول أو الوصول إلى النظام حتى يتم إلغاء حظره.';
+
+  @override
+  String get unblockUserSubtitle =>
+      'هل أنت متأكد أنك تريد إلغاء حظر هذا المستخدم؟\nسيمنحه هذا الإجراء صلاحيات الوصول إلى النظام مرة أخرى.';
+
+  @override
+  String get blockUserAccount => 'حظر حساب المستخدم';
+
+  @override
+  String get unblockUserAccount => 'إلغاء حظر حساب المستخدم';
+
+  @override
+  String get reasonForBlocking => 'سبب الحظر';
+
+  @override
+  String get enterReasonForBlocking => 'أدخل سبب الحظر';
+
+  @override
+  String get blockDaysCount => ' عدد أيام الحظر';
+
+  @override
+  String get enterBlockDaysCount => 'أدخل عدد أيام الحظر';
+
+  @override
+  String get block => 'حظر';
+
+  @override
+  String get unblock => 'إلغاء الحظر';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      'هل أنت متأكد أنك تريد تعيين هذا المستخدم كقائد فريق؟\nسيمنحه هذا الإجراء صلاحيات إضافية لإدارة الفريق.';
 }
