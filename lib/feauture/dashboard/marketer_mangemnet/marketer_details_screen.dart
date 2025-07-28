@@ -4,9 +4,12 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized
 import 'package:ankh_project/domain/entities/all_marketers_entity.dart';
 import 'package:ankh_project/feauture/marketer_products/get_product_controller/marketer_product_cubit.dart';
 import 'package:ankh_project/feauture/marketer_products/get_product_controller/states.dart';
-import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/marketer_unassign_product_cubit.dart';
+
 import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart';
 import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_states.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/block_user_cubit.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/unblock_user_cubit.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/appoint_as_team_leader_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,11 +18,16 @@ import 'package:flutter_svg/svg.dart';
 import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import '../../../core/customized_widgets/reusable_widgets/custom_text_field.dart';
+import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../l10n/app_localizations.dart';
+import '../../authentication/user_controller/user_cubit.dart';
+import '../../details_screen/details_screen.dart';
 import '../../marketer_home/assign_product_controller/marketer_product_cubit.dart';
 import '../../marketer_home/assign_product_controller/states.dart';
 import '../custom_widgets/custom_bottom_sheet.dart';
 import '../users_management/user_details_screen.dart';
+import 'cubit/appoint_as_team_leader_states.dart';
 
 class MarketerDetailsScreen extends StatefulWidget {
   static const String routeName = 'MarketerDetailsScreen';
@@ -37,12 +45,12 @@ class MarketerDetailsScreen extends StatefulWidget {
 
 class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
   MarketerProductCubit marketerProductCubit = getIt<MarketerProductCubit>();
-  MarketerUnassignProductCubit marketerUnassignProductCubit = getIt<MarketerUnassignProductCubit>();
-  MarketerAssignProductCubit marketerAssignProductCubit = getIt<MarketerAssignProductCubit>();
   UpdateMarketerStatusCubit updateMarketerStatusCubit = getIt<UpdateMarketerStatusCubit>();
-  
-  // Store last product ID for retry
-  num? lastProductId;
+  BlockUserCubit blockUserCubit = getIt<BlockUserCubit>();
+  UnblockUserCubit unblockUserCubit = getIt<UnblockUserCubit>();
+  AppointAsTeamLeaderCubit appointAsTeamLeaderCubit = getIt<AppointAsTeamLeaderCubit>();
+  String? token;
+
 
   @override
   void initState() {
@@ -53,66 +61,37 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
         marketerProductCubit.fetchProducts(marketer.id!);
       }
     });
+    _loadToken();
   }
+  Future<void> _loadToken() async {
+    final fetchedToken = await SharedPrefsManager.getData(key: 'user_token');
+    setState(() {
+      token = fetchedToken;
+    });
+    print("👤 User ID: $token");
+  }
+
 
   @override
   void dispose() {
     marketerProductCubit.close();
-    marketerUnassignProductCubit.close();
-    marketerAssignProductCubit.close();
     updateMarketerStatusCubit.close();
+    blockUserCubit.close();
+    unblockUserCubit.close();
+    appointAsTeamLeaderCubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state;
+
     final marketer =
     ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
     final isActive = marketer.accountStatus == 'Active';
     return MultiBlocListener(
       listeners: [
-        BlocListener<MarketerUnassignProductCubit, MarketerUnassignProductState>(
-          bloc: marketerUnassignProductCubit,
-          listener: (context, state) {
-            if (state is MarketerUnassignProductLoading) {
-              CustomDialog.loading(
-                context: context,
-                message: AppLocalizations.of(context)!.loading,
-                cancelable: false,
-              );
-            } else if (state is MarketerUnassignProductFailure) {
-              print(" error state is :${state.error.errorMessage}");
-              Navigator.of(context).pop();
-              CustomDialog.positiveAndNegativeButton(
-                context: context,
-                positiveText: AppLocalizations.of(context)!.tryAgain,
-                positiveOnClick: () {
-                  // Retry unassigning the product
-                  if (lastProductId != null) {
-                    marketerUnassignProductCubit.unassignProduct(
-                      productId: lastProductId!,
-                      marketerId: marketer.id ?? "",
-                    );
-                  }
-                },
-                title: AppLocalizations.of(context)!.error,
-                message: state.error.errorMessage,
-              );
-            } else if (state is MarketerUnassignProductSuccess) {
-              Navigator.of(context).pop();
-              CustomDialog.positiveButton(
-                context: context,
-                title: AppLocalizations.of(context)!.success,
-                message: state.response,
-                positiveOnClick: () {
-                  Navigator.of(context).pop();
-                  // Refresh the products list
-                  marketerProductCubit.fetchProducts(marketer.id!);
-                },
-              );
-            }
-          },
-        ),
+
         BlocListener<UpdateMarketerStatusCubit, UpdateMarketerStatusState>(
           bloc: updateMarketerStatusCubit,
           listener: (context, state) {
@@ -150,43 +129,118 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
             }
           },
         ),
-        BlocListener<MarketerAssignProductCubit, MarketerAssignProductState>(
-          bloc: marketerAssignProductCubit,
+        BlocListener<BlockUserCubit, BlockUserState>(
+          bloc: blockUserCubit,
           listener: (context, state) {
-            if (state is MarketerAssignProductLoading) {
+            if (state is BlockUserLoading) {
               CustomDialog.loading(
                 context: context,
                 message: AppLocalizations.of(context)!.loading,
                 cancelable: false,
               );
-            } else if (state is MarketerAssignProductError) {
+            } else if (state is BlockUserFailure) {
               Navigator.of(context).pop();
               CustomDialog.positiveAndNegativeButton(
                 context: context,
                 positiveText: AppLocalizations.of(context)!.tryAgain,
                 positiveOnClick: () {
                   Navigator.of(context).pop();
-                  // Re-trigger the assign action
-                  _showAssignProductBottomSheet();
+                  // Re-trigger the block action
+                  _showBlockUserBottomSheet();
                 },
                 title: AppLocalizations.of(context)!.error,
                 message: state.error.errorMessage,
               );
-            } else if (state is MarketerAssignProductSuccess) {
+            } else if (state is BlockUserSuccess) {
               Navigator.of(context).pop();
               CustomDialog.positiveButton(
                 context: context,
                 title: AppLocalizations.of(context)!.success,
-                message: state.message,
+                message: state.response,
                 positiveOnClick: () {
                   Navigator.of(context).pop();
-                  // Refresh the products list
-                  marketerProductCubit.fetchProducts(marketer.id!);
+                  // Refresh the screen or navigate back
+                  Navigator.of(context).pop();
                 },
               );
             }
           },
         ),
+        BlocListener<UnblockUserCubit, UnblockUserState>(
+          bloc: unblockUserCubit,
+          listener: (context, state) {
+            if (state is UnblockUserLoading) {
+              CustomDialog.loading(
+                context: context,
+                message: AppLocalizations.of(context)!.loading,
+                cancelable: false,
+              );
+            } else if (state is UnblockUserFailure) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveAndNegativeButton(
+                context: context,
+                positiveText: AppLocalizations.of(context)!.tryAgain,
+                positiveOnClick: () {
+                  Navigator.of(context).pop();
+                  // Re-trigger the unblock action
+                  _showUnblockUserBottomSheet();
+                },
+                title: AppLocalizations.of(context)!.error,
+                message: state.error.errorMessage,
+              );
+            } else if (state is UnblockUserSuccess) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.success,
+                message: state.response,
+                positiveOnClick: () {
+                  Navigator.of(context).pop();
+                  // Refresh the screen or navigate back
+                  Navigator.of(context).pop();
+                },
+              );
+            }
+          },
+        ),
+        BlocListener<AppointAsTeamLeaderCubit, AppointAsTeamLeaderState>(
+          bloc: appointAsTeamLeaderCubit,
+          listener: (context, state) {
+            if (state is AppointAsTeamLeaderLoading) {
+              CustomDialog.loading(
+                context: context,
+                message: AppLocalizations.of(context)!.loading,
+                cancelable: false,
+              );
+            } else if (state is AppointAsTeamLeaderFailure) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveAndNegativeButton(
+                context: context,
+                positiveText: AppLocalizations.of(context)!.tryAgain,
+                positiveOnClick: () {
+                  Navigator.of(context).pop();
+                  // Re-trigger the appoint action
+                  appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer');
+                },
+                title: AppLocalizations.of(context)!.error,
+                message: state.failure.errorMessage,
+              );
+            } else if (state is AppointAsTeamLeaderSuccess) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.success,
+                message: state.response ,
+                positiveOnClick: () {
+                  Navigator.of(context).pop();
+                  // Navigate back to marketer management screen
+                  Navigator.of(context).pop();
+                },
+              );
+            }
+          },
+        ),
+
       ],
       child: Scaffold(
       appBar: AppBar(
@@ -311,42 +365,13 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                           name: product.title ?? '',
                           price: product.price ?? '',
                           onButtonClick: () {
-                            // Show confirmation dialog before unassigning
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(AppLocalizations.of(context)!.confirm,style: Theme.of(context).textTheme.bodyLarge),
-                                  content: Text(AppLocalizations.of(context)!.unassign,style: Theme.of(context).textTheme.bodyMedium,),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.of(context).pop(),
-                                      child: Text(AppLocalizations.of(context)!.cancel,style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorManager.darkGrey,),
-
-                                      )
-                                    ),
-                                    TextButton(
-                                                                              onPressed: () {
-                                          Navigator.of(context).pop();
-                                          // Store product ID for potential retry
-                                          lastProductId = product?.id;
-                                          marketerUnassignProductCubit.unassignProduct(
-                                            productId: product?.id ?? 0,
-                                            marketerId: marketer.id ?? "",
-                                          );
-                                        },
-                                      child: Text(AppLocalizations.of(context)!.confirm,style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: ColorManager.lightprimary,),
-
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
+                            Navigator.of(context).pushNamed(DetailsScreen.detailsScreenRouteName,
+                            arguments: product.id
                             );
                           },
-                          TextButton: AppLocalizations.of(context)!.unassign,
-                          TextColor: ColorManager.darkGrey,
-                          backgroundColor: Color(0xffD1D1D1),
+                          TextButton: AppLocalizations.of(context)!.view,
+                          TextColor: ColorManager.lightprimary,
+                          backgroundColor: ColorManager.white,
                         );
                       },
                     );
@@ -355,16 +380,23 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 },
               ),
               SizedBox(height: 24),
-              _actionButton(AppLocalizations.of(context)!.appointAsTeamLeader, ColorManager.darkGrey, Colors.white,
-
-                      () {}
-              )
-                ,
+                              _actionButton(AppLocalizations.of(context)!.appointAsTeamLeader, ColorManager.darkGrey, Colors.white,
+                       () => appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer')
+                ),
               SizedBox(height: 12),
-              _actionButton(AppLocalizations.of(context)!.suspendAccount, ColorManager.error
-                  , Colors.white, () => _showDeleteConfirmation()),
+              _actionButton(
+                AppLocalizations.of(context)!.blockUser,
+                ColorManager.error,
+                Colors.white,
+                () => _showBlockUserBottomSheet(),
+              ),
               SizedBox(height: 12),
-              _actionButton(AppLocalizations.of(context)!.assignNewProduct, ColorManager.lightprimary, Colors.white, () => _showAssignProductBottomSheet()),
+              _actionButton(
+                AppLocalizations.of(context)!.unblockUser,
+                ColorManager.lightprimary,
+                Colors.white,
+                () => _showUnblockUserBottomSheet(),
+              ),
             ],
           ),
         ),
@@ -429,9 +461,11 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
     );
   }
 
-  void _showAssignProductBottomSheet() {
+  void _showBlockUserBottomSheet() {
     final marketer = ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
-    final TextEditingController productIdController = TextEditingController();
+    final TextEditingController reasonController = TextEditingController();
+    final TextEditingController daysController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     
     showModalBottomSheet(
       context: context,
@@ -441,102 +475,175 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+          ),
           padding: EdgeInsets.all(20.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    ImageAssets.assignedIcon,
-                    height: 24.h,
-                    width: 24.w,
-                    color: ColorManager.lightprimary,
-                  ),
-                  SizedBox(width: 8.w),
-                  Text(
-                    AppLocalizations.of(context)!.assignNewProduct,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.block,
+                      size: 24.h,
+                      color: ColorManager.error,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              Text(
-                AppLocalizations.of(context)!.productId,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: 8.h),
-              TextFormField(
-                controller: productIdController,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.insertProductId,
-                  hintStyle:Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp,color: ColorManager.darkGrey) ,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: ColorManager.lightGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                    borderSide: BorderSide(color: ColorManager.lightGrey),
-                  ),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.white,
-                        side: BorderSide(color: ColorManager.lightGrey),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
+                    SizedBox(width: 8.w),
+                    Text(
+                      AppLocalizations.of(context)!.blockUser,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                      child: Text(
-                        AppLocalizations.of(context)!.cancel,
-                        style: TextStyle(color: ColorManager.darkGrey),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (productIdController.text.isNotEmpty) {
-                          Navigator.pop(context);
-                          marketerAssignProductCubit.assignProduct(
-                            productId: num.parse(productIdController.text),
-                            userId: marketer.id ?? "",
 
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.lightprimary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                      ),
-                      child: Text(
-                        AppLocalizations.of(context)!.assign,
-                        style: TextStyle(color: Colors.white),
-                      ),
+
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  AppLocalizations.of(context)!.blockUserSubtitle,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp,color: ColorManager.darkGrey),
+                ),
+                SizedBox(height: 20.h),
+                Text(
+                  AppLocalizations.of(context)!.reasonForBlocking,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+                SizedBox(height: 8.h),
+                                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return AppLocalizations.of(context)!.fieldRequired;
+                      }
+                      return null;
+                    },
+                    controller: reasonController,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.enterReasonForBlocking,
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: ColorManager.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: ColorManager.lightGrey),
                     ),
                   ),
-                ],
-              ),
-            ],
+                  maxLines: 3,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  AppLocalizations.of(context)!.blockDaysCount,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                SizedBox(height: 8.h),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.fieldRequired; // or use localization
+                    }
+
+                    return null; // Valid
+                  },
+                  controller: daysController,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.enterBlockDaysCount,
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: ColorManager.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide(color: ColorManager.lightGrey),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(height: 20.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.white,
+                          side: BorderSide(color: ColorManager.lightGrey),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.cancel,
+                          style: TextStyle(color: ColorManager.darkGrey),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            Navigator.pop(context);
+                            blockUserCubit.blockUser(
+                              marketer.id ?? '',
+                              reasonController.text,
+                              int.parse(daysController.text),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.error,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.block,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    ));
+  }
+
+  void _showUnblockUserBottomSheet() {
+    final marketer = ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
+    
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => CustomBottomSheet(
+        title: AppLocalizations.of(context)!.unblockUser,
+        description: AppLocalizations.of(context)!.unblockUserSubtitle,
+        cancelText: AppLocalizations.of(context)!.cancel,
+        confirmText: AppLocalizations.of(context)!.unblock,
+        onCancel: () => Navigator.pop(context),
+        onConfirm: () {
+          Navigator.pop(context);
+          unblockUserCubit.unblockUser(marketer.id ?? '');
+        },
+        icon: Icon(Icons.lock_open, color: ColorManager.lightprimary),
+      ),
     );
   }
+
+
 }
 
 class AssignedProductCard extends StatelessWidget {

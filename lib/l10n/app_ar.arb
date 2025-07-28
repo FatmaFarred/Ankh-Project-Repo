@@ -288,6 +288,22 @@
   "appointAsTeamLeader": "تعيين كقائد فريق",
   "insertProductId": "أدخل معرف المنتج",
   "productId": "معرف المنتج",
-  "assign": "تعيين"
+  "assign": "تعيين",
+  "blockUser": "حظر المستخدم",
+    "unblockUser": "إلغاء حظر المستخدم",
+  "blockUserSubtitle": "هل أنت متأكد أنك تريد حظر هذا المستخدم؟\nسيمنعه هذا الإجراء من تسجيل الدخول أو الوصول إلى النظام حتى يتم إلغاء حظره.",
+    "unblockUserSubtitle": "هل أنت متأكد أنك تريد إلغاء حظر هذا المستخدم؟\nسيمنحه هذا الإجراء صلاحيات الوصول إلى النظام مرة أخرى.",
+  "blockUserAccount": "حظر حساب المستخدم",
+    "unblockUserAccount": "إلغاء حظر حساب المستخدم",
+  "reasonForBlocking": "سبب الحظر",
+    "enterReasonForBlocking": "أدخل سبب الحظر",
+  "blockDaysCount": " عدد أيام الحظر",
+    "enterBlockDaysCount": "أدخل عدد أيام الحظر",
+  "block": "حظر",
+    "unblock": "إلغاء الحظر"
+
+
+
+
 
 }

@@ -16,6 +16,8 @@ class AllMarketersDm extends AllMarketersEntity {
     super.code,
     super.accountStatus,
     super.productsCount,
+    super .teamLeader,
+    super.role
 
 
   });
@@ -28,6 +30,8 @@ class AllMarketersDm extends AllMarketersEntity {
     code = json['code'];
     accountStatus = json['accountStatus'];
     productsCount = json['productsCount'];
+    teamLeader = json['teamLeader'] ;
+    role = json['role'] ;
   }
 
 
@@ -40,6 +44,8 @@ class AllMarketersDm extends AllMarketersEntity {
     map['code'] = code;
     map['accountStatus'] = accountStatus;
     map['productsCount'] = productsCount;
+    map['teamLeader'] = teamLeader;
+    map['role'] = role;
     return map;
   }
 

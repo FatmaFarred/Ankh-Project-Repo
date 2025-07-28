@@ -292,7 +292,19 @@
   "appointAsTeamLeader": "Appoint as Team Leader",
   "insertProductId": "Insert Product ID",
     "productId": "Product ID",
-  "assign": "Assign"
+  "assign": "Assign",
+  "blockUser": "Block User",
+  "unblockUser": "Unblock User",
+  "blockUserSubtitle": "Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.",
+  "unblockUserSubtitle": " Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.",
+  "blockUserAccount": "Block User Account",
+  "unblockUserAccount": " Unblock User Account",
+  "reasonForBlocking": " Reason for Blocking",
+  "enterReasonForBlocking": " Enter Reason for Blocking",
+  "blockDaysCount": " Block Days Count",
+  "enterBlockDaysCount": " Enter Block Days Count",
+  "block": "Block",
+  "unblock": "Unblock"
 
 
 

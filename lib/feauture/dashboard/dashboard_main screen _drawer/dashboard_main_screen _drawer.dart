@@ -44,6 +44,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         actions: [Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
@@ -51,11 +52,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(
-              Icons.menu_rounded,
-              color: Colors.white,
-              size: 24.sp,
-            ),
+            icon: SvgPicture.asset(ImageAssets.drawerIcon),
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },

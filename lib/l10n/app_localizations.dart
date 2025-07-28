@@ -1807,6 +1807,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assign'**
   String get assign;
+
+  /// No description provided for @blockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get blockUser;
+
+  /// No description provided for @unblockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock User'**
+  String get unblockUser;
+
+  /// No description provided for @blockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.'**
+  String get blockUserSubtitle;
+
+  /// No description provided for @unblockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.'**
+  String get unblockUserSubtitle;
+
+  /// No description provided for @blockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User Account'**
+  String get blockUserAccount;
+
+  /// No description provided for @unblockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **' Unblock User Account'**
+  String get unblockUserAccount;
+
+  /// No description provided for @reasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Reason for Blocking'**
+  String get reasonForBlocking;
+
+  /// No description provided for @enterReasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Reason for Blocking'**
+  String get enterReasonForBlocking;
+
+  /// No description provided for @blockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Block Days Count'**
+  String get blockDaysCount;
+
+  /// No description provided for @enterBlockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Block Days Count'**
+  String get enterBlockDaysCount;
+
+  /// No description provided for @block.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block;
+
+  /// No description provided for @unblock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock'**
+  String get unblock;
 }
 
 class _AppLocalizationsDelegate

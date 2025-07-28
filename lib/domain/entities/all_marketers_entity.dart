@@ -14,6 +14,8 @@ class AllMarketersEntity {
       this.code, 
       this.accountStatus,
       this.productsCount,
+      this.teamLeader,
+      this.role
 
   });
 
@@ -24,6 +26,8 @@ class AllMarketersEntity {
   dynamic code;
   String? accountStatus;
   int? productsCount;
+  String? teamLeader;
+  String? role;
 
 
 }
