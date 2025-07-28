@@ -930,4 +930,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unblock => 'Unblock';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      ' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.';
 }

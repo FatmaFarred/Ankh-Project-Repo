@@ -1879,6 +1879,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unblock'**
   String get unblock;
+
+  /// No description provided for @appointAsteamLeaderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.'**
+  String get appointAsteamLeaderSubtitle;
 }
 
 class _AppLocalizationsDelegate

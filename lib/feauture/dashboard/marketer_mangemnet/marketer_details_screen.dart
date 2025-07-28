@@ -381,7 +381,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
               ),
               SizedBox(height: 24),
                               _actionButton(AppLocalizations.of(context)!.appointAsTeamLeader, ColorManager.darkGrey, Colors.white,
-                       () => appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer')
+                       () => _showAppointAsTeamLeaderBottomSheet()
                 ),
               SizedBox(height: 12),
               _actionButton(
@@ -639,6 +639,25 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
           unblockUserCubit.unblockUser(marketer.id ?? '');
         },
         icon: Icon(Icons.lock_open, color: ColorManager.lightprimary),
+      ),
+    );
+  }
+
+  void _showAppointAsTeamLeaderBottomSheet() {
+    final marketer = ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => CustomBottomSheet(
+        title: AppLocalizations.of(context)!.appointAsTeamLeader,
+        description: AppLocalizations.of(context)!.appointAsteamLeaderSubtitle,
+        cancelText: AppLocalizations.of(context)!.cancel,
+        confirmText: AppLocalizations.of(context)!.confirm,
+        onCancel: () => Navigator.pop(context),
+        onConfirm: () {
+          Navigator.pop(context);
+          appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer');
+        },
+        icon: Icon(Icons.person_add, color: ColorManager.darkGrey),
       ),
     );
   }
