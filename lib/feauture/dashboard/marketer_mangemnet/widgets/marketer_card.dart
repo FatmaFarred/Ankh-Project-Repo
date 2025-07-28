@@ -11,6 +11,7 @@ import '../../../../api_service/di/di.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../cubit/update_marketer_status_cubit.dart';
 import '../cubit/update_marketer_status_states.dart';
+
 import 'account_status_handler.dart';
 
 class MarketerCard extends StatelessWidget {
@@ -18,7 +19,6 @@ class MarketerCard extends StatelessWidget {
   final VoidCallback onViewPressed;
   final VoidCallback? onRefresh;
   final UpdateMarketerStatusCubit? updateMarketerStatusCubit;
-
   const MarketerCard({
     Key? key,
     required this.marketer,
@@ -42,6 +42,8 @@ class MarketerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isActive = marketer.accountStatus?.toLowerCase() == 'active';
+    
+
     return Card(
       elevation: 0,
       color: ColorManager.white,
@@ -136,7 +138,8 @@ class MarketerCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10.h),
-                Row(
+
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton.icon(

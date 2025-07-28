@@ -164,6 +164,8 @@ import '../../domain/use_cases/push_notification_use_case/push_notification_use_
     as _i172;
 import '../../domain/use_cases/search_marketers_use_case.dart' as _i871;
 import '../../domain/use_cases/submit_inspection_report_usecase.dart' as _i1015;
+import '../../domain/use_cases/unssign_prodcut_from_marketer_use_case.dart'
+    as _i537;
 import '../../domain/use_cases/update_marketer_account_status_use_case.dart'
     as _i598;
 import '../../feauture/authentication/forgrt_password/forget_password/controller/forget_passwors_cubit.dart'
@@ -180,6 +182,8 @@ import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.
 import '../../feauture/client_search_screen/cubit/search_cubit.dart' as _i355;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cubit.dart'
     as _i956;
+import '../../feauture/dashboard/marketer_mangemnet/cubit/marketer_unassign_product_cubit.dart'
+    as _i239;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
     as _i42;
 import '../../feauture/details_screen/controller/product_details_cubit.dart'
@@ -289,11 +293,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i527.MarketerProductsUseCase>(() =>
         _i527.MarketerProductsUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i871.MarketerSearchUseCase>(() => _i871.MarketerSearchUseCase(
+        gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
         _i598.UpdateMarketerAccountStatusUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
-    gh.factory<_i871.MarketerSearchUseCase>(() => _i871.MarketerSearchUseCase(
-        gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i537.MarketerUnAssignProductUseCase>(() =>
+        _i537.MarketerUnAssignProductUseCase(
+            gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
             gh<_i329.FirebaseMessagingService>()));
@@ -369,6 +376,9 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i598.UpdateMarketerAccountStatusUseCase>()));
     gh.factory<_i385.ProductDetailsUseCase>(
         () => _i385.ProductDetailsUseCase(gh<_i404.ProductDetailsRepositry>()));
+    gh.factory<_i239.MarketerUnassignProductCubit>(() =>
+        _i239.MarketerUnassignProductCubit(
+            gh<_i537.MarketerUnAssignProductUseCase>()));
     gh.factory<_i280.MarketerAddRequestCubit>(() =>
         _i280.MarketerAddRequestCubit(
             gh<_i176.MarketerAddRequestInspectionUseCase>()));

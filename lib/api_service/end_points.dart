@@ -22,6 +22,7 @@ abstract class EndPoints {
   static const String getAllMarketers = "Marketers/get-all";
   static const String updateMarketerAccountStatus = "Marketers/update-status";
   static const String searchMarketer = "Marketers/search-marketer";
+  static const String unAssignProduct = "Marketers/unassign-product-from-marketer";
 
 
 

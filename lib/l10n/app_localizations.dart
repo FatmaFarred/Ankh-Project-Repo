@@ -1783,6 +1783,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reject User Account'**
   String get rejectUserAccount;
+
+  /// No description provided for @appointAsTeamLeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Appoint as Team Leader'**
+  String get appointAsTeamLeader;
+
+  /// No description provided for @insertProductId.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert Product ID'**
+  String get insertProductId;
+
+  /// No description provided for @productId.
+  ///
+  /// In en, this message translates to:
+  /// **'Product ID'**
+  String get productId;
+
+  /// No description provided for @assign.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign'**
+  String get assign;
 }
 
 class _AppLocalizationsDelegate

@@ -12,6 +12,7 @@ abstract class MarketerAssignGetProductsRemoteDataSource{
   Future <Either<Failure,List<AllMarketersEntity>>>getAllMarketers ();
   Future <Either<Failure,String?>>updateMarketerAccountStatus ( num status ,String userId );
   Future <Either<Failure,List<AllMarketersEntity>>>searchMarketer ( String keyWord );
+  Future <Either<Failure,String?>>unAssignProduct ( num productId,String userId );
 
 
 

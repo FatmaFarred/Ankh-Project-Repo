@@ -4,6 +4,7 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized
 import 'package:ankh_project/feauture/dashboard/custom_widgets/custom_bottom_sheet.dart';
 import 'package:ankh_project/feauture/dashboard/users_management/user_details_screen.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,6 +35,8 @@ class _MarketersManagementScreenState extends State<MarketersManagementScreen> {
   MarketerManagementCubit marketerManagementCubit = getIt<MarketerManagementCubit>();
   UpdateMarketerStatusCubit updateMarketerStatusCubit = getIt<UpdateMarketerStatusCubit>();
   final TextEditingController _searchController = TextEditingController();
+  
+
 
   @override
   void initState() {
@@ -53,6 +56,8 @@ class _MarketersManagementScreenState extends State<MarketersManagementScreen> {
     await marketerManagementCubit.fetchMarketers();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<UpdateMarketerStatusCubit, UpdateMarketerStatusState>(
@@ -70,8 +75,7 @@ class _MarketersManagementScreenState extends State<MarketersManagementScreen> {
             context: context,
             positiveText: AppLocalizations.of(context)!.tryAgain,
             positiveOnClick: () {
-              Navigator.of(context).pop();
-              // Re-trigger the last action - you might want to store the last action
+              _refreshData();
             },
             title: AppLocalizations.of(context)!.error,
             message: state.error.errorMessage,

@@ -288,7 +288,12 @@
   "reject": "Reject",
   "accept": "Accept",
     "acceptUserAccount": "Accept User Account",
-    "rejectUserAccount": "Reject User Account"
+    "rejectUserAccount": "Reject User Account",
+  "appointAsTeamLeader": "Appoint as Team Leader",
+  "insertProductId": "Insert Product ID",
+    "productId": "Product ID",
+  "assign": "Assign"
+
 
 
 }

@@ -880,4 +880,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rejectUserAccount => 'Reject User Account';
+
+  @override
+  String get appointAsTeamLeader => 'Appoint as Team Leader';
+
+  @override
+  String get insertProductId => 'Insert Product ID';
+
+  @override
+  String get productId => 'Product ID';
+
+  @override
+  String get assign => 'Assign';
 }

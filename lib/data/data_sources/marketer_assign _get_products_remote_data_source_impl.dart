@@ -237,4 +237,58 @@ import '../models/product_details_dm.dart';
     }
 
   }
+
+  @override
+  Future<Either<Failure, String?>> unAssignProduct(num productId, String userId) async{
+    try {
+      final List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.putData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.unAssignProduct,
+          data:{"marketerId":userId,
+            "productId": productId
+          } ,
+
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+
+        if (kDebugMode) {
+          print("📤 Sent Data: { marketerId: $userId, productId: $productId }");
+          print("✅ Status Code: ${response.statusCode}");
+          print("📥 Response Data: ${response.data}");
+          print("📥 Response Data Type: ${response.data.runtimeType}");
+        }
+        final myResponse = response.data;
+
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          print("✅ Success Response");
+
+          // Return success
+          return right(myResponse);
+        } else {
+
+          print("❌ Error Response: ${response.data}");
+          return left(ServerError(errorMessage: response.data));
+        }
+      } else {
+        print("📴 No internet connection");
+
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e,stacktrace) {
+      print("🔥 Exception caught in unAssignProduct: $e");
+      print("🧯 Stacktrace: $stacktrace");
+
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
+  }
 }

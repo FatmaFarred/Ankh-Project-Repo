@@ -284,8 +284,10 @@
   "reject": "رفض",
   "accept": "قبول",
   "acceptUserAccount": "قبول حساب المستخدم",
-  "rejectUserAccount": "رفض حساب المستخدم"
-
-
+  "rejectUserAccount": "رفض حساب المستخدم",
+  "appointAsTeamLeader": "تعيين كقائد فريق",
+  "insertProductId": "أدخل معرف المنتج",
+  "productId": "معرف المنتج",
+  "assign": "تعيين"
 
 }

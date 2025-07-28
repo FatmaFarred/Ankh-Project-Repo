@@ -49,6 +49,13 @@ import '../../domain/repositries_and_data_sources/repositries/marketer_assign _g
     return either.fold((error) => left(error), (response) => right(response));
   }
 
+  @override
+  Future<Either<Failure, String?>> unAssignProduct(num productId, String userId)async {
+    var either =await marketerProductsRemoteDataSource.unAssignProduct(productId, userId);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
 
 
 

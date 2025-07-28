@@ -878,4 +878,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rejectUserAccount => 'رفض حساب المستخدم';
+
+  @override
+  String get appointAsTeamLeader => 'تعيين كقائد فريق';
+
+  @override
+  String get insertProductId => 'أدخل معرف المنتج';
+
+  @override
+  String get productId => 'معرف المنتج';
+
+  @override
+  String get assign => 'تعيين';
 }
