@@ -25,7 +25,7 @@ class CustomDialog {
             backgroundColor: ColorManager.lightGrey,
             content: Row(
               children: [
-                 CircularProgressIndicator(
+                CircularProgressIndicator(
                   color: ColorManager.black,
                 ),
                 if (message != null) ...[
@@ -33,7 +33,7 @@ class CustomDialog {
                   Text(
                     message!,
                     style:
-                        getSemiBoldStyle(color:ColorManager.black,context:context ),
+                    getSemiBoldStyle(color:ColorManager.black,context:context ),
                   ),
                 ],
               ],
@@ -44,11 +44,11 @@ class CustomDialog {
 
   CustomDialog.positiveButton(
       {required this.context,
-      this.title,
-      this.message,
-      this.positiveText,
-      this.positiveOnClick,
-      bool cancelable = true}) {
+        this.title,
+        this.message,
+        this.positiveText,
+        this.positiveOnClick,
+        bool cancelable = true}) {
     showDialog(
         context: context,
         barrierDismissible: cancelable,
@@ -82,13 +82,13 @@ class CustomDialog {
 
   CustomDialog.positiveAndNegativeButton(
       {required this.context,
-      this.title,
-      this.message,
-      this.positiveText,
-      this.negativeText,
-      this.positiveOnClick,
-      this.negativeOnClick,
-      bool cancelable = true}) {
+        this.title,
+        this.message,
+        this.positiveText,
+        this.negativeText,
+        this.positiveOnClick,
+        this.negativeOnClick,
+        bool cancelable = true}) {
     showDialog(
         context: context,
         barrierDismissible: cancelable,

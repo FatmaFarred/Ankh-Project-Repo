@@ -1885,6 +1885,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.'**
   String get appointAsteamLeaderSubtitle;
+
+  /// No description provided for @clientProductInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Client & Product Information'**
+  String get clientProductInformation;
 }
 
 class _AppLocalizationsDelegate

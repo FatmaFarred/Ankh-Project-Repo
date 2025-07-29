@@ -1,5 +1,6 @@
 
 import 'package:ankh_project/domain/entities/all_inpection_entity.dart';
+import 'package:ankh_project/domain/entities/all_inspectors_entity.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -14,6 +15,7 @@ import '../../api_service/failure/error_handling.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/inspector _home_get_all_remote_data_source.dart';
 import '../../l10n/global_localization_helper.dart';
 import '../models/all_inpection_dm.dart';
+import '../models/all_inspectors_dm.dart';
 import '../models/all_products_dm.dart';
 
 @Injectable(as: HomeGetAllInspectionRemoteDataSource)
@@ -43,15 +45,16 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
         if (kDebugMode) {
           print(response.data);
         }
-        final List<dynamic> myResponse = response.data;
 
-
-        final requestResponse = myResponse
-            .map((json) => AllInpectionDm.fromJson(json))
-            .toList();
 
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => AllInpectionDm.fromJson(json))
+              .toList();
           // Return success
           return right(requestResponse);
         } else {
@@ -182,6 +185,136 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
       return left(ServerError(errorMessage: e.toString()));
     }
 
+  }
+
+  @override
+  Future<Either<Failure, List<AllInspectorsDm>>> getAllInspectors()async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.getData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.getAllInspectors,
+
+
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => AllInspectorsDm.fromJson(json))
+              .toList();
+          // Return success
+          return right(requestResponse);
+        } else {
+          return left(ServerError(errorMessage: response.data));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AllInspectorsDm>>> searchInspectors(String keyWord)async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.getData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.searchAllInspectors,
+          queryParameters: {
+            'search': keyWord,
+          },
+
+
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => AllInspectorsDm.fromJson(json))
+              .toList();
+          // Return success
+          return right(requestResponse);
+        } else {
+          return left(ServerError(errorMessage: response.data));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
+  }
+
+  @override
+  Future<Either<Failure, List<AllInpectionDm>>> getInspectionsByInspectorId(String inspectorId) async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+      await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.getData(
+          url: ApiConstant.baseUrl,
+          endPoint: "${EndPoints.inspectorGetAllInspection}/inspector/$inspectorId",
+          options: Options(validateStatus: (_) => true),
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+          final requestResponse = myResponse
+              .map((json) => AllInpectionDm.fromJson(json))
+              .toList();
+          // Return success
+          return right(requestResponse);
+        } else {
+          return left(ServerError(errorMessage: response.data['message'] ?? 'Failed to fetch inspections'));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
   }
 
 

@@ -1,5 +1,5 @@
 
-import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/admin_permission_remote_data_source.dart';
+import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/admin_permission_remote_data_source.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 

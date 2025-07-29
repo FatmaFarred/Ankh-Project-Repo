@@ -73,7 +73,7 @@ class ClientProductInfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Client & Product Information",
+          Text(AppLocalizations.of(context)!.clientProductInformation,
               style: Theme.of(context).textTheme.bodyLarge),
           SizedBox(height: 16.h),
           SizedBox(height: 16.h),
