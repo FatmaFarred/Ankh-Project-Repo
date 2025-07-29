@@ -26,6 +26,9 @@ abstract class EndPoints {
   static const String blockUser = "Auth/lock-user";
   static const String unBlockUser = "Auth/unlock-user";
   static const String appointAsTeamLeader = "Marketers/change-role";
+  static const String getAllInspectors = "Inspections/get-all";
+  static const String searchAllInspectors = "Inspections/search/inspectors";
+  static const String getAllOfMyInspectionsById = "Inspections/Request-Assigned-To-Inspector";
 
 
 

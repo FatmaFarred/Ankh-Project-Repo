@@ -12,4 +12,5 @@ abstract class MyInspectionsRepository {
   Future<Either<Failure, InspectionReportDetailsEntity>> getReportDetails({
     required num requestId,
   });
+  Future<Either<Failure, List<AllInpectionEntity>>> getAllOfMyInspections(String inspectorId);
 } 

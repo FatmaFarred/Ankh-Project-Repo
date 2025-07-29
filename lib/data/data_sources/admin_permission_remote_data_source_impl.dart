@@ -10,7 +10,7 @@ import '../../../api_service/failure/error_handling.dart';
 import '../../api_service/api_constants.dart';
 import '../../api_service/api_manager.dart';
 import '../../api_service/end_points.dart';
-import '../../domain/repositries_and_data_sources/data_sources/admin_permission_remote_data_source.dart';
+import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/admin_permission_remote_data_source.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/cs_roles_remote_data_source.dart';
 import '../../l10n/global_localization_helper.dart';
 

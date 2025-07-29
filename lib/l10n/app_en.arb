@@ -305,7 +305,8 @@
   "enterBlockDaysCount": " Enter Block Days Count",
   "block": "Block",
   "unblock": "Unblock",
-  "appointAsteamLeaderSubtitle": " Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team."
+  "appointAsteamLeaderSubtitle": " Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.",
+  "clientProductInformation": "Client & Product Information"
 
 
 

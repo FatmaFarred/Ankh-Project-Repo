@@ -932,4 +932,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get appointAsteamLeaderSubtitle =>
       'هل أنت متأكد أنك تريد تعيين هذا المستخدم كقائد فريق؟\nسيمنحه هذا الإجراء صلاحيات إضافية لإدارة الفريق.';
+
+  @override
+  String get clientProductInformation => 'بيانات المنتح والعميل';
 }

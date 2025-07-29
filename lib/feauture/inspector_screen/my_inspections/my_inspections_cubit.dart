@@ -1,3 +1,4 @@
+import 'package:ankh_project/domain/use_cases/get_All_inspection_by_id_use_cae.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -12,10 +13,12 @@ import 'my_inspections_state.dart';
 class MyInspectionsCubit extends Cubit<MyInspectionsState> {
   final GetMyInspectionsUseCase getInspectionsUseCase;
   final InspectorHomeSearchUseCase searchProductsUseCase;
+  final GetAllInspectionByIdUseCase getAllInspectionByIdUseCase;
 
   MyInspectionsCubit({
     required this.getInspectionsUseCase,
     required this.searchProductsUseCase,
+    required this.getAllInspectionByIdUseCase,
   }) : super(MyInspectionsInitial());
 
   Future<void> fetchInspections({
@@ -91,4 +94,48 @@ class MyInspectionsCubit extends Cubit<MyInspectionsState> {
       emit(MyInspectionsError(error: ServerError(errorMessage: e.toString())));
     }
   }
+
+  /// 🆕 New method for fetching inspections for a specific inspector
+  Future<void> fetchInspectionsByInspectorId({
+    required String inspectorId,
+    required String token,
+  }) async {
+    emit(MyInspectionsLoading());
+    
+    try {
+      final either = await getInspectionsUseCase.execute(
+        token: token,
+        filter: "inspector:$inspectorId", // You might need to adjust this based on your API
+      );
+      
+      either.fold(
+        (error) => emit(MyInspectionsError(error: error)),
+        (inspections) {
+          if (inspections.isEmpty) {
+            emit(MyInspectionsEmpty());
+          } else {
+            emit(MyInspectionsLoaded(inspections: inspections));
+          }
+        },
+      );
+    } catch (e) {
+      print("Error fetching inspections for inspector $inspectorId: $e");
+      emit(MyInspectionsError(error: ServerError(errorMessage: e.toString())));
+    }
+  }
+  Future<void> fetchAllInspectionsById({
+  required String inspectorId,
+  }) async {
+    emit(MyInspectionsLoading());
+    final either = await getAllInspectionByIdUseCase.execute(
+      inspectorId: inspectorId, // Replace with actual inspector ID
+
+    );
+    either.fold((error) => emit(MyInspectionsError(error: error)), (response) {
+      (response.isEmpty)
+          ? emit(MyInspectionsEmpty())
+          : emit(MyInspectionsLoaded(inspections: response));
+    });
+  }
+
 }
