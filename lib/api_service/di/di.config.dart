@@ -41,6 +41,7 @@ import '../../data/data_sources/marketer_assign%20_get_products_remote_data_sour
     as _i407;
 import '../../data/data_sources/marketer_requsts_for_inspection_remote_data_source_impl.dart'
     as _i976;
+import '../../data/data_sources/point_request_data_source_impl.dart' as _i434;
 import '../../data/data_sources/product_details_remote_data_source_impl.dart'
     as _i500;
 import '../../data/data_sources/push_notification_data_source_/push_notification_data_sorce_impl.dart'
@@ -68,6 +69,7 @@ import '../../data/repositries/marketer_assign%20_get_products_repositry_impl.da
     as _i894;
 import '../../data/repositries/marketer_requsts_for_inspection_repositry_impl.dart'
     as _i942;
+import '../../data/repositries/PointsRepositryImpl.dart' as _i301;
 import '../../data/repositries/product_details_repositry_impl.dart' as _i288;
 import '../../data/repositries/push_notification_repositry/push_notification_repositry_impl.dart'
     as _i672;
@@ -96,6 +98,8 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
     as _i686;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/marketer_requsts_for_inspection_remote_data_sourse.dart'
     as _i44;
+import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/PointsRemoteDataSource.dart'
+    as _i200;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart'
     as _i526;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/push_notification_data_sourse.dart'
@@ -130,12 +134,15 @@ import '../../domain/repositries_and_data_sources/repositries/marketer_assign%20
     as _i863;
 import '../../domain/repositries_and_data_sources/repositries/marketer_requsts_for_inspection_repositry.dart'
     as _i1072;
+import '../../domain/repositries_and_data_sources/repositries/points_repositry.dart'
+    as _i147;
 import '../../domain/repositries_and_data_sources/repositries/product_details_repositry.dart'
     as _i404;
 import '../../domain/repositries_and_data_sources/repositries/push%20_notification_%20repositry.dart'
     as _i1072;
 import '../../domain/repositries_and_data_sources/repositries/reset_password_repositry.dart'
     as _i234;
+import '../../domain/use_cases/accept_point_request_use_case.dart' as _i962;
 import '../../domain/use_cases/appoint_as_team_leader_use_case.dart' as _i416;
 import '../../domain/use_cases/authentication/inspector_register_usecase.dart'
     as _i33;
@@ -150,6 +157,7 @@ import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_c
 import '../../domain/use_cases/get_all_insepctors_use_case.dart' as _i769;
 import '../../domain/use_cases/get_All_inspection_by_id_use_cae.dart' as _i1025;
 import '../../domain/use_cases/get_all_marketers_use_case.dart' as _i91;
+import '../../domain/use_cases/get_all_point_request_use_case.dart' as _i557;
 import '../../domain/use_cases/get_all_products_use_case.dart' as _i939;
 import '../../domain/use_cases/get_inspection_request_details_use_case.dart'
     as _i194;
@@ -175,6 +183,7 @@ import '../../domain/use_cases/marketer_serach_home_usecase.dart' as _i43;
 import '../../domain/use_cases/product_details_use_case.dart' as _i385;
 import '../../domain/use_cases/push_notification_use_case/push_notification_use_case.dart'
     as _i172;
+import '../../domain/use_cases/reject_point_request_use_case.dart' as _i552;
 import '../../domain/use_cases/search_inspectors_use_case.dart' as _i215;
 import '../../domain/use_cases/search_marketers_use_case.dart' as _i871;
 import '../../domain/use_cases/submit_inspection_report_usecase.dart' as _i1015;
@@ -213,6 +222,8 @@ import '../../feauture/dashboard/marketer_mangemnet/cubit/unblock_user_cubit.dar
     as _i209;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
     as _i42;
+import '../../feauture/dashboard/points_management/cubit/points_cubit.dart'
+    as _i561;
 import '../../feauture/details_screen/controller/product_details_cubit.dart'
     as _i447;
 import '../../feauture/inspector_screen/authentication/inspector_register_controller/inspector_register_cubit.dart'
@@ -280,6 +291,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i686.MarketerAssignGetProductsRemoteDataSource>()));
     gh.factory<_i460.CsRolesRemoteDataSource>(
         () => _i1067.CsRolesRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
+    gh.factory<_i200.PointsRemoteDataSource>(
+        () => _i434.PointRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i822.ForgrtPasswordRemoteDataSource>(() =>
         _i767.ForgetResetPasswordRemoteDataSourseImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
@@ -363,6 +376,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i234.ResetPasswordRepositry>(() =>
         _i584.ResetPasswordsRepositryImpl(
             gh<_i223.ResetPasswordRemoteDataSourse>()));
+    gh.factory<_i147.PointsRepositry>(
+        () => _i301.Pointsrepositryimpl(gh<_i200.PointsRemoteDataSource>()));
     gh.factory<_i338.BlockUserCubit>(
         () => _i338.BlockUserCubit(gh<_i808.BlockUserUseCase>()));
     gh.factory<_i32.BlockInspectorCubit>(
@@ -394,6 +409,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i404.ProductDetailsRepositry>(() =>
         _i288.ProductDetailsRepositryImpl(
             gh<_i526.ProductDetailsRemoteDataSource>()));
+    gh.factory<_i962.AcceptPointRequestUseCase>(
+        () => _i962.AcceptPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i557.GetAllPointRequestUseCase>(
+        () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i552.RejectPointRequestUseCase>(
+        () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i456.RegisterUseCase>(
         () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i96.SignInUseCase>(
@@ -485,6 +506,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i738.InspectionRequestDetailsCubit>(() =>
         _i738.InspectionRequestDetailsCubit(
             gh<_i194.GetInspectionRequestDetailsUseCase>()));
+    gh.factory<_i561.PointsCubit>(() => _i561.PointsCubit(
+          getAllPointRequestUseCase: gh<_i557.GetAllPointRequestUseCase>(),
+          acceptPointRequestUseCase: gh<_i962.AcceptPointRequestUseCase>(),
+          rejectPointRequestUseCase: gh<_i552.RejectPointRequestUseCase>(),
+        ));
     gh.factory<_i33.InspectorRegisterUseCase>(() =>
         _i33.InspectorRegisterUseCase(
             gh<_i339.InspectorAuthenticationRepositry>()));

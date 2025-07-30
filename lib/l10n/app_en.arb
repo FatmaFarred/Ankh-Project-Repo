@@ -306,9 +306,15 @@
   "block": "Block",
   "unblock": "Unblock",
   "appointAsteamLeaderSubtitle": " Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.",
-  "clientProductInformation": "Client & Product Information"
-
-
-
-
+  "clientProductInformation": "Client & Product Information",
+  "points": "Points",
+    "pointsDetails": "Points Details",
+    "pointsHistory": "Points History",
+  "approve": "Approve",
+  "approved": "Approved",
+  "pointsRequest": "Points Request",
+  "rejectReason": "Reason for Rejection",
+  "enterRejectReason": "Enter Reason for Rejection",
+  "rejectSubTitle": "Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.",
+  "approveSubTitle": " Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly."
 }

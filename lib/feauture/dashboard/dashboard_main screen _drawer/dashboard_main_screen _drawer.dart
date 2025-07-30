@@ -13,6 +13,7 @@ import '../../authentication/user_controller/user_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
+import '../points_management/points_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -29,8 +30,10 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: UsersManagementScreen()),
     Center(child: MarketersManagementScreen()),
     Center(child: InspectorManagementScreen()),
-    Center(child: Text('📊 Inspections Screen')),
+    Center(child: Text('⚙️ inspections screen')),
     Center(child: Text('⚙️ Notification Screen')),
+    Center(child: PointsScreen()),
+
   ];
 
   void _onDrawerItemTapped(int index) {
@@ -201,8 +204,27 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                 ),
 
               ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
 
-             Spacer(),
+                selected: _selectedIndex == 6,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(6),
+                leading: Icon(
+                  Icons.monetization_on_outlined,
+                  color: _selectedIndex == 6 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.notifications,
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 6 ? Colors.white : null), // Text color
+                ),
+
+              ),
+
+
+              Spacer(),
               ListTile(
                 onTap: () {
                   context.read<UserCubit>().clearUser();

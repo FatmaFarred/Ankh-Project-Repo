@@ -937,4 +937,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clientProductInformation => 'Client & Product Information';
+
+  @override
+  String get points => 'Points';
+
+  @override
+  String get pointsDetails => 'Points Details';
+
+  @override
+  String get pointsHistory => 'Points History';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get approved => 'Approved';
+
+  @override
+  String get pointsRequest => 'Points Request';
+
+  @override
+  String get rejectReason => 'Reason for Rejection';
+
+  @override
+  String get enterRejectReason => 'Enter Reason for Rejection';
+
+  @override
+  String get rejectSubTitle =>
+      'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.';
+
+  @override
+  String get approveSubTitle =>
+      ' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.';
 }
