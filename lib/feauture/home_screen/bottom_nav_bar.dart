@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/shared_preferences .dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
 import '../chats_screen/chats_screen.dart';
@@ -23,6 +24,7 @@ import '../myrequest/controller/cubit.dart';
 import '../myrequest/my_request_screen.dart';
 
 
+import '../profile/cubit/profile_cubit.dart';
 import '../profile/profile_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -30,20 +32,42 @@ class BottomNavBar extends StatefulWidget {
 
   static String bottomNavBarRouteName = "BottomNavBar";
   final int initialIndex;
-  
 
-  @override
+
+
+   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
   late int _currentIndex;
+  String? token;
+
 
   @override
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
+   // _loadToken(); // <- only call this
   }
+
+ /* Future<void> _loadToken() async {
+    final fetchedToken = await SharedPrefsManager.getData(key: 'user_token');
+    setState(() {
+      token = fetchedToken;
+    });
+
+    print("👤 Token2: $token");
+
+    final userId = context.read<UserCubit>().state?.id;
+    if (token != null && userId != null) {
+      print("👤 User2 ID: $userId");
+      context.read<ProfileCubit>().fetchProfile(token!, userId);
+    } else {
+      print("Token or User ID is null, redirecting to login...");
+      // Optional redirect here
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {

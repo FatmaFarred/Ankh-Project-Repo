@@ -29,6 +29,8 @@ class InspectionSubmissionRemoteDataSourceImpl
     // Add image files (if any)
     if (model.images != null && model.images!.isNotEmpty) {
       for (var imagePath in model.images!) {
+        print('   ➤ Image Path: $imagePath');
+
         request.files.add(await http.MultipartFile.fromPath('Images', imagePath));
       }
     }

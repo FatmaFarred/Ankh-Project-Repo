@@ -35,7 +35,10 @@ import 'feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
 import 'feauture/marketer_Reports/marketer_report_details/report_details.dart';
 import 'feauture/marketer_Reports/marketer_reports_screen.dart';
 import 'feauture/myrequest/my_request_details/my_request_details.dart';
+import 'feauture/profile/cubit/profile_cubit.dart';
+import 'feauture/profile/cubit/edit_profile_cubit.dart';
 import 'feauture/profile/profile_screen.dart';
+import 'feauture/profile/edit_profile_screen.dart';
 import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
     import 'feauture/request_inspection_screen/confirm_request_screen.dart';
 import 'feauture/request_inspection_screen/request_inspection_screen.dart';
@@ -62,6 +65,17 @@ import 'feauture/welcome_screen/welcome_screen.dart';
       await FcmApi().initNotification();
 
       final String? token = await SharedPrefsManager.getData(key: 'user_token');
+      final String? id = await SharedPrefsManager.getData(key: 'user_id');
+
+      // Fetch profile after initializing the app
+      if (token != null && id != null) {
+        print("👤 Token12: $token");
+        print("👤 User ID12: $id");
+        final profileCubit = getIt<ProfileCubit>();
+        await profileCubit.fetchProfile(token, id);
+      }
+
+
       final user = getIt<UserCubit>().state;
       final String? role = user?.roles?.isNotEmpty == true ? user!.roles!.first : null;
 
@@ -74,6 +88,10 @@ import 'feauture/welcome_screen/welcome_screen.dart';
             ),
             BlocProvider(create: (context) => RoleCubit()),
             BlocProvider(create: (context) => getIt<RoleCsCubit>()),
+            BlocProvider<ProfileCubit>.value(
+              value: getIt<ProfileCubit>(),
+            ),
+            BlocProvider(create: (context) => getIt<EditProfileCubit>()),
 
             BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
 
@@ -213,6 +231,7 @@ import 'feauture/welcome_screen/welcome_screen.dart';
                 ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
                 RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
                 AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
+                EditProfileScreen.routeName: (context) => EditProfileScreen(),
                 MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
             DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
                 UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),

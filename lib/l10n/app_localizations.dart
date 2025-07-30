@@ -683,7 +683,7 @@ abstract class AppLocalizations {
   /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'Description'**
+  /// **'Description '**
   String get description;
 
   /// No description provided for @supportTeam.
@@ -2005,6 +2005,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' My Profile'**
   String get myProfile;
+
+  /// No description provided for @point.
+  ///
+  /// In en, this message translates to:
+  /// **' Point'**
+  String get point;
+
+  /// No description provided for @rejected.
+  ///
+  /// In en, this message translates to:
+  /// **' Rejected'**
+  String get rejected;
+
+  /// No description provided for @requestPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Points'**
+  String get requestPoints;
+
+  /// No description provided for @requestPointsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the number of points you want to request.\n Your current balance will be updated accordingly.'**
+  String get requestPointsSubTitle;
+
+  /// No description provided for @requestPointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Request Points Details'**
+  String get requestPointsDetails;
+
+  /// No description provided for @pointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Count'**
+  String get pointsCount;
+
+  /// No description provided for @enterPointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Points Count'**
+  String get enterPointsCount;
+
+  /// No description provided for @enterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Description'**
+  String get enterDescription;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
 }
 
 class _AppLocalizationsDelegate

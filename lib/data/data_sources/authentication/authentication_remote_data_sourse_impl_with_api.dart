@@ -123,6 +123,7 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
           await userCubit.saveUserData(myUser);
           print("User logged in: ${myUser.fullName}");
           await SharedPrefsManager.saveData(key: 'user_token', value: loginResponse.token);
+          await SharedPrefsManager.saveData(key: 'user_id', value: myUser.id);
 
 
           return right(loginResponse);

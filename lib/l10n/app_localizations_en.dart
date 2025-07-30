@@ -318,7 +318,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get online => 'Online';
 
   @override
-  String get description => 'Description';
+  String get description => 'Description ';
 
   @override
   String get supportTeam => 'Support Team';
@@ -996,4 +996,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myProfile => ' My Profile';
+
+  @override
+  String get point => ' Point';
+
+  @override
+  String get rejected => ' Rejected';
+
+  @override
+  String get requestPoints => 'Request Points';
+
+  @override
+  String get requestPointsSubTitle =>
+      ' Enter the number of points you want to request.\n Your current balance will be updated accordingly.';
+
+  @override
+  String get requestPointsDetails => ' Request Points Details';
+
+  @override
+  String get pointsCount => ' Points Count';
+
+  @override
+  String get enterPointsCount => 'Enter Points Count';
+
+  @override
+  String get enterDescription => ' Enter Description';
+
+  @override
+  String get submit => 'Submit';
 }

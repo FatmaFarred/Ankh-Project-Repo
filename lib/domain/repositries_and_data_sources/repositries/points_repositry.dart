@@ -1,3 +1,4 @@
+import 'package:ankh_project/domain/entities/balance_response_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../api_service/failure/error_handling.dart';
@@ -10,5 +11,7 @@ abstract class PointsRepositry {
   Future <Either<Failure,String?>> rejectPointRequest(String token, String id, String reason);
   Future <Either<Failure,List<AllPointPriceEntity>>> getAllPointPrice();
   Future <Either<Failure,String?>> editPointPrice(String roleName,num price);
+  Future <Either<Failure,String?>> addPointRequest(String token,String description,num points);
+  Future <Either<Failure,BalanceResponseEntity>> getBalance(String token);
 
 }
