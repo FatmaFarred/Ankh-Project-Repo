@@ -935,4 +935,36 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get clientProductInformation => 'بيانات المنتح والعميل';
+
+  @override
+  String get points => 'النقاط';
+
+  @override
+  String get pointsDetails => ' تفاصيل النقاط';
+
+  @override
+  String get pointsHistory => ' تاريخ النقاط';
+
+  @override
+  String get approve => ' قبول';
+
+  @override
+  String get approved => ' مقبول ';
+
+  @override
+  String get pointsRequest => ' طلبات النقاط';
+
+  @override
+  String get rejectReason => 'السبب';
+
+  @override
+  String get enterRejectReason => 'أدخل سبب الرفض';
+
+  @override
+  String get rejectSubTitle =>
+      'هل أنت متأكد أنك تريد رفض هذا الطلب؟\nسيتم إلغاء الطلب ولن يتم منح النقاط للعميل.';
+
+  @override
+  String get approveSubTitle =>
+      'هل أنت متأكد أنك تريد الموافقة على هذا الطلب؟\nسيتم منح النقاط للعميل وسيتم تحديث رصيده.';
 }

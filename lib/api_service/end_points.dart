@@ -29,6 +29,10 @@ abstract class EndPoints {
   static const String getAllInspectors = "Inspections/get-all";
   static const String searchAllInspectors = "Inspections/search/inspectors";
   static const String getAllOfMyInspectionsById = "Inspections/Request-Assigned-To-Inspector";
+  static const String getAllOfMyInspectionsByIdSearch = "Inspections/search/inspector-inspections";
+  static const String getPointRequest = "Point/pending";
+  static const String acceptPointRequest = "Point/approve";
+  static const String rejectPointRequest = "Point/reject";
 
 
 

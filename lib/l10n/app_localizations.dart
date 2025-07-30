@@ -1891,6 +1891,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Client & Product Information'**
   String get clientProductInformation;
+
+  /// No description provided for @points.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get points;
+
+  /// No description provided for @pointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Details'**
+  String get pointsDetails;
+
+  /// No description provided for @pointsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Points History'**
+  String get pointsHistory;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @pointsRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Request'**
+  String get pointsRequest;
+
+  /// No description provided for @rejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for Rejection'**
+  String get rejectReason;
+
+  /// No description provided for @enterRejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Reason for Rejection'**
+  String get enterRejectReason;
+
+  /// No description provided for @rejectSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.'**
+  String get rejectSubTitle;
+
+  /// No description provided for @approveSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.'**
+  String get approveSubTitle;
 }
 
 class _AppLocalizationsDelegate

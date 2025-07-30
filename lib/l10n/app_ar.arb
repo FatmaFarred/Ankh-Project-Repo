@@ -302,7 +302,21 @@
   "block": "حظر",
     "unblock": "إلغاء الحظر",
   "appointAsteamLeaderSubtitle": "هل أنت متأكد أنك تريد تعيين هذا المستخدم كقائد فريق؟\nسيمنحه هذا الإجراء صلاحيات إضافية لإدارة الفريق.",
-  "clientProductInformation": "بيانات المنتح والعميل"
+  "clientProductInformation": "بيانات المنتح والعميل",
+  "points": "النقاط",
+  "pointsDetails": " تفاصيل النقاط",
+  "pointsHistory": " تاريخ النقاط",
+  "approve": " قبول",
+  "approved": " مقبول ",
+  "pointsRequest": " طلبات النقاط",
+  "point": "نقطة",
+  "rejectReason": "السبب",
+  "enterRejectReason": "أدخل سبب الرفض",
+  "rejectSubTitle": "هل أنت متأكد أنك تريد رفض هذا الطلب؟\nسيتم إلغاء الطلب ولن يتم منح النقاط للعميل.",
+    "approveSubTitle": "هل أنت متأكد أنك تريد الموافقة على هذا الطلب؟\nسيتم منح النقاط للعميل وسيتم تحديث رصيده."
+
+
+
 
 
 
