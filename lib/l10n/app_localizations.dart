@@ -1951,6 +1951,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.'**
   String get approveSubTitle;
+
+  /// No description provided for @pointsRequestDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Request Details'**
+  String get pointsRequestDetails;
+
+  /// No description provided for @pointPriceManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price Management'**
+  String get pointPriceManagement;
+
+  /// No description provided for @pointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price'**
+  String get pointPrice;
+
+  /// No description provided for @enterPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Point Price'**
+  String get enterPointPrice;
+
+  /// No description provided for @editPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Point Price'**
+  String get editPointPrice;
+
+  /// No description provided for @eg.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get eg;
+
+  /// No description provided for @leaderMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'LeaderMarketer'**
+  String get leaderMarketer;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @myProfile.
+  ///
+  /// In en, this message translates to:
+  /// **' My Profile'**
+  String get myProfile;
 }
 
 class _AppLocalizationsDelegate

@@ -1,3 +1,4 @@
+import 'package:ankh_project/domain/entities/all_point_price_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -23,6 +24,20 @@ import '../../domain/repositries_and_data_sources/repositries/points_repositry.d
   Future <Either<Failure,String?>> rejectPointRequest(String token, String id,String reason ) async {
     var either = await pointsRemoteDataSource.rejectPointRequest(token, id, reason);
     return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> editPointPrice(String roleName, num price) async{
+    var either = await pointsRemoteDataSource.editPointPrice(roleName, price);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
+  @override
+  Future<Either<Failure, List<AllPointPriceEntity>>> getAllPointPrice()async {
+    var either = await pointsRemoteDataSource.getAllPointPrice();
+    return either.fold((error) => left(error), (response) => right(response));
+
   }
 
 }

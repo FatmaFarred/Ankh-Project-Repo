@@ -967,4 +967,31 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get approveSubTitle =>
       'هل أنت متأكد أنك تريد الموافقة على هذا الطلب؟\nسيتم منح النقاط للعميل وسيتم تحديث رصيده.';
+
+  @override
+  String get pointsRequestDetails => 'تفاصيل طلب النقاط';
+
+  @override
+  String get pointPriceManagement => ' إدارة سعر النقطة';
+
+  @override
+  String get pointPrice => ' سعر النقطة';
+
+  @override
+  String get enterPointPrice => ' أدخل سعر النقطة';
+
+  @override
+  String get editPointPrice => ' تعديل سعر النقطة';
+
+  @override
+  String get eg => 'ج.م';
+
+  @override
+  String get leaderMarketer => 'قائد الفريق';
+
+  @override
+  String get update => ' تحديث';
+
+  @override
+  String get myProfile => 'ملفي الشخصي';
 }

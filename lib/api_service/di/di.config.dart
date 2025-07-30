@@ -150,6 +150,7 @@ import '../../domain/use_cases/authentication/register_usecase.dart' as _i456;
 import '../../domain/use_cases/authentication/signin_usecase.dart' as _i96;
 import '../../domain/use_cases/block_user_use_case.dart' as _i808;
 import '../../domain/use_cases/cs_roles_usecase.dart' as _i941;
+import '../../domain/use_cases/edit_point_price_use_case.dart' as _i341;
 import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usecase.dart'
     as _i458;
 import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_case.dart'
@@ -157,6 +158,7 @@ import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_c
 import '../../domain/use_cases/get_all_insepctors_use_case.dart' as _i769;
 import '../../domain/use_cases/get_All_inspection_by_id_use_cae.dart' as _i1025;
 import '../../domain/use_cases/get_all_marketers_use_case.dart' as _i91;
+import '../../domain/use_cases/get_all_point_price_use_case.dart' as _i429;
 import '../../domain/use_cases/get_all_point_request_use_case.dart' as _i557;
 import '../../domain/use_cases/get_all_products_use_case.dart' as _i939;
 import '../../domain/use_cases/get_inspection_request_details_use_case.dart'
@@ -222,6 +224,8 @@ import '../../feauture/dashboard/marketer_mangemnet/cubit/unblock_user_cubit.dar
     as _i209;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
     as _i42;
+import '../../feauture/dashboard/points_management/cubit/point_prices_cubit.dart'
+    as _i614;
 import '../../feauture/dashboard/points_management/cubit/points_cubit.dart'
     as _i561;
 import '../../feauture/details_screen/controller/product_details_cubit.dart'
@@ -415,6 +419,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i552.RejectPointRequestUseCase>(
         () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i341.EditPointPriceUseCase>(
+        () => _i341.EditPointPriceUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i429.GetAllPointPriceUseCase>(
+        () => _i429.GetAllPointPriceUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i614.PointPricesCubit>(() => _i614.PointPricesCubit(
+          getAllPointPriceUseCase: gh<_i429.GetAllPointPriceUseCase>(),
+          editPointPriceUseCase: gh<_i341.EditPointPriceUseCase>(),
+        ));
     gh.factory<_i456.RegisterUseCase>(
         () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i96.SignInUseCase>(

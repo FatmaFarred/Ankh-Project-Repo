@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import '../../../domain/entities/request_point_entitty.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../myrequest/status_handler_widgets.dart';
+import 'package:ankh_project/feauture/dashboard/points_management/point_prices_screen.dart';
 
 class PointsScreen extends StatefulWidget {
   const PointsScreen({Key? key}) : super(key: key);
@@ -282,10 +283,75 @@ class _PointsScreenState extends State<PointsScreen> {
           children: [
             SizedBox(height: 20.h),
 
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppLocalizations.of(context)!.pointsRequest,style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18.sp)),
-              ],),
+                Text(
+                  AppLocalizations.of(context)!.pointsRequest,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 18.sp),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
+
+            // Point Prices Management Button
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PointPricesScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [ColorManager.lightprimary, ColorManager.lightprimary.withOpacity(0.8)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(12.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: ColorManager.lightprimary.withOpacity(0.3),
+                        blurRadius: 8,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.monetization_on_outlined,
+                        color: ColorManager.white,
+                        size: 18.sp,
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        'Point Prices Settings',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorManager.white,
+                        ),
+                      ),
+                      SizedBox(width: 4.w),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: ColorManager.white,
+                        size: 14.sp,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 20.h),
 
           // Points Requests List

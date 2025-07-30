@@ -969,4 +969,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get approveSubTitle =>
       ' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.';
+
+  @override
+  String get pointsRequestDetails => ' Points Request Details';
+
+  @override
+  String get pointPriceManagement => 'Point Price Management';
+
+  @override
+  String get pointPrice => 'Point Price';
+
+  @override
+  String get enterPointPrice => 'Enter Point Price';
+
+  @override
+  String get editPointPrice => 'Edit Point Price';
+
+  @override
+  String get eg => 'EGP';
+
+  @override
+  String get leaderMarketer => 'LeaderMarketer';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get myProfile => ' My Profile';
 }

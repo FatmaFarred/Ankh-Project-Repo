@@ -316,5 +316,22 @@
   "rejectReason": "Reason for Rejection",
   "enterRejectReason": "Enter Reason for Rejection",
   "rejectSubTitle": "Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.",
-  "approveSubTitle": " Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly."
+  "approveSubTitle": " Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.",
+  "pointsRequestDetails": " Points Request Details",
+  "pointPriceManagement": "Point Price Management",
+  "pointPrice": "Point Price",
+  "enterPointPrice": "Enter Point Price",
+  "editPointPrice": "Edit Point Price",
+  "eg": "EGP",
+  "leaderMarketer": "LeaderMarketer",
+
+  "update": "Update",
+  "myProfile": " My Profile"
+
+
+
+
+
+
+
 }
