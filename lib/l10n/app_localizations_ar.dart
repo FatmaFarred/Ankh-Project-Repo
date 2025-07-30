@@ -316,7 +316,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get online => 'متصل';
 
   @override
-  String get description => 'الوصف';
+  String get description => 'الوصف ';
 
   @override
   String get supportTeam => 'فريق الدعم';
@@ -949,7 +949,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get approve => ' قبول';
 
   @override
-  String get approved => ' مقبول ';
+  String get approved => ' تم الموافقة ';
 
   @override
   String get pointsRequest => ' طلبات النقاط';
@@ -994,4 +994,32 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get myProfile => 'ملفي الشخصي';
+
+  @override
+  String get point => ' نقطة';
+
+  @override
+  String get rejected => ' مرفوض';
+
+  @override
+  String get requestPoints => ' طلب نقاط';
+
+  @override
+  String get requestPointsSubTitle =>
+      'قم بإرسال طلب للحصول على نقاط إضافية. سيتم مراجعة طلبك من قبل فريق الدعم.';
+
+  @override
+  String get requestPointsDetails => ' تفاصيل طلب النقاط';
+
+  @override
+  String get pointsCount => ' عدد النقاط';
+
+  @override
+  String get enterPointsCount => 'أدخل عدد النقاط';
+
+  @override
+  String get enterDescription => 'أدخل الوصف';
+
+  @override
+  String get submit => 'إرسال';
 }

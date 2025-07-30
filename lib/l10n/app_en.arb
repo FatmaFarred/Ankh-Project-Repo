@@ -326,7 +326,20 @@
   "leaderMarketer": "LeaderMarketer",
 
   "update": "Update",
-  "myProfile": " My Profile"
+  "myProfile": " My Profile",
+  "point": " Point",
+  "rejected": " Rejected",
+  "requestPoints": "Request Points",
+  "requestPointsSubTitle": " Enter the number of points you want to request.\n Your current balance will be updated accordingly.",
+  "requestPointsDetails": " Request Points Details",
+  "pointsCount": " Points Count",
+  "enterPointsCount": "Enter Points Count",
+  "description": "Description ",
+  "enterDescription": " Enter Description",
+  "submit": "Submit"
+
+
+
 
 
 

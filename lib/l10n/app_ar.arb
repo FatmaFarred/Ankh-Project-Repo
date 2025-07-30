@@ -307,7 +307,7 @@
   "pointsDetails": " تفاصيل النقاط",
   "pointsHistory": " تاريخ النقاط",
   "approve": " قبول",
-  "approved": " مقبول ",
+  "approved": " تم الموافقة ",
   "pointsRequest": " طلبات النقاط",
   "point": "نقطة",
   "rejectReason": "السبب",
@@ -322,7 +322,21 @@
   "eg": "ج.م",
   "leaderMarketer": "قائد الفريق",
   "update": " تحديث",
-  "myProfile": "ملفي الشخصي"
+  "myProfile": "ملفي الشخصي",
+  "point": " نقطة",
+  "rejected": " مرفوض",
+    "requestPoints": " طلب نقاط",
+  "requestPointsSubTitle": "قم بإرسال طلب للحصول على نقاط إضافية. سيتم مراجعة طلبك من قبل فريق الدعم.",
+    "requestPointsDetails": " تفاصيل طلب النقاط",
+  "pointsCount": " عدد النقاط",
+    "enterPointsCount": "أدخل عدد النقاط",
+  "description": "الوصف ",
+    "enterDescription": "أدخل الوصف",
+  "submit": "إرسال",
+  "editPrfile": "تعديل الملف الشخصي"
+
+
+
 
 
 

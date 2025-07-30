@@ -1,4 +1,5 @@
 import 'package:ankh_project/domain/entities/all_point_price_entity.dart';
+import 'package:ankh_project/domain/entities/balance_response_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -39,5 +40,18 @@ import '../../domain/repositries_and_data_sources/repositries/points_repositry.d
     return either.fold((error) => left(error), (response) => right(response));
 
   }
+
+  @override
+  Future<Either<Failure, String?>> addPointRequest(String token, String description, num points)async {
+    var either = await pointsRemoteDataSource.addPointRequest(token, description, points);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, BalanceResponseEntity>> getBalance(String token)async {
+    var either = await pointsRemoteDataSource.getBalance(token);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
 
 }

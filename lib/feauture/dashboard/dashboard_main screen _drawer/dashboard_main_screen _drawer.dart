@@ -231,6 +231,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   context.read<UserCubit>().clearUser();
                   SharedPrefsManager.removeData(key: 'user_token');
                   SharedPrefsManager.removeData(key:  'currentUser');
+                  SharedPrefsManager.removeData(key: 'user_id');
                   context.read<UserCubit>().clearUser();
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       WelcomeScreen.welcomeScreenRouteName,

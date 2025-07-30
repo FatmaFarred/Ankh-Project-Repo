@@ -34,7 +34,11 @@ abstract class EndPoints {
   static const String acceptPointRequest = "Point/approve";
   static const String rejectPointRequest = "Point/reject";
   static const String getAllPointPrices = "Point/point-prices";
-  static const String editPointPrice = "update-point-price";
+  static const String editPointPrice = "Point/update-point-price";
+  static const String addPointRequest = "Point/request";
+  static const String getBalance = "Point/balance";
+  static const String getProfile = "Profile/get-user";
+  static const String editProfile = "Profile/edit-profile";
 
 
 

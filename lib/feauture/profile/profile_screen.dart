@@ -9,17 +9,38 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../api_service/api_constants.dart';
 import '../../core/constants/assets_manager.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import 'cubit/profile_cubit.dart';
+import 'cubit/states.dart';
+import 'edit_profile_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 static  String accountScreenRouteName = "AccountScreen";
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserCubit>().state;
+      final user = context.watch<UserCubit>().state;
+      final profileCubit = context.read<ProfileCubit>();
+      final state = profileCubit.state;
+
+      String userName = AppLocalizations.of(context)!.visitor;
+      String? profileImageUrl;
+      num? rate;
+      num?completedTasks;
+
+
+
+      if (state is ProfileLoaded) {
+        userName = state.profile.fullName ?? AppLocalizations.of(context)!.visitor;
+        profileImageUrl = state.profile.imageUrl; // ma// ke sure this is a URL string
+        rate = state.profile.rating ?? 0; // Assuming rate is a num, adjust as necessary
+        completedTasks = state.profile.completedTasks ?? 0; // Assuming completedTasks is a num, adjust as necessary
+
+      }
 
     return Scaffold(
       appBar: AppBar(
@@ -66,16 +87,17 @@ static  String accountScreenRouteName = "AccountScreen";
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              const CircleAvatar(
+                               CircleAvatar(
                                 radius: 40,
-                                backgroundImage:
-                                AssetImage(ImageAssets.profilePic,), // Replace with your asset
+                                backgroundImage: profileImageUrl != null
+                                    ? NetworkImage("${ApiConstant.imageBaseUrl}$profileImageUrl")
+                                    : const AssetImage(ImageAssets.profilePic) as ImageProvider,
                               ),
                               const SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text( user?.fullName ?? "Guest",
+                                  Text( userName ?? "Guest",
                                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp,)
                                   ),
                                   Image.asset(ImageAssets.goldMedal,
@@ -89,7 +111,7 @@ static  String accountScreenRouteName = "AccountScreen";
                               ),
                               const SizedBox(height: 4),
                               RatingBarIndicator(
-                                rating: 5,
+                                rating: rate?.toDouble()?? 0.0,
                                 itemBuilder: (context, _) => const Icon(Icons.star, color: ColorManager.starRateColor),
                                 itemCount: 5,
                                 itemSize: 14.sp,
@@ -97,7 +119,9 @@ static  String accountScreenRouteName = "AccountScreen";
                               ),
                               const SizedBox(height: 8),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, EditProfileScreen.routeName);
+                                },
                                 child:  Text(AppLocalizations.of(context)!.editProfile,
                                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 14.sp,decoration: TextDecoration.underline, )
                                 ),
@@ -178,6 +202,7 @@ static  String accountScreenRouteName = "AccountScreen";
                           context.read<UserCubit>().clearUser();
                           SharedPrefsManager.removeData(key: 'user_token');
                           SharedPrefsManager.removeData(key:  'currentUser');
+                          SharedPrefsManager.removeData(key: 'user_id');
                           context.read<UserCubit>().clearUser();
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               WelcomeScreen.welcomeScreenRouteName,
