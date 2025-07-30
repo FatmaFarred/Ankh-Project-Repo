@@ -14,6 +14,7 @@ import '../../welcome_screen/welcome_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../points_management/points_screen.dart';
+import '../points_management/point_prices_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -33,7 +34,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: Text('⚙️ inspections screen')),
     Center(child: Text('⚙️ Notification Screen')),
     Center(child: PointsScreen()),
-
+    Center(child: PointPricesScreen()),
   ];
 
   void _onDrawerItemTapped(int index) {

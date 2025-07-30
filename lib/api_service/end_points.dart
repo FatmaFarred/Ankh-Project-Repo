@@ -33,6 +33,8 @@ abstract class EndPoints {
   static const String getPointRequest = "Point/pending";
   static const String acceptPointRequest = "Point/approve";
   static const String rejectPointRequest = "Point/reject";
+  static const String getAllPointPrices = "Point/point-prices";
+  static const String editPointPrice = "update-point-price";
 
 
 

@@ -1,4 +1,5 @@
 import 'package:ankh_project/api_service/api_manager.dart';
+import 'package:ankh_project/domain/entities/all_point_price_entity.dart';
 
 import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -14,6 +15,7 @@ import '../../api_service/failure/error_handling.dart';
 import '../../domain/entities/product_details_entity.dart';
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/PointsRemoteDataSource.dart';
 import '../../l10n/global_localization_helper.dart';
+import '../models/all_point_price_dm.dart';
 import '../models/request_point_dm.dart';
 @Injectable(as: PointsRemoteDataSource)
 class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
@@ -179,6 +181,118 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
     }
 
   }
+
+  @override
+  Future<Either<Failure, String?>> editPointPrice(String roleName, num price) async {
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.editPointPrice}/$roleName";
+        print('🌐 Full URL: $fullUrl');
+
+        print('📤 Sending GET request with headers:');
+
+
+        var response = await apiManager.putData(
+          url: ApiConstant.baseUrl,
+          endPoint: "${EndPoints.editPointPrice}/$roleName",
+          options: Options(validateStatus: (_) => true),
+          data: {
+            'price': 'price',
+          },
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        final myResponse = response.data;
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          print('✅ Request successful. Message: ${myResponse['message']}');
+          return right(myResponse['message']);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: myResponse.toString()));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
+  }
+
+  @override
+  Future<Either<Failure, List<AllPointPriceDm>>> getAllPointPrice()async {
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.getAllPointPrices}";
+        print('🌐 Full URL: $fullUrl');
+
+        print('📤 Sending GET request with headers:');
+
+
+        var response = await apiManager.getData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.getAllPointPrices,
+          options: Options(validateStatus: (_) => true),
+
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        final myResponse = response.data;
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+
+
+          final requestResponse = myResponse
+              .map((json) => AllPointPriceDm.fromJson(json))
+              .toList();
+          print('✅ Request successful. Message: ${requestResponse}');
+          return right(requestResponse);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: myResponse.toString()));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
 
 
 }
