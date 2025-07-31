@@ -117,6 +117,7 @@ class UsedDetailsEntity {
     this.insuranceCardFront,
     this.insuranceCardBack,
     this.licenseExpiryDate,
+    this.address,
     this.safetyReport,
     this.taxStatus,
     this.interiorCondition,
@@ -142,6 +143,7 @@ class UsedDetailsEntity {
     this.tags,});
 
   String? ownerName;
+  String? address;
   String? licenseImage;
   String? insuranceCardFront;
   String? insuranceCardBack;

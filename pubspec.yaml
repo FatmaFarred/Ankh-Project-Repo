@@ -72,6 +72,7 @@ dependencies:
   image_picker:
   equatable: ^2.0.7
   flutter_svg: ^2.2.0
+  json_annotation: ^4.9.0
 
 
 
@@ -83,6 +84,7 @@ dev_dependencies:
   build_runner:
   injectable_generator:
   analyzer: ^6.11.0
+  json_serializable: ^6.7.1
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
