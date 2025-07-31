@@ -32,7 +32,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
 
   String? selectedDriveType = 'FrontWheel';
 
-  late int statusNum;
+  late int  statusNum;
 
   final List<String> driveTypes = ['FrontWheel', 'RearWheel', "AllWheel"];
 

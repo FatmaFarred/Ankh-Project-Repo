@@ -76,13 +76,11 @@ import '../../data/repositries/marketer_assign%20_get_products_repositry_impl.da
     as _i894;
 import '../../data/repositries/marketer_requsts_for_inspection_repositry_impl.dart'
     as _i942;
+import '../../data/repositries/PointsRepositryImpl.dart' as _i301;
 import '../../data/repositries/post_product_repository_impl.dart' as _i734;
 import '../../data/repositries/product_details_repositry_impl.dart' as _i288;
 import '../../data/repositries/product_management_repository_impl.dart'
     as _i744;
-
-import '../../data/repositries/PointsRepositryImpl.dart' as _i301;
-import '../../data/repositries/product_details_repositry_impl.dart' as _i288;
 import '../../data/repositries/profile_repositry_impl.dart' as _i509;
 import '../../data/repositries/push_notification_repositry/push_notification_repositry_impl.dart'
     as _i672;
@@ -153,16 +151,14 @@ import '../../domain/repositries_and_data_sources/repositries/marketer_assign%20
     as _i863;
 import '../../domain/repositries_and_data_sources/repositries/marketer_requsts_for_inspection_repositry.dart'
     as _i1072;
+import '../../domain/repositries_and_data_sources/repositries/points_repositry.dart'
+    as _i147;
 import '../../domain/repositries_and_data_sources/repositries/post_product_repository.dart'
     as _i846;
 import '../../domain/repositries_and_data_sources/repositries/product_details_repositry.dart'
     as _i404;
 import '../../domain/repositries_and_data_sources/repositries/product_management_repository.dart'
     as _i127;
-import '../../domain/repositries_and_data_sources/repositries/points_repositry.dart'
-    as _i147;
-import '../../domain/repositries_and_data_sources/repositries/product_details_repositry.dart'
-    as _i404;
 import '../../domain/repositries_and_data_sources/repositries/profile_repositry.dart'
     as _i883;
 import '../../domain/repositries_and_data_sources/repositries/push%20_notification_%20repositry.dart'
@@ -183,11 +179,9 @@ import '../../domain/use_cases/authentication/signin_usecase.dart' as _i96;
 import '../../domain/use_cases/block_user_use_case.dart' as _i808;
 import '../../domain/use_cases/cs_roles_usecase.dart' as _i941;
 import '../../domain/use_cases/delete_favorite_use_case.dart' as _i367;
-
 import '../../domain/use_cases/delete_product_usecase.dart' as _i578;
-import '../../domain/use_cases/edit_product_usecase.dart' as _i151;
-
 import '../../domain/use_cases/edit_point_price_use_case.dart' as _i341;
+import '../../domain/use_cases/edit_product_usecase.dart' as _i151;
 import '../../domain/use_cases/edit_profile_use_case.dart' as _i775;
 import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usecase.dart'
     as _i458;
@@ -206,11 +200,11 @@ import '../../domain/use_cases/get_favorite_use_case.dart' as _i590;
 import '../../domain/use_cases/get_inspection_request_details_use_case.dart'
     as _i194;
 import '../../domain/use_cases/get_inspections_use_case.dart' as _i147;
+import '../../domain/use_cases/get_inspector_inspections_use_case.dart'
+    as _i747;
 import '../../domain/use_cases/get_product_management_details_usecase.dart'
     as _i508;
 import '../../domain/use_cases/get_product_management_usecase.dart' as _i683;
-import '../../domain/use_cases/get_inspector_inspections_use_case.dart'
-    as _i747;
 import '../../domain/use_cases/get_profile_use_case.dart' as _i305;
 import '../../domain/use_cases/get_report_details_use_case.dart' as _i708;
 import '../../domain/use_cases/home_get_all_products_use_case.dart' as _i873;
@@ -263,17 +257,6 @@ import '../../feauture/dashboard/cubit/adjust_user_points_cubit.dart' as _i46;
 import '../../feauture/dashboard/inspection_managemnt/cubit.dart' as _i411;
 import '../../feauture/dashboard/inspection_managemnt/reschedule_cubit.dart'
     as _i852;
-import '../../feauture/dashboard/products_management/add_new_product/cubit/post_product_cubit.dart'
-    as _i745;
-import '../../feauture/dashboard/products_management/cubit/product_management_cubit.dart'
-    as _i27;
-import '../../feauture/dashboard/products_management/edit_product_screen/edit_product_cubit.dart'
-    as _i1006;
-import '../../feauture/dashboard/products_management/product_details_screen/cubit/product_details_cubit.dart'
-    as _i710;
-import '../../feauture/dashboard/products_management/product_details_screen/delete_product/delete_product_cubit.dart'
-    as _i411;
-
 import '../../feauture/dashboard/inspector_management/cubit/block_inspector_cubit.dart'
     as _i32;
 import '../../feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart'
@@ -296,6 +279,16 @@ import '../../feauture/dashboard/points_management/cubit/point_prices_cubit.dart
     as _i614;
 import '../../feauture/dashboard/points_management/cubit/points_cubit.dart'
     as _i561;
+import '../../feauture/dashboard/products_management/add_new_product/cubit/post_product_cubit.dart'
+    as _i745;
+import '../../feauture/dashboard/products_management/cubit/product_management_cubit.dart'
+    as _i27;
+import '../../feauture/dashboard/products_management/edit_product_screen/edit_product_cubit.dart'
+    as _i1006;
+import '../../feauture/dashboard/products_management/product_details_screen/cubit/product_details_cubit.dart'
+    as _i710;
+import '../../feauture/dashboard/products_management/product_details_screen/delete_product/delete_product_cubit.dart'
+    as _i411;
 import '../../feauture/dashboard/users_management/cubit/user_favorites_cubit.dart'
     as _i709;
 import '../../feauture/dashboard/users_management/cubit/users_management_cubit.dart'
@@ -382,15 +375,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i430.AuthenticationRemoteDataSource>(() =>
         _i758.AuthenticationRemoteDataSourceImplWithApi(
             gh<_i1069.ApiManager>()));
-    gh.lazySingleton<_i846.PostProductRepository>(
-        () => _i734.PostProductRepositoryImpl(gh<_i361.Dio>()));
-    gh.lazySingleton<_i101.EditProductRemoteDataSource>(
-        () => _i101.EditProductRemoteDataSourceImpl(gh<_i361.Dio>()));
     gh.factory<_i14.AdminPermissionsRemoteDataSource>(() =>
         _i865.AdminPermissionsRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i551.AdminPermissionsRepositry>(() =>
         _i1037.AdminPermissionsRepositryimpl(
             gh<_i14.AdminPermissionsRemoteDataSource>()));
+    gh.lazySingleton<_i846.PostProductRepository>(
+        () => _i734.PostProductRepositoryImpl(gh<_i361.Dio>()));
+    gh.lazySingleton<_i101.EditProductRemoteDataSource>(
+        () => _i101.EditProductRemoteDataSourceImpl(gh<_i361.Dio>()));
     gh.factory<_i91.GetAllMarketersUseCase>(() => _i91.GetAllMarketersUseCase(
         gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i362.MyInspectionsRemoteDataSource>(
@@ -427,10 +420,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i98.HomeGetAllInspectionRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i526.ProductDetailsRemoteDataSource>(() =>
         _i500.ProductDetailsRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
-    gh.factory<_i209.UnblockUserCubit>(
-        () => _i209.UnblockUserCubit(gh<_i877.UnBlockUserUseCase>()));
     gh.factory<_i714.UnblockInspectorCubit>(
         () => _i714.UnblockInspectorCubit(gh<_i877.UnBlockUserUseCase>()));
+    gh.factory<_i209.UnblockUserCubit>(
+        () => _i209.UnblockUserCubit(gh<_i877.UnBlockUserUseCase>()));
     gh.factory<_i883.UserProfileRepositry>(() => _i509.ProfileRepositryImpl(
         userProfileRemoteDataSource: gh<_i55.UserProfileRemoteDataSource>()));
     gh.factory<_i939.GetAllProductsUseCase>(
@@ -439,16 +432,16 @@ extension GetItInjectableX on _i174.GetIt {
         _i105.MarketerAddRequestInspectionRepositryImpl(
             marketerAddRequestInspectionRemoteDataSource:
                 gh<_i583.MarketerAddRequestInspectionRemoteDataSource>()));
-    gh.factory<_i795.GetAllUsersUseCase>(
-        () => _i795.GetAllUsersUseCase(gh<_i1039.ClientRepositry>()));
-    gh.factory<_i384.SearchUsersUseCase>(
-        () => _i384.SearchUsersUseCase(gh<_i1039.ClientRepositry>()));
-    gh.factory<_i590.GetFavoriteUseCase>(
-        () => _i590.GetFavoriteUseCase(gh<_i1039.ClientRepositry>()));
     gh.factory<_i886.AddFavoriteUseCase>(
         () => _i886.AddFavoriteUseCase(gh<_i1039.ClientRepositry>()));
     gh.factory<_i367.DeleteFavoriteUseCase>(
         () => _i367.DeleteFavoriteUseCase(gh<_i1039.ClientRepositry>()));
+    gh.factory<_i795.GetAllUsersUseCase>(
+        () => _i795.GetAllUsersUseCase(gh<_i1039.ClientRepositry>()));
+    gh.factory<_i590.GetFavoriteUseCase>(
+        () => _i590.GetFavoriteUseCase(gh<_i1039.ClientRepositry>()));
+    gh.factory<_i384.SearchUsersUseCase>(
+        () => _i384.SearchUsersUseCase(gh<_i1039.ClientRepositry>()));
     gh.factory<_i674.MarketerAssignProductUseCase>(() =>
         _i674.MarketerAssignProductUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
@@ -457,11 +450,11 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i871.MarketerSearchUseCase>(() => _i871.MarketerSearchUseCase(
         gh<_i863.MarketerAssignGetProductsRepositry>()));
-    gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
-        _i598.UpdateMarketerAccountStatusUseCase(
-            gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i537.MarketerUnAssignProductUseCase>(() =>
         _i537.MarketerUnAssignProductUseCase(
+            gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
+        _i598.UpdateMarketerAccountStatusUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i906.FavoriteCubit>(() => _i906.FavoriteCubit(
           gh<_i886.AddFavoriteUseCase>(),
@@ -490,10 +483,10 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i223.ResetPasswordRemoteDataSourse>()));
     gh.factory<_i147.PointsRepositry>(
         () => _i301.Pointsrepositryimpl(gh<_i200.PointsRemoteDataSource>()));
-    gh.factory<_i338.BlockUserCubit>(
-        () => _i338.BlockUserCubit(gh<_i808.BlockUserUseCase>()));
     gh.factory<_i32.BlockInspectorCubit>(
         () => _i32.BlockInspectorCubit(gh<_i808.BlockUserUseCase>()));
+    gh.factory<_i338.BlockUserCubit>(
+        () => _i338.BlockUserCubit(gh<_i808.BlockUserUseCase>()));
     gh.factory<_i1072.MarketerRequestsForInspectionRepositry>(() =>
         _i942.MarketerRequestsForInspectionRepositryImpl(
             gh<_i44.MarketerRequestsForInspectionRemoteDataSource>()));
@@ -525,32 +518,32 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i526.ProductDetailsRemoteDataSource>()));
     gh.factory<_i962.AcceptPointRequestUseCase>(
         () => _i962.AcceptPointRequestUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i557.GetAllPointRequestUseCase>(
-        () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i552.RejectPointRequestUseCase>(
-        () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i391.AddPointRequestUseCase>(
+        () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i286.AdjustUserPointsUseCase>(
+        () => _i286.AdjustUserPointsUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i341.EditPointPriceUseCase>(
         () => _i341.EditPointPriceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i429.GetAllPointPriceUseCase>(
         () => _i429.GetAllPointPriceUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i391.AddPointRequestUseCase>(
-        () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i557.GetAllPointRequestUseCase>(
+        () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i78.GetBalanceUseCase>(
         () => _i78.GetBalanceUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i286.AdjustUserPointsUseCase>(
-        () => _i286.AdjustUserPointsUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i552.RejectPointRequestUseCase>(
+        () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i752.AddPointRequestCubit>(() => _i752.AddPointRequestCubit(
         addPointRequestUseCase: gh<_i391.AddPointRequestUseCase>()));
     gh.factory<_i614.PointPricesCubit>(() => _i614.PointPricesCubit(
           getAllPointPriceUseCase: gh<_i429.GetAllPointPriceUseCase>(),
           editPointPriceUseCase: gh<_i341.EditPointPriceUseCase>(),
         ));
+    gh.factory<_i920.ClientRegisterUseCase>(
+        () => _i920.ClientRegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i456.RegisterUseCase>(
         () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i96.SignInUseCase>(
         () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
-    gh.factory<_i920.ClientRegisterUseCase>(
-        () => _i920.ClientRegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i954.MarketerProductCubit>(
         () => _i954.MarketerProductCubit(gh<_i527.MarketerProductsUseCase>()));
     gh.factory<_i270.AppointAsTeamLeaderCubit>(() =>
@@ -562,12 +555,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i176.MarketerAddRequestInspectionUseCase>(() =>
         _i176.MarketerAddRequestInspectionUseCase(
             gh<_i233.MarketerAddRequestInspectionRepositry>()));
+    gh.factory<_i1025.GetAllInspectionByIdUseCase>(() =>
+        _i1025.GetAllInspectionByIdUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.factory<_i147.GetMyInspectionsUseCase>(() =>
         _i147.GetMyInspectionsUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.factory<_i708.GetReportDetailsUseCase>(() =>
         _i708.GetReportDetailsUseCase(gh<_i17.MyInspectionsRepository>()));
-    gh.factory<_i1025.GetAllInspectionByIdUseCase>(() =>
-        _i1025.GetAllInspectionByIdUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.lazySingleton<_i110.InspectionRequestDetailsRepository>(() =>
         _i413.InspectionRequestDetailsRepositoryImpl(
             gh<_i147.InspectionRequestDetailsRemoteDataSource>()));
@@ -594,6 +587,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i280.MarketerAddRequestCubit>(() =>
         _i280.MarketerAddRequestCubit(
             gh<_i176.MarketerAddRequestInspectionUseCase>()));
+    gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
+        _i273.GetAllInspectionAdminUseCase(
+            gh<_i700.HomeGetAllInspectionRepositry>()));
+    gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
+        _i747.GetInspectorInspectionsUseCase(
+            gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i826.InspectorHomeSearchUseCase>(() =>
         _i826.InspectorHomeSearchUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
@@ -603,17 +602,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i868.InspectorHomeGetAllInspectionUseCase>(() =>
         _i868.InspectorHomeGetAllInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
-    gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
-        _i747.GetInspectorInspectionsUseCase(
-            gh<_i700.HomeGetAllInspectionRepositry>()));
-    gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
-        _i273.GetAllInspectionAdminUseCase(
+    gh.factory<_i1001.RescheduleInspectionUseCase>(() =>
+        _i1001.RescheduleInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i699.SearchInspectionAdminUseCase>(() =>
         _i699.SearchInspectionAdminUseCase(
-            gh<_i700.HomeGetAllInspectionRepositry>()));
-    gh.factory<_i1001.RescheduleInspectionUseCase>(() =>
-        _i1001.RescheduleInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i635.InspectorHomeProductCubit>(() =>
         _i635.InspectorHomeProductCubit(
@@ -682,18 +675,13 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i941.CsRolesUseCase>(
         () => _i941.CsRolesUseCase(gh<_i203.CsRolesRepositry>()));
-    gh.factory<_i215.MyInspectionsCubit>(() => _i215.MyInspectionsCubit(
-          getInspectionsUseCase: gh<_i147.GetMyInspectionsUseCase>(),
-          searchProductsUseCase: gh<_i826.InspectorHomeSearchUseCase>(),
-        ));
-    gh.lazySingleton<_i127.ProductManagementRepository>(() =>
-        _i744.ProductManagementRepositoryImpl(
-            gh<_i1010.ProductManagementRemoteDataSource>()));
-
     gh.singleton<_i383.ProfileCubit>(
         () => _i383.ProfileCubit(gh<_i305.GetProfileUseCase>()));
     gh.factory<_i419.BalanceCubit>(() =>
         _i419.BalanceCubit(getBalanceUseCase: gh<_i78.GetBalanceUseCase>()));
+    gh.lazySingleton<_i127.ProductManagementRepository>(() =>
+        _i744.ProductManagementRepositoryImpl(
+            gh<_i1010.ProductManagementRemoteDataSource>()));
     gh.factory<_i411.InspectionManagementCubit>(
         () => _i411.InspectionManagementCubit(
               gh<_i273.GetAllInspectionAdminUseCase>(),

@@ -360,6 +360,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       color: const Color(0xff404147),
                     ),
                   ),
+
+                  SectionTitle(
+                  title: AppLocalizations.of(context)!.carCode),
+          SizedBox(height: 4.h),
+          Text(
+          product?.description ?? "",
+          style: GoogleFonts.poppins(
+          fontSize: 14.sp,
+          color: const Color(0xff404147),
+          ),),
                   SizedBox(height: 12.h),
                   _buildSmallText(
                     "${AppLocalizations.of(context)!.created}:   ${product.createdAt != null ? DateFormat('dd/MM/yyyy').format(DateTime.parse(product.createdAt!)) : AppLocalizations.of(context)!.notAvailable}",

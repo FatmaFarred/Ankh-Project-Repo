@@ -64,7 +64,7 @@ class ChooseRoleScreen extends StatelessWidget {
               isSelected: selectedRole == UserRole.Client,
             ),
             SizedBox(height: 15.h,),
-            ContainerWithListTile(title: AppLocalizations.of(context)!.cst,
+            ContainerWithListTile(title: "فريق عمل ",
               subtitle: AppLocalizations.of(context)!.cstDescription,
               image: ImageAssets.cstIcon,
               onTap: (){

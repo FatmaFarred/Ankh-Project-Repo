@@ -376,7 +376,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectTimeSlot => 'اختر وقتًا';
 
   @override
-  String get requestInspection => 'طلب فحص';
+  String get requestInspection => 'طلب معاينة';
 
   @override
   String get requestSummary => 'ملخص الطلب';
