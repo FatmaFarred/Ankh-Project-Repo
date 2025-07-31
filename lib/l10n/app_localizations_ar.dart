@@ -316,7 +316,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get online => 'متصل';
 
   @override
-  String get description => 'الوصف';
+  String get description => 'الوصف ';
 
   @override
   String get supportTeam => 'فريق الدعم';
@@ -789,8 +789,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteUserAccount => 'حذف حساب المستخدم';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
+  String get rejectUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد رفض هذا المستخدم؟\nيمكن تعديل هذا القرار لاحقًا، ولكن قد يتم تعطيل وصوله مؤقتًا أو تعليق بياناته. ';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد قبول هذا المستخدم؟\n سيمنحه هذا الإجراء صلاحيات الوصول إلى النظام.\n يمكنك تعديل هذا القرار لاحقًا من خلال تعليق الحساب.';
 
   @override
   String get userDetails => 'بيانات المستخدم';
@@ -812,9 +816,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addNewProduct => 'إضافة منتج جديد';
-
-  @override
-  String get unassign => ' إلغاء الإسناد';
 
   @override
   String unassignConfirmation(Object clientName, Object productName) {
@@ -846,6 +847,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerDetails => 'بيانات المسوق';
 
   @override
+  String get unassign => 'إلغاء التعيين';
+
+  @override
   String get inspectorManagement => 'إدارة المعاينين';
 
   @override
@@ -862,4 +866,160 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deleteInspector => 'حذف المعاين ';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get acceptUserAccount => 'قبول حساب المستخدم';
+
+  @override
+  String get rejectUserAccount => 'رفض حساب المستخدم';
+
+  @override
+  String get appointAsTeamLeader => 'تعيين كقائد فريق';
+
+  @override
+  String get insertProductId => 'أدخل معرف المنتج';
+
+  @override
+  String get productId => 'معرف المنتج';
+
+  @override
+  String get assign => 'تعيين';
+
+  @override
+  String get blockUser => 'حظر المستخدم';
+
+  @override
+  String get unblockUser => 'إلغاء حظر المستخدم';
+
+  @override
+  String get blockUserSubtitle =>
+      'هل أنت متأكد أنك تريد حظر هذا المستخدم؟\nسيمنعه هذا الإجراء من تسجيل الدخول أو الوصول إلى النظام حتى يتم إلغاء حظره.';
+
+  @override
+  String get unblockUserSubtitle =>
+      'هل أنت متأكد أنك تريد إلغاء حظر هذا المستخدم؟\nسيمنحه هذا الإجراء صلاحيات الوصول إلى النظام مرة أخرى.';
+
+  @override
+  String get blockUserAccount => 'حظر حساب المستخدم';
+
+  @override
+  String get unblockUserAccount => 'إلغاء حظر حساب المستخدم';
+
+  @override
+  String get reasonForBlocking => 'سبب الحظر';
+
+  @override
+  String get enterReasonForBlocking => 'أدخل سبب الحظر';
+
+  @override
+  String get blockDaysCount => ' عدد أيام الحظر';
+
+  @override
+  String get enterBlockDaysCount => 'أدخل عدد أيام الحظر';
+
+  @override
+  String get block => 'حظر';
+
+  @override
+  String get unblock => 'إلغاء الحظر';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      'هل أنت متأكد أنك تريد تعيين هذا المستخدم كقائد فريق؟\nسيمنحه هذا الإجراء صلاحيات إضافية لإدارة الفريق.';
+
+  @override
+  String get clientProductInformation => 'بيانات المنتح والعميل';
+
+  @override
+  String get points => 'النقاط';
+
+  @override
+  String get pointsDetails => ' تفاصيل النقاط';
+
+  @override
+  String get pointsHistory => ' تاريخ النقاط';
+
+  @override
+  String get approve => ' قبول';
+
+  @override
+  String get approved => ' تم الموافقة ';
+
+  @override
+  String get pointsRequest => ' طلبات النقاط';
+
+  @override
+  String get rejectReason => 'السبب';
+
+  @override
+  String get enterRejectReason => 'أدخل سبب الرفض';
+
+  @override
+  String get rejectSubTitle =>
+      'هل أنت متأكد أنك تريد رفض هذا الطلب؟\nسيتم إلغاء الطلب ولن يتم منح النقاط للعميل.';
+
+  @override
+  String get approveSubTitle =>
+      'هل أنت متأكد أنك تريد الموافقة على هذا الطلب؟\nسيتم منح النقاط للعميل وسيتم تحديث رصيده.';
+
+  @override
+  String get pointsRequestDetails => 'تفاصيل طلب النقاط';
+
+  @override
+  String get pointPriceManagement => ' إدارة سعر النقطة';
+
+  @override
+  String get pointPrice => ' سعر النقطة';
+
+  @override
+  String get enterPointPrice => ' أدخل سعر النقطة';
+
+  @override
+  String get editPointPrice => ' تعديل سعر النقطة';
+
+  @override
+  String get eg => 'ج.م';
+
+  @override
+  String get leaderMarketer => 'قائد الفريق';
+
+  @override
+  String get update => ' تحديث';
+
+  @override
+  String get myProfile => 'ملفي الشخصي';
+
+  @override
+  String get point => ' نقطة';
+
+  @override
+  String get rejected => ' مرفوض';
+
+  @override
+  String get requestPoints => ' طلب نقاط';
+
+  @override
+  String get requestPointsSubTitle =>
+      'قم بإرسال طلب للحصول على نقاط إضافية. سيتم مراجعة طلبك من قبل فريق الدعم.';
+
+  @override
+  String get requestPointsDetails => ' تفاصيل طلب النقاط';
+
+  @override
+  String get pointsCount => ' عدد النقاط';
+
+  @override
+  String get enterPointsCount => 'أدخل عدد النقاط';
+
+  @override
+  String get enterDescription => 'أدخل الوصف';
+
+  @override
+  String get submit => 'إرسال';
 }

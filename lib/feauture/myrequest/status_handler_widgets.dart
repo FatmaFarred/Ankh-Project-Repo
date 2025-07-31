@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import '../../core/constants/color_manager.dart';
 
-enum RequestStatus { pending, done, delayed, notResponded }
+enum RequestStatus { pending, done, delayed, notResponded,active,approved,rejected }
 Color getStatusColor(RequestStatus status) {
   switch (status) {
     case RequestStatus.pending:
@@ -13,6 +13,13 @@ Color getStatusColor(RequestStatus status) {
       return ColorManager.lightOrange;
     case RequestStatus.notResponded:
       return ColorManager.lightBlack;
+    case RequestStatus.active:
+      return ColorManager.lightGreen;
+    case RequestStatus.approved:
+      return ColorManager.lightGreen;
+    case RequestStatus.rejected:
+      return ColorManager.lightRed;
+
   }
 }
 Color getTextStatusColor(RequestStatus status) {
@@ -25,6 +32,13 @@ Color getTextStatusColor(RequestStatus status) {
       return ColorManager.darkOrange;
     case RequestStatus.notResponded:
       return ColorManager.darkBlack;
+    case RequestStatus.active:
+      return ColorManager.darkGreen;
+    case RequestStatus.approved:
+      return ColorManager.darkGreen;
+    case RequestStatus.rejected:
+      return ColorManager.darkRed;
+
   }
 }
 
@@ -38,7 +52,15 @@ String getStatusLabel(RequestStatus status) {
       return 'Delayed';
     case RequestStatus.notResponded:
       return 'Not Responded';
+    case RequestStatus.active:
+      return 'Active';
+    case RequestStatus.approved:
+      return 'Approved';
+    case RequestStatus.rejected:
+      return 'Rejected';
+
   }
+
 }
 
 RequestStatus? getRequestStatusFromString(String? status) {
@@ -51,6 +73,12 @@ RequestStatus? getRequestStatusFromString(String? status) {
       return RequestStatus.delayed;
     case 'not responded':
       return RequestStatus.notResponded;
+    case 'active':
+      return RequestStatus.active;
+    case 'approved':
+      return RequestStatus.approved;
+    case 'rejected':
+      return RequestStatus.rejected;
     default:
       return null;
   }

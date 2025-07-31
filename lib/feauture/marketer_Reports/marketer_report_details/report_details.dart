@@ -1,12 +1,10 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
-import 'package:ankh_project/feauture/inspector_screen/request_submitted_screen.dart';
 
 import 'package:ankh_project/feauture/inspector_screen/widgets/CustomRadioGroup.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/client_product_info_card.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
-import 'package:ankh_project/feauture/inspector_screen/widgets/custom_upload_take_photo_row.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/photo_list_view.dart';
 import 'package:ankh_project/feauture/marketer_Reports/marketer_report_details/report_details/report_details_cubit.dart';
 import 'package:ankh_project/feauture/marketer_Reports/marketer_report_details/report_details/report_details_state.dart';
@@ -18,14 +16,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ankh_project/domain/entities/inspection_report_details_entity.dart';
 import 'package:ankh_project/api_service/di/di.dart';
-import 'package:get_it/get_it.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/constants/font_manager/font_style_manager.dart';
-import '../../../domain/entities/marketer_requests_for_inspection_entity.dart';
 import '../../authentication/user_controller/user_cubit.dart';
-import '../../home_screen/bottom_nav_bar.dart';
 import '../../myrequest/status_handler_widgets.dart';
 
 class MarketerReportDetails extends StatefulWidget {
@@ -70,6 +64,7 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserCubit>().state;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -128,11 +123,23 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CarReportDetailsCard(
-                        details: details, paddingVertical: 0, paddingHorizontal: 0),
+                   user?.roles?[0]=="Marketer"?CarReportDetailsCard(
+                       details: details, paddingVertical: 0, paddingHorizontal: 0):
+                    ClientProductInfoCard(
+                      clientName: details.clientName??"",
+                      phoneNumber: details.phoneNumber??"",
+                      address: details.address??"",
+                      productName: details.productName??"",
+                      appointment:
+                          (details.appointmentDate != null &&
+                              details.appointmentTime != null)
+                              ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(details.appointmentDate!))} – ${details.appointmentTime}"
+                              : AppLocalizations.of(context)!.noDataFound,),
+
+
                     SizedBox(height: 20.h),
                     PhotoListView(
-                      imageUrls: details?.productImages ?? [],
+                      imageUrls: details.productImages ?? [],
                     ),
                     (details.inspectionImages == null || details.inspectionImages!.isEmpty || details.inspectorComment == null)?SizedBox():Column(
                       children: [

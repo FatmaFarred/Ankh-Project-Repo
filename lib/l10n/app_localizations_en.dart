@@ -318,7 +318,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get online => 'Online';
 
   @override
-  String get description => 'Description';
+  String get description => 'Description ';
 
   @override
   String get supportTeam => 'Support Team';
@@ -791,8 +791,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteUserAccount => 'Delete User Account';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.';
+  String get rejectUserAccountSubtitle =>
+      'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.';
 
   @override
   String get userDetails => 'User Details';
@@ -814,9 +818,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addNewProduct => 'Add New Product';
-
-  @override
-  String get unassign => 'Unassign';
 
   @override
   String unassignConfirmation(Object clientName, Object productName) {
@@ -848,6 +849,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marketerDetails => 'Marketer Details';
 
   @override
+  String get unassign => 'Unassign';
+
+  @override
   String get inspectorManagement => 'Inspectors Management ';
 
   @override
@@ -864,4 +868,160 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteInspector => 'Delete Inspector ';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get acceptUserAccount => 'Accept User Account';
+
+  @override
+  String get rejectUserAccount => 'Reject User Account';
+
+  @override
+  String get appointAsTeamLeader => 'Appoint as Team Leader';
+
+  @override
+  String get insertProductId => 'Insert Product ID';
+
+  @override
+  String get productId => 'Product ID';
+
+  @override
+  String get assign => 'Assign';
+
+  @override
+  String get blockUser => 'Block User';
+
+  @override
+  String get unblockUser => 'Unblock User';
+
+  @override
+  String get blockUserSubtitle =>
+      'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.';
+
+  @override
+  String get unblockUserSubtitle =>
+      ' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.';
+
+  @override
+  String get blockUserAccount => 'Block User Account';
+
+  @override
+  String get unblockUserAccount => ' Unblock User Account';
+
+  @override
+  String get reasonForBlocking => ' Reason for Blocking';
+
+  @override
+  String get enterReasonForBlocking => ' Enter Reason for Blocking';
+
+  @override
+  String get blockDaysCount => ' Block Days Count';
+
+  @override
+  String get enterBlockDaysCount => ' Enter Block Days Count';
+
+  @override
+  String get block => 'Block';
+
+  @override
+  String get unblock => 'Unblock';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      ' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.';
+
+  @override
+  String get clientProductInformation => 'Client & Product Information';
+
+  @override
+  String get points => 'Points';
+
+  @override
+  String get pointsDetails => 'Points Details';
+
+  @override
+  String get pointsHistory => 'Points History';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get approved => 'Approved';
+
+  @override
+  String get pointsRequest => 'Points Request';
+
+  @override
+  String get rejectReason => 'Reason for Rejection';
+
+  @override
+  String get enterRejectReason => 'Enter Reason for Rejection';
+
+  @override
+  String get rejectSubTitle =>
+      'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.';
+
+  @override
+  String get approveSubTitle =>
+      ' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.';
+
+  @override
+  String get pointsRequestDetails => ' Points Request Details';
+
+  @override
+  String get pointPriceManagement => 'Point Price Management';
+
+  @override
+  String get pointPrice => 'Point Price';
+
+  @override
+  String get enterPointPrice => 'Enter Point Price';
+
+  @override
+  String get editPointPrice => 'Edit Point Price';
+
+  @override
+  String get eg => 'EGP';
+
+  @override
+  String get leaderMarketer => 'LeaderMarketer';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get myProfile => ' My Profile';
+
+  @override
+  String get point => ' Point';
+
+  @override
+  String get rejected => ' Rejected';
+
+  @override
+  String get requestPoints => 'Request Points';
+
+  @override
+  String get requestPointsSubTitle =>
+      ' Enter the number of points you want to request.\n Your current balance will be updated accordingly.';
+
+  @override
+  String get requestPointsDetails => ' Request Points Details';
+
+  @override
+  String get pointsCount => ' Points Count';
+
+  @override
+  String get enterPointsCount => 'Enter Points Count';
+
+  @override
+  String get enterDescription => ' Enter Description';
+
+  @override
+  String get submit => 'Submit';
 }

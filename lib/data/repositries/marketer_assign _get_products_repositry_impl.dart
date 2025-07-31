@@ -1,3 +1,4 @@
+import 'package:ankh_project/domain/entities/all_marketers_entity.dart';
 import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -27,6 +28,34 @@ import '../../domain/repositries_and_data_sources/repositries/marketer_assign _g
 
 
   }
+
+  @override
+  Future<Either<Failure, List<AllMarketersEntity>>> getAllMarketers()async {
+    var either =await marketerProductsRemoteDataSource.getAllMarketers();
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+
+
+  @override
+  Future<Either<Failure, String?>> updateMarketerAccountStatus(num status, String userId) async{
+    var either =await marketerProductsRemoteDataSource.updateMarketerAccountStatus(status, userId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, List<AllMarketersEntity>>> searchMarketer(String keyWord)async {
+    var either =await marketerProductsRemoteDataSource.searchMarketer(keyWord);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> unAssignProduct(num productId, String userId)async {
+    var either =await marketerProductsRemoteDataSource.unAssignProduct(productId, userId);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
 
 
 

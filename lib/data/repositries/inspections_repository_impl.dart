@@ -6,6 +6,7 @@ import '../../domain/repositries_and_data_sources/repositries/inspections_reposi
 import '../../api_service/failure/error_handling.dart';
 import '../data_sources/inspections_remote_data_source_impl.dart';
 import '../../domain/entities/inspection_report_details_entity.dart';
+
 @Injectable(as: MyInspectionsRepository)
 class MyInspectionsRepositoryImpl implements MyInspectionsRepository {
   MyInspectionsRemoteDataSource remoteDataSource;
@@ -17,22 +18,26 @@ class MyInspectionsRepositoryImpl implements MyInspectionsRepository {
     required String token,
     required String filter,
   }) async {
-    var either= await remoteDataSource.getMyInspections(token: token, filter: filter);
-    return either.fold(
-      (error) => left(error),
-      (response) => right(response),
+    var either = await remoteDataSource.getMyInspections(
+      token: token,
+      filter: filter,
     );
+    return either.fold((error) => left(error), (response) => right(response));
   }
 
   @override
   Future<Either<Failure, InspectionReportDetailsEntity>> getReportDetails({
     required num requestId,
   }) async {
-    var either= await remoteDataSource.getReportDetails(requestId: requestId);
-    return either.fold(
-          (error) => left(error),
-          (response) => right(response),
-    );
-
+    var either = await remoteDataSource.getReportDetails(requestId: requestId);
+    return either.fold((error) => left(error), (response) => right(response));
   }
-} 
+
+  @override
+  Future<Either<Failure, List<AllInpectionEntity>>> getAllOfMyInspections(
+    String inspectorId,
+  ) async {
+    var either = await remoteDataSource.getAllOfMyInspections(inspectorId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+}

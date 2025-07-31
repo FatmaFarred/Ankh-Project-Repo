@@ -683,7 +683,7 @@ abstract class AppLocalizations {
   /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'Description'**
+  /// **'Description '**
   String get description;
 
   /// No description provided for @supportTeam.
@@ -1610,11 +1610,17 @@ abstract class AppLocalizations {
   /// **'Delete User Account'**
   String get deleteUserAccount;
 
-  /// No description provided for @deleteUserAccountSubtitle.
+  /// No description provided for @rejectUserAccountSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.'**
-  String get deleteUserAccountSubtitle;
+  /// **'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.'**
+  String get rejectUserAccountSubtitle;
+
+  /// No description provided for @acceptUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.'**
+  String get acceptUserAccountSubtitle;
 
   /// No description provided for @userDetails.
   ///
@@ -1657,12 +1663,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add New Product'**
   String get addNewProduct;
-
-  /// No description provided for @unassign.
-  ///
-  /// In en, this message translates to:
-  /// **'Unassign'**
-  String get unassign;
 
   /// No description provided for @unassignConfirmation.
   ///
@@ -1718,6 +1718,12 @@ abstract class AppLocalizations {
   /// **'Marketer Details'**
   String get marketerDetails;
 
+  /// No description provided for @unassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Unassign'**
+  String get unassign;
+
   /// No description provided for @inspectorManagement.
   ///
   /// In en, this message translates to:
@@ -1753,6 +1759,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete Inspector '**
   String get deleteInspector;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @acceptUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept User Account'**
+  String get acceptUserAccount;
+
+  /// No description provided for @rejectUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject User Account'**
+  String get rejectUserAccount;
+
+  /// No description provided for @appointAsTeamLeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Appoint as Team Leader'**
+  String get appointAsTeamLeader;
+
+  /// No description provided for @insertProductId.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert Product ID'**
+  String get insertProductId;
+
+  /// No description provided for @productId.
+  ///
+  /// In en, this message translates to:
+  /// **'Product ID'**
+  String get productId;
+
+  /// No description provided for @assign.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign'**
+  String get assign;
+
+  /// No description provided for @blockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get blockUser;
+
+  /// No description provided for @unblockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock User'**
+  String get unblockUser;
+
+  /// No description provided for @blockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.'**
+  String get blockUserSubtitle;
+
+  /// No description provided for @unblockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.'**
+  String get unblockUserSubtitle;
+
+  /// No description provided for @blockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User Account'**
+  String get blockUserAccount;
+
+  /// No description provided for @unblockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **' Unblock User Account'**
+  String get unblockUserAccount;
+
+  /// No description provided for @reasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Reason for Blocking'**
+  String get reasonForBlocking;
+
+  /// No description provided for @enterReasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Reason for Blocking'**
+  String get enterReasonForBlocking;
+
+  /// No description provided for @blockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Block Days Count'**
+  String get blockDaysCount;
+
+  /// No description provided for @enterBlockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Block Days Count'**
+  String get enterBlockDaysCount;
+
+  /// No description provided for @block.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block;
+
+  /// No description provided for @unblock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock'**
+  String get unblock;
+
+  /// No description provided for @appointAsteamLeaderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.'**
+  String get appointAsteamLeaderSubtitle;
+
+  /// No description provided for @clientProductInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Client & Product Information'**
+  String get clientProductInformation;
+
+  /// No description provided for @points.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get points;
+
+  /// No description provided for @pointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Details'**
+  String get pointsDetails;
+
+  /// No description provided for @pointsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Points History'**
+  String get pointsHistory;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @pointsRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Request'**
+  String get pointsRequest;
+
+  /// No description provided for @rejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for Rejection'**
+  String get rejectReason;
+
+  /// No description provided for @enterRejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Reason for Rejection'**
+  String get enterRejectReason;
+
+  /// No description provided for @rejectSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.'**
+  String get rejectSubTitle;
+
+  /// No description provided for @approveSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.'**
+  String get approveSubTitle;
+
+  /// No description provided for @pointsRequestDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Request Details'**
+  String get pointsRequestDetails;
+
+  /// No description provided for @pointPriceManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price Management'**
+  String get pointPriceManagement;
+
+  /// No description provided for @pointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price'**
+  String get pointPrice;
+
+  /// No description provided for @enterPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Point Price'**
+  String get enterPointPrice;
+
+  /// No description provided for @editPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Point Price'**
+  String get editPointPrice;
+
+  /// No description provided for @eg.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get eg;
+
+  /// No description provided for @leaderMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'LeaderMarketer'**
+  String get leaderMarketer;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @myProfile.
+  ///
+  /// In en, this message translates to:
+  /// **' My Profile'**
+  String get myProfile;
+
+  /// No description provided for @point.
+  ///
+  /// In en, this message translates to:
+  /// **' Point'**
+  String get point;
+
+  /// No description provided for @rejected.
+  ///
+  /// In en, this message translates to:
+  /// **' Rejected'**
+  String get rejected;
+
+  /// No description provided for @requestPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Points'**
+  String get requestPoints;
+
+  /// No description provided for @requestPointsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the number of points you want to request.\n Your current balance will be updated accordingly.'**
+  String get requestPointsSubTitle;
+
+  /// No description provided for @requestPointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Request Points Details'**
+  String get requestPointsDetails;
+
+  /// No description provided for @pointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Count'**
+  String get pointsCount;
+
+  /// No description provided for @enterPointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Points Count'**
+  String get enterPointsCount;
+
+  /// No description provided for @enterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Description'**
+  String get enterDescription;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
 }
 
 class _AppLocalizationsDelegate

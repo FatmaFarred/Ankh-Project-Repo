@@ -34,6 +34,8 @@ abstract class ColorManager {
   static Color darkBlack = const Color(0xff1F2937);
   static Color lightBlack = const Color(0xffF3F4F6);
   static Color rateColor = const Color(0xffE7B008);
+  static Color lightRed = const Color(0xffFCD5D5);
+  static Color darkRed = const Color(0xffCA0000);
 
 
 

@@ -13,6 +13,8 @@ import '../../authentication/user_controller/user_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
+import '../points_management/points_screen.dart';
+import '../points_management/point_prices_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -31,6 +33,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: InspectorManagementScreen()),
     Center(child: Text('⚙ InspectionsManagementScreen()')),
     Center(child: Text('⚙️ Notification Screen')),
+    Center(child: PointsScreen()),
+    Center(child: PointPricesScreen()),
   ];
 
   void _onDrawerItemTapped(int index) {
@@ -44,6 +48,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         actions: [Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
@@ -51,11 +56,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(
-              Icons.menu_rounded,
-              color: Colors.white,
-              size: 24.sp,
-            ),
+            icon: SvgPicture.asset(ImageAssets.drawerIcon),
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
@@ -204,13 +205,33 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                 ),
 
               ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
 
-             Spacer(),
+                selected: _selectedIndex == 6,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(6),
+                leading: Icon(
+                  Icons.monetization_on_outlined,
+                  color: _selectedIndex == 6 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.notifications,
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 6 ? Colors.white : null), // Text color
+                ),
+
+              ),
+
+
+              Spacer(),
               ListTile(
                 onTap: () {
                   context.read<UserCubit>().clearUser();
                   SharedPrefsManager.removeData(key: 'user_token');
                   SharedPrefsManager.removeData(key:  'currentUser');
+                  SharedPrefsManager.removeData(key: 'user_id');
                   context.read<UserCubit>().clearUser();
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       WelcomeScreen.welcomeScreenRouteName,

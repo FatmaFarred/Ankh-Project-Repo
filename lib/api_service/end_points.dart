@@ -19,6 +19,26 @@ abstract class EndPoints {
   static const String searchHomeInspection= "Inspections/search";
   static const String inspectorAssignInspection = "RequestInspections/assign-inspector";
   static const String getReportDetails = "Marketers/report-details";
+  static const String getAllMarketers = "Marketers/get-all";
+  static const String updateMarketerAccountStatus = "Marketers/update-status";
+  static const String searchMarketer = "Marketers/search-marketer";
+  static const String unAssignProduct = "Marketers/unassign-product-from-marketer";
+  static const String blockUser = "Auth/lock-user";
+  static const String unBlockUser = "Auth/unlock-user";
+  static const String appointAsTeamLeader = "Marketers/change-role";
+  static const String getAllInspectors = "Inspections/get-all";
+  static const String searchAllInspectors = "Inspections/search/inspectors";
+  static const String getAllOfMyInspectionsById = "Inspections/Request-Assigned-To-Inspector";
+  static const String getAllOfMyInspectionsByIdSearch = "Inspections/search/inspector-inspections";
+  static const String getPointRequest = "Point/pending";
+  static const String acceptPointRequest = "Point/approve";
+  static const String rejectPointRequest = "Point/reject";
+  static const String getAllPointPrices = "Point/point-prices";
+  static const String editPointPrice = "Point/update-point-price";
+  static const String addPointRequest = "Point/request";
+  static const String getBalance = "Point/balance";
+  static const String getProfile = "Profile/get-user";
+  static const String editProfile = "Profile/edit-profile";
 
 
 

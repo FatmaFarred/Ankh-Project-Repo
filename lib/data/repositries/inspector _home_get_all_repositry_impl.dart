@@ -1,4 +1,5 @@
 import 'package:ankh_project/domain/entities/all_inpection_entity.dart';
+import 'package:ankh_project/domain/entities/all_inspectors_entity.dart';
 import 'package:ankh_project/domain/entities/all_products_entity.dart';
 import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -35,6 +36,26 @@ import '../../domain/repositries_and_data_sources/repositries/inspector _home_ge
       String inspectorId) async {
     var either = await homeGetAllInspectionRemoteDataSource
         .assignProdcutToInspector(productId, inspectorId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, List<AllInspectorsEntity>>> getAllInspectors()async {
+    var either = await homeGetAllInspectionRemoteDataSource.getAllInspectors();
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
+  @override
+  Future<Either<Failure, List<AllInspectorsEntity>>> searchInspectors(String keyWord)async {
+    var either = await homeGetAllInspectionRemoteDataSource.searchInspectors(keyWord);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
+  @override
+  Future<Either<Failure, List<AllInpectionEntity>>> getInspectionsByInspectorId(String inspectorId) async {
+    var either = await homeGetAllInspectionRemoteDataSource.getInspectionsByInspectorId(inspectorId);
     return either.fold((error) => left(error), (response) => right(response));
   }
 }

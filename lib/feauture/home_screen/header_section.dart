@@ -16,9 +16,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../api_service/api_constants.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_search_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../profile/cubit/profile_cubit.dart';
+import '../profile/cubit/states.dart';
 
 typedef OnSearchCallback = void Function(String keyword);
 
@@ -29,9 +32,23 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserCubit>().state;
+      final user = context.watch<UserCubit>().state;
+      final profileCubit = context.read<ProfileCubit>();
+      final state = profileCubit.state;
 
-    return Container(
+      String userName = AppLocalizations.of(context)!.visitor;
+      String? profileImageUrl;
+      num? rate;
+
+
+      if (state is ProfileLoaded) {
+        userName = state.profile.fullName ?? AppLocalizations.of(context)!.visitor;
+        profileImageUrl = state.profile.imageUrl; // ma// ke sure this is a URL string
+        rate = state.profile.rating ?? 0; // Assuming rate is a num, adjust as necessary
+
+      }
+
+      return Container(
       padding: REdgeInsets.all(22),
       width: double.infinity,
       decoration: BoxDecoration(color: ColorManager.lightprimary),
@@ -46,8 +63,30 @@ class HeaderSection extends StatelessWidget {
                      Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
                     }
                   },
+
                   child: ClipRRect(
-                    child: Image.asset(ImageAssets.appLogo, scale: 1.2),
+                    borderRadius: BorderRadius.circular(30.r),
+                    child: profileImageUrl != null
+                        ? Image.network(
+                      "${ApiConstant.imageBaseUrl}$profileImageUrl",
+                      height: 50.w,
+                      width: 50.w,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          ImageAssets.profilePic,
+                          height: 50.w,
+                          width: 50.w,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    )
+                        : Image.asset(
+                      ImageAssets.profilePic,
+                      height: 50.w,
+                      width: 50.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(width: 12.w),
@@ -55,7 +94,7 @@ class HeaderSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Text(user?.fullName??AppLocalizations.of(context)!.visitor,
+                    Text(userName??"",
                         style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,

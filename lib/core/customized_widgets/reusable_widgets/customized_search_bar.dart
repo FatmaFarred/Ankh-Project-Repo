@@ -8,7 +8,13 @@ typedef OnSearchCallback = void Function(String keyword);
 
 class CustomizedSearchBar extends StatelessWidget {
   final OnSearchCallback? onSearch;
-  const CustomizedSearchBar({super.key, this.onSearch});
+  final String? hintText;
+  final OutlineInputBorder? outlineInputBorder;
+
+  const CustomizedSearchBar({super.key, this.onSearch, this.hintText, this.outlineInputBorder,
+
+
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +31,9 @@ class CustomizedSearchBar extends StatelessWidget {
         ),
         decoration: InputDecoration(
           prefixIcon:  Icon(Icons.search, color: ColorManager.hintColor),
-          hintText: AppLocalizations.of(context)!.whatAreYouLookingFor,
+          hintText: hintText?? AppLocalizations.of(context)!.whatAreYouLookingFor,
           hintStyle:  GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w400,color: ColorManager.hintColor),
-          border: InputBorder.none,
+          border: outlineInputBorder??InputBorder.none,
           contentPadding:  REdgeInsets.symmetric(vertical: 14),
 
         ),
