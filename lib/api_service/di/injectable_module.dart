@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
@@ -5,4 +6,5 @@ import 'package:http/http.dart' as http;
 abstract class InjectableModule {
   @lazySingleton
   http.Client get client => http.Client();
+  Dio get dio => Dio();
 }

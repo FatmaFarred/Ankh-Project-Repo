@@ -31,7 +31,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: UsersManagementScreen()),
     Center(child: MarketersManagementScreen()),
     Center(child: InspectorManagementScreen()),
-    Center(child: Text('⚙️ inspections screen')),
+    Center(child: Text('⚙ InspectionsManagementScreen()')),
     Center(child: Text('⚙️ Notification Screen')),
     Center(child: PointsScreen()),
     Center(child: PointPricesScreen()),

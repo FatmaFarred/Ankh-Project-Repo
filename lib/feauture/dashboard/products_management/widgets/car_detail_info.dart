@@ -3,7 +3,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CarDetailInfo extends StatelessWidget {
-  const CarDetailInfo({super.key});
+  final String ownerName;
+  final String assignedMarketer;
+  final String batteryCapacity;
+  final String horsepower;
+  final String odometer;
+  final String year;
+  final String transmission;
+  final String engineType;
+  final String color;
+  final String category;
+
+  const CarDetailInfo({
+    super.key,
+    required this.ownerName,
+    required this.assignedMarketer,
+    required this.batteryCapacity,
+    required this.horsepower,
+    required this.odometer,
+    required this.year,
+    required this.transmission,
+    required this.engineType,
+    required this.color,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,142 +36,46 @@ class CarDetailInfo extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Owner Name",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "Mohamed Khaled",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Battery Capacity",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "75 kWh",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Horsepower",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "184 bhp",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Odometer",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "85,000 km",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Year",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "2020",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            _buildInfoItem("Owner Name", ownerName),
+            _buildInfoItem("Battery Capacity", batteryCapacity),
+            _buildInfoItem("Horsepower", horsepower),
+            _buildInfoItem("Odometer", odometer),
+            _buildInfoItem("Year", year),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Assigned Marketer",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "yasser mohamed",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Transmission",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "Automatic",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Engine Type",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "Petrol",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Color",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "Gray",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Text(
-              "Category",
-              style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
-            ),
-            Text(
-              "Sedan",
-              style: GoogleFonts.poppins(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            _buildInfoItem("Assigned Marketer", assignedMarketer),
+            _buildInfoItem("Transmission", transmission),
+            _buildInfoItem("Engine Type", engineType),
+            _buildInfoItem("Color", color),
+            _buildInfoItem("Category", category),
           ],
         ),
-
-
       ],
+    );
+  }
+
+  Widget _buildInfoItem(String label, String value) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey),
+          ),
+          Text(
+            value,
+            style: GoogleFonts.poppins(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
