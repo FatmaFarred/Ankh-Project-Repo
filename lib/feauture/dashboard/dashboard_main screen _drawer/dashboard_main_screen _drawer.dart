@@ -11,7 +11,6 @@ import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../l10n/app_localizations.dart';
 import '../../authentication/user_controller/user_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
-import '../inspections_management/inspections_management_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../users_management/users_management_screen.dart';
@@ -30,7 +29,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: UsersManagementScreen()),
     Center(child: MarketersManagementScreen()),
     Center(child: InspectorManagementScreen()),
-    Center(child: InspectionsManagementScreen()),
+    Center(child: Text('⚙ InspectionsManagementScreen()')),
     Center(child: Text('⚙️ Notification Screen')),
   ];
 
