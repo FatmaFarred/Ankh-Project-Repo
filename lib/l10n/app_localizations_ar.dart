@@ -1062,4 +1062,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get insepectionManagement => 'Inspection Management';
+
+  @override
+  String get carCode => 'رمز السيارة';
+
+  @override
+  String get reactDenied =>
+      ' للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً.';
 }

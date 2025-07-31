@@ -19,6 +19,7 @@ import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import '../../home_screen/bottom_nav_bar.dart';
 import '../../inspector_screen/authentication/inspector_register_screen.dart';
+import '../../profile/cubit/profile_cubit.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
@@ -57,6 +58,7 @@ class _SignInScreenState extends State<SignInScreen> {
             positiveText:  AppLocalizations.of(context)!.tryAgain,
             positiveOnClick: () {
               Navigator.of(context).pop();
+
               signInViewModel.signIn();
 
             },
@@ -208,6 +210,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 CustomizedElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+
                       signInViewModel.signIn();
                     }
                   },

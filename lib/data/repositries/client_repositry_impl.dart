@@ -31,6 +31,18 @@ import '../../domain/repositries_and_data_sources/repositries/client_repositry.d
     return either.fold((error) => left(error), (response) => right(response));
   }
 
+  @override
+  Future<Either<Failure, String?>> addFavourite(String userId, num productId) async {
+    var either = await clientRemoteDataSource.addFavourite(userId, productId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> removeFavourite(String userId, num productId) async {
+    var either = await clientRemoteDataSource.removeFavourite(userId, productId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
 
 
 }

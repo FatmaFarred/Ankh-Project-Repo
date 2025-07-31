@@ -200,14 +200,14 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                             itemBuilder: (context, index) {
                               final product = state.favoritesList[index];
                               return AssignedProductCard(
-                                image: product.imageUrls?.isNotEmpty == true 
-                                    ? "${ApiConstant.imageBaseUrl}${product.imageUrls!.first}" 
-                                    : ImageAssets.carPic1,
+                                image:
+                                "${ApiConstant.imageBaseUrl}${product?.imageUrls}" ,
                                 name: product.title ?? '',
                                 price: "${AppLocalizations.of(context)!.egp} ${product.price ?? ''}",
                                 onButtonClick: () {
+                                  "image:${ApiConstant.imageBaseUrl}${[product?.imageUrls]}";
                                   Navigator.of(context).pushNamed(DetailsScreen.detailsScreenRouteName,
-                                      arguments: product.id?.toString()
+                                      arguments: product.productId
                                   );
                                 },
                                 TextButton: AppLocalizations.of(context)!.view,
@@ -480,7 +480,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
   void _showUnblockUserBottomSheet() {
     final user = ModalRoute.of(context)!.settings.arguments as AllUsersEntity;
-    
+
     showModalBottomSheet(
       context: context,
       builder: (context) => CustomBottomSheet(
@@ -649,27 +649,21 @@ class AssignedProductCard extends StatelessWidget {
             Container(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: image.startsWith('http') 
-                    ? Image.network(
+                child:
+                Image.network(
                         image,
                         width: 60,
                         height: 60,
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {
                           return Image.asset(
-                            ImageAssets.carPic1,
+                            ImageAssets.brokenImage,
                             width: 60,
                             height: 60,
                             fit: BoxFit.contain,
                           );
                         },
                       )
-                    : Image.asset(
-                        image,
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.contain,
-                      ),
               ),
             ),
             SizedBox(width: 12),

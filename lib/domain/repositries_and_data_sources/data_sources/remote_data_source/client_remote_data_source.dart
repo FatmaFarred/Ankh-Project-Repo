@@ -11,6 +11,8 @@ abstract class ClientRemoteDataSource {
   Future <Either<Failure,List<AllUsersEntity>>> getAllUsers();
   Future <Either<Failure,List<ProductDetailsEntity>>> getUserFavourite( String userId );
   Future <Either<Failure,List<AllUsersEntity>>> searchUsers(String keyword);
+  Future <Either<Failure,String?>> addFavourite( String userId , num productId );
+  Future <Either<Failure,String?>> removeFavourite( String userId , num productId );
 
 
 

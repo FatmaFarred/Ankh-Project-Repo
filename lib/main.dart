@@ -57,15 +57,15 @@ import 'feauture/welcome_screen/welcome_screen.dart';
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
       configureDependencies();
-      await getIt.allReady();
       await getIt<UserCubit>().loadUserFromPrefs();
+      final String? token = await SharedPrefsManager.getData(key: 'user_token');
+      final String? id = await SharedPrefsManager.getData(key: 'user_id');
+
 
       await ScreenUtil.ensureScreenSize();
       await LocalNotification().initNotification();
       await FcmApi().initNotification();
 
-      final String? token = await SharedPrefsManager.getData(key: 'user_token');
-      final String? id = await SharedPrefsManager.getData(key: 'user_id');
 
       // Fetch profile after initializing the app
       if (token != null && id != null) {

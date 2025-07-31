@@ -1,5 +1,6 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/domain/entities/product_entity.dart';
+import 'package:ankh_project/domain/use_cases/get_favorite_use_case.dart';
 import 'package:ankh_project/feauture/details_screen/controller/product_details_states.dart';
 import 'package:ankh_project/feauture/details_screen/widgets/add_comment_section.dart';
 import 'package:ankh_project/feauture/details_screen/widgets/status_section.dart';
@@ -18,8 +19,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 
 import '../../api_service/di/di.dart';
+import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../home_screen/cubit/add_favorite_cubit.dart';
+import '../home_screen/cubit/add_remove_favorite_state.dart';
+import '../welcome_screen/welcome_screen.dart';
 import 'controller/product_details_cubit.dart';
 import 'widgets/car_detail_info.dart';
 import 'widgets/section_title.dart';
@@ -37,7 +42,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
-  bool isFavorite = false;
+  final favoriteCubit = getIt<FavoriteCubit>();
 
 
   @override
@@ -60,6 +65,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       Divider(thickness: 1, color: const Color(0xff91929526).withOpacity(0.15));
 
   final productDetailsCubit = getIt<ProductDetailsCubit>();
+  final GetFavoriteUseCase getFavoritesUseCase = getIt<GetFavoriteUseCase>();
 
   num? productId;
 
@@ -95,7 +101,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
 
 
-    return Scaffold(
+
+    return BlocListener<FavoriteCubit, FavoriteToggleState>(
+      bloc: favoriteCubit,
+      listener: (context, state) {
+        if (state is FavoriteSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.response)),
+          );
+          // ✅ Refresh product details to update `isFavorite`
+          productDetailsCubit.fetchDetails(productId: productId!);
+        } else if (state is FavoriteFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error?.errorMessage ?? "Error")),
+          );
+      }
+    },
+
+    child:Scaffold(
       floatingActionButton:(user?.roles?[0] == "Marketer")?null: FloatingActionButton(
         onPressed: () {},
         tooltip: AppLocalizations.of(context)!.haveADeal,
@@ -140,6 +163,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ));
           } else if (state is ProductDetailsSuccess) {
             final product = state.productDetails;
+             bool isFavorite = state.isFavorite; // ✅ Read from state
+
             final List<String> images = (product.imageUrls?.isNotEmpty ?? false)
                 ? product.imageUrls!.map((img) => "https://ankhapi.runasp.net/$img").toList()
                 : [ImageAssets.brokenImage];
@@ -191,18 +216,45 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         left: 13.w,
                         child: GestureDetector(
                           onTap: () {
+                            final user = context.read<UserCubit>().state;
+                            final String? userId = user?.id; // Make sure your UserCubit's state has `id`
+                            final num productId = this.productId!;
+
+                            if (userId == null) {
+                              CustomDialog.positiveAndNegativeButton(
+                                  context: context,
+                                  positiveText:  AppLocalizations.of(context)!.loginNow,
+                                  positiveOnClick: () {
+                                    Navigator.of(context).pushNamed(WelcomeScreen.welcomeScreenRouteName);
+                                  },
+                                  title: AppLocalizations.of(context)!.loginNow,
+                                  message: AppLocalizations.of(context)!.reactDenied);
+                              return;
+                            }
+
+                            // Toggle UI immediately (better UX)
                             setState(() {
-                              isFavorite = !isFavorite; // toggle the value
+                              isFavorite = !isFavorite;
                             });
+
+                            // Call the correct cubit method
+                            if (isFavorite) {
+                              favoriteCubit.addFavorite(userId: userId, productId: productId);
+                            } else {
+                              favoriteCubit.removeFavorite(userId: userId, productId: productId);
+                            }
                           },
-                          child: CircleAvatar(radius: 30.r,
-
+                          child: CircleAvatar(
+                            radius: 30.r,
                             backgroundColor: ColorManager.white,
-                            child: Icon(Iconsax.heart5,color:isFavorite?ColorManager.lightprimary: ColorManager.grey,),
-
+                            child: Icon(
+                              Iconsax.heart5,
+                              color: isFavorite ? ColorManager.lightprimary : ColorManager.grey,
+                            ),
                           ),
                         ),
-                      ),
+                        ),
+
 
                     ],
                   ),
@@ -287,6 +339,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   SizedBox(height: 18.h),
                    StatusSection(product: product,),
                   SizedBox(height: 17.h),
+                  SectionTitle(
+                      title: AppLocalizations.of(context)!.carCode),
+                  SizedBox(height: 4.h),
+                  Text(
+                   product.code??"",
+                    style: GoogleFonts.poppins(
+                      fontSize: 14.sp,
+                      color: const Color(0xff404147),
+                    ),
+                  ),
 
                   SectionTitle(
                       title: AppLocalizations.of(context)!.description),
@@ -387,7 +449,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             return const SizedBox.shrink();
           }
         }
-      ),
+      )),
     );
   }
 }

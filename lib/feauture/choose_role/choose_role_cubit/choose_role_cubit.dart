@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum UserRole { owner, client, customerService, inspector }
+enum UserRole { owner, Client, customerService, inspector }
 
 class RoleCubit extends Cubit<UserRole?> {
   static UserRole? selectedRole; // Static variable to store selected role

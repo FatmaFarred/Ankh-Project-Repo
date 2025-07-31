@@ -2137,6 +2137,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Inspection Management'**
   String get insepectionManagement;
+
+  /// No description provided for @carCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Car Code'**
+  String get carCode;
+
+  /// No description provided for @reactDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'For interact with this feature, you need to login first.'**
+  String get reactDenied;
 }
 
 class _AppLocalizationsDelegate

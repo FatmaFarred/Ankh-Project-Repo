@@ -1064,4 +1064,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get insepectionManagement => 'Inspection Management';
+
+  @override
+  String get carCode => 'Car Code';
+
+  @override
+  String get reactDenied =>
+      'For interact with this feature, you need to login first.';
 }

@@ -219,7 +219,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   color: _selectedIndex == 6 ? Colors.white : Colors.black, // Icon color
                 ),
                 title: Text(
-                  AppLocalizations.of(context)!.notifications,
+                  AppLocalizations.of(context)!.points,
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 6 ? Colors.white : null), // Text color
                 ),
 

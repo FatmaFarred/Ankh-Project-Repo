@@ -5,14 +5,16 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../api_service/di/di.dart';
 import '../../../../domain/use_cases/authentication/signin_usecase.dart';
+import '../../../profile/cubit/profile_cubit.dart';
 
 @injectable
 class SignInCubit extends Cubit<SignInState> {
   final SignInUseCase signInUseCase;
 
-  final email = TextEditingController(text: "inspect3@gmail.com");
-  final password = TextEditingController(text: "Fatma1234@");
+  final email = TextEditingController(text: "admin@system.com");
+  final password = TextEditingController(text: "Admin@123");
   bool isPasswordVisible = false;
 
   SignInCubit(this.signInUseCase) : super(SignInInitial());
@@ -37,6 +39,12 @@ class SignInCubit extends Cubit<SignInState> {
       emit(SignInFailure(error: error));
     }, (response) {
       print("✅ SignIn Success: ${response.message}");
+      final String token = response.token??"";
+      final String userId = response.user?.id??"";
+      final profileCubit = getIt<ProfileCubit>();
+      profileCubit.fetchProfile(token, userId); // No await — runs in background
+
+
 
       emit(SignInSuccess(response:response));
     });

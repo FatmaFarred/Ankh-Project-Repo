@@ -20,13 +20,4 @@ class InspectionManagementError extends InspectionManagementState {
   Failure error;
   InspectionManagementError({required this.error});
 }
-class RescheduleInspectionInitial extends InspectionManagementState {}
-class RescheduleInspectionLoading extends InspectionManagementState {}
-class RescheduleInspectionSuccess extends InspectionManagementState {
-  final String message;
-  RescheduleInspectionSuccess({required this.message});
-}
-class RescheduleInspectionError extends InspectionManagementState {
-  final Failure error;
-  RescheduleInspectionError({required this.error});
-}
+

@@ -346,10 +346,7 @@
   "reschedule": "إعادة جدولة",
   "date": " التاريخ",
   "time": "الوقت",
-  "inspectionManagement": "إدارة المعاينات"
-
-
-
-
-
+  "inspectionManagement": "إدارة المعاينات",
+  "carCode": "رمز السيارة",
+  "reactDenied": " للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً."
 }

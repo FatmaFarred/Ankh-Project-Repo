@@ -349,7 +349,10 @@
   "reschedule": "Reschedule",
   "date": "Date",
     "time": "Time",
-  "insepectionManagement": "Inspection Management"
+  "insepectionManagement": "Inspection Management",
+  "carCode": "Car Code",
+  "reactDenied": "For interact with this feature, you need to login first."
+
 
 
 

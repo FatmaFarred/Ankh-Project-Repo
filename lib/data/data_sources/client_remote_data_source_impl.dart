@@ -196,5 +196,115 @@ class ClientRemoteDataSourceImpl implements ClientRemoteDataSource {
       return left(ServerError(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String?>> addFavourite(String userId, num productId) async{
+
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.addFavorite}";
+        print('🌐 Full URL: $fullUrl');
+
+
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint:EndPoints.addFavorite,
+          queryParameters: {'userId': userId,
+           'productId': productId
+          },
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final  myResponse = response.data;
+
+
+          print('✅ Request successful. Message: ${myResponse}');
+
+          return right(myResponse);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: response.data.toString()));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String?>> removeFavourite(String userId, num productId)async {
+
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.removeFavorite}";
+        print('🌐 Full URL: $fullUrl');
+
+
+
+        var response = await apiManager.deleteData(
+          url: ApiConstant.baseUrl,
+          endPoint:EndPoints.removeFavorite,
+          queryParameters: {'userId': userId,
+            'productId': productId
+          },
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final  myResponse = response.data;
+
+          print('✅ Request successful. Message: ${myResponse}');
+
+          return right(myResponse);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: response.data.toString()));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }  }
 }
 

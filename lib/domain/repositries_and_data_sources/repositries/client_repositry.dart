@@ -10,6 +10,9 @@ import '../../entities/user_profile_entity.dart';
 abstract class ClientRepositry {
   Future <Either<Failure,List<AllUsersEntity>>> getAllUsers();
   Future <Either<Failure,List<ProductDetailsEntity>>> getUserFavourite( String userId );
+  Future <Either<Failure,String?>> addFavourite( String userId , num productId );
+  Future <Either<Failure,String?>> removeFavourite( String userId , num productId );
+
   Future <Either<Failure,List<AllUsersEntity>>> searchUsers(String keyword);
 
 

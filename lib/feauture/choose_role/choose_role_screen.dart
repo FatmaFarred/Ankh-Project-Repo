@@ -58,10 +58,10 @@ class ChooseRoleScreen extends StatelessWidget {
               subtitle: AppLocalizations.of(context)!.clientDescription,
               image: ImageAssets.clientIcon,
               onTap: (){
-                context.read<RoleCubit>().selectRole(UserRole.client);
+                context.read<RoleCubit>().selectRole(UserRole.Client);
 
               },
-              isSelected: selectedRole == UserRole.client,
+              isSelected: selectedRole == UserRole.Client,
             ),
             SizedBox(height: 15.h,),
             ContainerWithListTile(title: AppLocalizations.of(context)!.cst,

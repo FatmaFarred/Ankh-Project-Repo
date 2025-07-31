@@ -44,8 +44,12 @@ abstract class EndPoints {
   static const String getUserFavourite = "Home/user-favorites";
   static const String searchUsers = "Customer/search-customers";
   static const String getAllInspections = "RequestInspections/all";
-  static const String searchAllInspections = "RequestInspections/search";
+  static const String searchAllInspections = "RequestInspections/search-request";
   static const String rescheduleInspection = "RequestInspections/reschedule-inspection";
+  static const String registerCustomer  = "Auth/register-customer";
+  static const String addFavorite = "Home/add-favorites";
+  static const String removeFavorite = "Home/remove";
+
 
 
 

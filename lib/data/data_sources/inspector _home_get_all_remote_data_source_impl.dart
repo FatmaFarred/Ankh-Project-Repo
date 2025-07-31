@@ -465,7 +465,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
           endPoint: EndPoints.searchAllInspections,
           options: Options(validateStatus: (_) => true),
           queryParameters: {
-            'search': keyWord,
+            'searchTerm': keyWord,
           },
 
         );

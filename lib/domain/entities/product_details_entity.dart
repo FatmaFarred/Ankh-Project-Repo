@@ -27,6 +27,7 @@
 class ProductDetailsEntity {
   ProductDetailsEntity({
     this.id,
+    this.productId,
     this.title,
     this.description,
     this.make,
@@ -48,11 +49,15 @@ class ProductDetailsEntity {
     this.batteryCapacity,
     this.videoUrl,
     this.imageUrls,
+    this.image,
     this.createdAt,
     this.lastEditedAt,
+    this.code,
+
     this.usedDetails,});
 
   num? id;
+  num? productId;
   String? title;
   String? description;
   String? make;
@@ -61,6 +66,8 @@ class ProductDetailsEntity {
   num? year;
   num? mileage;
   String? color;
+  String? code;
+
   bool? isUsedVehicle;
   String? status;
   String? price;
@@ -74,6 +81,7 @@ class ProductDetailsEntity {
   String? batteryCapacity;
   List<dynamic>? videoUrl;
   List<String>? imageUrls;
+  String? image;
   String? createdAt;
   String? lastEditedAt;
   UsedDetailsEntity? usedDetails;

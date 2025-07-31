@@ -14,8 +14,7 @@ import '../../../domain/use_cases/search_inspection_admin_use_case.dart';
 class InspectionManagementCubit extends Cubit<InspectionManagementState> {
   GetAllInspectionAdminUseCase getAllInspectionAdminUseCase;
   SearchInspectionAdminUseCase searchInspectionAdminUseCase;
-  RescheduleInspectionUseCase rescheduleInspectionUseCase;
-  InspectionManagementCubit(this.getAllInspectionAdminUseCase,this.searchInspectionAdminUseCase,this.rescheduleInspectionUseCase) : super(InspectionManagementInitial());
+  InspectionManagementCubit(this.getAllInspectionAdminUseCase,this.searchInspectionAdminUseCase) : super(InspectionManagementInitial());
 
   Future<void> fetchInspections() async {
     emit(InspectionManagementLoading());
@@ -40,14 +39,5 @@ class InspectionManagementCubit extends Cubit<InspectionManagementState> {
     });
 
   }
-  Future<void> rescheduleInspection({required String date,required String time,required String adminNote, required num inspectionId }) async {
-    emit(RescheduleInspectionLoading());
-    // Assuming you have a use case for rescheduling inspections
-    var either = await rescheduleInspectionUseCase.execute(date, time, adminNote, inspectionId);
-    either.fold((error) {
-      emit(RescheduleInspectionError(error: error));
-    }, (response) {
-      emit(RescheduleInspectionSuccess(message: response??""));
-    });
-  }
+
 }

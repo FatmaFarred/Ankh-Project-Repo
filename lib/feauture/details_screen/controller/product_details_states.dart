@@ -12,7 +12,12 @@ class ProductDetailsLoading extends ProductDetailsStates {}
 
 class ProductDetailsSuccess extends ProductDetailsStates {
   final ProductDetailsEntity productDetails;
-  ProductDetailsSuccess({ required this.productDetails});
+  final bool isFavorite; // ← Add this
+
+  ProductDetailsSuccess({ required this.productDetails,
+    required this.isFavorite ,
+
+  });
 }
 
 

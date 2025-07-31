@@ -4,6 +4,8 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_search_bar.dart';
 import 'package:ankh_project/feauture/dashboard/custom_widgets/custom_bottom_sheet.dart';
 import 'package:ankh_project/feauture/dashboard/inspection_managemnt/cubit.dart';
+import 'package:ankh_project/feauture/dashboard/inspection_managemnt/reschedule_cubit.dart';
+import 'package:ankh_project/feauture/dashboard/inspection_managemnt/reschedule_states.dart';
 import 'package:ankh_project/feauture/dashboard/inspection_managemnt/states.dart';
 import 'package:ankh_project/feauture/dashboard/users_management/user_details_screen.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
@@ -22,6 +24,7 @@ import '../../../core/customized_widgets/reusable_widgets/custom_text_field.dart
 import '../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../../domain/entities/all_inpection_entity.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../marketer_Reports/marketer_report_details/report_details.dart';
 import '../users_management/users_management_screen.dart';
 import '../widgets/adjust_points_bottom_sheet.dart';
 import 'ispection_bottom_sheet.dart';
@@ -38,7 +41,8 @@ class _InspectionsManagementScreenState
     extends State<InspectionsManagementScreen> {
   final TextEditingController _searchController = TextEditingController();
   InspectionManagementCubit inspectionManagementCubit =
-  getIt<InspectionManagementCubit>();
+      getIt<InspectionManagementCubit>();
+  RescheduleCubit reschedulingCubit = getIt<RescheduleCubit>();
 
   @override
   void initState() {
@@ -60,8 +64,8 @@ class _InspectionsManagementScreenState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<InspectionManagementCubit, InspectionManagementState>(
-      bloc: inspectionManagementCubit,
+    return BlocListener<RescheduleCubit, RescheduleStates>(
+      bloc: reschedulingCubit,
       listener: (context, state) {
         if (state is RescheduleInspectionLoading) {
           CustomDialog.loading(
@@ -101,11 +105,10 @@ class _InspectionsManagementScreenState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.marketerManagement,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge!
-                      .copyWith(fontSize: 18.sp),
+                  AppLocalizations.of(context)!.insepectionManagement,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.headlineLarge!.copyWith(fontSize: 18.sp),
                 ),
               ],
             ),
@@ -114,9 +117,9 @@ class _InspectionsManagementScreenState
               child: CustomizedSearchBar(
                 onSearch: (keyword) {
                   if (keyword.isNotEmpty) {
-                    // handle search
+                    inspectionManagementCubit.searchInspections(keyword);
                   } else {
-                    // reset search
+                    inspectionManagementCubit.fetchInspections();
                   }
                 },
                 hintText: AppLocalizations.of(context)!.search,
@@ -130,108 +133,116 @@ class _InspectionsManagementScreenState
               ),
             ),
             Expanded(
-              child: BlocBuilder<InspectionManagementCubit,
-                  InspectionManagementState>(
-                bloc: inspectionManagementCubit,
-                builder: (context, state) {
-                  if (state is InspectionManagementLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is InspectionManagementError) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(state.error?.errorMessage ?? ""),
-                            CustomizedElevatedButton(
-                              bottonWidget: Text(
-                                AppLocalizations.of(context)!.tryAgain,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(color: ColorManager.white),
-                              ),
-                              color: ColorManager.lightprimary,
-                              borderColor: ColorManager.lightprimary,
-                              onPressed: () =>
-                                  inspectionManagementCubit.fetchInspections(),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  } else if (state is InspectionManagementEmpty) {
-                    return RefreshIndicator(
-                      color: ColorManager.lightprimary,
-                      onRefresh: _refreshData,
-                      child: ListView(
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.5,
-                            child: Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.noDataFound,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
+              child:
+                  BlocBuilder<
+                    InspectionManagementCubit,
+                    InspectionManagementState
+                  >(
+                    bloc: inspectionManagementCubit,
+                    builder: (context, state) {
+                      if (state is InspectionManagementLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is InspectionManagementError) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(state.error?.errorMessage ?? ""),
+                                CustomizedElevatedButton(
+                                  bottonWidget: Text(
+                                    AppLocalizations.of(context)!.tryAgain,
+                                    style: Theme.of(context).textTheme.bodyLarge
+                                        ?.copyWith(color: ColorManager.white),
+                                  ),
+                                  color: ColorManager.lightprimary,
+                                  borderColor: ColorManager.lightprimary,
+                                  onPressed: () => inspectionManagementCubit
+                                      .fetchInspections(),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  } else if (state is InspectionManagementSuccess) {
-                    final inspections = state.inspectionsList;
-                    return RefreshIndicator(
-                      color: ColorManager.lightprimary,
-                      onRefresh: _refreshData,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        itemCount: inspections.length,
-                        itemBuilder: (context, index) {
-                          final inspection = inspections[index];
-                          return InspectionCard(inspection: inspection,
-                              onRescheduleButton:() {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (_) => RescheduleInspectionBottomSheet(
-                                    inspectionId: inspection.id??0,
-                                    onConfirm: (id, date, time, reason) {
-                                      inspectionManagementCubit.rescheduleInspection(
-                                        inspectionId: id,
-                                        date: date,
-                                        time: time,
-                                        adminNote: reason,
-                                      );
-                                    },
+                        );
+                      } else if (state is InspectionManagementEmpty) {
+                        return RefreshIndicator(
+                          color: ColorManager.lightprimary,
+                          onRefresh: _refreshData,
+                          child: ListView(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                child: Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.noDataFound,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodyLarge,
                                   ),
-                                );
-                              }
-
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (state is InspectionManagementSuccess) {
+                        final inspections = state.inspectionsList;
+                        return RefreshIndicator(
+                          color: ColorManager.lightprimary,
+                          onRefresh: _refreshData,
+                          child: ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            itemCount: inspections.length,
+                            itemBuilder: (context, index) {
+                              final inspection = inspections[index];
+                              return InspectionCard(
+                                inspection: inspection,
+                                onRescheduleButton: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (_) =>
+                                        RescheduleInspectionBottomSheet(
+                                          inspectionId: inspection.id ?? 0,
+                                          onConfirm: (id, date, time, reason) {
+                                            reschedulingCubit
+                                                .rescheduleInspection(
+                                                  inspectionId: id,
+                                                  date: date,
+                                                  time: time,
+                                                  adminNote: reason,
+                                                );
+                                          },
+                                        ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
             ),
           ],
         ),
       ),
     );
   }
-
-
 }
 
 class InspectionCard extends StatelessWidget {
   final AllInpectionEntity inspection;
   final VoidCallback onRescheduleButton;
 
-   const InspectionCard({Key? key, required this.inspection, required this.onRescheduleButton}) : super(key: key);
+  const InspectionCard({
+    Key? key,
+    required this.inspection,
+    required this.onRescheduleButton,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -249,11 +260,10 @@ class InspectionCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child:   ClipRRect(
+                Expanded(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child:
-
-                    Image.network(
+                    child: Image.network(
                       "${ApiConstant.imageBaseUrl}${inspection.productImage}",
                       width: 64.w,
                       height: 64.h,
@@ -266,14 +276,12 @@ class InspectionCard extends StatelessWidget {
                             color: ColorManager.lightGrey,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Image.asset(
-                            ImageAssets.brokenImage,
-                          ),
+                          child: Image.asset(ImageAssets.brokenImage),
                         );
                       },
-                    )
-
-                ),),
+                    ),
+                  ),
+                ),
                 SizedBox(width: 16.w),
                 Expanded(
                   flex: 2,
@@ -285,45 +293,62 @@ class InspectionCard extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              inspection.productName??"",
-                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
-
-                              ),
+                              inspection.productName ?? "",
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 4.h,
+                            ),
                             decoration: BoxDecoration(
-                              color:  getStatusColor(getRequestStatusFromString(inspection?.status)??RequestStatus.pending),
+                              color: getStatusColor(
+                                getRequestStatusFromString(
+                                      inspection?.status,
+                                    ) ??
+                                    RequestStatus.pending,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
-                              inspection.status??"",
+                              inspection.status ?? "",
                               style: TextStyle(
-                                color:  getTextStatusColor(getRequestStatusFromString(inspection?.status)??RequestStatus.pending),
+                                color: getTextStatusColor(
+                                  getRequestStatusFromString(
+                                        inspection?.status,
+                                      ) ??
+                                      RequestStatus.pending,
+                                ),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                               ),
                             ),
                           ),
-
                         ],
                       ),
                       Row(
                         children: [
-                          SvgPicture.asset(ImageAssets.userIcon, height: 18.h, width: 18.w),
+                          SvgPicture.asset(
+                            ImageAssets.userIcon,
+                            height: 18.h,
+                            width: 18.w,
+                          ),
                           SizedBox(width: 6.w),
                           Expanded(
                             child: Text(
-                              inspection.clientName??"",
-                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              inspection.clientName ?? "",
+                              style: Theme.of(context).textTheme.bodyLarge!
+                                  .copyWith(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -332,44 +357,59 @@ class InspectionCard extends StatelessWidget {
                       SizedBox(height: 8.h),
                       Row(
                         children: [
-                          Icon(Icons.visibility, size: 18.sp, color: ColorManager.lightprimary),
+                          Icon(
+                            Icons.visibility,
+                            size: 18.sp,
+                            color: ColorManager.lightprimary,
+                          ),
                           SizedBox(width: 6.w),
                           Text(
-                            inspection.inspectorName??"",
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                            inspection.inspectorName ?? "",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                           ),
                         ],
                       ),
                       SizedBox(height: 8.h),
                       Row(
                         children: [
-                          Icon(Icons.location_on_outlined, size: 18.sp, color: ColorManager.lightprimary),
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 18.sp,
+                            color: ColorManager.lightprimary,
+                          ),
                           SizedBox(width: 6.w),
                           Text(
-                            inspection.address??"",
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                            inspection.address ?? "",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                           ),
                         ],
                       ),
                       SizedBox(height: 10.h),
                       Row(
                         children: [
-                          SvgPicture.asset(ImageAssets.calenderIcon, height: 18.h, width: 18.w),
+                          SvgPicture.asset(
+                            ImageAssets.calenderIcon,
+                            height: 18.h,
+                            width: 18.w,
+                          ),
                           SizedBox(width: 6.w),
                           Text(
-    (inspection.preferredDate != null &&
-    inspection.preferredTime != null)
-    ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(inspection.preferredDate!))} – ${inspection.preferredTime}"
-        : AppLocalizations.of(context)!.noDataFound,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                            (inspection.preferredDate != null &&
+                                    inspection.preferredTime != null)
+                                ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(inspection.preferredDate!))} – ${inspection.preferredTime}"
+                                : AppLocalizations.of(context)!.noDataFound,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                           ),
                         ],
                       ),
                       SizedBox(height: 10.h),
-                      Row(
-                        children: [
-                        ],
-                      ),
+                      Row(children: []),
                     ],
                   ),
                 ),
@@ -389,9 +429,17 @@ class InspectionCard extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-
+                    Navigator.of(context).pushNamed(
+                      MarketerReportDetails.reportDetailsRouteName,
+                      arguments: inspection.id,
+                    );
                   },
-                  icon: Icon(Icons.visibility, color: Color(0xffD4AF37), size: 20.sp),
+
+                  icon: Icon(
+                    Icons.visibility,
+                    color: Color(0xffD4AF37),
+                    size: 20.sp,
+                  ),
                   label: Text(
                     AppLocalizations.of(context)!.viewReport,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -409,9 +457,13 @@ class InspectionCard extends StatelessWidget {
                       side: BorderSide(color: ColorManager.darkGrey),
                     ),
                   ),
-                  onPressed:onRescheduleButton ,
+                  onPressed: onRescheduleButton,
 
-                  icon: Icon(Icons.restore_outlined, color: ColorManager.lightprimary, size: 20.sp),
+                  icon: Icon(
+                    Icons.restore_outlined,
+                    color: ColorManager.lightprimary,
+                    size: 20.sp,
+                  ),
                   label: Text(
                     AppLocalizations.of(context)!.reschedule,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -427,6 +479,4 @@ class InspectionCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
