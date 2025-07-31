@@ -138,11 +138,20 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
 
 
                     SizedBox(height: 20.h),
+
+                    SizedBox(height: 20.h),
+
                     PhotoListView(
                       imageUrls: details.productImages ?? [],
                     ),
                     (details.inspectionImages == null || details.inspectionImages!.isEmpty || details.inspectorComment == null)?SizedBox():Column(
+
                       children: [
+                        PhotoListView(
+                          imageUrls: details.inspectionImages ?? [],
+                          title: AppLocalizations.of(context)!.inspectionImages,
+                        ),
+
                         RadioStatusGroup(
                           title: AppLocalizations.of(context)!.inspectionResults,
                           statusOptions: statusOptions,

@@ -14,6 +14,8 @@ abstract class PointsRemoteDataSource {
   Future <Either<Failure,String?>> editPointPrice(String roleName,num price);
   Future <Either<Failure,String?>> addPointRequest(String token,String description,num points);
   Future <Either<Failure,BalanceResponseEntity>> getBalance(String token);
+  Future <Either<Failure,String?>> adjustUserPoints(String userId,num points,String reason );
+
 
 
 

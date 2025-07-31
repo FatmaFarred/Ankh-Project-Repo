@@ -17,7 +17,12 @@ class AllInspectorsDm  extends AllInspectorsEntity {
       super.code,
       super.totalInspections,
       super.completedInspections,
-    super.accountStatus
+    super.vehicleType,
+    super.licenseNumber,
+    super.licenseImage,
+    super.vehicleLicenseNumber,
+    super.vehicleImage,
+    super.workArea,
 
 
   });
@@ -30,20 +35,14 @@ class AllInspectorsDm  extends AllInspectorsEntity {
     code = json['code'];
     totalInspections = json['totalInspections'];
     completedInspections = json['completedInspections'];
-    accountStatus = json['accountStatus'];
+    vehicleType = json['vehicleType'];
+    licenseNumber = json['licenseNumber'];
+    licenseImage = json['licenseImage'];
+    vehicleLicenseNumber = json['vehicleLicenseNumber'];
+    vehicleImage = json['vehicleImage'];
+    workArea = json['workArea'];
+
   }
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['fullName'] = fullName;
-    map['email'] = email;
-    map['phoneNumber'] = phoneNumber;
-    map['code'] = code;
-    map['totalInspections'] = totalInspections;
-    map['completedInspections'] = completedInspections;
-    map['accountStatus'] = accountStatus;
-    return map;
-  }
 
 }

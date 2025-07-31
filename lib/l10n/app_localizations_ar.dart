@@ -722,6 +722,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noInspectionsFound => 'لا توجد فحوصات متاحة';
 
   @override
+  String get noUsersFound => 'لا يوجد مستخدمين';
+
+  @override
+  String get noFavoritesFound => 'لا توجد منتجات مفضلة';
+
+  @override
+  String get favoriteProducts => 'المنتجات المفضلة';
+
+  @override
   String get inspectionResults => 'نتائج الفحص';
 
   @override
@@ -1022,4 +1031,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submit => 'إرسال';
+
+  @override
+  String get inspectionImages => ' صور المعاينة';
+
+  @override
+  String get sendPoints => 'إرسال النقاط';
+
+  @override
+  String get sendPointsSubTitle =>
+      'قم بإرسال النقاط إلى العميل. سيتم تحديث رصيد العميل تلقائيًا.';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get inspectorDocuments => 'مستندات المعاين';
+
+  @override
+  String get resechudleInspection => 'إعادة جدولة المعاينة';
+
+  @override
+  String get reschedule => 'إعادة جدولة';
+
+  @override
+  String get date => ' التاريخ';
+
+  @override
+  String get time => 'الوقت';
+
+  @override
+  String get insepectionManagement => 'Inspection Management';
 }

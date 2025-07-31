@@ -1478,6 +1478,24 @@ abstract class AppLocalizations {
   /// **'No Inspections Found'**
   String get noInspectionsFound;
 
+  /// No description provided for @noUsersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No users found'**
+  String get noUsersFound;
+
+  /// No description provided for @noFavoritesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorite products found'**
+  String get noFavoritesFound;
+
+  /// No description provided for @favoriteProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Products'**
+  String get favoriteProducts;
+
   /// No description provided for @inspectionResults.
   ///
   /// In en, this message translates to:
@@ -2059,6 +2077,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit'**
   String get submit;
+
+  /// No description provided for @inspectionImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Images'**
+  String get inspectionImages;
+
+  /// No description provided for @sendPoints.
+  ///
+  /// In en, this message translates to:
+  /// **' Send Points'**
+  String get sendPoints;
+
+  /// No description provided for @sendPointsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' select the user you want to send points to and enter the amount.'**
+  String get sendPointsSubTitle;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @inspectorDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **' Inspector Documents'**
+  String get inspectorDocuments;
+
+  /// No description provided for @resechudleInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule Inspection'**
+  String get resechudleInspection;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get reschedule;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @insepectionManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Management'**
+  String get insepectionManagement;
 }
 
 class _AppLocalizationsDelegate
