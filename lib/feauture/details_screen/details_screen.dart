@@ -189,18 +189,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ):SizedBox.shrink(),
                       Positioned(
                         left: 13.w,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isFavorite = !isFavorite; // toggle the value
-                            });
+                        child: StatefulBuilder(
+                          builder: (context, setFavoriteState) {
+                            return GestureDetector(
+                              onTap: () {
+                                setFavoriteState(() {
+                                  isFavorite = !isFavorite; // toggle the value
+                                });
+                              },
+                              child: CircleAvatar(
+                                radius: 30.r,
+                                backgroundColor: ColorManager.white,
+                                child: Icon(
+                                  Iconsax.heart5,
+                                  color: isFavorite ? ColorManager.lightprimary : ColorManager.grey,
+                                ),
+                              ),
+                            );
                           },
-                          child: CircleAvatar(radius: 30.r,
-
-                            backgroundColor: ColorManager.white,
-                            child: Icon(Iconsax.heart5,color:isFavorite?ColorManager.lightprimary: ColorManager.grey,),
-
-                          ),
                         ),
                       ),
 

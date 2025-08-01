@@ -390,10 +390,10 @@ extension GetItInjectableX on _i174.GetIt {
         _i98.HomeGetAllInspectionRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
     gh.factory<_i526.ProductDetailsRemoteDataSource>(() =>
         _i500.ProductDetailsRemoteDataSourceImpl(gh<_i1069.ApiManager>()));
-    gh.factory<_i209.UnblockUserCubit>(
-        () => _i209.UnblockUserCubit(gh<_i877.UnBlockUserUseCase>()));
     gh.factory<_i714.UnblockInspectorCubit>(
         () => _i714.UnblockInspectorCubit(gh<_i877.UnBlockUserUseCase>()));
+    gh.factory<_i209.UnblockUserCubit>(
+        () => _i209.UnblockUserCubit(gh<_i877.UnBlockUserUseCase>()));
     gh.factory<_i883.UserProfileRepositry>(() => _i509.ProfileRepositryImpl(
         userProfileRemoteDataSource: gh<_i55.UserProfileRemoteDataSource>()));
     gh.factory<_i939.GetAllProductsUseCase>(
@@ -410,11 +410,11 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i871.MarketerSearchUseCase>(() => _i871.MarketerSearchUseCase(
         gh<_i863.MarketerAssignGetProductsRepositry>()));
-    gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
-        _i598.UpdateMarketerAccountStatusUseCase(
-            gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i537.MarketerUnAssignProductUseCase>(() =>
         _i537.MarketerUnAssignProductUseCase(
+            gh<_i863.MarketerAssignGetProductsRepositry>()));
+    gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
+        _i598.UpdateMarketerAccountStatusUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
@@ -437,10 +437,10 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i223.ResetPasswordRemoteDataSourse>()));
     gh.factory<_i147.PointsRepositry>(
         () => _i301.Pointsrepositryimpl(gh<_i200.PointsRemoteDataSource>()));
-    gh.factory<_i338.BlockUserCubit>(
-        () => _i338.BlockUserCubit(gh<_i808.BlockUserUseCase>()));
     gh.factory<_i32.BlockInspectorCubit>(
         () => _i32.BlockInspectorCubit(gh<_i808.BlockUserUseCase>()));
+    gh.factory<_i338.BlockUserCubit>(
+        () => _i338.BlockUserCubit(gh<_i808.BlockUserUseCase>()));
     gh.factory<_i1072.MarketerRequestsForInspectionRepositry>(() =>
         _i942.MarketerRequestsForInspectionRepositryImpl(
             gh<_i44.MarketerRequestsForInspectionRemoteDataSource>()));
@@ -472,18 +472,18 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i526.ProductDetailsRemoteDataSource>()));
     gh.factory<_i962.AcceptPointRequestUseCase>(
         () => _i962.AcceptPointRequestUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i557.GetAllPointRequestUseCase>(
-        () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i552.RejectPointRequestUseCase>(
-        () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i391.AddPointRequestUseCase>(
+        () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i341.EditPointPriceUseCase>(
         () => _i341.EditPointPriceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i429.GetAllPointPriceUseCase>(
         () => _i429.GetAllPointPriceUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i391.AddPointRequestUseCase>(
-        () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i557.GetAllPointRequestUseCase>(
+        () => _i557.GetAllPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i78.GetBalanceUseCase>(
         () => _i78.GetBalanceUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i552.RejectPointRequestUseCase>(
+        () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i752.AddPointRequestCubit>(() => _i752.AddPointRequestCubit(
         addPointRequestUseCase: gh<_i391.AddPointRequestUseCase>()));
     gh.factory<_i614.PointPricesCubit>(() => _i614.PointPricesCubit(
@@ -503,12 +503,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i176.MarketerAddRequestInspectionUseCase>(() =>
         _i176.MarketerAddRequestInspectionUseCase(
             gh<_i233.MarketerAddRequestInspectionRepositry>()));
+    gh.factory<_i1025.GetAllInspectionByIdUseCase>(() =>
+        _i1025.GetAllInspectionByIdUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.factory<_i147.GetMyInspectionsUseCase>(() =>
         _i147.GetMyInspectionsUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.factory<_i708.GetReportDetailsUseCase>(() =>
         _i708.GetReportDetailsUseCase(gh<_i17.MyInspectionsRepository>()));
-    gh.factory<_i1025.GetAllInspectionByIdUseCase>(() =>
-        _i1025.GetAllInspectionByIdUseCase(gh<_i17.MyInspectionsRepository>()));
     gh.lazySingleton<_i110.InspectionRequestDetailsRepository>(() =>
         _i413.InspectionRequestDetailsRepositoryImpl(
             gh<_i147.InspectionRequestDetailsRemoteDataSource>()));
@@ -535,6 +535,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i280.MarketerAddRequestCubit>(() =>
         _i280.MarketerAddRequestCubit(
             gh<_i176.MarketerAddRequestInspectionUseCase>()));
+    gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
+        _i747.GetInspectorInspectionsUseCase(
+            gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i826.InspectorHomeSearchUseCase>(() =>
         _i826.InspectorHomeSearchUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
@@ -543,9 +546,6 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i868.InspectorHomeGetAllInspectionUseCase>(() =>
         _i868.InspectorHomeGetAllInspectionUseCase(
-            gh<_i700.HomeGetAllInspectionRepositry>()));
-    gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
-        _i747.GetInspectorInspectionsUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i635.InspectorHomeProductCubit>(() =>
         _i635.InspectorHomeProductCubit(
