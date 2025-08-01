@@ -189,6 +189,7 @@ class _MyAppState extends State<MyApp> {
 
 
     return ScreenUtilInit(
+
     designSize: const Size(428, 926.76),
     minTextAdapt: true,
     splitScreenMode: true,
@@ -252,6 +253,7 @@ class _MyAppState extends State<MyApp> {
     );
     },
     );
+
 
     }
   }
