@@ -724,6 +724,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noInspectionsFound => 'No Inspections Found';
 
   @override
+  String get noUsersFound => 'No users found';
+
+  @override
+  String get noFavoritesFound => 'No favorite products found';
+
+  @override
+  String get favoriteProducts => 'Favorite Products';
+
+  @override
   String get inspectionResults => 'Inspection Results';
 
   @override
@@ -1024,4 +1033,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submit => 'Submit';
+
+  @override
+  String get inspectionImages => 'Inspection Images';
+
+  @override
+  String get sendPoints => ' Send Points';
+
+  @override
+  String get sendPointsSubTitle =>
+      ' select the user you want to send points to and enter the amount.';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get inspectorDocuments => ' Inspector Documents';
+
+  @override
+  String get resechudleInspection => 'Reschedule Inspection';
+
+  @override
+  String get reschedule => 'Reschedule';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get insepectionManagement => 'Inspection Management';
+
+  @override
+  String get carCode => 'Car Code';
+
+  @override
+  String get reactDenied =>
+      'For interact with this feature, you need to login first.';
 }

@@ -39,6 +39,17 @@ abstract class EndPoints {
   static const String getBalance = "Point/balance";
   static const String getProfile = "Profile/get-user";
   static const String editProfile = "Profile/edit-profile";
+  static const String adjustUserPoints = "Point/adjust-points";
+  static const String getAllUsers = "Customer/get-all-customers";
+  static const String getUserFavourite = "Home/user-favorites";
+  static const String searchUsers = "Customer/search-customers";
+  static const String getAllInspections = "RequestInspections/all";
+  static const String searchAllInspections = "RequestInspections/search-request";
+  static const String rescheduleInspection = "RequestInspections/reschedule-inspection";
+  static const String registerCustomer  = "Auth/register-customer";
+  static const String addFavorite = "Home/add-favorites";
+  static const String removeFavorite = "Home/remove";
+
 
 
 

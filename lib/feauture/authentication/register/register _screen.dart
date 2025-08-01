@@ -10,6 +10,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
 import '../signin/signin_screen.dart';
@@ -33,6 +34,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedRole = context.watch<RoleCubit>().state;
+    print("selectedRole:${selectedRole}");
+
 
     return BlocListener<RegisterCubit, RegisterState>(
         bloc: registerViewModel,
@@ -49,7 +53,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             positiveText:  AppLocalizations.of(context)!.tryAgain,
             positiveOnClick: () {
               Navigator.of(context).pop();
-              registerViewModel.register();
+              selectedRole==UserRole.Client?
+              registerViewModel.clientRegister():
+                  registerViewModel.register();
 
             },
             title: AppLocalizations.of(context)!.error,
@@ -194,7 +200,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomizedElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        selectedRole==UserRole.Client?
+                        registerViewModel.clientRegister():
                         registerViewModel.register();
+
 
 
                       }

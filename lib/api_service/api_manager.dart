@@ -7,13 +7,12 @@ import 'api_constants.dart';
 class ApiManager {
   final dio = Dio();
 
-  Future<Response> getData(
-      {required String endPoint,
-        required String url,
+  Future<Response> getData({required String endPoint,
+    required String url,
 
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        Map<String, dynamic>? headers}) {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    Map<String, dynamic>? headers}) {
     return dio.get(
       url + endPoint,
       queryParameters: queryParameters,
@@ -45,6 +44,7 @@ class ApiManager {
       ),
     );
   }
+
   Future<Response> putData({
     required String endPoint,
     required String url,
@@ -71,14 +71,12 @@ class ApiManager {
   }
 
 
-
-  Future<Response> patchData(
-      {required String endPoint,
-        required String url,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        Object? data,
-        Map<String, dynamic>? headers}) {
+  Future<Response> patchData({required String endPoint,
+    required String url,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    Object? data,
+    Map<String, dynamic>? headers}) {
     return dio.patch(
       url + endPoint,
       queryParameters: queryParameters,
@@ -87,14 +85,14 @@ class ApiManager {
     );
   }
 
-  Future<Response> deleteData(
-      {required String endPoint,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        Object? data,
-        Map<String, dynamic>? headers}) {
+  Future<Response> deleteData({required String endPoint,
+    required String url,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    Object? data,
+    Map<String, dynamic>? headers}) {
     return dio.delete(
-      ApiConstant.baseUrl + endPoint,
+      url + endPoint,
       queryParameters: queryParameters,
       data: data,
       options: Options(validateStatus: (status) => true, headers: headers),

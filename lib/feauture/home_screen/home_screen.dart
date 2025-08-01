@@ -31,12 +31,12 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 8.h),
                  TopBrandsList(),
               SizedBox(height: 20.h),
-              SectionTitle(
+           /*   SectionTitle(
                 title: AppLocalizations.of(context)!.popularNewCars,
 
               ),
               const SizedBox(height: 8),
-              const PopularCarsList(),
+              const PopularCarsList(),*/
               SizedBox(height: 20.h),
               SectionTitle(
                 title: AppLocalizations.of(context)!.recommendedCars,

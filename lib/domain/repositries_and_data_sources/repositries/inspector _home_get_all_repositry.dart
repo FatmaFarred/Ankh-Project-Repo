@@ -15,6 +15,11 @@ abstract class HomeGetAllInspectionRepositry{
   Future <Either<Failure,List<AllInspectorsEntity>>>getAllInspectors ( );
   Future <Either<Failure,List<AllInspectorsEntity>>>searchInspectors (String keyWord);
   Future <Either<Failure,List<AllInpectionEntity>>>getInspectionsByInspectorId (String inspectorId);
+  Future <Either<Failure,List<AllInpectionEntity>>>getAllInspection ();
+  Future <Either<Failure,List<AllInpectionEntity>>>searchAllInspectionAdmin (String keyWord);
+  Future <Either<Failure,String?>>rescheduleInspection(String date,String time,String adminNote,num inspectionId);
+
+
 
 
 

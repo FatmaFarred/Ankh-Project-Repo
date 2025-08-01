@@ -153,7 +153,9 @@ class AdminPermissionsRemoteDataSourceImpl implements AdminPermissionsRemoteData
         }
 
 
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           final  myResponse = response.data;
 

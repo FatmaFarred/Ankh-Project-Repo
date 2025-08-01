@@ -37,6 +37,7 @@ class HeaderSection extends StatelessWidget {
       final state = profileCubit.state;
 
       String userName = AppLocalizations.of(context)!.visitor;
+      print("currentUserRole:${user?.roles?[0]}");
       String? profileImageUrl;
       num? rate;
 

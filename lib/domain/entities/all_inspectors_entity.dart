@@ -15,7 +15,12 @@ class AllInspectorsEntity {
       this.code, 
       this.totalInspections, 
       this.completedInspections,
-    this.accountStatus
+      this.vehicleType,
+      this.licenseNumber,
+      this.licenseImage,
+      this.vehicleLicenseNumber,
+      this.vehicleImage,
+      this.workArea,
 
   });
 
@@ -26,7 +31,14 @@ class AllInspectorsEntity {
   String? code;
   num? totalInspections;
   num? completedInspections;
-  String? accountStatus;
+  String? vehicleType;
+  String? licenseNumber;
+  String? licenseImage;
+  String? vehicleLicenseNumber;
+  String? vehicleImage;
+  String? workArea;
+
+
 
 
 }

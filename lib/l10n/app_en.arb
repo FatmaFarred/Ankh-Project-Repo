@@ -235,6 +235,9 @@
   "returnedToMarketer": "Returned to Marketer",
   "clientRejected": "Client Rejected",
   "noInspectionsFound": "No Inspections Found",
+  "noUsersFound": "No users found",
+  "noFavoritesFound": "No favorite products found",
+  "favoriteProducts": "Favorite Products",
   "inspectionResults": "Inspection Results",
   "noPhotosAvailable": "No Photos Available",
   "productPhotos": "Product Photos",
@@ -336,7 +339,24 @@
   "enterPointsCount": "Enter Points Count",
   "description": "Description ",
   "enterDescription": " Enter Description",
-  "submit": "Submit"
+  "submit": "Submit",
+  "inspectionImages": "Inspection Images",
+  "sendPoints": " Send Points",
+  "sendPointsSubTitle": " select the user you want to send points to and enter the amount.",
+  "send": "Send",
+  "inspectorDocuments": " Inspector Documents",
+  "resechudleInspection": "Reschedule Inspection",
+  "reschedule": "Reschedule",
+  "date": "Date",
+    "time": "Time",
+  "insepectionManagement": "Inspection Management",
+  "carCode": "Car Code",
+  "reactDenied": "For interact with this feature, you need to login first."
+
+
+
+
+
 
 
 

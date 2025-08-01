@@ -100,7 +100,7 @@
   "supportTeam": "فريق الدعم",
   "chatNow": "ابدأ المحادثة",
   "images": "الصور",
-  "requestInspection": "طلب فحص",
+  "requestInspection": "طلب معاينة",
   "lastEdited": "آخر تعديل",
   "batteryCapacity": "سعة البطارية",
   "transmission": "ناقل الحركة",
@@ -231,6 +231,9 @@
   "returnedToMarketer": "أعيد إلى المسوّق",
   "clientRejected": "رفض العميل",
   "noInspectionsFound": "لا توجد فحوصات متاحة",
+  "noUsersFound": "لا يوجد مستخدمين",
+  "noFavoritesFound": "لا توجد منتجات مفضلة",
+  "favoriteProducts": "المنتجات المفضلة",
   "inspectionResults": "نتائج الفحص",
   "noPhotosAvailable": "لا توجد صور متاحة",
    "productPhotos": "صور المنتج",
@@ -333,12 +336,17 @@
   "description": "الوصف ",
     "enterDescription": "أدخل الوصف",
   "submit": "إرسال",
-  "editPrfile": "تعديل الملف الشخصي"
-
-
-
-
-
-
-
+  "editPrfile": "تعديل الملف الشخصي",
+  "inspectionImages": " صور المعاينة",
+  "sendPoints": "إرسال النقاط",
+    "sendPointsSubTitle": "قم بإرسال النقاط إلى العميل. سيتم تحديث رصيد العميل تلقائيًا.",
+    "send": "إرسال",
+  "inspectorDocuments": "مستندات المعاين",
+  "resechudleInspection": "إعادة جدولة المعاينة",
+  "reschedule": "إعادة جدولة",
+  "date": " التاريخ",
+  "time": "الوقت",
+  "inspectionManagement": "إدارة المعاينات",
+  "carCode": "رمز السيارة",
+  "reactDenied": " للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً."
 }

@@ -18,6 +18,7 @@ import '../../../core/constants/assets_manager.dart';
 import '../../../core/constants/font_manager/font_style_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/customized_containers/rounded_conatiner_image.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../details_screen/full_image_view_screen.dart';
 import '../../inspector_screen/widgets/photo_list_view.dart';
 import '../../marketer_Reports/marketer_report_details/report_details.dart';
 import '../../marketer_Reports/marketer_reports_screen.dart';
@@ -30,6 +31,8 @@ import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../custom_widgets/custom_bottom_sheet.dart';
 import 'cubit/block_inspector_cubit.dart';
 import 'cubit/unblock_inspector_cubit.dart';
+import '../cubit/adjust_user_points_cubit.dart';
+import '../widgets/adjust_points_bottom_sheet.dart';
 
 class InspectorDetailsScreen extends StatefulWidget {
   static const String routeName = 'InspectorDetailsScreen';
@@ -44,6 +47,7 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
   MyInspectionsCubit myInspectionsCubit = GetIt.instance<MyInspectionsCubit>();
   BlockInspectorCubit blockInspectorCubit = GetIt.instance<BlockInspectorCubit>();
   UnblockInspectorCubit unblockInspectorCubit = GetIt.instance<UnblockInspectorCubit>();
+  AdjustUserPointsCubit adjustUserPointsCubit = GetIt.instance<AdjustUserPointsCubit>();
   late AllInspectorsEntity inspector;
 
   @override
@@ -65,6 +69,7 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
     myInspectionsCubit.close();
     blockInspectorCubit.close();
     unblockInspectorCubit.close();
+    adjustUserPointsCubit.close();
     super.dispose();
   }
 
@@ -131,22 +136,54 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
                 positiveText: AppLocalizations.of(context)!.tryAgain,
                 positiveOnClick: () {
                   Navigator.of(context).pop();
-                  // Re-trigger the unblock action
                   _showUnblockInspectorBottomSheet();
                 },
                 title: AppLocalizations.of(context)!.error,
                 message: state.error.errorMessage,
+                negativeText: AppLocalizations.of(context)!.cancel,
+                negativeOnClick: () => Navigator.of(context).pop(),
               );
             } else if (state is UnblockInspectorSuccess) {
               Navigator.of(context).pop();
               CustomDialog.positiveButton(
                 context: context,
                 title: AppLocalizations.of(context)!.success,
-                message: state.response,
+                message: state.response ?? "User unblocked successfully",
+                positiveText: AppLocalizations.of(context)!.ok,
                 positiveOnClick: () {
                   Navigator.of(context).pop();
-
+                  Navigator.of(context).pop();
                 },
+              );
+            }
+          },
+        ),
+        BlocListener<AdjustUserPointsCubit, AdjustUserPointsState>(
+          bloc: adjustUserPointsCubit,
+          listener: (context, state) {
+            if (state is AdjustUserPointsLoading) {
+              CustomDialog.loading(
+                context: context,
+                message: AppLocalizations.of(context)!.loading,
+                cancelable: false,
+              );
+            } else if (state is AdjustUserPointsFailure) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.error,
+                message: state.failure.errorMessage,
+                positiveText: AppLocalizations.of(context)!.ok,
+                positiveOnClick: () => Navigator.of(context).pop(),
+              );
+            } else if (state is AdjustUserPointsSuccess) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.success,
+                message: state.message ?? "Points adjusted successfully",
+                positiveText: AppLocalizations.of(context)!.ok,
+                positiveOnClick: () => Navigator.of(context).pop(),
               );
             }
           },
@@ -168,6 +205,173 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
             children: [
               InspectorCard(inspector: inspector, showBottons: false),
               SizedBox(height: 16.h),
+              
+              // Inspector Images Section
+              if (inspector.licenseImage != null && inspector.licenseImage!.isNotEmpty || 
+                  inspector.vehicleImage != null && inspector.vehicleImage!.isNotEmpty) ...[
+                Row(
+                  children: [
+                    Icon(
+                      Icons.image,
+                      color: ColorManager.lightprimary,
+                      size: 18.sp,
+                    ),
+                    SizedBox(width: 6.w),
+                    Text(
+                      AppLocalizations.of(context)!.inspectorDocuments,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 12.h),
+                
+                // License Image
+                if (inspector.licenseImage != null && inspector.licenseImage!.isNotEmpty) ...[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.licenseImage,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullImageViewScreen(images: [  "${ApiConstant.imageBaseUrl}${inspector.licenseImage}"], initialIndex: 0,
+
+                                )
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 150.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(color: ColorManager.lightGrey),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Image.network(
+                              "${ApiConstant.imageBaseUrl}${inspector.licenseImage}",
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.lightGrey,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.broken_image,
+                                          color: ColorManager.darkGrey,
+                                          size: 32.sp,
+                                        ),
+                                        SizedBox(height: 8.h),
+                                        Text(
+                                          AppLocalizations.of(context)!.thereIsNoImages,
+                                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                            color: ColorManager.darkGrey,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                ],
+                
+                // Vehicle Image
+                if (inspector.vehicleImage != null && inspector.vehicleImage!.isNotEmpty) ...[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.vehicleImage,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FullImageViewScreen(images: [ "${ApiConstant.imageBaseUrl}${inspector.vehicleImage}"], initialIndex: 0,
+
+                              )
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 150.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(color: ColorManager.lightGrey),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Image.network(
+                              "${ApiConstant.imageBaseUrl}${inspector.vehicleImage}",
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.lightGrey,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.broken_image,
+                                          color: ColorManager.darkGrey,
+                                          size: 32.sp,
+                                        ),
+                                        SizedBox(height: 8.h),
+                                        Text(
+                                         AppLocalizations.of(context)!.thereIsNoImages,
+                                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                            color: ColorManager.darkGrey,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                ],
+              ],
+              
               Row(
                 children: [
                   SvgPicture.asset(
@@ -260,6 +464,21 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
                 },
                 color: ColorManager.error,
                 borderColor: ColorManager.error,
+              ),
+              SizedBox(height: 16.h),
+              CustomizedElevatedButton(
+                bottonWidget: Text(
+                  AppLocalizations.of(context)!.sendPoints,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontSize: 16.sp,
+                    color: ColorManager.white,
+                  ),
+                ),
+                onPressed: () {
+                  _showAdjustPointsBottomSheet();
+                },
+                color: ColorManager.lightprimary,
+                borderColor: ColorManager.lightprimary,
               ),
               SizedBox(height: 16.h),
               CustomizedElevatedButton(
@@ -454,6 +673,25 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
           unblockInspectorCubit.unblockInspector(inspector.id?.toString() ?? '');
         },
         icon: Icon(Icons.lock_open, color: ColorManager.lightprimary),
+      ),
+    );
+  }
+
+  void _showAdjustPointsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AdjustPointsBottomSheet(
+          userId: inspector.id?.toString() ?? '',
+          userName: inspector.fullName ?? 'Inspector',
+          onAdjustPoints: (userId, points, reason) {
+            adjustUserPointsCubit.adjustUserPoints(userId, points, reason);
+          },
+        ),
       ),
     );
   }

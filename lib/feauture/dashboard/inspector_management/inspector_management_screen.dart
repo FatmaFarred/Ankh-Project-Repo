@@ -191,7 +191,6 @@ class InspectorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isActive = inspector.accountStatus == 'Active';
     return Card(
       elevation: 0,
       color: ColorManager.white,
@@ -304,6 +303,96 @@ class InspectorCard extends StatelessWidget {
                 ),
               ],
             ),
+            // Vehicle Type
+            if (inspector.vehicleType != null && inspector.vehicleType!.isNotEmpty) ...[
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    ImageAssets.carIcon2,
+                    height: 18.h,
+                    width: 18.w,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.vehicleType} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.vehicleType ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            // License Number
+            if (inspector.licenseNumber != null && inspector.licenseNumber!.isNotEmpty) ...[
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.credit_card,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.licenseNumber} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.licenseNumber ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            // Vehicle License Number
+            if (inspector.vehicleLicenseNumber != null && inspector.vehicleLicenseNumber!.isNotEmpty) ...[
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.car_rental,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.vehicleLicenseNumber} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.vehicleLicenseNumber ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            // Work Area
+            if (inspector.workArea != null && inspector.workArea!.isNotEmpty) ...[
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.workArea} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.workArea ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            // License Image
+            // Vehicle Image
             SizedBox(height: 10.h),
             showBottons
                 ? Row(

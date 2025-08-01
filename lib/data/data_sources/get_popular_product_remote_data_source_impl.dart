@@ -11,6 +11,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   @override
   Future<List<ProductModel>> getPopularProducts() async {
     final response = await http.get(Uri.parse('${baseUrl}api/Home/popular'));
+    print('🔁 Status Code for popular: ${response.statusCode}');
+    print('📦 Response Body for popular: ${response.body}');
 
     if (response.statusCode == 200) {
       final List data = json.decode(response.body);

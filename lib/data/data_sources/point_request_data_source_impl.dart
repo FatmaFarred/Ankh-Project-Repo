@@ -65,7 +65,9 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
         print('🔍 Response type: ${response.data.runtimeType}');
 
         final myResponse = response.data;
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           print('✅ Request successful. Message: ${myResponse['message']}');
           return right(myResponse['message']);
@@ -111,7 +113,9 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
 
 
 
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           final List<dynamic> myResponse = response.data;
 
@@ -166,7 +170,9 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
         print('Type: ${response.data.runtimeType}');
         final  myResponse = response.data;
 
-
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           // Return success
@@ -336,6 +342,9 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
         print('🔍 Response type: ${response.data.runtimeType}');
 
         final myResponse = response.data;
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
 
@@ -392,6 +401,9 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
         print('🔍 Response type: ${response.data.runtimeType}');
 
         final myResponse = response.data;
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
 
@@ -414,6 +426,66 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
       return left(ServerError(errorMessage: e.toString()));
     }
 
+  }
+
+  @override
+  Future<Either<Failure, String?>> adjustUserPoints(String userId, num points, String reason)async {
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.adjustUserPoints}";
+        print('🌐 Full URL: $fullUrl');
+
+        print('📤 Sending GET request with headers:');
+
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.adjustUserPoints,
+          options: Options(validateStatus: (_) => true),
+
+          data:{
+            "userId": userId,
+            "points": points,
+            "reason": reason
+          }
+
+
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        final myResponse = response.data;
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+
+
+          print('✅ Request successful. Message: ${myResponse['message']}');
+          return right(myResponse['message']);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: myResponse));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
   }
 
 
