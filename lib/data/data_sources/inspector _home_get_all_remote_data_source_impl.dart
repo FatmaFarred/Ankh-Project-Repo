@@ -35,7 +35,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
           connectivityResult.contains(ConnectivityResult.mobile)) {
         var response = await apiManager.getData(
           url: ApiConstant.baseUrl,
-          endPoint: EndPoints.inspectorGetAllInspection,
+          endPoint: EndPoints.inspectorGetAllInspectionPending,
 
 
           options: Options(validateStatus: (_) => true),
@@ -300,8 +300,7 @@ class HomeGetAllInspectionRemoteDataSourceImpl implements HomeGetAllInspectionRe
           connectivityResult.contains(ConnectivityResult.mobile)) {
         var response = await apiManager.getData(
           url: ApiConstant.baseUrl,
-          endPoint: "${EndPoints
-              .inspectorGetAllInspection}/inspector/$inspectorId",
+          endPoint: "Inspections/Request-Assigned-To-Inspector/$inspectorId",
           options: Options(validateStatus: (_) => true),
         );
 

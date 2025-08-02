@@ -77,6 +77,9 @@ void main() async {
     print("👤 Token12: $token");
     print("👤 User ID12: $id");
     final profileCubit = getIt<ProfileCubit>();
+    // Start loading state immediately
+    profileCubit.preloadProfileData();
+    // Fetch profile data
     await profileCubit.fetchProfile(token, id);
   }
 

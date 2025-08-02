@@ -1071,4 +1071,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get reactDenied =>
       'For interact with this feature, you need to login first.';
+
+  @override
+  String get signInforMore => ' Sign in for more features';
 }

@@ -69,6 +69,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
     final user = context.read<UserCubit>().state;
     final userId = user?.id;
     await inspectorHomeProductCubit.fetchProducts();
+    print("👤 User IDd: $userId"); // Debug print
 
     /* print("👤 User ID: $userId"); // Debug print
     if (userId != null && userId.isNotEmpty) {

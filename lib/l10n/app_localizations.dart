@@ -2149,6 +2149,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'For interact with this feature, you need to login first.'**
   String get reactDenied;
+
+  /// No description provided for @signInforMore.
+  ///
+  /// In en, this message translates to:
+  /// **' Sign in for more features'**
+  String get signInforMore;
 }
 
 class _AppLocalizationsDelegate

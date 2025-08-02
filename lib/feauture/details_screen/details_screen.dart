@@ -32,8 +32,9 @@ import 'widgets/support_team_section.dart';
 
 class DetailsScreen extends StatefulWidget {
   static const String detailsScreenRouteName = "detailsScreen";
+  final bool? showButton  ; // Control visibility of the button
 
-  const DetailsScreen({super.key});
+  const DetailsScreen({super.key, this.showButton= false});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -43,6 +44,65 @@ class _DetailsScreenState extends State<DetailsScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   final favoriteCubit = getIt<FavoriteCubit>();
+
+  void _showCustomOverlay(BuildContext context, String message, {bool isError = false}) {
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).size.height * 0.7,
+        left: 20,
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: REdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            decoration: BoxDecoration(
+              color: isError ? Colors.red.shade100 : ColorManager.lightprimary,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: isError ? Colors.red.shade300 : ColorManager.lightprimary,
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  isError ? Icons.error_outline : Icons.check_circle_outline,
+                  color: isError ? Colors.red.shade700 : ColorManager.white,
+                  size: 24.sp,
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Text(
+                    message,
+                    style: GoogleFonts.inter(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: isError ? Colors.red.shade700 : ColorManager.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
+  }
 
 
   @override
@@ -68,6 +128,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   final GetFavoriteUseCase getFavoritesUseCase = getIt<GetFavoriteUseCase>();
 
   num? productId;
+
 
   @override
   void initState() {
@@ -106,35 +167,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
       bloc: favoriteCubit,
       listener: (context, state) {
         if (state is FavoriteSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.response)),
-          );
-          // ✅ Refresh product details to update `isFavorite`
-          productDetailsCubit.fetchDetails(productId: productId!);
+          _showCustomOverlay(context, state.response);
+          // No need to refresh entire product details - favorite state is managed locally
         } else if (state is FavoriteFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error?.errorMessage ?? "Error")),
+          _showCustomOverlay(
+            context, 
+            state.error?.errorMessage ?? "Error updating favorites",
+            isError: true
           );
-      }
-    },
+        }
+      },
 
-    child:Scaffold(
-      floatingActionButton:(user?.roles?[0] == "Marketer")?null: FloatingActionButton(
-        onPressed: () {},
-        tooltip: AppLocalizations.of(context)!.haveADeal,
-        backgroundColor: ColorManager.lightprimary,
-        child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
+      child: Scaffold(
+        floatingActionButton:(user?.roles?[0] == "Marketer")?null: FloatingActionButton(
+          onPressed: () {},
+          tooltip: AppLocalizations.of(context)!.haveADeal,
+          backgroundColor: ColorManager.lightprimary,
+          child: Icon(Icons.chat_bubble_outline_sharp, color: ColorManager.white),
+        ) ,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(CupertinoIcons.back),
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Text(AppLocalizations.of(context)!.details),
+          centerTitle: true,
+          backgroundColor: ColorManager.lightprimary,
+
       ) ,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(CupertinoIcons.back),
-          color: Colors.white,
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text(AppLocalizations.of(context)!.details),
-        centerTitle: true,
-        backgroundColor: ColorManager.lightprimary,
-      ),
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
         bloc: productDetailsCubit,
         builder: (context, state) {
@@ -212,48 +273,54 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                         ),
                       ):SizedBox.shrink(),
+                      user?.roles?[0] == "Admin"|| user?.roles?[0] == "Marketer"|| user?.roles?[0] == "Inspector"?
+                          SizedBox.shrink():
                       Positioned(
                         left: 13.w,
-                        child: GestureDetector(
-                          onTap: () {
-                            final user = context.read<UserCubit>().state;
-                            final String? userId = user?.id; // Make sure your UserCubit's state has `id`
-                            final num productId = this.productId!;
+                        child: StatefulBuilder(
+                          builder: (context, setFavoriteState) {
+                            return GestureDetector(
+                              onTap: () {
+                                final user = context.read<UserCubit>().state;
+                                final String? userId = user?.id;
+                                final num productId = this.productId!;
 
-                            if (userId == null) {
-                              CustomDialog.positiveAndNegativeButton(
-                                  context: context,
-                                  positiveText:  AppLocalizations.of(context)!.loginNow,
-                                  positiveOnClick: () {
-                                    Navigator.of(context).pushNamed(WelcomeScreen.welcomeScreenRouteName);
-                                  },
-                                  title: AppLocalizations.of(context)!.loginNow,
-                                  message: AppLocalizations.of(context)!.reactDenied);
-                              return;
-                            }
+                                if (userId == null) {
+                                  CustomDialog.positiveAndNegativeButton(
+                                      context: context,
+                                      positiveText: AppLocalizations.of(context)!.loginNow,
+                                      positiveOnClick: () {
+                                        Navigator.of(context).pushNamed(WelcomeScreen.welcomeScreenRouteName);
+                                      },
+                                      title: AppLocalizations.of(context)!.loginNow,
+                                      message: AppLocalizations.of(context)!.reactDenied);
+                                  return;
+                                }
 
-                            // Toggle UI immediately (better UX)
-                            setState(() {
-                              isFavorite = !isFavorite;
-                            });
+                                // Toggle UI immediately (better UX) - only rebuild the favorite icon
+                                setFavoriteState(() {
+                                  isFavorite = !isFavorite;
+                                });
 
-                            // Call the correct cubit method
-                            if (isFavorite) {
-                              favoriteCubit.addFavorite(userId: userId, productId: productId);
-                            } else {
-                              favoriteCubit.removeFavorite(userId: userId, productId: productId);
-                            }
+                                // Call the correct cubit method
+                                if (isFavorite) {
+                                  favoriteCubit.addFavorite(userId: userId, productId: productId);
+                                } else {
+                                  favoriteCubit.removeFavorite(userId: userId, productId: productId);
+                                }
+                              },
+                              child: CircleAvatar(
+                                radius: 30.r,
+                                backgroundColor: ColorManager.white,
+                                child: Icon(
+                                  Iconsax.heart5,
+                                  color: isFavorite ? ColorManager.lightprimary : ColorManager.grey,
+                                ),
+                              ),
+                            );
                           },
-                          child: CircleAvatar(
-                            radius: 30.r,
-                            backgroundColor: ColorManager.white,
-                            child: Icon(
-                              Iconsax.heart5,
-                              color: isFavorite ? ColorManager.lightprimary : ColorManager.grey,
-                            ),
-                          ),
                         ),
-                        ),
+                      ),
 
 
                     ],
@@ -413,18 +480,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
 
                   SizedBox(height: 16.h),
-                  user?.roles?[0] == "Admin" ?SizedBox.shrink() :SectionTitle(title: AppLocalizations.of(context)!.comments),
+                  user?.roles?[0] == "Admin"|| user?.roles?[0] == "Marketer"|| user?.roles?[0] == "Inspector"?
+                  SizedBox.shrink():
+                  SectionTitle(title: AppLocalizations.of(context)!.comments),
                  SizedBox(height: 12.h),
-                  user?.roles?[0] == "Admin" ?SizedBox.shrink() :const AddCommentSection(),
-
+                  user?.roles?[0] == "Admin"|| user?.roles?[0] == "Marketer"|| user?.roles?[0] == "Inspector"?
+                  SizedBox.shrink():
+                  const AddCommentSection(),
                   SizedBox(height: 16.h),
+                  user?.roles?[0] == "Admin"?
+                  SizedBox.shrink():
+
                   SectionTitle(
                       title: AppLocalizations.of(context)!.supportTeam),
                   SizedBox(height: 12.h),
+                  user?.roles?[0] == "Admin"?
+                  SizedBox.shrink():
+
                   const SupportTeamSection(),
 
                   SizedBox(height: 74.h),
-                  user?.roles?[0] == "Marketer" ?
+                  user?.roles?[0] == "Marketer" && widget.showButton==true?
                   CustomizedElevatedButton(
                     bottonWidget: Text(
                       AppLocalizations.of(context)!.requestInspection,

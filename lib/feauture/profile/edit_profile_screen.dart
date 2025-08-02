@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../api_service/di/di.dart';
 import '../../core/constants/color_manager.dart';
 import '../../core/constants/font_manager/font_manager.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_text_field.dart';
@@ -27,6 +28,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  EditProfileCubit  editProfileCubit = getIt<EditProfileCubit>();
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -39,18 +41,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadCurrentProfileData();
+    // Delay loading profile data until after the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadCurrentProfileData();
+    });
   }
 
-  void _loadCurrentProfileData() {
-    // Load current profile data from ProfileCubit
-    final profileState = context.read<ProfileCubit>().state;
+  void _loadCurrentProfileData() async {
+    // First, try to get data from ProfileCubit state
+    final profileCubit = context.read<ProfileCubit>();
+    final profileState = profileCubit.state;
+    
     if (profileState is ProfileLoaded) {
       final profile = profileState.profile;
-      _fullNameController.text = profile.fullName ?? '';
-      _emailController.text = profile.email ?? '';
-      _phoneController.text = profile.phone ?? '';
-      _addressController.text = profile.address ?? '';
+      setState(() {
+        _fullNameController.text = profile.fullName ?? '';
+        _emailController.text = profile.email ?? '';
+        _phoneController.text = profile.phone ?? '';
+        _addressController.text = profile.address ?? '';
+      });
+    } else {
+      // If profile is not loaded, fetch it first
+      final token = await SharedPrefsManager.getData(key: 'user_token');
+      final userId = await SharedPrefsManager.getData(key: 'user_id');
+      
+      if (token != null && userId != null) {
+        profileCubit.fetchProfile(token, userId);
+      }
+    }
+  }
+
+  Future<void> _refreshProfileData() async {
+    // Force refresh profile data from API
+    final token = await SharedPrefsManager.getData(key: 'user_token');
+    final userId = await SharedPrefsManager.getData(key: 'user_id');
+    
+    if (token != null && userId != null) {
+      context.read<ProfileCubit>().fetchProfile(token, userId);
     }
   }
 
@@ -76,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       SharedPrefsManager.getData(key: 'user_token').then((token) {
         SharedPrefsManager.getData(key: 'user_id').then((userId) {
           if (token != null && userId != null) {
-            context.read<EditProfileCubit>().editProfile(
+            editProfileCubit.editProfile(
               token: token,
               userId: userId,
               fullName: _fullNameController.text,
@@ -100,10 +127,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       title: AppLocalizations.of(context)!.success,
       message: message,
       positiveOnClick: () async {
+        // Refresh profile data immediately after successful update
         if (token != null && id != null) {
-          context.read<ProfileCubit>().fetchProfile(token, id);
+          await context.read<ProfileCubit>().fetchProfile(token, id);
         }
-        Navigator.of(context).pop(); // Go back to previous screen
+        Navigator.of(context).pop(); // Close dialog
+        // Return to profile screen with result to trigger refresh
+        Navigator.of(context).pop(true);
       },
     );
   }
@@ -116,31 +146,63 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: ColorManager.lightprimary,
         foregroundColor: Colors.white,
       ),
-      body: BlocListener<EditProfileCubit, EditProfileState>(
-        listener: (context, state) {
-          if (state is EditProfileLoading) {
-            CustomDialog.loading(
-              context: context,
-              message: AppLocalizations.of(context)!.loading,
-              cancelable: false,
-            );
-                      } else if (state is EditProfileSuccess) {
-              Navigator.of(context).pop(); // Close loading dialog
-              _showSuccessDialog(state.message);
-            } else if (state is EditProfileError) {
-            Navigator.of(context).pop(); // Close loading dialog
-            CustomDialog.positiveButton(
-              context: context,
-              title: AppLocalizations.of(context)!.error,
-              message: state.error.errorMessage,
-            );
-          }
-        },
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<EditProfileCubit, EditProfileState>(
+            bloc: editProfileCubit,
+            listener: (context, state) async {
+              if (state is EditProfileLoading) {
+                CustomDialog.loading(
+                  context: context,
+                  message: AppLocalizations.of(context)!.loading,
+                  cancelable: false,
+                );
+              } else if (state is EditProfileSuccess) {
+                Navigator.of(context).pop(); // Close loading dialog
+                // Immediately refresh profile data after successful update
+                await _refreshProfileData();
+                // Show success dialog after data is refreshed
+                _showSuccessDialog(state.message);
+              } else if (state is EditProfileError) {
+                Navigator.of(context).pop(); // Close loading dialog
+                CustomDialog.positiveButton(
+                  context: context,
+                  title: AppLocalizations.of(context)!.error,
+                  message: state.error.errorMessage,
+                );
+              }
+            },
+          ),
+          BlocListener<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              if (state is ProfileLoaded) {
+                final profile = state.profile;
+                setState(() {
+                  _fullNameController.text = profile.fullName ?? '';
+                  _emailController.text = profile.email ?? '';
+                  _phoneController.text = profile.phone ?? '';
+                  _addressController.text = profile.address ?? '';
+                });
+              } else if (state is ProfileError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Failed to refresh profile data'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+        child: RefreshIndicator(
+          onRefresh: _refreshProfileData,
+          color: ColorManager.lightprimary,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            physics: const AlwaysScrollableScrollPhysics(), // Ensures pull-to-refresh works
+            child: Form(
+              key: _formKey,
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Profile Image Section
@@ -265,7 +327,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   @override

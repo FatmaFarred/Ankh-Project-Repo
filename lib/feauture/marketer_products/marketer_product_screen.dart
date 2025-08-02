@@ -155,11 +155,17 @@ class _MarketerProductScreenState extends State<MarketerProductScreen> {
                         itemBuilder: (context, index) {
                           final product = allRequests[index];
                           return InkWell(
-                            onTap: () => Navigator.pushNamed(
+                          onTap: () {
+                            Navigator.push(
                               context,
-                              DetailsScreen.detailsScreenRouteName,
-                              arguments: product.id,
-                            ),
+                              MaterialPageRoute(
+                                builder: (context) => DetailsScreen(showButton: true,),
+                                settings: RouteSettings(
+                                  arguments: product.id,
+                                ),
+                              ),
+                            );
+                          },
                             child: MyProductCarCard(product: product),
                           );
                         },

@@ -14,7 +14,7 @@ abstract class EndPoints {
   static const String getHomeAllProducts = "Home/get-all";
   static const String marketerAssignProduct = "Marketers/assign";
   static const String searchHome = "Home/search";
-  static const String inspectorGetAllInspection = "RequestInspections/all";
+  static const String inspectorGetAllInspectionPending = "RequestInspections/all-pending";
   static const String inspectorGetInspectionByS = "Inspections";
   static const String searchHomeInspection= "Inspections/search";
   static const String inspectorAssignInspection = "RequestInspections/assign-inspector";

@@ -16,6 +16,9 @@ class RecommendedCarCard extends StatelessWidget {
      onTap: () {
        Navigator.pushNamed(context, DetailsScreen.detailsScreenRouteName,
             arguments: product.id);
+       print("details id${product.id}")
+
+       ;
       },
       child: Container(
         padding: REdgeInsets.symmetric(vertical: 18, horizontal: 12),

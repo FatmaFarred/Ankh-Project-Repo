@@ -84,7 +84,7 @@ class _PointsScreenState extends State<PointsScreen> {
           Navigator.pop(context);
           _approveRequest(requestId);
         },
-        icon: Icon(Icons.check_circle, color: ColorManager.darkGreen),
+        icon: Icon(Icons.check_circle, color: ColorManager.error),
       ),
     );
   }
@@ -524,7 +524,7 @@ class _PointsScreenState extends State<PointsScreen> {
                             Expanded(
                               child: CustomizedElevatedButton(
                                 bottonWidget: Text(
-                                  'Reject',
+                                  AppLocalizations.of(context)!.reject,
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
@@ -540,7 +540,7 @@ class _PointsScreenState extends State<PointsScreen> {
                             Expanded(
                               child: CustomizedElevatedButton(
                                 bottonWidget: Text(
-                                  'Approve',
+                                  AppLocalizations.of(context)!.approve,
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,

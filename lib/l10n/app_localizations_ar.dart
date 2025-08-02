@@ -1069,4 +1069,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get reactDenied =>
       ' للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً.';
+
+  @override
+  String get signInforMore => ' Sign in for more features';
 }
