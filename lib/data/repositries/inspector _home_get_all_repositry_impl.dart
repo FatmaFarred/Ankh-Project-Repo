@@ -58,4 +58,22 @@ import '../../domain/repositries_and_data_sources/repositries/inspector _home_ge
     var either = await homeGetAllInspectionRemoteDataSource.getInspectionsByInspectorId(inspectorId);
     return either.fold((error) => left(error), (response) => right(response));
   }
+
+  @override
+  Future<Either<Failure, List<AllInpectionEntity>>> getAllInspection() async {
+    var either = await homeGetAllInspectionRemoteDataSource.getAllInspection();
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> rescheduleInspection(String date, String time, String adminNote,num inspectionId)async {
+    var either = await homeGetAllInspectionRemoteDataSource.rescheduleInspection(date, time, adminNote,inspectionId);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, List<AllInpectionEntity>>> searchAllInspectionAdmin(String keyWord)async {
+    var either = await homeGetAllInspectionRemoteDataSource.searchAllInspectionAdmin(keyWord);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
 }

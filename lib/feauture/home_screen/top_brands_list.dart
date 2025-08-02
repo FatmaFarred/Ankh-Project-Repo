@@ -7,10 +7,10 @@ class TopBrandsList extends StatelessWidget {
    TopBrandsList({super.key});
   final List<String> brandImages = [
     ImageAssets.carBrandLogo, // replace with multiple logos
-    ImageAssets.carBrandLogo2,
-    ImageAssets.carBrandLogo3,
-    ImageAssets.carBrandLogo4,
-    ImageAssets.carBrandLogo5,
+    ImageAssets.carBrandLogo,
+    ImageAssets.carBrandLogo,
+    ImageAssets.carBrandLogo,
+    ImageAssets.carBrandLogo,
   ];
   @override
   Widget build(BuildContext context) {

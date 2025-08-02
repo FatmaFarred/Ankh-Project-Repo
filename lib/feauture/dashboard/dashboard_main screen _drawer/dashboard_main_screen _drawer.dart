@@ -11,6 +11,7 @@ import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../l10n/app_localizations.dart';
 import '../../authentication/user_controller/user_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
+import '../inspection_managemnt/insepction_managemnt_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../points_management/points_screen.dart';
@@ -31,7 +32,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     Center(child: UsersManagementScreen()),
     Center(child: MarketersManagementScreen()),
     Center(child: InspectorManagementScreen()),
-    Center(child: Text('⚙ InspectionsManagementScreen()')),
+    Center(child: InspectionsManagementScreen()),
     Center(child: Text('⚙️ Notification Screen')),
     Center(child: PointsScreen()),
     Center(child: PointPricesScreen()),
@@ -218,7 +219,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   color: _selectedIndex == 6 ? Colors.white : Colors.black, // Icon color
                 ),
                 title: Text(
-                  AppLocalizations.of(context)!.notifications,
+                  AppLocalizations.of(context)!.points,
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 6 ? Colors.white : null), // Text color
                 ),
 

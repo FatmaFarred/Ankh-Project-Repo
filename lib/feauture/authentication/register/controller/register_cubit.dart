@@ -7,11 +7,14 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../api_service/failure/error_handling.dart';
 import '../../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import '../../../../domain/use_cases/authentication/client_register_use_case.dart';
 import '../../../../domain/use_cases/authentication/register_usecase.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase registerUseCase;
+  final ClientRegisterUseCase clientRegisterUseCase;
+
 
   final TextEditingController fullNameController = TextEditingController(text: "fares");
   final TextEditingController phoneController = TextEditingController(text:"01277165514");
@@ -20,7 +23,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   bool isPasswordVisible = false;
 
-  RegisterCubit(this.registerUseCase) : super(RegisterInitial());
+  RegisterCubit(this.registerUseCase, this.clientRegisterUseCase) : super(RegisterInitial());
 
   void togglePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
@@ -43,4 +46,21 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(RegisterSuccess(response: response));
     });
   }
+  Future<void> clientRegister() async {
+
+    emit(RegisterLoading());
+
+    var either = await clientRegisterUseCase.execute(
+      fullNameController.text,
+      emailController.text,
+      passwordController.text,
+      phoneController.text,
+    );
+    either.fold((error) {
+      emit(RegisterFailure(error: error));
+    }, (response) {
+      emit(RegisterSuccess(response: response));
+    });
+  }
+
 }

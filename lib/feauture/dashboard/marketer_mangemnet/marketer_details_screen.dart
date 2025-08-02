@@ -28,6 +28,8 @@ import '../../marketer_home/assign_product_controller/states.dart';
 import '../custom_widgets/custom_bottom_sheet.dart';
 import '../users_management/user_details_screen.dart';
 import 'cubit/appoint_as_team_leader_states.dart';
+import '../cubit/adjust_user_points_cubit.dart';
+import '../widgets/adjust_points_bottom_sheet.dart';
 
 class MarketerDetailsScreen extends StatefulWidget {
   static const String routeName = 'MarketerDetailsScreen';
@@ -49,6 +51,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
   BlockUserCubit blockUserCubit = getIt<BlockUserCubit>();
   UnblockUserCubit unblockUserCubit = getIt<UnblockUserCubit>();
   AppointAsTeamLeaderCubit appointAsTeamLeaderCubit = getIt<AppointAsTeamLeaderCubit>();
+  AdjustUserPointsCubit adjustUserPointsCubit = getIt<AdjustUserPointsCubit>();
   String? token;
 
 
@@ -79,6 +82,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
     blockUserCubit.close();
     unblockUserCubit.close();
     appointAsTeamLeaderCubit.close();
+    adjustUserPointsCubit.close();
     super.dispose();
   }
 
@@ -240,6 +244,36 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
             }
           },
         ),
+        BlocListener<AdjustUserPointsCubit, AdjustUserPointsState>(
+          bloc: adjustUserPointsCubit,
+          listener: (context, state) {
+            if (state is AdjustUserPointsLoading) {
+              CustomDialog.loading(
+                context: context,
+                message: AppLocalizations.of(context)!.loading,
+                cancelable: false,
+              );
+            } else if (state is AdjustUserPointsFailure) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.error,
+                message: state.failure.errorMessage,
+                positiveText: AppLocalizations.of(context)!.ok,
+                positiveOnClick: () => Navigator.of(context).pop(),
+              );
+            } else if (state is AdjustUserPointsSuccess) {
+              Navigator.of(context).pop();
+              CustomDialog.positiveButton(
+                context: context,
+                title: AppLocalizations.of(context)!.success,
+                message: state.message ?? "Points adjusted successfully",
+                positiveText: AppLocalizations.of(context)!.ok,
+                positiveOnClick: () => Navigator.of(context).pop(),
+              );
+            }
+          },
+        ),
 
       ],
       child: Scaffold(
@@ -383,6 +417,13 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                               _actionButton(AppLocalizations.of(context)!.appointAsTeamLeader, ColorManager.darkGrey, Colors.white,
                        () => _showAppointAsTeamLeaderBottomSheet()
                 ),
+                SizedBox(height: 12),
+                _actionButton(
+                  AppLocalizations.of(context)!.sendPoints,
+                  ColorManager.lightprimary,
+                  Colors.white,
+                      () => _showAdjustPointsBottomSheet(),
+                ),
               SizedBox(height: 12),
               _actionButton(
                 AppLocalizations.of(context)!.blockUser,
@@ -390,6 +431,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 Colors.white,
                 () => _showBlockUserBottomSheet(),
               ),
+
               SizedBox(height: 12),
               _actionButton(
                 AppLocalizations.of(context)!.unblockUser,
@@ -658,6 +700,26 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
           appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer');
         },
         icon: Icon(Icons.person_add, color: ColorManager.darkGrey),
+      ),
+    );
+  }
+
+  void _showAdjustPointsBottomSheet() {
+    final marketer = ModalRoute.of(context)!.settings.arguments as AllMarketersEntity;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AdjustPointsBottomSheet(
+          userId: marketer.id ?? '',
+          userName: marketer.fullName ?? 'Marketer',
+          onAdjustPoints: (userId, points, reason) {
+            adjustUserPointsCubit.adjustUserPoints(userId, points, reason);
+          },
+        ),
       ),
     );
   }

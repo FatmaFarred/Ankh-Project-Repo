@@ -31,6 +31,7 @@ class ProductDetailsDm extends  ProductDetailsEntity {
 
 ProductDetailsDm({
 super.id,
+super.productId,
 super.title,
 super.description,
 super.make,
@@ -52,13 +53,16 @@ super.horsepower,
 super.batteryCapacity,
 super.videoUrl,
 super.imageUrls,
+  super.image,
 super.createdAt,
 super.lastEditedAt,
 super.usedDetails,
+  super.code,
 });
 
 ProductDetailsDm.fromJson(dynamic json) {
     id = json['id'];
+    productId = json['productId'];
     title = json['title'];
     description = json['description'];
     make = json['make'];
@@ -80,6 +84,8 @@ ProductDetailsDm.fromJson(dynamic json) {
     batteryCapacity = json['batteryCapacity'];
     videoUrl = json['videoUrl'] != null ? json['videoUrl'].cast<dynamic>() : [];
     imageUrls = json['imageUrls'] != null ? json['imageUrls'].cast<String>() : [];
+    image = json['image'];
+    code = json['code'];
     createdAt = json['createdAt'];
     lastEditedAt = json['lastEditedAt'];
     usedDetails = json['usedDetails'] != null ? UsedDetailsDm.fromJson(json['usedDetails']) : null;

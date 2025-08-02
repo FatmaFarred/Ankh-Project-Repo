@@ -53,5 +53,11 @@ import '../../domain/repositries_and_data_sources/repositries/points_repositry.d
     return either.fold((error) => left(error), (response) => right(response));
   }
 
+  @override
+  Future<Either<Failure, String?>> adjustUserPoints(String userId, num points, String reason)async {
+    var either = await pointsRemoteDataSource.adjustUserPoints(userId, points, reason);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
 
 }

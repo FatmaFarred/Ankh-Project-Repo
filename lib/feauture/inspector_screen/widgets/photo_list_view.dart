@@ -6,8 +6,9 @@ import '../../../l10n/app_localizations.dart';
 
 class PhotoListView extends StatelessWidget {
   final List<String> imageUrls;
+  final String? title;
 
-  const PhotoListView({super.key, required this.imageUrls});
+  const PhotoListView({super.key, required this.imageUrls, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class PhotoListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           SectionHeader(title: AppLocalizations.of(context)!.productPhotos,imageUrl:imageUrls,),
+           SectionHeader(title:title?? AppLocalizations.of(context)!.productPhotos,imageUrl:imageUrls,),
           SizedBox(height: 8.h),
           if (imageUrls.isEmpty)
             Center(

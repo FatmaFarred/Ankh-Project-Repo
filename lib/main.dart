@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'package:ankh_project/feauture/onboarding/onboarding.dart';
 import 'package:app_links/app_links.dart';
@@ -55,7 +56,6 @@ import 'l10n/languge_cubit.dart';
 import '/api_service/di/injection.dart' as di;
 
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +68,21 @@ void main() async {
   await LocalNotification().initNotification();
   await FcmApi().initNotification();
 
+
   final String? token = await SharedPrefsManager.getData(key: 'user_token');
+  final String? id = await SharedPrefsManager.getData(key: 'user_id');
+
+  // Fetch profile after initializing the app
+  if (token != null && id != null) {
+    print("👤 Token12: $token");
+    print("👤 User ID12: $id");
+    final profileCubit = getIt<ProfileCubit>();
+    // Start loading state immediately
+    profileCubit.preloadProfileData();
+    // Fetch profile data
+    await profileCubit.fetchProfile(token, id);
+  }
+
   final user = getIt<UserCubit>().state;
   final String? role = user?.roles?.isNotEmpty == true
       ? user!.roles!.first
@@ -84,6 +98,8 @@ void main() async {
         BlocProvider(create: (_) => getIt<ProfileCubit>()),
 
 
+        BlocProvider(create: (context) => getIt<ProfileCubit>()),
+
         BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
         BlocProvider(create: (_) => getIt<ProductDetailsCubit>()),
         BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
@@ -94,6 +110,8 @@ void main() async {
   );
 }
 
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 
 
@@ -175,8 +193,10 @@ class _MyAppState extends State<MyApp> {
       initialRoute = BottomNavBar.bottomNavBarRouteName;
     }
 
+
     return ScreenUtilInit(
-        designSize: const Size(428, 926.76),
+    designSize: const Size(428, 926.76),
+
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (_, child) {
@@ -195,68 +215,53 @@ class _MyAppState extends State<MyApp> {
     theme: MyAppTheme.lightTheme(context),
     builder: (context, child) => child!,
 
+
     initialRoute: initialRoute,
     routes: {
     '/': (context) => OnBoarding(),
     OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
     WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
-    RegisterScreen.registerScreenRouteName: (context) =>
-    RegisterScreen(),
-    InspectorRegisterScreen.inspectorRegisterScreenRouteName:
-    (context) => InspectorRegisterScreen(),
-    ChooseRoleScreen.chooseRoleScreenRouteName: (context) =>
-    ChooseRoleScreen(),
-    ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) =>
-    ChooseCsTypeScreen(),
+    RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
+    InspectorRegisterScreen.inspectorRegisterScreenRouteName: (context) => InspectorRegisterScreen(),
+    ChooseRoleScreen.chooseRoleScreenRouteName: (context) => ChooseRoleScreen(),
+    ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) => ChooseCsTypeScreen(),
     SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
-    EmailVerficationScreen.emailVerficationScreenRouteName: (context) =>
-    EmailVerficationScreen(),
-    ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) =>
-    ForgetPasswordScreen(),
-    OtpVerficationScreen.otpVerficationScreenRouteName: (context) =>
-    OtpVerficationScreen(),
+    EmailVerficationScreen.emailVerficationScreenRouteName: (context) => EmailVerficationScreen(),
+    ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) => ForgetPasswordScreen(),
+    OtpVerficationScreen.otpVerficationScreenRouteName: (context) => OtpVerficationScreen(),
     ResetPasswordScreen.resetPasswordScreenRouteName: (context) {
-    final args =
-    ModalRoute.of(context)!.settings.arguments
-    as Map<String, String>;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+
     return ResetPasswordScreen(
     email: args['email']!,
     token: args['token']!,
     );
     },
     BottomNavBar.bottomNavBarRouteName: (context) {
-    final args =
-    ModalRoute.of(context)?.settings.arguments
-    as Map<String, dynamic>?;
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final initialIndex = args?['initialIndex'] as int? ?? 0;
     return BottomNavBar(initialIndex: initialIndex);
     },
-    MyRequestDetails.myRequestDetailsRouteName: (context) =>
-    MyRequestDetails(),
-    DetailsScreen.detailsScreenRouteName: (context) => DetailsScreen(),
+    MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+    DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
     //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
-    RequestInspectionScreen.requestInspectionScreenRouteName:
-    (context) => RequestInspectionScreen(),
-    ConfirmRequestScreen.confirmRequestRouteName: (context) =>
-    ConfirmRequestScreen(),
-    RequestSubmittedScreen.requestSubmittedRouteName: (context) =>
-    RequestSubmittedScreen(),
+    RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
+    ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
+    RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
     AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
-    MarketerReportDetails.reportDetailsRouteName: (context) =>
-    MarketerReportDetails(),
-    DashboardMainScreen.mainScreenRouteName: (context) =>
-    DashboardMainScreen(),
-    UserDetailsScreen.routeName: (context) => UserDetailsScreen(),
-    MarketerDetailsScreen.routeName: (context) =>
-    MarketerDetailsScreen(),
-    InspectorDetailsScreen.routeName: (context) =>
-    InspectorDetailsScreen(),
-
+    EditProfileScreen.routeName: (context) => EditProfileScreen(),
+    MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
+    DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
+    UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
+    MarketerDetailsScreen.routeName:(context)=>MarketerDetailsScreen(),
+    InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
 
     },
     );
     },
     );
+
+
     }
   }
 

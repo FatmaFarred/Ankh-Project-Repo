@@ -84,7 +84,7 @@ class _PointsScreenState extends State<PointsScreen> {
           Navigator.pop(context);
           _approveRequest(requestId);
         },
-        icon: Icon(Icons.check_circle, color: ColorManager.darkGreen),
+        icon: Icon(Icons.check_circle, color: ColorManager.error),
       ),
     );
   }
@@ -308,21 +308,11 @@ class _PointsScreenState extends State<PointsScreen> {
                   );
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [ColorManager.lightprimary, ColorManager.lightprimary.withOpacity(0.8)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+
+                    color: ColorManager.lightprimary,
                     borderRadius: BorderRadius.circular(12.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: ColorManager.lightprimary.withOpacity(0.3),
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -334,18 +324,12 @@ class _PointsScreenState extends State<PointsScreen> {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        'Point Prices Settings',
+                        AppLocalizations.of(context)!.pointPrice,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: ColorManager.white,
                         ),
-                      ),
-                      SizedBox(width: 4.w),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: ColorManager.white,
-                        size: 14.sp,
                       ),
                     ],
                   ),
@@ -540,7 +524,7 @@ class _PointsScreenState extends State<PointsScreen> {
                             Expanded(
                               child: CustomizedElevatedButton(
                                 bottonWidget: Text(
-                                  'Reject',
+                                  AppLocalizations.of(context)!.reject,
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
@@ -556,7 +540,7 @@ class _PointsScreenState extends State<PointsScreen> {
                             Expanded(
                               child: CustomizedElevatedButton(
                                 bottonWidget: Text(
-                                  'Approve',
+                                  AppLocalizations.of(context)!.approve,
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
@@ -564,8 +548,8 @@ class _PointsScreenState extends State<PointsScreen> {
                                   ),
                                 ),
                                 onPressed: () => _showApproveBottomSheet(context, request.id ?? ''),
-                                color: ColorManager.darkGreen,
-                                borderColor: ColorManager.darkGreen,
+                                color: ColorManager.lightprimary,
+                                borderColor: ColorManager.lightprimary,
                               ),
                             ),
                           ],

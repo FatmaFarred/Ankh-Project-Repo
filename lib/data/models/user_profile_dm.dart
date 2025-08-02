@@ -10,6 +10,9 @@ class UserProfileDm  extends UserProfileEntity{
   UserProfileDm({
       super.id,
     super.fullName,
+    super.email,
+    super.phone,
+    super.address,
     super.imageUrl,
     super.rating,
     super.completedTasks,});
@@ -17,6 +20,9 @@ class UserProfileDm  extends UserProfileEntity{
   UserProfileDm.fromJson(dynamic json) {
     id = json['id'];
     fullName = json['fullName'];
+    email = json['email'];
+    phone = json['phone'];
+    address = json['address'];
     imageUrl = json['imageUrl'];
     rating = json['rating'];
     completedTasks = json['completedTasks'];
