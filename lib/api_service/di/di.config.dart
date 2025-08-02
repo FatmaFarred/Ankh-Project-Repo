@@ -293,6 +293,7 @@ import '../../feauture/dashboard/users_management/cubit/user_favorites_cubit.dar
     as _i709;
 import '../../feauture/dashboard/users_management/cubit/users_management_cubit.dart'
     as _i612;
+
 import '../../feauture/details_screen/controller/product_details_cubit.dart'
     as _i447;
 import '../../feauture/home_screen/cubit/add_favorite_cubit.dart' as _i906;
@@ -456,10 +457,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i598.UpdateMarketerAccountStatusUseCase>(() =>
         _i598.UpdateMarketerAccountStatusUseCase(
             gh<_i863.MarketerAssignGetProductsRepositry>()));
+
     gh.factory<_i906.FavoriteCubit>(() => _i906.FavoriteCubit(
           gh<_i886.AddFavoriteUseCase>(),
           gh<_i367.DeleteFavoriteUseCase>(),
         ));
+
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
             gh<_i329.FirebaseMessagingService>()));
@@ -520,8 +523,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i962.AcceptPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i391.AddPointRequestUseCase>(
         () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
+
+    
     gh.factory<_i286.AdjustUserPointsUseCase>(
         () => _i286.AdjustUserPointsUseCase(gh<_i147.PointsRepositry>()));
+
     gh.factory<_i341.EditPointPriceUseCase>(
         () => _i341.EditPointPriceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i429.GetAllPointPriceUseCase>(
@@ -590,6 +596,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
         _i273.GetAllInspectionAdminUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
+
     gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
         _i747.GetInspectorInspectionsUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
@@ -602,12 +609,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i868.InspectorHomeGetAllInspectionUseCase>(() =>
         _i868.InspectorHomeGetAllInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
+
     gh.factory<_i1001.RescheduleInspectionUseCase>(() =>
         _i1001.RescheduleInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
     gh.factory<_i699.SearchInspectionAdminUseCase>(() =>
         _i699.SearchInspectionAdminUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
+
     gh.factory<_i635.InspectorHomeProductCubit>(() =>
         _i635.InspectorHomeProductCubit(
             gh<_i868.InspectorHomeGetAllInspectionUseCase>()));
@@ -687,6 +696,7 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i273.GetAllInspectionAdminUseCase>(),
               gh<_i699.SearchInspectionAdminUseCase>(),
             ));
+
     gh.factory<_i356.MarketerReportDetailsCubit>(() =>
         _i356.MarketerReportDetailsCubit(gh<_i708.GetReportDetailsUseCase>()));
     gh.factory<_i447.ProductDetailsCubit>(

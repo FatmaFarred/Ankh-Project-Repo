@@ -95,6 +95,8 @@ void main() async {
         BlocProvider<UserCubit>.value(value: getIt<UserCubit>()),
         BlocProvider(create: (context) => RoleCubit()),
         BlocProvider(create: (context) => getIt<RoleCsCubit>()),
+        BlocProvider(create: (_) => getIt<ProfileCubit>()),
+
 
         BlocProvider(create: (context) => getIt<ProfileCubit>()),
 
@@ -110,6 +112,7 @@ void main() async {
 
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 
 
 class MyApp extends StatefulWidget {
@@ -193,6 +196,7 @@ class _MyAppState extends State<MyApp> {
 
     return ScreenUtilInit(
     designSize: const Size(428, 926.76),
+
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (_, child) {
@@ -227,6 +231,7 @@ class _MyAppState extends State<MyApp> {
     OtpVerficationScreen.otpVerficationScreenRouteName: (context) => OtpVerficationScreen(),
     ResetPasswordScreen.resetPasswordScreenRouteName: (context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+
     return ResetPasswordScreen(
     email: args['email']!,
     token: args['token']!,
@@ -255,6 +260,7 @@ class _MyAppState extends State<MyApp> {
     );
     },
     );
+
 
     }
   }

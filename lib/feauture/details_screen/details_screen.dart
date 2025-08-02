@@ -308,6 +308,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 } else {
                                   favoriteCubit.removeFavorite(userId: userId, productId: productId);
                                 }
+
                               },
                               child: CircleAvatar(
                                 radius: 30.r,
