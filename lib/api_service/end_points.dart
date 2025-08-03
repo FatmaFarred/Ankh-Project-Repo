@@ -49,6 +49,8 @@ abstract class EndPoints {
   static const String registerCustomer  = "Auth/register-customer";
   static const String addFavorite = "Home/add-favorites";
   static const String removeFavorite = "Home/remove";
+  static const String addComment = "Product/add-comment";
+
 
 
 

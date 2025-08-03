@@ -352,7 +352,12 @@
   "insepectionManagement": "Inspection Management",
   "carCode": "Car Code",
   "reactDenied": "For interact with this feature, you need to login first.",
-  "signInforMore": " Sign in for more features"
+  "signInforMore": " Sign in for more features",
+  "failedToLoadData": "Failed to load profile data",
+  "noCommentsFound": " No comments found",
+  "noNotificationsFound": " No notifications found"
+
+
 
 
 

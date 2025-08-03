@@ -117,12 +117,7 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
       listener: (context, state) {
         // Handle state changes here if needed
         if (state is ProfileError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Failed to load profile data'),
-              backgroundColor: Colors.red,
-            ),
-          );
+
         }
       },
       builder: (context, state) {
@@ -318,23 +313,25 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                     Icon(Icons.error_outline, size: 64, color: Colors.grey),
                     SizedBox(height: 16.h),
                     Text(
-                      'Failed to load profile data',
+
+                      AppLocalizations.of(context)!.failedToLoadData,
                       style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'Please check your internet connection and try again',
+                      AppLocalizations.of(context)!.noInternetConnection,
                       style: TextStyle(fontSize: 14.sp, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 24.h),
                     ElevatedButton(
-                      onPressed: _refreshProfileData,
+                      onPressed:()=>Navigator.pushNamed(context, WelcomeScreen.welcomeScreenRouteName),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.lightprimary,
                         foregroundColor: Colors.white,
                       ),
-                      child: Text('Retry'),
+                      child: Text(AppLocalizations.of(context)!.loginNow),
                     ),
                   ],
                 ),
