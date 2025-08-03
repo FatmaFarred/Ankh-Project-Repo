@@ -1,4 +1,5 @@
 import 'package:ankh_project/data/models/login_response_dm.dart';
+import 'package:ankh_project/domain/entities/authentication_response_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -197,6 +198,68 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
     } catch (e) {
       return left(ServerError(errorMessage: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, String?>> registerMarketerTeamMember(String name, String email, String password, String phone, String code)async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        final deviceToken = await FirebaseMessaging.instance.getToken();
+
+
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.registerTeamMember,
+          data: {
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "password": password,
+            "inviteCode": code,
+            "deviceToken": deviceToken != null ? [deviceToken] : []
+          },
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          var registerResponse = response.data;
+
+
+
+         /* // Save user to Firestore
+          UserDm myUser = UserDm(
+              id: registerResponse.user?.id,
+              fullName: name,
+              email: email,
+              phoneNumber: phone,
+              deviceTokens: deviceToken != null ? [deviceToken] : [],
+              roles: registerResponse.user?.roles
+          );*/
+
+          // await FireBaseUtilies.addUser(myUser);
+
+          // Return success
+          return right(registerResponse);
+        } else {
+          return left(ServerError(errorMessage: response.data));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
   }
 }
 

@@ -350,6 +350,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ) : SizedBox.shrink(),
                             user?.roles?[0] == "Admin" ||
+                                user?.roles?[0] == "LeaderMarketer" ||
                                 user?.roles?[0] == "Marketer" ||
                                 user?.roles?[0] == "Inspector" ?
                             SizedBox.shrink() :
@@ -591,7 +592,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         SizedBox(height: 12.h),
                         user?.roles?[0] == "Admin" ||
                             user?.roles?[0] == "Marketer" ||
-                            user?.roles?[0] == "Inspector" ?
+                            user?.roles?[0] == "LeaderMarketer"||
+                        user?.roles?[0] == "Inspector" ?
                         SizedBox.shrink() :
                         AddCommentSection(
                             productId: productId!, commentCubit: commentCubit),

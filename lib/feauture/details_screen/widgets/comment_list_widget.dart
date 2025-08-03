@@ -41,7 +41,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
           return Center(
             child: Text(
               state.error.errorMessage ?? 'Error loading comments',
-              style: TextStyle(color: Colors.red),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
         } else if (state is CommentEmpty) {

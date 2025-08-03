@@ -142,6 +142,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).pop(); // Go back to previous screen
+          },
+        ),
         title:  Text(AppLocalizations.of(context)!.editProfile),
         backgroundColor: ColorManager.lightprimary,
         foregroundColor: Colors.white,
@@ -210,12 +216,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: Stack(
                     children: [
                       CircleAvatar(
+                        backgroundColor: ColorManager.lightGrey,
                         radius: 60,
                         backgroundImage: _selectedImage != null
                             ? FileImage(_selectedImage!)
                             : null,
                         child: _selectedImage == null
-                            ? const Icon(Icons.person, size: 60)
+                            ?  Icon(Icons.person, size: 60,color: ColorManager.lightprimary,)
                             : null,
                       ),
                       Positioned(

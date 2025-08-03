@@ -35,6 +35,8 @@ import 'feauture/details_screen/all_Images_screen.dart';
 import 'feauture/details_screen/details_screen.dart';
 import 'feauture/home_screen/bottom_nav_bar.dart';
 import 'feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
+import 'feauture/invite_team_member/invite_team_member_screen.dart';
+import 'feauture/teams_and_codes/teams_and_codes_screen.dart';
 import 'feauture/marketer_Reports/marketer_report_details/report_details.dart';
 import 'feauture/marketer_Reports/marketer_reports_screen.dart';
 import 'feauture/myrequest/my_request_details/my_request_details.dart';
@@ -255,6 +257,8 @@ class _MyAppState extends State<MyApp> {
     UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
     MarketerDetailsScreen.routeName:(context)=>MarketerDetailsScreen(),
     InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
+      InviteTeamMemberScreen.inviteTeamMemberRouteName: (context) => InviteTeamMemberScreen(),
+      TeamsAndCodesScreen.teamsAndCodesRouteName: (context) => TeamsAndCodesScreen(),
 
     },
     );

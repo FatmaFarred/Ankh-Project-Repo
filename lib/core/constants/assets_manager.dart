@@ -60,6 +60,8 @@ abstract class ImageAssets {
   static const String userIcon = "$imagePath/userIcon.svg";
   static const String drawerIcon = "$imagePath/solar_hamburger-menu-broken.svg";
   static const String imageIcon = "$imagePath/Frame.svg";
+  static const String chatTeam = "$imagePath/chatTeam.svg";
+
 
 
 
