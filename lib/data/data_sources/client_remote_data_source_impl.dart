@@ -2,6 +2,7 @@ import 'package:ankh_project/api_service/api_manager.dart';
 import 'package:ankh_project/domain/entities/all_point_price_entity.dart';
 import 'package:ankh_project/domain/entities/all_users_entity.dart';
 import 'package:ankh_project/domain/entities/balance_response_entity.dart';
+import 'package:ankh_project/domain/entities/comment_entity.dart';
 
 import 'package:ankh_project/domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -21,6 +22,7 @@ import '../../l10n/global_localization_helper.dart';
 import '../models/all_point_price_dm.dart';
 import '../models/all_users_dm.dart';
 import '../models/balance_response_dm.dart';
+import '../models/comment_dm.dart';
 import '../models/product_details_dm.dart';
 import '../models/request_point_dm.dart';
 @Injectable(as: ClientRemoteDataSource)
@@ -306,5 +308,125 @@ class ClientRemoteDataSourceImpl implements ClientRemoteDataSource {
       print('📚 Stack trace:\n$stackTrace');
       return left(ServerError(errorMessage: e.toString()));
     }  }
+
+  @override
+  Future<Either<Failure, String?>> addComment(num productId, String token, String comment) async {
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.addComment}";
+        print('🌐 Full URL: $fullUrl');
+
+
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint:EndPoints.addComment,
+          data: {
+            "productId": productId,
+            "content": comment
+          },
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+          },
+
+
+
+            options: Options(validateStatus: (_) => true),
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final  myResponse = response.data;
+
+          print('✅ Request successful. Message: ${myResponse['message']}');
+
+          return right(myResponse['message']);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: response.data['message']));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CommentDm>>> getComment(num productId) async{
+    print('🔍 ClientRemoteDataSourceImpl: getComment called with productId: $productId');
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}Product/$productId/comments";
+        print('🌐 Full URL: $fullUrl');
+
+
+
+        var response = await apiManager.getData(
+          url: ApiConstant.baseUrl,
+          endPoint:"Product/$productId/comments",
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final List<dynamic> myResponse = response.data;
+          final requestResponse = myResponse.map((json) => CommentDm.fromJson(json)).toList();
+
+
+          print('✅ Request successful. Message: ${requestResponse}');
+
+          return right(requestResponse);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: response.data['message']));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
+  }
 }
 

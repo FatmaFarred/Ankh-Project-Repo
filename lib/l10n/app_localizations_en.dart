@@ -1074,4 +1074,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signInforMore => ' Sign in for more features';
+
+  @override
+  String get failedToLoadData => 'Failed to load profile data';
+
+  @override
+  String get noCommentsFound => ' No comments found';
+
+  @override
+  String get noNotificationsFound => ' No notifications found';
 }

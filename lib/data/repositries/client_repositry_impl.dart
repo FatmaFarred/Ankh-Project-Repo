@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ankh_project/domain/entities/all_users_entity.dart';
+import 'package:ankh_project/domain/entities/comment_entity.dart';
 import 'package:ankh_project/domain/entities/product_details_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -42,6 +43,24 @@ import '../../domain/repositries_and_data_sources/repositries/client_repositry.d
     var either = await clientRemoteDataSource.removeFavourite(userId, productId);
     return either.fold((error) => left(error), (response) => right(response));
   }
+
+  @override
+  Future<Either<Failure, String?>> addComment(num productId, String token, String comment)async {
+    var either = await clientRemoteDataSource.addComment(productId, token, comment);
+    return either.fold((error) => left(error), (response) => right(response));
+
+
+  }
+
+  @override
+  Future<Either<Failure, List<CommentEntity>>> getComment(num productId)async {
+    print('🔍 ClientRepositoryImpl: getComment called with productId: $productId');
+    var either = await clientRemoteDataSource.getComment(productId);
+    print('🔍 ClientRepositoryImpl: Remote data source result received');
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
 
 
 

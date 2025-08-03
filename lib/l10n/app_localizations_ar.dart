@@ -1072,4 +1072,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signInforMore => ' Sign in for more features';
+
+  @override
+  String get failedToLoadData =>
+      'فشل في تحميل البيانات، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get noCommentsFound => 'لا توجد تعليقات متاحة';
+
+  @override
+  String get noNotificationsFound => 'لا توجد إشعارات متاحة';
 }

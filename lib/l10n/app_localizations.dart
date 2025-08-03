@@ -2155,6 +2155,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' Sign in for more features'**
   String get signInforMore;
+
+  /// No description provided for @failedToLoadData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile data'**
+  String get failedToLoadData;
+
+  /// No description provided for @noCommentsFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No comments found'**
+  String get noCommentsFound;
+
+  /// No description provided for @noNotificationsFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No notifications found'**
+  String get noNotificationsFound;
 }
 
 class _AppLocalizationsDelegate

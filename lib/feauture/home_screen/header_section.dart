@@ -95,12 +95,7 @@ class _HeaderSectionState extends State<HeaderSection> with WidgetsBindingObserv
         listener: (context, state) {
           // Handle state changes here if needed
           if (state is ProfileError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Failed to load profile data'),
-                backgroundColor: Colors.red,
-              ),
-            );
+
           }
         },
                 builder: (context, state) {
