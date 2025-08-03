@@ -50,6 +50,14 @@ abstract class EndPoints {
   static const String addFavorite = "Home/add-favorites";
   static const String removeFavorite = "Home/remove";
   static const String addComment = "Product/add-comment";
+  static const String generateTeamInvitationCode = "Marketers/create-multiple";
+  static const String getTeamByLeaderId = "Marketers/get-team";
+  static const String registerTeamMember = "Auth/register-team-marketer";
+  static const String getAllInvitesCodeByLeaderId = "Marketers/my-invites";
+
+
+
+
 
 
 

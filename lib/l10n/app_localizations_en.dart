@@ -294,6 +294,78 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataFound => 'No Data Found';
 
   @override
+  String get inviteTeamMember => 'Invite Team Member';
+
+  @override
+  String get invitesNumber => 'Invites Number';
+
+  @override
+  String get generateLink => 'Generate Code';
+
+  @override
+  String get yourInvitesAreReady => 'Your Invites are Ready';
+
+  @override
+  String get shareTheseLinksToInvite =>
+      'Share these Codes to invite a new members.';
+
+  @override
+  String get singleUseLink => 'Single-Use Code';
+
+  @override
+  String get linkWillBeInvalidated =>
+      'Code will be invalidated once a new member joins.';
+
+  @override
+  String get expiresSoon => 'Expires Soon';
+
+  @override
+  String get linkValidFor24Hours =>
+      'For security, the Code is valid for the next 24 hours.';
+
+  @override
+  String get teams => 'Teams';
+
+  @override
+  String get codes => 'Codes';
+
+  @override
+  String get teamMembers => ' Team Members';
+
+  @override
+  String get invitationCodes => 'Invitation Codes';
+
+  @override
+  String get assignedProducts => 'Assigned Products';
+
+  @override
+  String get used => 'Used';
+
+  @override
+  String get unused => 'Unused';
+
+  @override
+  String get copyCode => 'Copy Code';
+
+  @override
+  String get codeCopied => 'Code copied to clipboard';
+
+  @override
+  String get noTeamMembers => 'No team members found';
+
+  @override
+  String get noInvitationCodes => 'No invitation codes found';
+
+  @override
+  String get invitationCode => 'Invitation Code';
+
+  @override
+  String get enterInvitationCode => 'Enter your invitation code';
+
+  @override
+  String get invitationCodeRequired => 'Invitation code is required';
+
+  @override
   String get popularNewCars => 'Popular New Cars';
 
   @override
@@ -837,9 +909,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marketerManagement => 'Marketers Management';
 
   @override
-  String get assignedProducts => 'Assigned Products';
-
-  @override
   String get marketerInfo => 'Marketer Info';
 
   @override
@@ -1083,4 +1152,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noNotificationsFound => ' No notifications found';
+
+  @override
+  String get teamManagement => ' Team Management';
+
+  @override
+  String get inviteMember => ' Invite Member';
+
+  @override
+  String get inviteMemberSubtitle =>
+      ' Enter the email of the member you want to invite to your team.';
+
+  @override
+  String get noTeamMembersFound => ' No team members found';
+
+  @override
+  String get noCodeFound => ' No code found';
+
+  @override
+  String get enterCodeInvitationCount => ' Enter Code Invitation Count';
+
+  @override
+  String get generating => 'Generating...';
+
+  @override
+  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
+
+  @override
+  String get registerWithInvitationCode => 'Register with Invitation Code';
 }

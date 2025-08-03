@@ -89,6 +89,30 @@
   "viewAll": "View All",
   "noDataFound": "No Data Found",
 
+  "inviteTeamMember": "Invite Team Member",
+  "invitesNumber": "Invites Number",
+  "generateLink": "Generate Code",
+  "yourInvitesAreReady": "Your Invites are Ready",
+  "shareTheseLinksToInvite": "Share these Codes to invite a new members.",
+  "singleUseLink": "Single-Use Code",
+  "linkWillBeInvalidated": "Code will be invalidated once a new member joins.",
+  "expiresSoon": "Expires Soon",
+  "linkValidFor24Hours": "For security, the Code is valid for the next 24 hours.",
+  "teams": "Teams",
+  "codes": "Codes",
+  "teamMembers": "Team Members",
+  "invitationCodes": "Invitation Codes",
+  "assignedProducts": "Assigned Products",
+  "used": "Used",
+  "unused": "Unused",
+  "copyCode": "Copy Code",
+  "codeCopied": "Code copied to clipboard",
+  "noTeamMembers": "No team members found",
+  "noInvitationCodes": "No invitation codes found",
+  "invitationCode": "Invitation Code",
+  "enterInvitationCode": "Enter your invitation code",
+  "invitationCodeRequired": "Invitation code is required",
+
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars",
   "searchRequest": "Search Request",
@@ -355,7 +379,18 @@
   "signInforMore": " Sign in for more features",
   "failedToLoadData": "Failed to load profile data",
   "noCommentsFound": " No comments found",
-  "noNotificationsFound": " No notifications found"
+  "noNotificationsFound": " No notifications found",
+  "teamManagement": " Team Management",
+  "teamMembers": " Team Members",
+  "inviteMember": " Invite Member",
+  "inviteMemberSubtitle": " Enter the email of the member you want to invite to your team.",
+  "noTeamMembersFound": " No team members found",
+  "noCodeFound": " No code found",
+  "enterCodeInvitationCount": " Enter Code Invitation Count",
+  "generating": "Generating...",
+  "doYouHaveInvitationCode": "Do you have an invitation code?",
+  "registerWithInvitationCode": "Register with Invitation Code"
+
 
 
 

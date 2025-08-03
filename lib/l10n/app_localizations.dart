@@ -632,6 +632,144 @@ abstract class AppLocalizations {
   /// **'No Data Found'**
   String get noDataFound;
 
+  /// No description provided for @inviteTeamMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Team Member'**
+  String get inviteTeamMember;
+
+  /// No description provided for @invitesNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invites Number'**
+  String get invitesNumber;
+
+  /// No description provided for @generateLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate Code'**
+  String get generateLink;
+
+  /// No description provided for @yourInvitesAreReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Invites are Ready'**
+  String get yourInvitesAreReady;
+
+  /// No description provided for @shareTheseLinksToInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Share these Codes to invite a new members.'**
+  String get shareTheseLinksToInvite;
+
+  /// No description provided for @singleUseLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Single-Use Code'**
+  String get singleUseLink;
+
+  /// No description provided for @linkWillBeInvalidated.
+  ///
+  /// In en, this message translates to:
+  /// **'Code will be invalidated once a new member joins.'**
+  String get linkWillBeInvalidated;
+
+  /// No description provided for @expiresSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires Soon'**
+  String get expiresSoon;
+
+  /// No description provided for @linkValidFor24Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'For security, the Code is valid for the next 24 hours.'**
+  String get linkValidFor24Hours;
+
+  /// No description provided for @teams.
+  ///
+  /// In en, this message translates to:
+  /// **'Teams'**
+  String get teams;
+
+  /// No description provided for @codes.
+  ///
+  /// In en, this message translates to:
+  /// **'Codes'**
+  String get codes;
+
+  /// No description provided for @teamMembers.
+  ///
+  /// In en, this message translates to:
+  /// **' Team Members'**
+  String get teamMembers;
+
+  /// No description provided for @invitationCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation Codes'**
+  String get invitationCodes;
+
+  /// No description provided for @assignedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Products'**
+  String get assignedProducts;
+
+  /// No description provided for @used.
+  ///
+  /// In en, this message translates to:
+  /// **'Used'**
+  String get used;
+
+  /// No description provided for @unused.
+  ///
+  /// In en, this message translates to:
+  /// **'Unused'**
+  String get unused;
+
+  /// No description provided for @copyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Code'**
+  String get copyCode;
+
+  /// No description provided for @codeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied to clipboard'**
+  String get codeCopied;
+
+  /// No description provided for @noTeamMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'No team members found'**
+  String get noTeamMembers;
+
+  /// No description provided for @noInvitationCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'No invitation codes found'**
+  String get noInvitationCodes;
+
+  /// No description provided for @invitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation Code'**
+  String get invitationCode;
+
+  /// No description provided for @enterInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your invitation code'**
+  String get enterInvitationCode;
+
+  /// No description provided for @invitationCodeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation code is required'**
+  String get invitationCodeRequired;
+
   /// No description provided for @popularNewCars.
   ///
   /// In en, this message translates to:
@@ -1694,12 +1832,6 @@ abstract class AppLocalizations {
   /// **'Marketers Management'**
   String get marketerManagement;
 
-  /// No description provided for @assignedProducts.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned Products'**
-  String get assignedProducts;
-
   /// No description provided for @marketerInfo.
   ///
   /// In en, this message translates to:
@@ -2173,6 +2305,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' No notifications found'**
   String get noNotificationsFound;
+
+  /// No description provided for @teamManagement.
+  ///
+  /// In en, this message translates to:
+  /// **' Team Management'**
+  String get teamManagement;
+
+  /// No description provided for @inviteMember.
+  ///
+  /// In en, this message translates to:
+  /// **' Invite Member'**
+  String get inviteMember;
+
+  /// No description provided for @inviteMemberSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the email of the member you want to invite to your team.'**
+  String get inviteMemberSubtitle;
+
+  /// No description provided for @noTeamMembersFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No team members found'**
+  String get noTeamMembersFound;
+
+  /// No description provided for @noCodeFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No code found'**
+  String get noCodeFound;
+
+  /// No description provided for @enterCodeInvitationCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Code Invitation Count'**
+  String get enterCodeInvitationCount;
+
+  /// No description provided for @generating.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating...'**
+  String get generating;
+
+  /// No description provided for @doYouHaveInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have an invitation code?'**
+  String get doYouHaveInvitationCode;
+
+  /// No description provided for @registerWithInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with Invitation Code'**
+  String get registerWithInvitationCode;
 }
 
 class _AppLocalizationsDelegate

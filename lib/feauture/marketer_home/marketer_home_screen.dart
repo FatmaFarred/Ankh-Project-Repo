@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import '../../core/customized_widgets/shared_preferences .dart';
 import '../../data/data_sources/get_popular_product_remote_data_source_impl.dart' hide ProductRemoteDataSource;
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
@@ -35,8 +36,18 @@ class MarketerHomeScreen extends StatefulWidget {
 class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
   MarketerHomeProductCubit marketerHomeProductCubit = getIt<MarketerHomeProductCubit>();
   MarketerAssignProductCubit marketerAssignProductCubit = getIt<MarketerAssignProductCubit>();
+  String? token;
   
   final TextEditingController _searchController = TextEditingController();
+
+  Future<void> _loadToken() async {
+    final fetchedToken = await SharedPrefsManager.getData(key: 'user_token');
+    setState(() {
+      token = fetchedToken;
+    });
+    print("👤 User token: $token");
+  }
+
 
   void initState() {
     super.initState();
@@ -50,6 +61,7 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
       } else {
         debugPrint("User ID is null or empty");
       }
+      _loadToken(); // Load the token when the screen initializes
     });
   }
 
