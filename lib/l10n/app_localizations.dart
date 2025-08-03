@@ -2347,6 +2347,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Generating...'**
   String get generating;
+
+  /// No description provided for @doYouHaveInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have an invitation code?'**
+  String get doYouHaveInvitationCode;
+
+  /// No description provided for @registerWithInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with Invitation Code'**
+  String get registerWithInvitationCode;
 }
 
 class _AppLocalizationsDelegate

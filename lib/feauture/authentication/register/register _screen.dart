@@ -211,13 +211,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Do you have an invitation code?",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontSize: 12.sp, color: ColorManager.darkGrey),
-                        ),
                         TextButton(
                           onPressed: () {
                             setState(() {
@@ -226,13 +219,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             });
                           },
                           child: Text(
-                            "Register as Team Member",
+                            AppLocalizations.of(context)!.registerWithInvitationCode,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
                                 ?.copyWith(fontSize: 12.sp, color: ColorManager.lightprimary, fontWeight: FontWeight.w700),
                           ),
                         ),
+                        Text(
+                          AppLocalizations.of(context)!.doYouHaveInvitationCode,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontSize: 12.sp, color: ColorManager.darkGrey),
+                        ),
+
                       ],
                     ),
                     SizedBox(height: 20.h),
@@ -240,7 +241,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // Invitation Code Field (only show for team members)
                   if (_showInvitationCode) ...[
                     Text(
-                      "Invitation Code",
+                      AppLocalizations.of(context)!.invitationCode,
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
@@ -249,12 +250,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: 10.h),
                     CustomTextField(
                       controller: registerViewModel.invitationCodeController,
-                      hintText: "Enter your invitation code",
+                      hintText: AppLocalizations.of(context)!.enterInvitationCode,
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Invitation code is required";
+                          return AppLocalizations.of(context)!.fieldRequired;
                         }
                         return null;
                       },

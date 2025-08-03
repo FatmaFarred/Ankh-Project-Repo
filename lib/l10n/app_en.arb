@@ -387,7 +387,10 @@
   "noTeamMembersFound": " No team members found",
   "noCodeFound": " No code found",
   "enterCodeInvitationCount": " Enter Code Invitation Count",
-  "generating": "Generating..."
+  "generating": "Generating...",
+  "doYouHaveInvitationCode": "Do you have an invitation code?",
+  "registerWithInvitationCode": "Register with Invitation Code"
+
 
 
 

@@ -1174,4 +1174,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get generating => 'Generating...';
+
+  @override
+  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
+
+  @override
+  String get registerWithInvitationCode => 'Register with Invitation Code';
 }

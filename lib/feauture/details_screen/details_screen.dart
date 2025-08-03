@@ -614,7 +614,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         const SupportTeamSection(),
 
                         SizedBox(height: 74.h),
-                        user?.roles?[0] == "Marketer" &&
+                        (user?.roles?[0] == "Marketer"||user?.roles?[0] == "LeaderMarketer") &&
                             widget.showButton == true ?
                         CustomizedElevatedButton(
                           bottonWidget: Text(

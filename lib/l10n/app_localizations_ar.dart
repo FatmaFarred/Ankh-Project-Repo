@@ -1170,4 +1170,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get generating => ' جارٍ إنشاء الكود...';
+
+  @override
+  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+
+  @override
+  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 }

@@ -386,6 +386,8 @@
   "noTeamMembersFound": "لا توجد أعضاء في الفريق",
   "noCodeFound": "لا توجد محادثات متاحة",
   "enterCodeInvitationCount": " أدخل عدد الدعوات",
-  "generating": " جارٍ إنشاء الكود..."
+  "generating": " جارٍ إنشاء الكود...",
+  "doYouHaveInvitationCode": "هل لديك كود دعوة؟",
+  "registerWithInvitationCode": "سجل باستخدام كود الدعوة"
 
 }
