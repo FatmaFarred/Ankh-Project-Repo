@@ -9,9 +9,53 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/color_manager.dart';
 import '../../l10n/app_localizations.dart';
 
+class ChatMessage {
+  final String text;
+  final bool isMe;
+  final DateTime timestamp;
 
-class ChatingScreen extends StatelessWidget {
+  ChatMessage({
+    required this.text,
+    required this.isMe,
+    required this.timestamp,
+  });
+}
+
+class ChatingScreen extends StatefulWidget {
   const ChatingScreen({super.key});
+
+  @override
+  State<ChatingScreen> createState() => _ChatingScreenState();
+}
+
+class _ChatingScreenState extends State<ChatingScreen> {
+  final List<ChatMessage> _messages = [
+    ChatMessage(
+      text: "Hello !",
+      isMe: false,
+      timestamp: DateTime.now().subtract(Duration(minutes: 5)),
+    ),
+    ChatMessage(
+      text: "Hello !",
+      isMe: true,
+      timestamp: DateTime.now().subtract(Duration(minutes: 4)),
+    ),
+    ChatMessage(
+      text: "Yes, it's available. Would you like to schedule an inspection",
+      isMe: false,
+      timestamp: DateTime.now().subtract(Duration(minutes: 3)),
+    ),
+  ];
+
+  void _handleMessageSent(String message) {
+    setState(() {
+      _messages.add(ChatMessage(
+        text: message,
+        isMe: true,
+        timestamp: DateTime.now(),
+      ));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,19 +106,19 @@ class ChatingScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  Massage(text: "Hello !", IsMe: false),
-                  Massage(text: "Hello !", IsMe: true),
-                  Massage(
-                    text:
-                        "Yes, it's available. Would you like to schedule an inspection",
-                    IsMe: false,
-                  ),
-                ],
+              child: ListView.builder(
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final message = _messages[index];
+                  return Massage(
+                    text: message.text,
+                    IsMe: message.isMe,
+                    timestamp: message.timestamp,
+                  );
+                },
               ),
             ),
-            InputField(),
+            InputField(onMessageSent: _handleMessageSent),
           ],
         ),
       ),

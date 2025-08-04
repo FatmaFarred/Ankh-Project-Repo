@@ -1,8 +1,25 @@
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:flutter/material.dart';
 
-class InputField extends StatelessWidget {
-  const InputField({super.key});
+class InputField extends StatefulWidget {
+  final Function(String) onMessageSent;
+  
+  const InputField({super.key, required this.onMessageSent});
+
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
+
+class _InputFieldState extends State<InputField> {
+  final TextEditingController _messageController = TextEditingController();
+
+  void _sendMessage() {
+    final message = _messageController.text.trim();
+    if (message.isNotEmpty) {
+      widget.onMessageSent(message);
+      _messageController.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +35,7 @@ class InputField extends StatelessWidget {
                 color: Color(0xfff0f0f3),
               ),
               child: TextFormField(
+                controller: _messageController,
                 style: TextStyle(color: ColorManager.black),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -35,14 +53,13 @@ class InputField extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
+                onFieldSubmitted: (_) => _sendMessage(),
               ),
             ),
           ),
           SizedBox(width: 20),
           InkWell(
-            onTap: (){
-              print("hello");
-            },
+            onTap: _sendMessage,
             child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -55,5 +72,11 @@ class InputField extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
   }
 }
