@@ -17,6 +17,7 @@ import 'feauture/authentication/forgrt_password/forget_password/forget_password_
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
 import 'feauture/authentication/register/register _screen.dart';
+import 'feauture/chat_screen/chat_screen.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
@@ -259,6 +260,7 @@ class _MyAppState extends State<MyApp> {
     InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
       InviteTeamMemberScreen.inviteTeamMemberRouteName: (context) => InviteTeamMemberScreen(),
       TeamsAndCodesScreen.teamsAndCodesRouteName: (context) => TeamsAndCodesScreen(),
+      TeamChatScreen.routeName: (context) => TeamChatScreen(),
 
     },
     );

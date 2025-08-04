@@ -680,13 +680,13 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i795.GetAllUsersUseCase>(),
           gh<_i384.SearchUsersUseCase>(),
         ));
-    gh.factory<_i371.MarketerGenerateCodeUseCase>(() =>
-        _i371.MarketerGenerateCodeUseCase(
+    gh.factory<_i348.GetAllMarketerCodesUseCase>(() =>
+        _i348.GetAllMarketerCodesUseCase(
             gh<_i966.MarketerInviteCodeReppositry>()));
     gh.factory<_i142.GetTeamMemberUseCase>(() =>
         _i142.GetTeamMemberUseCase(gh<_i966.MarketerInviteCodeReppositry>()));
-    gh.factory<_i348.GetAllMarketerCodesUseCase>(() =>
-        _i348.GetAllMarketerCodesUseCase(
+    gh.factory<_i371.MarketerGenerateCodeUseCase>(() =>
+        _i371.MarketerGenerateCodeUseCase(
             gh<_i966.MarketerInviteCodeReppositry>()));
     gh.factory<_i416.ResetPasswordUseCase>(
         () => _i416.ResetPasswordUseCase(gh<_i234.ResetPasswordRepositry>()));

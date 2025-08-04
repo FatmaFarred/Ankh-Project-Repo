@@ -4,10 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Massage extends StatelessWidget {
-  const Massage({super.key, required this.text, required this.IsMe});
+  const Massage({
+    super.key, 
+    required this.text, 
+    required this.IsMe,
+    this.timestamp,
+  });
 
   final bool IsMe;
   final String text;
+  final DateTime? timestamp;
+
+  String _formatTime(DateTime dt) {
+    return "${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +49,14 @@ class Massage extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            Text("11:11",style: GoogleFonts.poppins(fontSize: 10 .sp,fontWeight: FontWeight.w300,color: IsMe ? Colors.grey : Color(0xffE9EAEB)),),
+            Text(
+              timestamp != null ? _formatTime(timestamp!) : "11:11",
+              style: GoogleFonts.poppins(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w300,
+                color: IsMe ? Colors.grey : Color(0xffE9EAEB)
+              ),
+            ),
           ],
         ),
       ),

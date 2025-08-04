@@ -24,6 +24,7 @@ import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../chat_screen/chat_screen.dart';
 import '../home_screen/cubit/add_favorite_cubit.dart';
 import '../home_screen/cubit/add_remove_favorite_state.dart';
 import '../welcome_screen/welcome_screen.dart';
@@ -228,10 +229,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
         },
 
         child: Scaffold(
-          floatingActionButton: (user?.roles?[0] == "Marketer")
+          floatingActionButton: /*(
+              user?.roles?[0] == "Marketer")
               ? null
-              : FloatingActionButton(
-            onPressed: () {},
+              : */
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, TeamChatScreen.routeName);
+            },
             tooltip: AppLocalizations.of(context)!.haveADeal,
             backgroundColor: ColorManager.lightprimary,
             child: Icon(
