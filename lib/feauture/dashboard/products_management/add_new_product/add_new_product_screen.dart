@@ -15,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../api_service/di/di.dart';
 import '../../../../domain/use_cases/post_product_usecase.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import '../cubit/product_management_cubit.dart';
 import '../products_management_screen.dart';
@@ -33,28 +34,38 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   String? selectedTransmission = 'Choose Transmission Type';
   String? selectedFuel = 'Choose Fuel Type';
   String? selectedMarketer = 'Mohamed Khaled';
-  String? selectedStatus =  'Choose Status';
+  String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
 
   late int statusNum;
 
-  final List<String> driveTypes = ['Choose Drive Type','FrontWheel', 'RearWheel', "AllWheel"];
-  final List<String> transmissionTypes = ['Choose Transmission Type','Automatic', 'Manual'];
-  final List<String> fuelTypes = ['Choose Fuel Type',"Petrol", "Electric", "Gas"];
+  final List<String> driveTypes = [
+    'Choose Drive Type',
+    'FrontWheel',
+    'RearWheel',
+    "AllWheel",
+  ];
+  final List<String> transmissionTypes = [
+    'Choose Transmission Type',
+    'Automatic',
+    'Manual',
+  ];
+  final List<String> fuelTypes = [
+    'Choose Fuel Type',
+    "Petrol",
+    "Electric",
+    "Gas",
+  ];
   final List<String> marketers = [
     'Mohamed Khaled',
     'Ahmed Mohamed',
     'Fahmy',
     'Mohamed Ahmed',
   ];
-  final List<String> status =  ['Choose Status', 'Available', 'Sold', 'Pending'];
+  final List<String> status = ['Choose Status', 'Available', 'Sold', 'Reserved'];
 
   int currentIndex = 0;
 
-  final List<Widget> screens = [
-    Center(child: Text("New Screen")),
-    Center(child: Text("Used Screen")),
-  ];
   int selectedTabIndex = 0;
 
   final TextEditingController carNameController = TextEditingController();
@@ -203,7 +214,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               color: Colors.white,
               onPressed: () => Navigator.pop(context),
             ),
-            title: Text("Add Car"),
+            title: Text(AppLocalizations.of(context)!.addCar),
             backgroundColor: ColorManager.lightprimary,
           ),
           body: Padding(
@@ -214,7 +225,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: CustomTabBar(
-                      tabs: const ['New', 'Used'],
+                      tabs: [
+                        AppLocalizations.of(context)!.neww,
+                        AppLocalizations.of(context)!.used,
+                      ],
                       onTabChanged: (index) {
                         setState(() {
                           selectedTabIndex = index;
@@ -253,7 +267,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             ),
                                             SizedBox(width: 8.w),
                                             Text(
-                                              "Basic Information",
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.basicInformation,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16.sp,
                                                 fontWeight:
@@ -264,7 +280,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                         ),
                                         SizedBox(height: 20.h),
                                         Text(
-                                          "Car Name",
+                                          AppLocalizations.of(context)!.carName,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w500,
@@ -275,11 +291,15 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.trim().isEmpty) {
-                                              return 'Car Name is required';
+                                              return AppLocalizations.of(
+                                                context,
+                                              )!.carNameRequired;
                                             }
                                             return null;
                                           },
-                                          hintText: "Car Name",
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.carName,
                                           controller: carNameController,
                                         ),
                                         SizedBox(height: 16.h),
@@ -291,7 +311,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Category",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.category,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -302,7 +324,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
@@ -321,7 +345,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Year",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.year,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -332,14 +358,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
                                                     },
                                                     keyBoardType:
                                                         TextInputType.number,
-                                                    hintText: "Year",
+                                                    hintText:
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.year,
                                                     controller: yearController,
                                                   ),
                                                 ],
@@ -357,7 +388,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Mileage",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.mileage,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -368,14 +401,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
                                                     },
                                                     keyBoardType:
                                                         TextInputType.number,
-                                                    hintText: "Mileage",
+                                                    hintText:
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.mileage,
                                                     controller:
                                                         odometerController,
                                                   ),
@@ -389,7 +427,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Color",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.color,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -400,12 +440,17 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
                                                     },
-                                                    hintText: "Color",
+                                                    hintText:
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.color,
                                                     controller: colorController,
                                                   ),
                                                 ],
@@ -423,7 +468,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Horse Power",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.horsePower,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -434,14 +481,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
                                                     },
                                                     keyBoardType:
                                                         TextInputType.number,
-                                                    hintText: "Horse Power",
+                                                    hintText:
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.horsePower,
                                                     controller:
                                                         horsepowerController,
                                                   ),
@@ -455,7 +507,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Battery Capacity",
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.batteryCapacity,
                                                     style: GoogleFonts.inter(
                                                       fontSize: 14.sp,
                                                       fontWeight:
@@ -466,7 +520,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   CustomTextFormField(
                                                     validator: (value) {
                                                       if (value == null ||
-                                                          value.trim().isEmpty) {
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
                                                         return 'required';
                                                       }
                                                       return null;
@@ -474,7 +530,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                     keyBoardType:
                                                         TextInputType.number,
                                                     hintText:
-                                                        "Battery Capacity",
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.batteryCapacity,
                                                     controller:
                                                         batteryCapacityController,
                                                   ),
@@ -513,7 +571,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             ),
                                             SizedBox(width: 8.w),
                                             Text(
-                                              "Specifications",
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.specifications,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16.sp,
                                                 fontWeight:
@@ -526,7 +586,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
                                         // Transmission Type Dropdown
                                         Text(
-                                          'Transmission Type',
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.transmissionType,
                                           style: GoogleFonts.inter(
                                             fontSize: 16.sp,
                                             fontWeight:
@@ -542,22 +604,38 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             color: ColorManager.black,
                                           ),
                                           iconSize: 20.sp,
-                                          value: selectedTransmission,
+                                          value:selectedTransmission ,
+                                          // AppLocalizations.of(
+                                          //   context,
+                                          // )!.chooseTransmissionType,
                                           items: transmissionTypes
-                                              .map(
-                                                (type) => DropdownMenuItem(
-                                                  value: type,
-                                                  child: Text(type),
-                                                ),
-                                              )
-                                              .toList(),
+                                              // [
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.chooseTransmissionType,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.automatic,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.manual,
+                                              //     ]
+                                                  .map(
+                                                    (type) => DropdownMenuItem(
+                                                      value: type,
+                                                      child: Text(type),
+                                                    ),
+                                                  )
+                                                  .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedTransmission = value;
                                             });
                                           },
                                           validator: (value) {
-                                            if (value == null || value == 'Choose Transmission Type') {
+                                            if (value == null ||
+                                                value ==
+                                                    'Choose Transmission Type') {
                                               return 'Please select a valid transmission type';
                                             }
                                             return null;
@@ -575,7 +653,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
                                         // Fuel Type Dropdown
                                         Text(
-                                          'Fuel Type',
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.fuelType,
                                           style: GoogleFonts.inter(
                                             fontSize: 16.sp,
                                             fontWeight:
@@ -592,21 +672,41 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             color: ColorManager.black,
                                           ),
                                           value: selectedFuel,
+                                          // AppLocalizations.of(
+                                          //   context,
+                                          // )!.chooseFuelType,
                                           items: fuelTypes
-                                              .map(
-                                                (type) => DropdownMenuItem(
-                                                  value: type,
-                                                  child: Text(type),
-                                                ),
-                                              )
-                                              .toList(),
+                                              // [AppLocalizations.of(
+                                              //         context,
+                                              //       )!.chooseFuelType,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.petrol,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.electric,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.gas,
+                                              //     ]
+                                                  .map(
+                                                    (type) => DropdownMenuItem(
+                                                      value: type,
+                                                      child: Text(type),
+                                                    ),
+                                                  )
+                                                  .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedFuel = value!;
                                             });
                                           },
                                           validator: (value) {
-                                            if (value == null || value == 'Choose Fuel Type') {
+                                            if (value == null ||
+                                                value ==
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.chooseFuelType) {
                                               return 'Please select a valid fuel type';
                                             }
                                             return null;
@@ -622,7 +722,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                         ),
 
                                         Text(
-                                          'Drive Type',
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.driveType,
                                           style: GoogleFonts.inter(
                                             fontSize: 16.sp,
                                             fontWeight:
@@ -639,21 +741,42 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             color: ColorManager.black,
                                           ),
                                           value: selectedDriveType,
+                                          // AppLocalizations.of(
+                                          //   context,
+                                          // )!.chooseDriveType,
                                           items: driveTypes
-                                              .map(
-                                                (type) => DropdownMenuItem(
-                                                  value: type,
-                                                  child: Text(type),
-                                                ),
-                                              )
-                                              .toList(),
+                                              // [
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.chooseDriveType,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.frontWheel,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.rearWheel,
+                                              //       AppLocalizations.of(
+                                              //         context,
+                                              //       )!.allWheel,
+                                              //     ]
+                                                  .map(
+                                                    (type) => DropdownMenuItem(
+                                                      value: type,
+                                                      child: Text(type),
+                                                    ),
+                                                  )
+                                                  .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedDriveType = value!;
                                             });
                                           },
                                           validator: (value) {
-                                            if (value == null || value == 'Choose Drive Type') {
+                                            if (value == null ||
+                                                value ==
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.chooseDriveType) {
                                               return 'Please select a valid drive type';
                                             }
                                             return null;
@@ -710,7 +833,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                         const SizedBox(height: 16),
 
                                         Text(
-                                          "Price",
+                                          AppLocalizations.of(context)!.price,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w500,
@@ -727,13 +850,17 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           },
                                           keyBoardType:
                                               TextInputType.numberWithOptions(),
-                                          hintText: "Price",
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.price,
                                           controller: priceController,
                                         ),
                                         const SizedBox(height: 16),
 
                                         Text(
-                                          "commission",
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.commission,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w500,
@@ -750,13 +877,17 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           },
                                           keyBoardType:
                                               TextInputType.numberWithOptions(),
-                                          hintText: "commission",
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.commission,
                                           controller: commissionController,
                                         ),
                                         const SizedBox(height: 16),
 
                                         Text(
-                                          "Required Points",
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.requiredPoints,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w500,
@@ -773,7 +904,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           },
                                           keyBoardType:
                                               TextInputType.numberWithOptions(),
-                                          hintText: "Required Points",
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.requiredPoints,
                                           controller: requiredPointsController,
                                         ),
                                         const SizedBox(height: 16),
@@ -818,7 +951,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             });
                                           },
                                           validator: (value) {
-                                            if (value == null || value == 'Choose Status') {
+                                            if (value == null ||
+                                                value == 'Choose Status') {
                                               return 'Please select a valid status';
                                             }
                                             return null;
@@ -862,7 +996,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             ),
                                             SizedBox(width: 8.w),
                                             Text(
-                                              "images",
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.images,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16.sp,
                                                 fontWeight:
@@ -948,7 +1084,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                         ),
                                                     child: CustomizedElevatedButton(
                                                       bottonWidget: Text(
-                                                        "Browse Files",
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.browseFiles,
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodyLarge!
@@ -1001,7 +1139,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             ),
                                             SizedBox(width: 8.w),
                                             Text(
-                                              "Description",
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.description,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16.sp,
                                                 fontWeight:
@@ -1012,7 +1152,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                         ),
                                         const SizedBox(height: 16),
                                         Text(
-                                          "Description",
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.description,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w500,
@@ -1044,7 +1186,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                     Expanded(
                                       child: CustomizedElevatedButton(
                                         bottonWidget: Text(
-                                          "Add Product",
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.addProduct,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge!
@@ -1121,13 +1265,14 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                   return DashboardMainScreen();
                                                 },
                                               ),
-
                                             );
                                           }
                                           CustomDialog.positiveButton(
                                             context: context,
-                                            title: "Added", // you may define this key in your l10n
-                                            message: "the products have  been Added successfully.",
+                                            title: "Added",
+                                            // you may define this key in your l10n
+                                            message:
+                                                "the products have  been Added successfully.",
                                             positiveText: "OK",
                                             positiveOnClick: () {
                                               Navigator.of(context).pop();
@@ -1143,7 +1288,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                     Expanded(
                                       child: CustomizedElevatedButton(
                                         bottonWidget: Text(
-                                          "Cancel",
+                                          AppLocalizations.of(context)!.cancel,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge!
