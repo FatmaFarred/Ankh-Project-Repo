@@ -21,38 +21,56 @@ import 'cubit/product_management_state.dart';
 import 'edit_product_screen/edit_product_cubit.dart';
 import 'edit_product_screen/edit_product_screen.dart';
 
-class ProductsManagementScreen extends StatelessWidget {
+class ProductsManagementScreen extends StatefulWidget {
   const ProductsManagementScreen({super.key});
+
+  @override
+  State<ProductsManagementScreen> createState() => _ProductsManagementScreenState();
+}
+
+class _ProductsManagementScreenState extends State<ProductsManagementScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProductsManagementCubit>()..fetchAllProducts(),
-      child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(height: 20.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.productsManagement,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.headlineLarge!.copyWith(fontSize: 18.sp),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: CustomTextField(
-                hintText: AppLocalizations.of(context)!.search,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: ColorManager.lightGreyShade2,
+      child: Builder(
+        builder: (context) => Scaffold(
+          body: Column(
+            children: [
+              SizedBox(height: 20.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.productsManagement,
+                    style: Theme.of(
+                      context,
+                    ).textTheme.headlineLarge!.copyWith(fontSize: 18.sp),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CustomTextField(
+                  controller: _searchController,
+                  hintText: AppLocalizations.of(context)!.search,
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: ColorManager.lightGreyShade2,
+                  ),
+                  onChanged: (value) {
+                    context.read<ProductsManagementCubit>().searchProducts(value);
+                  },
                 ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: CustomizedElevatedButton(
@@ -81,32 +99,37 @@ class ProductsManagementScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child:
-                  BlocBuilder<ProductsManagementCubit, ProductManagementState>(
-                    builder: (context, state) {
-                      if (state is ProductManagementLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (state is ProductManagementLoaded) {
-                        final products = state.products;
-                        return ListView.builder(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(product: products[index]);
-                          },
-                        );
-                      } else if (state is ProductManagementError) {
-                        return Center(child: Text('Error: ${state.message}'));
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                  ),
+              child: BlocBuilder<ProductsManagementCubit, ProductManagementState>(
+                builder: (context, state) {
+                  if (state is ProductManagementLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ProductManagementLoaded) {
+                    final products = state.products;
+                    return RefreshIndicator(
+                      color: ColorManager.lightprimary,
+                      onRefresh: () async {
+                        context.read<ProductsManagementCubit>().fetchAllProducts();
+                      },
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          return ProductCard(product: products[index]);
+                        },
+                      ),
+                    );
+                  } else if (state is ProductManagementError) {
+                    return Center(child: Text('Error: ${state.message}'));
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
 

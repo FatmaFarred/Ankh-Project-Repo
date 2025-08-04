@@ -316,7 +316,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get online => 'متصل';
 
   @override
-  String get description => 'الوصف ';
+  String get description => 'الوصف';
 
   @override
   String get supportTeam => 'فريق الدعم';
@@ -338,6 +338,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get transmission => 'ناقل الحركة';
+
+  @override
+  String get transmissionType => 'اختار نوع ناقل الحركة';
+
+  @override
+  String get chooseTransmissionType => 'نوع ناقل الحركة';
+
+  @override
+  String get automatic => 'اوتوماتيك';
+
+  @override
+  String get manual => 'مانول';
 
   @override
   String get horsepower => 'قوة الحصان';
@@ -615,7 +627,7 @@ class AppLocalizationsAr extends AppLocalizations {
       '`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا';
 
   @override
-  String get ok => 'حسناً';
+  String get ok => 'موافق';
 
   @override
   String get failedToLoadRecommendedBrands =>
@@ -1082,4 +1094,199 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noNotificationsFound => 'لا توجد إشعارات متاحة';
+
+  @override
+  String get editCarDetails => 'تعديل تفاصيل السيارة';
+
+  @override
+  String get addCar => 'إضافة سيارة';
+
+  @override
+  String get basicInformation => 'المعلومات الأساسية';
+
+  @override
+  String get carName => 'اسم السيارة';
+
+  @override
+  String get category => 'الفئة';
+
+  @override
+  String get year => 'السنة';
+
+  @override
+  String get mileage => 'المسافة المقطوعة';
+
+  @override
+  String get color => 'اللون';
+
+  @override
+  String get horsePower => 'قوة المحرك';
+
+  @override
+  String get specifications => 'المواصفات';
+
+  @override
+  String get ownerName => 'اسم المالك';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get conditionParts => 'حالة الأجزاء';
+
+  @override
+  String get licenseExpiryDate => 'تاريخ انتهاء الرخصة';
+
+  @override
+  String get safetyReport => 'تقرير السلامة';
+
+  @override
+  String get taxStatus => 'حالة الضريبة';
+
+  @override
+  String get interiorCondition => 'حالة التصميم الداخلي';
+
+  @override
+  String get exteriorCondition => 'حالة التصميم الخارجي';
+
+  @override
+  String get additionalSpecs => 'مواصفات إضافية';
+
+  @override
+  String get additionalInfo => 'معلومات إضافية';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get inspectionResult => 'نتيجة المعاينة';
+
+  @override
+  String get accidentHistory => 'تاريخ الحوادث';
+
+  @override
+  String get testDriveAvailable => 'تجربة القيادة متاحة';
+
+  @override
+  String get warrantyStatus => 'حالة الضمان';
+
+  @override
+  String get tireStatus => 'حالة الإطارات';
+
+  @override
+  String get lightStatus => 'حالة الإضاءة';
+
+  @override
+  String get licenseDuration => 'مدة الرخصة';
+
+  @override
+  String get trafficViolations => 'مخالفات المرور';
+
+  @override
+  String get insuranceStatus => 'حالة التأمين';
+
+  @override
+  String get numberOfKeys => 'عدد المفاتيح';
+
+  @override
+  String get seatCondition => 'حالة المقاعد';
+
+  @override
+  String get gearCondition => 'حالة التروس';
+
+  @override
+  String get driveSystemCondition => 'حالة نظام القيادة';
+
+  @override
+  String get brakesCondition => 'حالة الفرامل';
+
+  @override
+  String get tags => 'العلامات';
+
+  @override
+  String get safetyStatus => 'حالة السلامة';
+
+  @override
+  String get commission => 'العمولة';
+
+  @override
+  String get requiredPoints => 'النقاط المطلوبة';
+
+  @override
+  String get browseFiles => 'تصفح الملفات';
+
+  @override
+  String get licenseImages => 'صور الرخصة';
+
+  @override
+  String get insuranceFront => 'الوجه الأمامي للتأمين';
+
+  @override
+  String get insuranceBack => 'الوجه الخلفي للتأمين';
+
+  @override
+  String get saveEdits => 'حفظ التعديلات';
+
+  @override
+  String get addProduct => 'إضافة منتج';
+
+  @override
+  String get edited => 'تم التعديل';
+
+  @override
+  String get added => 'تمت الإضافة';
+
+  @override
+  String get carNameRequired => 'اسم السيارة مطلوب';
+
+  @override
+  String get required => 'مطلوب';
+
+  @override
+  String get chooseDriveType => 'اختر نوع القيادة';
+
+  @override
+  String get chooseFuelType => 'اختر نوع الوقود';
+
+  @override
+  String get fuelType => 'نوع الوقود';
+
+  @override
+  String get driveType => 'نوع القيادة';
+
+  @override
+  String get frontWheel => 'العجلات الأمامية';
+
+  @override
+  String get rearWheel => 'العجلات الخلفية';
+
+  @override
+  String get allWheel => 'جميع العجلات';
+
+  @override
+  String get petrol => 'بنزين';
+
+  @override
+  String get electric => 'كهربائي';
+
+  @override
+  String get gas => 'غاز';
+
+  @override
+  String get available => 'متاح';
+
+  @override
+  String get sold => 'مباع';
+
+  @override
+  String get neww => 'جديد';
+
+  @override
+  String get used => 'مستعمل';
+
+  @override
+  String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
+
+  @override
+  String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
 }

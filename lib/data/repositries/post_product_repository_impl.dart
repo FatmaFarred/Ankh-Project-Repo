@@ -179,11 +179,15 @@ class PostProductRepositoryImpl implements PostProductRepository {
         for (String imagePath in entity.images!) {
           final file = File(imagePath);
           if (file.existsSync()) {
+            // This is a new image file that needs to be uploaded
             final multipartFile = await MultipartFile.fromFile(
               file.path,
               filename: file.path.split('/').last,
             );
             formData.files.add(MapEntry('Images', multipartFile));
+          } else {
+            // This is an existing image URL that should be kept
+            formData.fields.add(MapEntry('ExistingImages', imagePath));
           }
         }
       }

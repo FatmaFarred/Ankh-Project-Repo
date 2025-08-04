@@ -63,11 +63,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: BlocConsumer<DeleteProductCubit, DeleteProductState>(
         listener: (context, state) {
           if (state is DeleteProductSuccess) {
-            Navigator.pop(context,true); // Go back to the previous screen
+            Navigator.pop(context, true); // Go back to the previous screen
           } else if (state is DeleteProductFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, deleteState) {
@@ -113,9 +113,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   AppLocalizations.of(context)!.active,
                                   style: Theme.of(context).textTheme.bodySmall
                                       ?.copyWith(
-                                    fontSize: 14.sp,
-                                    color: ColorManager.darkGreen,
-                                  ),
+                                        fontSize: 14.sp,
+                                        color: ColorManager.darkGreen,
+                                      ),
                                 ),
                                 backgroundColor: ColorManager.lightGreen,
                                 padding: EdgeInsets.symmetric(
@@ -152,7 +152,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             images.length,
-                                (index) => Container(
+                            (index) => Container(
                               margin: EdgeInsets.symmetric(
                                 horizontal: 4.w,
                                 vertical: 8.h,
@@ -190,10 +190,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     RatingBarIndicator(
                                       rating: product.rating.toDouble(),
                                       itemBuilder: (context, index) =>
-                                      const Icon(
-                                        Icons.star,
-                                        color: ColorManager.starRateColor,
-                                      ),
+                                          const Icon(
+                                            Icons.star,
+                                            color: ColorManager.starRateColor,
+                                          ),
                                       itemCount: 5,
                                       itemSize: 16.sp,
                                     ),
@@ -224,7 +224,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                       // --- Description ---
                       SectionTitle(
-                          title: AppLocalizations.of(context)!.description),
+                        title: AppLocalizations.of(context)!.description,
+                      ),
                       SizedBox(height: 4.h),
                       Text(
                         product.description,
@@ -235,23 +236,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                       SizedBox(height: 12.h),
                       _buildSmallText(
-                        "Created: ${product.createdAt != null
-                            ? DateFormat('dd/MM/yyyy')
-                            : 'N/A'}",
+                        "${AppLocalizations.of(context)!.created}: ${DateFormat('yyyy-MM-dd ').format(product.createdAt)}",
                         const Color(0xff6B7280),
                       ),
                       _buildSmallText(
-                        "Last Edited: ${product.lastEditedAt != null ? DateFormat('dd/MM/yyyy'): 'N/A'}",
+                        "${AppLocalizations.of(context)!.lastEdited}: ${DateFormat('yyyy-MM-dd ').format(product.lastEditedAt)}",
                         const Color(0xff6B7280),
                       ),
                       SizedBox(height: 24.h),
 
                       // --- Product Details Section ---
-                      SectionTitle(title: AppLocalizations.of(context)!.details),
+                      SectionTitle(
+                        title: AppLocalizations.of(context)!.details,
+                      ),
                       SizedBox(height: 12.h),
                       CarDetailInfo(
-                        ownerName: product.usedDetails?.ownerName ?? "N/A",
-                        assignedMarketer: "product.marketerName",
                         batteryCapacity: product.batteryCapacity,
                         horsepower: product.horsepower.toString(),
                         odometer: product.mileage.toString(),
@@ -296,25 +295,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         child: CustomizedElevatedButton(
                           bottonWidget: deleteState is DeleteProductLoading
                               ? const CircularProgressIndicator(
-                            color: Colors.white,
-                          )
+                                  color: Colors.white,
+                                )
                               : Text(
-                            AppLocalizations.of(context)!.delete,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                              fontSize: 16.sp,
-                              color: ColorManager.white,
-                            ),
-                          ),
+                                  AppLocalizations.of(context)!.delete,
+                                  style: Theme.of(context).textTheme.bodyLarge!
+                                      .copyWith(
+                                        fontSize: 16.sp,
+                                        color: ColorManager.white,
+                                      ),
+                                ),
                           onPressed: deleteState is DeleteProductLoading
                               ? null
                               : () {
-                            context
-                                .read<DeleteProductCubit>()
-                                .deleteProduct(widget.productId);
-                          },
+                                  context
+                                      .read<DeleteProductCubit>()
+                                      .deleteProduct(widget.productId);
+                                },
                           color: ColorManager.darkGrey,
                           borderColor: ColorManager.darkGrey,
                         ),
@@ -327,11 +324,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         child: CustomizedElevatedButton(
                           bottonWidget: Text(
                             AppLocalizations.of(context)!.edit,
-                            style:
-                            Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 16.sp,
-                              color: ColorManager.white,
-                            ),
+                            style: Theme.of(context).textTheme.bodyLarge!
+                                .copyWith(
+                                  fontSize: 16.sp,
+                                  color: ColorManager.white,
+                                ),
                           ),
                           onPressed: () {},
                           color: ColorManager.lightprimary,

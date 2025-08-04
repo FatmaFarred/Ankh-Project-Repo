@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CarDetailInfo extends StatelessWidget {
-  final String ownerName;
-  final String assignedMarketer;
   final String batteryCapacity;
   final String horsepower;
   final String odometer;
@@ -16,8 +14,6 @@ class CarDetailInfo extends StatelessWidget {
 
   const CarDetailInfo({
     super.key,
-    required this.ownerName,
-    required this.assignedMarketer,
     required this.batteryCapacity,
     required this.horsepower,
     required this.odometer,
@@ -36,7 +32,6 @@ class CarDetailInfo extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInfoItem("Owner Name", ownerName),
             _buildInfoItem("Battery Capacity", batteryCapacity),
             _buildInfoItem("Horsepower", horsepower),
             _buildInfoItem("Odometer", odometer),
@@ -46,7 +41,6 @@ class CarDetailInfo extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInfoItem("Assigned Marketer", assignedMarketer),
             _buildInfoItem("Transmission", transmission),
             _buildInfoItem("Engine Type", engineType),
             _buildInfoItem("Color", color),
