@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../invite_team_member/invite_team_member_screen.dart';
+import '../teams_and_codes/teams_and_codes_screen.dart';
 import 'cubit/profile_cubit.dart';
 import 'cubit/states.dart';
 import 'edit_profile_screen.dart';
@@ -314,16 +317,11 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                     SizedBox(height: 16.h),
                     Text(
 
-                      AppLocalizations.of(context)!.failedToLoadData,
+                      state.error.errorMessage??AppLocalizations.of(context)!.failedToLoadData,
                       style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      AppLocalizations.of(context)!.noInternetConnection,
-                      style: TextStyle(fontSize: 14.sp, color: Colors.grey),
-                      textAlign: TextAlign.center,
-                    ),
+
                     SizedBox(height: 24.h),
                     ElevatedButton(
                       onPressed:()=>Navigator.pushNamed(context, WelcomeScreen.welcomeScreenRouteName),
@@ -449,7 +447,7 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                                   ),
                                 ),
                               ),
-                                  user?.roles?[0]=="Marketer"
+                                  user?.roles?[0]=="Marketer"|| user?.roles?[0]=="Inspector"|| user?.roles?[0]=="LeaderMarketer"
                                   ? Column(
                                 children: [
                                   Divider(color: ColorManager.darkGrey, thickness: 1),
@@ -457,12 +455,12 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      ProfileStat(label: AppLocalizations.of(context)!.completed, value: "234"),
+                                      ProfileStat(label: AppLocalizations.of(context)!.completed, value: "$completedTasks"),
                                       SizedBox(
                                         height: 40.h,
                                         child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
                                       ),
-                                      ProfileStat(label: AppLocalizations.of(context)!.rating, value: "4.9/5.0"),
+                                      ProfileStat(label: AppLocalizations.of(context)!.rating, value: "$rate/5.0"),
                                       SizedBox(
                                         height: 40.h,
                                         child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
@@ -491,6 +489,33 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                 child: ListView(
                   padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
                   children: [
+                    user?.roles?[0]=="LeaderMarketer"?
+                    _tableSection(
+                        title: AppLocalizations.of(context)!.teamManagement,
+                        rows: [
+                          SettingsTile(
+                              title: AppLocalizations.of(context)!.inviteTeamMember,
+                              iconWidget: SvgPicture.asset(ImageAssets.chatTeam,
+                                  height: 22.h, width: 22.w,
+                                color: ColorManager.darkestGrey,
+
+                              ),
+                            onTap:()=>Navigator.pushNamed(context, InviteTeamMemberScreen.inviteTeamMemberRouteName),
+
+                          ),
+                          SettingsTile(
+                              title: AppLocalizations.of(context)!.teamMembers,
+                            iconWidget: SvgPicture.asset(ImageAssets.usersIcon,
+                              height: 22.h, width: 22.w,
+                              color: ColorManager.darkestGrey,
+
+                            ),
+                            onTap:()=>Navigator.pushNamed(context, TeamsAndCodesScreen.teamsAndCodesRouteName),
+
+                          ),
+
+                        ])
+                        : const SizedBox.shrink(),
                     _tableSection(
                         title: AppLocalizations.of(context)!.manageAccount,
                         rows: [

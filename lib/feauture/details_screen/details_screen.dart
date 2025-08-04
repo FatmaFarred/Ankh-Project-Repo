@@ -24,6 +24,7 @@ import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../chat_screen/chat_screen.dart';
 import '../home_screen/cubit/add_favorite_cubit.dart';
 import '../home_screen/cubit/add_remove_favorite_state.dart';
 import '../welcome_screen/welcome_screen.dart';
@@ -228,10 +229,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
         },
 
         child: Scaffold(
-          floatingActionButton: (user?.roles?[0] == "Marketer")
+          floatingActionButton: /*(
+              user?.roles?[0] == "Marketer")
               ? null
-              : FloatingActionButton(
-            onPressed: () {},
+              : */
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, TeamChatScreen.routeName);
+            },
             tooltip: AppLocalizations.of(context)!.haveADeal,
             backgroundColor: ColorManager.lightprimary,
             child: Icon(
@@ -350,6 +355,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ) : SizedBox.shrink(),
                             user?.roles?[0] == "Admin" ||
+                                user?.roles?[0] == "LeaderMarketer" ||
                                 user?.roles?[0] == "Marketer" ||
                                 user?.roles?[0] == "Inspector" ?
                             SizedBox.shrink() :
@@ -591,7 +597,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         SizedBox(height: 12.h),
                         user?.roles?[0] == "Admin" ||
                             user?.roles?[0] == "Marketer" ||
-                            user?.roles?[0] == "Inspector" ?
+                            user?.roles?[0] == "LeaderMarketer"||
+                        user?.roles?[0] == "Inspector" ?
                         SizedBox.shrink() :
                         AddCommentSection(
                             productId: productId!, commentCubit: commentCubit),
@@ -612,7 +619,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         const SupportTeamSection(),
 
                         SizedBox(height: 74.h),
-                        user?.roles?[0] == "Marketer" &&
+                        (user?.roles?[0] == "Marketer"||user?.roles?[0] == "LeaderMarketer") &&
                             widget.showButton == true ?
                         CustomizedElevatedButton(
                           bottonWidget: Text(

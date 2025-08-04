@@ -135,7 +135,7 @@ class HomeAppBar extends StatelessWidget {
               children: [
                                  InkWell(
                    onTap: () {
-                     if (user?.roles?[0] == "Marketer") {
+                     if (user?.roles?[0] == "Marketer"||user?.roles?[0]=="LeaderMarketer") {
                        Navigator.of(context).pushNamed(AccountScreen.accountScreenRouteName);
                      }
                    },

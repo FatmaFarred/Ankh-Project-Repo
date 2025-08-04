@@ -76,7 +76,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     late final List<Widget> pages;
     late final List<BottomNavigationBarItem> items;
 
-    if (user?.roles?[0]=="Marketer") {
+    if (user?.roles?[0]=="Marketer"||user?.roles?[0]=="LeaderMarketer") {
       pages = [
         MarketerHomeScreen(),
         MarketerProductScreen(),

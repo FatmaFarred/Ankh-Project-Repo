@@ -292,6 +292,75 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noDataFound => 'لا توجد بيانات';
 
   @override
+  String get inviteTeamMember => 'دعوة عضو فريق';
+
+  @override
+  String get invitesNumber => 'عدد الدعوات';
+
+  @override
+  String get generateLink => 'إنشاء كود';
+
+  @override
+  String get yourInvitesAreReady => 'دعواتك جاهزة';
+
+  @override
+  String get shareTheseLinksToInvite => 'شارك هذه الاكواد لدعوة أعضاء جدد.';
+
+  @override
+  String get singleUseLink => 'كود للاستخدام مرة واحدة';
+
+  @override
+  String get linkWillBeInvalidated => 'سيتم إلغاء كود بمجرد انضمام عضو جديد.';
+
+  @override
+  String get expiresSoon => 'ينتهي قريباً';
+
+  @override
+  String get linkValidFor24Hours => 'لأمان، الكود صالح لمدة 24 ساعة القادمة.';
+
+  @override
+  String get teams => 'الفرق';
+
+  @override
+  String get codes => 'الأكواد';
+
+  @override
+  String get teamMembers => 'أعضاء الفريق';
+
+  @override
+  String get invitationCodes => 'أكواد الدعوة';
+
+  @override
+  String get assignedProducts => 'المنتجات المُسندة';
+
+  @override
+  String get used => 'مستخدم';
+
+  @override
+  String get unused => 'غير مستخدم';
+
+  @override
+  String get copyCode => 'نسخ الكود';
+
+  @override
+  String get codeCopied => 'تم نسخ الكود إلى الحافظة';
+
+  @override
+  String get noTeamMembers => 'لم يتم العثور على أعضاء فريق';
+
+  @override
+  String get noInvitationCodes => 'لم يتم العثور على أكواد دعوة';
+
+  @override
+  String get invitationCode => 'كود الدعوة';
+
+  @override
+  String get enterInvitationCode => 'أدخل كود الدعوة الخاص بك';
+
+  @override
+  String get invitationCodeRequired => 'كود الدعوة مطلوب';
+
+  @override
   String get popularNewCars => 'السيارات الجديدة الشائعة';
 
   @override
@@ -847,9 +916,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerManagement => 'إدارة المسوقين';
 
   @override
-  String get assignedProducts => 'المنتجات المُسندة';
-
-  @override
   String get marketerInfo => 'معلومات المسوق';
 
   @override
@@ -1289,4 +1355,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
+
+  String get teamManagement => 'إدارة الفريق';
+
+  @override
+  String get inviteMember => 'دعوة عضو';
+
+  @override
+  String get inviteMemberSubtitle =>
+      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+
+  @override
+  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+
+  @override
+  String get noCodeFound => 'لا توجد محادثات متاحة';
+
+  @override
+  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+
+  @override
+  String get generating => ' جارٍ إنشاء الكود...';
+
+  @override
+  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+
+  @override
+  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 }

@@ -4,16 +4,19 @@ import '../../../core/constants/color_manager.dart';
 
 class SettingsTile extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final IconData? icon;
+  final Widget? iconWidget;
   final VoidCallback? onTap;
 
-  const SettingsTile({super.key, required this.title, required this.icon, this.onTap});
+  const SettingsTile({super.key, required this.title,  this.icon,this.iconWidget, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: ColorManager.darkestGrey),
-      title: Text(title,
+      leading: iconWidget ??
+          (icon != null
+              ? Icon(icon, color: ColorManager.darkestGrey)
+              : null),      title: Text(title,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: 14,
                 color: ColorManager.darkestGrey,
