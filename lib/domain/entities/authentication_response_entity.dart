@@ -29,7 +29,9 @@ class UserEntity {
       this.email, 
       this.roles, 
       this.phoneNumber, 
-      this.deviceTokens,});
+      this.deviceTokens,
+      this.teamLeaderId,});
+
 
   String? id;
   String? fullName;
@@ -37,6 +39,7 @@ class UserEntity {
   List<String>? roles;
   String? phoneNumber;
   List<String>? deviceTokens;
+  String? teamLeaderId; // Assuming teamLeaderId is part of UserEntity
 
 
 }

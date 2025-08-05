@@ -21,6 +21,9 @@ class AllInspectorsEntity {
       this.vehicleLicenseNumber,
       this.vehicleImage,
       this.workArea,
+      this.deviceTokens,
+
+
 
   });
 
@@ -37,6 +40,7 @@ class AllInspectorsEntity {
   String? vehicleLicenseNumber;
   String? vehicleImage;
   String? workArea;
+  List<String>? deviceTokens;
 
 
 

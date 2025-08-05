@@ -35,6 +35,7 @@ class UserDm extends UserEntity {
     super.email,
     super.roles,
     super.phoneNumber,
+    super.teamLeaderId,
     super.deviceTokens,});
 
   UserDm.fromJson(dynamic json) {
@@ -44,6 +45,7 @@ class UserDm extends UserEntity {
     roles = json['roles'] != null ? json['roles'].cast<String>() : [];
     phoneNumber = json['phoneNumber'];
     deviceTokens = json['deviceTokens'] != null ? json['deviceTokens'].cast<String>() : [];
+    teamLeaderId = json['teamLeaderId']; // Assuming teamLeaderId is part of UserEntity
   }
 
 
@@ -55,6 +57,7 @@ class UserDm extends UserEntity {
     map['roles'] = roles;
     map['phoneNumber'] = phoneNumber;
     map['deviceTokens'] = deviceTokens;
+    map['teamLeaderId'] = teamLeaderId; // Assuming teamLeaderId is part of UserEntity
     return map;
   }
 

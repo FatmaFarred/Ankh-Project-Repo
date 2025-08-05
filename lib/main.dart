@@ -20,7 +20,9 @@ import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import 'feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
 import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
+import 'feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cubit.dart';
 import 'feauture/dashboard/marketer_mangemnet/marketer_details_screen.dart';
 import 'feauture/dashboard/products_management/add_new_product/cubit/post_product_cubit.dart';
 import 'feauture/dashboard/products_management/product_details_screen/cubit/product_details_cubit.dart';
@@ -45,7 +47,6 @@ import 'feauture/profile/cubit/profile_cubit.dart';
 import 'feauture/profile/cubit/edit_profile_cubit.dart';
 import 'feauture/profile/profile_screen.dart';
 import 'feauture/profile/edit_profile_screen.dart';
-import 'feauture/push_notification/push_notification_controller/push_notification_cubit.dart';
 import 'feauture/request_inspection_screen/confirm_request_screen.dart';
 import 'feauture/request_inspection_screen/request_inspection_screen.dart';
 import 'feauture/request_inspection_screen/request_submitted.dart';
@@ -99,6 +100,9 @@ void main() async {
         BlocProvider(create: (context) => RoleCubit()),
         BlocProvider(create: (context) => getIt<RoleCsCubit>()),
         BlocProvider(create: (_) => getIt<ProfileCubit>()),
+        BlocProvider(create: (_) => getIt<MarketerManagementCubit>()),
+        BlocProvider(create: (_) => getIt<InspectorManagementCubit>()),
+
 
 
         BlocProvider(create: (context) => getIt<ProfileCubit>()),
@@ -359,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // arranges them vertically. By default, it sizes itself to fit its
             // children horizontally, and tries to be as tall as its parent.
             //
-            // Column has various properties to control how it sizes itself and
+            // Column has various properties to control how it sizesws itself and
             // how it positions its children. Here we use mainAxisAlignment to
             // center the children vertically; the main axis here is the vertical
             // axis because Columns are vertical (the cross axis would be

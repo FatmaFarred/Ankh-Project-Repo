@@ -389,24 +389,6 @@
   "enterCodeInvitationCount": " Enter Code Invitation Count",
   "generating": "Generating...",
   "doYouHaveInvitationCode": "Do you have an invitation code?",
-  "registerWithInvitationCode": "Register with Invitation Code"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "registerWithInvitationCode": "Register with Invitation Code",
+  "tryAgain": "Try Again"
 }
