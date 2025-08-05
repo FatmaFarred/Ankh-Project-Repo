@@ -11,12 +11,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/shared_preferences .dart';
 import 'core/theme/my_app_theme.dart';
+import 'domain/use_cases/get_team_member_use_case.dart';
 import 'feauture/authentication/email_verfication/email_verfication_screen.dart';
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
+import 'feauture/chat_screen/cubit/team_chat_list_cubit.dart';
+import 'feauture/chat_screen/team_chat_list_screen.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
@@ -113,6 +116,13 @@ void main() async {
   BlocProvider(
   create: (context) => getIt<InstallmentPendingCubit>()..fetchPendingInstallments()),
 
+        BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
+        BlocProvider(create: (_) => getIt<ProductDetailsCubit>()),
+        BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
+        BlocProvider<PostProductCubit>(create: (_) => getIt<PostProductCubit>(),),
+        BlocProvider(create: (_) => getIt<MarketerAddRequestCubit>()),
+        BlocProvider(create: (_) => getIt<TeamChatListCubit>()),
+
   ],
   child: MyApp(isLoggedIn: token != null, userRole: role),
   ),
@@ -206,92 +216,80 @@ class _MyAppState extends State<MyApp> {
 
 
     return ScreenUtilInit(
-      designSize: const Size(428, 926.76),
+    designSize: const Size(428, 926.76),
 
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) {
-        return MaterialApp(
-          navigatorKey: navigatorKey,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: [
-            ...AppLocalizations.localizationsDelegates,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: locale,
-          title: 'Flutter Demo',
-          theme: MyAppTheme.lightTheme(context),
-          builder: (context, child) => child!,
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (_, child) {
+    return MaterialApp(
+    navigatorKey: navigatorKey,
+    debugShowCheckedModeBanner: false,
+    localizationsDelegates: [
+    ...AppLocalizations.localizationsDelegates,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: AppLocalizations.supportedLocales,
+    locale: locale,
+    title: 'Flutter Demo',
+    theme: MyAppTheme.lightTheme(context),
+    builder: (context, child) => child!,
 
 
-          initialRoute: initialRoute,
-          routes: {
-            '/': (context) => OnBoarding(),
-            OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
-            WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
-            RegisterScreen.registerScreenRouteName: (context) =>
-                RegisterScreen(),
-            InspectorRegisterScreen.inspectorRegisterScreenRouteName: (
-                context) => InspectorRegisterScreen(),
-            ChooseRoleScreen.chooseRoleScreenRouteName: (context) =>
-                ChooseRoleScreen(),
-            ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) =>
-                ChooseCsTypeScreen(),
-            SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
-            EmailVerficationScreen.emailVerficationScreenRouteName: (context) =>
-                EmailVerficationScreen(),
-            ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) =>
-                ForgetPasswordScreen(),
-            OtpVerficationScreen.otpVerficationScreenRouteName: (context) =>
-                OtpVerficationScreen(),
-            ResetPasswordScreen.resetPasswordScreenRouteName: (context) {
-              final args = ModalRoute
-                  .of(context)!
-                  .settings
-                  .arguments as Map<String, String>;
+    initialRoute: initialRoute,
+    routes: {
+    '/': (context) => OnBoarding(),
+    OnBoarding.onBoardingRouteName: (context) => OnBoarding(),
+    WelcomeScreen.welcomeScreenRouteName: (context) => WelcomeScreen(),
+    RegisterScreen.registerScreenRouteName: (context) => RegisterScreen(),
+    InspectorRegisterScreen.inspectorRegisterScreenRouteName: (context) => InspectorRegisterScreen(),
+    ChooseRoleScreen.chooseRoleScreenRouteName: (context) => ChooseRoleScreen(),
+    ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) => ChooseCsTypeScreen(),
+    SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
+    EmailVerficationScreen.emailVerficationScreenRouteName: (context) => EmailVerficationScreen(),
+    ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) => ForgetPasswordScreen(),
+    OtpVerficationScreen.otpVerficationScreenRouteName: (context) => OtpVerficationScreen(),
+    ResetPasswordScreen.resetPasswordScreenRouteName: (context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
 
-              return ResetPasswordScreen(
-                email: args['email']!,
-                token: args['token']!,
-              );
-            },
-            BottomNavBar.bottomNavBarRouteName: (context) {
-              final args = ModalRoute
-                  .of(context)
-                  ?.settings
-                  .arguments as Map<String, dynamic>?;
-              final initialIndex = args?['initialIndex'] as int? ?? 0;
-              return BottomNavBar(initialIndex: initialIndex);
-            },
-            MyRequestDetails.myRequestDetailsRouteName: (context) =>
-                MyRequestDetails(),
-            DetailsScreen.detailsScreenRouteName: (context) => DetailsScreen(),
-            //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
-            RequestInspectionScreen.requestInspectionScreenRouteName: (
-                context) => RequestInspectionScreen(),
-            ConfirmRequestScreen.confirmRequestRouteName: (context) =>
-                ConfirmRequestScreen(),
-            RequestSubmittedScreen.requestSubmittedRouteName: (context) =>
-                RequestSubmittedScreen(),
-            AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
-            EditProfileScreen.routeName: (context) => EditProfileScreen(),
-            MarketerReportDetails.reportDetailsRouteName: (context) =>
-                MarketerReportDetails(),
-            DashboardMainScreen.mainScreenRouteName: (context) =>
-                DashboardMainScreen(),
-            UserDetailsScreen.routeName: (context) => UserDetailsScreen(),
-            MarketerDetailsScreen.routeName: (context) =>
-                MarketerDetailsScreen(),
-            InspectorDetailsScreen.routeName: (context) =>
-                InspectorDetailsScreen(),
-            InviteTeamMemberScreen.inviteTeamMemberRouteName: (context) =>
-                InviteTeamMemberScreen(),
-            TeamsAndCodesScreen.teamsAndCodesRouteName: (context) =>
-                TeamsAndCodesScreen(),
-            TeamChatScreen.routeName: (context) => TeamChatScreen(),
+    return ResetPasswordScreen(
+    email: args['email']!,
+    token: args['token']!,
+    );
+    },
+    BottomNavBar.bottomNavBarRouteName: (context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final initialIndex = args?['initialIndex'] as int? ?? 0;
+    return BottomNavBar(initialIndex: initialIndex);
+    },
+    MyRequestDetails.myRequestDetailsRouteName: (context) => MyRequestDetails(),
+    DetailsScreen.detailsScreenRouteName:(context) => DetailsScreen(),
+    //AllImagesScreen.allImagesScreenRouteName: (context) => AllImagesScreen(imageUrl: '',),
+    RequestInspectionScreen.requestInspectionScreenRouteName: (context) => RequestInspectionScreen(),
+    ConfirmRequestScreen.confirmRequestRouteName: (context) => ConfirmRequestScreen(),
+    RequestSubmittedScreen.requestSubmittedRouteName : (context) => RequestSubmittedScreen(),
+    AccountScreen.accountScreenRouteName: (context) => AccountScreen(),
+    EditProfileScreen.routeName: (context) => EditProfileScreen(),
+    MarketerReportDetails.reportDetailsRouteName:(context)=>MarketerReportDetails(),
+    DashboardMainScreen.mainScreenRouteName:(context)=>DashboardMainScreen(),
+    UserDetailsScreen.routeName:(context)=>UserDetailsScreen(),
+    MarketerDetailsScreen.routeName:(context)=>MarketerDetailsScreen(),
+    InspectorDetailsScreen.routeName:(context)=>InspectorDetailsScreen(),
+      InviteTeamMemberScreen.inviteTeamMemberRouteName: (context) => InviteTeamMemberScreen(),
+      TeamsAndCodesScreen.teamsAndCodesRouteName: (context) => TeamsAndCodesScreen(),
+      TeamChatScreen.routeName: (context) => TeamChatScreen(),
+      TeamChatListScreen.routeName: (context) => BlocProvider(
+        create: (context) => TeamChatListCubit(getIt<GetTeamMemberUseCase>()),
+        child: const TeamChatListScreen(),
+      ),
+
+    },
+    );
+    },
+    );
+
+
 
           },
         );

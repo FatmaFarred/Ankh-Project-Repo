@@ -459,7 +459,9 @@
   "teamManagement": "إدارة الفريق",
   "teamMembers": "أعضاء الفريق",
   "inviteMember": "دعوة عضو",
-    "inviteMemberSubtitle": "قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.",
+  "insepectionManagement": " إدارة المعاينات",
+
+  "inviteMemberSubtitle": "قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.",
   "noTeamMembersFound": "لا توجد أعضاء في الفريق",
   "noCodeFound": "لا توجد محادثات متاحة",
   "enterCodeInvitationCount": " أدخل عدد الدعوات",
@@ -470,6 +472,15 @@
   "inspectorPoints": "نقاط الفاحص",
   "priceOffers": "عروض السعر",
   "installmentOffers": "عروض التقسيط",
-  "noOffers": "لا توجد عروض"
+  "noOffers": "لا توجد عروض",
+  "refresh": " تحديث",
+  "noTeamChatsDescription": " لا توجد محادثات فريق متاحة حاليًا.\nيمكنك دعوة أعضاء جدد للانضمام إلى فريقك وبدء الدردشة.",
+  "noTeamChatsFound": " لا توجد محادثات فريق",
+  "noTeamToChat": "لا يوجد فريق للمحادثة",
+  "noTeamToChatDescription": "أنت لست جزءاً من أي فريق بعد. يرجى الاتصال بمديرك للانضمام إلى فريق أو لتصبح قائد فريق.",
+  "goBack": "العودة",
+  "members": " الأعضاء",
+  "teamChat": " دردشة الفريق"
+
 
 }

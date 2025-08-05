@@ -387,6 +387,12 @@
   "doYouHaveInvitationCode": "Do you have an invitation code?",
   "registerWithInvitationCode": "Register with Invitation Code",
   "tryAgain": "Try Again",
+
+
+
+
+
+
   "editCarDetails": "Edit Car Details",
   "addCar": "Add Car",
   "basicInformation": "Basic Information",
@@ -463,6 +469,15 @@
   "inspectorPoints": "Inspector Points",
   "priceOffers": "Price Offers",
   "installmentOffers": "Installment Offers",
-  "noOffers": "There are no offers"
+  "noOffers": "There are no offers",
+  "refresh": "Refresh",
+  "noTeamChatsDescription": "No team chats found. Start a conversation with your team members to collaborate and share updates.",
+  "noTeamChatsFound": "No team chats found",
+  "members": "Members",
+  "teamChat": "Team Chat",
+  "noTeamToChat": "No Team to Chat",
+  "noTeamToChatDescription": "You are not part of any team yet. Please contact your administrator to join a team or become a team leader.",
+  "goBack": "Go Back"
+
 
 }

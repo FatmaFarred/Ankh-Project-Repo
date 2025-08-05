@@ -42,9 +42,12 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
   final TextEditingController timeController = TextEditingController();
   TimeOfDay? selectedTime;
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController price = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController requestedMonthsController = TextEditingController();
+
   final TextEditingController downPaymentController = TextEditingController();
   final TextEditingController requestedPriceController =
       TextEditingController();
@@ -110,7 +113,28 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
             textInputAction: TextInputAction.next,
             validator: (value) => ValidatorUtils.validateName(value, context),
           ),
+          Text(
+            AppLocalizations.of(context)!.price,
+            style: GoogleFonts.poppins(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: ColorManager.black,
+            ),
+          ),
+          CustomTextField(
+            controller: price,
+            hintText: AppLocalizations.of(context)!.price,
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppLocalizations.of(context)!.fieldRequired;
+              }
+              return null;
+            },
+          ),
           SizedBox(height: 16.h),
+
           Text(
             AppLocalizations.of(context)!.preferredDate,
             style: GoogleFonts.poppins(

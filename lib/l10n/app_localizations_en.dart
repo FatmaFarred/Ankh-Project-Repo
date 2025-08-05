@@ -1400,4 +1400,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOffers => 'There are no offers';
+  String get refresh => 'Refresh';
+
+  @override
+  String get noTeamChatsDescription =>
+      'No team chats found. Start a conversation with your team members to collaborate and share updates.';
+
+  @override
+  String get noTeamChatsFound => 'No team chats found';
+
+  @override
+  String get members => 'Members';
+
+  @override
+  String get teamChat => 'Team Chat';
+
+  @override
+  String get noTeamToChat => 'No Team to Chat';
+
+  @override
+  String get noTeamToChatDescription =>
+      'You are not part of any team yet. Please contact your administrator to join a team or become a team leader.';
+
+  @override
+  String get goBack => 'Go Back';
+
 }
