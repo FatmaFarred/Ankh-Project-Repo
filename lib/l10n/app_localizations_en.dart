@@ -1166,6 +1166,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noNotificationsFound => ' No notifications found';
 
   @override
+  String get teamManagement => ' Team Management';
+
+  @override
+  String get inviteMember => ' Invite Member';
+
+  @override
+  String get inviteMemberSubtitle =>
+      ' Enter the email of the member you want to invite to your team.';
+
+  @override
+  String get noTeamMembersFound => ' No team members found';
+
+  @override
+  String get noCodeFound => ' No code found';
+
+  @override
+  String get enterCodeInvitationCount => ' Enter Code Invitation Count';
+
+  @override
+  String get generating => 'Generating...';
+
+  @override
+  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
+
+  @override
+  String get registerWithInvitationCode => 'Register with Invitation Code';
+
+  @override
   String get editCarDetails => 'Edit Car Details';
 
   @override
@@ -1352,39 +1380,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get neww => 'New';
 
   @override
-  String get used => 'Used';
-
-  @override
   String get editedSuccessfully =>
       'the products have been edited successfully.';
 
   @override
   String get addedSuccessfully => 'the products have been added successfully.';
-
-  String get teamManagement => ' Team Management';
-
-  @override
-  String get inviteMember => ' Invite Member';
-
-  @override
-  String get inviteMemberSubtitle =>
-      ' Enter the email of the member you want to invite to your team.';
-
-  @override
-  String get noTeamMembersFound => ' No team members found';
-
-  @override
-  String get noCodeFound => ' No code found';
-
-  @override
-  String get enterCodeInvitationCount => ' Enter Code Invitation Count';
-
-  @override
-  String get generating => 'Generating...';
-
-  @override
-  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
-
-  @override
-  String get registerWithInvitationCode => 'Register with Invitation Code';
 }
