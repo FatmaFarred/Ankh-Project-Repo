@@ -2768,6 +2768,35 @@ abstract class AppLocalizations {
   /// **'the products have been added successfully.'**
   String get addedSuccessfully;
 
+  /// No description provided for @marketerPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Points'**
+  String get marketerPoints;
+
+  /// No description provided for @inspectorPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Points'**
+  String get inspectorPoints;
+
+  /// No description provided for @priceOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Offers'**
+  String get priceOffers;
+
+  /// No description provided for @installmentOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Installment Offers'**
+  String get installmentOffers;
+
+  /// No description provided for @noOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no offers'**
+  String get noOffers;
   /// No description provided for @refresh.
   ///
   /// In en, this message translates to:

@@ -69,7 +69,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     'Fahmy',
     'Mohamed Ahmed',
   ];
-  final List<String> status = ['Choose Status', 'Available', 'Sold', 'Pending'];
+  final List<String> status = ['Choose Status', 'Available', 'Sold', 'Reserved'];
 
   XFile? _selectedlicenseImage;
   XFile? _selectedinsuranceFrontPath ;
@@ -142,6 +142,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late final TextEditingController tagsController;
   late final TextEditingController safetyStatusController;
   late final TextEditingController taxStatusController;
+  late final TextEditingController marketerPointsController;
+  late final TextEditingController inspectorPointsController;
 
 
   @override
@@ -167,6 +169,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
 
     carNameController = TextEditingController(text: widget.product.title);
+    marketerPointsController = TextEditingController(text: widget.product.marketerPoints.toString());
+    inspectorPointsController = TextEditingController(text: widget.product.inspectorPoints.toString());
     categoryController =
         TextEditingController(text: widget.product.category);
     yearController =
@@ -245,7 +249,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       statusNum = 1;
     } else if (widget.product.status == "Sold") {
       statusNum = 2;
-    } else if (widget.product.status == "Pending") {
+    } else if (widget.product.status == "Reserved") {
       statusNum = 3;
     } else {
       statusNum = 1; // Default to Available if status is not recognized
@@ -1376,6 +1380,60 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         const SizedBox(height: 16),
 
+                        Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.marketerPoints,
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        CustomTextFormField(
+                          validator: (value) {
+                            if (value == null ||
+                                value.trim().isEmpty) {
+                              return 'Required Points is required';
+                            }
+                            return null;
+                          },
+                          keyBoardType:
+                          TextInputType.numberWithOptions(),
+                          hintText: AppLocalizations.of(
+                            context,
+                          )!.marketerPoints,
+                          controller: marketerPointsController,
+                        ),
+                        const SizedBox(height: 16),
+
+                        Text(
+                          AppLocalizations.of(
+                            context,
+                          )!.inspectorPoints,
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        CustomTextFormField(
+                          validator: (value) {
+                            if (value == null ||
+                                value.trim().isEmpty) {
+                              return 'Required Points is required';
+                            }
+                            return null;
+                          },
+                          keyBoardType:
+                          TextInputType.numberWithOptions(),
+                          hintText: AppLocalizations.of(
+                            context,
+                          )!.inspectorPoints,
+                          controller: inspectorPointsController,
+                        ),
+                        const SizedBox(height: 16),
+
                         // Fuel Type Dropdown
                         Text(
                           'Status',
@@ -2058,6 +2116,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             title: carNameController.text.trim(),
                             description: descriptionController.text.trim(),
                             commission: commissionController.text,
+                            inspectorPoints: inspectorPointsController.text.trim(),
+                            marketerPoints: marketerPointsController.text.trim(),
                             requiredPoints: requiredPointsController.text,
                             make: statusNum.toString(),
                             model: yearController.text.trim(),

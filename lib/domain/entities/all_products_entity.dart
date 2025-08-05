@@ -9,23 +9,24 @@
 
 class AllProductsEntity {
   AllProductsEntity({
-      this.id, 
-      this.title, 
-      this.status, 
-      this.price, 
-      this.rating, 
-      this.isUsedVehicle, 
-      this.transmission, 
-      this.image,});
+    this.id,
+    this.title,
+    this.status,
+    this.price,
+    this.rating,
+    this.isUsedVehicle,
+    this.transmission,
+    this.marketerPoints,
+    this.image,
+  });
 
   num? id;
   String? title;
   String? status;
   String? price;
+  String? marketerPoints;
   num? rating;
   bool? isUsedVehicle;
   String? transmission;
   String? image;
-
-
 }

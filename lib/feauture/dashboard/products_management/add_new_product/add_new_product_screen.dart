@@ -78,6 +78,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController commissionController = TextEditingController();
+  final TextEditingController marketerPointsController = TextEditingController();
+  final TextEditingController inspectorPointsController = TextEditingController();
   final TextEditingController requiredPointsController =
       TextEditingController();
   final TextEditingController horsepowerController = TextEditingController();
@@ -159,6 +161,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     driveSystemConditionController.dispose();
     tagsController.dispose();
     safetyStatusController.dispose();
+    marketerPointsController.dispose();
+    inspectorPointsController.dispose();
     super.dispose();
   }
 
@@ -331,7 +335,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                       }
                                                       return null;
                                                     },
-                                                    hintText: "Category",
+                                                    hintText: AppLocalizations.of(
+                                                      context,
+                                                    )!.category,
                                                     controller:
                                                         categoryController,
                                                   ),
@@ -911,6 +917,59 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                         ),
                                         const SizedBox(height: 16),
 
+                                        Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.marketerPoints,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(height: 6.h),
+                                        CustomTextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'Required Points is required';
+                                            }
+                                            return null;
+                                          },
+                                          keyBoardType:
+                                          TextInputType.numberWithOptions(),
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.marketerPoints,
+                                          controller: marketerPointsController,
+                                        ),
+                                        const SizedBox(height: 16),
+
+                                        Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.inspectorPoints,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(height: 6.h),
+                                        CustomTextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.trim().isEmpty) {
+                                              return 'Required Points is required';
+                                            }
+                                            return null;
+                                          },
+                                          keyBoardType:
+                                          TextInputType.numberWithOptions(),
+                                          hintText: AppLocalizations.of(
+                                            context,
+                                          )!.inspectorPoints,
+                                          controller: inspectorPointsController,
+                                        ),
+                                        const SizedBox(height: 16),
                                         // Fuel Type Dropdown
                                         Text(
                                           'Status',
@@ -1250,6 +1309,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                       batteryCapacityController
                                                           .text
                                                           .trim(),
+                                                  inspectorPoints: inspectorPointsController.text.trim(),
+                                                  marketerPoints: marketerPointsController.text.trim(),
                                                   isUsedVehicle: false,
                                                   usedDetails: null,
                                                 );
@@ -1266,18 +1327,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                 },
                                               ),
                                             );
+                                            CustomDialog.positiveButton(
+                                              context: context,
+                                              title: "Added",
+                                              // you may define this key in your l10n
+                                              message:
+                                              "the products have  been Added successfully.",
+                                              positiveText: "OK",
+                                              positiveOnClick: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            );
                                           }
-                                          CustomDialog.positiveButton(
-                                            context: context,
-                                            title: "Added",
-                                            // you may define this key in your l10n
-                                            message:
-                                                "the products have  been Added successfully.",
-                                            positiveText: "OK",
-                                            positiveOnClick: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          );
+
                                           // All fields are valid, proceed to create ProductPostEntity
                                         },
                                         color: ColorManager.lightprimary,

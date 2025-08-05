@@ -54,9 +54,11 @@ Widget _buildOfferList(
   final TextEditingController searchController = TextEditingController();
 
   if (offers.isEmpty) {
-    return const Center(
+    return  Center(
       child: Text(
-        'There are no offers',
+        AppLocalizations.of(
+          context,
+        )!.noOffers,
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
@@ -65,7 +67,9 @@ Widget _buildOfferList(
     children: [
       SizedBox(height: 20.h),
       Text(
-        "Installment Offers Management",
+        AppLocalizations.of(
+          context,
+        )!.installmentOffers,
         style: Theme.of(
           context,
         ).textTheme.headlineLarge!.copyWith(fontSize: 18.sp),
