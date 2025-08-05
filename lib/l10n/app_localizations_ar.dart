@@ -334,7 +334,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get assignedProducts => 'المنتجات المُسندة';
 
   @override
-  String get used => 'مستخدم';
+  String get used => 'مستعمل';
 
   @override
   String get unused => 'غير مستخدم';
@@ -1162,6 +1162,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noNotificationsFound => 'لا توجد إشعارات متاحة';
 
   @override
+  String get teamManagement => 'إدارة الفريق';
+
+  @override
+  String get inviteMember => 'دعوة عضو';
+
+  @override
+  String get inviteMemberSubtitle =>
+      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+
+  @override
+  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+
+  @override
+  String get noCodeFound => 'لا توجد محادثات متاحة';
+
+  @override
+  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+
+  @override
+  String get generating => ' جارٍ إنشاء الكود...';
+
+  @override
+  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+
+  @override
+  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
+
+  @override
   String get editCarDetails => 'تعديل تفاصيل السيارة';
 
   @override
@@ -1348,38 +1376,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get neww => 'جديد';
 
   @override
-  String get used => 'مستعمل';
-
-  @override
   String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
 
   @override
   String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
-
-  String get teamManagement => 'إدارة الفريق';
-
-  @override
-  String get inviteMember => 'دعوة عضو';
-
-  @override
-  String get inviteMemberSubtitle =>
-      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
-
-  @override
-  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
-
-  @override
-  String get noCodeFound => 'لا توجد محادثات متاحة';
-
-  @override
-  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
-
-  @override
-  String get generating => ' جارٍ إنشاء الكود...';
-
-  @override
-  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
-
-  @override
-  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 }

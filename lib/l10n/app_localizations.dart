@@ -2330,6 +2330,60 @@ abstract class AppLocalizations {
   /// **' No notifications found'**
   String get noNotificationsFound;
 
+  /// No description provided for @teamManagement.
+  ///
+  /// In en, this message translates to:
+  /// **' Team Management'**
+  String get teamManagement;
+
+  /// No description provided for @inviteMember.
+  ///
+  /// In en, this message translates to:
+  /// **' Invite Member'**
+  String get inviteMember;
+
+  /// No description provided for @inviteMemberSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the email of the member you want to invite to your team.'**
+  String get inviteMemberSubtitle;
+
+  /// No description provided for @noTeamMembersFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No team members found'**
+  String get noTeamMembersFound;
+
+  /// No description provided for @noCodeFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No code found'**
+  String get noCodeFound;
+
+  /// No description provided for @enterCodeInvitationCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Code Invitation Count'**
+  String get enterCodeInvitationCount;
+
+  /// No description provided for @generating.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating...'**
+  String get generating;
+
+  /// No description provided for @doYouHaveInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have an invitation code?'**
+  String get doYouHaveInvitationCode;
+
+  /// No description provided for @registerWithInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with Invitation Code'**
+  String get registerWithInvitationCode;
+
   /// No description provided for @editCarDetails.
   ///
   /// In en, this message translates to:
@@ -2702,12 +2756,6 @@ abstract class AppLocalizations {
   /// **'New'**
   String get neww;
 
-  /// No description provided for @used.
-  ///
-  /// In en, this message translates to:
-  /// **'Used'**
-  String get used;
-
   /// No description provided for @editedSuccessfully.
   ///
   /// In en, this message translates to:
@@ -2719,60 +2767,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'the products have been added successfully.'**
   String get addedSuccessfully;
-
-  /// No description provided for @teamManagement.
-  ///
-  /// In en, this message translates to:
-  /// **' Team Management'**
-  String get teamManagement;
-
-  /// No description provided for @inviteMember.
-  ///
-  /// In en, this message translates to:
-  /// **' Invite Member'**
-  String get inviteMember;
-
-  /// No description provided for @inviteMemberSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **' Enter the email of the member you want to invite to your team.'**
-  String get inviteMemberSubtitle;
-
-  /// No description provided for @noTeamMembersFound.
-  ///
-  /// In en, this message translates to:
-  /// **' No team members found'**
-  String get noTeamMembersFound;
-
-  /// No description provided for @noCodeFound.
-  ///
-  /// In en, this message translates to:
-  /// **' No code found'**
-  String get noCodeFound;
-
-  /// No description provided for @enterCodeInvitationCount.
-  ///
-  /// In en, this message translates to:
-  /// **' Enter Code Invitation Count'**
-  String get enterCodeInvitationCount;
-
-  /// No description provided for @generating.
-  ///
-  /// In en, this message translates to:
-  /// **'Generating...'**
-  String get generating;
-
-  /// No description provided for @doYouHaveInvitationCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Do you have an invitation code?'**
-  String get doYouHaveInvitationCode;
-
-  /// No description provided for @registerWithInvitationCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Register with Invitation Code'**
-  String get registerWithInvitationCode;
 }
 
 class _AppLocalizationsDelegate
