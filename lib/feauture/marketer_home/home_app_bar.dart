@@ -99,8 +99,18 @@ class HomeAppBar extends StatelessWidget {
                             ),
                           );
                         },
-                        child: ClipRRect(
-                          child: Image.asset(ImageAssets.notification, scale: 1.3),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ClientNotificationScreen(),
+                              ),
+                            );
+                          },
+                          child: ClipRRect(
+                            child: Image.asset(ImageAssets.notification, scale: 1.3),
+                          ),
                         ),
                       ),
                     ],

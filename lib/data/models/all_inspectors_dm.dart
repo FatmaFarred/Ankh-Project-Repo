@@ -23,6 +23,7 @@ class AllInspectorsDm  extends AllInspectorsEntity {
     super.vehicleLicenseNumber,
     super.vehicleImage,
     super.workArea,
+    super.deviceTokens,
 
 
   });
@@ -41,8 +42,14 @@ class AllInspectorsDm  extends AllInspectorsEntity {
     vehicleLicenseNumber = json['vehicleLicenseNumber'];
     vehicleImage = json['vehicleImage'];
     workArea = json['workArea'];
+      deviceTokens =  List<String>.from(json['deviceTokens'] ?? []);
+
+
+  }
 
   }
 
 
-}
+
+
+

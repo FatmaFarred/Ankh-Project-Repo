@@ -17,7 +17,8 @@ class AllMarketersDm extends AllMarketersEntity {
     super.accountStatus,
     super.productsCount,
     super .teamLeader,
-    super.role
+    super.role,
+    super.deviceTokens,
 
 
   });
@@ -32,6 +33,7 @@ class AllMarketersDm extends AllMarketersEntity {
     productsCount = json['productsCount'];
     teamLeader = json['teamLeader'] ;
     role = json['role'] ;
+    deviceTokens = List<String>.from(json['deviceTokens'] ?? []);
   }
 
 
