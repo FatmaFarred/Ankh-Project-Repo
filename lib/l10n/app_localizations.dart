@@ -2706,7 +2706,6 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Used'**
-  String get used;
 
   /// No description provided for @editedSuccessfully.
   ///

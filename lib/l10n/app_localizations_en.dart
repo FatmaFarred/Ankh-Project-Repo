@@ -1352,9 +1352,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get neww => 'New';
 
   @override
-  String get used => 'Used';
-
-  @override
   String get editedSuccessfully =>
       'the products have been edited successfully.';
 

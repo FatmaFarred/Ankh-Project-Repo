@@ -1347,8 +1347,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get neww => 'جديد';
 
-  @override
-  String get used => 'مستعمل';
 
   @override
   String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
