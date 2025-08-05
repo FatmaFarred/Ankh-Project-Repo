@@ -88,7 +88,6 @@
   "topBrands": "Top Brands",
   "viewAll": "View All",
   "noDataFound": "No Data Found",
-
   "inviteTeamMember": "Invite Team Member",
   "invitesNumber": "Invites Number",
   "generateLink": "Generate Code",
@@ -112,7 +111,6 @@
   "invitationCode": "Invitation Code",
   "enterInvitationCode": "Enter your invitation code",
   "invitationCodeRequired": "Invitation code is required",
-
   "popularNewCars": "Popular New Cars",
   "recommendedCars": "Recommended Cars",
   "searchRequest": "Search Request",
@@ -163,7 +161,6 @@
   "goToMyRequests": "Go to My Requests",
   "saveInfoForLater": "Save info for later",
   "confirmRequest": "Confirm Request",
-
   "views": "Views",
   "addComment": "Add Comment",
   "comments": "Comments",
@@ -181,11 +178,10 @@
   "requests": "Requests",
   "balance": "Balance",
   "account": "Account",
-
   "requestDetails": "Request Details",
   "currrentStatus": "Current Status",
-    "productInfo": "Product information",
-    "notAvailable": "Not Available",
+  "productInfo": "Product information",
+  "notAvailable": "Not Available",
   "lastUpdated": "Last Updated",
   "personalAccount": "Account",
   "editProfile": "Edit Profile",
@@ -209,7 +205,6 @@
   "logout": "Logout",
   "myProducts": "My Products",
   "active": "Active",
-
   "today": "Today",
   "tomorrow": "Tomorrow",
   "postponed": "Completed",
@@ -230,13 +225,13 @@
   "failedToSendPasswordResetEmail": "`Failed to send password reset email:",
   "ok": "Ok",
   "failedToLoadRecommendedBrands": "Failed to load recommended brands, please try again later.",
-  "failedToLoadPopularProducts":"Failed to load popular products, please try again later.",
-  "success":" Success ",
-  "error":"Error",
+  "failedToLoadPopularProducts": "Failed to load popular products, please try again later.",
+  "success": " Success ",
+  "error": "Error",
   "yes": "Yes",
   "no": "No",
   "tryAgain": "Try Again",
-    "loading": "Loading...",
+  "loading": "Loading...",
   "thereIsNoImages": "there is no images",
   "noRequestsFound": "No requests found",
   "noProductsFound": "No products found",
@@ -244,10 +239,10 @@
   "accoun": "Account",
   "addToMyProducts": "Add to My Products",
   "reports": "Reports",
-    "viewReport": "View Report",
+  "viewReport": "View Report",
   "acceptInspection": "Accept Inspection",
   "licenseNumber": "License Number",
-    "enterLicenseNumber": "Enter License Number",
+  "enterLicenseNumber": "Enter License Number",
   "vehicleLicenseNumber": "Vehicle License Number",
   "enterVehicleLicenceNumber": "Enter Vehicle License Number",
   "workArea": "Work Area",
@@ -290,7 +285,6 @@
   "suspendUserAccountSubtitle": "Are you sure you want to suspend this user?\u2028They will no longer be able to log in or access the system until reactivated.\nThis action can be reversed at any time.",
   "deleteUserAccount": "Delete User Account",
   "rejectUserAccountSubtitle": "Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.",
-
   "acceptUserAccountSubtitle": "Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.",
   "userDetails": "User Details",
   "addNewUser": "Add New User",
@@ -300,9 +294,8 @@
   "productsManagement": "Products Management",
   "addNewProduct": "Add New Product",
   "unassignConfirmation": "Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.",
-
   "marketerManagement": "Marketers Management",
-  "assignedProducts":"Assigned Products",
+  "assignedProducts": "Assigned Products",
   "marketerInfo": "Marketer Info",
   "marketerName": "Marketer Name ",
   "joiningCode": "Joining Code ",
@@ -318,11 +311,11 @@
   "deleteInspector": "Delete Inspector ",
   "reject": "Reject",
   "accept": "Accept",
-    "acceptUserAccount": "Accept User Account",
-    "rejectUserAccount": "Reject User Account",
+  "acceptUserAccount": "Accept User Account",
+  "rejectUserAccount": "Reject User Account",
   "appointAsTeamLeader": "Appoint as Team Leader",
   "insertProductId": "Insert Product ID",
-    "productId": "Product ID",
+  "productId": "Product ID",
   "assign": "Assign",
   "blockUser": "Block User",
   "unblockUser": "Unblock User",
@@ -339,8 +332,8 @@
   "appointAsteamLeaderSubtitle": " Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.",
   "clientProductInformation": "Client & Product Information",
   "points": "Points",
-    "pointsDetails": "Points Details",
-    "pointsHistory": "Points History",
+  "pointsDetails": "Points Details",
+  "pointsHistory": "Points History",
   "approve": "Approve",
   "approved": "Approved",
   "pointsRequest": "Points Request",
@@ -355,7 +348,6 @@
   "editPointPrice": "Edit Point Price",
   "eg": "EGP",
   "leaderMarketer": "LeaderMarketer",
-
   "update": "Update",
   "myProfile": " My Profile",
   "point": " Point",
@@ -376,7 +368,7 @@
   "resechudleInspection": "Reschedule Inspection",
   "reschedule": "Reschedule",
   "date": "Date",
-    "time": "Time",
+  "time": "Time",
   "insepectionManagement": "Inspection Management",
   "carCode": "Car Code",
   "reactDenied": "For interact with this feature, you need to login first.",
@@ -394,26 +386,7 @@
   "generating": "Generating...",
   "doYouHaveInvitationCode": "Do you have an invitation code?",
   "registerWithInvitationCode": "Register with Invitation Code",
-
   "tryAgain": "Try Again",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "editCarDetails": "Edit Car Details",
   "addCar": "Add Car",
   "basicInformation": "Basic Information",
@@ -485,6 +458,11 @@
   "neww": "New",
   "used": "Used",
   "editedSuccessfully": "the products have been edited successfully.",
-  "addedSuccessfully": "the products have been added successfully."
+  "addedSuccessfully": "the products have been added successfully.",
+  "marketerPoints": "Marketer Points",
+  "inspectorPoints": "Inspector Points",
+  "priceOffers": "Price Offers",
+  "installmentOffers": "Installment Offers",
+  "noOffers": "There are no offers"
 
 }

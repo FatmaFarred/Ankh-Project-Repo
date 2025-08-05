@@ -5,6 +5,8 @@ class ProductManagementEntity {
   final String title;
   final String description;
   final int commission;
+  final int marketerPoints;
+  final int inspectorPoints;
   final int requiredPoints;
   final String? topBrandName;
   final String make;
@@ -36,6 +38,8 @@ class ProductManagementEntity {
     required this.title,
     required this.description,
     required this.commission,
+    required this.inspectorPoints,
+    required this.marketerPoints,
     required this.requiredPoints,
     this.topBrandName,
     required this.make,

@@ -329,12 +329,12 @@ import '../../feauture/dashboard/marketer_mangemnet/cubit/unblock_user_cubit.dar
     as _i209;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
     as _i42;
-import '../../feauture/dashboard/offers_management/cubit/price_offer_cubit.dart'
-    as _i413;
 import '../../feauture/dashboard/notification/push_notification/cubit/get_notification_cubit.dart'
     as _i225;
 import '../../feauture/dashboard/notification/push_notification/cubit/push_notification_cubit.dart'
     as _i1031;
+import '../../feauture/dashboard/offers_management/cubit/price_offer_cubit.dart'
+    as _i413;
 import '../../feauture/dashboard/points_management/cubit/point_prices_cubit.dart'
     as _i614;
 import '../../feauture/dashboard/points_management/cubit/points_cubit.dart'
@@ -550,10 +550,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i886.AddFavoriteUseCase>(),
           gh<_i367.DeleteFavoriteUseCase>(),
         ));
-
-    gh.factory<_i667.PushNotificationDataSourse>(() =>
-        _i71.PushNotificationDataSourseImpl(
-            gh<_i329.FirebaseMessagingService>()));
     gh.factory<_i966.MarketerInviteCodeReppositry>(() =>
         _i842.MarketerInviteCodeRepositryImpl(
             gh<_i287.MarketerInviteCodeRemoteDataSource>()));
@@ -699,9 +695,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i239.MarketerUnassignProductCubit>(() =>
         _i239.MarketerUnassignProductCubit(
             gh<_i537.MarketerUnAssignProductUseCase>()));
-    gh.factory<_i280.MarketerAddRequestCubit>(() =>
-        _i280.MarketerAddRequestCubit(
-            gh<_i176.MarketerAddRequestInspectionUseCase>()));
     gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
         _i273.GetAllInspectionAdminUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
@@ -717,14 +710,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i868.InspectorHomeGetAllInspectionUseCase>(() =>
         _i868.InspectorHomeGetAllInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
-
-    gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
-        _i273.GetAllInspectionAdminUseCase(
-            gh<_i700.HomeGetAllInspectionRepositry>()));
-    gh.factory<_i747.GetInspectorInspectionsUseCase>(() =>
-        _i747.GetInspectorInspectionsUseCase(
-            gh<_i700.HomeGetAllInspectionRepositry>()));
-
     gh.factory<_i1001.RescheduleInspectionUseCase>(() =>
         _i1001.RescheduleInspectionUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));

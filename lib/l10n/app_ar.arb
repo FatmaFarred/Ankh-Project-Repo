@@ -465,6 +465,11 @@
   "enterCodeInvitationCount": " أدخل عدد الدعوات",
   "generating": " جارٍ إنشاء الكود...",
   "doYouHaveInvitationCode": "هل لديك كود دعوة؟",
-  "registerWithInvitationCode": "سجل باستخدام كود الدعوة"
+  "registerWithInvitationCode": "سجل باستخدام كود الدعوة",
+  "marketerPoints": "نقاط المسوق",
+  "inspectorPoints": "نقاط الفاحص",
+  "priceOffers": "عروض السعر",
+  "installmentOffers": "عروض التقسيط",
+  "noOffers": "لا توجد عروض"
 
 }

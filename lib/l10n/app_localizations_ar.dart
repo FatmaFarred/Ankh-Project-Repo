@@ -1380,4 +1380,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
+
+  @override
+  String get marketerPoints => 'نقاط المسوق';
+
+  @override
+  String get inspectorPoints => 'نقاط الفاحص';
+
+  @override
+  String get priceOffers => 'عروض السعر';
+
+  @override
+  String get installmentOffers => 'عروض التقسيط';
+
+  @override
+  String get noOffers => 'لا توجد عروض';
 }

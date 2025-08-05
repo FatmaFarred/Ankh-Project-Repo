@@ -9,6 +9,8 @@ class ProductPostEntity {
   final String mileage;
   final String color;
   final String commission;
+  final String inspectorPoints;
+  final String marketerPoints;
   final String requiredPoints;
   final String topBrandId;
   final String make;
@@ -35,6 +37,8 @@ class ProductPostEntity {
     required this.mileage,
     required this.color,
     required this.commission,
+    required this.inspectorPoints,
+    required this.marketerPoints,
     required this.requiredPoints,
     required this.topBrandId,
     required this.make,

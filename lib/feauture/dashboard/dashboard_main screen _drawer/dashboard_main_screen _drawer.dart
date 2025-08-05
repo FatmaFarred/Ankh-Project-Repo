@@ -244,7 +244,9 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   color: _selectedIndex == 7 ? Colors.white : Colors.black, // Icon color
                 ),
                 title: Text(
-                  "offers Screen",
+                  AppLocalizations.of(
+                    context,
+                  )!.priceOffers,
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 7 ? Colors.white : null), // Text color
                 ),
 
@@ -262,7 +264,9 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   color: _selectedIndex == 8 ? Colors.white : Colors.black, // Icon color
                 ),
                 title: Text(
-                  "Installment Screen",
+                  AppLocalizations.of(
+                    context,
+                  )!.installmentOffers,
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 8 ? Colors.white : null), // Text color
                 ),
 
