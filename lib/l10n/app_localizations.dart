@@ -821,7 +821,7 @@ abstract class AppLocalizations {
   /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'Description'**
+  /// **'Description '**
   String get description;
 
   /// No description provided for @supportTeam.
@@ -1433,7 +1433,7 @@ abstract class AppLocalizations {
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:
-  /// **'OK'**
+  /// **'Ok'**
   String get ok;
 
   /// No description provided for @failedToLoadRecommendedBrands.
@@ -2330,396 +2330,6 @@ abstract class AppLocalizations {
   /// **' No notifications found'**
   String get noNotificationsFound;
 
-  /// No description provided for @editCarDetails.
-  ///
-  /// In en, this message translates to:
-  /// **'Edit Car Details'**
-  String get editCarDetails;
-
-  /// No description provided for @addCar.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Car'**
-  String get addCar;
-
-  /// No description provided for @basicInformation.
-  ///
-  /// In en, this message translates to:
-  /// **'Basic Information'**
-  String get basicInformation;
-
-  /// No description provided for @carName.
-  ///
-  /// In en, this message translates to:
-  /// **'Car Name'**
-  String get carName;
-
-  /// No description provided for @category.
-  ///
-  /// In en, this message translates to:
-  /// **'Category'**
-  String get category;
-
-  /// No description provided for @year.
-  ///
-  /// In en, this message translates to:
-  /// **'Year'**
-  String get year;
-
-  /// No description provided for @mileage.
-  ///
-  /// In en, this message translates to:
-  /// **'Mileage'**
-  String get mileage;
-
-  /// No description provided for @color.
-  ///
-  /// In en, this message translates to:
-  /// **'Color'**
-  String get color;
-
-  /// No description provided for @horsePower.
-  ///
-  /// In en, this message translates to:
-  /// **'Horse Power'**
-  String get horsePower;
-
-  /// No description provided for @specifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Specifications'**
-  String get specifications;
-
-  /// No description provided for @ownerName.
-  ///
-  /// In en, this message translates to:
-  /// **'Owner Name'**
-  String get ownerName;
-
-  /// No description provided for @location.
-  ///
-  /// In en, this message translates to:
-  /// **'Location'**
-  String get location;
-
-  /// No description provided for @conditionParts.
-  ///
-  /// In en, this message translates to:
-  /// **'Condition Parts'**
-  String get conditionParts;
-
-  /// No description provided for @licenseExpiryDate.
-  ///
-  /// In en, this message translates to:
-  /// **'License Expiry Date'**
-  String get licenseExpiryDate;
-
-  /// No description provided for @safetyReport.
-  ///
-  /// In en, this message translates to:
-  /// **'Safety Report'**
-  String get safetyReport;
-
-  /// No description provided for @taxStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Tax Status'**
-  String get taxStatus;
-
-  /// No description provided for @interiorCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Interior Condition'**
-  String get interiorCondition;
-
-  /// No description provided for @exteriorCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Exterior Condition'**
-  String get exteriorCondition;
-
-  /// No description provided for @additionalSpecs.
-  ///
-  /// In en, this message translates to:
-  /// **'Additional Specs'**
-  String get additionalSpecs;
-
-  /// No description provided for @additionalInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Additional Info'**
-  String get additionalInfo;
-
-  /// No description provided for @paymentMethod.
-  ///
-  /// In en, this message translates to:
-  /// **'Payment Method'**
-  String get paymentMethod;
-
-  /// No description provided for @inspectionResult.
-  ///
-  /// In en, this message translates to:
-  /// **'Inspection Result'**
-  String get inspectionResult;
-
-  /// No description provided for @accidentHistory.
-  ///
-  /// In en, this message translates to:
-  /// **'Accident History'**
-  String get accidentHistory;
-
-  /// No description provided for @testDriveAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Test Drive Available'**
-  String get testDriveAvailable;
-
-  /// No description provided for @warrantyStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Warranty Status'**
-  String get warrantyStatus;
-
-  /// No description provided for @tireStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Tire Status'**
-  String get tireStatus;
-
-  /// No description provided for @lightStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Light Status'**
-  String get lightStatus;
-
-  /// No description provided for @licenseDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'License Duration'**
-  String get licenseDuration;
-
-  /// No description provided for @trafficViolations.
-  ///
-  /// In en, this message translates to:
-  /// **'Traffic Violations'**
-  String get trafficViolations;
-
-  /// No description provided for @insuranceStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Insurance Status'**
-  String get insuranceStatus;
-
-  /// No description provided for @numberOfKeys.
-  ///
-  /// In en, this message translates to:
-  /// **'Number of Keys'**
-  String get numberOfKeys;
-
-  /// No description provided for @seatCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Seat Condition'**
-  String get seatCondition;
-
-  /// No description provided for @gearCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Gear Condition'**
-  String get gearCondition;
-
-  /// No description provided for @driveSystemCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Drive System Condition'**
-  String get driveSystemCondition;
-
-  /// No description provided for @brakesCondition.
-  ///
-  /// In en, this message translates to:
-  /// **'Brakes Condition'**
-  String get brakesCondition;
-
-  /// No description provided for @tags.
-  ///
-  /// In en, this message translates to:
-  /// **'Tags'**
-  String get tags;
-
-  /// No description provided for @safetyStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Safety Status'**
-  String get safetyStatus;
-
-  /// No description provided for @commission.
-  ///
-  /// In en, this message translates to:
-  /// **'Commission'**
-  String get commission;
-
-  /// No description provided for @requiredPoints.
-  ///
-  /// In en, this message translates to:
-  /// **'Required Points'**
-  String get requiredPoints;
-
-  /// No description provided for @browseFiles.
-  ///
-  /// In en, this message translates to:
-  /// **'Browse Files'**
-  String get browseFiles;
-
-  /// No description provided for @licenseImages.
-  ///
-  /// In en, this message translates to:
-  /// **'License Images'**
-  String get licenseImages;
-
-  /// No description provided for @insuranceFront.
-  ///
-  /// In en, this message translates to:
-  /// **'Insurance Front'**
-  String get insuranceFront;
-
-  /// No description provided for @insuranceBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Insurance Back'**
-  String get insuranceBack;
-
-  /// No description provided for @saveEdits.
-  ///
-  /// In en, this message translates to:
-  /// **'Save Edits'**
-  String get saveEdits;
-
-  /// No description provided for @addProduct.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Product'**
-  String get addProduct;
-
-  /// No description provided for @edited.
-  ///
-  /// In en, this message translates to:
-  /// **'Edited'**
-  String get edited;
-
-  /// No description provided for @added.
-  ///
-  /// In en, this message translates to:
-  /// **'Added'**
-  String get added;
-
-  /// No description provided for @carNameRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Car Name is required'**
-  String get carNameRequired;
-
-  /// No description provided for @required.
-  ///
-  /// In en, this message translates to:
-  /// **'required'**
-  String get required;
-
-  /// No description provided for @chooseDriveType.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose Drive Type'**
-  String get chooseDriveType;
-
-  /// No description provided for @chooseFuelType.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose Fuel Type'**
-  String get chooseFuelType;
-
-  /// No description provided for @fuelType.
-  ///
-  /// In en, this message translates to:
-  /// **'Fuel Type'**
-  String get fuelType;
-
-  /// No description provided for @driveType.
-  ///
-  /// In en, this message translates to:
-  /// **'Drive Type'**
-  String get driveType;
-
-  /// No description provided for @frontWheel.
-  ///
-  /// In en, this message translates to:
-  /// **'FrontWheel'**
-  String get frontWheel;
-
-  /// No description provided for @rearWheel.
-  ///
-  /// In en, this message translates to:
-  /// **'RearWheel'**
-  String get rearWheel;
-
-  /// No description provided for @allWheel.
-  ///
-  /// In en, this message translates to:
-  /// **'AllWheel'**
-  String get allWheel;
-
-  /// No description provided for @petrol.
-  ///
-  /// In en, this message translates to:
-  /// **'Petrol'**
-  String get petrol;
-
-  /// No description provided for @electric.
-  ///
-  /// In en, this message translates to:
-  /// **'Electric'**
-  String get electric;
-
-  /// No description provided for @gas.
-  ///
-  /// In en, this message translates to:
-  /// **'Gas'**
-  String get gas;
-
-  /// No description provided for @available.
-  ///
-  /// In en, this message translates to:
-  /// **'Available'**
-  String get available;
-
-  /// No description provided for @sold.
-  ///
-  /// In en, this message translates to:
-  /// **'Sold'**
-  String get sold;
-
-  /// No description provided for @neww.
-  ///
-  /// In en, this message translates to:
-  /// **'New'**
-  String get neww;
-
-  /// No description provided for @used.
-  ///
-  /// In en, this message translates to:
-  /// **'Used'**
-  String get used;
-
-  /// No description provided for @editedSuccessfully.
-  ///
-  /// In en, this message translates to:
-  /// **'the products have been edited successfully.'**
-  String get editedSuccessfully;
-
-  /// No description provided for @addedSuccessfully.
-  ///
-  /// In en, this message translates to:
-  /// **'the products have been added successfully.'**
-  String get addedSuccessfully;
-
   /// No description provided for @teamManagement.
   ///
   /// In en, this message translates to:
@@ -2773,6 +2383,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register with Invitation Code'**
   String get registerWithInvitationCode;
+
+  /// No description provided for @teamChats.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Chats'**
+  String get teamChats;
+
+  /// No description provided for @members.
+  ///
+  /// In en, this message translates to:
+  /// **'members'**
+  String get members;
+
+  /// No description provided for @messages.
+  ///
+  /// In en, this message translates to:
+  /// **'messages'**
+  String get messages;
+
+  /// No description provided for @noTeamChatsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No team chats found'**
+  String get noTeamChatsFound;
+
+  /// No description provided for @noTeamChatsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have any team chats yet. Contact your administrator to join a team.'**
+  String get noTeamChatsDescription;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
 }
 
 class _AppLocalizationsDelegate

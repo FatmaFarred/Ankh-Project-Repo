@@ -385,7 +385,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get online => 'متصل';
 
   @override
-  String get description => 'الوصف';
+  String get description => 'الوصف ';
 
   @override
   String get supportTeam => 'فريق الدعم';
@@ -696,7 +696,7 @@ class AppLocalizationsAr extends AppLocalizations {
       '`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا';
 
   @override
-  String get ok => 'موافق';
+  String get ok => 'حسناً';
 
   @override
   String get failedToLoadRecommendedBrands =>
@@ -1162,224 +1162,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noNotificationsFound => 'لا توجد إشعارات متاحة';
 
   @override
-  String get editCarDetails => 'تعديل تفاصيل السيارة';
+  String get teamManagement => ' Team Management';
 
   @override
-  String get addCar => 'إضافة سيارة';
-
-  @override
-  String get basicInformation => 'المعلومات الأساسية';
-
-  @override
-  String get carName => 'اسم السيارة';
-
-  @override
-  String get category => 'الفئة';
-
-  @override
-  String get year => 'السنة';
-
-  @override
-  String get mileage => 'المسافة المقطوعة';
-
-  @override
-  String get color => 'اللون';
-
-  @override
-  String get horsePower => 'قوة المحرك';
-
-  @override
-  String get specifications => 'المواصفات';
-
-  @override
-  String get ownerName => 'اسم المالك';
-
-  @override
-  String get location => 'الموقع';
-
-  @override
-  String get conditionParts => 'حالة الأجزاء';
-
-  @override
-  String get licenseExpiryDate => 'تاريخ انتهاء الرخصة';
-
-  @override
-  String get safetyReport => 'تقرير السلامة';
-
-  @override
-  String get taxStatus => 'حالة الضريبة';
-
-  @override
-  String get interiorCondition => 'حالة التصميم الداخلي';
-
-  @override
-  String get exteriorCondition => 'حالة التصميم الخارجي';
-
-  @override
-  String get additionalSpecs => 'مواصفات إضافية';
-
-  @override
-  String get additionalInfo => 'معلومات إضافية';
-
-  @override
-  String get paymentMethod => 'طريقة الدفع';
-
-  @override
-  String get inspectionResult => 'نتيجة المعاينة';
-
-  @override
-  String get accidentHistory => 'تاريخ الحوادث';
-
-  @override
-  String get testDriveAvailable => 'تجربة القيادة متاحة';
-
-  @override
-  String get warrantyStatus => 'حالة الضمان';
-
-  @override
-  String get tireStatus => 'حالة الإطارات';
-
-  @override
-  String get lightStatus => 'حالة الإضاءة';
-
-  @override
-  String get licenseDuration => 'مدة الرخصة';
-
-  @override
-  String get trafficViolations => 'مخالفات المرور';
-
-  @override
-  String get insuranceStatus => 'حالة التأمين';
-
-  @override
-  String get numberOfKeys => 'عدد المفاتيح';
-
-  @override
-  String get seatCondition => 'حالة المقاعد';
-
-  @override
-  String get gearCondition => 'حالة التروس';
-
-  @override
-  String get driveSystemCondition => 'حالة نظام القيادة';
-
-  @override
-  String get brakesCondition => 'حالة الفرامل';
-
-  @override
-  String get tags => 'العلامات';
-
-  @override
-  String get safetyStatus => 'حالة السلامة';
-
-  @override
-  String get commission => 'العمولة';
-
-  @override
-  String get requiredPoints => 'النقاط المطلوبة';
-
-  @override
-  String get browseFiles => 'تصفح الملفات';
-
-  @override
-  String get licenseImages => 'صور الرخصة';
-
-  @override
-  String get insuranceFront => 'الوجه الأمامي للتأمين';
-
-  @override
-  String get insuranceBack => 'الوجه الخلفي للتأمين';
-
-  @override
-  String get saveEdits => 'حفظ التعديلات';
-
-  @override
-  String get addProduct => 'إضافة منتج';
-
-  @override
-  String get edited => 'تم التعديل';
-
-  @override
-  String get added => 'تمت الإضافة';
-
-  @override
-  String get carNameRequired => 'اسم السيارة مطلوب';
-
-  @override
-  String get required => 'مطلوب';
-
-  @override
-  String get chooseDriveType => 'اختر نوع القيادة';
-
-  @override
-  String get chooseFuelType => 'اختر نوع الوقود';
-
-  @override
-  String get fuelType => 'نوع الوقود';
-
-  @override
-  String get driveType => 'نوع القيادة';
-
-  @override
-  String get frontWheel => 'العجلات الأمامية';
-
-  @override
-  String get rearWheel => 'العجلات الخلفية';
-
-  @override
-  String get allWheel => 'جميع العجلات';
-
-  @override
-  String get petrol => 'بنزين';
-
-  @override
-  String get electric => 'كهربائي';
-
-  @override
-  String get gas => 'غاز';
-
-  @override
-  String get available => 'متاح';
-
-  @override
-  String get sold => 'مباع';
-
-  @override
-  String get neww => 'جديد';
-
-  @override
-  String get used => 'مستعمل';
-
-  @override
-  String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
-
-  @override
-  String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
-
-  String get teamManagement => 'إدارة الفريق';
-
-  @override
-  String get inviteMember => 'دعوة عضو';
+  String get inviteMember => ' Invite Member';
 
   @override
   String get inviteMemberSubtitle =>
-      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+      ' Enter the email of the member you want to invite to your team.';
 
   @override
-  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+  String get noTeamMembersFound => ' No team members found';
 
   @override
-  String get noCodeFound => 'لا توجد محادثات متاحة';
+  String get noCodeFound => ' No code found';
 
   @override
-  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+  String get enterCodeInvitationCount => ' Enter Code Invitation Count';
 
   @override
-  String get generating => ' جارٍ إنشاء الكود...';
+  String get generating => 'Generating...';
 
   @override
-  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
 
   @override
-  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
+  String get registerWithInvitationCode => 'Register with Invitation Code';
+
+  @override
+  String get teamChats => 'Team Chats';
+
+  @override
+  String get members => 'members';
+
+  @override
+  String get messages => 'messages';
+
+  @override
+  String get noTeamChatsFound => 'No team chats found';
+
+  @override
+  String get noTeamChatsDescription =>
+      'You don\'t have any team chats yet. Contact your administrator to join a team.';
+
+  @override
+  String get refresh => 'Refresh';
 }

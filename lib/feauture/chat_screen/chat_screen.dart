@@ -10,9 +10,14 @@ import '../../core/constants/color_manager.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import 'team_chat_list_screen.dart';
 
 class TeamChatScreen extends StatefulWidget {
   static const String routeName = '/team_chat';
+  final TeamChat? teamChat;
+  
+  const TeamChatScreen({Key? key, this.teamChat}) : super(key: key);
+  
   @override
   _TeamChatScreenState createState() => _TeamChatScreenState();
 }

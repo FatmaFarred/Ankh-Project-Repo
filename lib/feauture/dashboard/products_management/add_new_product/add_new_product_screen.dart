@@ -226,7 +226,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                     padding: const EdgeInsets.all(16),
                     child: CustomTabBar(
                       tabs: [
-                        AppLocalizations.of(context)!.neww,
+                        AppLocalizations.of(context)!.basicInfo,
                         AppLocalizations.of(context)!.used,
                       ],
                       onTabChanged: (index) {
@@ -269,7 +269,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             Text(
                                               AppLocalizations.of(
                                                 context,
-                                              )!.basicInformation,
+                                              )!.bas,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16.sp,
                                                 fontWeight:
