@@ -2767,6 +2767,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'the products have been added successfully.'**
   String get addedSuccessfully;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @noTeamChatsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'No team chats found. Start a conversation with your team members to collaborate and share updates.'**
+  String get noTeamChatsDescription;
+
+  /// No description provided for @noTeamChatsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No team chats found'**
+  String get noTeamChatsFound;
+
+  /// No description provided for @members.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get members;
+
+  /// No description provided for @teamChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Chat'**
+  String get teamChat;
+
+  /// No description provided for @noTeamToChat.
+  ///
+  /// In en, this message translates to:
+  /// **'No Team to Chat'**
+  String get noTeamToChat;
+
+  /// No description provided for @noTeamToChatDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not part of any team yet. Please contact your administrator to join a team or become a team leader.'**
+  String get noTeamToChatDescription;
+
+  /// No description provided for @goBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get goBack;
 }
 
 class _AppLocalizationsDelegate

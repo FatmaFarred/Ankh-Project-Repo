@@ -302,6 +302,7 @@ import '../../feauture/authentication/user_controller/user_cubit.dart' as _i354;
 import '../../feauture/balance_screen/cubit/add_point_request_cubit.dart'
     as _i752;
 import '../../feauture/balance_screen/cubit/balance_cubit.dart' as _i419;
+import '../../feauture/chat_screen/cubit/team_chat_list_cubit.dart' as _i881;
 import '../../feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart'
     as _i495;
 import '../../feauture/client_search_screen/cubit/search_cubit.dart' as _i355;
@@ -551,6 +552,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i367.DeleteFavoriteUseCase>(),
         ));
 
+
     gh.factory<_i667.PushNotificationDataSourse>(() =>
         _i71.PushNotificationDataSourseImpl(
             gh<_i329.FirebaseMessagingService>()));
@@ -699,9 +701,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i239.MarketerUnassignProductCubit>(() =>
         _i239.MarketerUnassignProductCubit(
             gh<_i537.MarketerUnAssignProductUseCase>()));
-    gh.factory<_i280.MarketerAddRequestCubit>(() =>
-        _i280.MarketerAddRequestCubit(
-            gh<_i176.MarketerAddRequestInspectionUseCase>()));
     gh.factory<_i273.GetAllInspectionAdminUseCase>(() =>
         _i273.GetAllInspectionAdminUseCase(
             gh<_i700.HomeGetAllInspectionRepositry>()));
@@ -850,12 +849,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i235.EditProfileCubit(gh<_i775.EditProfileUseCase>()));
     gh.factory<_i203.InspectorRegisterCubit>(() =>
         _i203.InspectorRegisterCubit(gh<_i33.InspectorRegisterUseCase>()));
+    gh.factory<_i881.TeamChatListCubit>(
+        () => _i881.TeamChatListCubit(gh<_i142.GetTeamMemberUseCase>()));
+    gh.factory<_i172.PushNotificationUseCase>(() =>
+        _i172.PushNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i186.GetNotificationUseCase>(() =>
         _i186.GetNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i349.PostNotificationUseCase>(() =>
         _i349.PostNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
-    gh.factory<_i172.PushNotificationUseCase>(() =>
-        _i172.PushNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i873.HomeGetAllProductsUseCase>(() =>
         _i873.HomeGetAllProductsUseCase(
             gh<_i77.HomeGetAllProductsRepositry>()));

@@ -1139,7 +1139,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get time => 'الوقت';
 
   @override
-  String get insepectionManagement => 'Inspection Management';
+  String get insepectionManagement => ' إدارة المعاينات';
 
   @override
   String get carCode => 'رمز السيارة';
@@ -1380,4 +1380,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
+
+  @override
+  String get refresh => ' تحديث';
+
+  @override
+  String get noTeamChatsDescription =>
+      ' لا توجد محادثات فريق متاحة حاليًا.\nيمكنك دعوة أعضاء جدد للانضمام إلى فريقك وبدء الدردشة.';
+
+  @override
+  String get noTeamChatsFound => ' لا توجد محادثات فريق';
+
+  @override
+  String get members => ' الأعضاء';
+
+  @override
+  String get teamChat => ' دردشة الفريق';
+
+  @override
+  String get noTeamToChat => 'لا يوجد فريق للمحادثة';
+
+  @override
+  String get noTeamToChatDescription =>
+      'أنت لست جزءاً من أي فريق بعد. يرجى الاتصال بمديرك للانضمام إلى فريق أو لتصبح قائد فريق.';
+
+  @override
+  String get goBack => 'العودة';
+
 }

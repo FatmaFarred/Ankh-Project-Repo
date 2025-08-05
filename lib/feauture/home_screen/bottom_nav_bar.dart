@@ -14,6 +14,7 @@ import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
+import '../chat_screen/team_chat_list_screen.dart';
 import '../chats_screen/chats_screen.dart';
 import '../inspector_screen/inspector_home/inspector_home_screen.dart';
 import '../inspector_screen/inspection_reports/inspector_reports_screen.dart';
@@ -76,6 +77,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     late final List<Widget> pages;
     late final List<BottomNavigationBarItem> items;
 
+
     if (user?.roles?[0]=="Marketer"||user?.roles?[0]=="LeaderMarketer") {
       pages = [
         MarketerHomeScreen(),
@@ -86,7 +88,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ..fetchRequests(user?.id??"", 'roleId'),
           child: MarketerReportsScreen(),
         ),
-        ChatsScreen(),
+        TeamChatListScreen(),
         AccountScreen(),
       ];
       items = [
