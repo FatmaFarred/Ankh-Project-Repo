@@ -16,6 +16,7 @@ import '../../welcome_screen/welcome_screen.dart';
 import '../inspection_managemnt/insepction_managemnt_screen.dart';
 import '../inspector_management/inspector_management_screen.dart';
 import '../marketer_mangemnet/marketer_managment_screen.dart';
+import '../notification/notification_screen/notification_screen.dart';
 import '../points_management/points_screen.dart';
 import '../points_management/point_prices_screen.dart';
 import '../users_management/users_management_screen.dart';
@@ -30,18 +31,18 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    Center(child: ProductsManagementScreen()),
-    Center(child: UsersManagementScreen()),
-    Center(child: MarketersManagementScreen()),
-    Center(child: InspectorManagementScreen()),
-    Center(child: InspectionsManagementScreen()),
-    Center(child: Text('⚙️ Notification Screen')),
-    Center(child: PointsScreen()),
-    // Center(child: PointPricesScreen()),
-    Center(child: OffersManagementScreen()  ),
-    Center(child: InstallmentRequestsScreen()  ),
 
+    ProductsManagementScreen(),
+    UsersManagementScreen(),
+    MarketersManagementScreen(),
+    InspectorManagementScreen(),
+    InspectionsManagementScreen(),
+    NotificationScreen(),
+    PointsScreen(),
+    OffersManagementScreen(),
+    InstallmentRequestsScreen()
   ];
+
 
   void _onDrawerItemTapped(int index) {
     setState(() {

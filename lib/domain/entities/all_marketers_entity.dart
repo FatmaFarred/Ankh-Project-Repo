@@ -15,7 +15,8 @@ class AllMarketersEntity {
       this.accountStatus,
       this.productsCount,
       this.teamLeader,
-      this.role
+      this.role,
+      this.deviceTokens,
 
   });
 
@@ -28,6 +29,7 @@ class AllMarketersEntity {
   int? productsCount;
   String? teamLeader;
   String? role;
+  List<String>? deviceTokens;
 
 
 }

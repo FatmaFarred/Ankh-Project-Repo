@@ -144,25 +144,25 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
           ),
         ],
       ),
-      child: Column(
-        children: [
+        child: Column(
+          children: [
           // Status Row
           Row(
             children: [
-              Container(
+            Container(
                 width: 12,
                 height: 12,
-                decoration: BoxDecoration(
+              decoration: BoxDecoration(
                   color: _statusColor,
                   shape: BoxShape.circle,
                 ),
               ),
               SizedBox(width: 8),
               Expanded(
-                child: Text(
-                  _statusText,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              child: Text(
+                _statusText,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                     color: _statusColor,
                   ),
                 ),
@@ -234,7 +234,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
                 SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: _isConnecting ? null : _connect,
-                  style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF2196F3),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -449,9 +449,9 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
                 Icons.send,
                 color: Colors.white,
               ),
+              ),
             ),
-          ),
-        ],
+          ],
       ),
     );
   }
@@ -486,38 +486,38 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
         room: room,
         onMessage: (msg) {
           if (mounted) {
-            setState(() {
-              _messages.add(msg);
-            });
+      setState(() {
+        _messages.add(msg);
+      });
             _scrollToBottom();
           }
         },
         onSystemMessage: (text) {
           if (mounted) {
-            setState(() {
-              _messages.add(ChatMessage.system(text));
-            });
+      setState(() {
+        _messages.add(ChatMessage.system(text));
+      });
             _scrollToBottom();
           }
         },
         onConnected: () {
           if (mounted) {
-            setState(() {
-              _isConnected = true;
+      setState(() {
+        _isConnected = true;
               _isConnecting = false;
-              _statusText = "متصل";
-              _statusColor = Colors.green;
-            });
+        _statusText = "متصل";
+        _statusColor = Colors.green;
+      });
           }
         },
         onDisconnected: (err) {
           if (mounted) {
-            setState(() {
-              _isConnected = false;
+      setState(() {
+        _isConnected = false;
               _isConnecting = false;
-              _statusText = "غير متصل";
-              _statusColor = Colors.red;
-              if (err != null) {
+        _statusText = "غير متصل";
+        _statusColor = Colors.red;
+        if (err != null) {
                 _messages.add(ChatMessage.error("خطأ في الاتصال: $err"));
               }
             });
@@ -527,8 +527,8 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
       );
     } catch (e) {
       if (mounted) {
-        setState(() {
-          _isConnected = false;
+    setState(() {
+      _isConnected = false;
           _isConnecting = false;
           _statusText = "فشل الاتصال";
           _statusColor = Colors.red;
@@ -683,24 +683,24 @@ class ChatClient {
       await _cleanupConnection();
 
       // Create new connection
-      _hubConnection = HubConnectionBuilder()
-          .withUrl(
+    _hubConnection = HubConnectionBuilder()
+        .withUrl(
         _baseUrl,
-        HttpConnectionOptions(
-          accessTokenFactory: () async => token,
+      HttpConnectionOptions(
+        accessTokenFactory: () async => token,
           skipNegotiation: false,
           transport: HttpTransportType.webSockets,
-        ),
-      )
+      ),
+    )
           .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
-          .build();
+        .build();
 
       // Decode JWT to get user ID and role
-      final claims = _parseJwt(token);
-      _userId = claims['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-      final role = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      _isLeader = role == "LeaderMarketer" || role == "Admin" ||
-          (role is List && (role.contains("LeaderMarketer") || role.contains("Admin")));
+    final claims = _parseJwt(token);
+    _userId = claims['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    final role = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    _isLeader = role == "LeaderMarketer" || role == "Admin" ||
+        (role is List && (role.contains("LeaderMarketer") || role.contains("Admin")));
 
       // Set up event listeners only once
       if (!_listenersSetup) {
@@ -717,7 +717,7 @@ class ChatClient {
       
       // Try to join team room (optional - may not exist on server yet)
       try {
-        await _hubConnection!.invoke("JoinTeamRoom", args: [room]);
+      await _hubConnection!.invoke("JoinTeamRoom", args: [room]);
         //onSystemMessage?.call("انضم عضو الي الفريق");
       } catch (e) {
         onSystemMessage?.call("");
@@ -813,18 +813,18 @@ class ChatClient {
     }
 
     try {
-      final data = args[0] as Map;
-      final isMyMessage = data["senderId"] == _userId;
-      final type = isMyMessage ? MessageType.sent : MessageType.received;
+    final data = args[0] as Map;
+    final isMyMessage = data["senderId"] == _userId;
+    final type = isMyMessage ? MessageType.sent : MessageType.received;
 
-      final message = ChatMessage(
+    final message = ChatMessage(
         message: data["message"] ?? "",
         senderName: data["senderName"] ?? "عضو",
         timestamp: DateTime.tryParse(data["sentAt"] ?? "") ?? DateTime.now(),
-        type: type,
-      );
+      type: type,
+    );
 
-      onMessage?.call(message);
+    onMessage?.call(message);
     } catch (e) {
       onSystemMessage?.call("خطأ في معالجة الرسالة: $e");
       
@@ -849,30 +849,30 @@ class ChatClient {
     }
     
     try {
-      final List messages = args[0] as List;
+    final List messages = args[0] as List;
       
       if (messages.isNotEmpty) {
         onSystemMessage?.call("تم تحميل ${messages.length} رسالة سابقة");
       }
       
-      messages.reversed.forEach((msg) {
+    messages.reversed.forEach((msg) {
         try {
-          final data = msg as Map;
-          final isMyMessage = data["senderId"] == _userId;
-          final type = isMyMessage ? MessageType.sent : MessageType.received;
+      final data = msg as Map;
+      final isMyMessage = data["senderId"] == _userId;
+      final type = isMyMessage ? MessageType.sent : MessageType.received;
 
-          final message = ChatMessage(
+      final message = ChatMessage(
             message: data["message"] ?? "",
             senderName: data["senderName"] ?? "عضو",
             timestamp: DateTime.tryParse(data["sentAt"] ?? "") ?? DateTime.now(),
-            type: type,
-          );
+        type: type,
+      );
           
-          onMessage?.call(message);
+      onMessage?.call(message);
         } catch (e) {
           // Silent error for individual message processing
         }
-      });
+    });
     } catch (e) {
       onSystemMessage?.call("خطأ في تحميل الرسائل السابقة: $e");
     }
@@ -923,13 +923,13 @@ class ChatClient {
   // Simple JWT parser with better error handling
   Map<String, dynamic> _parseJwt(String token) {
     try {
-      final parts = token.split(".");
+    final parts = token.split(".");
       if (parts.length != 3) throw Exception("Invalid token format");
 
-      final payload = parts[1];
-      final normalized = base64Url.normalize(payload);
-      final decoded = utf8.decode(base64Url.decode(normalized));
-      return json.decode(decoded);
+    final payload = parts[1];
+    final normalized = base64Url.normalize(payload);
+    final decoded = utf8.decode(base64Url.decode(normalized));
+    return json.decode(decoded);
     } catch (e) {
       throw Exception("Failed to parse JWT token: $e");
     }
