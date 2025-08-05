@@ -1387,6 +1387,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addedSuccessfully => 'the products have been added successfully.';
 
   @override
+  String get marketerPoints => 'Marketer Points';
+
+  @override
+  String get inspectorPoints => 'Inspector Points';
+
+  @override
+  String get priceOffers => 'Price Offers';
+
+  @override
+  String get installmentOffers => 'Installment Offers';
+
+  @override
+  String get noOffers => 'There are no offers';
   String get refresh => 'Refresh';
 
   @override
