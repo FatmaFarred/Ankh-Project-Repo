@@ -334,7 +334,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get assignedProducts => 'المنتجات المُسندة';
 
   @override
-  String get used => 'مستخدم';
+  String get used => 'مستعمل';
 
   @override
   String get unused => 'غير مستخدم';
@@ -1139,7 +1139,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get time => 'الوقت';
 
   @override
-  String get insepectionManagement => 'Inspection Management';
+  String get insepectionManagement => ' إدارة المعاينات';
 
   @override
   String get carCode => 'رمز السيارة';
@@ -1160,6 +1160,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noNotificationsFound => 'لا توجد إشعارات متاحة';
+
+  @override
+  String get teamManagement => 'إدارة الفريق';
+
+  @override
+  String get inviteMember => 'دعوة عضو';
+
+  @override
+  String get inviteMemberSubtitle =>
+      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+
+  @override
+  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+
+  @override
+  String get noCodeFound => 'لا توجد محادثات متاحة';
+
+  @override
+  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+
+  @override
+  String get generating => ' جارٍ إنشاء الكود...';
+
+  @override
+  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+
+  @override
+  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 
   @override
   String get editCarDetails => 'تعديل تفاصيل السيارة';
@@ -1347,37 +1375,36 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get neww => 'جديد';
 
-
   @override
   String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
 
   @override
   String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
 
-  String get teamManagement => 'إدارة الفريق';
+  @override
+  String get refresh => ' تحديث';
 
   @override
-  String get inviteMember => 'دعوة عضو';
+  String get noTeamChatsDescription =>
+      ' لا توجد محادثات فريق متاحة حاليًا.\nيمكنك دعوة أعضاء جدد للانضمام إلى فريقك وبدء الدردشة.';
 
   @override
-  String get inviteMemberSubtitle =>
-      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+  String get noTeamChatsFound => ' لا توجد محادثات فريق';
 
   @override
-  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+  String get members => ' الأعضاء';
 
   @override
-  String get noCodeFound => 'لا توجد محادثات متاحة';
+  String get teamChat => ' دردشة الفريق';
 
   @override
-  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+  String get noTeamToChat => 'لا يوجد فريق للمحادثة';
 
   @override
-  String get generating => ' جارٍ إنشاء الكود...';
+  String get noTeamToChatDescription =>
+      'أنت لست جزءاً من أي فريق بعد. يرجى الاتصال بمديرك للانضمام إلى فريق أو لتصبح قائد فريق.';
 
   @override
-  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+  String get goBack => 'العودة';
 
-  @override
-  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 }

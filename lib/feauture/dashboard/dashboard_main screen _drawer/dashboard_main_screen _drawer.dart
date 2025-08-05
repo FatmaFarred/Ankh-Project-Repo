@@ -1,5 +1,7 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/feauture/dashboard/installment_requests_management/installment_requests_screen.dart';
+import 'package:ankh_project/feauture/dashboard/offers_management/offers_management_screen.dart';
 import 'package:ankh_project/feauture/dashboard/products_management/products_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +31,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
+
     ProductsManagementScreen(),
     UsersManagementScreen(),
     MarketersManagementScreen(),
@@ -36,6 +39,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     InspectionsManagementScreen(),
     NotificationScreen(),
     PointsScreen(),
+    OffersManagementScreen(),
+    InstallmentRequestsScreen()
   ];
 
 
@@ -225,6 +230,44 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                 ),
 
               ),
+
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+
+                selected: _selectedIndex == 7,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(7),
+                leading: Icon(
+                  Icons.monetization_on_outlined,
+                  color: _selectedIndex == 7 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  "offers Screen",
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 7 ? Colors.white : null), // Text color
+                ),
+
+              ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+
+                selected: _selectedIndex == 8,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(8),
+                leading: Icon(
+                  Icons.monetization_on_outlined,
+                  color: _selectedIndex == 8 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  "Installment Screen",
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 8 ? Colors.white : null), // Text color
+                ),
+
+              ),
+
 
 
               Spacer(),

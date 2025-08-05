@@ -394,19 +394,8 @@
   "generating": "Generating...",
   "doYouHaveInvitationCode": "Do you have an invitation code?",
   "registerWithInvitationCode": "Register with Invitation Code",
-  "tryAgain": "Try Again"
 
-
-
-
-
-
-
-
-
-
-
-
+  "tryAgain": "Try Again",
 
 
 
@@ -484,6 +473,15 @@
   "neww": "New",
   "used": "Used",
   "editedSuccessfully": "the products have been edited successfully.",
-  "addedSuccessfully": "the products have been added successfully."
+  "addedSuccessfully": "the products have been added successfully.",
+  "refresh": "Refresh",
+  "noTeamChatsDescription": "No team chats found. Start a conversation with your team members to collaborate and share updates.",
+  "noTeamChatsFound": "No team chats found",
+  "members": "Members",
+  "teamChat": "Team Chat",
+  "noTeamToChat": "No Team to Chat",
+  "noTeamToChatDescription": "You are not part of any team yet. Please contact your administrator to join a team or become a team leader.",
+  "goBack": "Go Back"
+
 
 }

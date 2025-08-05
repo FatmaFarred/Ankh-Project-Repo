@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +19,6 @@ class TeamChatScreen extends StatefulWidget {
 }
 
 class _TeamChatScreenState extends State<TeamChatScreen> {
-  final TextEditingController _roomController = TextEditingController(text: "78874d63-f8dc-497b-9b92-a6a0ec5bf01b");
   final TextEditingController _messageController = TextEditingController();
   String? token;
   String? name;
@@ -57,23 +57,35 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
     print("👤 User token: $token");
     print("👤 User ID: $userId");
     print("👤 User roles: $userRoles");
+    print("👤 User team leader ID: ${user?.teamLeaderId}");
 
-    // Check if user is a team leader
-    final isTeamLeader = userRoles?.contains("LeaderMarketer") == true ||
-                        userRoles?.contains("Admin") == true;
-
-    if (isTeamLeader && currentUserId != null) {
-      // Auto-fill room ID with team leader's ID
-      _roomController.text = currentUserId;
-      print("👑 User is team leader, auto-filled room ID: $currentUserId");
+    // Determine room ID based on user role
+    String? roomId;
+    if (userRoles?.contains("LeaderMarketer") == true ||
+        userRoles?.contains("Admin") == true) {
+      roomId = currentUserId;
+      print("👑 User is team leader, will use own ID: $roomId");
+    } else if (user?.teamLeaderId != null && user!.teamLeaderId!.isNotEmpty) {
+      roomId = user.teamLeaderId;
+      print("👥 User is marketer, will use team leader ID: $roomId");
+    } else {
+      print("❌ User has no team access");
     }
   }
 
   void _attemptAutoConnection() {
-    if (token != null && _roomController.text.isNotEmpty) {
-      Future.delayed(Duration(milliseconds: 500), () {
-        _connect();
-      });
+    if (token != null) {
+      // Check if user has team access
+      final user = context.read<UserCubit>().state;
+      final hasTeamAccess = (user?.roles?.contains("LeaderMarketer") == true ||
+                            user?.roles?.contains("Admin") == true) ||
+                           (user?.teamLeaderId != null && user!.teamLeaderId!.isNotEmpty);
+      
+      if (hasTeamAccess) {
+        Future.delayed(Duration(milliseconds: 500), () {
+          _connect();
+        });
+      }
     }
   }
 
@@ -132,7 +144,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
   Widget _buildConnectionStatusCard() {
     return Container(
       margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 16.w ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -187,62 +199,21 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
             ],
           ),
           
-          SizedBox(height: 12),
-          
-          // User Info
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: ColorManager.lightprimary,
-                child: Icon(Icons.person, color: Colors.white),
-              ),
-              SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name??"",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          
+
           if (!_isConnected) ...[
             SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _roomController,
-                    decoration: InputDecoration(
-                      labelText: "معرف الفريق",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      prefixIcon: Icon(Icons.group),
-                    ),
-                    enabled: !_isConnecting,
+            Center(
+              child: ElevatedButton(
+                onPressed: _isConnecting ? null : _connect,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF4E8048),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 ),
-                SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: _isConnecting ? null : _connect,
-                    style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Text("اتصال"),
-                ),
-              ],
+                child: Text("اتصال بالدردشة"),
+              ),
             ),
           ],
         ],
@@ -318,7 +289,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
     if (isSystem || isError) {
       return Container(
         margin: EdgeInsets.symmetric(vertical: 4),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         decoration: BoxDecoration(
           color: isError ? Colors.red[50] : Colors.blue[50],
           borderRadius: BorderRadius.circular(16),
@@ -405,8 +376,8 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
 
   Widget _buildMessageInput() {
     return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.all(4),
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -462,10 +433,22 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
 
   void _connect() async {
     final token = this.token;
-    final room = _roomController.text.trim();
+    
+    // Automatically determine room ID based on user role
+    String? room;
+    final user = context.read<UserCubit>().state;
+    
+    if (user?.roles?.contains("LeaderMarketer") == true || 
+        user?.roles?.contains("Admin") == true) {
+      // If user is team leader or admin, use their own ID
+      room = user?.id;
+    } else if (user?.teamLeaderId != null && user!.teamLeaderId!.isNotEmpty) {
+      // If user is marketer, use their team leader ID
+      room = user.teamLeaderId;
+    }
 
-    if (token == null || room.isEmpty) {
-      _showCustomErrorDialog("خطأ في البيانات", "الرجاء التأكد من توفر رمز التفويض ومعرف الفريق");
+    if (token == null || room == null || room.isEmpty) {
+      _showCustomErrorDialog("خطأ في البيانات", "الرجاء التأكد من توفر رمز التفويض أو أنك جزء من فريق");
       return;
     }
 
@@ -535,7 +518,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
           _messages.add(ChatMessage.error("خطأ في الاتصال: $e"));
         });
 
-        String errorMessage = "فشل الاتصال بالخادم";
+        String errorMessage = "فشل الاتصال ";
         if (e.toString().contains("Connection refused")) {
           errorMessage = "لا يمكن الاتصال بالخادم. تأكد من أن الخادم يعمل";
         } else if (e.toString().contains("timeout")) {
@@ -619,7 +602,6 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
 
   @override
   void dispose() {
-    _roomController.dispose();
     _messageController.dispose();
     _scrollController.dispose();
     
