@@ -48,6 +48,7 @@ import 'feauture/profile/cubit/edit_profile_cubit.dart';
 import 'feauture/profile/profile_screen.dart';
 import 'feauture/profile/edit_profile_screen.dart';
 import 'feauture/request_inspection_screen/confirm_request_screen.dart';
+import 'feauture/request_inspection_screen/cubit/marketer_add_request_cubit.dart';
 import 'feauture/request_inspection_screen/request_inspection_screen.dart';
 import 'feauture/request_inspection_screen/request_submitted.dart';
 import 'feauture/welcome_screen/welcome_screen.dart';
@@ -111,6 +112,8 @@ void main() async {
         BlocProvider(create: (_) => getIt<ProductDetailsCubit>()),
         BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
         BlocProvider<PostProductCubit>(create: (_) => getIt<PostProductCubit>(),),
+        BlocProvider(create: (_) => getIt<MarketerAddRequestCubit>()),
+
       ],
       child: MyApp(isLoggedIn: token != null, userRole: role),
     ),

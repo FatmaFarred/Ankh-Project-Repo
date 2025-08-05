@@ -390,7 +390,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get online => 'Online';
 
   @override
-  String get description => 'Description ';
+  String get description => 'Description';
 
   @override
   String get supportTeam => 'Support Team';
@@ -412,6 +412,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transmission => 'Transmission';
+
+  @override
+  String get transmissionType => 'Transmission Type';
+
+  @override
+  String get chooseTransmissionType => 'Choose Transmission Type';
+
+  @override
+  String get automatic => 'Automatic';
+
+  @override
+  String get manual => 'Manual';
 
   @override
   String get horsepower => 'Horsepower';
@@ -689,7 +701,7 @@ class AppLocalizationsEn extends AppLocalizations {
       '`Failed to send password reset email:';
 
   @override
-  String get ok => 'Ok';
+  String get ok => 'OK';
 
   @override
   String get failedToLoadRecommendedBrands =>
@@ -1154,6 +1166,201 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noNotificationsFound => ' No notifications found';
 
   @override
+  String get editCarDetails => 'Edit Car Details';
+
+  @override
+  String get addCar => 'Add Car';
+
+  @override
+  String get basicInformation => 'Basic Information';
+
+  @override
+  String get carName => 'Car Name';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get mileage => 'Mileage';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get horsePower => 'Horse Power';
+
+  @override
+  String get specifications => 'Specifications';
+
+  @override
+  String get ownerName => 'Owner Name';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get conditionParts => 'Condition Parts';
+
+  @override
+  String get licenseExpiryDate => 'License Expiry Date';
+
+  @override
+  String get safetyReport => 'Safety Report';
+
+  @override
+  String get taxStatus => 'Tax Status';
+
+  @override
+  String get interiorCondition => 'Interior Condition';
+
+  @override
+  String get exteriorCondition => 'Exterior Condition';
+
+  @override
+  String get additionalSpecs => 'Additional Specs';
+
+  @override
+  String get additionalInfo => 'Additional Info';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get inspectionResult => 'Inspection Result';
+
+  @override
+  String get accidentHistory => 'Accident History';
+
+  @override
+  String get testDriveAvailable => 'Test Drive Available';
+
+  @override
+  String get warrantyStatus => 'Warranty Status';
+
+  @override
+  String get tireStatus => 'Tire Status';
+
+  @override
+  String get lightStatus => 'Light Status';
+
+  @override
+  String get licenseDuration => 'License Duration';
+
+  @override
+  String get trafficViolations => 'Traffic Violations';
+
+  @override
+  String get insuranceStatus => 'Insurance Status';
+
+  @override
+  String get numberOfKeys => 'Number of Keys';
+
+  @override
+  String get seatCondition => 'Seat Condition';
+
+  @override
+  String get gearCondition => 'Gear Condition';
+
+  @override
+  String get driveSystemCondition => 'Drive System Condition';
+
+  @override
+  String get brakesCondition => 'Brakes Condition';
+
+  @override
+  String get tags => 'Tags';
+
+  @override
+  String get safetyStatus => 'Safety Status';
+
+  @override
+  String get commission => 'Commission';
+
+  @override
+  String get requiredPoints => 'Required Points';
+
+  @override
+  String get browseFiles => 'Browse Files';
+
+  @override
+  String get licenseImages => 'License Images';
+
+  @override
+  String get insuranceFront => 'Insurance Front';
+
+  @override
+  String get insuranceBack => 'Insurance Back';
+
+  @override
+  String get saveEdits => 'Save Edits';
+
+  @override
+  String get addProduct => 'Add Product';
+
+  @override
+  String get edited => 'Edited';
+
+  @override
+  String get added => 'Added';
+
+  @override
+  String get carNameRequired => 'Car Name is required';
+
+  @override
+  String get required => 'required';
+
+  @override
+  String get chooseDriveType => 'Choose Drive Type';
+
+  @override
+  String get chooseFuelType => 'Choose Fuel Type';
+
+  @override
+  String get fuelType => 'Fuel Type';
+
+  @override
+  String get driveType => 'Drive Type';
+
+  @override
+  String get frontWheel => 'FrontWheel';
+
+  @override
+  String get rearWheel => 'RearWheel';
+
+  @override
+  String get allWheel => 'AllWheel';
+
+  @override
+  String get petrol => 'Petrol';
+
+  @override
+  String get electric => 'Electric';
+
+  @override
+  String get gas => 'Gas';
+
+  @override
+  String get available => 'Available';
+
+  @override
+  String get sold => 'Sold';
+
+  @override
+  String get neww => 'New';
+
+  @override
+  String get used => 'Used';
+
+  @override
+  String get editedSuccessfully =>
+      'the products have been edited successfully.';
+
+  @override
+  String get addedSuccessfully => 'the products have been added successfully.';
+
   String get teamManagement => ' Team Management';
 
   @override

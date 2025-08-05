@@ -19,6 +19,7 @@ import '../../../../data/models/used_details_model.dart';
 import '../../../../domain/entities/product_management_entity.dart';
 import '../../../../domain/entities/used_details_entity.dart';
 import '../../../../domain/use_cases/edit_product_usecase.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../inspector_screen/widgets/custom_text_form_field.dart';
 import '../../dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'edit_product_cubit.dart';
@@ -40,6 +41,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   String? selectedDriveType = 'Choose Drive Type';
 
   late List<String> imageUrls;
+  List<XFile> selectedImages = []; // Add this for new selected images
 
 
   late int statusNum;
@@ -77,6 +79,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     onImagePicked(image);
+  }
+
+  // Add new method for picking multiple images
+  void pickMultipleImages() async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> images = await picker.pickMultiImage();
+    if (images.isNotEmpty) {
+      setState(() {
+        selectedImages.addAll(images);
+      });
+    }
   }
 
   Future<void> _pickdate() async {
@@ -226,6 +239,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
     selectedStatus = widget.product.status;
     selectedDriveType = widget.product.driveType;
     imageUrls = widget.product.imageUrls;
+    
+    // Initialize statusNum based on the product's current status
+    if (widget.product.status == "Available") {
+      statusNum = 1;
+    } else if (widget.product.status == "Sold") {
+      statusNum = 2;
+    } else if (widget.product.status == "Pending") {
+      statusNum = 3;
+    } else {
+      statusNum = 1; // Default to Available if status is not recognized
+    }
   }
 
   @override
@@ -297,7 +321,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           color: Colors.white,
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Edit Car Details"),
+        title: Text(AppLocalizations.of(context)!.editCarDetails),
         backgroundColor: ColorManager.lightprimary,
       ),
       body: Padding(
@@ -329,7 +353,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "Basic Information",
+                              AppLocalizations.of(context)!.basicInformation,
                               style: GoogleFonts.inter(
                                 fontSize: 16.sp,
                                 fontWeight:
@@ -340,7 +364,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         SizedBox(height: 20.h),
                         Text(
-                          "Car Name",
+                          AppLocalizations.of(context)!.carName,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -351,11 +375,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           validator: (value) {
                             if (value == null ||
                                 value.trim().isEmpty) {
-                              return 'Car Name is required';
+                              return AppLocalizations.of(context)!.carNameRequired;
                             }
                             return null;
                           },
-                          hintText: "Car Name",
+                          hintText: AppLocalizations.of(context)!.carName,
                           controller: carNameController,
                         ),
                         SizedBox(height: 16.h),
@@ -367,7 +391,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Category",
+                                    AppLocalizations.of(context)!.category,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -379,11 +403,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
-                                    hintText: "Category",
+                                    hintText: AppLocalizations.of(context)!.category,
                                     controller:
                                     categoryController,
                                   ),
@@ -397,7 +421,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Year",
+                                    AppLocalizations.of(context)!.year,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -409,13 +433,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
                                     keyBoardType:
                                     TextInputType.number,
-                                    hintText: "Year",
+                                    hintText: AppLocalizations.of(context)!.year,
                                     controller: yearController,
                                   ),
                                 ],
@@ -433,7 +457,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Mileage",
+                                    AppLocalizations.of(context)!.mileage,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -445,13 +469,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
                                     keyBoardType:
                                     TextInputType.number,
-                                    hintText: "Mileage",
+                                    hintText: AppLocalizations.of(context)!.mileage,
                                     controller:
                                     odometerController,
                                   ),
@@ -465,7 +489,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Color",
+                                    AppLocalizations.of(context)!.color,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -477,11 +501,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
-                                    hintText: "Color",
+                                    hintText: AppLocalizations.of(context)!.color,
                                     controller: colorController,
                                   ),
                                 ],
@@ -499,7 +523,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Horse Power",
+                                    AppLocalizations.of(context)!.horsePower,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -511,13 +535,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
                                     keyBoardType:
                                     TextInputType.number,
-                                    hintText: "Horse Power",
+                                    hintText: AppLocalizations.of(context)!.horsePower,
                                     controller:
                                     horsepowerController,
                                   ),
@@ -531,7 +555,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Battery Capacity",
+                                    AppLocalizations.of(context)!.batteryCapacity,
                                     style: GoogleFonts.inter(
                                       fontSize: 14.sp,
                                       fontWeight:
@@ -543,14 +567,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
-                                        return 'required';
+                                        return AppLocalizations.of(context)!.required;
                                       }
                                       return null;
                                     },
                                     keyBoardType:
                                     TextInputType.number,
                                     hintText:
-                                    "Battery Capacity",
+                                    AppLocalizations.of(context)!.batteryCapacity,
                                     controller:
                                     batteryCapacityController,
                                   ),
@@ -589,7 +613,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "Specifications",
+                              AppLocalizations.of(context)!.specifications,
                               style: GoogleFonts.inter(
                                 fontSize: 16.sp,
                                 fontWeight:
@@ -782,18 +806,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         const SizedBox(height: 16),
 
                         Text(
-                          "Owner Name",
+                          AppLocalizations.of(context)!.ownerName,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(height: 6.h),
-                        CustomTextFormField(hintText: "Owner Name",controller: ownerNameController,),
+                        CustomTextFormField(hintText: AppLocalizations.of(context)!.ownerName,controller: ownerNameController,),
                         const SizedBox(height: 16),
 
                         Text(
-                          "Location",
+                          AppLocalizations.of(context)!.location,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -801,7 +825,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         SizedBox(height: 6.h),
                         CustomTextFormField(
-                          hintText: "Location",
+                          hintText: AppLocalizations.of(context)!.location,
                           controller: locationController,
                         ),
                         const SizedBox(height: 16),
@@ -872,7 +896,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "Condition Parts",
+                              AppLocalizations.of(context)!.conditionParts,
                               style: GoogleFonts.inter(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeightManager.semiBold,
@@ -883,7 +907,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         const SizedBox(height: 16),
 
                         Text(
-                          "licenseExpiryDate",
+                          AppLocalizations.of(context)!.licenseExpiryDate,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -891,14 +915,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         SizedBox(height: 6.h),
                         CustomTextFormField(
-                          hintText: "License Expiry Date",
+                          hintText: AppLocalizations.of(context)!.licenseExpiryDate,
                           controller: licenseExpiryDateController,
                           onTab: _pickdate,
                         ),
                         const SizedBox(height: 16),
 
                         Text(
-                          "safetyReport",
+                          AppLocalizations.of(context)!.safetyReport,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -907,13 +931,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         SizedBox(height: 6.h),
                         CustomTextFormField(
                           keyBoardType: TextInputType.numberWithOptions(),
-                          hintText: "safetyReport",
+                          hintText: AppLocalizations.of(context)!.safetyReport,
                           controller: safetyReportController,
                         ),
                         const SizedBox(height: 16),
 
                         Text(
-                          "taxStatus",
+                          AppLocalizations.of(context)!.taxStatus,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -922,7 +946,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         SizedBox(height: 6.h),
                         CustomTextFormField(
                           keyBoardType: TextInputType.numberWithOptions(),
-                          hintText: "taxStatus",
+                          hintText: AppLocalizations.of(context)!.taxStatus,
                           controller: taxStatusController,
                         ),
                         const SizedBox(height: 16),
@@ -1284,7 +1308,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         const SizedBox(height: 16),
 
                         Text(
-                          "Price",
+                          AppLocalizations.of(context)!.price,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -1295,19 +1319,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           validator: (value) {
                             if (value == null ||
                                 value.trim().isEmpty) {
-                              return 'Price  is required';
+                              return AppLocalizations.of(context)!.required;
                             }
                             return null;
                           },
                           keyBoardType:
                           TextInputType.numberWithOptions(),
-                          hintText: "Price",
+                          hintText: AppLocalizations.of(context)!.price,
                           controller: priceController,
                         ),
                         const SizedBox(height: 16),
 
                         Text(
-                          "commission",
+                          AppLocalizations.of(context)!.commission,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -1318,19 +1342,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           validator: (value) {
                             if (value == null ||
                                 value.trim().isEmpty) {
-                              return 'Commission is required';
+                              return AppLocalizations.of(context)!.required;
                             }
                             return null;
                           },
                           keyBoardType:
                           TextInputType.numberWithOptions(),
-                          hintText: "commission",
+                          hintText: AppLocalizations.of(context)!.commission,
                           controller: commissionController,
                         ),
                         const SizedBox(height: 16),
 
                         Text(
-                          "Required Points",
+                          AppLocalizations.of(context)!.requiredPoints,
                           style: GoogleFonts.inter(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -1341,13 +1365,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           validator: (value) {
                             if (value == null ||
                                 value.trim().isEmpty) {
-                              return 'Required Points is required';
+                              return AppLocalizations.of(context)!.required;
                             }
                             return null;
                           },
                           keyBoardType:
                           TextInputType.numberWithOptions(),
-                          hintText: "Required Points",
+                          hintText: AppLocalizations.of(context)!.requiredPoints,
                           controller: requiredPointsController,
                         ),
                         const SizedBox(height: 16),
@@ -1434,7 +1458,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              "images",
+                              AppLocalizations.of(context)!.images,
                               style: GoogleFonts.inter(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeightManager.semiBold,
@@ -1443,7 +1467,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        imageUrls.isEmpty
+                        imageUrls.isEmpty && selectedImages.isEmpty
                             ? SizedBox()
                             : SizedBox(
                           height: 120.h,
@@ -1451,26 +1475,70 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             scrollDirection:
                             Axis.horizontal,
                             itemCount:
-                            imageUrls.length,
+                            imageUrls.length + selectedImages.length,
                             itemBuilder: (context, index) {
-                              return ClipRRect(
-                                  borderRadius:
-                                  BorderRadius.circular(
-                                    8.r,
-                                  ),
-                                  child:
-                                  Image.network(
-                                    "https://ankhapi.runasp.net/${imageUrls[index]}",
-                                    width: 120.w,
-                                    height: 120.h,
-                                    fit: BoxFit.cover, errorBuilder:(context, error, stackTrace) {
-                                    return Container(
+                              if (index < imageUrls.length) {
+                                // Show old images
+                                return ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                      8.r,
+                                    ),
+                                    child:
+                                    Image.network(
+                                      "https://ankhapi.runasp.net/${imageUrls[index]}",
                                       width: 120.w,
                                       height: 120.h,
-                                      color: Colors.grey[300],
-                                      child: Icon(Icons.broken_image, color: Colors.grey),
-                                    );
-                                  },));
+                                      fit: BoxFit.cover, 
+                                      errorBuilder:(context, error, stackTrace) {
+                                        return Container(
+                                          width: 120.w,
+                                          height: 120.h,
+                                          color: Colors.grey[300],
+                                          child: Icon(Icons.broken_image, color: Colors.grey),
+                                        );
+                                      }
+                                    )
+                                );
+                              } else {
+                                // Show new selected images
+                                final newImageIndex = index - imageUrls.length;
+                                return Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      child: Image.file(
+                                        File(selectedImages[newImageIndex].path),
+                                        width: 120.w,
+                                        height: 120.h,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 4,
+                                      right: 4,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            selectedImages.removeAt(newImageIndex);
+                                          });
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                            size: 16.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }
                             },
                             separatorBuilder: (_, _) =>
                                 SizedBox(width: 10.w),
@@ -1521,7 +1589,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     ),
                                     child: CustomizedElevatedButton(
                                       bottonWidget: Text(
-                                        "Browse Files",
+                                        AppLocalizations.of(context)!.browseFiles,
                                         style: Theme
                                             .of(context)
                                             .textTheme
@@ -1533,7 +1601,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                               .white,
                                         ),
                                       ),
-                                      // onPressed: _pickImages,
+                                      onPressed: pickMultipleImages,
                                       color: ColorManager
                                           .lightprimary,
                                       borderColor: ColorManager
@@ -1569,7 +1637,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             Icon(Icons.image, color: Colors.blueAccent, size: 20.sp),
                             SizedBox(width: 8.w),
                             Text(
-                              "License images",
+                              AppLocalizations.of(context)!.licenseImages,
                               style: GoogleFonts.inter(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeightManager.semiBold,
@@ -1938,7 +2006,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     Expanded(
                       child: CustomizedElevatedButton(
                         bottonWidget: Text(
-                          "Save Edits",
+                          AppLocalizations.of(context)!.saveEdits,
                           style: Theme
                               .of(context)
                               .textTheme
@@ -2009,7 +2077,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               topBrandId: '1',
                             batteryCapacity: batteryCapacityController.text.trim(),
                             videoPath: [],
-                            images: imageUrls,
+                            images: _createCombinedImageList(),
                             usedDetails: usedDetailsJson,
                           );
 
@@ -2050,9 +2118,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
                           CustomDialog.positiveButton(
                             context: context,
-                            title: "Edited", // you may define this key in your l10n
-                            message: "the products have  been edited successfully.",
-                            positiveText: "OK",
+                            title: AppLocalizations.of(context)!.edited,
+                            message: AppLocalizations.of(context)!.editedSuccessfully,
+                            positiveText: AppLocalizations.of(context)!.ok,
                             positiveOnClick: () {
                               Navigator.of(context).pop();
                             },
@@ -2067,7 +2135,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     Expanded(
                       child: CustomizedElevatedButton(
                         bottonWidget: Text(
-                          "Cancel",
+                          AppLocalizations.of(context)!.cancel,
                           style: Theme
                               .of(context)
                               .textTheme
@@ -2092,5 +2160,28 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ),
       ),
     )));
+  }
+
+  /// Creates a combined list of image paths for submission
+  /// Old images are kept as relative paths (as they come from the backend)
+  /// New images are added as absolute file paths
+  List<String> _createCombinedImageList() {
+    List<String> combinedList = [];
+    
+    // Add old images (keep them as relative paths)
+    combinedList.addAll(imageUrls);
+    
+    // Add new images (as absolute file paths)
+    combinedList.addAll(selectedImages.map((image) => image.path));
+    
+    print('--- Combined Image List ---');
+    print('Old images count: ${imageUrls.length}');
+    print('New images count: ${selectedImages.length}');
+    print('Total images: ${combinedList.length}');
+    print('Old images: $imageUrls');
+    print('New images: ${selectedImages.map((image) => image.path).toList()}');
+    print('Combined list: $combinedList');
+    
+    return combinedList;
   }
 }
