@@ -7,6 +7,7 @@ class InspectionRequest {
   final int productId;
   final String marketerId;
 
+
   InspectionRequest({
     required this.clientName,
     required this.phoneNumber,

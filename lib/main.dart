@@ -12,12 +12,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/shared_preferences .dart';
 import 'core/theme/my_app_theme.dart';
+import 'domain/use_cases/get_team_member_use_case.dart';
 import 'feauture/authentication/email_verfication/email_verfication_screen.dart';
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
+import 'feauture/chat_screen/cubit/team_chat_list_cubit.dart';
+import 'feauture/chat_screen/team_chat_list_screen.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
@@ -113,6 +116,8 @@ void main() async {
         BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
         BlocProvider<PostProductCubit>(create: (_) => getIt<PostProductCubit>(),),
         BlocProvider(create: (_) => getIt<MarketerAddRequestCubit>()),
+        BlocProvider(create: (_) => getIt<TeamChatListCubit>()),
+
 
       ],
       child: MyApp(isLoggedIn: token != null, userRole: role),
@@ -268,6 +273,10 @@ class _MyAppState extends State<MyApp> {
       InviteTeamMemberScreen.inviteTeamMemberRouteName: (context) => InviteTeamMemberScreen(),
       TeamsAndCodesScreen.teamsAndCodesRouteName: (context) => TeamsAndCodesScreen(),
       TeamChatScreen.routeName: (context) => TeamChatScreen(),
+      TeamChatListScreen.routeName: (context) => BlocProvider(
+        create: (context) => TeamChatListCubit(getIt<GetTeamMemberUseCase>()),
+        child: const TeamChatListScreen(),
+      ),
 
     },
     );
