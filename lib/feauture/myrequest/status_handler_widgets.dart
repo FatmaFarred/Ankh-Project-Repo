@@ -58,7 +58,7 @@ String getStatusLabel(RequestStatus status) {
     case RequestStatus.done:
       return 'Done';
     case RequestStatus.Postponed:
-      return 'Delayed';
+      return 'Postponed';
     case RequestStatus.ClientDidNotRespond:
       return 'Not Responded';
     case RequestStatus.active:
@@ -77,9 +77,20 @@ String getStatusLabel(RequestStatus status) {
 }
 
 RequestStatus? getRequestStatusFromString(String? status) {
-  switch (status?.toLowerCase()) {
-    case 'pending':
+  switch (status) {
+    case 'Pending':
       return RequestStatus.pending;
+    case 'Completed':
+      return RequestStatus.Completed;
+    case 'ClientRejected':
+      return RequestStatus.ClientRejected;
+    case 'ReturnedToMarketer':
+      return RequestStatus.ReturnedToMarketer;
+    case 'Postponed':
+      return RequestStatus.Postponed;
+    case 'ClientDidNotRespond':
+      return RequestStatus.ClientDidNotRespond;
+    // Optionally, keep old mappings for backward compatibility
     case 'done':
       return RequestStatus.done;
     case 'delayed':

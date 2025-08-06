@@ -551,11 +551,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i886.AddFavoriteUseCase>(),
           gh<_i367.DeleteFavoriteUseCase>(),
         ));
-
-
-    gh.factory<_i667.PushNotificationDataSourse>(() =>
-        _i71.PushNotificationDataSourseImpl(
-            gh<_i329.FirebaseMessagingService>()));
     gh.factory<_i966.MarketerInviteCodeReppositry>(() =>
         _i842.MarketerInviteCodeRepositryImpl(
             gh<_i287.MarketerInviteCodeRemoteDataSource>()));
@@ -843,12 +838,12 @@ extension GetItInjectableX on _i174.GetIt {
         _i203.InspectorRegisterCubit(gh<_i33.InspectorRegisterUseCase>()));
     gh.factory<_i881.TeamChatListCubit>(
         () => _i881.TeamChatListCubit(gh<_i142.GetTeamMemberUseCase>()));
-    gh.factory<_i172.PushNotificationUseCase>(() =>
-        _i172.PushNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i186.GetNotificationUseCase>(() =>
         _i186.GetNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i349.PostNotificationUseCase>(() =>
         _i349.PostNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
+    gh.factory<_i172.PushNotificationUseCase>(() =>
+        _i172.PushNotificationUseCase(gh<_i1072.PushNotificationRepositry>()));
     gh.factory<_i873.HomeGetAllProductsUseCase>(() =>
         _i873.HomeGetAllProductsUseCase(
             gh<_i77.HomeGetAllProductsRepositry>()));

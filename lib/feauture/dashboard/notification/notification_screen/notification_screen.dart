@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +29,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   List<String> selectedUserIds = [];
   List<String> selectedDeviceTokens = [];
   final TextEditingController _searchController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   PushNotificationCubit pushNotificationCubit = getIt<PushNotificationCubit>();
 
@@ -65,7 +70,43 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   void initState() {
     super.initState();
-    _loadRecipients();
+    _loadSavedTemplates();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadRecipients();
+    });
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    messageController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _loadSavedTemplates() async {
+    try {
+      final saved = await SharedPrefsManager.getData(key: 'notification_templates');
+      if (saved != null) {
+        final List<dynamic> jsonList = jsonDecode(saved);
+        final List<Map<String, String>> templates = jsonList
+            .map((item) => {
+          'title': item['title'] as String,
+          'message': item['message'] as String,
+        })
+            .cast<Map<String, String>>() // ✅ Add this line
+            .toList();
+
+        setState(() {
+          messageTemplates = templates;
+        });
+        print('📱 Loaded ${templates.length} templates from SharedPreferences');
+      } else {
+        print('📱 No saved templates found');
+      }
+    } catch (e) {
+      print('❌ Failed to load templates: $e');
+    }
   }
 
 
@@ -90,21 +131,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   void _showAddNewMessageBottomSheet() {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController messageController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    // Clear the controllers before showing the bottom sheet
+    titleController.clear();
+    messageController.clear();
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.8,
-          ),
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.8),
           padding: EdgeInsets.all(20.w),
           child: Form(
             key: formKey,
@@ -113,143 +150,159 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 24.h,
-                        color: ColorManager.lightprimary,
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        'إضافة رسالة جديدة',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    'أدخل عنوان الرسالة ونصها لإضافتها إلى القائمة',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorManager.darkGrey,
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-                  TextFormField(
 
-                    controller: titleController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'يرجى إدخال عنوان الرسالة';
-                      }
-                      return null;
-                    },
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorManager.textColor,
-                    ),
-                    decoration: InputDecoration(
-                      labelText: 'عنوان الرسالة',
-                      labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: ColorManager.darkGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.darkGrey),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.darkGrey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.lightprimary),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.error),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.error),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  TextFormField(
-                    controller: messageController,
-                    maxLines: 3,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'يرجى إدخال نص الرسالة';
-                      }
-                      return null;
-                    },
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorManager.textBlack,
-                    ),
-                    decoration: InputDecoration(
-                      labelText: 'نص الرسالة',
-                      labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: ColorManager.darkGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.darkGrey),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.darkGrey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.lightprimary),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.error),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.error),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
+              Row(
+              children: [
+              Icon(
+                Icons.add,
+                size: 24.h,
+                color: ColorManager.lightprimary,
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                'إضافة رسالة جديدة',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              ],
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              'أدخل عنوان الرسالة ونصها لإضافتها إلى القائمة',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: ColorManager.darkGrey,
+              ),
+            ),
+            SizedBox(height: 20.h),
+            TextFormField(
+
+              controller: titleController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'يرجى إدخال عنوان الرسالة';
+                }
+                return null;
+              },
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: ColorManager.textColor,
+              ),
+              decoration: InputDecoration(
+                labelText: 'عنوان الرسالة',
+                labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorManager.darkGrey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.darkGrey),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.darkGrey),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.lightprimary),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.error),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.error),
+                ),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            TextFormField(
+              controller: messageController,
+              maxLines: 3,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'يرجى إدخال نص الرسالة';
+                }
+                return null;
+              },
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: ColorManager.textBlack,
+              ),
+              decoration: InputDecoration(
+                labelText: 'نص الرسالة',
+                labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: ColorManager.darkGrey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.darkGrey),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.darkGrey),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.lightprimary),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.error),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide(color: ColorManager.error),
+                ),
+              ),
+            ),
+            SizedBox(height: 24.h),
                   Row(
                     children: [
                       Expanded(
                         child: TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            'إلغاء',
+                          child: Text('إلغاء',
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: ColorManager.darkGrey,
-                            ),
+
                           ),
+                          )
                         ),
                       ),
                       SizedBox(width: 12.w),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            print('🔘 Button pressed!');
+                            print('📝 Title: "${titleController.text}"');
+                            print('📝 Message: "${messageController.text}"');
+                            
                             if (formKey.currentState!.validate()) {
+                              print('✅ Form validation passed');
+                              // ✅ 1. Add to in-memory list
                               setState(() {
                                 messageTemplates.add({
                                   'title': titleController.text,
                                   'message': messageController.text,
                                 });
                               });
+
+                              // ✅ 2. Save updated list to SharedPreferences
+                              await _saveTemplatesToPrefs();
+                              print('✅ Saved to SharedPreferences');
+
                               Navigator.pop(context);
+                              print('✅ Popped bottom sheet');
                               CustomDialog.positiveButton(
                                 context: context,
-                                title: AppLocalizations.of(context)!.success,
+                                title: 'نجح',
                                 message: 'تم إضافة الرسالة الجديدة بنجاح',
                                 positiveOnClick: () {
-                                  Navigator.pop(context);
-                                },
+                                  print('✅ Success dialog PRESSED');
+                                 },
                               );
+                              print('✅ Success dialog called');
+                            } else {
+                              print('❌ Form validation failed');
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -258,9 +311,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                           ),
-                          child: Text(
-                            'إضافة',
-                            style: TextStyle(color: Colors.white),
+                          child: Text('إضافة',
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.white,
+                            ),
+
                           ),
                         ),
                       ),
@@ -274,7 +329,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
     );
   }
-
+  Future<void> _saveTemplatesToPrefs() async {
+    final jsonList = jsonEncode(messageTemplates);
+    await SharedPrefsManager.saveData(key: 'notification_templates', value: jsonList);
+    print('💾 Saved ${messageTemplates.length} templates to SharedPreferences');
+  }
   void _showRecipientSelectionScreen() {
     Navigator.push(
       context,
@@ -375,92 +434,80 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<MarketerManagementCubit>(
-          create: (context) => getIt<MarketerManagementCubit>(),
-        ),
-        BlocProvider<InspectorManagementCubit>(
-          create: (context) => getIt<InspectorManagementCubit>(),
-        ),
+    return BlocListener<PushNotificationCubit, PushNotificationState>(
+      bloc: pushNotificationCubit,
+      listener: (context, state) {
+        print('🔄 BlocListener state changed: ${state.runtimeType}');
 
-      ],
-      child: BlocListener<PushNotificationCubit, PushNotificationState>(
-        bloc: pushNotificationCubit,
-        listener: (context, state) {
-          print('🔄 BlocListener state changed: ${state.runtimeType}');
-          
-          if (state is PushNotificationLoading) {
-            print('🔄 Push notification loading...');
-            CustomDialog.loading(
-              context: context,
-              message: AppLocalizations.of(context)!.loading,
-              cancelable: false,
-            );
-          } else if (state is PushNotificationSuccess) {
-            print('✅ Push notification success with message: ${state.message}');
-            Navigator.of(context).pop(); // Close loading dialog
-            CustomDialog.positiveButton(
-              context: context,
-              title: AppLocalizations.of(context)!.success,
-              message: state.message ?? 'تم إرسال الإشعار بنجاح',
-              positiveOnClick: () {
-                Navigator.of(context).pop();
-                setState(() {
-                  selectedMessage = null;
-                  selectedTitle = null;
-                  selectedUserIds.clear();
-                  selectedDeviceTokens.clear();
-                  _isLoading = false;
-                });
-              },
-            );
-          } else if (state is PushNotificationFailure) {
-            print('❌ Push notification failure: ${state.errorMessage ?? state.error?.errorMessage}');
-            Navigator.of(context).pop(); // Close loading dialog
-            CustomDialog.positiveButton(
-              context: context,
-              title: AppLocalizations.of(context)!.error,
-              message: state.errorMessage ?? state.error?.errorMessage ?? 'حدث خطأ غير متوقع',
-              positiveOnClick: () {
-                Navigator.of(context).pop();
-                setState(() {
-                  _isLoading = false;
-                });
-              },
-            );
-          }
-        },
-        child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: _showAddNewMessageBottomSheet,
-            backgroundColor: ColorManager.lightprimary,
-            child: Icon(Icons.add, color: Colors.white),
-            tooltip: 'إضافة رسالة جديدة',
-          ),
-          body: RefreshIndicator(
-            onRefresh: () async {
-              print('🔄 Pull to refresh triggered');
-              _loadRecipients();
-              // Add a small delay to show the refresh indicator
-              await Future.delayed(Duration(milliseconds: 500));
+        if (state is PushNotificationLoading) {
+          print('🔄 Push notification loading...');
+          CustomDialog.loading(
+            context: context,
+            message: AppLocalizations.of(context)!.loading,
+            cancelable: false,
+          );
+        } else if (state is PushNotificationSuccess) {
+          print('✅ Push notification success with message: ${state.message}');
+          Navigator.of(context).pop(); // Close loading dialog
+          CustomDialog.positiveButton(
+            context: context,
+            title: AppLocalizations.of(context)!.success,
+            message: state.message ?? 'تم إرسال الإشعار بنجاح',
+            positiveOnClick: () {
+              setState(() {
+                selectedMessage = null;
+                selectedTitle = null;
+                selectedUserIds.clear();
+                selectedDeviceTokens.clear();
+                _isLoading = false;
+              });
             },
-            color: ColorManager.lightprimary,
-            backgroundColor: Colors.white,
-            child: Column(
-              children: [
-                // Recipients Section
-                _buildRecipientsSection(),
+          );
+        } else if (state is PushNotificationFailure) {
+          print('❌ Push notification failure: ${state.errorMessage ?? state.error?.errorMessage}');
+          Navigator.of(context).pop(); // Close loading dialog
+          CustomDialog.positiveButton(
+            context: context,
+            title: AppLocalizations.of(context)!.error,
+            message: state.errorMessage ?? state.error?.errorMessage ?? 'حدث خطأ غير متوقع',
+            positiveOnClick: () {
+              Navigator.of(context).pop();
+              setState(() {
+                _isLoading = false;
+              });
+            },
+          );
+        }
+      },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: _showAddNewMessageBottomSheet,
+          backgroundColor: ColorManager.lightprimary,
+          child: Icon(Icons.add, color: Colors.white),
+          tooltip: 'إضافة رسالة جديدة',
+        ),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            print('🔄 Pull to refresh triggered');
+            _loadRecipients();
+            // Add a small delay to show the refresh indicator
+            await Future.delayed(Duration(milliseconds: 500));
+          },
+          color: ColorManager.lightprimary,
+          backgroundColor: Colors.white,
+          child: Column(
+            children: [
+              // Recipients Section
+              _buildRecipientsSection(),
 
-                // Message Templates Section
-                Expanded(
-                  child: _buildMessageTemplatesSection(),
-                ),
+              // Message Templates Section
+              Expanded(
+                child: _buildMessageTemplatesSection(),
+              ),
 
-                // Send Button
-                _buildSendButton(),
-              ],
-            ),
+              // Send Button
+              _buildSendButton(),
+            ],
           ),
         ),
       ),
@@ -569,10 +616,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
           final isSelected = selectedMessage == template['message'];
 
           return Container(
-            margin: EdgeInsets.only(bottom: 16), // Add spacing between items
+            margin: EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
-              color:isSelected ? ColorManager.lightprimary :  Color(0xffEBFAEB),
-
+              color: isSelected ? ColorManager.lightprimary : Color(0xffEBFAEB),
               borderRadius: BorderRadius.circular(16),
             ),
             child: DottedBorder(
@@ -581,9 +627,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 strokeWidth: 2,
                 padding: EdgeInsets.all(16),
                 radius: Radius.circular(16),
-
-
-                color: isSelected ? ColorManager.transparent :  ColorManager.lightprimary !,
+                color: isSelected ? ColorManager.transparent : ColorManager.lightprimary!,
               ),
               child: Material(
                 color: Colors.transparent,
@@ -592,24 +636,39 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   borderRadius: BorderRadius.circular(12),
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text(
-                          template['title']!,
-                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isSelected ? Colors.white : ColorManager.textColor,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                template['title']!,
+                                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: isSelected ? Colors.white : ColorManager.textColor,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                template['message']!,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  fontSize: 14.sp,
+                                  color: isSelected ? Colors.white : ColorManager.textColor,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          template['message']!,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 14.sp,
-                            color: isSelected ? Colors.white : ColorManager.textColor,
+                        // ✅ Always show delete icon
+                        IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                            size: 20,
+                            color: isSelected ? Colors.white : Colors.red,
                           ),
+                          onPressed: () => _deleteMessage(index),
                         ),
                       ],
                     ),
@@ -621,7 +680,34 @@ class _NotificationScreenState extends State<NotificationScreen> {
         },
       ),
     );
-  }  Widget _buildSendButton() {
+  }
+  void _deleteMessage(int index) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('حذف الرسالة'),
+        content: Text('هل أنت متأكد من حذف هذه الرسالة؟'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text('إلغاء'),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                messageTemplates.removeAt(index);
+              });
+              // ✅ Save to SharedPreferences
+              _saveTemplatesToPrefs();
+              Navigator.pop(ctx); // Close dialog
+            },
+            child: Text('حذف', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget _buildSendButton() {
     final canSend = selectedMessage != null && selectedUserIds.isNotEmpty && !_isLoading;
 
     return Container(
@@ -704,18 +790,6 @@ class _RecipientSelectionScreenState extends State<RecipientSelectionScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _loadRecipients();
-  }
-
-  void _loadRecipients() {
-    if (widget.recipientType == 'Marketer') {
-      context.read<MarketerManagementCubit>().fetchMarketers();
-    } else {
-      context.read<InspectorManagementCubit>().getAllInspectors();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

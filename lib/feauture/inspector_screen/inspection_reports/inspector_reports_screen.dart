@@ -12,6 +12,8 @@ import '../../../api_service/di/di.dart';
 import '../../../core/customized_widgets/shared_preferences .dart';
 import '../../../domain/entities/all_inpection_entity.dart';
 import '../../../domain/entities/inspection_request_details_entity.dart';
+import '../../home_screen/bottom_nav_bar.dart';
+import '../../marketer_Reports/marketer_report_details/report_details.dart';
 import '../my_inspections/my_inspections_cubit.dart';
 import '../my_inspections/my_inspections_state.dart';
 import 'package:ankh_project/feauture/marketer_Reports/marketer_report_details/report_details/report_details_cubit.dart';
@@ -63,9 +65,11 @@ class _InspectorReportsScreenState extends State<InspectorReportsScreen> {
         leading: IconButton(
           icon: const Icon(CupertinoIcons.back),
           color: Colors.white,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+          },
         ),
-        title: const Text("Reports"),
+        title:  Text(AppLocalizations.of(context)!.reports),
         centerTitle: true,
         backgroundColor: ColorManager.lightprimary,
       ),
@@ -210,17 +214,13 @@ class _InspectorReportsScreenState extends State<InspectorReportsScreen> {
             color: const Color(0xff777777),
             borderColor: Theme.of(context).primaryColor,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => BlocProvider<MarketerReportDetailsCubit>(
-                    create: (context) => getIt<MarketerReportDetailsCubit>(),
-                    child: InspectionReportDetails(requestId: inspection.id, selectedStatus: inspection.status),
-                  ),
-                ),
+              Navigator.pushNamed(context, MarketerReportDetails.reportDetailsRouteName,
+                arguments: inspection.id,
+
               );
             },
           ),
+
         ],
       ),
     );

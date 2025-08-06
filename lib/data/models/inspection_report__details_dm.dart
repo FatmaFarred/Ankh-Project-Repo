@@ -22,6 +22,8 @@ class InspectionReportDetailsDm extends InspectionReportDetailsEntity {
     super.productImages,
     super.status,
     super.inspectionImages,
+
+    super.agreedPrice,
     super.inspectorComment,});
 
   InspectionReportDetailsDm.fromJson(dynamic json) {
@@ -35,6 +37,7 @@ class InspectionReportDetailsDm extends InspectionReportDetailsEntity {
     status = json['status'];
     inspectionImages = json['inspectionImages'] != null ? json['inspectionImages'].cast<String>() : [];
     inspectorComment = json['inspectorComment'];
+    agreedPrice = json['agreedPrice'];
   }
 
 
@@ -48,6 +51,7 @@ class InspectionReportDetailsDm extends InspectionReportDetailsEntity {
     map['appointmentTime'] = appointmentTime;
     map['productImages'] = productImages;
     map['status'] = status;
+    map['agreedPrice'] = agreedPrice;
     map['inspectionImages'] = inspectionImages;
     map['inspectorComment'] = inspectorComment;
     return map;

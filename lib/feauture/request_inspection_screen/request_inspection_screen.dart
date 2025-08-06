@@ -243,6 +243,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
               print(product?.id);
               if (_formKey.currentState!.validate()) {
                 final request = InspectionRequest(
+                  agreedPrice: price.text.isNotEmpty ? num.tryParse(price.text) ?? 0:0,
                   clientName: nameController.text,
                   phoneNumber: phoneController.text,
                   address: addressController.text,
@@ -304,7 +305,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           ),
           SizedBox(height: 16.h),
           Text(
-            AppLocalizations.of(context)!.price,
+            AppLocalizations.of(context)!.aggredPrice,
             style: GoogleFonts.poppins(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,

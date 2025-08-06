@@ -14,7 +14,7 @@ class FirebaseMessagingService {
     try {
       // 🔐 Load the service account credentials from the JSON file in assets
       final serviceAccountJson = await rootBundle.loadString(
-        'assets/ankh-project-firebase-adminsdk-fbsvc-fd74501130.json',
+        'assets/ankh-project-firebase-adminsdk-fbsvc-ff138dbe41.json',
       );
 
       final credentials = ServiceAccountCredentials.fromJson(serviceAccountJson);

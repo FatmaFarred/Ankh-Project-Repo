@@ -104,11 +104,13 @@ void main() async {
   BlocProvider(create: (context) => RoleCubit()),
   BlocProvider(create: (context) => getIt<RoleCsCubit>()),
   BlocProvider(create: (_) => getIt<ProfileCubit>()),
+            BlocProvider(create: (context) => getIt<MarketerManagementCubit>()),
+            BlocProvider(create: (context) => getIt<InspectorManagementCubit>()),
 
 
-  BlocProvider(create: (context) => getIt<ProfileCubit>()),
 
-  BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
+
+            BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
   BlocProvider(create: (_) => getIt<ProductDetailsCubit>()),
   BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
   BlocProvider<PostProductCubit>(create: (_) => getIt<PostProductCubit>(),),
@@ -116,12 +118,9 @@ void main() async {
   BlocProvider(
   create: (context) => getIt<InstallmentPendingCubit>()..fetchPendingInstallments()),
 
-        BlocProvider(create: (context) => getIt<MyInspectionsCubit>()),
-        BlocProvider(create: (_) => getIt<ProductDetailsCubit>()),
-        BlocProvider(create: (_) => getIt<DeleteProductCubit>()),
-        BlocProvider<PostProductCubit>(create: (_) => getIt<PostProductCubit>(),),
-        BlocProvider(create: (_) => getIt<MarketerAddRequestCubit>()),
+
         BlocProvider(create: (_) => getIt<TeamChatListCubit>()),
+
 
   ],
   child: MyApp(isLoggedIn: token != null, userRole: role),
@@ -291,10 +290,10 @@ class _MyAppState extends State<MyApp> {
 
 
 
-          },
-        );
-      },
-    );
+
+
+
+
   }
 }
 

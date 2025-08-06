@@ -80,7 +80,8 @@ class _MarketerHomeScreenState extends State<MarketerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
-    print("👤 User ID: ${user?.id}"); // Debug print
+      print("👤 User Name: ${user?.email}"); // Debug print
+    print("👤 User ID: ${user?.teamLeaderId}"); // Debug print
 
 
     return Scaffold(

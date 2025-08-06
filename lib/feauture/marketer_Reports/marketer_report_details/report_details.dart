@@ -36,10 +36,10 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
   MarketerReportDetailsCubit getMarketerReportDetailsCubit = getIt<MarketerReportDetailsCubit>();
   final List<String> statusOptions = [
     'Completed',
-    'Client did not respond',
+    'ClientDidNotRespond',
     'Postponed',
-    'Returned to marketer',
-    'Client rejected',
+    'ReturnedToMarketer',
+    'ClientRejected',
   ];
 
   num? requestId;
@@ -138,6 +138,29 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
 
 
                     SizedBox(height: 20.h),
+                       Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.all(12.r),
+                              decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(12.r),
+                                          border: Border.all(color: Color(0xff777777).withOpacity(0.5), width: 1.2.w),
+                                        ),
+                              child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                              Text(AppLocalizations.of(context)!.aggredPrice,),
+                              SizedBox(height: 8.h),
+                              Text("${AppLocalizations.of(context)!.price}  : ${details.agreedPrice}  ${AppLocalizations.of(context)!.egp}",
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 14.sp),
+                              ),
+                              ],),
+                            ),
+                          ),
+                        ],
+                      ),
+
 
                     SizedBox(height: 20.h),
 
@@ -147,10 +170,13 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                     (details.inspectionImages == null || details.inspectionImages!.isEmpty || details.inspectorComment == null)?SizedBox():Column(
 
                       children: [
+                        SizedBox(height: 20.h),
+
                         PhotoListView(
                           imageUrls: details.inspectionImages ?? [],
                           title: AppLocalizations.of(context)!.inspectionImages,
                         ),
+                        SizedBox(height: 20.h),
 
                         RadioStatusGroup(
                           title: AppLocalizations.of(context)!.inspectionResults,

@@ -36,7 +36,7 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 7, vsync: this);
   }
 
   List<MarketerRequestsForInspectionEntity> filterRequests(List<MarketerRequestsForInspectionEntity> all, int index) {
@@ -56,11 +56,17 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
       case 1:
         return 'Pending';
       case 2:
-        return 'Done';
+        return 'Completed';
       case 3:
-        return 'Delayed';
+        return 'ClientDidNotRespond';
       case 4:
-        return 'Not Responded';
+        return 'Postponed';
+      case 5:
+        return 'ReturnedToMarketer';
+      case 6:
+        return 'ClientRejected';
+
+
       default:
         return '';
     }
@@ -78,7 +84,7 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
     return DefaultTabController(
-      length: 5,
+      length: 7,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -121,6 +127,7 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
               return Center(child: Text(AppLocalizations.of(context)!.noRequestsFound));
             } else if (state is MarketerRequestSuccess) {
               final allRequests = state.requests;
+              print("All Requests: $allRequests");
               return Column(
                 children: [
                  
@@ -141,12 +148,14 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
                       unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
 
                       indicatorSize: TabBarIndicatorSize.tab,
-                      tabs: const [
-                        Tab(text: 'All'),
-                        Tab(text: 'Pending'),
-                        Tab(text: 'Done'),
-                        Tab(text: 'Delayed'),
-                        Tab(text: 'Not Responded'),
+                      tabs:  [
+                        Tab(text: AppLocalizations.of(context)!.all),
+                        Tab(text: AppLocalizations.of(context)!.pending),
+                        Tab(text: AppLocalizations.of(context)!.completed),
+                        Tab(text: AppLocalizations.of(context)!.clientDidNotRespond),
+                        Tab(text: AppLocalizations.of(context)!.postponed),
+                        Tab(text: AppLocalizations.of(context)!.returnedToMarketer),
+                        Tab(text: AppLocalizations.of(context)!.clientRejected),
                       ],
                       onTap: (_) => setState(() {}),
                     ),
@@ -154,7 +163,7 @@ class _MarketerReportsScreenState extends State<MarketerReportsScreen>
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: List.generate(5, (tabIndex) {
+                      children: List.generate(7, (tabIndex) {
                         final filteredRequests = filterRequests(allRequests, tabIndex);
                         return RefreshIndicator(
                           color: ColorManager.lightprimary,
@@ -226,6 +235,7 @@ class CarReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Request status: ${request.status}"); // Debug print
     return Card(
       color: ColorManager.white,
       elevation: 2,

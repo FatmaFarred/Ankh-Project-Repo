@@ -19,7 +19,9 @@ class InspectionReportDetailsEntity {
       this.appointmentTime, 
       this.productImages, 
       this.status, 
-      this.inspectionImages, 
+      this.inspectionImages,
+      this.agreedPrice,
+
       this.inspectorComment,});
 
   String? productName;
@@ -32,6 +34,8 @@ class InspectionReportDetailsEntity {
   String? status;
   List<String>? inspectionImages;
   String? inspectorComment;
+  num? agreedPrice;
+
 
 
 }

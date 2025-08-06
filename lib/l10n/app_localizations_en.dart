@@ -1194,6 +1194,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerWithInvitationCode => 'Register with Invitation Code';
 
   @override
+  String get aggredPrice => 'Aggred Price';
+
+  @override
   String get editCarDetails => 'Edit Car Details';
 
   @override
@@ -1400,6 +1403,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOffers => 'There are no offers';
+
+  @override
   String get refresh => 'Refresh';
 
   @override
@@ -1424,5 +1429,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goBack => 'Go Back';
-
 }

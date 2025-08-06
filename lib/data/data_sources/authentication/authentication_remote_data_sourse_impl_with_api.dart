@@ -117,7 +117,8 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
               email: email,
               phoneNumber:  loginResponse.user?.phoneNumber,
               deviceTokens: deviceToken != null ? [deviceToken] : [],
-              roles: loginResponse.user?.roles
+              roles: loginResponse.user?.roles,
+              teamLeaderId: loginResponse.user?.teamLeaderId
           );
           final userCubit = getIt<UserCubit>();
           userCubit.setUser(myUser);
