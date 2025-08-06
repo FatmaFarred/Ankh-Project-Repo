@@ -93,6 +93,7 @@ void main() async {
       : null;
 
   runApp(
+
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LanguageCubit()),
@@ -207,6 +208,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     return ScreenUtilInit(
+
       designSize: const Size(428, 926.76),
 
       minTextAdapt: true,
@@ -290,6 +292,11 @@ class _MyAppState extends State<MyApp> {
             TeamsAndCodesScreen.teamsAndCodesRouteName: (context) =>
                 TeamsAndCodesScreen(),
             TeamChatScreen.routeName: (context) => TeamChatScreen(),
+            TeamChatListScreen.routeName: (context) => BlocProvider(
+        create: (context) => TeamChatListCubit(getIt<GetTeamMemberUseCase>()),
+        child: const TeamChatListScreen(),
+      ),
+            
           },
         );
       },

@@ -1194,6 +1194,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerWithInvitationCode => 'Register with Invitation Code';
 
   @override
+  String get aggredPrice => 'Aggred Price';
+
+  @override
   String get editCarDetails => 'Edit Car Details';
 
   @override

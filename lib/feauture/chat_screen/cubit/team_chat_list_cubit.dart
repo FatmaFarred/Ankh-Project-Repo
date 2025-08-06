@@ -21,49 +21,59 @@ class TeamChatListCubit extends Cubit<TeamChatListState> {
     emit(TeamChatListLoading());
 
     try {
-      // Get current user
       final user = getIt<UserCubit>().state;
+      print('🎯 Current User: $user');
 
       if (user == null) {
         emit(TeamChatListFailure(errorMessage: "User not authenticated"));
         return;
       }
 
-      // Determine the ID to use based on user role
       String? targetId;
-      
-      if (user.roles?.contains("LeaderMarketer") == true || 
-          user.roles?.contains("Admin") == true) {
-        // If user is team leader or admin, use their own ID
+
+      if (user.roles?.contains("LeaderMarketer") == true) {
+        // Team leader views their team
         targetId = user.id;
-      } else if (user.teamLeaderId != null && user.teamLeaderId!.isNotEmpty) {
-        // If user is marketer, use their team leader ID
-        targetId = user.teamLeaderId;
+      } else if (user.roles?.contains("Marketer") == true) {
+        // Regular marketer: must belong to a team
+        if (user.teamLeaderId != null && user.teamLeaderId!.isNotEmpty) {
+          targetId = user.teamLeaderId;
+        } else {
+          emit(TeamChatListNoTeam());
+          return;
+        }
       } else {
-        // User has no team access
+        // Other roles (e.g., admin, viewer) — no team chat access unless specified
         emit(TeamChatListNoTeam());
         return;
       }
 
-      // Get actual team members using the determined ID
+      print('👤 User ID: ${user.id}');
+      print('👥 User teamLeaderId: ${user.teamLeaderId}');
+      print('📡 Fetching team members for targetId: $targetId');
+
       final either = await getTeamMemberUseCase.execute(targetId!);
-      
-      either.fold((failure) {
-        emit(TeamChatListFailure(errorMessage: failure.errorMessage ?? "Failed to load team members"));
-      }, (teamMembers) {
-        if (teamMembers.isEmpty) {
-          emit(TeamChatListEmpty());
-        } else {
-          // Convert team members to team chats
-          final teamChats = _convertTeamMembersToTeamChats(teamMembers);
-          emit(TeamChatListSuccess(teamChats: teamChats));
-        }
-      });
-    } catch (e) {
+
+      either.fold(
+            (failure) {
+          emit(TeamChatListFailure(
+            errorMessage: failure.errorMessage ?? "Failed to load team members",
+          ));
+        },
+            (teamMembers) {
+          if (teamMembers.isEmpty) {
+            emit(TeamChatListEmpty());
+          } else {
+            final teamChats = _convertTeamMembersToTeamChats(teamMembers);
+            emit(TeamChatListSuccess(teamChats: teamChats));
+          }
+        },
+      );
+    } catch (e, stackTrace) {
+      print('❌ Exception in loadTeamChats: $e\n$stackTrace');
       emit(TeamChatListFailure(errorMessage: e.toString()));
     }
   }
-
   List<TeamChat> _convertTeamMembersToTeamChats(List<AllMarketersEntity> teamMembers) {
     // Since we're already filtering by the correct team leader ID,
     // we can create a single team chat for all members

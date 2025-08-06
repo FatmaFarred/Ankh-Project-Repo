@@ -1190,6 +1190,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
 
   @override
+  String get aggredPrice => 'السعر المتفق عليه';
+
+  @override
   String get editCarDetails => 'تعديل تفاصيل السيارة';
 
   @override
@@ -1425,6 +1428,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get goBack => 'العودة';
 
+
   @override
   String get currency => 'ج.م';
 
@@ -1433,4 +1437,5 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get months => 'شهور';
+
 }

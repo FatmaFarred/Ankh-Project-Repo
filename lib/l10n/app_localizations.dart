@@ -2384,6 +2384,12 @@ abstract class AppLocalizations {
   /// **'Register with Invitation Code'**
   String get registerWithInvitationCode;
 
+  /// No description provided for @aggredPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Aggred Price'**
+  String get aggredPrice;
+
   /// No description provided for @editCarDetails.
   ///
   /// In en, this message translates to:

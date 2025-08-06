@@ -10,6 +10,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
@@ -42,7 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final selectedRole = context.watch<RoleCubit>().state;
-    print("selectedRole:${selectedRole}");
+    final selectedCSRole = context.watch<RoleCsCubit>().state;
+
+    print("selectedRole:${selectedCSRole}");
 
     return BlocListener<RegisterCubit, RegisterState>(
         bloc: registerViewModel,
@@ -207,6 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 20.h),
                   // Team Member Registration Option
+
                   if (!_isTeamMemberRegistration) ...[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -238,7 +242,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 20.h),
                   ],
-                  // Invitation Code Field (only show for team members)
+
                   if (_showInvitationCode) ...[
                     Text(
                       AppLocalizations.of(context)!.invitationCode,
