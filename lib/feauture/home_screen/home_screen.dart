@@ -2,11 +2,14 @@ import 'package:ankh_project/feauture/details_screen/widgets/section_title.dart'
 import 'package:ankh_project/feauture/home_screen/popular_cars_list.dart';
 import 'package:ankh_project/feauture/home_screen/recommended_cars_list.dart';
 import 'package:ankh_project/feauture/home_screen/section_header.dart';
-import 'package:ankh_project/feauture/home_screen/top_brands_list.dart';
+import 'package:ankh_project/feauture/home_screen/top_brands/cubit/top_brand_cubit.dart';
+import 'package:ankh_project/feauture/home_screen/top_brands/top_brands_list.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../api_service/di/di.dart';
 import 'header_section.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,9 +32,13 @@ class HomeScreen extends StatelessWidget {
             children: [
               SectionTitle(title: AppLocalizations.of(context)!.topBrands),
               SizedBox(height: 8.h),
-                 TopBrandsList(),
+              BlocProvider(
+                create: (_) => getIt<TopBrandCubit>()..fetchTopBrands(),
+                child: const TopBrandsList(),
+              ),
+
               SizedBox(height: 20.h),
-           /*   SectionTitle(
+              /*   SectionTitle(
                 title: AppLocalizations.of(context)!.popularNewCars,
 
               ),

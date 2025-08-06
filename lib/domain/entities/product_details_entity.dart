@@ -32,6 +32,7 @@ class ProductDetailsEntity {
     this.description,
     this.make,
     this.model,
+    this.marketerPoints,
     this.category,
     this.year,
     this.mileage,
@@ -67,6 +68,7 @@ class ProductDetailsEntity {
   num? mileage;
   String? color;
   String? code;
+  num? marketerPoints;
 
   bool? isUsedVehicle;
   String? status;

@@ -1393,6 +1393,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inspectorPoints => 'Inspector Points';
 
   @override
+  String get offersManagement => 'Offers Management';
+
+  @override
   String get priceOffers => 'Price Offers';
 
   @override
@@ -1400,6 +1403,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noOffers => 'There are no offers';
+
+  @override
   String get refresh => 'Refresh';
 
   @override
@@ -1425,4 +1430,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get goBack => 'Go Back';
 
+  @override
+  String get currency => 'EGP';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get months => 'Months';
 }

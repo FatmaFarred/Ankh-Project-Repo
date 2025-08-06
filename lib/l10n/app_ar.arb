@@ -470,6 +470,7 @@
   "registerWithInvitationCode": "سجل باستخدام كود الدعوة",
   "marketerPoints": "نقاط المسوق",
   "inspectorPoints": "نقاط الفاحص",
+  "offersManagement": "إدارة العروض",
   "priceOffers": "عروض السعر",
   "installmentOffers": "عروض التقسيط",
   "noOffers": "لا توجد عروض",
@@ -480,7 +481,10 @@
   "noTeamToChatDescription": "أنت لست جزءاً من أي فريق بعد. يرجى الاتصال بمديرك للانضمام إلى فريق أو لتصبح قائد فريق.",
   "goBack": "العودة",
   "members": " الأعضاء",
-  "teamChat": " دردشة الفريق"
+  "teamChat": " دردشة الفريق",
+  "currency": "ج.م",
+  "retry": "إعادة المحاولة",
+  "months": "شهور"
 
 
 }

@@ -4,4 +4,5 @@ import '../../entities/price_offer_request_entity.dart';
 
 abstract class MarketerRequestRepository {
   Future<Either<Failure, Unit>> sendPriceOfferRequest(PriceOfferRequestEntity request);
+
 }

@@ -467,6 +467,7 @@
   "addedSuccessfully": "the products have been added successfully.",
   "marketerPoints": "Marketer Points",
   "inspectorPoints": "Inspector Points",
+  "offersManagement": "Offers Management",
   "priceOffers": "Price Offers",
   "installmentOffers": "Installment Offers",
   "noOffers": "There are no offers",
@@ -477,7 +478,10 @@
   "teamChat": "Team Chat",
   "noTeamToChat": "No Team to Chat",
   "noTeamToChatDescription": "You are not part of any team yet. Please contact your administrator to join a team or become a team leader.",
-  "goBack": "Go Back"
+  "goBack": "Go Back",
+  "currency": "EGP",
+  "retry": "Retry",
+  "months": "Months"
 
 
 }
