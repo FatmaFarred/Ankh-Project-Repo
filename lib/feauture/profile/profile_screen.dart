@@ -20,18 +20,26 @@ import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../invite_team_member/invite_team_member_screen.dart';
 import '../teams_and_codes/teams_and_codes_screen.dart';
+import '../marketer_price_offers/marketer_price_offers.dart';
+import '../marketer_installment_offers/marketer_installment_offers.dart';
+import '../marketer_installment_offers/cubit/installment_offers_by_marketer_id_cubit.dart';
+import '../marketer_price_offers/cubit/price_offers_by_marketer_id_cubit.dart';
+import '../../api_service/di/di.dart';
 import 'cubit/profile_cubit.dart';
 import 'cubit/states.dart';
 import 'edit_profile_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
-  static  String accountScreenRouteName = "AccountScreen";
+
+  static String accountScreenRouteName = "AccountScreen";
+
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
 
-class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserver, RouteAware {
+class _AccountScreenState extends State<AccountScreen>
+    with WidgetsBindingObserver, RouteAware {
   @override
   void initState() {
     super.initState();
@@ -79,7 +87,7 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
     // Force refresh profile data from API
     final token = await SharedPrefsManager.getData(key: 'user_token');
     final userId = await SharedPrefsManager.getData(key: 'user_id');
-    
+
     if (token != null && userId != null) {
       await context.read<ProfileCubit>().fetchProfile(token, userId);
     } else {
@@ -115,13 +123,11 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state;
-    
+
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         // Handle state changes here if needed
-        if (state is ProfileError) {
-
-        }
+        if (state is ProfileError) {}
       },
       builder: (context, state) {
         String userName = AppLocalizations.of(context)!.visitor;
@@ -147,7 +153,10 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                 icon: const Icon(Icons.arrow_back_ios),
                 color: Colors.white,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+                  Navigator.pushReplacementNamed(
+                    context,
+                    BottomNavBar.bottomNavBarRouteName,
+                  );
                 },
               ),
             ),
@@ -160,20 +169,22 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                   children: [
                     Stack(
                       children: [
-                        Column(children: [
-                          Container(
-                            height: 300.h,
-                            width: double.infinity,
-                            color: ColorManager.lightprimary,
-                          ),
-                          Container(
-                            height: 90.h,
-                            decoration: BoxDecoration(
-                              color: ColorManager.containerGrey,
-                              borderRadius: BorderRadius.circular(20.r),
+                        Column(
+                          children: [
+                            Container(
+                              height: 300.h,
+                              width: double.infinity,
+                              color: ColorManager.lightprimary,
                             ),
-                          )
-                        ]),
+                            Container(
+                              height: 90.h,
+                              decoration: BoxDecoration(
+                                color: ColorManager.containerGrey,
+                                borderRadius: BorderRadius.circular(20.r),
+                              ),
+                            ),
+                          ],
+                        ),
                         Positioned(
                           top: 70.h,
                           right: 20.w,
@@ -189,34 +200,43 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                                 padding: const EdgeInsets.all(20),
                                 child: Column(
                                   children: [
-                                                                       CircleAvatar(
-                                     radius: 40,
-                                     backgroundColor: Colors.grey.shade300,
-                                     child: Stack(
-                                       children: [
-                                         Center(
-                                           child: SizedBox(
-                                             width: 30.w,
-                                             height: 30.w,
-                                             child: CircularProgressIndicator(
-                                               strokeWidth: 3,
-                                               valueColor: AlwaysStoppedAnimation<Color>(Colors.grey.shade600),
-                                             ),
-                                           ),
-                                         ),
-                                         Center(
-                                           child: Icon(Icons.person, size: 30, color: Colors.grey.shade600),
-                                         ),
-                                       ],
-                                     ),
-                                   ),
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.grey.shade300,
+                                      child: Stack(
+                                        children: [
+                                          Center(
+                                            child: SizedBox(
+                                              width: 30.w,
+                                              height: 30.w,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 3,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                      Color
+                                                    >(Colors.grey.shade600),
+                                              ),
+                                            ),
+                                          ),
+                                          Center(
+                                            child: Icon(
+                                              Icons.person,
+                                              size: 30,
+                                              color: Colors.grey.shade600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                     const SizedBox(height: 10),
                                     Container(
                                       width: 120.w,
                                       height: 16.h,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade300,
-                                        borderRadius: BorderRadius.circular(8.r),
+                                        borderRadius: BorderRadius.circular(
+                                          8.r,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(height: 8),
@@ -225,7 +245,9 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                                       height: 12.h,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade300,
-                                        borderRadius: BorderRadius.circular(6.r),
+                                        borderRadius: BorderRadius.circular(
+                                          6.r,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(height: 8),
@@ -234,7 +256,9 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                                       height: 32.h,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade300,
-                                        borderRadius: BorderRadius.circular(16.r),
+                                        borderRadius: BorderRadius.circular(
+                                          16.r,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -247,33 +271,42 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                     ),
                     Expanded(
                       child: ListView(
-                        padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-                        children: List.generate(4, (index) => Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 120.w,
-                                height: 16.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
-                                  borderRadius: BorderRadius.circular(4.r),
+                        padding: EdgeInsets.only(
+                          top: 20.h,
+                          left: 20.w,
+                          right: 20.w,
+                        ),
+                        children: List.generate(
+                          4,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 120.w,
+                                  height: 16.h,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade300,
+                                    borderRadius: BorderRadius.circular(4.r),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 8.h),
-                              Container(
-                                width: double.infinity,
-                                height: 60.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.grey.shade300),
-                                  borderRadius: BorderRadius.circular(12.r),
+                                SizedBox(height: 8.h),
+                                Container(
+                                  width: double.infinity,
+                                  height: 60.h,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        )),
+                        ),
                       ),
                     ),
                   ],
@@ -284,7 +317,8 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
         }
 
         if (state is ProfileLoaded) {
-          userName = state.profile.fullName ?? AppLocalizations.of(context)!.visitor;
+          userName =
+              state.profile.fullName ?? AppLocalizations.of(context)!.visitor;
           profileImageUrl = state.profile.imageUrl;
           rate = state.profile.rating ?? 0;
           completedTasks = state.profile.completedTasks ?? 0;
@@ -303,7 +337,10 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                 icon: const Icon(Icons.arrow_back_ios),
                 color: Colors.white,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
+                  Navigator.pushReplacementNamed(
+                    context,
+                    BottomNavBar.bottomNavBarRouteName,
+                  );
                 },
               ),
             ),
@@ -316,15 +353,21 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
                     Icon(Icons.error_outline, size: 64, color: Colors.grey),
                     SizedBox(height: 16.h),
                     Text(
-
-                      state.error.errorMessage??AppLocalizations.of(context)!.failedToLoadData,
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      state.error.errorMessage ??
+                          AppLocalizations.of(context)!.failedToLoadData,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
 
                     SizedBox(height: 24.h),
                     ElevatedButton(
-                      onPressed:()=>Navigator.pushNamed(context, WelcomeScreen.welcomeScreenRouteName),
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        WelcomeScreen.welcomeScreenRouteName,
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.lightprimary,
                         foregroundColor: Colors.white,
@@ -338,252 +381,437 @@ class _AccountScreenState extends State<AccountScreen> with WidgetsBindingObserv
           );
         }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.personalAccount),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, BottomNavBar.bottomNavBarRouteName);
-          },
-        ),
-      ),
-      backgroundColor: ColorManager.containerGrey,
-      body: RefreshIndicator(
-        onRefresh: _refreshProfileData,
-        color: ColorManager.lightprimary,
-        child: SafeArea(
-          child: Column(
-            children: [
-            Stack(
-              children: [
-                Column(children: [ Container(
-                  height: 300.h,
-                  width: double.infinity,
-                  color: ColorManager.lightprimary,
-                ),
-                  Container(height: 90.h,
-                    decoration: BoxDecoration(
-                        color: ColorManager.containerGrey,
-                        borderRadius: BorderRadius.circular(20.r)
-                    ),
-                  )
-                ],),
-                Positioned(
-                  top: 70.h,
-                  right: 20.w,
-                  child: SizedBox(
-                    height: 319.h,
-                    width: 388.w,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.personalAccount),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pushReplacementNamed(
+                  context,
+                  BottomNavBar.bottomNavBarRouteName,
+                );
+              },
+            ),
+          ),
+          backgroundColor: ColorManager.containerGrey,
+          body: RefreshIndicator(
+            onRefresh: _refreshProfileData,
+            color: ColorManager.lightprimary,
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: 300.h,
+                            width: double.infinity,
+                            color: ColorManager.lightprimary,
+                          ),
+                          Container(
+                            height: 90.h,
+                            decoration: BoxDecoration(
+                              color: ColorManager.containerGrey,
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                          ),
+                        ],
                       ),
-                      color: ColorManager.white,// Dark greenish
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                               ProfileImageWidget(
-                                 imageUrl: profileImageUrl,
-                                 size: 80,
-                                 showLoadingState: true,
-                               ),
-                              const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text( userName ?? "Guest",
-                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16.sp,)
-                                  ),
-                                  Image.asset(ImageAssets.goldMedal,
-                                    scale: 6.sp,
-                                    height: 24.h,
-                                    width: 18.w,
-
-                                  )
-
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              RatingBarIndicator(
-                                rating: rate?.toDouble()?? 0.0,
-                                itemBuilder: (context, _) => const Icon(Icons.star, color: ColorManager.starRateColor),
-                                itemCount: 5,
-                                itemSize: 14.sp,
-                                direction: Axis.horizontal,
-                              ),
-                              const SizedBox(height: 8),
-                              TextButton(
-                                onPressed: () async {
-                                  // Check if user is authenticated before allowing edit
-                                  if (user?.roles != null && user?.roles?.isNotEmpty == true) {
-                                    final result = await Navigator.pushNamed(context, EditProfileScreen.routeName);
-                                    // If profile was updated, refresh the data
-                                    if (result == true) {
-                                      _handleProfileUpdate();
-                                    }
-                                  } else {
-                                    // Show message for visitors
-                                    CustomDialog.positiveAndNegativeButton(
-                                        context: context,
-                                        positiveText: AppLocalizations.of(context)!.loginNow,
-                                        positiveOnClick: () {
-                                          Navigator.of(context).pushNamed(WelcomeScreen.welcomeScreenRouteName);
-                                        },
-                                        title: AppLocalizations.of(context)!.login,
-                                        message: AppLocalizations.of(context)!.signInforMore);
-                                  }
-                                },
-                                child: Text(
-                                  user?.roles != null && user?.roles?.isNotEmpty == true 
-                                    ? AppLocalizations.of(context)!.editProfile
-                                    : AppLocalizations.of(context)!.loginNow,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontSize: 14.sp,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                      Positioned(
+                        top: 70.h,
+                        right: 20.w,
+                        child: SizedBox(
+                          height: 319.h,
+                          width: 388.w,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                            color: ColorManager.white, // Dark greenish
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    ProfileImageWidget(
+                                      imageUrl: profileImageUrl,
+                                      size: 80,
+                                      showLoadingState: true,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          userName ?? "Guest",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(fontSize: 16.sp),
+                                        ),
+                                        Image.asset(
+                                          ImageAssets.goldMedal,
+                                          scale: 6.sp,
+                                          height: 24.h,
+                                          width: 18.w,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    RatingBarIndicator(
+                                      rating: rate?.toDouble() ?? 0.0,
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star,
+                                        color: ColorManager.starRateColor,
+                                      ),
+                                      itemCount: 5,
+                                      itemSize: 14.sp,
+                                      direction: Axis.horizontal,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    TextButton(
+                                      onPressed: () async {
+                                        // Check if user is authenticated before allowing edit
+                                        if (user?.roles != null &&
+                                            user?.roles?.isNotEmpty == true) {
+                                          final result =
+                                              await Navigator.pushNamed(
+                                                context,
+                                                EditProfileScreen.routeName,
+                                              );
+                                          // If profile was updated, refresh the data
+                                          if (result == true) {
+                                            _handleProfileUpdate();
+                                          }
+                                        } else {
+                                          // Show message for visitors
+                                          CustomDialog.positiveAndNegativeButton(
+                                            context: context,
+                                            positiveText: AppLocalizations.of(
+                                              context,
+                                            )!.loginNow,
+                                            positiveOnClick: () {
+                                              Navigator.of(context).pushNamed(
+                                                WelcomeScreen
+                                                    .welcomeScreenRouteName,
+                                              );
+                                            },
+                                            title: AppLocalizations.of(
+                                              context,
+                                            )!.login,
+                                            message: AppLocalizations.of(
+                                              context,
+                                            )!.signInforMore,
+                                          );
+                                        }
+                                      },
+                                      child: Text(
+                                        user?.roles != null &&
+                                                user?.roles?.isNotEmpty == true
+                                            ? AppLocalizations.of(
+                                                context,
+                                              )!.editProfile
+                                            : AppLocalizations.of(
+                                                context,
+                                              )!.loginNow,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              fontSize: 14.sp,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      ),
+                                    ),
+                                    user?.roles?[0] == "Marketer" ||
+                                            user?.roles?[0] == "Inspector" ||
+                                            user?.roles?[0] == "LeaderMarketer"
+                                        ? Column(
+                                            children: [
+                                              Divider(
+                                                color: ColorManager.darkGrey,
+                                                thickness: 1,
+                                              ),
+                                              const SizedBox(height: 12),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  ProfileStat(
+                                                    label: AppLocalizations.of(
+                                                      context,
+                                                    )!.completed,
+                                                    value: "$completedTasks",
+                                                  ),
+                                                  SizedBox(
+                                                    height: 40.h,
+                                                    child: VerticalDivider(
+                                                      color:
+                                                          ColorManager.darkGrey,
+                                                      thickness: 1,
+                                                    ),
+                                                  ),
+                                                  ProfileStat(
+                                                    label: AppLocalizations.of(
+                                                      context,
+                                                    )!.rating,
+                                                    value: "$rate/5.0",
+                                                  ),
+                                                  SizedBox(
+                                                    height: 40.h,
+                                                    child: VerticalDivider(
+                                                      color:
+                                                          ColorManager.darkGrey,
+                                                      thickness: 1,
+                                                    ),
+                                                  ),
+                                                  ProfileStat(
+                                                    label: AppLocalizations.of(
+                                                      context,
+                                                    )!.response,
+                                                    value: "98%",
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        : const SizedBox.shrink(),
+                                  ],
                                 ),
                               ),
-                                  user?.roles?[0]=="Marketer"|| user?.roles?[0]=="Inspector"|| user?.roles?[0]=="LeaderMarketer"
-                                  ? Column(
-                                children: [
-                                  Divider(color: ColorManager.darkGrey, thickness: 1),
-                                  const SizedBox(height: 12),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      ProfileStat(label: AppLocalizations.of(context)!.completed, value: "$completedTasks"),
-                                      SizedBox(
-                                        height: 40.h,
-                                        child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
-                                      ),
-                                      ProfileStat(label: AppLocalizations.of(context)!.rating, value: "$rate/5.0"),
-                                      SizedBox(
-                                        height: 40.h,
-                                        child: VerticalDivider(color: ColorManager.darkGrey, thickness: 1),
-                                      ),
-                                      ProfileStat(label: AppLocalizations.of(context)!.response, value: "98%"),
-                                    ],
-                                  )
-                                ],
-                              )
-                                  : const SizedBox.shrink(),
-
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            // 🔒 Fixed Top Section
+                  // 🔒 Fixed Top Section
 
-
-              // 📜 Scrollable Section
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-                  children: [
-                    user?.roles?[0]=="LeaderMarketer"?
-                    _tableSection(
-                        title: AppLocalizations.of(context)!.teamManagement,
-                        rows: [
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.inviteTeamMember,
-                              iconWidget: SvgPicture.asset(ImageAssets.chatTeam,
-                                  height: 22.h, width: 22.w,
-                                color: ColorManager.darkestGrey,
-
-                              ),
-                            onTap:()=>Navigator.pushNamed(context, InviteTeamMemberScreen.inviteTeamMemberRouteName),
-
-                          ),
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.teamMembers,
-                            iconWidget: SvgPicture.asset(ImageAssets.usersIcon,
-                              height: 22.h, width: 22.w,
-                              color: ColorManager.darkestGrey,
-
+                  // 📜 Scrollable Section
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.only(
+                        top: 20.h,
+                        left: 20.w,
+                        right: 20.w,
+                      ),
+                      children: [
+                        user?.roles?[0] == "LeaderMarketer"
+                            ? _tableSection(
+                                title: AppLocalizations.of(
+                                  context,
+                                )!.teamManagement,
+                                rows: [
+                                  SettingsTile(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.inviteTeamMember,
+                                    iconWidget: SvgPicture.asset(
+                                      ImageAssets.chatTeam,
+                                      height: 22.h,
+                                      width: 22.w,
+                                      color: ColorManager.darkestGrey,
+                                    ),
+                                    onTap: () => Navigator.pushNamed(
+                                      context,
+                                      InviteTeamMemberScreen
+                                          .inviteTeamMemberRouteName,
+                                    ),
+                                  ),
+                                  SettingsTile(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.teamMembers,
+                                    iconWidget: SvgPicture.asset(
+                                      ImageAssets.usersIcon,
+                                      height: 22.h,
+                                      width: 22.w,
+                                      color: ColorManager.darkestGrey,
+                                    ),
+                                    onTap: () => Navigator.pushNamed(
+                                      context,
+                                      TeamsAndCodesScreen
+                                          .teamsAndCodesRouteName,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                        user?.roles?[0] == "LeaderMarketer" ||
+                                user?.roles?[0] == "Marketer"
+                            ? _tableSection(
+                                title: AppLocalizations.of(
+                                  context,
+                                )!.offersManagement,
+                                rows: [
+                                  SettingsTile(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.priceOffers,
+                                    icon: Iconsax.dollar_circle,
+                                    onTap: () {
+                                      print("Creating PriceOffersByMarketerIdCubit...");
+                                      try {
+                                        final cubit = getIt<PriceOffersByMarketerIdCubit>();
+                                        print("Cubit created successfully: $cubit");
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => BlocProvider.value(
+                                              value: cubit,
+                                              child: const MarketerPriceOffers(),
+                                            ),
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        print("Error creating cubit: $e");
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text("Error creating cubit: $e"),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  SettingsTile(
+                                    title: AppLocalizations.of(
+                                      context,
+                                    )!.installmentOffers,
+                                    icon: Iconsax.calendar,
+                                    onTap: () {
+                                      print("Creating InstallmentOffersByMarketerIdCubit...");
+                                      try {
+                                        final cubit = getIt<InstallmentOffersByMarketerIdCubit>();
+                                        print("Cubit created successfully: $cubit");
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => BlocProvider.value(
+                                              value: cubit,
+                                              child: const MarketerInstallmentOffers(),
+                                            ),
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        print("Error creating cubit: $e");
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text("Error creating cubit: $e"),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                        _tableSection(
+                          title: AppLocalizations.of(context)!.manageAccount,
+                          rows: [
+                            // SettingsTile(title:  AppLocalizations.of(context)!.personalDetails, icon: Iconsax.user),
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.securitySettings,
+                              icon: Iconsax.lock,
                             ),
-                            onTap:()=>Navigator.pushNamed(context, TeamsAndCodesScreen.teamsAndCodesRouteName),
-
-                          ),
-
-                        ])
-                        : const SizedBox.shrink(),
-                    _tableSection(
-                        title: AppLocalizations.of(context)!.manageAccount,
-                        rows: [
-                          // SettingsTile(title:  AppLocalizations.of(context)!.personalDetails, icon: Iconsax.user),
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.securitySettings,
-                              icon: Iconsax.lock),
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.notifications,
-                              icon: Iconsax.notification),
-                        ]),
-                    _tableSection(
-                        title: AppLocalizations.of(context)!.paymentAndWallets,
-                        rows: [
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.walletAndCommissions,
-                              icon: Iconsax.empty_wallet),
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.paymentMethods,
-                              icon: Iconsax.card),
-                        ]),
-                    _tableSection(
-                        title: AppLocalizations.of(context)!.preferences,
-                        rows: [
-                          // SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
-                          SettingsTile(
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.notifications,
+                              icon: Iconsax.notification,
+                            ),
+                          ],
+                        ),
+                        _tableSection(
+                          title: AppLocalizations.of(
+                            context,
+                          )!.paymentAndWallets,
+                          rows: [
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.walletAndCommissions,
+                              icon: Iconsax.empty_wallet,
+                            ),
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.paymentMethods,
+                              icon: Iconsax.card,
+                            ),
+                          ],
+                        ),
+                        _tableSection(
+                          title: AppLocalizations.of(context)!.preferences,
+                          rows: [
+                            // SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
+                            SettingsTile(
                               title: AppLocalizations.of(context)!.myFavorites,
-                              icon: Iconsax.heart),
-                          DarkModeSwitchTile(),
-                          SettingsTile(
+                              icon: Iconsax.heart,
+                            ),
+                            DarkModeSwitchTile(),
+                            SettingsTile(
                               title: AppLocalizations.of(context)!.language,
-                              icon: Icons.language),
-                        ]),
-                    _tableSection(
-                        title: AppLocalizations.of(context)!.helpAndSupport,
-                        rows: [
-                          SettingsTile(
-                              title: AppLocalizations.of(context)!.contactSupport,
-                              icon: Iconsax.call),
-                          SettingsTile(
+                              icon: Icons.language,
+                            ),
+                          ],
+                        ),
+                        _tableSection(
+                          title: AppLocalizations.of(context)!.helpAndSupport,
+                          rows: [
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.contactSupport,
+                              icon: Iconsax.call,
+                            ),
+                            SettingsTile(
                               title: AppLocalizations.of(context)!.saftyCenter,
-                              icon: Icons.info_outline_rounded),
-                        ]),
-                    _tableSection(
-                        title: "",
-                        rows: [
-                          SettingsTile(
+                              icon: Icons.info_outline_rounded,
+                            ),
+                          ],
+                        ),
+                        _tableSection(
+                          title: "",
+                          rows: [
+                            SettingsTile(
                               title: AppLocalizations.of(context)!.logout,
                               icon: Iconsax.logout,
                               onTap: () {
                                 context.read<UserCubit>().clearUser();
-                                SharedPrefsManager.removeData(key: 'user_token');
-                                SharedPrefsManager.removeData(key: 'currentUser');
+                                SharedPrefsManager.removeData(
+                                  key: 'user_token',
+                                );
+                                SharedPrefsManager.removeData(
+                                  key: 'currentUser',
+                                );
                                 SharedPrefsManager.removeData(key: 'user_id');
                                 context.read<UserCubit>().clearUser();
                                 Navigator.of(context).pushNamedAndRemoveUntil(
-                                    WelcomeScreen.welcomeScreenRouteName,
-                                    (route) => false);
-                              }),
-                        ]),
-                  ],
-                ),
+                                  WelcomeScreen.welcomeScreenRouteName,
+                                  (route) => false,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        );
       },
     );
   }
@@ -600,13 +828,19 @@ class ProfileStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label,
-            style:Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 12.sp,color:ColorManager.darkGrey)
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            fontSize: 12.sp,
+            color: ColorManager.darkGrey,
+          ),
         ),
-        Text(value,
-            style:Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14.sp)
+        Text(
+          value,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(fontSize: 14.sp),
         ),
-
       ],
     );
   }
@@ -615,7 +849,6 @@ class ProfileStat extends StatelessWidget {
 // Widget: Section Header
 
 // Widget: Setting Tile
-
 
 Widget _tableSection({required String title, required List<Widget> rows}) {
   return Padding(
@@ -665,12 +898,10 @@ class _DarkModeSwitchTileState extends State<DarkModeSwitchTile> {
 
   @override
   Widget build(BuildContext context) {
-
     return ListTile(
       leading: const Icon(Icons.nightlight_round),
-      title: Text(AppLocalizations.of(context)!.darkMode,),
+      title: Text(AppLocalizations.of(context)!.darkMode),
       trailing: Switch(
-
         value: isDark,
         onChanged: (val) {
           setState(() => isDark = val);

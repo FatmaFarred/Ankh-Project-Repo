@@ -517,19 +517,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
 
-                        SectionTitle(
-                            title: AppLocalizations.of(context)!.description),
-                        SizedBox(height: 4.h),
-                        Text(
-                          product?.description ?? "",
-                          style: GoogleFonts.poppins(
-                            fontSize: 14.sp,
-                            color: const Color(0xff404147),
-                          ),
+                        Row(
+                          children: [
+                            SectionTitle(
+                                title: "نقاط المسوق:"),
+                          SizedBox(width: 25.w,),
+                            Text(
+                              product?.marketerPoints?.toString() ?? '0',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14.sp,
+                                color: const Color(0xff404147),
+                              ),),
+                          ],
                         ),
+                        SizedBox(height: 4.h),
 
                         SectionTitle(
-                            title: AppLocalizations.of(context)!.carCode),
+                            title: AppLocalizations.of(context)!.description),
                         SizedBox(height: 4.h),
                         Text(
                           product?.description ?? "",

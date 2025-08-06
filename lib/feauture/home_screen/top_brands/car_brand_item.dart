@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CarBrandItem extends StatelessWidget {
-  final String imagePath;
+  final String imageUrl;
 
-  const CarBrandItem({super.key, required this.imagePath});
+  const CarBrandItem({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,13 @@ class CarBrandItem extends StatelessWidget {
           width: 0.9,
         ),
       ),
-      child: Image.asset(imagePath, scale: 1.2),
+      child: Image.network(
+        imageUrl,
+        width: 40,
+        height: 40,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => Icon(Icons.broken_image),
+      ),
     );
   }
 }
