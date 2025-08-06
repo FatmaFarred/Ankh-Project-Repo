@@ -20,6 +20,7 @@ class AllInpectionEntity {
       this.phoneNumber, 
       this.preferredDate, 
       this.preferredTime, 
+      this.inspectorPoints,
       this.status,
       this.address,
       this.date,
@@ -28,6 +29,7 @@ class AllInpectionEntity {
   });
 
   num? id;
+  num? inspectorPoints;
   String? productName;
   String? productImage;
   String? marketerName;

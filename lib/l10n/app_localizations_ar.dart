@@ -1391,6 +1391,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get inspectorPoints => 'نقاط الفاحص';
 
   @override
+  String get offersManagement => 'إدارة العروض';
+
+  @override
   String get priceOffers => 'عروض السعر';
 
   @override
@@ -1424,4 +1427,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get goBack => 'العودة';
+
+
+  @override
+  String get currency => 'ج.م';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get months => 'شهور';
+
 }

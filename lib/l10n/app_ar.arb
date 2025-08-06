@@ -470,6 +470,7 @@
   "registerWithInvitationCode": "سجل باستخدام كود الدعوة",
   "marketerPoints": "نقاط المسوق",
   "inspectorPoints": "نقاط الفاحص",
+  "offersManagement": "إدارة العروض",
   "priceOffers": "عروض السعر",
   "installmentOffers": "عروض التقسيط",
   "noOffers": "لا توجد عروض",
@@ -482,6 +483,11 @@
   "members": " الأعضاء",
   "teamChat": " دردشة الفريق",
   "aggredPrice": "السعر المتفق عليه"
+
+  "currency": "ج.م",
+  "retry": "إعادة المحاولة",
+  "months": "شهور"
+
 
 
 }

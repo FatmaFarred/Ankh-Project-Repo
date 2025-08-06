@@ -2786,6 +2786,12 @@ abstract class AppLocalizations {
   /// **'Inspector Points'**
   String get inspectorPoints;
 
+  /// No description provided for @offersManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers Management'**
+  String get offersManagement;
+
   /// No description provided for @priceOffers.
   ///
   /// In en, this message translates to:
@@ -2851,6 +2857,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go Back'**
   String get goBack;
+
+  /// No description provided for @currency.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get currency;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @months.
+  ///
+  /// In en, this message translates to:
+  /// **'Months'**
+  String get months;
 }
 
 class _AppLocalizationsDelegate

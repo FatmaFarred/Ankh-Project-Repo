@@ -58,6 +58,7 @@ super.createdAt,
 super.lastEditedAt,
 super.usedDetails,
   super.code,
+  super.marketerPoints,
 });
 
 ProductDetailsDm.fromJson(dynamic json) {
@@ -86,6 +87,7 @@ ProductDetailsDm.fromJson(dynamic json) {
     imageUrls = json['imageUrls'] != null ? json['imageUrls'].cast<String>() : [];
     image = json['image'];
     code = json['code'];
+    marketerPoints = json['marketerPoints'];
     createdAt = json['createdAt'];
     lastEditedAt = json['lastEditedAt'];
     usedDetails = json['usedDetails'] != null ? UsedDetailsDm.fromJson(json['usedDetails']) : null;

@@ -363,6 +363,25 @@ class InspectionRequestCard extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            children: [
+              Icon(
+                Icons.point_of_sale_rounded,
+                size: 14,
+                color: ColorManager.lightprimary,
+              ),
+              SizedBox(width: 6.w),
+              Text(
+                "النقاط : ${inspectionRequest?.inspectorPoints.toString()}" ?? "0",
+
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF4f4f4f),
+                ),
+              ),
+            ],
+          ),
           SizedBox(height: 26.h),
           CustomizedElevatedButton(
             bottonWidget: Text(

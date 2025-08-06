@@ -24,7 +24,7 @@ class AllProductsEntity {
   String? title;
   String? status;
   String? price;
-  String? marketerPoints;
+  int? marketerPoints;
   num? rating;
   bool? isUsedVehicle;
   String? transmission;

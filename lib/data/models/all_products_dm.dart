@@ -18,6 +18,7 @@ class AllProductsDm extends AllProductsEntity {
       super.rating, 
       super.isUsedVehicle, 
       super.transmission, 
+      super.marketerPoints,
       super.image,});
 
   AllProductsDm.fromJson(dynamic json) {
@@ -28,6 +29,7 @@ class AllProductsDm extends AllProductsEntity {
     rating = json['rating'];
     isUsedVehicle = json['isUsedVehicle'];
     transmission = json['transmission'];
+    marketerPoints = json['marketerPoints'];
     image = json['image'];
   }
 
@@ -41,6 +43,7 @@ class AllProductsDm extends AllProductsEntity {
     map['rating'] = rating;
     map['isUsedVehicle'] = isUsedVehicle;
     map['transmission'] = transmission;
+    map['marketerPoints'] = marketerPoints;
     map['image'] = image;
     return map;
   }
