@@ -294,6 +294,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataFound => 'No Data Found';
 
   @override
+  String get addBrand => 'Add Brand';
+
+  @override
+  String get brandName => 'Brand Name';
+
+  @override
+  String get brandNameRequired => 'Brand name is required';
+
+  @override
+  String get brandImage => 'Brand Image';
+
+  @override
+  String get tapToSelectImage => 'Tap to select image';
+
+  @override
+  String get pleaseSelectImage => 'Please select an image';
+
+  @override
+  String get topBrandAddedSuccessfully => 'Top brand added successfully';
+
+  @override
+  String get noTopBrandsFound => 'No top brands found';
+
+  @override
   String get inviteTeamMember => 'Invite Team Member';
 
   @override
@@ -869,6 +893,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get currentImage => 'Current Image';
 
   @override
   String get unsuspend => 'Unsuspend';

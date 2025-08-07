@@ -3,6 +3,7 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/dashboard/installment_requests_management/installment_requests_screen.dart';
 import 'package:ankh_project/feauture/dashboard/offers_management/offers_management_screen.dart';
 import 'package:ankh_project/feauture/dashboard/products_management/products_management_screen.dart';
+import 'package:ankh_project/feauture/dashboard/top_brands/top_brands_managment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     NotificationScreen(),
     PointsScreen(),
     OffersManagementScreen(),
-    InstallmentRequestsScreen()
+    InstallmentRequestsScreen(),
+    TopBrandsManagmentScreen()
   ];
 
 
@@ -115,6 +117,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 0 ? Colors.white : null), // Text color
                 ),
               ),
+
               ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.r),
@@ -270,6 +273,25 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 8 ? Colors.white : null), // Text color
                 ),
 
+              ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                selected: _selectedIndex == 9,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(9),
+                leading: SvgPicture.asset(
+                  ImageAssets.productIcon,
+                  height:20.h, // Adjust height as needed,
+                  width:20.w, // Adjust width as needed,
+
+                  color: _selectedIndex == 9 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.topBrands,
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 9 ? Colors.white : null), // Text color
+                ),
               ),
 
 

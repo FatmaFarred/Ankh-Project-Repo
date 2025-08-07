@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/top_brand_entity.dart';
@@ -13,5 +14,20 @@ class TopBrandRepositoryImpl implements TopBrandRepository {
   @override
   Future<List<TopBrandEntity>> getTopBrands() async {
     return await remoteDataSource.fetchTopBrands();
+  }
+
+  @override
+  Future<bool> addTopBrand({required String name, required File imageFile}) async {
+    return await remoteDataSource.addTopBrand(name: name, imageFile: imageFile);
+  }
+  
+  @override
+  Future<bool> editTopBrand({required int id, required String name, required File? imageFile}) async {
+    return await remoteDataSource.editTopBrand(id: id, name: name, imageFile: imageFile);
+  }
+  
+  @override
+  Future<bool> deleteTopBrand({required int id}) async {
+    return await remoteDataSource.deleteTopBrand(id: id);
   }
 }

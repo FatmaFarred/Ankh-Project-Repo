@@ -32,6 +32,32 @@ class _AddUsedProductState extends State<AddUsedProduct> {
   String? selectedStatus = 'Available';
 
   String? selectedDriveType = 'FrontWheel';
+  
+  String? selectedCarName;
+  
+  final List<String> carNames = [ 
+    // Hyundai 
+    'HB20','i10','i20','i30','Accent','Verna','Solaris','Aura','Grand i10 Sedan', 
+    'Grand Metro','Elantra','Avante','i30 Sedan','Grandeur','Azera','HB20S', 
+    'i30 Fastback','Ioniq 6','Sonata','i30 wagon','Alcazar','Grand Creta','Bayon', 
+    'Casper','Casper Electric','Creta','Cantus', 
+  
+    // Kia 
+    'Ceed','EV4','K3','K4','Picanto','Morning','Ray','K5','K8','K9','Pegas','Soluto', 
+    'Ceed SW','Proceed','EV3','EV5','EV6','EV9','Niro','Seltos','Sonet','Sorento', 
+    'Soul','Sportage', 
+  
+    // Chevrolet 
+    'Blazer','Blazer EV','Captiva','Captiva PHEV','Captiva EV','Equinox','Equinox EV', 
+    'Groove','Spark EUV','Tracker', 
+  
+    // BMW 
+    '1 Series','2 Series Gran Coupé','3 Series','4 Series Gran Coupé','5 Series', 
+    '7 Series','8 Series Gran Coupé','i3','i4','i5','i7','3 Series Wagon','5 Series Wagon', 
+    'i5 Wagon','X1','X2','X3','X4','X5','X6','X7','XM','iX1','iX2','iX3','iX', 
+    '2 Series Coupé','4 Series Coupé','4 Series Convertible','8 Series Coupé', 
+    '8 Series Convertible','Z4','2 Series Active Tourer', 
+  ];
 
   late int statusNum;
 
@@ -298,15 +324,44 @@ class _AddUsedProductState extends State<AddUsedProduct> {
                     ),
                   ),
                   SizedBox(height: 6.h),
-                  CustomTextFormField(
+                  DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                        borderSide: BorderSide(color: ColorManager.lightprimary),
+                      ),
+                      hintText: AppLocalizations.of(context)!.carName,
+                    ),
+                    value: selectedCarName,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return AppLocalizations.of(context)!.carNameRequired;
                       }
                       return null;
                     },
-                    hintText: AppLocalizations.of(context)!.carName,
-                    controller: carNameController,
+                    items: carNames.map((String car) {
+                      return DropdownMenuItem<String>(
+                        value: car,
+                        child: Text(car),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedCarName = newValue;
+                        carNameController.text = newValue ?? '';
+                      });
+                    },
                   ),
                   SizedBox(height: 16.h),
                   Row(

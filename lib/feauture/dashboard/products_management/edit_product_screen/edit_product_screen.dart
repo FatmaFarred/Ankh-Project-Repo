@@ -39,6 +39,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
   String? selectedMarketer = 'Mohamed Khaled';
   String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
+  String? selectedCarName;
+  
+  final List<String> carNames = [ 
+    // Hyundai 
+    'HB20','i10','i20','i30','Accent','Verna','Solaris','Aura','Grand i10 Sedan', 
+    'Grand Metro','Elantra','Avante','i30 Sedan','Grandeur','Azera','HB20S', 
+    'i30 Fastback','Ioniq 6','Sonata','i30 wagon','Alcazar','Grand Creta','Bayon', 
+    'Casper','Casper Electric','Creta','Cantus', 
+  
+    // Kia 
+    'Ceed','EV4','K3','K4','Picanto','Morning','Ray','K5','K8','K9','Pegas','Soluto', 
+    'Ceed SW','Proceed','EV3','EV5','EV6','EV9','Niro','Seltos','Sonet','Sorento', 
+    'Soul','Sportage', 
+  
+    // Chevrolet 
+    'Blazer','Blazer EV','Captiva','Captiva PHEV','Captiva EV','Equinox','Equinox EV', 
+    'Groove','Spark EUV','Tracker', 
+  
+    // BMW 
+    '1 Series','2 Series Gran Coupé','3 Series','4 Series Gran Coupé','5 Series', 
+    '7 Series','8 Series Gran Coupé','i3','i4','i5','i7','3 Series Wagon','5 Series Wagon', 
+    'i5 Wagon','X1','X2','X3','X4','X5','X6','X7','XM','iX1','iX2','iX3','iX', 
+    '2 Series Coupé','4 Series Coupé','4 Series Convertible','8 Series Coupé', 
+    '8 Series Convertible','Z4','2 Series Active Tourer', 
+  ];
 
   late List<String> imageUrls;
   List<XFile> selectedImages = []; // Add this for new selected images
@@ -150,9 +175,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
   void initState() {
     super.initState();
 
-
-
-
     print('🧾 Product: ${widget.product}');
     print('🧾 Used Details: ${widget.product.usedDetails}');
 
@@ -161,12 +183,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
     print('Mileage: ${widget.product.mileage}');
     print('Used owner: ${widget.product.usedDetails?.ownerName}');
 
-
-
-
-
-
-
+    // Set selectedCarName if it exists in the carNames list
+    if (carNames.contains(widget.product.title)) {
+      selectedCarName = widget.product.title;
+    }
 
     carNameController = TextEditingController(text: widget.product.title);
     marketerPointsController = TextEditingController(text: widget.product.marketerPoints.toString());
@@ -375,16 +395,46 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           ),
                         ),
                         SizedBox(height: 6.h),
-                        CustomTextFormField(
+                        DropdownButtonFormField<String>(
+                          value: selectedCarName,
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context)!.carName,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: ColorManager.lightGrey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: ColorManager.lightGrey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: ColorManager.lightprimary),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                          ),
                           validator: (value) {
-                            if (value == null ||
-                                value.trim().isEmpty) {
+                            if (value == null || value.isEmpty) {
                               return AppLocalizations.of(context)!.carNameRequired;
                             }
                             return null;
                           },
-                          hintText: AppLocalizations.of(context)!.carName,
-                          controller: carNameController,
+                          items: carNames.map((String carName) {
+                            return DropdownMenuItem<String>(
+                              value: carName,
+                              child: Text(carName),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedCarName = newValue;
+                              carNameController.text = newValue ?? '';
+                            });
+                          },
                         ),
                         SizedBox(height: 16.h),
                         Row(
