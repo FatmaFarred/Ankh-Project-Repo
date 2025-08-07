@@ -12,9 +12,12 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_dia
 import 'package:ankh_project/feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
 import 'package:ankh_project/domain/entities/all_inspectors_entity.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/rate_user_cubit.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/rate_user_states.dart';
+import 'package:ankh_project/feauture/authentication/user_controller/user_cubit.dart';
 
 import '../../../core/customized_widgets/reusable_widgets/custom_text_field.dart';
-import '../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../../core/customized_widgets/reusable_widgets/customized_search_bar.dart';
 import '../../../l10n/app_localizations.dart';
 import 'inspector_details_screen.dart';
@@ -53,6 +56,9 @@ class _InspectorManagementScreenState extends State<InspectorManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserCubit>().state;
+    final isAdmin = user?.roles?.contains('Admin') == true;
+    
     return Scaffold(
       body: Column(
         children: [
@@ -177,6 +183,7 @@ class _InspectorManagementScreenState extends State<InspectorManagementScreen> {
   }
 }
 
+
 class InspectorCard extends StatelessWidget {
   final AllInspectorsEntity inspector;
   final bool showBottons;
@@ -191,6 +198,9 @@ class InspectorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserCubit>().state;
+    final isAdmin = user?.roles?.contains('Admin') == true;
+
     return Card(
       elevation: 0,
       color: ColorManager.white,
@@ -216,22 +226,35 @@ class InspectorCard extends StatelessWidget {
                   inspector.fullName ?? '',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                 ),
-               /* const Spacer(),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    color: isActive ? const Color(0xFFDCFCE7) : const Color(0xFFFFEDD5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    inspector.accountStatus ?? '',
-                    style: TextStyle(
-                      color: isActive ? const Color(0xFF166534) : const Color(0xFF9A3412),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
+                if (isAdmin) ...[
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () => _showRateBottomSheet(context),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.star_rate, color: Colors.amber, size: 16.sp),
+                          SizedBox(width: 6.w),
+                          Text(
+                            AppLocalizations.of(context)!.inspectorRate,
+                            style: TextStyle(
+                              color: Colors.amber.shade700,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),*/
+                ],
               ],
             ),
             SizedBox(height: 8.h),
@@ -247,9 +270,10 @@ class InspectorCard extends StatelessWidget {
                   inspector.phoneNumber ?? '',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                 ),
+
               ],
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             Row(
               children: [
                 SvgPicture.asset(
@@ -264,8 +288,7 @@ class InspectorCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10.h),
-
+            SizedBox(height: 12.h),
             Row(
               children: [
                 Icon(
@@ -284,7 +307,7 @@ class InspectorCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             Row(
               children: [
                 SvgPicture.asset(
@@ -305,7 +328,7 @@ class InspectorCard extends StatelessWidget {
             ),
             // Vehicle Type
             if (inspector.vehicleType != null && inspector.vehicleType!.isNotEmpty) ...[
-              SizedBox(height: 10.h),
+              SizedBox(height: 12.h),
               Row(
                 children: [
                   SvgPicture.asset(
@@ -349,7 +372,7 @@ class InspectorCard extends StatelessWidget {
             ],
             // Vehicle License Number
             if (inspector.vehicleLicenseNumber != null && inspector.vehicleLicenseNumber!.isNotEmpty) ...[
-              SizedBox(height: 10.h),
+              SizedBox(height: 12.h),
               Row(
                 children: [
                   Icon(
@@ -371,7 +394,7 @@ class InspectorCard extends StatelessWidget {
             ],
             // Work Area
             if (inspector.workArea != null && inspector.workArea!.isNotEmpty) ...[
-              SizedBox(height: 10.h),
+              SizedBox(height: 12.h),
               Row(
                 children: [
                   Icon(
@@ -391,138 +414,210 @@ class InspectorCard extends StatelessWidget {
                 ],
               ),
             ],
-            // License Image
-            // Vehicle Image
-            SizedBox(height: 10.h),
-            showBottons
-                ? Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: ColorManager.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: BorderSide(color: ColorManager.darkGrey),
-                            ),
-                          ),
-                          onPressed: onViewPressed,
-                          icon: Icon(
-                            Icons.visibility,
-                            color: Color(0xffD4AF37),
-                            size: 20.sp,
-                          ),
-                          label: Text(
-                            AppLocalizations.of(context)!.view,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontSize: 12.sp,
-                              color: ColorManager.lightprimary,
-                            ),
-                          ),
+            SizedBox(height: 12.h),
+            if (showBottons)
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: ColorManager.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(color: ColorManager.darkGrey),
                         ),
                       ),
-                     /* ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorManager.white,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(color: ColorManager.darkGrey),
-                          ),
-                        ),
-                        onPressed: () {
-                          _showBottomSheet(
-                            context: context,
-                            title: AppLocalizations.of(context)!.rejectUserAccount,
-                            description: AppLocalizations.of(context)!.rejectUserAccountSubtitle,
-                            cancelText: AppLocalizations.of(context)!.cancel,
-                            confirmText: AppLocalizations.of(context)!.reject,
-                            onCancel: () => Navigator.pop(context),
-                            onConfirm: () {},
-                            icon: Icon(Icons.delete, color: ColorManager.error),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.delete,
-                          color: ColorManager.error,
-                          size: 20.sp,
-                        ),
-                        label: Text(
-                          AppLocalizations.of(context)!.delete,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 12.sp,
-                            color: ColorManager.lightprimary,
-                          ),
-                        ),
+                      onPressed: onViewPressed,
+                      icon: Icon(
+                        Icons.visibility,
+                        color: const Color(0xffD4AF37),
+                        size: 20.sp,
                       ),
-                      ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: ColorManager.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(color: ColorManager.darkGrey),
-                          ),
-                        ),
-                        onPressed: () {
-                          _showBottomSheet(
-                            context: context,
-                            title: AppLocalizations.of(context)!.suspendUserAccount,
-                            description: AppLocalizations.of(context)!.suspendUserAccountSubtitle,
-                            cancelText: AppLocalizations.of(context)!.cancel,
-                            confirmText: AppLocalizations.of(context)!.confirm,
-                            onCancel: () => Navigator.pop(context),
-                            onConfirm: () {},
-                            icon: Icon(Icons.lock, color: ColorManager.error),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.lock,
+                      label: Text(
+                        AppLocalizations.of(context)!.view,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 12.sp,
                           color: ColorManager.lightprimary,
-                          size: 20.sp,
                         ),
-                        label: Text(
-                          isActive
-                              ? AppLocalizations.of(context)!.suspend
-                              : AppLocalizations.of(context)!.unsuspend,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 12.sp,
-                            color: ColorManager.lightprimary,
-                          ),
-                        ),
-                      ),*/
-                    ],
-                  )
-                : SizedBox.shrink(),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            else
+              const SizedBox.shrink(),
           ],
         ),
       ),
     );
   }
 
-  void _showBottomSheet({
-    required BuildContext context,
-    required String title,
-    required String description,
-    required String cancelText,
-    required String confirmText,
-    required VoidCallback onCancel,
-    required VoidCallback onConfirm,
-    Color? cancelColor,
-    Color? confirmColor,
-    Widget? icon,
-  }) {
+  void _showRateBottomSheet(BuildContext context) {
+    final TextEditingController _rateController = TextEditingController();
+
     showModalBottomSheet(
       context: context,
-      builder: (context) => CustomBottomSheet(
-        title: title,
-        description: description,
-        cancelText: cancelText,
-        confirmText: confirmText,
-        onCancel: onCancel,
-        onConfirm: onConfirm,
-        icon: icon,
+      isScrollControlled: true,
+      builder: (context) => BlocListener<RateUserCubit, RateUserState>(
+        listener: (context, state) {
+          if (state is RateUserSuccess) {
+            // ✅ Show success dialog first
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!.success),
+                content: Text(state.message ?? AppLocalizations.of(context)!.success),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Close dialog
+                      Navigator.pop(context); // Close bottom sheet
+                    },
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is RateUserFailure) {
+            // ✅ Show error dialog
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!.error),
+                content: Text(state.error.errorMessage ?? 'حدث خطأ'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context), // Close dialog only
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: SizedBox(
+            height: 350.h,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.amber.withOpacity(0.1),
+                        radius: 30,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.amber.withOpacity(0.2),
+                          child: Icon(Icons.star_rate, color: Colors.amber),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.close, size: 24.sp, color: ColorManager.darkGrey),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    AppLocalizations.of(context)!.inspectorRate,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontSize: 18.sp,
+                      color: Colors.amber.shade700,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    AppLocalizations.of(context)!.inspectorRate,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 14.sp,
+                      color: ColorManager.darkGrey,
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  TextField(
+                    controller: _rateController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.enterYourRate,
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomizedElevatedButton(
+                          bottonWidget: Text(
+                            AppLocalizations.of(context)!.cancel,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          borderColor: ColorManager.lightGrey,
+                          color: ColorManager.white,
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        child: BlocBuilder<RateUserCubit, RateUserState>(
+                          builder: (context, state) {
+                            return CustomizedElevatedButton(
+                              bottonWidget: state is RateUserLoading
+                                  ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              )
+                                  : Text(
+                                'إرسال',
+                                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  fontSize: 16.sp,
+                                  color: ColorManager.white,
+                                ),
+                              ),
+                              onPressed: state is RateUserLoading
+                                  ? null
+                                  : () {
+                                final rate = num.tryParse(_rateController.text);
+                                if (rate == null) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text(AppLocalizations.of(context)!.error),
+                                      content: Text('يرجى إدخال رقم صحيح'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: Text(AppLocalizations.of(context)!.ok),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  return;
+                                }
+                                // ✅ Dispatch event — DO NOT close sheet yet
+                                context.read<RateUserCubit>().rateUser(inspector.id ?? '', rate);
+                              },
+                              borderColor: ColorManager.lightprimary,
+                              color: ColorManager.lightprimary,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

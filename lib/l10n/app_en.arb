@@ -482,7 +482,13 @@
   "goBack": "Go Back",
   "currency": "EGP",
   "retry": "Retry",
-  "months": "Months"
+  "months": "Months",
+  "writeYourMessage": " Write your message...",
+  "marketerRate": "Marketer Rate",
+  "inspectorRate": "Inspector Rate",
+  "enterYourRate": "Enter Your Rate"
+
+
 
 
 }

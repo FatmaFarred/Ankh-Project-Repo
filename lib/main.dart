@@ -24,6 +24,7 @@ import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _
 import 'feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
 import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
 import 'feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cubit.dart';
+import 'feauture/dashboard/marketer_mangemnet/cubit/rate_user_cubit.dart';
 import 'feauture/dashboard/marketer_mangemnet/marketer_details_screen.dart';
 import 'feauture/dashboard/products_management/add_new_product/cubit/post_product_cubit.dart';
 import 'feauture/dashboard/products_management/product_details_screen/cubit/product_details_cubit.dart';
@@ -105,6 +106,7 @@ void main() async {
         BlocProvider(create: (_) => getIt<ProfileCubit>()),
         BlocProvider(create: (_) => getIt<MarketerManagementCubit>()),
         BlocProvider(create: (_) => getIt<InspectorManagementCubit>()),
+        BlocProvider(create: (_) => getIt<RateUserCubit>()),
 
         BlocProvider(create: (context) => getIt<ProfileCubit>()),
 

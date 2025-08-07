@@ -2875,6 +2875,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Months'**
   String get months;
+
+  /// No description provided for @writeYourMessage.
+  ///
+  /// In en, this message translates to:
+  /// **' Write your message...'**
+  String get writeYourMessage;
+
+  /// No description provided for @marketerRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Rate'**
+  String get marketerRate;
+
+  /// No description provided for @inspectorRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Rate'**
+  String get inspectorRate;
+
+  /// No description provided for @enterYourRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Rate'**
+  String get enterYourRate;
 }
 
 class _AppLocalizationsDelegate

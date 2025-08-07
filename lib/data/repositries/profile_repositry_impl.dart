@@ -18,7 +18,7 @@ class ProfileRepositryImpl implements UserProfileRepositry {
   ProfileRepositryImpl({required this.userProfileRemoteDataSource});
 
   @override
-  Future<Either<Failure, String?>> editProfile(String token, String userId, String fullName, String email, String phone, File image)async {
+  Future<Either<Failure, String?>> editProfile(String token, String userId, String fullName, String email, String phone, File? image)async {
     var either= await userProfileRemoteDataSource.editProfile(token, userId, fullName, email, phone, image);
     return either.fold((error) => left(error), (response) => right(response));
 

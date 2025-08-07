@@ -30,6 +30,12 @@ import '../../domain/repositries_and_data_sources/repositries/admin_permissions_
 
   }
 
+  @override
+  Future<Either<Failure, String?>> rateUser(String userId, num rate) async{
+    var either = await adminPermissionsRemoteDataSource.rateUser(userId, rate);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
 
 
 }

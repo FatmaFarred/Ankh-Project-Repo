@@ -1441,4 +1441,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get months => 'Months';
+
+  @override
+  String get writeYourMessage => ' Write your message...';
+
+  @override
+  String get marketerRate => 'Marketer Rate';
+
+  @override
+  String get inspectorRate => 'Inspector Rate';
+
+  @override
+  String get enterYourRate => 'Enter Your Rate';
 }

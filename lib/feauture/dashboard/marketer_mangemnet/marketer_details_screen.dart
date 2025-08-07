@@ -125,9 +125,9 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.response ?? AppLocalizations.of(context)!.success,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
                   // Navigate back to marketer management screen
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                 },
               );
             }
@@ -162,9 +162,9 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.response,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                   // Refresh the screen or navigate back
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                 },
               );
             }
@@ -185,7 +185,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 context: context,
                 positiveText: AppLocalizations.of(context)!.tryAgain,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                   // Re-trigger the unblock action
                   _showUnblockUserBottomSheet();
                 },
@@ -199,9 +199,9 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.response,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                   // Refresh the screen or navigate back
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                 },
               );
             }
@@ -222,7 +222,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 context: context,
                 positiveText: AppLocalizations.of(context)!.tryAgain,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                   // Re-trigger the appoint action
                   appointAsTeamLeaderCubit.appointAsTeamLeader(marketer.id ?? '', 'LeaderMarketer');
                 },
@@ -236,9 +236,9 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.response ,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
                   // Navigate back to marketer management screen
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
                 },
               );
             }
@@ -269,7 +269,7 @@ class _MarketerDetailsScreenState extends State<MarketerDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.message ?? "Points adjusted successfully",
                 positiveText: AppLocalizations.of(context)!.ok,
-                positiveOnClick: () => Navigator.of(context).pop(),
+                positiveOnClick: () {},
               );
             }
           },

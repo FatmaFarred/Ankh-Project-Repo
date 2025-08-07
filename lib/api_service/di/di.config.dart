@@ -300,6 +300,7 @@ import '../../domain/use_cases/push_notification_use_case/post_notification_use_
     as _i349;
 import '../../domain/use_cases/push_notification_use_case/push_notification_use_case.dart'
     as _i172;
+import '../../domain/use_cases/rate_user_use_case.dart' as _i531;
 import '../../domain/use_cases/reject_point_request_use_case.dart' as _i552;
 import '../../domain/use_cases/reschedule_inspection_use_case.dart' as _i1001;
 import '../../domain/use_cases/search_inspection_admin_use_case.dart' as _i699;
@@ -351,6 +352,8 @@ import '../../feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cu
     as _i956;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/marketer_unassign_product_cubit.dart'
     as _i239;
+import '../../feauture/dashboard/marketer_mangemnet/cubit/rate_user_cubit.dart'
+    as _i629;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/unblock_user_cubit.dart'
     as _i209;
 import '../../feauture/dashboard/marketer_mangemnet/cubit/update_marketer_status_cubit.dart'
@@ -520,6 +523,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i551.AdminPermissionsRepositry>()));
     gh.factory<_i808.BlockUserUseCase>(
         () => _i808.BlockUserUseCase(gh<_i551.AdminPermissionsRepositry>()));
+    gh.factory<_i531.RateUserUseCase>(
+        () => _i531.RateUserUseCase(gh<_i551.AdminPermissionsRepositry>()));
     gh.factory<_i877.UnBlockUserUseCase>(
         () => _i877.UnBlockUserUseCase(gh<_i551.AdminPermissionsRepositry>()));
     gh.factory<_i223.ResetPasswordRemoteDataSourse>(
@@ -707,6 +712,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i749.MarketerRequestsForInspectionUseCase>()));
     gh.factory<_i46.AdjustUserPointsCubit>(() => _i46.AdjustUserPointsCubit(
         adjustUserPointsUseCase: gh<_i286.AdjustUserPointsUseCase>()));
+    gh.factory<_i629.RateUserCubit>(
+        () => _i629.RateUserCubit(gh<_i531.RateUserUseCase>()));
     gh.factory<_i176.MarketerAddRequestInspectionUseCase>(() =>
         _i176.MarketerAddRequestInspectionUseCase(
             gh<_i233.MarketerAddRequestInspectionRepositry>()));

@@ -15,11 +15,13 @@ import 'cubit/team_chat_list_cubit.dart';
 
 class TeamChatListScreen extends StatefulWidget {
   static const String routeName = '/team_chat_list';
+  final VoidCallback? onChatOpened;
+  final VoidCallback? onNewMessage;
   
-  const TeamChatListScreen({Key? key}) : super(key: key);
+  const TeamChatListScreen({Key? key, this.onChatOpened, this.onNewMessage}) : super(key: key);
 
   @override
-  State<TeamChatListScreen> createState() => _TeamChatListScreenState();
+  _TeamChatListScreenState createState() => _TeamChatListScreenState();
 }
 
 class _TeamChatListScreenState extends State<TeamChatListScreen> {
@@ -28,6 +30,14 @@ class _TeamChatListScreenState extends State<TeamChatListScreen> {
     super.initState();
     // Load team chats when screen initializes
     context.read<TeamChatListCubit>().loadTeamChats();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onChatOpened?.call();
+    });
+  }
+
+  // Example: Call this when a new message arrives and the screen is not open
+  void notifyNewMessage() {
+    widget.onNewMessage?.call();
   }
 
   @override

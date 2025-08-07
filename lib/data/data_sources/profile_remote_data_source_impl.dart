@@ -27,7 +27,7 @@ class UserProfileRemoteDataSourceImpl implements UserProfileRemoteDataSource {
 
 
   Future<Either<Failure, String?>> editProfile(String token, String userId,
-      String fullName, String email, String phone, File image) async {
+      String fullName, String email, String phone, File? image) async {
     try {
       print('🔌 Checking internet connection...');
       final List<ConnectivityResult> connectivityResult =
@@ -46,16 +46,19 @@ class UserProfileRemoteDataSourceImpl implements UserProfileRemoteDataSource {
         print("  ➤ FullName: $fullName");
         print("  ➤ PhoneNumber: $phone");
         print("  ➤ Email: $email");
-        print("  ➤ Image Path: ${image.path}");
+        print("  ➤ Image Path: ${image?.path}");
 
-        FormData formData = FormData.fromMap({
+        final formDataMap = <String, dynamic>{  // ← This is key!
           "Id": userId,
           "FullName": fullName,
           "PhoneNumber": phone,
           "Email": email,
-          "Image": await MultipartFile.fromFile(image.path),
-        });
+        };
 
+        if (image != null) {
+          formDataMap["Image"] = await MultipartFile.fromFile(image.path);
+        }
+        FormData formData = FormData.fromMap(formDataMap);
 
         var response = await apiManager.postData(
             url: ApiConstant.baseUrl,

@@ -23,7 +23,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onBoarding1SubTitle =>
-      'تواصل بسهولة مع المالكين، والمسوقين، والمفتشين كل ذلك عبر منصة قوية واحدة';
+      'تواصل بسهولة مع المالكين، والمسوقين، والمعاينين كل ذلك عبر منصة قوية واحدة';
 
   @override
   String get onBoarding2Title => 'اعرض ممتلكاتك أو سيارتك بسهولة وتحكم بكل شيء';
@@ -77,7 +77,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get owner => 'مالك';
 
   @override
-  String get inspector => 'مفتش ';
+  String get inspector => 'معاين ';
 
   @override
   String get inspectorDescription => 'افحص وحقق من العقارات أو السيارات';
@@ -836,7 +836,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketers => 'المسوّقين';
 
   @override
-  String get inspectors => 'المفتشين';
+  String get inspectors => 'المعاينين';
 
   @override
   String get inspections => 'الفحوصات';
@@ -1436,4 +1436,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get months => 'شهور';
+
+  @override
+  String get writeYourMessage => 'اكتب رسالتك...';
+
+  @override
+  String get marketerRate => 'تقييم المسوق';
+
+  @override
+  String get inspectorRate => 'تقييم المعاين';
+
+  @override
+  String get enterYourRate => 'أدخل تقييمك';
+
 }
