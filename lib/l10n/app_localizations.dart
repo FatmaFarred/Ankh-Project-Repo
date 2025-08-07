@@ -632,6 +632,54 @@ abstract class AppLocalizations {
   /// **'No Data Found'**
   String get noDataFound;
 
+  /// No description provided for @addBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Brand'**
+  String get addBrand;
+
+  /// No description provided for @brandName.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand Name'**
+  String get brandName;
+
+  /// No description provided for @brandNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand name is required'**
+  String get brandNameRequired;
+
+  /// No description provided for @brandImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand Image'**
+  String get brandImage;
+
+  /// No description provided for @tapToSelectImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select image'**
+  String get tapToSelectImage;
+
+  /// No description provided for @pleaseSelectImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an image'**
+  String get pleaseSelectImage;
+
+  /// No description provided for @topBrandAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Top brand added successfully'**
+  String get topBrandAddedSuccessfully;
+
+  /// No description provided for @noTopBrandsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No top brands found'**
+  String get noTopBrandsFound;
+
   /// No description provided for @inviteTeamMember.
   ///
   /// In en, this message translates to:
@@ -1765,6 +1813,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @currentImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Image'**
+  String get currentImage;
 
   /// No description provided for @unsuspend.
   ///

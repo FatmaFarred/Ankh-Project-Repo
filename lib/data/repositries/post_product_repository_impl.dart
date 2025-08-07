@@ -31,6 +31,8 @@ class PostProductRepositoryImpl implements PostProductRepository {
       _addIfNotNull(formData, 'BatteryCapacity', entity.batteryCapacity);
       _addIfNotNull(formData, 'Commission', entity.commission);
       _addIfNotNull(formData, 'RequiredPoints', entity.requiredPoints);
+      _addIfNotNull(formData, 'InspectorPoints', entity.inspectorPoints);
+      _addIfNotNull(formData, 'MarketerPoints', entity.marketerPoints);
       _addIfNotNull(formData, 'TopBrandId', entity.topBrandId);
       _addIfNotNull(formData, 'Transmission', entity.transmission);
       _addIfNotNull(formData, 'FuelType', entity.fuelType);
@@ -168,6 +170,8 @@ class PostProductRepositoryImpl implements PostProductRepository {
       _addIfNotNull(formData, 'BatteryCapacity', entity.batteryCapacity);
       _addIfNotNull(formData, 'Commission', entity.commission);
       _addIfNotNull(formData, 'RequiredPoints', entity.requiredPoints);
+      _addIfNotNull(formData, 'InspectorPoints', entity.inspectorPoints);
+      _addIfNotNull(formData, 'MarketerPoints', entity.marketerPoints);
       _addIfNotNull(formData, 'TopBrandId', entity.topBrandId);
       _addIfNotNull(formData, 'Transmission', entity.transmission);
       _addIfNotNull(formData, 'FuelType', entity.fuelType);

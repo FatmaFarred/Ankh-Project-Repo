@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'Client';
+  String get client => 'عميل';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -153,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟';
 
   @override
-  String get log => 'Login';
+  String get log => 'تسجيل دخول';
 
   @override
   String get signIn => 'أهلا بعودتك!';
@@ -276,7 +276,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidPhone => 'ادخل رقم هاتف صالح';
 
   @override
-  String get confirmPasswordRequired => 'confirm password is required';
+  String get confirmPasswordRequired => 'تأكيد كلمة المرور مطلوب';
 
   @override
   String get invalidPasswordDetails =>
@@ -290,6 +290,30 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noDataFound => 'لا توجد بيانات';
+
+  @override
+  String get addBrand => 'إضافة علامة تجارية';
+
+  @override
+  String get brandName => 'اسم العلامة التجارية';
+
+  @override
+  String get brandNameRequired => 'اسم العلامة التجارية مطلوب';
+
+  @override
+  String get brandImage => 'صورة العلامة التجارية';
+
+  @override
+  String get tapToSelectImage => 'اضغط لاختيار صورة';
+
+  @override
+  String get pleaseSelectImage => 'الرجاء اختيار صورة';
+
+  @override
+  String get topBrandAddedSuccessfully => 'تمت إضافة العلامة التجارية بنجاح';
+
+  @override
+  String get noTopBrandsFound => 'لا توجد علامات تجارية';
 
   @override
   String get inviteTeamMember => 'دعوة عضو فريق';
@@ -561,7 +585,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'Account';
+  String get account => 'الحساب';
 
   @override
   String get requestDetails => 'تفاصيل الطلب';
@@ -866,6 +890,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancel => 'إلغاء';
 
   @override
+  String get currentImage => 'الصورة الحالية';
+
+  @override
   String get unsuspend => 'إلغاء التعليق';
 
   @override
@@ -1149,7 +1176,7 @@ class AppLocalizationsAr extends AppLocalizations {
       ' للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً.';
 
   @override
-  String get signInforMore => ' Sign in for more features';
+  String get signInforMore => 'سجل الدخول لمزيد من المعلومات والصلاحيات.';
 
   @override
   String get failedToLoadData =>
