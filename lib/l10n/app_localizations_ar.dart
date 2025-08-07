@@ -1448,4 +1448,5 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterYourRate => 'أدخل تقييمك';
+
 }
