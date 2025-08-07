@@ -7,6 +7,6 @@ import '../../entities/user_profile_entity.dart';
 
 abstract class UserProfileRepositry {
   Future <Either<Failure,UserProfileEntity>> getUserData(String token, String userId);
-  Future <Either<Failure,String?>> editProfile(String token, String userId , String fullName, String email, String phone, File image);
+  Future <Either<Failure,String?>> editProfile(String token, String userId , String fullName, String email, String phone, File? image);
 
 }

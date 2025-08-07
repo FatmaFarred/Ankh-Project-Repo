@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:async';
 
 
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../authentication/user_controller/user_cubit.dart';
 import '../balance_screen/balance_screen.dart';
+import '../chat_screen/chat_screen.dart';
 import '../chat_screen/team_chat_list_screen.dart';
 import '../chats_screen/chats_screen.dart';
 import '../inspector_screen/inspector_home/inspector_home_screen.dart';
@@ -44,12 +46,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
   late int _currentIndex;
   String? token;
 
+  // Helper: index of your chat tab (adjust if needed)
+  int get chatTabIndex {
+    final user = context.read<UserCubit>().state;
+    if (user?.roles?[0] == "Marketer" || user?.roles?[0] == "LeaderMarketer") {
+      return 4; // 5th tab (0-based)
+    } else {
+      return 2; // 3rd tab (0-based) for default user
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
-   // _loadToken(); // <- only call this
+
+    // Listen for new messages globally
+    ChatClient.instance.onGlobalMessage = (msg) {
+      if (_currentIndex != chatTabIndex) {
+        // incrementUnread(); // Removed unread logic
+      }
+    };
   }
 
  /* Future<void> _loadToken() async {
@@ -112,6 +129,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           icon: Icon(Icons.wechat_sharp, size: 20.sp),
           label: AppLocalizations.of(context)!.chats,
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person, size: 20.sp),
+          label: AppLocalizations.of(context)!.account,
+        ),
       ];
     }
     else  if (user?.roles?[0]=="Inspector")  {
@@ -152,7 +173,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       pages = [
         HomeScreen(),
         ClientFavouriteScreen(),
-        ChatsScreen(),
+        TeamChatScreen(),
         AccountScreen(),
       ];
       items = [
@@ -169,7 +190,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           label: AppLocalizations.of(context)!.chats,
         ),
         BottomNavigationBarItem(
-          icon:ImageIcon(AssetImage(ImageAssets.profileIcon), size: 20.sp),
+          icon: Icon(Icons.person, size: 20.sp),
           label: AppLocalizations.of(context)!.accoun,
         ),
       ];
@@ -195,7 +216,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
         backgroundColor: Colors.white,
         elevation: 0.7,
         showUnselectedLabels: true,
-        onTap: (i) => setState(() => _currentIndex = i),
+        onTap: (i) {
+          setState(() {
+            _currentIndex = i;
+            if (i == chatTabIndex) {
+              // resetUnread(); // Removed unread logic
+            }
+          });
+        },
         items: items,
       ),
     );

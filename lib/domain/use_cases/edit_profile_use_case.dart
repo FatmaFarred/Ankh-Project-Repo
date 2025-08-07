@@ -10,7 +10,7 @@ class EditProfileUseCase{
   UserProfileRepositry repositry;
   EditProfileUseCase(this.repositry);
 
-  Future <Either<Failure,String?>>execute (String token,String userId,String fullName,String email,String phone,File image)async{
+  Future <Either<Failure,String?>>execute (String token,String userId,String fullName,String email,String phone,File? image)async{
     return await repositry.editProfile(token, userId, fullName, email, phone, image);
 
   }

@@ -84,21 +84,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        _selectedImage = File(image.path);
-      });
-    }
+
+        _selectedImage = File(image?.path??"");
+
   }
 
   void _updateProfile() {
     if (_formKey.currentState!.validate()) {
-      if (_selectedImage == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select an image')),
-        );
-        return;
-      }
 
       // Get token and userId from SharedPreferences
       SharedPrefsManager.getData(key: 'user_token').then((token) {
@@ -110,7 +102,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               fullName: _fullNameController.text,
               email: _emailController.text,
               phone: _phoneController.text,
-              image: _selectedImage!,
+              image: _selectedImage,
             );
           }
         });

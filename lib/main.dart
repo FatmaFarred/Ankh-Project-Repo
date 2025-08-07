@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'api_service/di/di.dart';
 import 'core/customized_widgets/shared_preferences .dart';
 import 'core/theme/my_app_theme.dart';
+import 'domain/use_cases/get_team_member_use_case.dart';
 import 'feauture/authentication/email_verfication/email_verfication_screen.dart';
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
@@ -17,11 +18,13 @@ import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/ver
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
 import 'feauture/chat_screen/cubit/team_chat_list_cubit.dart';
+import 'feauture/chat_screen/team_chat_list_screen.dart';
 import 'feauture/choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import 'feauture/dashboard/dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
 import 'feauture/dashboard/inspector_management/inspector_details_screen.dart';
 import 'feauture/dashboard/marketer_mangemnet/cubit/marketer_management_cubit.dart';
+import 'feauture/dashboard/marketer_mangemnet/cubit/rate_user_cubit.dart';
 import 'feauture/dashboard/marketer_mangemnet/marketer_details_screen.dart';
 import 'feauture/dashboard/products_management/add_new_product/cubit/post_product_cubit.dart';
 import 'feauture/dashboard/products_management/product_details_screen/cubit/product_details_cubit.dart';
@@ -103,6 +106,7 @@ void main() async {
         BlocProvider(create: (_) => getIt<ProfileCubit>()),
         BlocProvider(create: (_) => getIt<MarketerManagementCubit>()),
         BlocProvider(create: (_) => getIt<InspectorManagementCubit>()),
+        BlocProvider(create: (_) => getIt<RateUserCubit>()),
 
         BlocProvider(create: (context) => getIt<ProfileCubit>()),
 

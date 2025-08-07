@@ -17,7 +17,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     required String fullName,
     required String email,
     required String phone,
-    required File image,
+     File? image,
   }) async {
     emit(EditProfileLoading());
 

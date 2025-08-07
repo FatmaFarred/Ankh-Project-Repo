@@ -1,5 +1,6 @@
 // chat_screen.dart
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,11 @@ import '../authentication/user_controller/user_cubit.dart';
 
 class TeamChatScreen extends StatefulWidget {
   static const String routeName = '/team_chat';
+  final VoidCallback? onChatOpened;
+  final VoidCallback? onNewMessage;
+
+  const TeamChatScreen({Key? key, this.onChatOpened, this.onNewMessage}) : super(key: key);
+
   @override
   _TeamChatScreenState createState() => _TeamChatScreenState();
 }
@@ -34,6 +40,9 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
   void initState() {
     super.initState();
     _initializeChat();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onChatOpened?.call();
+    });
   }
 
   Future<void> _initializeChat() async {
@@ -114,7 +123,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+     // backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
         title: Text(
           "شات فريق العمل",
@@ -144,7 +153,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
   Widget _buildConnectionStatusCard() {
     return Container(
       margin: EdgeInsets.all(16),
-      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 16.w ),
+      padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 16.w ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -222,29 +231,31 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
   }
 
   Widget _buildChatMessages() {
+    if (_messages.isEmpty) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: _messages.isEmpty
-          ? _buildEmptyState()
-          : ListView.builder(
+        margin: EdgeInsets.zero,
+
+        child: _buildEmptyState(),
+      );
+    }
+    List<Widget> messageWidgets = [];
+    DateTime? lastDate;
+    for (int i = 0; i < _messages.length; i++) {
+      final msg = _messages[i];
+      final msgDate = DateTime(msg.timestamp.year, msg.timestamp.month, msg.timestamp.day);
+      if (lastDate == null || msgDate != lastDate) {
+        messageWidgets.add(_buildDateDivider(msg.timestamp));
+        lastDate = msgDate;
+      }
+      messageWidgets.add(_buildMessageBubble(msg));
+    }
+    return Container(
+      margin: EdgeInsets.zero,
+
+      child: ListView(
               controller: _scrollController,
-              padding: EdgeInsets.all(16),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final msg = _messages[index];
-                return _buildMessageBubble(msg);
-              },
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        children: messageWidgets,
             ),
     );
   }
@@ -310,11 +321,12 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
       margin: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: isSent ? MainAxisAlignment.end : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isSent) ...[
             CircleAvatar(
               radius: 16,
-              backgroundColor:  ColorManager.lightprimary,
+              backgroundColor: ColorManager.lightprimary,
               child: Text(
                 message.senderName?.substring(0, 1).toUpperCase() ?? "U",
                 style: TextStyle(color: Colors.white, fontSize: 12),
@@ -324,10 +336,10 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
           ],
           Flexible(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: isSent ?  ColorManager.lightprimary : Colors.grey[100],
-                borderRadius: BorderRadius.circular(20),
+                color: isSent ? ColorManager.lightprimary : Colors.grey[100],
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -374,6 +386,41 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
     );
   }
 
+  Widget _buildDateDivider(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final messageDay = DateTime(date.year, date.month, date.day);
+    String label;
+    if (messageDay == today) {
+      label = 'اليوم';
+    } else if (messageDay == today.subtract(Duration(days: 1))) {
+      label = 'أمس';
+    } else {
+      label = '${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}';
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Row(
+        children: [
+          Expanded(child: Divider(thickness: 1.2, color: Colors.grey[300])),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
+          Expanded(child: Divider(thickness: 1.2, color: Colors.grey[300])),
+        ],
+      ),
+    );
+  }
+
   Widget _buildMessageInput() {
     return Container(
       margin: EdgeInsets.all(4),
@@ -394,8 +441,10 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
           Expanded(
             child: TextField(
               controller: _messageController,
+              style: Theme.of(context)!.textTheme.bodyMedium!.copyWith(color: ColorManager.darkGrey),
               decoration: InputDecoration(
-                hintText: "اكتب رسالتك...",
+                hintText: AppLocalizations.of(context)!.writeYourMessage,
+                hintStyle: Theme.of(context)!.textTheme.bodyMedium!.copyWith(color: ColorManager.darkGrey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none,
@@ -520,7 +569,7 @@ class _TeamChatScreenState extends State<TeamChatScreen> {
 
         String errorMessage = "فشل الاتصال ";
         if (e.toString().contains("Connection refused")) {
-          errorMessage = "لا يمكن الاتصال بالخادم. تأكد من أن الخادم يعمل";
+          errorMessage = "لا يمكن الاتصال .";
         } else if (e.toString().contains("timeout")) {
           errorMessage = "انتهت مهلة الاتصال. تحقق من اتصال الإنترنت";
         } else if (e.toString().contains("401") || e.toString().contains("403")) {
@@ -641,6 +690,7 @@ class ChatClient {
   Function(String)? onSystemMessage;
   VoidCallback? onConnected;
   Function(String?)? onDisconnected;
+  Function(ChatMessage)? onGlobalMessage; // Add global message callback
 
   Future<void> connect({
     required String token,
@@ -693,7 +743,7 @@ class ChatClient {
       // Start connection
       await _hubConnection!.start();
       _isConnected = true;
-      onSystemMessage?.call("تم الاتصال بالخادم بنجاح");
+      onSystemMessage?.call("تم الاتصال بنجاح");
 
       _currentRoom = room;
       
@@ -862,7 +912,7 @@ class ChatClient {
 
   Future<void> sendMessage(String message) async {
     if (_hubConnection == null || _currentRoom == null || !_isConnected) {
-      onSystemMessage?.call("غير متصل بالخادم");
+      onSystemMessage?.call("غير متصل ");
       return;
     }
     
@@ -875,7 +925,7 @@ class ChatClient {
 
   Future<void> loadRecentMessages() async  {
     if (_hubConnection == null || _currentRoom == null || !_isConnected) {
-      onSystemMessage?.call("غير متصل بالخادم أو لا يوجد فريق محدد");
+      onSystemMessage?.call("غير متصل أو لا يوجد فريق محدد");
       return;
     }
 
