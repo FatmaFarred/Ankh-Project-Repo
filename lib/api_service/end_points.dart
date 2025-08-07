@@ -56,6 +56,7 @@ abstract class EndPoints {
   static const String getAllInvitesCodeByLeaderId = "Marketers/my-invites";
   static const String postNotification = "Notifications/create";
   static const String getNotification = "Notifications/get-all";
+  static const String rateUser = "Auth/rating-user";
 
 
 

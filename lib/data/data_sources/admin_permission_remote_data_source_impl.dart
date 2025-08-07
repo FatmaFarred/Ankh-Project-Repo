@@ -174,6 +174,59 @@ class AdminPermissionsRemoteDataSourceImpl implements AdminPermissionsRemoteData
     }
   }
 
+  @override
+  Future<Either<Failure, String?>> rateUser(String userId, num rate) async{
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        if (kDebugMode) {
+          print('📤 Sending POST request to: ${ApiConstant.baseUrl}${EndPoints.rateUser}');
+
+        }
+
+        var response = await apiManager.putData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.rateUser,
+          data: {
+            "rating": rate,
+            "userId": userId
+          },
+
+
+          options: Options(validateStatus: (_) => true),
+
+        );
+
+        if (kDebugMode) {
+          print('✅ Status Code: ${response.statusCode}');
+          print('📥 Raw Response Data: ${response.data}');
+          print('🧾 Response Type: ${response.data.runtimeType}');
+          print(response.data);
+        }
+
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          final  myResponse = response.data;
+
+
+
+          return right(myResponse['message'] );
+        } else {
+          return left(ServerError(errorMessage: response.data['message'] ));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
 
 
 }

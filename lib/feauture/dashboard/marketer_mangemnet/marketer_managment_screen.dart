@@ -87,7 +87,7 @@ class _MarketersManagementScreenState extends State<MarketersManagementScreen> {
             title: AppLocalizations.of(context)!.success,
             message: state.response ?? AppLocalizations.of(context)!.success,
             positiveOnClick: () {
-              Navigator.of(context).pop();
+             // Navigator.of(context).pop();
               // Refresh the marketers list
               marketerManagementCubit.fetchMarketers();
             },
