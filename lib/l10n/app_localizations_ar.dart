@@ -1428,7 +1428,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get goBack => 'العودة';
 
-
   @override
   String get currency => 'ج.م';
 
@@ -1437,5 +1436,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get months => 'شهور';
-
 }

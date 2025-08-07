@@ -14,6 +14,8 @@ class ProductPostModel {
       'color': entity.color,
       'commission': entity.commission,
       'requiredPoints': entity.requiredPoints,
+      'inspectorPoints': entity.inspectorPoints,
+      'marketerPoints': entity.marketerPoints,
       'TopBrandId': entity.topBrandId,
       'make': entity.make,
       'model': entity.model,

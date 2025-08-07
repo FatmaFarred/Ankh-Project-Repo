@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities/all_inpection_entity.dart';
 import '../../authentication/user_controller/user_cubit.dart';
+import '../../dashboard/inspection_managemnt/ispection_bottom_sheet.dart';
+import '../../dashboard/inspection_managemnt/reschedule_cubit.dart';
 import '../../home_screen/header_section.dart';
 import '../../../api_service/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +49,8 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
   late MyInspectionsCubit myInspectionsCubit;
   final TextEditingController _searchController = TextEditingController();
   String? token;
+  RescheduleCubit reschedulingCubit = getIt<RescheduleCubit>();
+
 
   final List<String> filters = [
     'today',
@@ -353,7 +357,26 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (_) =>
+                      RescheduleInspectionBottomSheet(
+                        inspectionId: inspection.id ?? 0,
+                        onConfirm: (id, date, time, reason) {
+                          reschedulingCubit
+                              .rescheduleInspection(
+                            inspectionId: id,
+                            date: date,
+                            time: time,
+                            adminNote: reason,
+                          );
+                        },
+                      ),
+                );
+              },
             ),
             "Completed" => CustomizedElevatedButton(
               bottonWidget: Text(
