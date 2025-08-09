@@ -89,6 +89,9 @@
 
   "topBrands": "أفضل العلامات التجارية",
   "viewAll": "عرض الكل",
+  "topBrand": "العلامة التجارية",
+  "selectTopBrand": "اختر العلامة التجارية",
+  "pleaseSelectTopBrand": "الرجاء اختيار علامة تجارية",
   "addBrand": "إضافة علامة تجارية",
   "brandName": "اسم العلامة التجارية",
   "brandNameRequired": "اسم العلامة التجارية مطلوب",
@@ -173,6 +176,12 @@
   "requestSubmittedNote": "تم إرسال طلب الفحص الخاص بك إلى النظام. سنخطرك بمجرد معالجته. يمكنك تتبع حالة طلبك في أي وقت.",
   "goToMyRequests": "الانتقال إلى طلباتي",
   "saveInfoForLater": "حفظ المعلومات لاحقًا",
+  "required": "هذا الحقل مطلوب",
+  "invalidInteger": "الرجاء إدخال رقم صحيح",
+  "invalidNumber": "الرجاء إدخال رقم صالح",
+  "numberMustBeGreaterThanZero": "يجب أن يكون الرقم أكبر من صفر",
+  "requestedMonths": "الأشهر المطلوبة",
+  "downPayment": "المقدم",
 
   "views": "المشاهدات",
   "addComment": "أضف تعليقًا",

@@ -632,6 +632,24 @@ abstract class AppLocalizations {
   /// **'No Data Found'**
   String get noDataFound;
 
+  /// No description provided for @topBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Brand'**
+  String get topBrand;
+
+  /// No description provided for @selectTopBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Top Brand'**
+  String get selectTopBrand;
+
+  /// No description provided for @pleaseSelectTopBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a top brand'**
+  String get pleaseSelectTopBrand;
+
   /// No description provided for @addBrand.
   ///
   /// In en, this message translates to:
@@ -1097,7 +1115,7 @@ abstract class AppLocalizations {
   /// No description provided for @requestSubmittedNote.
   ///
   /// In en, this message translates to:
-  /// **'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.'**
+  /// **'Your inspection request has been sent to our system. We\'ll notify you once it\'s processed. You can track the status of your request anytime.'**
   String get requestSubmittedNote;
 
   /// No description provided for @goToMyRequests.
@@ -1117,6 +1135,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm Request'**
   String get confirmRequest;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'required'**
+  String get required;
+
+  /// No description provided for @invalidInteger.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid whole number'**
+  String get invalidInteger;
+
+  /// No description provided for @invalidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number'**
+  String get invalidNumber;
+
+  /// No description provided for @numberMustBeGreaterThanZero.
+  ///
+  /// In en, this message translates to:
+  /// **'Number must be greater than zero'**
+  String get numberMustBeGreaterThanZero;
+
+  /// No description provided for @requestedMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested Months'**
+  String get requestedMonths;
+
+  /// No description provided for @downPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Down Payment'**
+  String get downPayment;
 
   /// No description provided for @views.
   ///
@@ -2731,12 +2785,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Car Name is required'**
   String get carNameRequired;
-
-  /// No description provided for @required.
-  ///
-  /// In en, this message translates to:
-  /// **'required'**
-  String get required;
 
   /// No description provided for @chooseDriveType.
   ///

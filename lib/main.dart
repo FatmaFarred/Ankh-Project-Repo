@@ -1,4 +1,5 @@
 import 'package:ankh_project/feauture/dashboard/installment_requests_management/cubit/installment_pending_cubit.dart';
+import 'package:ankh_project/feauture/home_screen/top_brands/di/products_by_brand_di.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
@@ -69,6 +70,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   configureDependencies();
+  // Register ProductsByBrand dependencies
+  registerProductsByBrandDependencies();
   await getIt.allReady();
   await getIt<UserCubit>().loadUserFromPrefs();
 

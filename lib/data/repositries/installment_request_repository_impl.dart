@@ -23,18 +23,26 @@ class InstallmentRequestRepositoryImpl implements InstallmentRequestRepository {
     );
 
     try {
+      final jsonBody = model.toJson();
+      print('Debug - API Request URL: $url');
+      print('Debug - API Request Body: ${jsonEncode(jsonBody)}');
+      
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(model.toJson()),
+        body: jsonEncode(jsonBody),
       );
 
+      print('Debug - API Response Status: ${response.statusCode}');
+      print('Debug - API Response Body: ${response.body}');
+      
       if (response.statusCode == 200 || response.statusCode == 201) {
         return const Right(unit);
       } else {
         return Left(Failure(errorMessage: "Failed to submit installment request: ${response.body}"));
       }
     } catch (e) {
+      print('Debug - API Request Error: ${e.toString()}');
       return Left(Failure(errorMessage: "Error: ${e.toString()}"));
     }
   }

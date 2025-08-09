@@ -52,6 +52,12 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
   final TextEditingController requestedPriceController =
       TextEditingController();
   int selectedTabIndex = 0;
+  
+  @override
+  void initState() {
+    super.initState();
+    // No default values for controllers, will use hint text instead
+  }
 
   List<Widget> _buildTabContent(int index) {
     final user = context.watch<UserCubit>().state;
@@ -462,7 +468,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           ),
           SizedBox(height: 16.h),
           Text(
-            "عدد الشهور",
+            AppLocalizations.of(context)!.requestedMonths,
             style: GoogleFonts.poppins(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
@@ -472,7 +478,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           SizedBox(height: 8.h),
           CustomTextField(
             controller: requestedMonthsController,
-            hintText: "عدد الشهور",
+            hintText: "${AppLocalizations.of(context)!.requestedMonths} (e.g. 12)",
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -480,13 +486,18 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
                 return AppLocalizations.of(context)!.required;
               }
 
-              final parsed = double.tryParse(value.trim());
+              // Check if the input is a valid integer
+              if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+                return AppLocalizations.of(context)!.invalidInteger;
+              }
+
+              final parsed = int.tryParse(value.trim());
               if (parsed == null) {
-                return "invalid";
+                return AppLocalizations.of(context)!.invalidNumber;
               }
 
               if (parsed <= 0) {
-                return "it should be more than zero";
+                return AppLocalizations.of(context)!.numberMustBeGreaterThanZero;
               }
 
               return null;
@@ -494,7 +505,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           ),
           SizedBox(height: 16.h),
           Text(
-            "المقدم",
+            AppLocalizations.of(context)!.downPayment,
             style: GoogleFonts.poppins(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
@@ -504,7 +515,7 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           SizedBox(height: 8.h),
           CustomTextField(
             controller: downPaymentController,
-            hintText: "المقدم",
+            hintText: "${AppLocalizations.of(context)!.downPayment} (e.g. 1000)",
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             validator: (value) {
@@ -512,13 +523,18 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
                 return AppLocalizations.of(context)!.required;
               }
 
-              final parsed = double.tryParse(value.trim());
+              // Check if the input is a valid integer
+              if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+                return AppLocalizations.of(context)!.invalidInteger;
+              }
+
+              final parsed = int.tryParse(value.trim());
               if (parsed == null) {
-                return "invalid";
+                return AppLocalizations.of(context)!.invalidNumber;
               }
 
               if (parsed <= 0) {
-                return "it should be more than zero";
+                return AppLocalizations.of(context)!.numberMustBeGreaterThanZero;
               }
 
               return null;
@@ -537,15 +553,38 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
             borderColor: Theme.of(context).primaryColor,
             onPressed: () async {
               if (_formKey.currentState?.validate() ?? false) {
+                // Parse values with proper error handling
+                int installmentPeriod;
+                int downPayment;
+                
+                try {
+                  print('Debug - requestedMonthsController.text: "${requestedMonthsController.text}"');
+                  print('Debug - downPaymentController.text: "${downPaymentController.text}"');
+                  
+                  installmentPeriod = int.parse(requestedMonthsController.text.trim());
+                  downPayment = int.parse(downPaymentController.text.trim());
+                  
+                  print('Debug - parsed installmentPeriod: $installmentPeriod');
+                  print('Debug - parsed downPayment: $downPayment');
+                } catch (e) {
+                  // Show error message if parsing fails
+                  print('Debug - Error parsing values: $e');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Please enter valid numbers for months and down payment")),
+                  );
+                  return; // Exit the function early
+                }
+                
                 final request = InstallmentRequestEntity(
                   marketerId: user?.id ?? "",
                   productId: product?.id?.toInt() ?? 0,
                   clientName: nameController.text,
                   clientPhone: phoneController.text,
-                  installmentPeriod: int.tryParse(requestedMonthsController.text) ?? 0,
-                  downPayment: int.tryParse(downPaymentController.text) ?? 0,
+                  installmentPeriod: installmentPeriod,
+                  downPayment: downPayment,
                 );
                 print("clicked");
+                print('Debug - Request object: marketerId=${request.marketerId}, productId=${request.productId}, clientName=${request.clientName}, clientPhone=${request.clientPhone}, installmentPeriod=${request.installmentPeriod}, downPayment=${request.downPayment}');
 
                 final result = await context
                     .read<MarketerAddRequestCubit>()

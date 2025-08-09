@@ -10,7 +10,9 @@ import '../../../../core/constants/color_manager.dart';
 import '../../../../core/constants/font_manager/font_manager.dart';
 import '../../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../../../domain/entities/product_post_entity.dart';
+import '../../../../domain/entities/top_brand_entity.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../home_screen/top_brands/cubit/top_brand_cubit.dart';
 import '../../../inspector_screen/widgets/custom_text_form_field.dart';
 import '../../dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
 import 'cubit/post_product_cubit.dart';
@@ -34,6 +36,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
   String? selectedDriveType = 'FrontWheel';
   
   String? selectedCarName;
+  TopBrandEntity? selectedTopBrand;
   
   final List<String> carNames = [ 
     // Hyundai 
@@ -280,6 +283,13 @@ class _AddUsedProductState extends State<AddUsedProduct> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    // Fetch top brands when the widget initializes
+    context.read<TopBrandCubit>().fetchTopBrands();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -361,6 +371,66 @@ class _AddUsedProductState extends State<AddUsedProduct> {
                         selectedCarName = newValue;
                         carNameController.text = newValue ?? '';
                       });
+                    },
+                  ),
+                  
+                  SizedBox(height: 16.h),
+                  Text(
+                    "Top Brand",
+                    style: GoogleFonts.inter(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 6.h),
+                  BlocBuilder<TopBrandCubit, TopBrandState>(
+                    builder: (context, state) {
+                      if (state is TopBrandLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is TopBrandLoaded) {
+                        final brands = state.brands;
+                        return DropdownButtonFormField<TopBrandEntity>(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: ColorManager.lightprimary),
+                            ),
+                            hintText: AppLocalizations.of(context)!.selectTopBrand,
+                          ),
+                          value: selectedTopBrand,
+                          validator: (value) {
+                            if (value == null) {
+                              return AppLocalizations.of(context)!.pleaseSelectTopBrand;
+                            }
+                            return null;
+                          },
+                          items: brands.map((TopBrandEntity brand) {
+                            return DropdownMenuItem<TopBrandEntity>(
+                              value: brand,
+                              child: Text(brand.name),
+                            );
+                          }).toList(),
+                          onChanged: (TopBrandEntity? newValue) {
+                            setState(() {
+                              selectedTopBrand = newValue;
+                            });
+                          },
+                        );
+                      } else if (state is TopBrandError) {
+                        return Text("Error: ${state.message}", style: TextStyle(color: Colors.red));
+                      }
+                      return const Text("No brands available");
                     },
                   ),
                   SizedBox(height: 16.h),
@@ -1981,7 +2051,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
                     if (_formKey.currentState!.validate()) {
                       final productEntity = ProductPostEntity(
                         rating: "3",
-                        topBrandId: 1.toString(),
+                        topBrandId: selectedTopBrand?.id.toString() ?? '1',
                         requiredPoints: requiredPointsController.text,
                         commission: commissionController.text.trim(),
                         marketerPoints: marketerPointsController.text.trim(),

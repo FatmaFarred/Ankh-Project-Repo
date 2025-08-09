@@ -294,6 +294,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataFound => 'No Data Found';
 
   @override
+  String get topBrand => 'Top Brand';
+
+  @override
+  String get selectTopBrand => 'Select Top Brand';
+
+  @override
+  String get pleaseSelectTopBrand => 'Please select a top brand';
+
+  @override
   String get addBrand => 'Add Brand';
 
   @override
@@ -530,7 +539,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get requestSubmittedNote =>
-      'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.';
+      'Your inspection request has been sent to our system. We\'ll notify you once it\'s processed. You can track the status of your request anytime.';
 
   @override
   String get goToMyRequests => 'Go to My Requests';
@@ -540,6 +549,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmRequest => 'Confirm Request';
+
+  @override
+  String get required => 'required';
+
+  @override
+  String get invalidInteger => 'Please enter a valid whole number';
+
+  @override
+  String get invalidNumber => 'Please enter a valid number';
+
+  @override
+  String get numberMustBeGreaterThanZero => 'Number must be greater than zero';
+
+  @override
+  String get requestedMonths => 'Requested Months';
+
+  @override
+  String get downPayment => 'Down Payment';
 
   @override
   String get views => 'Views';
@@ -1366,9 +1393,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get carNameRequired => 'Car Name is required';
-
-  @override
-  String get required => 'required';
 
   @override
   String get chooseDriveType => 'Choose Drive Type';
