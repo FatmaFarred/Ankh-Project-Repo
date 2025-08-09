@@ -12,9 +12,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities/all_inpection_entity.dart';
 import '../../authentication/user_controller/user_cubit.dart';
+import '../../dashboard/inspection_managemnt/ispection_bottom_sheet.dart';
+import '../../dashboard/inspection_managemnt/reschedule_cubit.dart';
 import '../../home_screen/header_section.dart';
 import '../../../api_service/di/di.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/core/customized_widgets/shared_preferences .dart';
+import 'package:ankh_project/feauture/inspector_screen/inspection_details/inspection_details_screen.dart';
+import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
+import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_state.dart';
+import 'package:ankh_project/feauture/marketer_home/home_app_bar.dart';
+import 'package:ankh_project/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import '../../../domain/entities/all_inpection_entity.dart';
+import '../../authentication/user_controller/user_cubit.dart';
+import '../../../api_service/di/di.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../marketer_Reports/marketer_report_details/report_details.dart';
 
 class MyInspectionsScreen extends StatefulWidget {
   const MyInspectionsScreen({super.key});
@@ -28,10 +48,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
   late TabController _tabController;
   late MyInspectionsCubit myInspectionsCubit;
   final TextEditingController _searchController = TextEditingController();
-
-  String? currentKeyword;
-
   String? token;
+  RescheduleCubit reschedulingCubit = getIt<RescheduleCubit>();
+
+
   final List<String> filters = [
     'today',
     'tomorrow',
@@ -49,6 +69,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     _tabController = TabController(length: 8, vsync: this);
     myInspectionsCubit = getIt<MyInspectionsCubit>();
     _loadTokenAndFetch();
+
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) return;
       _fetchForTab(_tabController.index);
@@ -66,7 +87,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
   }
 
   void _fetchForTab(int index) {
-    if (token != null) {
+    if (token != null && index < filters.length) {
       myInspectionsCubit.fetchInspections(
         token: token!,
         filter: filters[index],
@@ -82,26 +103,19 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
   }
 
   Future<void> _refreshData(int index) async {
-    print("🔄 inspector Products Refresh triggered!"); // Debug print
-    final user = context.read<UserCubit>().state;
-    final userId = user?.id;
-    if (token != null) {
+    print("🔄 MyInspections Refresh triggered!");
+    if (token != null && index < filters.length) {
       await myInspectionsCubit.fetchInspections(
         token: token!,
         filter: filters[index],
       );
     }
-    /* print("👤 User ID: $userId"); // Debug print
-    if (userId != null && userId.isNotEmpty) {
-      await inspectorHomeProductCubit.fetchProducts();
-
-    }
-    print("✅ Marketer Products Refresh completed!"); // Debug print
-  }*/
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, _) => [
@@ -137,20 +151,20 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
-                labelStyle: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: ColorManager.white),
+                labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.white,
+                ),
                 unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
-                  Tab(text: AppLocalizations.of(context)!.today),
-                  Tab(text: AppLocalizations.of(context)!.tomorrow),
-                  Tab(text: AppLocalizations.of(context)!.pending),
-                  Tab(text: AppLocalizations.of(context)!.completed),
-                  Tab(text: AppLocalizations.of(context)!.clientDidNotRespond),
-                  Tab(text: AppLocalizations.of(context)!.postponed),
-                  Tab(text: AppLocalizations.of(context)!.returnedToMarketer),
-                  Tab(text: AppLocalizations.of(context)!.clientRejected),
+                  Tab(text: localizations.today),
+                  Tab(text: localizations.tomorrow),
+                  Tab(text: localizations.pending),
+                  Tab(text: localizations.completed),
+                  Tab(text: localizations.clientDidNotRespond),
+                  Tab(text: localizations.postponed),
+                  Tab(text: localizations.returnedToMarketer),
+                  Tab(text: localizations.clientRejected),
                 ],
                 onTap: (index) => _fetchForTab(index),
               ),
@@ -163,7 +177,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is MyInspectionsError) {
                     print('--- MyInspectionsError State ---');
-                    print(StackTrace.current);
+                    print(state.error.errorMessage);
                     return Center(
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -174,18 +188,18 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                             SizedBox(height: 16),
                             CustomizedElevatedButton(
                               bottonWidget: Text(
-                                AppLocalizations.of(context)!.tryAgain,
-                                style: Theme.of(context).textTheme.bodyLarge
+                                localizations.tryAgain,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
                                     ?.copyWith(color: ColorManager.white),
                               ),
                               color: ColorManager.lightprimary,
                               borderColor: ColorManager.lightprimary,
                               onPressed: () {
                                 print('--- Try Again Button Pressed ---');
-                                print(StackTrace.current);
                                 _fetchForTab(_tabController.index);
                               },
-
                             ),
                           ],
                         ),
@@ -193,12 +207,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                     );
                   } else if (state is MyInspectionsEmpty) {
                     print('--- MyInspectionsEmpty State ---');
-                    print(StackTrace.current);
                     return RefreshIndicator(
                       onRefresh: () => _refreshData(_tabController.index),
                       child: ListView(
                         physics: const AlwaysScrollableScrollPhysics(),
-                        // Ensures it can always be pulled
                         children: [
                           Center(
                             child: Column(
@@ -211,10 +223,10 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                                 ),
                                 SizedBox(height: 16),
                                 Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.noInspectionsFound,
-                                  style: Theme.of(context).textTheme.bodyLarge
+                                  localizations.noInspectionsFound,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
                                       ?.copyWith(color: ColorManager.darkGrey),
                                 ),
                               ],
@@ -251,10 +263,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
     );
   }
 
-  Widget _buildInspectionCard(
-    BuildContext context,
-    AllInpectionEntity inspection,
-  ) {
+  Widget _buildInspectionCard(BuildContext context, AllInpectionEntity inspection) {
     return Container(
       padding: REdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -307,7 +316,7 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               SizedBox(width: 6.w),
               Text(
                 (inspection.preferredDate != null &&
-                        inspection.preferredTime != null)
+                    inspection.preferredTime != null)
                     ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(inspection.preferredDate!))} – ${inspection.preferredTime}"
                     : AppLocalizations.of(context)!.noDataFound,
                 style: GoogleFonts.poppins(
@@ -348,11 +357,30 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               color: Theme.of(context).primaryColor,
               borderColor: Theme.of(context).primaryColor,
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (_) =>
+                      RescheduleInspectionBottomSheet(
+                        inspectionId: inspection.id ?? 0,
+                        onConfirm: (id, date, time, reason) {
+                          reschedulingCubit
+                              .rescheduleInspection(
+                            inspectionId: id,
+                            date: date,
+                            time: time,
+                            adminNote: reason,
+                          );
+                        },
+                      ),
+                );
+              },
             ),
             "Completed" => CustomizedElevatedButton(
               bottonWidget: Text(
-                "View Report",
+                AppLocalizations.of(context)!.viewReport,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.white,
                   fontSize: 16.sp,
@@ -360,40 +388,12 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
               ),
               color: ColorManager.darkGrey,
               borderColor: ColorManager.darkGrey,
-              onPressed: () {},
-            ),
-            "Not Respond" => Row(
-              children: [
-                Expanded(
-                  child: CustomizedElevatedButton(
-                    bottonWidget: Text(
-                      "Call",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ColorManager.white,
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                    color: Theme.of(context).primaryColor,
-                    borderColor: Theme.of(context).primaryColor,
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(width: 16.w,),
-                Expanded(
-                  child: CustomizedElevatedButton(
-                    bottonWidget: Text(
-                      "Message",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ColorManager.white,
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                    color: ColorManager.darkGrey,
-                    borderColor: ColorManager.darkGrey,
-                    onPressed: () {},
-                  ),
-                ),
-              ],
+              onPressed: () {
+                Navigator.pushNamed(context, MarketerReportDetails.reportDetailsRouteName,
+                  arguments: inspection.id,
+
+                );
+              },
             ),
             "Pending" => CustomizedElevatedButton(
               bottonWidget: Text(
@@ -415,32 +415,36 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                 );
               },
             ),
+            "ClientDidNotRespond" || "ClientRejected" || "ReturnedToMarketer" => Row(
+              children: [
+                Expanded(
+                  child:CustomizedElevatedButton(
+                    bottonWidget: Text(
+                      "View Report",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ColorManager.white,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    color: ColorManager.darkGrey,
+                    borderColor: ColorManager.darkGrey,
+                    onPressed: () {
+                      Navigator.pushNamed(context, MarketerReportDetails.reportDetailsRouteName,
+                        arguments: inspection.id,
 
-            // TODO: Handle this case.
-            String() => throw UnimplementedError(),
-            // TODO: Handle this case.
-            null => throw UnimplementedError(),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          // Safely handle any unknown or null status
+            null || String() => () {
+              // Optional: Log unexpected statuses during development
+              // debugPrint('⚠️ Unknown inspection status: ${inspection.status}');
+              return const SizedBox.shrink();
+            }(),
           },
-          // CustomizedElevatedButton(
-          //   bottonWidget: Text(
-          //     AppLocalizations.of(context)!.startInspect,
-          //     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          //       color: ColorManager.white,
-          //       fontSize: 16.sp,
-          //     ),
-          //   ),
-          //   color: Theme.of(context).primaryColor,
-          //   borderColor: Theme.of(context).primaryColor,
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) =>
-          //             InspectionDetailsScreen(requestId: inspection.id),
-          //       ),
-          //     );
-          //   },
-          // ),
         ],
       ),
     );

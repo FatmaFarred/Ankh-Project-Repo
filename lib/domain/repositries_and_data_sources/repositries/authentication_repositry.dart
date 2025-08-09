@@ -11,6 +11,8 @@ abstract class AuthenticationRepositry{
 
   Future <Either<Failure,AuthenticationResponseEntity>>register (String name , String email,String password ,String phone);
   Future <Either<Failure,AuthenticationResponseEntity>>signIn (String email,String password);
+  Future <Either<Failure,AuthenticationResponseEntity>>registerClient (String name , String email,String password ,String phone);
+  Future <Either<Failure,String?>>registerMarketerTeamMember (String name , String email,String password ,String phone,String code);
 
 
 }

@@ -1,4 +1,5 @@
 import 'package:ankh_project/data/models/login_response_dm.dart';
+import 'package:ankh_project/domain/entities/authentication_response_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -116,13 +117,15 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
               email: email,
               phoneNumber:  loginResponse.user?.phoneNumber,
               deviceTokens: deviceToken != null ? [deviceToken] : [],
-              roles: loginResponse.user?.roles
+              roles: loginResponse.user?.roles,
+              teamLeaderId: loginResponse.user?.teamLeaderId
           );
           final userCubit = getIt<UserCubit>();
           userCubit.setUser(myUser);
           await userCubit.saveUserData(myUser);
           print("User logged in: ${myUser.fullName}");
           await SharedPrefsManager.saveData(key: 'user_token', value: loginResponse.token);
+          await SharedPrefsManager.saveData(key: 'user_id', value: myUser.id);
 
 
           return right(loginResponse);
@@ -137,6 +140,127 @@ class AuthenticationRemoteDataSourceImplWithApi implements AuthenticationRemoteD
     catch (e) {
       return left(NetworkError(errorMessage: e.toString()));
     }
+  }
+  Future<Either<Failure, AuthenticationResponseDm>> registerClient(String name,
+      String email, String password, String phone) async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+      await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        final deviceToken = await FirebaseMessaging.instance.getToken();
+
+
+        FormData formData = FormData.fromMap({
+          "Name": name,
+          "Email": email,
+          "Phone": phone,
+          "Password": password,
+          "deviceToken": deviceToken != null ? [deviceToken] : [],
+        });
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.registerCustomer,
+          data: formData,
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+        var registerResponse = AuthenticationResponseDm.fromJson(response.data);
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+
+
+          // Save user to Firestore
+          UserDm myUser = UserDm(
+              id: registerResponse.user?.id,
+              fullName: name,
+              email: email,
+              phoneNumber: phone,
+              deviceTokens: deviceToken != null ? [deviceToken] : [],
+              roles: registerResponse.user?.roles
+          );
+
+          // await FireBaseUtilies.addUser(myUser);
+
+          // Return success
+          return right(registerResponse);
+        } else {
+          return left(ServerError(errorMessage: registerResponse.message));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String?>> registerMarketerTeamMember(String name, String email, String password, String phone, String code)async {
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        final deviceToken = await FirebaseMessaging.instance.getToken();
+
+
+
+        var response = await apiManager.postData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.registerTeamMember,
+          data: {
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "password": password,
+            "inviteCode": code,
+            "deviceToken": deviceToken != null ? [deviceToken] : []
+          },
+        );
+
+        if (kDebugMode) {
+          print(response.data);
+        }
+
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          var registerResponse = response.data;
+
+
+
+         /* // Save user to Firestore
+          UserDm myUser = UserDm(
+              id: registerResponse.user?.id,
+              fullName: name,
+              email: email,
+              phoneNumber: phone,
+              deviceTokens: deviceToken != null ? [deviceToken] : [],
+              roles: registerResponse.user?.roles
+          );*/
+
+          // await FireBaseUtilies.addUser(myUser);
+
+          // Return success
+          return right(registerResponse);
+        } else {
+          return left(ServerError(errorMessage: response.data));
+        }
+      } else {
+        return left(NetworkError(
+            errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e) {
+      return left(ServerError(errorMessage: e.toString()));
+    }
+
   }
 }
 

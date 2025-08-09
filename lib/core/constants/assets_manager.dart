@@ -21,6 +21,10 @@ abstract class ImageAssets {
   static const String goldMedal = "$imagePath/GoldMedal.png";
   static const String notification = "$imagePath/Notice+Avt.png";
   static const String carBrandLogo = "$imagePath/bmwLogo.png";
+  static const String carBrandLogo2 = "$imagePath/audiPic.png";
+  static const String carBrandLogo3 = "$imagePath/ferrariPic.png";
+  static const String carBrandLogo4 = "$imagePath/lamboPic.png";
+  static const String carBrandLogo5 = "$imagePath/kiaLogo.png";
   static const String homeIcon = "$imagePath/homeIcon.png";
   static const String requestIcon = "$imagePath/requestIcon.png";
   static const String walletIcon = "$imagePath/walletIcon.png";
@@ -56,6 +60,8 @@ abstract class ImageAssets {
   static const String userIcon = "$imagePath/userIcon.svg";
   static const String drawerIcon = "$imagePath/solar_hamburger-menu-broken.svg";
   static const String imageIcon = "$imagePath/Frame.svg";
+  static const String chatTeam = "$imagePath/chatTeam.svg";
+
 
 
 

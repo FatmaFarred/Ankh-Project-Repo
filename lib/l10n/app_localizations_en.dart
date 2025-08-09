@@ -294,6 +294,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDataFound => 'No Data Found';
 
   @override
+  String get topBrand => 'Top Brand';
+
+  @override
+  String get selectTopBrand => 'Select Top Brand';
+
+  @override
+  String get pleaseSelectTopBrand => 'Please select a top brand';
+
+  @override
+  String get addBrand => 'Add Brand';
+
+  @override
+  String get brandName => 'Brand Name';
+
+  @override
+  String get brandNameRequired => 'Brand name is required';
+
+  @override
+  String get brandImage => 'Brand Image';
+
+  @override
+  String get tapToSelectImage => 'Tap to select image';
+
+  @override
+  String get pleaseSelectImage => 'Please select an image';
+
+  @override
+  String get topBrandAddedSuccessfully => 'Top brand added successfully';
+
+  @override
+  String get noTopBrandsFound => 'No top brands found';
+
+  @override
+  String get inviteTeamMember => 'Invite Team Member';
+
+  @override
+  String get invitesNumber => 'Invites Number';
+
+  @override
+  String get generateLink => 'Generate Code';
+
+  @override
+  String get yourInvitesAreReady => 'Your Invites are Ready';
+
+  @override
+  String get shareTheseLinksToInvite =>
+      'Share these Codes to invite a new members.';
+
+  @override
+  String get singleUseLink => 'Single-Use Code';
+
+  @override
+  String get linkWillBeInvalidated =>
+      'Code will be invalidated once a new member joins.';
+
+  @override
+  String get expiresSoon => 'Expires Soon';
+
+  @override
+  String get linkValidFor24Hours =>
+      'For security, the Code is valid for the next 24 hours.';
+
+  @override
+  String get teams => 'Teams';
+
+  @override
+  String get codes => 'Codes';
+
+  @override
+  String get teamMembers => ' Team Members';
+
+  @override
+  String get invitationCodes => 'Invitation Codes';
+
+  @override
+  String get assignedProducts => 'Assigned Products';
+
+  @override
+  String get used => 'Used';
+
+  @override
+  String get unused => 'Unused';
+
+  @override
+  String get copyCode => 'Copy Code';
+
+  @override
+  String get codeCopied => 'Code copied to clipboard';
+
+  @override
+  String get noTeamMembers => 'No team members found';
+
+  @override
+  String get noInvitationCodes => 'No invitation codes found';
+
+  @override
+  String get invitationCode => 'Invitation Code';
+
+  @override
+  String get enterInvitationCode => 'Enter your invitation code';
+
+  @override
+  String get invitationCodeRequired => 'Invitation code is required';
+
+  @override
   String get popularNewCars => 'Popular New Cars';
 
   @override
@@ -340,6 +445,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transmission => 'Transmission';
+
+  @override
+  String get transmissionType => 'Transmission Type';
+
+  @override
+  String get chooseTransmissionType => 'Choose Transmission Type';
+
+  @override
+  String get automatic => 'Automatic';
+
+  @override
+  String get manual => 'Manual';
 
   @override
   String get horsepower => 'Horsepower';
@@ -422,7 +539,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get requestSubmittedNote =>
-      'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.';
+      'Your inspection request has been sent to our system. We\'ll notify you once it\'s processed. You can track the status of your request anytime.';
 
   @override
   String get goToMyRequests => 'Go to My Requests';
@@ -432,6 +549,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmRequest => 'Confirm Request';
+
+  @override
+  String get required => 'required';
+
+  @override
+  String get invalidInteger => 'Please enter a valid whole number';
+
+  @override
+  String get invalidNumber => 'Please enter a valid number';
+
+  @override
+  String get numberMustBeGreaterThanZero => 'Number must be greater than zero';
+
+  @override
+  String get requestedMonths => 'Requested Months';
+
+  @override
+  String get downPayment => 'Down Payment';
 
   @override
   String get views => 'Views';
@@ -617,7 +752,7 @@ class AppLocalizationsEn extends AppLocalizations {
       '`Failed to send password reset email:';
 
   @override
-  String get ok => 'Ok';
+  String get ok => 'OK';
 
   @override
   String get failedToLoadRecommendedBrands =>
@@ -724,6 +859,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noInspectionsFound => 'No Inspections Found';
 
   @override
+  String get noUsersFound => 'No users found';
+
+  @override
+  String get noFavoritesFound => 'No favorite products found';
+
+  @override
+  String get favoriteProducts => 'Favorite Products';
+
+  @override
   String get inspectionResults => 'Inspection Results';
 
   @override
@@ -778,6 +922,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get currentImage => 'Current Image';
+
+  @override
   String get unsuspend => 'Unsuspend';
 
   @override
@@ -791,8 +938,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteUserAccount => 'Delete User Account';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.';
+  String get rejectUserAccountSubtitle =>
+      'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.';
 
   @override
   String get userDetails => 'User Details';
@@ -810,10 +961,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get suspendAccount => 'Suspend Account';
 
   @override
-  String get marketerManagement => 'Marketers Management';
+  String get productsManagement => 'Products Management';
 
   @override
-  String get assignedProducts => 'Assigned Products';
+  String get addNewProduct => 'Add New Product';
+
+  @override
+  String unassignConfirmation(Object clientName, Object productName) {
+    return 'Are you sure you want to unassign “$productName” from $clientName? This product will be marked as Available again.';
+  }
+
+  @override
+  String get marketerManagement => 'Marketers Management';
 
   @override
   String get marketerInfo => 'Marketer Info';
@@ -853,4 +1012,496 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteInspector => 'Delete Inspector ';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get acceptUserAccount => 'Accept User Account';
+
+  @override
+  String get rejectUserAccount => 'Reject User Account';
+
+  @override
+  String get appointAsTeamLeader => 'Appoint as Team Leader';
+
+  @override
+  String get insertProductId => 'Insert Product ID';
+
+  @override
+  String get productId => 'Product ID';
+
+  @override
+  String get assign => 'Assign';
+
+  @override
+  String get blockUser => 'Block User';
+
+  @override
+  String get unblockUser => 'Unblock User';
+
+  @override
+  String get blockUserSubtitle =>
+      'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.';
+
+  @override
+  String get unblockUserSubtitle =>
+      ' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.';
+
+  @override
+  String get blockUserAccount => 'Block User Account';
+
+  @override
+  String get unblockUserAccount => ' Unblock User Account';
+
+  @override
+  String get reasonForBlocking => ' Reason for Blocking';
+
+  @override
+  String get enterReasonForBlocking => ' Enter Reason for Blocking';
+
+  @override
+  String get blockDaysCount => ' Block Days Count';
+
+  @override
+  String get enterBlockDaysCount => ' Enter Block Days Count';
+
+  @override
+  String get block => 'Block';
+
+  @override
+  String get unblock => 'Unblock';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      ' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.';
+
+  @override
+  String get clientProductInformation => 'Client & Product Information';
+
+  @override
+  String get points => 'Points';
+
+  @override
+  String get pointsDetails => 'Points Details';
+
+  @override
+  String get pointsHistory => 'Points History';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get approved => 'Approved';
+
+  @override
+  String get pointsRequest => 'Points Request';
+
+  @override
+  String get rejectReason => 'Reason for Rejection';
+
+  @override
+  String get enterRejectReason => 'Enter Reason for Rejection';
+
+  @override
+  String get rejectSubTitle =>
+      'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.';
+
+  @override
+  String get approveSubTitle =>
+      ' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.';
+
+  @override
+  String get pointsRequestDetails => ' Points Request Details';
+
+  @override
+  String get pointPriceManagement => 'Point Price Management';
+
+  @override
+  String get pointPrice => 'Point Price';
+
+  @override
+  String get enterPointPrice => 'Enter Point Price';
+
+  @override
+  String get editPointPrice => 'Edit Point Price';
+
+  @override
+  String get eg => 'EGP';
+
+  @override
+  String get leaderMarketer => 'LeaderMarketer';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get myProfile => ' My Profile';
+
+  @override
+  String get point => ' Point';
+
+  @override
+  String get rejected => ' Rejected';
+
+  @override
+  String get requestPoints => 'Request Points';
+
+  @override
+  String get requestPointsSubTitle =>
+      ' Enter the number of points you want to request.\n Your current balance will be updated accordingly.';
+
+  @override
+  String get requestPointsDetails => ' Request Points Details';
+
+  @override
+  String get pointsCount => ' Points Count';
+
+  @override
+  String get enterPointsCount => 'Enter Points Count';
+
+  @override
+  String get enterDescription => ' Enter Description';
+
+  @override
+  String get submit => 'Submit';
+
+  @override
+  String get inspectionImages => 'Inspection Images';
+
+  @override
+  String get sendPoints => ' Send Points';
+
+  @override
+  String get sendPointsSubTitle =>
+      ' select the user you want to send points to and enter the amount.';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get inspectorDocuments => ' Inspector Documents';
+
+  @override
+  String get resechudleInspection => 'Reschedule Inspection';
+
+  @override
+  String get reschedule => 'Reschedule';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get insepectionManagement => 'Inspection Management';
+
+  @override
+  String get carCode => 'Car Code';
+
+  @override
+  String get reactDenied =>
+      'For interact with this feature, you need to login first.';
+
+  @override
+  String get signInforMore => ' Sign in for more features';
+
+  @override
+  String get failedToLoadData => 'Failed to load profile data';
+
+  @override
+  String get noCommentsFound => ' No comments found';
+
+  @override
+  String get noNotificationsFound => ' No notifications found';
+
+  @override
+  String get teamManagement => ' Team Management';
+
+  @override
+  String get inviteMember => ' Invite Member';
+
+  @override
+  String get inviteMemberSubtitle =>
+      ' Enter the email of the member you want to invite to your team.';
+
+  @override
+  String get noTeamMembersFound => ' No team members found';
+
+  @override
+  String get noCodeFound => ' No code found';
+
+  @override
+  String get enterCodeInvitationCount => ' Enter Code Invitation Count';
+
+  @override
+  String get generating => 'Generating...';
+
+  @override
+  String get doYouHaveInvitationCode => 'Do you have an invitation code?';
+
+  @override
+  String get registerWithInvitationCode => 'Register with Invitation Code';
+
+  @override
+  String get aggredPrice => 'Aggred Price';
+
+  @override
+  String get editCarDetails => 'Edit Car Details';
+
+  @override
+  String get addCar => 'Add Car';
+
+  @override
+  String get basicInformation => 'Basic Information';
+
+  @override
+  String get carName => 'Car Name';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get mileage => 'Mileage';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get horsePower => 'Horse Power';
+
+  @override
+  String get specifications => 'Specifications';
+
+  @override
+  String get ownerName => 'Owner Name';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get conditionParts => 'Condition Parts';
+
+  @override
+  String get licenseExpiryDate => 'License Expiry Date';
+
+  @override
+  String get safetyReport => 'Safety Report';
+
+  @override
+  String get taxStatus => 'Tax Status';
+
+  @override
+  String get interiorCondition => 'Interior Condition';
+
+  @override
+  String get exteriorCondition => 'Exterior Condition';
+
+  @override
+  String get additionalSpecs => 'Additional Specs';
+
+  @override
+  String get additionalInfo => 'Additional Info';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get inspectionResult => 'Inspection Result';
+
+  @override
+  String get accidentHistory => 'Accident History';
+
+  @override
+  String get testDriveAvailable => 'Test Drive Available';
+
+  @override
+  String get warrantyStatus => 'Warranty Status';
+
+  @override
+  String get tireStatus => 'Tire Status';
+
+  @override
+  String get lightStatus => 'Light Status';
+
+  @override
+  String get licenseDuration => 'License Duration';
+
+  @override
+  String get trafficViolations => 'Traffic Violations';
+
+  @override
+  String get insuranceStatus => 'Insurance Status';
+
+  @override
+  String get numberOfKeys => 'Number of Keys';
+
+  @override
+  String get seatCondition => 'Seat Condition';
+
+  @override
+  String get gearCondition => 'Gear Condition';
+
+  @override
+  String get driveSystemCondition => 'Drive System Condition';
+
+  @override
+  String get brakesCondition => 'Brakes Condition';
+
+  @override
+  String get tags => 'Tags';
+
+  @override
+  String get safetyStatus => 'Safety Status';
+
+  @override
+  String get commission => 'Commission';
+
+  @override
+  String get requiredPoints => 'Required Points';
+
+  @override
+  String get browseFiles => 'Browse Files';
+
+  @override
+  String get licenseImages => 'License Images';
+
+  @override
+  String get insuranceFront => 'Insurance Front';
+
+  @override
+  String get insuranceBack => 'Insurance Back';
+
+  @override
+  String get saveEdits => 'Save Edits';
+
+  @override
+  String get addProduct => 'Add Product';
+
+  @override
+  String get edited => 'Edited';
+
+  @override
+  String get added => 'Added';
+
+  @override
+  String get carNameRequired => 'Car Name is required';
+
+  @override
+  String get chooseDriveType => 'Choose Drive Type';
+
+  @override
+  String get chooseFuelType => 'Choose Fuel Type';
+
+  @override
+  String get fuelType => 'Fuel Type';
+
+  @override
+  String get driveType => 'Drive Type';
+
+  @override
+  String get frontWheel => 'FrontWheel';
+
+  @override
+  String get rearWheel => 'RearWheel';
+
+  @override
+  String get allWheel => 'AllWheel';
+
+  @override
+  String get petrol => 'Petrol';
+
+  @override
+  String get electric => 'Electric';
+
+  @override
+  String get gas => 'Gas';
+
+  @override
+  String get available => 'Available';
+
+  @override
+  String get sold => 'Sold';
+
+  @override
+  String get neww => 'New';
+
+  @override
+  String get editedSuccessfully =>
+      'the products have been edited successfully.';
+
+  @override
+  String get addedSuccessfully => 'the products have been added successfully.';
+
+  @override
+  String get marketerPoints => 'Marketer Points';
+
+  @override
+  String get inspectorPoints => 'Inspector Points';
+
+  @override
+  String get offersManagement => 'Offers Management';
+
+  @override
+  String get priceOffers => 'Price Offers';
+
+  @override
+  String get installmentOffers => 'Installment Offers';
+
+  @override
+  String get noOffers => 'There are no offers';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get noTeamChatsDescription =>
+      'No team chats found. Start a conversation with your team members to collaborate and share updates.';
+
+  @override
+  String get noTeamChatsFound => 'No team chats found';
+
+  @override
+  String get members => 'Members';
+
+  @override
+  String get teamChat => 'Team Chat';
+
+  @override
+  String get noTeamToChat => 'No Team to Chat';
+
+  @override
+  String get noTeamToChatDescription =>
+      'You are not part of any team yet. Please contact your administrator to join a team or become a team leader.';
+
+  @override
+  String get goBack => 'Go Back';
+
+  @override
+  String get currency => 'EGP';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get months => 'Months';
+
+  @override
+  String get writeYourMessage => ' Write your message...';
+
+  @override
+  String get marketerRate => 'Marketer Rate';
+
+  @override
+  String get inspectorRate => 'Inspector Rate';
+
+  @override
+  String get enterYourRate => 'Enter Your Rate';
 }

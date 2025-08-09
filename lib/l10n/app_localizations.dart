@@ -632,6 +632,210 @@ abstract class AppLocalizations {
   /// **'No Data Found'**
   String get noDataFound;
 
+  /// No description provided for @topBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Brand'**
+  String get topBrand;
+
+  /// No description provided for @selectTopBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Top Brand'**
+  String get selectTopBrand;
+
+  /// No description provided for @pleaseSelectTopBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a top brand'**
+  String get pleaseSelectTopBrand;
+
+  /// No description provided for @addBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Brand'**
+  String get addBrand;
+
+  /// No description provided for @brandName.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand Name'**
+  String get brandName;
+
+  /// No description provided for @brandNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand name is required'**
+  String get brandNameRequired;
+
+  /// No description provided for @brandImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand Image'**
+  String get brandImage;
+
+  /// No description provided for @tapToSelectImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select image'**
+  String get tapToSelectImage;
+
+  /// No description provided for @pleaseSelectImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an image'**
+  String get pleaseSelectImage;
+
+  /// No description provided for @topBrandAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Top brand added successfully'**
+  String get topBrandAddedSuccessfully;
+
+  /// No description provided for @noTopBrandsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No top brands found'**
+  String get noTopBrandsFound;
+
+  /// No description provided for @inviteTeamMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Team Member'**
+  String get inviteTeamMember;
+
+  /// No description provided for @invitesNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invites Number'**
+  String get invitesNumber;
+
+  /// No description provided for @generateLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate Code'**
+  String get generateLink;
+
+  /// No description provided for @yourInvitesAreReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Invites are Ready'**
+  String get yourInvitesAreReady;
+
+  /// No description provided for @shareTheseLinksToInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Share these Codes to invite a new members.'**
+  String get shareTheseLinksToInvite;
+
+  /// No description provided for @singleUseLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Single-Use Code'**
+  String get singleUseLink;
+
+  /// No description provided for @linkWillBeInvalidated.
+  ///
+  /// In en, this message translates to:
+  /// **'Code will be invalidated once a new member joins.'**
+  String get linkWillBeInvalidated;
+
+  /// No description provided for @expiresSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires Soon'**
+  String get expiresSoon;
+
+  /// No description provided for @linkValidFor24Hours.
+  ///
+  /// In en, this message translates to:
+  /// **'For security, the Code is valid for the next 24 hours.'**
+  String get linkValidFor24Hours;
+
+  /// No description provided for @teams.
+  ///
+  /// In en, this message translates to:
+  /// **'Teams'**
+  String get teams;
+
+  /// No description provided for @codes.
+  ///
+  /// In en, this message translates to:
+  /// **'Codes'**
+  String get codes;
+
+  /// No description provided for @teamMembers.
+  ///
+  /// In en, this message translates to:
+  /// **' Team Members'**
+  String get teamMembers;
+
+  /// No description provided for @invitationCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation Codes'**
+  String get invitationCodes;
+
+  /// No description provided for @assignedProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Products'**
+  String get assignedProducts;
+
+  /// No description provided for @used.
+  ///
+  /// In en, this message translates to:
+  /// **'Used'**
+  String get used;
+
+  /// No description provided for @unused.
+  ///
+  /// In en, this message translates to:
+  /// **'Unused'**
+  String get unused;
+
+  /// No description provided for @copyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Code'**
+  String get copyCode;
+
+  /// No description provided for @codeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied to clipboard'**
+  String get codeCopied;
+
+  /// No description provided for @noTeamMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'No team members found'**
+  String get noTeamMembers;
+
+  /// No description provided for @noInvitationCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'No invitation codes found'**
+  String get noInvitationCodes;
+
+  /// No description provided for @invitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation Code'**
+  String get invitationCode;
+
+  /// No description provided for @enterInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your invitation code'**
+  String get enterInvitationCode;
+
+  /// No description provided for @invitationCodeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation code is required'**
+  String get invitationCodeRequired;
+
   /// No description provided for @popularNewCars.
   ///
   /// In en, this message translates to:
@@ -727,6 +931,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transmission'**
   String get transmission;
+
+  /// No description provided for @transmissionType.
+  ///
+  /// In en, this message translates to:
+  /// **'Transmission Type'**
+  String get transmissionType;
+
+  /// No description provided for @chooseTransmissionType.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Transmission Type'**
+  String get chooseTransmissionType;
+
+  /// No description provided for @automatic.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic'**
+  String get automatic;
+
+  /// No description provided for @manual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get manual;
 
   /// No description provided for @horsepower.
   ///
@@ -887,7 +1115,7 @@ abstract class AppLocalizations {
   /// No description provided for @requestSubmittedNote.
   ///
   /// In en, this message translates to:
-  /// **'Your inspection request has been sent to our system. We’ll notify you once it’s processed. You can track the status of your request anytime.'**
+  /// **'Your inspection request has been sent to our system. We\'ll notify you once it\'s processed. You can track the status of your request anytime.'**
   String get requestSubmittedNote;
 
   /// No description provided for @goToMyRequests.
@@ -907,6 +1135,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm Request'**
   String get confirmRequest;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'required'**
+  String get required;
+
+  /// No description provided for @invalidInteger.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid whole number'**
+  String get invalidInteger;
+
+  /// No description provided for @invalidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number'**
+  String get invalidNumber;
+
+  /// No description provided for @numberMustBeGreaterThanZero.
+  ///
+  /// In en, this message translates to:
+  /// **'Number must be greater than zero'**
+  String get numberMustBeGreaterThanZero;
+
+  /// No description provided for @requestedMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested Months'**
+  String get requestedMonths;
+
+  /// No description provided for @downPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Down Payment'**
+  String get downPayment;
 
   /// No description provided for @views.
   ///
@@ -1271,7 +1535,7 @@ abstract class AppLocalizations {
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:
-  /// **'Ok'**
+  /// **'OK'**
   String get ok;
 
   /// No description provided for @failedToLoadRecommendedBrands.
@@ -1478,6 +1742,24 @@ abstract class AppLocalizations {
   /// **'No Inspections Found'**
   String get noInspectionsFound;
 
+  /// No description provided for @noUsersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No users found'**
+  String get noUsersFound;
+
+  /// No description provided for @noFavoritesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorite products found'**
+  String get noFavoritesFound;
+
+  /// No description provided for @favoriteProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Products'**
+  String get favoriteProducts;
+
   /// No description provided for @inspectionResults.
   ///
   /// In en, this message translates to:
@@ -1586,6 +1868,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @currentImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Image'**
+  String get currentImage;
+
   /// No description provided for @unsuspend.
   ///
   /// In en, this message translates to:
@@ -1610,11 +1898,17 @@ abstract class AppLocalizations {
   /// **'Delete User Account'**
   String get deleteUserAccount;
 
-  /// No description provided for @deleteUserAccountSubtitle.
+  /// No description provided for @rejectUserAccountSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to permanently delete this user? This action cannot be undone, and all related data may be lost. If the user is currently assigned to products or inspections, please unassign them first.'**
-  String get deleteUserAccountSubtitle;
+  /// **'Are you sure you want to reject this user?\nThis decision can be modified later, but their access may be temporarily disabled or their data may be suspended.'**
+  String get rejectUserAccountSubtitle;
+
+  /// No description provided for @acceptUserAccountSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to accept this user?\nThis action will grant them access to the system.\nYou can modify this decision later by suspending the account.'**
+  String get acceptUserAccountSubtitle;
 
   /// No description provided for @userDetails.
   ///
@@ -1646,17 +1940,29 @@ abstract class AppLocalizations {
   /// **'Suspend Account'**
   String get suspendAccount;
 
+  /// No description provided for @productsManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Products Management'**
+  String get productsManagement;
+
+  /// No description provided for @addNewProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Product'**
+  String get addNewProduct;
+
+  /// No description provided for @unassignConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unassign “{productName}” from {clientName}? This product will be marked as Available again.'**
+  String unassignConfirmation(Object clientName, Object productName);
+
   /// No description provided for @marketerManagement.
   ///
   /// In en, this message translates to:
   /// **'Marketers Management'**
   String get marketerManagement;
-
-  /// No description provided for @assignedProducts.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned Products'**
-  String get assignedProducts;
 
   /// No description provided for @marketerInfo.
   ///
@@ -1735,6 +2041,966 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete Inspector '**
   String get deleteInspector;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get accept;
+
+  /// No description provided for @acceptUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept User Account'**
+  String get acceptUserAccount;
+
+  /// No description provided for @rejectUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject User Account'**
+  String get rejectUserAccount;
+
+  /// No description provided for @appointAsTeamLeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Appoint as Team Leader'**
+  String get appointAsTeamLeader;
+
+  /// No description provided for @insertProductId.
+  ///
+  /// In en, this message translates to:
+  /// **'Insert Product ID'**
+  String get insertProductId;
+
+  /// No description provided for @productId.
+  ///
+  /// In en, this message translates to:
+  /// **'Product ID'**
+  String get productId;
+
+  /// No description provided for @assign.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign'**
+  String get assign;
+
+  /// No description provided for @blockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get blockUser;
+
+  /// No description provided for @unblockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock User'**
+  String get unblockUser;
+
+  /// No description provided for @blockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to block this user?\nThis action will prevent them from accessing the system and they will not be able to log in.'**
+  String get blockUserSubtitle;
+
+  /// No description provided for @unblockUserSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to unblock this user?\nThis action will restore their access to the system and they will be able to log in again.'**
+  String get unblockUserSubtitle;
+
+  /// No description provided for @blockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User Account'**
+  String get blockUserAccount;
+
+  /// No description provided for @unblockUserAccount.
+  ///
+  /// In en, this message translates to:
+  /// **' Unblock User Account'**
+  String get unblockUserAccount;
+
+  /// No description provided for @reasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Reason for Blocking'**
+  String get reasonForBlocking;
+
+  /// No description provided for @enterReasonForBlocking.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Reason for Blocking'**
+  String get enterReasonForBlocking;
+
+  /// No description provided for @blockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Block Days Count'**
+  String get blockDaysCount;
+
+  /// No description provided for @enterBlockDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Block Days Count'**
+  String get enterBlockDaysCount;
+
+  /// No description provided for @block.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block;
+
+  /// No description provided for @unblock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock'**
+  String get unblock;
+
+  /// No description provided for @appointAsteamLeaderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to appoint this user as a team leader?\nThis action will grant them additional permissions and responsibilities within the team.'**
+  String get appointAsteamLeaderSubtitle;
+
+  /// No description provided for @clientProductInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Client & Product Information'**
+  String get clientProductInformation;
+
+  /// No description provided for @points.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get points;
+
+  /// No description provided for @pointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Details'**
+  String get pointsDetails;
+
+  /// No description provided for @pointsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Points History'**
+  String get pointsHistory;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @pointsRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Points Request'**
+  String get pointsRequest;
+
+  /// No description provided for @rejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for Rejection'**
+  String get rejectReason;
+
+  /// No description provided for @enterRejectReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Reason for Rejection'**
+  String get enterRejectReason;
+
+  /// No description provided for @rejectSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reject this request?\nThe client will not receive any points and their balance will not be updated.'**
+  String get rejectSubTitle;
+
+  /// No description provided for @approveSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Are you sure you want to approve this request?\nThe client will receive the requested points and their balance will be updated accordingly.'**
+  String get approveSubTitle;
+
+  /// No description provided for @pointsRequestDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Request Details'**
+  String get pointsRequestDetails;
+
+  /// No description provided for @pointPriceManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price Management'**
+  String get pointPriceManagement;
+
+  /// No description provided for @pointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Point Price'**
+  String get pointPrice;
+
+  /// No description provided for @enterPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Point Price'**
+  String get enterPointPrice;
+
+  /// No description provided for @editPointPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Point Price'**
+  String get editPointPrice;
+
+  /// No description provided for @eg.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get eg;
+
+  /// No description provided for @leaderMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'LeaderMarketer'**
+  String get leaderMarketer;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @myProfile.
+  ///
+  /// In en, this message translates to:
+  /// **' My Profile'**
+  String get myProfile;
+
+  /// No description provided for @point.
+  ///
+  /// In en, this message translates to:
+  /// **' Point'**
+  String get point;
+
+  /// No description provided for @rejected.
+  ///
+  /// In en, this message translates to:
+  /// **' Rejected'**
+  String get rejected;
+
+  /// No description provided for @requestPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Points'**
+  String get requestPoints;
+
+  /// No description provided for @requestPointsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the number of points you want to request.\n Your current balance will be updated accordingly.'**
+  String get requestPointsSubTitle;
+
+  /// No description provided for @requestPointsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Request Points Details'**
+  String get requestPointsDetails;
+
+  /// No description provided for @pointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Points Count'**
+  String get pointsCount;
+
+  /// No description provided for @enterPointsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Points Count'**
+  String get enterPointsCount;
+
+  /// No description provided for @enterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Description'**
+  String get enterDescription;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @inspectionImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Images'**
+  String get inspectionImages;
+
+  /// No description provided for @sendPoints.
+  ///
+  /// In en, this message translates to:
+  /// **' Send Points'**
+  String get sendPoints;
+
+  /// No description provided for @sendPointsSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **' select the user you want to send points to and enter the amount.'**
+  String get sendPointsSubTitle;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
+  /// No description provided for @inspectorDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **' Inspector Documents'**
+  String get inspectorDocuments;
+
+  /// No description provided for @resechudleInspection.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule Inspection'**
+  String get resechudleInspection;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get reschedule;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @insepectionManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Management'**
+  String get insepectionManagement;
+
+  /// No description provided for @carCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Car Code'**
+  String get carCode;
+
+  /// No description provided for @reactDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'For interact with this feature, you need to login first.'**
+  String get reactDenied;
+
+  /// No description provided for @signInforMore.
+  ///
+  /// In en, this message translates to:
+  /// **' Sign in for more features'**
+  String get signInforMore;
+
+  /// No description provided for @failedToLoadData.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile data'**
+  String get failedToLoadData;
+
+  /// No description provided for @noCommentsFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No comments found'**
+  String get noCommentsFound;
+
+  /// No description provided for @noNotificationsFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No notifications found'**
+  String get noNotificationsFound;
+
+  /// No description provided for @teamManagement.
+  ///
+  /// In en, this message translates to:
+  /// **' Team Management'**
+  String get teamManagement;
+
+  /// No description provided for @inviteMember.
+  ///
+  /// In en, this message translates to:
+  /// **' Invite Member'**
+  String get inviteMember;
+
+  /// No description provided for @inviteMemberSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter the email of the member you want to invite to your team.'**
+  String get inviteMemberSubtitle;
+
+  /// No description provided for @noTeamMembersFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No team members found'**
+  String get noTeamMembersFound;
+
+  /// No description provided for @noCodeFound.
+  ///
+  /// In en, this message translates to:
+  /// **' No code found'**
+  String get noCodeFound;
+
+  /// No description provided for @enterCodeInvitationCount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Code Invitation Count'**
+  String get enterCodeInvitationCount;
+
+  /// No description provided for @generating.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating...'**
+  String get generating;
+
+  /// No description provided for @doYouHaveInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have an invitation code?'**
+  String get doYouHaveInvitationCode;
+
+  /// No description provided for @registerWithInvitationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with Invitation Code'**
+  String get registerWithInvitationCode;
+
+  /// No description provided for @aggredPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Aggred Price'**
+  String get aggredPrice;
+
+  /// No description provided for @editCarDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Car Details'**
+  String get editCarDetails;
+
+  /// No description provided for @addCar.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Car'**
+  String get addCar;
+
+  /// No description provided for @basicInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic Information'**
+  String get basicInformation;
+
+  /// No description provided for @carName.
+  ///
+  /// In en, this message translates to:
+  /// **'Car Name'**
+  String get carName;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @mileage.
+  ///
+  /// In en, this message translates to:
+  /// **'Mileage'**
+  String get mileage;
+
+  /// No description provided for @color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get color;
+
+  /// No description provided for @horsePower.
+  ///
+  /// In en, this message translates to:
+  /// **'Horse Power'**
+  String get horsePower;
+
+  /// No description provided for @specifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Specifications'**
+  String get specifications;
+
+  /// No description provided for @ownerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner Name'**
+  String get ownerName;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @conditionParts.
+  ///
+  /// In en, this message translates to:
+  /// **'Condition Parts'**
+  String get conditionParts;
+
+  /// No description provided for @licenseExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'License Expiry Date'**
+  String get licenseExpiryDate;
+
+  /// No description provided for @safetyReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Report'**
+  String get safetyReport;
+
+  /// No description provided for @taxStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax Status'**
+  String get taxStatus;
+
+  /// No description provided for @interiorCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Interior Condition'**
+  String get interiorCondition;
+
+  /// No description provided for @exteriorCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Exterior Condition'**
+  String get exteriorCondition;
+
+  /// No description provided for @additionalSpecs.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional Specs'**
+  String get additionalSpecs;
+
+  /// No description provided for @additionalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional Info'**
+  String get additionalInfo;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @inspectionResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspection Result'**
+  String get inspectionResult;
+
+  /// No description provided for @accidentHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Accident History'**
+  String get accidentHistory;
+
+  /// No description provided for @testDriveAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Drive Available'**
+  String get testDriveAvailable;
+
+  /// No description provided for @warrantyStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Warranty Status'**
+  String get warrantyStatus;
+
+  /// No description provided for @tireStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Tire Status'**
+  String get tireStatus;
+
+  /// No description provided for @lightStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Status'**
+  String get lightStatus;
+
+  /// No description provided for @licenseDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'License Duration'**
+  String get licenseDuration;
+
+  /// No description provided for @trafficViolations.
+  ///
+  /// In en, this message translates to:
+  /// **'Traffic Violations'**
+  String get trafficViolations;
+
+  /// No description provided for @insuranceStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance Status'**
+  String get insuranceStatus;
+
+  /// No description provided for @numberOfKeys.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of Keys'**
+  String get numberOfKeys;
+
+  /// No description provided for @seatCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Seat Condition'**
+  String get seatCondition;
+
+  /// No description provided for @gearCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Gear Condition'**
+  String get gearCondition;
+
+  /// No description provided for @driveSystemCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Drive System Condition'**
+  String get driveSystemCondition;
+
+  /// No description provided for @brakesCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Brakes Condition'**
+  String get brakesCondition;
+
+  /// No description provided for @tags.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get tags;
+
+  /// No description provided for @safetyStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Safety Status'**
+  String get safetyStatus;
+
+  /// No description provided for @commission.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission'**
+  String get commission;
+
+  /// No description provided for @requiredPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Points'**
+  String get requiredPoints;
+
+  /// No description provided for @browseFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Files'**
+  String get browseFiles;
+
+  /// No description provided for @licenseImages.
+  ///
+  /// In en, this message translates to:
+  /// **'License Images'**
+  String get licenseImages;
+
+  /// No description provided for @insuranceFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance Front'**
+  String get insuranceFront;
+
+  /// No description provided for @insuranceBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance Back'**
+  String get insuranceBack;
+
+  /// No description provided for @saveEdits.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Edits'**
+  String get saveEdits;
+
+  /// No description provided for @addProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Product'**
+  String get addProduct;
+
+  /// No description provided for @edited.
+  ///
+  /// In en, this message translates to:
+  /// **'Edited'**
+  String get edited;
+
+  /// No description provided for @added.
+  ///
+  /// In en, this message translates to:
+  /// **'Added'**
+  String get added;
+
+  /// No description provided for @carNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Car Name is required'**
+  String get carNameRequired;
+
+  /// No description provided for @chooseDriveType.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Drive Type'**
+  String get chooseDriveType;
+
+  /// No description provided for @chooseFuelType.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Fuel Type'**
+  String get chooseFuelType;
+
+  /// No description provided for @fuelType.
+  ///
+  /// In en, this message translates to:
+  /// **'Fuel Type'**
+  String get fuelType;
+
+  /// No description provided for @driveType.
+  ///
+  /// In en, this message translates to:
+  /// **'Drive Type'**
+  String get driveType;
+
+  /// No description provided for @frontWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'FrontWheel'**
+  String get frontWheel;
+
+  /// No description provided for @rearWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'RearWheel'**
+  String get rearWheel;
+
+  /// No description provided for @allWheel.
+  ///
+  /// In en, this message translates to:
+  /// **'AllWheel'**
+  String get allWheel;
+
+  /// No description provided for @petrol.
+  ///
+  /// In en, this message translates to:
+  /// **'Petrol'**
+  String get petrol;
+
+  /// No description provided for @electric.
+  ///
+  /// In en, this message translates to:
+  /// **'Electric'**
+  String get electric;
+
+  /// No description provided for @gas.
+  ///
+  /// In en, this message translates to:
+  /// **'Gas'**
+  String get gas;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get available;
+
+  /// No description provided for @sold.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold'**
+  String get sold;
+
+  /// No description provided for @neww.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get neww;
+
+  /// No description provided for @editedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'the products have been edited successfully.'**
+  String get editedSuccessfully;
+
+  /// No description provided for @addedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'the products have been added successfully.'**
+  String get addedSuccessfully;
+
+  /// No description provided for @marketerPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Points'**
+  String get marketerPoints;
+
+  /// No description provided for @inspectorPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Points'**
+  String get inspectorPoints;
+
+  /// No description provided for @offersManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers Management'**
+  String get offersManagement;
+
+  /// No description provided for @priceOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Offers'**
+  String get priceOffers;
+
+  /// No description provided for @installmentOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Installment Offers'**
+  String get installmentOffers;
+
+  /// No description provided for @noOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no offers'**
+  String get noOffers;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @noTeamChatsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'No team chats found. Start a conversation with your team members to collaborate and share updates.'**
+  String get noTeamChatsDescription;
+
+  /// No description provided for @noTeamChatsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No team chats found'**
+  String get noTeamChatsFound;
+
+  /// No description provided for @members.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get members;
+
+  /// No description provided for @teamChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Chat'**
+  String get teamChat;
+
+  /// No description provided for @noTeamToChat.
+  ///
+  /// In en, this message translates to:
+  /// **'No Team to Chat'**
+  String get noTeamToChat;
+
+  /// No description provided for @noTeamToChatDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not part of any team yet. Please contact your administrator to join a team or become a team leader.'**
+  String get noTeamToChatDescription;
+
+  /// No description provided for @goBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get goBack;
+
+  /// No description provided for @currency.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get currency;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @months.
+  ///
+  /// In en, this message translates to:
+  /// **'Months'**
+  String get months;
+
+  /// No description provided for @writeYourMessage.
+  ///
+  /// In en, this message translates to:
+  /// **' Write your message...'**
+  String get writeYourMessage;
+
+  /// No description provided for @marketerRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketer Rate'**
+  String get marketerRate;
+
+  /// No description provided for @inspectorRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspector Rate'**
+  String get inspectorRate;
+
+  /// No description provided for @enterYourRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Your Rate'**
+  String get enterYourRate;
 }
 
 class _AppLocalizationsDelegate

@@ -1,11 +1,16 @@
 import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/domain/entities/notification_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({super.key});
+   NotificationCard({super.key,required this.notification});
+  NotificationEntity notification;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class NotificationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "New Update",
+                  "إشعار",
                   style: GoogleFonts.poppins(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
@@ -36,9 +41,9 @@ class NotificationCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Price updated for Toyota Corolla 2020 – now EGP 345,000",
+                  notification.message??"",
                   style: GoogleFonts.poppins(
-                    fontSize: 11.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff777777),
                   ),
@@ -48,7 +53,11 @@ class NotificationCard extends StatelessWidget {
           ),
           SizedBox(width: 10.w,),
           Text(
-            "10:00 am",
+    "   ${notification
+        .createdAt != null
+    ? DateFormat('dd/MM/yyyy HH:mm').format(
+    DateTime.parse(notification.createdAt!))
+        : AppLocalizations.of(context)!.notAvailable}",
             style: GoogleFonts.poppins(
               fontSize: 11.sp,
               fontWeight: FontWeight.w400,

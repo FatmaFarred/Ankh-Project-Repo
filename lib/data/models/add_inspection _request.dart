@@ -6,6 +6,8 @@ class InspectionRequest {
   final String preferredTime;
   final int productId;
   final String marketerId;
+  final num agreedPrice;
+
 
   InspectionRequest({
     required this.clientName,
@@ -15,6 +17,7 @@ class InspectionRequest {
     required this.preferredTime,
     required this.productId,
     required this.marketerId,
+    required this.agreedPrice
   });
 
   Map<String, dynamic> toJson() {
@@ -26,6 +29,7 @@ class InspectionRequest {
       "preferredTime": preferredTime, // Format: HH:mm:ss
       "productId": productId,
       "marketerId": marketerId,
+      "agreedPrice": agreedPrice,
     };
   }
 }

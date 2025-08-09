@@ -85,8 +85,8 @@ class CustomBottomSheet extends StatelessWidget {
 
                     ) ,
                     onPressed: onConfirm,
-                    borderColor: ColorManager.error,
-                    color: ColorManager.error,
+                    borderColor:ColorManager.lightprimary,
+                    color: ColorManager.lightprimary,
 
                   ),
 

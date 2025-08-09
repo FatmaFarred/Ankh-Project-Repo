@@ -2,17 +2,28 @@ import 'dart:ui';
 
 import '../../core/constants/color_manager.dart';
 
-enum RequestStatus { pending, done, delayed, notResponded }
+enum RequestStatus { pending, approved,Postponed,ClientRejected,ReturnedToMarketer,ClientDidNotRespond,Completed,active,done }
 Color getStatusColor(RequestStatus status) {
   switch (status) {
     case RequestStatus.pending:
       return ColorManager.lightYellow;
+    case RequestStatus.Completed:
+      return ColorManager.lightGreen;
+    case RequestStatus.Postponed:
+      return ColorManager.lightOrange;
+    case RequestStatus.ClientDidNotRespond:
+      return ColorManager.lightBlack;
+    case RequestStatus.active:
+      return ColorManager.lightGreen;
+    case RequestStatus.approved:
+      return ColorManager.lightGreen;
+    case RequestStatus.ClientRejected:
+      return ColorManager.lightRed;
+    case RequestStatus.ReturnedToMarketer:
+      return ColorManager.lightRed;
     case RequestStatus.done:
       return ColorManager.lightGreen;
-    case RequestStatus.delayed:
-      return ColorManager.lightOrange;
-    case RequestStatus.notResponded:
-      return ColorManager.lightBlack;
+
   }
 }
 Color getTextStatusColor(RequestStatus status) {
@@ -21,10 +32,22 @@ Color getTextStatusColor(RequestStatus status) {
       return ColorManager.darkYellow;
     case RequestStatus.done:
       return ColorManager.darkGreen;
-    case RequestStatus.delayed:
+    case RequestStatus.Postponed:
       return ColorManager.darkOrange;
-    case RequestStatus.notResponded:
+    case RequestStatus.ClientDidNotRespond:
       return ColorManager.darkBlack;
+    case RequestStatus.active:
+      return ColorManager.darkGreen;
+    case RequestStatus.approved:
+      return ColorManager.darkGreen;
+    case RequestStatus.ClientRejected:
+      return ColorManager.darkRed;
+    case RequestStatus.ReturnedToMarketer:
+      return ColorManager.darkRed;
+    case RequestStatus.Completed:
+      return ColorManager.darkGreen;
+
+
   }
 }
 
@@ -34,23 +57,56 @@ String getStatusLabel(RequestStatus status) {
       return 'Pending';
     case RequestStatus.done:
       return 'Done';
-    case RequestStatus.delayed:
-      return 'Delayed';
-    case RequestStatus.notResponded:
+    case RequestStatus.Postponed:
+      return 'Postponed';
+    case RequestStatus.ClientDidNotRespond:
       return 'Not Responded';
+    case RequestStatus.active:
+      return 'Active';
+    case RequestStatus.approved:
+      return 'Approved';
+    case RequestStatus.ClientRejected:
+      return 'Rejected';
+    case RequestStatus.ReturnedToMarketer:
+      return 'Returned to Marketer';
+    case RequestStatus.Completed:
+      return 'Completed';
+
   }
+
 }
 
 RequestStatus? getRequestStatusFromString(String? status) {
-  switch (status?.toLowerCase()) {
-    case 'pending':
+  switch (status) {
+    case 'Pending':
       return RequestStatus.pending;
+    case 'Completed':
+      return RequestStatus.Completed;
+    case 'ClientRejected':
+      return RequestStatus.ClientRejected;
+    case 'ReturnedToMarketer':
+      return RequestStatus.ReturnedToMarketer;
+    case 'Postponed':
+      return RequestStatus.Postponed;
+    case 'ClientDidNotRespond':
+      return RequestStatus.ClientDidNotRespond;
+    // Optionally, keep old mappings for backward compatibility
     case 'done':
       return RequestStatus.done;
     case 'delayed':
-      return RequestStatus.delayed;
+      return RequestStatus.Postponed;
     case 'not responded':
-      return RequestStatus.notResponded;
+      return RequestStatus.ClientDidNotRespond;
+    case 'active':
+      return RequestStatus.active;
+    case 'approved':
+      return RequestStatus.approved;
+    case 'rejected':
+      return RequestStatus.ClientRejected;
+    case 'returned to marketer':
+      return RequestStatus.ReturnedToMarketer;
+    case 'completed':
+      return RequestStatus.Completed;
     default:
       return null;
   }

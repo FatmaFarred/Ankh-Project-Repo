@@ -33,7 +33,7 @@ class InspectionDetailsScreen extends StatefulWidget {
 }
 
 class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
-  String? selectedStatus;
+  int? selectedIndex;
   List<XFile> _selectedImages = [];
   final List<String> statusOptions = [
     'Completed',
@@ -75,6 +75,9 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
       child: BlocConsumer<SubmitInspectionCubit, SubmitInspectionState>(
         listener: (context, state) {
           if (state is SubmitInspectionSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message ?? "")),
+            );
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const RequestSubmittedScreen()),
@@ -82,7 +85,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
           } else if (state is SubmitInspectionError) {
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            ).showSnackBar(SnackBar(content: Text(state.message??"An error occurred")));
           }
         },
         builder: (context, submitState) {
@@ -128,15 +131,45 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                         SizedBox(height: 20.h),
                         PhotoListView(imageUrls: details.productImages),
                         SizedBox(height: 20.h),
-                        RadioStatusGroup(
-                          title: "Inspection result",
-                          statusOptions: statusOptions,
-                          selectedValue: selectedStatus,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedStatus = value;
-                            });
-                          },
+                        Container(
+                          padding: REdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xff777777).withOpacity(0.5)),
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Inspection result",
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Column(
+                                children: List.generate(statusOptions.length, (index) {
+                                  return RadioListTile<int>(
+                                    title: Text(
+                                      statusOptions[index],
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xff374151),
+                                      ),
+                                    ),
+                                    value: index,
+                                    groupValue: selectedIndex,
+                                    onChanged: (int? value) {
+                                      setState(() {
+                                        selectedIndex = value;
+                                      });
+                                    },
+                                  );
+                                }),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 20.h),
 
@@ -207,13 +240,12 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                           onPressed: submitState is SubmitInspectionLoading
                               ? null
                               : () {
-                                  if (selectedStatus == null ||
+                                  if (selectedIndex == null ||
                                       commentController.text.isEmpty) {
-
                                     String missing = '';
-                                    if (selectedStatus == null && commentController.text.isEmpty) {
+                                    if (selectedIndex == null && commentController.text.isEmpty) {
                                       missing = 'status and comment';
-                                    } else if (selectedStatus == null) {
+                                    } else if (selectedIndex == null) {
                                       missing = 'status';
                                     } else {
                                       missing = 'comment';
@@ -227,12 +259,14 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                                         Navigator.of(context).pop();
                                       },
                                     );
-
                                     return;
+
                                   }
                                   print("clicked");
                                   print("inspection Id: ${widget.requestId}");
-                                  print("result status : $selectedStatus");
+                                  print("result status : ${statusOptions[selectedIndex!]}");
+                                  print("inspection index: ${selectedIndex!+1}");
+
                                   print(
                                     "selected images : ${_selectedImages.map((file) => file.path).toList()}",
                                   );
@@ -241,7 +275,7 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                                   final entity = InspectionSubmissionEntity(
                                     requestInspectionId: widget.requestId!
                                         .toInt(),
-                                    status: selectedStatus!,
+                                    status: selectedIndex!+1,
                                     inspectorComment: commentController.text
                                         .trim(),
                                     images: _selectedImages

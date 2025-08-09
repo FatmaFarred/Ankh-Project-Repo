@@ -22,6 +22,7 @@ class AllInpectionDm extends AllInpectionEntity {
     super.phoneNumber,
     super.preferredDate,
     super.preferredTime,
+    super.inspectorPoints,
     super.status,
     super.address,
     super.date,
@@ -35,6 +36,7 @@ class AllInpectionDm extends AllInpectionEntity {
     productImage = json['productImage'];
     marketerName = json['marketerName'];
     inspectorName = json['inspectorName'];
+    inspectorPoints = json['inspectorPoints'];
     clientName = json['clientName'];
     phoneNumber = json['phoneNumber'];
     preferredDate = json['preferredDate'];

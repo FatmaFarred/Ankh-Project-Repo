@@ -10,6 +10,9 @@ class CustomTextFormField extends StatelessWidget {
   final int maxLines;
   final bool enabled;
   final String? initialValue;
+  final GestureTapCallback? onTab;
+  final TextInputType? keyBoardType;
+  final String? Function(String?)? validator;
 
 
   const CustomTextFormField({
@@ -18,12 +21,16 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.maxLines = 1,
     this.enabled = true,
-    this.initialValue,
+    this.initialValue, this.onTab,this.keyBoardType,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      keyboardType: keyBoardType,
+      onTap: onTab,
       enabled:enabled ,
       initialValue:initialValue ,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.textBlack,fontSize: 14.sp),

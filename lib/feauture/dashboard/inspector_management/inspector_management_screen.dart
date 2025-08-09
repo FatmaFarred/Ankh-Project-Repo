@@ -7,77 +7,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import 'package:ankh_project/feauture/dashboard/inspector_management/cubit/inspector_management_cubit.dart';
+import 'package:ankh_project/domain/entities/all_inspectors_entity.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/rate_user_cubit.dart';
+import 'package:ankh_project/feauture/dashboard/marketer_mangemnet/cubit/rate_user_states.dart';
+import 'package:ankh_project/feauture/authentication/user_controller/user_cubit.dart';
 
 import '../../../core/customized_widgets/reusable_widgets/custom_text_field.dart';
-import '../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import '../../../core/customized_widgets/reusable_widgets/customized_search_bar.dart';
 import '../../../l10n/app_localizations.dart';
 import 'inspector_details_screen.dart';
 
-class InspectorManagementScreen extends StatelessWidget {
-  InspectorManagementScreen({Key? key}) : super(key: key);
+class InspectorManagementScreen extends StatefulWidget {
+  const InspectorManagementScreen({Key? key}) : super(key: key);
 
-  final List<Map<String, dynamic>> users = [
-    {
-      'name': 'Amr',
-      'phone': '+201012345678',
-      'email': 'Amr@example.com',
-      'date': 'Jul 5, 2023',
-      'status': 'Active',
-      'assignedmarketer': 'Yasser Mohamed',
-      'interestedCar': "2",
-      "AssignedProductsNum":"5",
-      "Completed":"12",
-      "totalinspections":"2"
-    },
-    {
-      'name': 'yasser',
-      'phone': '+201012345678',
-      'email': 'yasser@example.com',
-      'date': 'Dec 30, 2023',
-      'status': 'Suspended',
-      'assignedmarketer': 'kaream Mohamed',
+  @override
+  State<InspectorManagementScreen> createState() => _InspectorManagementScreenState();
+}
 
-      'interestedCar': "2",
-      "AssignedProductsNum":"5",
-      "Completed":"12",
-      "totalinspections":"2"
+class _InspectorManagementScreenState extends State<InspectorManagementScreen> {
+  InspectorManagementCubit inspectorManagementCubit = GetIt.instance<InspectorManagementCubit>();
+  final TextEditingController _searchController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    inspectorManagementCubit.getAllInspectors();
+  }
 
-    },
-    {
-      'name': 'Ali Ahmed',
-      'phone': '+201012345678',
-      'email': 'ahmed@example.com',
-      'date': 'Dec 21, 2023',
-      'status': 'Active',
-      'assignedmarketer': ' Mohamed',
+  @override
+  void dispose() {
+    inspectorManagementCubit.close();
+    _searchController.dispose();
+    super.dispose();
+  }
 
-      'interestedCar': "2",
-      "AssignedProductsNum":"5",
-      "Completed":"12",
-      "totalinspections":"2"
-
-
-    },
-    {
-      'name': 'Ali ',
-      'phone': '+201012345678',
-      'email': 'Ali@example.com',
-      'date': 'Dec 21, 2023',
-      'status': 'Active',
-      'assignedmarketer': 'Yasser ',
-
-      'interestedCar': "2",
-      "AssignedProductsNum":"5",
-      "Completed":"12",
-      "totalinspections":"2"
-
-
-    },
-  ];
+  Future<void> _refreshData() async {
+    if (_searchController.text.isEmpty) {
+      await inspectorManagementCubit.getAllInspectors();
+    } else {
+      await inspectorManagementCubit.searchInspectors(keyWord: _searchController.text);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserCubit>().state;
+    final isAdmin = user?.roles?.contains('Admin') == true;
+    
     return Scaffold(
       body: Column(
         children: [
@@ -87,33 +68,112 @@ class InspectorManagementScreen extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.inspectorManagement,
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize:18.sp ),
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 18.sp),
               ),
-              // Profile image or icon can go here
             ],
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: CustomTextField(
-
+            child: CustomizedSearchBar(
               hintText: AppLocalizations.of(context)!.search,
+              outlineInputBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                  borderSide:  BorderSide(
+                    color: ColorManager.lightGreyShade2,
+                    width: 2,
+                  )),
 
-              prefixIcon: Icon(Icons.search, color: ColorManager.lightGreyShade2),
+
+              onSearch: (keyword) {
+              if (keyword.isEmpty) {
+                inspectorManagementCubit.getAllInspectors();
+              } else {
+                inspectorManagementCubit.searchInspectors(keyWord: keyword);
+              }
+            },
             ),
           ),
-
           Expanded(
-            child: ListView.builder(
-              padding:  EdgeInsets.symmetric(horizontal: 16.w),
-              itemCount: users.length,
-              itemBuilder: (context, index) {
-                final user = users[index];
-                return InspectorCard(user: user,onViewPressed: () {
-                  Navigator.of(context).pushNamed(
-                    InspectorDetailsScreen.routeName,
-                    arguments: user,
+            child: BlocBuilder<InspectorManagementCubit, InspectorManagementState>(
+              bloc: inspectorManagementCubit,
+              builder: (context, state) {
+                if (state is InspectorManagementLoading) {
+                  return Center(child: CircularProgressIndicator(color: ColorManager.lightprimary));
+                } else if (state is InspectorManagementFailure) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(state.error?.errorMessage??""),
+                        SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () => inspectorManagementCubit.getAllInspectors(),
+                          child: Text(AppLocalizations.of(context)!.tryAgain),
+                        ),
+                      ],
+                    ),
                   );
-                },);
+                } else if (state is InspectorManagementEmpty) {
+                  return RefreshIndicator(
+                    color: ColorManager.lightprimary,
+                    onRefresh: _refreshData,
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.5,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.hourglass_empty,
+                                  size: 64,
+                                  color: ColorManager.darkGrey,
+                                ),
+                                SizedBox(height: 16),
+                                Text(
+                                  AppLocalizations.of(context)!.noProductsFound,
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                    color: ColorManager.darkGrey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (state is InspectorManagementSuccess) {
+                  return RefreshIndicator(
+                    color: ColorManager.lightprimary,
+                    onRefresh: _refreshData,
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      itemCount: state.inspectors.length,
+                      itemBuilder: (context, index) {
+                        final inspector = state.inspectors[index];
+                        return InspectorCard(
+                          inspector: inspector,
+                          onViewPressed: () {
+                            Navigator.of(context).pushNamed(
+                              InspectorDetailsScreen.routeName,
+                              arguments: inspector,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  );
+                }
+                return SizedBox.shrink();
               },
             ),
           ),
@@ -123,24 +183,32 @@ class InspectorManagementScreen extends StatelessWidget {
   }
 }
 
+
 class InspectorCard extends StatelessWidget {
-  final Map<String, dynamic> user;
+  final AllInspectorsEntity inspector;
   final bool showBottons;
   final VoidCallback? onViewPressed;
 
-  const InspectorCard(
-      {Key? key, required this.user, this.showBottons = true, this.onViewPressed})
-      : super(key: key);
+  const InspectorCard({
+    Key? key,
+    required this.inspector,
+    this.showBottons = true,
+    this.onViewPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final isActive = user['status'] == 'Active';
+    final user = context.read<UserCubit>().state;
+    final isAdmin = user?.roles?.contains('Admin') == true;
+
     return Card(
       elevation: 0,
       color: ColorManager.white,
       margin: EdgeInsets.symmetric(vertical: 8.h),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r),
-          side: BorderSide(color: ColorManager.lightGrey)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.r),
+        side: BorderSide(color: ColorManager.lightGrey),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -149,255 +217,408 @@ class InspectorCard extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset(
-                  ImageAssets.userIcon, height: 18.h, width: 18.w,),
+                  ImageAssets.userIcon,
+                  height: 18.h,
+                  width: 18.w,
+                ),
                 SizedBox(width: 6.w),
                 Text(
-                  user['name'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
+                  inspector.fullName ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                 ),
-                const Spacer(),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 10.w, vertical: 4.h),
-                  decoration: BoxDecoration(
-                    color: isActive ? const Color(0xFFDCFCE7) : const Color(
-                        0xFFFFEDD5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    user['status'],
-                    style: TextStyle(
-                      color: isActive ? const Color(0xFF166534) : const Color(
-                          0xFF9A3412),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
+                if (isAdmin) ...[
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () => _showRateBottomSheet(context),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.star_rate, color: Colors.amber, size: 16.sp),
+                          SizedBox(width: 6.w),
+                          Text(
+                            AppLocalizations.of(context)!.inspectorRate,
+                            style: TextStyle(
+                              color: Colors.amber.shade700,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
             ),
             SizedBox(height: 8.h),
             Row(
               children: [
                 SvgPicture.asset(
-                  ImageAssets.callIcon, height: 18.h, width: 18.w,),
-                SizedBox(width: 6.w),
-                Text(user['phone'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
+                  ImageAssets.callIcon,
+                  height: 18.h,
+                  width: 18.w,
                 ),
+                SizedBox(width: 6.w),
+                Text(
+                  inspector.phoneNumber ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+
               ],
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             Row(
               children: [
                 SvgPicture.asset(
-                  ImageAssets.mailIcon, height: 18.h, width: 18.w,),
+                  ImageAssets.mailIcon,
+                  height: 18.h,
+                  width: 18.w,
+                ),
                 SizedBox(width: 6.w),
-                Text(user['email'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
+                Text(
+                  inspector.email ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                 ),
               ],
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
+            Row(
+              children: [
+                Icon(
+                  Icons.visibility,
+                  color: ColorManager.lightprimary,
+                  size: 20.sp,
+                ),
+                SizedBox(width: 6.w),
+                Text(
+                  "${AppLocalizations.of(context)!.totalInspections} :",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+                Text(
+                  inspector.totalInspections?.toString() ?? '0',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+              ],
+            ),
+            SizedBox(height: 12.h),
             Row(
               children: [
                 SvgPicture.asset(
-                  ImageAssets.calenderIcon, height: 18.h, width: 18.w,),
-
+                  ImageAssets.completedIcon,
+                  height: 18.h,
+                  width: 18.w,
+                ),
                 SizedBox(width: 6.w),
-                Text(user['date'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
+                Text(
+                  "${AppLocalizations.of(context)!.completed} :",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                ),
+                Text(
+                  inspector.completedInspections?.toString() ?? '0',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                 ),
               ],
             ),
-            SizedBox(height: 10.h),
-            Row(
-              children: [
-                Icon(Icons.visibility, color: ColorManager.lightprimary,
-                    size: 20.sp),
-
-                SizedBox(width: 6.w),
-                Text("${AppLocalizations.of(context)!.totalInspections} :",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
-                ),
-                Text(user['totalinspections'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.h),
-
-            Row(
-              children: [
-                SvgPicture.asset(
-                  ImageAssets.completedIcon, height: 18.h, width: 18.w,),
-
-                SizedBox(width: 6.w),
-                Text("${AppLocalizations.of(context)!.completed} :",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
-                ),
-                Text(user['Completed'],
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 14.sp),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.h),
-            showBottons ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: ColorManager.white,
-
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: ColorManager.darkGrey)),
+            // Vehicle Type
+            if (inspector.vehicleType != null && inspector.vehicleType!.isNotEmpty) ...[
+              SizedBox(height: 12.h),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    ImageAssets.carIcon2,
+                    height: 18.h,
+                    width: 18.w,
                   ),
-                  onPressed: onViewPressed,
-                  icon: Icon(
-                      Icons.visibility, color: Color(0xffD4AF37), size: 20.sp),
-
-                  label: Text(AppLocalizations.of(context)!.view,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(
-                        fontSize: 12.sp, color: ColorManager.lightprimary),
-
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.vehicleType} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                   ),
-                ),
-                ElevatedButton.icon(
-
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.white,
-
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: ColorManager.darkGrey)),
+                  Text(
+                    inspector.vehicleType ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                   ),
-                  onPressed: () {
-                    _showBottomSheet(
-                      context: context,
-                      title: AppLocalizations.of(context)!.deleteUserAccount,
-                      description: AppLocalizations.of(context)!
-                          .deleteUserAccountSubtitle,
-                      cancelText: AppLocalizations.of(context)!.cancel,
-                      confirmText: AppLocalizations.of(context)!.delete,
-                      onCancel: () => Navigator.pop(context),
-                      onConfirm: () {},
-                      icon: Icon(Icons.delete, color: ColorManager.error),
-
-                    );
-                  },
-                  icon: Icon(
-                      Icons.delete, color: ColorManager.error, size: 20.sp),
-
-                  label: Text(AppLocalizations.of(context)!.delete,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(
-                        fontSize: 12.sp, color: ColorManager.lightprimary),
-
+                ],
+              ),
+            ],
+            // License Number
+            if (inspector.licenseNumber != null && inspector.licenseNumber!.isNotEmpty) ...[
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.credit_card,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
                   ),
-                ),
-                ElevatedButton.icon(
-
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: ColorManager.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: ColorManager.darkGrey)),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.licenseNumber} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                   ),
-                  onPressed: () {
-                    _showBottomSheet(
-                      context: context,
-                      title: AppLocalizations.of(context)!.suspendUserAccount,
-                      description: AppLocalizations.of(context)!
-                          .suspendUserAccountSubtitle,
-                      cancelText: AppLocalizations.of(context)!.cancel,
-                      confirmText: AppLocalizations.of(context)!.confirm,
-                      onCancel: () => Navigator.pop(context),
-                      onConfirm: () {},
-                      icon: Icon(Icons.lock, color: ColorManager.error),
-
-                    );
-                  },
-                  icon: Icon(Icons.lock, color: ColorManager.lightprimary,
-                      size: 20.sp),
-
-                  label: Text(isActive
-                      ? AppLocalizations.of(context)!.suspend
-                      : AppLocalizations.of(context)!.unsuspend,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(
-                        fontSize: 12.sp, color: ColorManager.lightprimary),
-
+                  Text(
+                    inspector.licenseNumber ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
                   ),
-                ),
-              ],
-
-            ) : SizedBox.shrink(),
+                ],
+              ),
+            ],
+            // Vehicle License Number
+            if (inspector.vehicleLicenseNumber != null && inspector.vehicleLicenseNumber!.isNotEmpty) ...[
+              SizedBox(height: 12.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.car_rental,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.vehicleLicenseNumber} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.vehicleLicenseNumber ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            // Work Area
+            if (inspector.workArea != null && inspector.workArea!.isNotEmpty) ...[
+              SizedBox(height: 12.h),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    color: ColorManager.lightprimary,
+                    size: 18.sp,
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    "${AppLocalizations.of(context)!.workArea} :",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                  Text(
+                    inspector.workArea ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
+            ],
+            SizedBox(height: 12.h),
+            if (showBottons)
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: ColorManager.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(color: ColorManager.darkGrey),
+                        ),
+                      ),
+                      onPressed: onViewPressed,
+                      icon: Icon(
+                        Icons.visibility,
+                        color: const Color(0xffD4AF37),
+                        size: 20.sp,
+                      ),
+                      label: Text(
+                        AppLocalizations.of(context)!.view,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 12.sp,
+                          color: ColorManager.lightprimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            else
+              const SizedBox.shrink(),
           ],
         ),
       ),
     );
   }
 
-// ... inside your widget class
+  void _showRateBottomSheet(BuildContext context) {
+    final TextEditingController _rateController = TextEditingController();
 
-  void _showBottomSheet({ required BuildContext context,
-    required String title,
-    required String description,
-    required String cancelText,
-    required String confirmText,
-    required VoidCallback onCancel,
-    required VoidCallback onConfirm,
-    Color? cancelColor,
-    Color? confirmColor,
-    Widget ? icon,
-
-
-  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => BlocListener<RateUserCubit, RateUserState>(
+        listener: (context, state) {
+          if (state is RateUserSuccess) {
+            // ✅ Show success dialog first
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!.success),
+                content: Text(state.message ?? AppLocalizations.of(context)!.success),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context); // Close dialog
+                      Navigator.pop(context); // Close bottom sheet
+                    },
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is RateUserFailure) {
+            // ✅ Show error dialog
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocalizations.of(context)!.error),
+                content: Text(state.error.errorMessage ?? 'حدث خطأ'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context), // Close dialog only
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: SizedBox(
+            height: 350.h,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.amber.withOpacity(0.1),
+                        radius: 30,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.amber.withOpacity(0.2),
+                          child: Icon(Icons.star_rate, color: Colors.amber),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.close, size: 24.sp, color: ColorManager.darkGrey),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    AppLocalizations.of(context)!.inspectorRate,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontSize: 18.sp,
+                      color: Colors.amber.shade700,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    AppLocalizations.of(context)!.inspectorRate,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: 14.sp,
+                      color: ColorManager.darkGrey,
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  TextField(
+                    controller: _rateController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.enterYourRate,
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomizedElevatedButton(
+                          bottonWidget: Text(
+                            AppLocalizations.of(context)!.cancel,
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          borderColor: ColorManager.lightGrey,
+                          color: ColorManager.white,
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      Expanded(
+                        child: BlocBuilder<RateUserCubit, RateUserState>(
+                          builder: (context, state) {
+                            return CustomizedElevatedButton(
+                              bottonWidget: state is RateUserLoading
+                                  ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              )
+                                  : Text(
+                                'إرسال',
+                                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  fontSize: 16.sp,
+                                  color: ColorManager.white,
+                                ),
+                              ),
+                              onPressed: state is RateUserLoading
+                                  ? null
+                                  : () {
+                                final rate = num.tryParse(_rateController.text);
+                                if (rate == null) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text(AppLocalizations.of(context)!.error),
+                                      content: Text('يرجى إدخال رقم صحيح'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: Text(AppLocalizations.of(context)!.ok),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  return;
+                                }
+                                // ✅ Dispatch event — DO NOT close sheet yet
+                                context.read<RateUserCubit>().rateUser(inspector.id ?? '', rate);
+                              },
+                              borderColor: ColorManager.lightprimary,
+                              color: ColorManager.lightprimary,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

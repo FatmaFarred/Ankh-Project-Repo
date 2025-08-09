@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/details_screen/details_screen.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/all_products_entity.dart';
 import '../../../l10n/app_localizations.dart';
@@ -33,8 +34,8 @@ class MyProductCarCard extends StatelessWidget {
     child: Container(
 
       width: 198.w,
-      height: showAddButton?285.5.h:248.h,
-      padding: EdgeInsets.symmetric(horizontal: 17.5.w, vertical: 13.h),
+      // height: showAddButton?285.5.h:248.h,
+      padding: EdgeInsets.symmetric(horizontal: 17.5.w, vertical: 8.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.5.r),
         border: Border.all(
@@ -103,6 +104,13 @@ class MyProductCarCard extends StatelessWidget {
 
           ),
           SizedBox(height: 5.h),
+          Text(
+            "Points : ${product.marketerPoints}",
+            style:  Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.sp,color: ColorManager.darkGrey),
+
+
+          ),
+          SizedBox(height: 5.h),
 
           Text(
             AppLocalizations.of(context)!.price,
@@ -110,15 +118,13 @@ class MyProductCarCard extends StatelessWidget {
 
 
           ),
-          SizedBox(height: 8.h),
 
-
+          SizedBox(height: 2.h),
           Text(
             "EGP ${product.price}",
             style:Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 11.sp,color: ColorManager.lightprimary),
           ),
           if (showAddButton) ...[
-            SizedBox(height: 12.h),
             SizedBox(
               height: 50.h,
               child: CustomizedElevatedButton(

@@ -33,6 +33,20 @@ class AuthenticationRepositryImpl implements AuthenticationRepositry {
 
   }
 
+  Future <Either<Failure,AuthenticationResponseEntity>> registerClient (String name , String email,String password ,String phone)async{
+
+    var either = await authRemoteDataSource.registerClient(
+        name, email, password,  phone);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future <Either<Failure,String?>>registerMarketerTeamMember (String name , String email,String password ,String phone,String code)async {
+    var either = await authRemoteDataSource.registerMarketerTeamMember(name, email, password, phone, code);
+    return either.fold((error) => left(error), (response) => right(response));
+
+  }
+
   }
 
 

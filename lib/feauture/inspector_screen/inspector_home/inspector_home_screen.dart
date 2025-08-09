@@ -69,6 +69,7 @@ class _InspectorHomeScreenState extends State<InspectorHomeScreen> {
     final user = context.read<UserCubit>().state;
     final userId = user?.id;
     await inspectorHomeProductCubit.fetchProducts();
+    print("👤 User IDd: $userId"); // Debug print
 
     /* print("👤 User ID: $userId"); // Debug print
     if (userId != null && userId.isNotEmpty) {
@@ -353,6 +354,25 @@ class InspectionRequestCard extends StatelessWidget {
               SizedBox(width: 6.w),
               Text(
                 inspectionRequest?.address ?? "",
+
+                style: GoogleFonts.poppins(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w300,
+                  color: Color(0xFF4f4f4f),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.point_of_sale_rounded,
+                size: 14,
+                color: ColorManager.lightprimary,
+              ),
+              SizedBox(width: 6.w),
+              Text(
+                "النقاط : ${inspectionRequest?.inspectorPoints.toString()}" ?? "0",
 
                 style: GoogleFonts.poppins(
                   fontSize: 14.sp,

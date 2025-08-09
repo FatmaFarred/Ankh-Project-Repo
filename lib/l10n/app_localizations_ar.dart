@@ -23,7 +23,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onBoarding1SubTitle =>
-      'تواصل بسهولة مع المالكين، والمسوقين، والمفتشين كل ذلك عبر منصة قوية واحدة';
+      'تواصل بسهولة مع المالكين، والمسوقين، والمعاينين كل ذلك عبر منصة قوية واحدة';
 
   @override
   String get onBoarding2Title => 'اعرض ممتلكاتك أو سيارتك بسهولة وتحكم بكل شيء';
@@ -77,7 +77,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get owner => 'مالك';
 
   @override
-  String get inspector => 'مفتش ';
+  String get inspector => 'معاين ';
 
   @override
   String get inspectorDescription => 'افحص وحقق من العقارات أو السيارات';
@@ -86,7 +86,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ownerDescription => 'مالك عقار أو نشاط تجاري';
 
   @override
-  String get client => 'Client';
+  String get client => 'عميل';
 
   @override
   String get clientDescription => 'يبحث عن خدمات ';
@@ -153,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟';
 
   @override
-  String get log => 'Login';
+  String get log => 'تسجيل دخول';
 
   @override
   String get signIn => 'أهلا بعودتك!';
@@ -276,7 +276,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidPhone => 'ادخل رقم هاتف صالح';
 
   @override
-  String get confirmPasswordRequired => 'confirm password is required';
+  String get confirmPasswordRequired => 'تأكيد كلمة المرور مطلوب';
 
   @override
   String get invalidPasswordDetails =>
@@ -290,6 +290,108 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noDataFound => 'لا توجد بيانات';
+
+  @override
+  String get topBrand => 'العلامة التجارية';
+
+  @override
+  String get selectTopBrand => 'اختر العلامة التجارية';
+
+  @override
+  String get pleaseSelectTopBrand => 'الرجاء اختيار علامة تجارية';
+
+  @override
+  String get addBrand => 'إضافة علامة تجارية';
+
+  @override
+  String get brandName => 'اسم العلامة التجارية';
+
+  @override
+  String get brandNameRequired => 'اسم العلامة التجارية مطلوب';
+
+  @override
+  String get brandImage => 'صورة العلامة التجارية';
+
+  @override
+  String get tapToSelectImage => 'اضغط لاختيار صورة';
+
+  @override
+  String get pleaseSelectImage => 'الرجاء اختيار صورة';
+
+  @override
+  String get topBrandAddedSuccessfully => 'تمت إضافة العلامة التجارية بنجاح';
+
+  @override
+  String get noTopBrandsFound => 'لا توجد علامات تجارية';
+
+  @override
+  String get inviteTeamMember => 'دعوة عضو فريق';
+
+  @override
+  String get invitesNumber => 'عدد الدعوات';
+
+  @override
+  String get generateLink => 'إنشاء كود';
+
+  @override
+  String get yourInvitesAreReady => 'دعواتك جاهزة';
+
+  @override
+  String get shareTheseLinksToInvite => 'شارك هذه الاكواد لدعوة أعضاء جدد.';
+
+  @override
+  String get singleUseLink => 'كود للاستخدام مرة واحدة';
+
+  @override
+  String get linkWillBeInvalidated => 'سيتم إلغاء كود بمجرد انضمام عضو جديد.';
+
+  @override
+  String get expiresSoon => 'ينتهي قريباً';
+
+  @override
+  String get linkValidFor24Hours => 'لأمان، الكود صالح لمدة 24 ساعة القادمة.';
+
+  @override
+  String get teams => 'الفرق';
+
+  @override
+  String get codes => 'الأكواد';
+
+  @override
+  String get teamMembers => 'أعضاء الفريق';
+
+  @override
+  String get invitationCodes => 'أكواد الدعوة';
+
+  @override
+  String get assignedProducts => 'المنتجات المُسندة';
+
+  @override
+  String get used => 'مستعمل';
+
+  @override
+  String get unused => 'غير مستخدم';
+
+  @override
+  String get copyCode => 'نسخ الكود';
+
+  @override
+  String get codeCopied => 'تم نسخ الكود إلى الحافظة';
+
+  @override
+  String get noTeamMembers => 'لم يتم العثور على أعضاء فريق';
+
+  @override
+  String get noInvitationCodes => 'لم يتم العثور على أكواد دعوة';
+
+  @override
+  String get invitationCode => 'كود الدعوة';
+
+  @override
+  String get enterInvitationCode => 'أدخل كود الدعوة الخاص بك';
+
+  @override
+  String get invitationCodeRequired => 'كود الدعوة مطلوب';
 
   @override
   String get popularNewCars => 'السيارات الجديدة الشائعة';
@@ -340,6 +442,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get transmission => 'ناقل الحركة';
 
   @override
+  String get transmissionType => 'اختار نوع ناقل الحركة';
+
+  @override
+  String get chooseTransmissionType => 'نوع ناقل الحركة';
+
+  @override
+  String get automatic => 'اوتوماتيك';
+
+  @override
+  String get manual => 'مانول';
+
+  @override
   String get horsepower => 'قوة الحصان';
 
   @override
@@ -376,7 +490,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectTimeSlot => 'اختر وقتًا';
 
   @override
-  String get requestInspection => 'طلب فحص';
+  String get requestInspection => 'طلب معاينة';
 
   @override
   String get requestSummary => 'ملخص الطلب';
@@ -432,6 +546,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmRequest => 'تأكيد الطلب';
 
   @override
+  String get required => 'مطلوب';
+
+  @override
+  String get invalidInteger => 'الرجاء إدخال رقم صحيح';
+
+  @override
+  String get invalidNumber => 'الرجاء إدخال رقم صالح';
+
+  @override
+  String get numberMustBeGreaterThanZero => 'يجب أن يكون الرقم أكبر من صفر';
+
+  @override
+  String get requestedMonths => 'الأشهر المطلوبة';
+
+  @override
+  String get downPayment => 'المقدم';
+
+  @override
   String get views => 'المشاهدات';
 
   @override
@@ -480,7 +612,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get balance => 'الرصيد';
 
   @override
-  String get account => 'Account';
+  String get account => 'الحساب';
 
   @override
   String get requestDetails => 'تفاصيل الطلب';
@@ -615,7 +747,7 @@ class AppLocalizationsAr extends AppLocalizations {
       '`فشل في إرسال بريد إعادة تعيين كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا';
 
   @override
-  String get ok => 'حسناً';
+  String get ok => 'موافق';
 
   @override
   String get failedToLoadRecommendedBrands =>
@@ -722,6 +854,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noInspectionsFound => 'لا توجد فحوصات متاحة';
 
   @override
+  String get noUsersFound => 'لا يوجد مستخدمين';
+
+  @override
+  String get noFavoritesFound => 'لا توجد منتجات مفضلة';
+
+  @override
+  String get favoriteProducts => 'المنتجات المفضلة';
+
+  @override
   String get inspectionResults => 'نتائج الفحص';
 
   @override
@@ -746,7 +887,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketers => 'المسوّقين';
 
   @override
-  String get inspectors => 'المفتشين';
+  String get inspectors => 'المعاينين';
 
   @override
   String get inspections => 'الفحوصات';
@@ -776,6 +917,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancel => 'إلغاء';
 
   @override
+  String get currentImage => 'الصورة الحالية';
+
+  @override
   String get unsuspend => 'إلغاء التعليق';
 
   @override
@@ -789,8 +933,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteUserAccount => 'حذف حساب المستخدم';
 
   @override
-  String get deleteUserAccountSubtitle =>
-      'هل أنت متأكد أنك تريد حذف هذا المستخدم بشكل دائم؟ لا يمكن التراجع عن هذا الإجراء، وقد يتم فقدان جميع البيانات المتعلقة به. إذا كان المستخدم مرتبطًا حاليًا بمنتجات أو فحوصات، يرجى إلغاء ارتباطه أولاً.';
+  String get rejectUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد رفض هذا المستخدم؟\nيمكن تعديل هذا القرار لاحقًا، ولكن قد يتم تعطيل وصوله مؤقتًا أو تعليق بياناته. ';
+
+  @override
+  String get acceptUserAccountSubtitle =>
+      'هل أنت متأكد أنك تريد قبول هذا المستخدم؟\n سيمنحه هذا الإجراء صلاحيات الوصول إلى النظام.\n يمكنك تعديل هذا القرار لاحقًا من خلال تعليق الحساب.';
 
   @override
   String get userDetails => 'بيانات المستخدم';
@@ -808,10 +956,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get suspendAccount => 'تعليق الحساب';
 
   @override
-  String get marketerManagement => 'إدارة المسوقين';
+  String get productsManagement => 'إدارة المنتجات';
 
   @override
-  String get assignedProducts => 'المنتجات المُسندة';
+  String get addNewProduct => 'إضافة منتج جديد';
+
+  @override
+  String unassignConfirmation(Object clientName, Object productName) {
+    return 'هل أنت متأكد أنك تريد إلغاء تعيين \"$productName\" من $clientName؟ سيتم تمييز هذا المنتج كمتاح مرة أخرى.';
+  }
+
+  @override
+  String get marketerManagement => 'إدارة المسوقين';
 
   @override
   String get marketerInfo => 'معلومات المسوق';
@@ -832,7 +988,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerDetails => 'بيانات المسوق';
 
   @override
-  String get unassign => ' إلغاء الإسناد';
+  String get unassign => 'إلغاء التعيين';
 
   @override
   String get inspectorManagement => 'إدارة المعاينين';
@@ -851,4 +1007,496 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get deleteInspector => 'حذف المعاين ';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get accept => 'قبول';
+
+  @override
+  String get acceptUserAccount => 'قبول حساب المستخدم';
+
+  @override
+  String get rejectUserAccount => 'رفض حساب المستخدم';
+
+  @override
+  String get appointAsTeamLeader => 'تعيين كقائد فريق';
+
+  @override
+  String get insertProductId => 'أدخل معرف المنتج';
+
+  @override
+  String get productId => 'معرف المنتج';
+
+  @override
+  String get assign => 'تعيين';
+
+  @override
+  String get blockUser => 'حظر المستخدم';
+
+  @override
+  String get unblockUser => 'إلغاء حظر المستخدم';
+
+  @override
+  String get blockUserSubtitle =>
+      'هل أنت متأكد أنك تريد حظر هذا المستخدم؟\nسيمنعه هذا الإجراء من تسجيل الدخول أو الوصول إلى النظام حتى يتم إلغاء حظره.';
+
+  @override
+  String get unblockUserSubtitle =>
+      'هل أنت متأكد أنك تريد إلغاء حظر هذا المستخدم؟\nسيمنحه هذا الإجراء صلاحيات الوصول إلى النظام مرة أخرى.';
+
+  @override
+  String get blockUserAccount => 'حظر حساب المستخدم';
+
+  @override
+  String get unblockUserAccount => 'إلغاء حظر حساب المستخدم';
+
+  @override
+  String get reasonForBlocking => 'سبب الحظر';
+
+  @override
+  String get enterReasonForBlocking => 'أدخل سبب الحظر';
+
+  @override
+  String get blockDaysCount => ' عدد أيام الحظر';
+
+  @override
+  String get enterBlockDaysCount => 'أدخل عدد أيام الحظر';
+
+  @override
+  String get block => 'حظر';
+
+  @override
+  String get unblock => 'إلغاء الحظر';
+
+  @override
+  String get appointAsteamLeaderSubtitle =>
+      'هل أنت متأكد أنك تريد تعيين هذا المستخدم كقائد فريق؟\nسيمنحه هذا الإجراء صلاحيات إضافية لإدارة الفريق.';
+
+  @override
+  String get clientProductInformation => 'بيانات المنتح والعميل';
+
+  @override
+  String get points => 'النقاط';
+
+  @override
+  String get pointsDetails => ' تفاصيل النقاط';
+
+  @override
+  String get pointsHistory => ' تاريخ النقاط';
+
+  @override
+  String get approve => ' قبول';
+
+  @override
+  String get approved => ' تم الموافقة ';
+
+  @override
+  String get pointsRequest => ' طلبات النقاط';
+
+  @override
+  String get rejectReason => 'السبب';
+
+  @override
+  String get enterRejectReason => 'أدخل سبب الرفض';
+
+  @override
+  String get rejectSubTitle =>
+      'هل أنت متأكد أنك تريد رفض هذا الطلب؟\nسيتم إلغاء الطلب ولن يتم منح النقاط للعميل.';
+
+  @override
+  String get approveSubTitle =>
+      'هل أنت متأكد أنك تريد الموافقة على هذا الطلب؟\nسيتم منح النقاط للعميل وسيتم تحديث رصيده.';
+
+  @override
+  String get pointsRequestDetails => 'تفاصيل طلب النقاط';
+
+  @override
+  String get pointPriceManagement => ' إدارة سعر النقطة';
+
+  @override
+  String get pointPrice => ' سعر النقطة';
+
+  @override
+  String get enterPointPrice => ' أدخل سعر النقطة';
+
+  @override
+  String get editPointPrice => ' تعديل سعر النقطة';
+
+  @override
+  String get eg => 'ج.م';
+
+  @override
+  String get leaderMarketer => 'قائد الفريق';
+
+  @override
+  String get update => ' تحديث';
+
+  @override
+  String get myProfile => 'ملفي الشخصي';
+
+  @override
+  String get point => ' نقطة';
+
+  @override
+  String get rejected => ' مرفوض';
+
+  @override
+  String get requestPoints => ' طلب نقاط';
+
+  @override
+  String get requestPointsSubTitle =>
+      'قم بإرسال طلب للحصول على نقاط إضافية. سيتم مراجعة طلبك من قبل فريق الدعم.';
+
+  @override
+  String get requestPointsDetails => ' تفاصيل طلب النقاط';
+
+  @override
+  String get pointsCount => ' عدد النقاط';
+
+  @override
+  String get enterPointsCount => 'أدخل عدد النقاط';
+
+  @override
+  String get enterDescription => 'أدخل الوصف';
+
+  @override
+  String get submit => 'إرسال';
+
+  @override
+  String get inspectionImages => ' صور المعاينة';
+
+  @override
+  String get sendPoints => 'إرسال النقاط';
+
+  @override
+  String get sendPointsSubTitle =>
+      'قم بإرسال النقاط إلى العميل. سيتم تحديث رصيد العميل تلقائيًا.';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get inspectorDocuments => 'مستندات المعاين';
+
+  @override
+  String get resechudleInspection => 'إعادة جدولة المعاينة';
+
+  @override
+  String get reschedule => 'إعادة جدولة';
+
+  @override
+  String get date => ' التاريخ';
+
+  @override
+  String get time => 'الوقت';
+
+  @override
+  String get insepectionManagement => ' إدارة المعاينات';
+
+  @override
+  String get carCode => 'رمز السيارة';
+
+  @override
+  String get reactDenied =>
+      ' للتفاعل مع هذه الميزة، تحتاج إلى تسجيل الدخول أولاً.';
+
+  @override
+  String get signInforMore => 'سجل الدخول لمزيد من المعلومات والصلاحيات.';
+
+  @override
+  String get failedToLoadData =>
+      'فشل في تحميل البيانات، يرجى المحاولة مرة أخرى لاحقًا';
+
+  @override
+  String get noCommentsFound => 'لا توجد تعليقات متاحة';
+
+  @override
+  String get noNotificationsFound => 'لا توجد إشعارات متاحة';
+
+  @override
+  String get teamManagement => 'إدارة الفريق';
+
+  @override
+  String get inviteMember => 'دعوة عضو';
+
+  @override
+  String get inviteMemberSubtitle =>
+      'قم بدعوة أعضاء جدد للانضمام إلى فريقك. يمكنك مشاركة كود الدعوة معهم.';
+
+  @override
+  String get noTeamMembersFound => 'لا توجد أعضاء في الفريق';
+
+  @override
+  String get noCodeFound => 'لا توجد محادثات متاحة';
+
+  @override
+  String get enterCodeInvitationCount => ' أدخل عدد الدعوات';
+
+  @override
+  String get generating => ' جارٍ إنشاء الكود...';
+
+  @override
+  String get doYouHaveInvitationCode => 'هل لديك كود دعوة؟';
+
+  @override
+  String get registerWithInvitationCode => 'سجل باستخدام كود الدعوة';
+
+  @override
+  String get aggredPrice => 'السعر المتفق عليه';
+
+  @override
+  String get editCarDetails => 'تعديل تفاصيل السيارة';
+
+  @override
+  String get addCar => 'إضافة سيارة';
+
+  @override
+  String get basicInformation => 'المعلومات الأساسية';
+
+  @override
+  String get carName => 'اسم السيارة';
+
+  @override
+  String get category => 'الفئة';
+
+  @override
+  String get year => 'السنة';
+
+  @override
+  String get mileage => 'المسافة المقطوعة';
+
+  @override
+  String get color => 'اللون';
+
+  @override
+  String get horsePower => 'قوة المحرك';
+
+  @override
+  String get specifications => 'المواصفات';
+
+  @override
+  String get ownerName => 'اسم المالك';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get conditionParts => 'حالة الأجزاء';
+
+  @override
+  String get licenseExpiryDate => 'تاريخ انتهاء الرخصة';
+
+  @override
+  String get safetyReport => 'تقرير السلامة';
+
+  @override
+  String get taxStatus => 'حالة الضريبة';
+
+  @override
+  String get interiorCondition => 'حالة التصميم الداخلي';
+
+  @override
+  String get exteriorCondition => 'حالة التصميم الخارجي';
+
+  @override
+  String get additionalSpecs => 'مواصفات إضافية';
+
+  @override
+  String get additionalInfo => 'معلومات إضافية';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get inspectionResult => 'نتيجة المعاينة';
+
+  @override
+  String get accidentHistory => 'تاريخ الحوادث';
+
+  @override
+  String get testDriveAvailable => 'تجربة القيادة متاحة';
+
+  @override
+  String get warrantyStatus => 'حالة الضمان';
+
+  @override
+  String get tireStatus => 'حالة الإطارات';
+
+  @override
+  String get lightStatus => 'حالة الإضاءة';
+
+  @override
+  String get licenseDuration => 'مدة الرخصة';
+
+  @override
+  String get trafficViolations => 'مخالفات المرور';
+
+  @override
+  String get insuranceStatus => 'حالة التأمين';
+
+  @override
+  String get numberOfKeys => 'عدد المفاتيح';
+
+  @override
+  String get seatCondition => 'حالة المقاعد';
+
+  @override
+  String get gearCondition => 'حالة التروس';
+
+  @override
+  String get driveSystemCondition => 'حالة نظام القيادة';
+
+  @override
+  String get brakesCondition => 'حالة الفرامل';
+
+  @override
+  String get tags => 'العلامات';
+
+  @override
+  String get safetyStatus => 'حالة السلامة';
+
+  @override
+  String get commission => 'العمولة';
+
+  @override
+  String get requiredPoints => 'النقاط المطلوبة';
+
+  @override
+  String get browseFiles => 'تصفح الملفات';
+
+  @override
+  String get licenseImages => 'صور الرخصة';
+
+  @override
+  String get insuranceFront => 'الوجه الأمامي للتأمين';
+
+  @override
+  String get insuranceBack => 'الوجه الخلفي للتأمين';
+
+  @override
+  String get saveEdits => 'حفظ التعديلات';
+
+  @override
+  String get addProduct => 'إضافة منتج';
+
+  @override
+  String get edited => 'تم التعديل';
+
+  @override
+  String get added => 'تمت الإضافة';
+
+  @override
+  String get carNameRequired => 'اسم السيارة مطلوب';
+
+  @override
+  String get chooseDriveType => 'اختر نوع القيادة';
+
+  @override
+  String get chooseFuelType => 'اختر نوع الوقود';
+
+  @override
+  String get fuelType => 'نوع الوقود';
+
+  @override
+  String get driveType => 'نوع القيادة';
+
+  @override
+  String get frontWheel => 'العجلات الأمامية';
+
+  @override
+  String get rearWheel => 'العجلات الخلفية';
+
+  @override
+  String get allWheel => 'جميع العجلات';
+
+  @override
+  String get petrol => 'بنزين';
+
+  @override
+  String get electric => 'كهربائي';
+
+  @override
+  String get gas => 'غاز';
+
+  @override
+  String get available => 'متاح';
+
+  @override
+  String get sold => 'مباع';
+
+  @override
+  String get neww => 'جديد';
+
+  @override
+  String get editedSuccessfully => 'تم تعديل المنتجات بنجاح.';
+
+  @override
+  String get addedSuccessfully => 'تمت إضافة المنتجات بنجاح.';
+
+  @override
+  String get marketerPoints => 'نقاط المسوق';
+
+  @override
+  String get inspectorPoints => 'نقاط الفاحص';
+
+  @override
+  String get offersManagement => 'إدارة العروض';
+
+  @override
+  String get priceOffers => 'عروض السعر';
+
+  @override
+  String get installmentOffers => 'عروض التقسيط';
+
+  @override
+  String get noOffers => 'لا توجد عروض';
+
+  @override
+  String get refresh => ' تحديث';
+
+  @override
+  String get noTeamChatsDescription =>
+      ' لا توجد محادثات فريق متاحة حاليًا.\nيمكنك دعوة أعضاء جدد للانضمام إلى فريقك وبدء الدردشة.';
+
+  @override
+  String get noTeamChatsFound => ' لا توجد محادثات فريق';
+
+  @override
+  String get members => ' الأعضاء';
+
+  @override
+  String get teamChat => ' دردشة الفريق';
+
+  @override
+  String get noTeamToChat => 'لا يوجد فريق للمحادثة';
+
+  @override
+  String get noTeamToChatDescription =>
+      'أنت لست جزءاً من أي فريق بعد. يرجى الاتصال بمديرك للانضمام إلى فريق أو لتصبح قائد فريق.';
+
+  @override
+  String get goBack => 'العودة';
+
+  @override
+  String get currency => 'ج.م';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get months => 'شهور';
+
+  @override
+  String get writeYourMessage => 'اكتب رسالتك...';
+
+  @override
+  String get marketerRate => 'تقييم المسوق';
+
+  @override
+  String get inspectorRate => 'تقييم المعاين';
+
+  @override
+  String get enterYourRate => 'أدخل تقييمك';
 }

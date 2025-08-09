@@ -1,6 +1,6 @@
 class InspectionSubmissionEntity {
   final int requestInspectionId;
-  final String status;
+  final num status;
   final String inspectorComment;
   final List<String> images;
 
