@@ -292,6 +292,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noDataFound => 'لا توجد بيانات';
 
   @override
+  String get topBrand => 'العلامة التجارية';
+
+  @override
+  String get selectTopBrand => 'اختر العلامة التجارية';
+
+  @override
+  String get pleaseSelectTopBrand => 'الرجاء اختيار علامة تجارية';
+
+  @override
   String get addBrand => 'إضافة علامة تجارية';
 
   @override
@@ -535,6 +544,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirmRequest => 'تأكيد الطلب';
+
+  @override
+  String get required => 'مطلوب';
+
+  @override
+  String get invalidInteger => 'الرجاء إدخال رقم صحيح';
+
+  @override
+  String get invalidNumber => 'الرجاء إدخال رقم صالح';
+
+  @override
+  String get numberMustBeGreaterThanZero => 'يجب أن يكون الرقم أكبر من صفر';
+
+  @override
+  String get requestedMonths => 'الأشهر المطلوبة';
+
+  @override
+  String get downPayment => 'المقدم';
 
   @override
   String get views => 'المشاهدات';
@@ -1364,9 +1391,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get carNameRequired => 'اسم السيارة مطلوب';
 
   @override
-  String get required => 'مطلوب';
-
-  @override
   String get chooseDriveType => 'اختر نوع القيادة';
 
   @override
@@ -1475,5 +1499,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterYourRate => 'أدخل تقييمك';
-
 }

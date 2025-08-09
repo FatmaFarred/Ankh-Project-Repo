@@ -5,6 +5,8 @@ import 'package:ankh_project/core/constants/font_manager/font_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import 'package:ankh_project/domain/entities/product_post_entity.dart';
+import 'package:ankh_project/domain/entities/top_brand_entity.dart';
+import 'package:ankh_project/feauture/home_screen/top_brands/cubit/top_brand_cubit.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
   String? selectedCarName;
+  TopBrandEntity? selectedTopBrand;
   
   final List<String> carNames = [ 
     // Hyundai 
@@ -147,6 +150,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       TextEditingController();
   final TextEditingController tagsController = TextEditingController();
   final TextEditingController safetyStatusController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch top brands when the widget initializes
+    context.read<TopBrandCubit>().fetchTopBrands();
+  }
 
   @override
   void dispose() {
@@ -357,6 +367,67 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             });
                                           },
                                         ),
+                                        SizedBox(height: 16.h),
+                                        
+                                        Text(
+                                          "Top Brand",
+                                          style: GoogleFonts.inter(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(height: 6.h),
+                                        BlocBuilder<TopBrandCubit, TopBrandState>(
+                                          builder: (context, state) {
+                                            if (state is TopBrandLoading) {
+                                              return const Center(child: CircularProgressIndicator());
+                                            } else if (state is TopBrandLoaded) {
+                                              final brands = state.brands;
+                                              return DropdownButtonFormField<TopBrandEntity>(
+                                                decoration: InputDecoration(
+                                                  filled: true,
+                                                  fillColor: Colors.white,
+                                                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8.r),
+                                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8.r),
+                                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8.r),
+                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
+                                                  ),
+                                                  hintText: AppLocalizations.of(context)!.selectTopBrand,
+                                                ),
+                                                value: selectedTopBrand,
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return AppLocalizations.of(context)!.pleaseSelectTopBrand;
+                                                  }
+                                                  return null;
+                                                },
+                                                items: brands.map((TopBrandEntity brand) {
+                                                  return DropdownMenuItem<TopBrandEntity>(
+                                                    value: brand,
+                                                    child: Text(brand.name),
+                                                  );
+                                                }).toList(),
+                                                onChanged: (TopBrandEntity? newValue) {
+                                                  setState(() {
+                                                    selectedTopBrand = newValue;
+                                                  });
+                                                },
+                                              );
+                                            } else if (state is TopBrandError) {
+                                              return Text("Error: ${state.message}", style: TextStyle(color: Colors.red));
+                                            }
+                                            return const Text("No brands available");
+                                          },
+                                        ),
+                                        
                                         SizedBox(height: 16.h),
                                         Row(
                                           children: [
@@ -1318,7 +1389,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             final productEntity =
                                                 ProductPostEntity(
                                                   rating: "3",
-                                                  topBrandId: 1.toString(),
+                                                  topBrandId: selectedTopBrand?.id.toString() ?? '1',
                                                   requiredPoints:
                                                       requiredPointsController
                                                           .text

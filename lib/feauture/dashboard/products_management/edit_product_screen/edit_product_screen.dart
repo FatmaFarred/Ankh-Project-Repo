@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/domain/entities/product_post_entity.dart';
+import 'package:ankh_project/domain/entities/top_brand_entity.dart';
+import 'package:ankh_project/feauture/home_screen/top_brands/cubit/top_brand_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +42,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
   String? selectedCarName;
+  TopBrandEntity? selectedTopBrand;
   
   final List<String> carNames = [ 
     // Hyundai 
@@ -174,6 +177,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void initState() {
     super.initState();
+    // Fetch top brands when the widget initializes
+    context.read<TopBrandCubit>().fetchTopBrands();
 
     print('🧾 Product: ${widget.product}');
     print('🧾 Used Details: ${widget.product.usedDetails}');
@@ -436,6 +441,84 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             });
                           },
                         ),
+                        SizedBox(height: 16.h),
+                        
+                        Text(
+                          "Top Brand",
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        BlocBuilder<TopBrandCubit, TopBrandState>(
+                          builder: (context, state) {
+                            if (state is TopBrandLoading) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (state is TopBrandLoaded) {
+                              final brands = state.brands;
+                              
+                              // If we have a topBrandName from the product and selectedTopBrand is not set yet,
+                              // find the matching brand by name
+                              if (widget.product.topBrandName != null && selectedTopBrand == null) {
+                                for (var brand in brands) {
+                                  if (brand.name == widget.product.topBrandName) {
+                                    // Use Future.microtask to avoid setState during build
+                                    Future.microtask(() {
+                                      setState(() {
+                                        selectedTopBrand = brand;
+                                      });
+                                    });
+                                    break;
+                                  }
+                                }
+                              }
+                              
+                              return DropdownButtonFormField<TopBrandEntity>(
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightprimary),
+                                  ),
+                                  hintText: AppLocalizations.of(context)!.selectTopBrand,
+                                ),
+                                value: selectedTopBrand,
+                                validator: (value) {
+                                  if (value == null) {
+                                    return AppLocalizations.of(context)!.pleaseSelectTopBrand;
+                                  }
+                                  return null;
+                                },
+                                items: brands.map((TopBrandEntity brand) {
+                                  return DropdownMenuItem<TopBrandEntity>(
+                                    value: brand,
+                                    child: Text(brand.name),
+                                  );
+                                }).toList(),
+                                onChanged: (TopBrandEntity? newValue) {
+                                  setState(() {
+                                    selectedTopBrand = newValue;
+                                  });
+                                },
+                              );
+                            } else if (state is TopBrandError) {
+                              return Text("Error: ${state.message}", style: TextStyle(color: Colors.red));
+                            }
+                            return const Text("No brands available");
+                          },
+                        ),
+                        
                         SizedBox(height: 16.h),
                         Row(
                           children: [
@@ -2184,7 +2267,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             driveType: selectedDriveType!,
                             engineType: selectedFuel!,
                             horsepower: horsepowerController.text.trim(),
-                              topBrandId: '1',
+                            topBrandId: selectedTopBrand?.id.toString() ?? '1',
                             batteryCapacity: batteryCapacityController.text.trim(),
                             videoPath: [],
                             images: _createCombinedImageList(),

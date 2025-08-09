@@ -27,6 +27,7 @@ class TopBrandsList extends StatelessWidget {
                 final brand = brands[index];
                 return CarBrandItem(
                   imageUrl: 'https://ankhapi.runasp.net${brand.imageUrl}',
+                  id: brand.id,
                 );
               },
             ),
