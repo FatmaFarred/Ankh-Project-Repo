@@ -1504,4 +1504,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterYourRate => 'Enter Your Rate';
+
+  @override
+  String get productRating => 'Product Rating';
+
+  @override
+  String get rateThisProduct => 'Rate This Product';
+
+  @override
+  String get submitRating => 'Submit Rating';
+
+  @override
+  String get ratingComment => 'Comment (Optional)';
+
+  @override
+  String get ratingSuccess => 'Rating submitted successfully';
+
+  @override
+  String get tapToRate => 'Tap to rate this product';
+
+  @override
+  String get productNames => 'Product Names';
+
+  @override
+  String get productNamesManagement => 'Product Names Management';
+
+  @override
+  String get addNewProductName => 'Add New Product Name';
+
+  @override
+  String get noProductNamesFound => 'No Product Names Found';
+
+  @override
+  String get enterProductName => 'Enter Product Name';
+
+  @override
+  String get productNameCannotBeEmpty => 'Product name cannot be empty';
+
+  @override
+  String get productNameAddedSuccessfully => 'Product name added successfully';
+
+  @override
+  String get deleteProductName => 'Delete Product Name';
+
+  @override
+  String get confirmDeleteProductName =>
+      'Are you sure you want to delete this product name?';
+
+  @override
+  String get productNameDeletedSuccessfully =>
+      'Product name deleted successfully';
 }

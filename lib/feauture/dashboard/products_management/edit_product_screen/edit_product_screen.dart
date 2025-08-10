@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:ankh_project/core/constants/color_manager.dart';
+import 'package:ankh_project/domain/entities/product_name_entity.dart';
 import 'package:ankh_project/domain/entities/product_post_entity.dart';
 import 'package:ankh_project/domain/entities/top_brand_entity.dart';
 import 'package:ankh_project/feauture/home_screen/top_brands/cubit/top_brand_cubit.dart';
@@ -24,6 +25,7 @@ import '../../../../domain/use_cases/edit_product_usecase.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../inspector_screen/widgets/custom_text_form_field.dart';
 import '../../dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import '../../products_management/cubit/product_names_dropdown_cubit.dart';
 import 'edit_product_cubit.dart';
 
 class EditProductScreen extends StatefulWidget {
@@ -42,31 +44,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
   String? selectedCarName;
+  int? selectedProductId; // Added to store the product ID
   TopBrandEntity? selectedTopBrand;
   
-  final List<String> carNames = [ 
-    // Hyundai 
-    'HB20','i10','i20','i30','Accent','Verna','Solaris','Aura','Grand i10 Sedan', 
-    'Grand Metro','Elantra','Avante','i30 Sedan','Grandeur','Azera','HB20S', 
-    'i30 Fastback','Ioniq 6','Sonata','i30 wagon','Alcazar','Grand Creta','Bayon', 
-    'Casper','Casper Electric','Creta','Cantus', 
-  
-    // Kia 
-    'Ceed','EV4','K3','K4','Picanto','Morning','Ray','K5','K8','K9','Pegas','Soluto', 
-    'Ceed SW','Proceed','EV3','EV5','EV6','EV9','Niro','Seltos','Sonet','Sorento', 
-    'Soul','Sportage', 
-  
-    // Chevrolet 
-    'Blazer','Blazer EV','Captiva','Captiva PHEV','Captiva EV','Equinox','Equinox EV', 
-    'Groove','Spark EUV','Tracker', 
-  
-    // BMW 
-    '1 Series','2 Series Gran Coupé','3 Series','4 Series Gran Coupé','5 Series', 
-    '7 Series','8 Series Gran Coupé','i3','i4','i5','i7','3 Series Wagon','5 Series Wagon', 
-    'i5 Wagon','X1','X2','X3','X4','X5','X6','X7','XM','iX1','iX2','iX3','iX', 
-    '2 Series Coupé','4 Series Coupé','4 Series Convertible','8 Series Coupé', 
-    '8 Series Convertible','Z4','2 Series Active Tourer', 
-  ];
+  late ProductNamesDropdownCubit _productNamesDropdownCubit;
 
   late List<String> imageUrls;
   List<XFile> selectedImages = []; // Add this for new selected images
@@ -177,6 +158,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void initState() {
     super.initState();
+    // Initialize product names dropdown cubit
+    _productNamesDropdownCubit = getIt<ProductNamesDropdownCubit>();
+    _productNamesDropdownCubit.loadProductNames();
+    
     // Fetch top brands when the widget initializes
     context.read<TopBrandCubit>().fetchTopBrands();
 
@@ -188,10 +173,43 @@ class _EditProductScreenState extends State<EditProductScreen> {
     print('Mileage: ${widget.product.mileage}');
     print('Used owner: ${widget.product.usedDetails?.ownerName}');
 
-    // Set selectedCarName if it exists in the carNames list
-    if (carNames.contains(widget.product.title)) {
-      selectedCarName = widget.product.title;
-    }
+    // Set selectedCarName from product title
+    selectedCarName = widget.product.title;
+    
+    // We'll set the selectedProductId when the product names are loaded
+    _productNamesDropdownCubit.stream.listen((state) {
+      if (state is ProductNamesDropdownLoaded) {
+        // Check if the product title is a numeric value (product ID)
+        if (widget.product.title.trim().isNotEmpty && int.tryParse(widget.product.title) != null) {
+          // If the title is a numeric value, find the product name by ID
+          final productId = int.parse(widget.product.title);
+          final matchingProduct = state.productNames.firstWhere(
+            (product) => product.id == productId,
+            orElse: () => ProductNameEntity(id: 0, name: ''),
+          );
+          
+          if (matchingProduct.id != 0) {
+            setState(() {
+              selectedProductId = matchingProduct.id;
+              selectedCarName = matchingProduct.name;
+              carNameController.text = matchingProduct.name;
+            });
+          }
+        } else {
+          // If the title is not a numeric value, try to find by name as before
+          final matchingProduct = state.productNames.firstWhere(
+            (product) => product.name == widget.product.title,
+            orElse: () => ProductNameEntity(id: 0, name: ''),
+          );
+          
+          if (matchingProduct.id != 0) {
+            setState(() {
+              selectedProductId = matchingProduct.id;
+            });
+          }
+        }
+      }
+    });
 
     carNameController = TextEditingController(text: widget.product.title);
     marketerPointsController = TextEditingController(text: widget.product.marketerPoints.toString());
@@ -283,6 +301,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   void dispose() {
+    _productNamesDropdownCubit.close();
     carNameController.dispose();
     categoryController.dispose();
     yearController.dispose();
@@ -400,45 +419,78 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           ),
                         ),
                         SizedBox(height: 6.h),
-                        DropdownButtonFormField<String>(
-                          value: selectedCarName,
-                          decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.carName,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: ColorManager.lightGrey),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: ColorManager.lightGrey),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: ColorManager.lightprimary),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppLocalizations.of(context)!.carNameRequired;
+                        BlocBuilder<ProductNamesDropdownCubit, ProductNamesDropdownState>(
+                          bloc: _productNamesDropdownCubit,
+                          builder: (context, state) {
+                            if (state is ProductNamesDropdownLoading) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (state is ProductNamesDropdownError) {
+                              return Text('Error: ${state.message}', style: TextStyle(color: Colors.red));
+                            } else if (state is ProductNamesDropdownLoaded) {
+                              final productNames = state.productNames;
+                              
+                              return DropdownButtonFormField<int>(
+                                value: selectedProductId,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.carName,
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(color: ColorManager.lightprimary),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return AppLocalizations.of(context)!.carNameRequired;
+                                  }
+                                  return null;
+                                },
+                                items: productNames.map((product) {
+                                  return DropdownMenuItem<int>(
+                                    value: product.id,
+                                    child: Text(product.name),
+                                  );
+                                }).toList(),
+                                onChanged: (int? newValue) {
+                                  setState(() {
+                                    selectedProductId = newValue;
+                                    // Find the product name from the selected ID
+                                    final selectedProduct = productNames.firstWhere(
+                                      (product) => product.id == newValue,
+                                      orElse: () => ProductNameEntity(id: 0, name: ''),
+                                    );
+                                    selectedCarName = selectedProduct.name;
+                                    carNameController.text = selectedProduct.name;
+                                  });
+                                },
+                              );
+                            } else {
+                              return DropdownButtonFormField<String>(
+                                value: selectedCarName,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.carName,
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                ),
+                                items: const [],
+                                onChanged: null,
+                              );
                             }
-                            return null;
-                          },
-                          items: carNames.map((String carName) {
-                            return DropdownMenuItem<String>(
-                              value: carName,
-                              child: Text(carName),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedCarName = newValue;
-                              carNameController.text = newValue ?? '';
-                            });
                           },
                         ),
                         SizedBox(height: 16.h),
@@ -2246,7 +2298,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
 
                           final updatedProduct = ProductPostEntity(
-                            title: carNameController.text.trim(),
+                            nameProductId: selectedProductId?.toString() ?? carNameController.text.trim(),
                             description: descriptionController.text.trim(),
                             commission: commissionController.text,
                             inspectorPoints: inspectorPointsController.text.trim(),
@@ -2272,10 +2324,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             videoPath: [],
                             images: _createCombinedImageList(),
                             usedDetails: usedDetailsJson,
+                            // Pass the product ID as a string in the title field
+                            // The title is still stored in carNameController.text for display purposes
                           );
 
                           print('--- Updated Product ---');
-                          print('Title: ${updatedProduct.title}');
+                          print('Title: ${updatedProduct.nameProductId}');
                           print('Description: ${updatedProduct.description}');
                           print('Commission: ${updatedProduct.commission}');
                           print('Required Points: ${updatedProduct.requiredPoints}');

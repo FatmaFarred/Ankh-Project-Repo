@@ -504,9 +504,23 @@
   "writeYourMessage": " Write your message...",
   "marketerRate": "Marketer Rate",
   "inspectorRate": "Inspector Rate",
-  "enterYourRate": "Enter Your Rate"
-
-
-
-
+  "enterYourRate": "Enter Your Rate",
+  "productRating": "Product Rating",
+  "rateThisProduct": "Rate This Product",
+  "submitRating": "Submit Rating",
+  "ratingComment": "Comment (Optional)",
+  "ratingSuccess": "Rating submitted successfully",
+  "tapToRate": "Tap to rate this product",
+  "productNames": "Product Names",
+  "productNamesManagement": "Product Names Management",
+  "addNewProductName": "Add New Product Name",
+  "noProductNamesFound": "No Product Names Found",
+  "enterProductName": "Enter Product Name",
+  "productNameCannotBeEmpty": "Product name cannot be empty",
+  "add": "Add",
+  "cancel": "Cancel",
+  "productNameAddedSuccessfully": "Product name added successfully",
+  "deleteProductName": "Delete Product Name",
+  "confirmDeleteProductName": "Are you sure you want to delete this product name?",
+  "productNameDeletedSuccessfully": "Product name deleted successfully"
 }

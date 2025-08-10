@@ -18,7 +18,7 @@ class InstallmentRequestRepositoryImpl implements InstallmentRequestRepository {
       productId: request.productId,
       clientName: request.clientName,
       clientPhone: request.clientPhone,
-      installmentPeriod: request.installmentPeriod,
+      requestedMonths: request.requestedMonths,
       downPayment: request.downPayment,
     );
 
@@ -26,6 +26,13 @@ class InstallmentRequestRepositoryImpl implements InstallmentRequestRepository {
       final jsonBody = model.toJson();
       print('Debug - API Request URL: $url');
       print('Debug - API Request Body: ${jsonEncode(jsonBody)}');
+      print('Debug - InstallmentRequestModel details:');
+      print('  marketerId: ${model.marketerId}');
+      print('  productId: ${model.productId}');
+      print('  clientName: ${model.clientName}');
+      print('  clientPhone: ${model.clientPhone}');
+      print('  requestedMonths: ${model.requestedMonths}');
+      print('  downPayment: ${model.downPayment}');
       
       final response = await http.post(
         url,
