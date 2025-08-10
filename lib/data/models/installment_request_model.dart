@@ -6,7 +6,7 @@ class InstallmentRequestModel extends InstallmentRequestEntity {
     required super.productId,
     required super.clientName,
     required super.clientPhone,
-    required super.installmentPeriod,
+    required super.requestedMonths,
     required super.downPayment,
   });
 
@@ -16,7 +16,7 @@ class InstallmentRequestModel extends InstallmentRequestEntity {
       "productId": productId,
       "clientName": clientName,
       "clientPhone": clientPhone,
-      "installmentPeriod": installmentPeriod,
+      "requestedMonths": requestedMonths,
       "downPayment": downPayment,
     };
   }

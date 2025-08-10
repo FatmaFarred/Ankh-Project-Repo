@@ -3,7 +3,7 @@ import '../../domain/entities/product_post_entity.dart';
 class ProductPostModel {
   static Map<String, dynamic> toFormData(ProductPostEntity entity) {
     final data = <String, dynamic>{
-      'title': entity.title,
+      'nameProductId': entity.nameProductId,
       'description': entity.description,
       'price': entity.price,
       'category': entity.category,

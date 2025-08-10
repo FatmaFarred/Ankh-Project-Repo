@@ -1439,7 +1439,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerPoints => 'نقاط المسوق';
 
   @override
-  String get inspectorPoints => 'نقاط الفاحص';
+  String get inspectorPoints => 'نقاط المعاين';
 
   @override
   String get offersManagement => 'إدارة العروض';
@@ -1499,4 +1499,53 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterYourRate => 'أدخل تقييمك';
+
+  @override
+  String get productRating => 'تقييم المنتج';
+
+  @override
+  String get rateThisProduct => 'قيم هذا المنتج';
+
+  @override
+  String get submitRating => 'إرسال التقييم';
+
+  @override
+  String get ratingComment => 'تعليق (اختياري)';
+
+  @override
+  String get ratingSuccess => 'تم إرسال التقييم بنجاح';
+
+  @override
+  String get tapToRate => 'اضغط لتقييم هذا المنتج';
+
+  @override
+  String get productNames => 'اسماء المنتجات';
+
+  @override
+  String get productNamesManagement => 'إدارة اسماء المنتجات';
+
+  @override
+  String get addNewProductName => 'إضافة اسم منتج جديد';
+
+  @override
+  String get noProductNamesFound => 'لا توجد اسماء منتجات';
+
+  @override
+  String get enterProductName => 'أدخل اسم المنتج';
+
+  @override
+  String get productNameCannotBeEmpty => 'لا يمكن أن يكون اسم المنتج فارغًا';
+
+  @override
+  String get productNameAddedSuccessfully => 'تمت إضافة اسم المنتج بنجاح';
+
+  @override
+  String get deleteProductName => 'حذف اسم المنتج';
+
+  @override
+  String get confirmDeleteProductName =>
+      'هل أنت متأكد أنك تريد حذف اسم المنتج هذا؟';
+
+  @override
+  String get productNameDeletedSuccessfully => 'تم حذف اسم المنتج بنجاح';
 }
