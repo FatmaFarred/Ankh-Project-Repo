@@ -28,6 +28,12 @@ class ApiManager {
     Object? data,
     Map<String, dynamic>? headers,
   }) {
+    print("🚀 [API MANAGER] postData called with:");
+    print("   URL: $url");
+    print("   EndPoint: $endPoint");
+    print("   Data: $data");
+    print("   Headers: $headers");
+    
     // Only set JSON content-type if not using FormData
     final defaultHeaders = headers ?? {};
     if (data is! FormData) {

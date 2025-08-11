@@ -440,6 +440,12 @@ abstract class AppLocalizations {
   /// **'A code has been sent to your email'**
   String get codeWasSentTo;
 
+  /// No description provided for @resendCodeIn.
+  ///
+  /// In en, this message translates to:
+  /// **'resend in'**
+  String get resendCodeIn;
+
   /// No description provided for @resendCode.
   ///
   /// In en, this message translates to:
@@ -3001,6 +3007,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Your Rate'**
   String get enterYourRate;
+
+  /// No description provided for @verifyYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Email'**
+  String get verifyYourEmail;
+
+  /// No description provided for @s.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get s;
 }
 
 class _AppLocalizationsDelegate

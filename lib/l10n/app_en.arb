@@ -56,7 +56,9 @@
   "verifyEmailTitle": "Verify your email",
   "verifyEmailSubTitle": "Enter the verification code that we have sent to your email",
   "codeWasSentTo": "A code has been sent to your email",
+  "resendCodeIn": "resend in",
   "resendCode": "resend",
+
   "n": "in",
   "confirm": "confirm",
   "forgetPasswordSubTitle": "Enter your email to recover your password!",
@@ -407,11 +409,6 @@
   "tryAgain": "Try Again",
   "aggredPrice": "Aggred Price",
 
-
-
-
-
-
   "editCarDetails": "Edit Car Details",
   "addCar": "Add Car",
   "basicInformation": "Basic Information",
@@ -504,7 +501,11 @@
   "writeYourMessage": " Write your message...",
   "marketerRate": "Marketer Rate",
   "inspectorRate": "Inspector Rate",
-  "enterYourRate": "Enter Your Rate"
+  "enterYourRate": "Enter Your Rate",
+  "verifyYourEmail": "Verify Email",
+  "s": "S"
+
+
 
 
 

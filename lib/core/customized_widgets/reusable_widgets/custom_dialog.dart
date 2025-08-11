@@ -117,8 +117,8 @@ class CustomDialog {
                     textStyle: getSemiBoldStyle(color: ColorManager.black, context: context),
                     onPressed: () {
                       // Run negative callback or just close
+                      Navigator.of(ctx).pop();
                       negativeOnClick?.call();
-                      Navigator.of(ctx).pop(); // ✅ Always pop after callback
                     },
                   ),
                 ),

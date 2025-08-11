@@ -193,6 +193,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get codeWasSentTo => 'A code has been sent to your email';
 
   @override
+  String get resendCodeIn => 'resend in';
+
+  @override
   String get resendCode => 'resend';
 
   @override
@@ -1504,4 +1507,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterYourRate => 'Enter Your Rate';
+
+  @override
+  String get verifyYourEmail => 'Verify Email';
+
+  @override
+  String get s => 'S';
 }
