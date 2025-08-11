@@ -3019,6 +3019,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'S'**
   String get s;
+
+  /// No description provided for @productRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Rating'**
+  String get productRating;
+
+  /// No description provided for @rateThisProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate This Product'**
+  String get rateThisProduct;
+
+  /// No description provided for @submitRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Rating'**
+  String get submitRating;
+
+  /// No description provided for @ratingComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment (Optional)'**
+  String get ratingComment;
+
+  /// No description provided for @ratingSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating submitted successfully'**
+  String get ratingSuccess;
+
+  /// No description provided for @tapToRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to rate this product'**
+  String get tapToRate;
+
+  /// No description provided for @productNames.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Names'**
+  String get productNames;
+
+  /// No description provided for @productNamesManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Names Management'**
+  String get productNamesManagement;
+
+  /// No description provided for @addNewProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Product Name'**
+  String get addNewProductName;
+
+  /// No description provided for @noProductNamesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Product Names Found'**
+  String get noProductNamesFound;
+
+  /// No description provided for @enterProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Product Name'**
+  String get enterProductName;
+
+  /// No description provided for @productNameCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name cannot be empty'**
+  String get productNameCannotBeEmpty;
+
+  /// No description provided for @productNameAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name added successfully'**
+  String get productNameAddedSuccessfully;
+
+  /// No description provided for @deleteProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Product Name'**
+  String get deleteProductName;
+
+  /// No description provided for @confirmDeleteProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this product name?'**
+  String get confirmDeleteProductName;
+
+  /// No description provided for @productNameDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name deleted successfully'**
+  String get productNameDeletedSuccessfully;
 }
 
 class _AppLocalizationsDelegate

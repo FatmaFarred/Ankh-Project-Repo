@@ -12,6 +12,49 @@ class CustomDialog {
 
   String? title, message, positiveText, negativeText;
   VoidCallback? positiveOnClick, negativeOnClick;
+  
+  /// Static method to show a simple dialog with a title, message, and confirm button
+  static void showCustomDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required String confirmButtonText,
+    VoidCallback? onConfirm,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) {
+        return AlertDialog(
+          backgroundColor: ColorManager.lightGrey,
+          title: Text(
+            title,
+            style: getBoldStyle(color: ColorManager.black, context: context),
+          ),
+          content: Text(
+            message,
+            style: getSemiBoldStyle(color: ColorManager.black, context: context),
+          ),
+          actions: [
+            CustomizedElevatedButton(
+              color: ColorManager.lightprimary,
+              bottonWidget: Text(
+                confirmButtonText,
+                style: getSemiBoldStyle(color: ColorManager.white, context: context),
+              ),
+              onPressed: () {
+                // Close dialog first
+                Navigator.of(ctx).pop();
+                
+                // Then run the callback, if any
+                onConfirm?.call();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   CustomDialog.loading(
       {required this.context, this.message, bool cancelable = true}) {

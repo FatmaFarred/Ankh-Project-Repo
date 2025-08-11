@@ -6,6 +6,8 @@ import 'package:ankh_project/feauture/details_screen/widgets/add_comment_section
 import 'package:ankh_project/feauture/details_screen/widgets/status_section.dart';
 import 'package:ankh_project/feauture/details_screen/widgets/comment_list_widget.dart';
 import 'package:ankh_project/feauture/details_screen/cubit/comment_cubit.dart';
+import 'package:ankh_project/feauture/details_screen/cubit/rating_cubit.dart';
+import 'package:ankh_project/feauture/details_screen/widgets/product_rating_widget.dart';
 import 'package:ankh_project/feauture/request_inspection_screen/request_inspection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -202,7 +204,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
         .watch<UserCubit>()
         .state;
 
-
     if (productId == null) {
       return Scaffold(
         appBar: AppBar(
@@ -213,8 +214,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
       );
     }
 
-
-    return BlocListener<FavoriteCubit, FavoriteToggleState>(
+    return BlocProvider<RatingCubit>(
+      create: (context) => getIt<RatingCubit>(),
+      child: BlocListener<FavoriteCubit, FavoriteToggleState>(
         bloc: favoriteCubit,
         listener: (context, state) {
           if (state is FavoriteSuccess) {
@@ -464,16 +466,49 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                   Row(
                                     children: [
-                                      RatingBarIndicator(
-                                        rating: (product?.rating ?? 0.0)
-                                            .toDouble(),
-                                        itemBuilder: (context, index) =>
-                                        const Icon(
-                                          Icons.star,
-                                          color: ColorManager.starRateColor,
+                                      GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(20),
+                                              ),
+                                            ),
+                                            builder: (context) => BlocProvider<RatingCubit>(
+                                              create: (context) => getIt<RatingCubit>(),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                                                ),
+                                                child: ProductRatingWidget(
+                                                  productId: product?.id ?? 0,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            RatingBarIndicator(
+                                              rating: (product?.rating ?? 0.0)
+                                                  .toDouble(),
+                                              itemBuilder: (context, index) =>
+                                              const Icon(
+                                                Icons.star,
+                                                color: ColorManager.starRateColor,
+                                              ),
+                                              itemCount: 5,
+                                              itemSize: 16.sp,
+                                            ),
+                                            Icon(
+                                              Icons.edit,
+                                              size: 14.sp,
+                                              color: ColorManager.hintColor,
+                                            ),
+                                          ],
                                         ),
-                                        itemCount: 5,
-                                        itemSize: 16.sp,
                                       ),
 
                                       _buildSmallText(
@@ -662,6 +697,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               },
             ),
           ),
-        ));
+        ),
+      ));
   }
 }
