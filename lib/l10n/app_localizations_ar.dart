@@ -1509,6 +1509,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get s => 'ث';
 
+  @override
   String get productRating => 'تقييم المنتج';
 
   @override

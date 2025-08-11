@@ -175,39 +175,53 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
     // Set selectedCarName from product title
     selectedCarName = widget.product.title;
+    print('Initial selectedCarName: $selectedCarName');
+    print('Product title type: ${widget.product.title.runtimeType}');
     
     // We'll set the selectedProductId when the product names are loaded
     _productNamesDropdownCubit.stream.listen((state) {
       if (state is ProductNamesDropdownLoaded) {
-        // Check if the product title is a numeric value (product ID)
-        if (widget.product.title.trim().isNotEmpty && int.tryParse(widget.product.title) != null) {
-          // If the title is a numeric value, find the product name by ID
-          final productId = int.parse(widget.product.title);
-          final matchingProduct = state.productNames.firstWhere(
-            (product) => product.id == productId,
-            orElse: () => ProductNameEntity(id: 0, name: ''),
-          );
-          
-          if (matchingProduct.id != 0) {
-            setState(() {
-              selectedProductId = matchingProduct.id;
-              selectedCarName = matchingProduct.name;
-              carNameController.text = matchingProduct.name;
-            });
-          }
+        print('Product names loaded: ${state.productNames.length} products');
+        
+        // First try to find by exact name match
+        final matchingProductByName = state.productNames.firstWhere(
+          (product) => product.name == widget.product.title,
+          orElse: () => ProductNameEntity(id: 0, name: ''),
+        );
+        
+        if (matchingProductByName.id != 0) {
+          print('Found exact name match: ${matchingProductByName.id}:${matchingProductByName.name}');
+          setState(() {
+            selectedProductId = matchingProductByName.id;
+            selectedCarName = matchingProductByName.name;
+            carNameController.text = matchingProductByName.name;
+          });
         } else {
-          // If the title is not a numeric value, try to find by name as before
-          final matchingProduct = state.productNames.firstWhere(
-            (product) => product.name == widget.product.title,
-            orElse: () => ProductNameEntity(id: 0, name: ''),
-          );
-          
-          if (matchingProduct.id != 0) {
-            setState(() {
-              selectedProductId = matchingProduct.id;
-            });
+          // If no exact match, check if the title is a numeric ID
+          if (widget.product.title != null && 
+              widget.product.title.trim().isNotEmpty && 
+              int.tryParse(widget.product.title) != null) {
+            
+            final productId = int.parse(widget.product.title);
+            final matchingProductById = state.productNames.firstWhere(
+              (product) => product.id == productId,
+              orElse: () => ProductNameEntity(id: 0, name: ''),
+            );
+            
+            if (matchingProductById.id != 0) {
+              print('Found match by ID: ${matchingProductById.id}:${matchingProductById.name}');
+              setState(() {
+                selectedProductId = matchingProductById.id;
+                selectedCarName = matchingProductById.name;
+                carNameController.text = matchingProductById.name;
+              });
+            }
           }
         }
+        
+        // Debug print to check values
+        print('Selected Product ID: $selectedProductId');
+        print('Selected Car Name: $selectedCarName');
       }
     });
 
@@ -429,10 +443,37 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             } else if (state is ProductNamesDropdownLoaded) {
                               final productNames = state.productNames;
                               
+                              // Debug print to check available products and selected ID
+                              print('Available Products: ${productNames.map((p) => "${p.id}:${p.name}").join(', ')}');
+                              print('Current selectedProductId: $selectedProductId');
+                              
+                              // Print available products for debugging
+                              print('Available products: ${productNames.map((p) => "${p.id}:${p.name}").join(', ')}');
+                              print('Current selectedProductId: $selectedProductId');
+                              
+                              // Check if selectedProductId exists in the product list
+                              bool idExists = selectedProductId != null && 
+                                  productNames.any((product) => product.id == selectedProductId);
+                              
+                              if (!idExists && selectedCarName != null) {
+                                // Try to find product by name if ID is not found
+                                for (var product in productNames) {
+                                  if (product.name == selectedCarName) {
+                                    // Use Future.microtask to avoid setState during build
+                                    Future.microtask(() {
+                                      setState(() {
+                                        selectedProductId = product.id;
+                                        print('Found product by name: ${product.id}:${product.name}');
+                                      });
+                                    });
+                                    break;
+                                  }
+                                }
+                              }
+                              
                               return DropdownButtonFormField<int>(
-                                value: selectedProductId,
+                                value: idExists ? selectedProductId : null,
                                 decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!.carName,
                                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
@@ -473,14 +514,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                     );
                                     selectedCarName = selectedProduct.name;
                                     carNameController.text = selectedProduct.name;
+                                    print('Selected new product: ${selectedProduct.id}:${selectedProduct.name}');
                                   });
                                 },
+                                isExpanded: true,
+                                hint: Text(selectedCarName ?? AppLocalizations.of(context)!.carName),
                               );
                             } else {
+                              // Fallback when no state is available yet
                               return DropdownButtonFormField<String>(
-                                value: selectedCarName,
+                                value: null, // Don't set a value here as it might not be in the items list
                                 decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!.carName,
                                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
@@ -489,6 +533,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 ),
                                 items: const [],
                                 onChanged: null,
+                                isExpanded: true,
+                                hint: Text(selectedCarName ?? AppLocalizations.of(context)!.carName),
                               );
                             }
                           },
@@ -2298,7 +2344,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
 
                           final updatedProduct = ProductPostEntity(
-                            nameProductId: selectedProductId?.toString() ?? carNameController.text.trim(),
+                            nameProductId: selectedProductId?.toString() ?? '',
                             description: descriptionController.text.trim(),
                             commission: commissionController.text,
                             inspectorPoints: inspectorPointsController.text.trim(),

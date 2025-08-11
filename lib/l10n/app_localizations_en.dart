@@ -1514,6 +1514,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get s => 'S';
 
+  @override
   String get productRating => 'Product Rating';
 
   @override
