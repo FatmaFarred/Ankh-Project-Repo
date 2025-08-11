@@ -12,14 +12,14 @@ import '../../../core/constants/color_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../../l10n/app_localizations.dart';
 
-class TopBrandsManagmentScreen extends StatefulWidget {
-  const TopBrandsManagmentScreen({super.key});
+class TopBrandsManagementScreen extends StatefulWidget {
+  const TopBrandsManagementScreen({super.key});
 
   @override
-  State<TopBrandsManagmentScreen> createState() => _TopBrandsManagmentScreenState();
+  State<TopBrandsManagementScreen> createState() => _TopBrandsManagementScreenState();
 }
 
-class _TopBrandsManagmentScreenState extends State<TopBrandsManagmentScreen> {
+class _TopBrandsManagementScreenState extends State<TopBrandsManagementScreen> {
   late TopBrandsManagementCubit _cubit;
 
   @override
@@ -51,7 +51,7 @@ class _TopBrandsManagmentScreenState extends State<TopBrandsManagmentScreen> {
                       Icon(Icons.add, color: ColorManager.white, size: 20.sp),
                       SizedBox(width: 8.w),
                       Text(
-                        AppLocalizations.of(context)!.addNewProduct,
+                        AppLocalizations.of(context)!.addBrand,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontSize: 16.sp,
                           color: ColorManager.white,
@@ -65,9 +65,11 @@ class _TopBrandsManagmentScreenState extends State<TopBrandsManagmentScreen> {
                       MaterialPageRoute(
                         builder: (_) => const AddNewTopBrand(),
                       ),
-                    ).then((_) {
-                      // Refresh the list when returning from add screen
-                      _cubit.getTopBrands();
+                    ).then((result) {
+                      // Refresh the list when returning from add screen with success result
+                      if (result == true) {
+                        _cubit.getTopBrands();
+                      }
                     });
                   },
                   color: ColorManager.lightprimary,
@@ -93,9 +95,11 @@ class _TopBrandsManagmentScreenState extends State<TopBrandsManagmentScreen> {
       MaterialPageRoute(
         builder: (_) => EditTopBrand(brand: brand),
       ),
-    ).then((_) {
-      // Refresh the list when returning from edit screen
-      _cubit.getTopBrands();
+    ).then((result) {
+      // Refresh the list when returning from edit screen with success result
+      if (result == true) {
+        _cubit.getTopBrands();
+      }
     });
   }
   
@@ -119,7 +123,7 @@ class _TopBrandsManagmentScreenState extends State<TopBrandsManagmentScreen> {
                 if (state is TopBrandDeleteSuccess) {
                   Navigator.pop(dialogContext);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${brand.name} ${AppLocalizations.of(context)!.delete}')),
+                    SnackBar(content: Text('${brand.name} deleted successfully')),
                   );
                   // Refresh the list after deletion
                   _cubit.getTopBrands();
