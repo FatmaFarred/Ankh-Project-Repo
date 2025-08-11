@@ -192,7 +192,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get codeWasSentTo => 'تم إرسال الرمز إلى بريدك الإلكتروني';
 
   @override
-  String get resendCode => 'إعادة إلارسال خلال';
+  String get resendCodeIn => 'إعادة إلارسال خلال';
+
+  @override
+  String get resendCode => 'إعادة إلارسال ';
 
   @override
   String get n => 'خلال';
@@ -1501,6 +1504,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterYourRate => 'أدخل تقييمك';
 
   @override
+  String get verifyYourEmail => 'تفعيل البريد';
+
+  @override
+  String get s => 'ث';
+
   String get productRating => 'تقييم المنتج';
 
   @override

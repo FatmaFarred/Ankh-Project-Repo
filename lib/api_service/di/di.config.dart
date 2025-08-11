@@ -120,6 +120,7 @@ import '../../data/repositries/price_offers_by_marketer_id_repository_impl.dart'
 import '../../data/repositries/product_details_repositry_impl.dart' as _i288;
 import '../../data/repositries/product_management_repository_impl.dart'
     as _i744;
+
 import '../../data/repositries/product_name_repository_impl.dart' as _i970;
 import '../../data/repositries/product_rating_repository_impl.dart' as _i199;
 import '../../data/repositries/products_by_brand_repository_impl.dart' as _i827;
@@ -160,6 +161,7 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
     as _i200;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart'
     as _i526;
+
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_name_remote_data_source.dart'
     as _i559;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_rating_remote_data_source.dart'
@@ -251,9 +253,16 @@ import '../../domain/use_cases/adjust_user_points.dart' as _i286;
 import '../../domain/use_cases/appoint_as_team_leader_use_case.dart' as _i416;
 import '../../domain/use_cases/authentication/client_register_use_case.dart'
     as _i920;
+import '../../domain/use_cases/authentication/email_verfication.dart' as _i280;
+import '../../domain/use_cases/authentication/foget_password_use_case.dart'
+    as _i1062;
 import '../../domain/use_cases/authentication/inspector_register_usecase.dart'
     as _i33;
 import '../../domain/use_cases/authentication/register_usecase.dart' as _i456;
+import '../../domain/use_cases/authentication/resent_email_verfication.dart'
+    as _i358;
+import '../../domain/use_cases/authentication/reset_password_use_case.dart'
+    as _i217;
 import '../../domain/use_cases/authentication/signin_usecase.dart' as _i96;
 import '../../domain/use_cases/authentication/team_member_register.dart'
     as _i370;
@@ -267,10 +276,6 @@ import '../../domain/use_cases/edit_point_price_use_case.dart' as _i341;
 import '../../domain/use_cases/edit_product_usecase.dart' as _i151;
 import '../../domain/use_cases/edit_profile_use_case.dart' as _i775;
 import '../../domain/use_cases/edit_top_brand_use_case.dart' as _i720;
-import '../../domain/use_cases/forget_reset_password_usecse/forget_password_usecase.dart'
-    as _i458;
-import '../../domain/use_cases/forget_reset_password_usecse/reset_password_use_case.dart'
-    as _i416;
 import '../../domain/use_cases/get_all_insepctors_use_case.dart' as _i769;
 import '../../domain/use_cases/get_all_inspection_admin_use_case.dart' as _i273;
 import '../../domain/use_cases/get_All_inspection_by_id_use_cae.dart' as _i1025;
@@ -293,6 +298,7 @@ import '../../domain/use_cases/get_pending_price_offers_usecase.dart' as _i865;
 import '../../domain/use_cases/get_product_management_details_usecase.dart'
     as _i508;
 import '../../domain/use_cases/get_product_management_usecase.dart' as _i683;
+
 import '../../domain/use_cases/get_product_names_use_case.dart' as _i90;
 import '../../domain/use_cases/get_products_by_brand_use_case.dart' as _i208;
 import '../../domain/use_cases/get_profile_use_case.dart' as _i305;
@@ -345,6 +351,8 @@ import '../../domain/use_cases/unssign_prodcut_from_marketer_use_case.dart'
 import '../../domain/use_cases/update_marketer_account_status_use_case.dart'
     as _i598;
 import '../../domain/use_cases/update_price_offer_status_usecase.dart' as _i966;
+import '../../feauture/authentication/email_verfication/cubit/email_verification_cubit.dart'
+    as _i322;
 import '../../feauture/authentication/forgrt_password/forget_password/controller/forget_passwors_cubit.dart'
     as _i155;
 import '../../feauture/authentication/forgrt_password/set_new_password/controller/reset_password_cubit.dart'
@@ -739,6 +747,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i78.GetBalanceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i552.RejectPointRequestUseCase>(
         () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
+        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i422.AddTopBrandUseCase>(
         () => _i422.AddTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i282.DeleteTopBrandUseCase>(
@@ -766,6 +776,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i370.TeamMemberRegister>(
         () => _i370.TeamMemberRegister(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i280.EmailVerificationUseCase>(() =>
+        _i280.EmailVerificationUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i1062.ForgetPasswordUseCase>(() =>
+        _i1062.ForgetPasswordUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i358.ResentEmailVerficationUseCase>(() =>
+        _i358.ResentEmailVerficationUseCase(
+            gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i217.ResetPasswordUseCase>(
+        () => _i217.ResetPasswordUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i954.MarketerProductCubit>(
         () => _i954.MarketerProductCubit(gh<_i527.MarketerProductsUseCase>()));
     gh.factory<_i270.AppointAsTeamLeaderCubit>(() =>
@@ -889,8 +908,6 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i966.MarketerInviteCodeReppositry>()));
     gh.factory<_i124.TopBrandCubit>(
         () => _i124.TopBrandCubit(gh<_i939.GetTopBrandsUseCase>()));
-    gh.factory<_i416.ResetPasswordUseCase>(
-        () => _i416.ResetPasswordUseCase(gh<_i234.ResetPasswordRepositry>()));
     gh.factory<_i938.SignInCubit>(
         () => _i938.SignInCubit(gh<_i96.SignInUseCase>()));
     gh.factory<_i756.ProductNameRepository>(() =>
@@ -927,6 +944,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i865.GetPendingPriceOffersUseCase>(),
           gh<_i966.UpdatePriceOfferStatusUseCase>(),
         ));
+    gh.factory<_i809.ResetPasswordCubit>(
+        () => _i809.ResetPasswordCubit(gh<_i217.ResetPasswordUseCase>()));
+    gh.factory<_i322.EmailVerificationCubit>(() => _i322.EmailVerificationCubit(
+          gh<_i280.EmailVerificationUseCase>(),
+          gh<_i358.ResentEmailVerficationUseCase>(),
+        ));
     gh.factory<_i458.ForgetPasswordUseCase>(
         () => _i458.ForgetPasswordUseCase(gh<_i255.ForgetPasswordRepositry>()));
     gh.factory<_i731.AddProductNameUseCase>(
@@ -939,6 +962,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i208.GetProductsByBrandUseCase(gh<_i129.ProductsByBrandRepository>()));
     gh.factory<_i941.CsRolesUseCase>(
         () => _i941.CsRolesUseCase(gh<_i203.CsRolesRepositry>()));
+    gh.factory<_i155.ForgetPasswordCubit>(
+        () => _i155.ForgetPasswordCubit(gh<_i1062.ForgetPasswordUseCase>()));
     gh.factory<_i730.RatingCubit>(
         () => _i730.RatingCubit(gh<_i395.AddProductRatingUseCase>()));
     gh.factory<_i710.PriceOffersByMarketerIdCubit>(() =>

@@ -56,7 +56,9 @@
   "verifyEmailTitle": "تحقق من بريدك الإلكتروني",
   "verifyEmailSubTitle": "أدخل رمز التحقق الذي أرسلناه إلى بريدك الالكتروني                                لإكمال عملية توثيق الحساب",
   "codeWasSentTo": "تم إرسال الرمز إلى بريدك الإلكتروني",
-  "resendCode": "إعادة إلارسال خلال",
+  "resendCodeIn": "إعادة إلارسال خلال",
+  "resendCode": "إعادة إلارسال ",
+
   "confirm": "تأكيد",
   "n": "خلال",
   "forgetPasswordSubTitle": "قم بادخال بريدك الالكتروني لاستعادة كلمة المرور الخاصة بك!",
@@ -512,6 +514,11 @@
   "months": "شهور",
   "writeYourMessage": "اكتب رسالتك...",
   "marketerRate": "تقييم المسوق",
+    "inspectorRate": "تقييم المعاين",
+  "enterYourRate": "أدخل تقييمك",
+  "verifyYourEmail": "تفعيل البريد",
+  "s": "ث"
+
   "inspectorRate": "تقييم المعاين",
   "enterYourRate": "أدخل تقييمك",
   "productRating": "تقييم المنتج",

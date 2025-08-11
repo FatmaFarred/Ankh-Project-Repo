@@ -47,6 +47,34 @@ class AuthenticationRepositryImpl implements AuthenticationRepositry {
 
   }
 
+  @override
+  Future<Either<Failure, String?>> emailVerification(String email, String code)async {
+    print("🚀 [REPOSITORY] emailVerification called with email: $email, code: $code");
+    var either = await authRemoteDataSource.emailVerification(email, code);
+    print("🚀 [REPOSITORY] emailVerification result: $either");
+    return either.fold((error) => left(error), (response) => right(response));
+
+
+  }
+
+  @override
+  Future<Either<Failure, String?>> forgetPassword(String email)async {
+    var either = await authRemoteDataSource.forgetPassword(email);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> resendEmailVerification(String email)async {
+    var either = await authRemoteDataSource.resendEmailVerification(email);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> resetPassword(String email, String newPassword, String code)async {
+    var either = await authRemoteDataSource.resetPassword(email, newPassword, code);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
   }
 
 
