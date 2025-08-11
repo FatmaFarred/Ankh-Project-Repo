@@ -120,7 +120,6 @@ import '../../data/repositries/price_offers_by_marketer_id_repository_impl.dart'
 import '../../data/repositries/product_details_repositry_impl.dart' as _i288;
 import '../../data/repositries/product_management_repository_impl.dart'
     as _i744;
-
 import '../../data/repositries/product_name_repository_impl.dart' as _i970;
 import '../../data/repositries/product_rating_repository_impl.dart' as _i199;
 import '../../data/repositries/products_by_brand_repository_impl.dart' as _i827;
@@ -161,7 +160,6 @@ import '../../domain/repositries_and_data_sources/data_sources/remote_data_sourc
     as _i200;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_details_remote_data_Source.dart'
     as _i526;
-
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_name_remote_data_source.dart'
     as _i559;
 import '../../domain/repositries_and_data_sources/data_sources/remote_data_source/product_rating_remote_data_source.dart'
@@ -298,7 +296,6 @@ import '../../domain/use_cases/get_pending_price_offers_usecase.dart' as _i865;
 import '../../domain/use_cases/get_product_management_details_usecase.dart'
     as _i508;
 import '../../domain/use_cases/get_product_management_usecase.dart' as _i683;
-
 import '../../domain/use_cases/get_product_names_use_case.dart' as _i90;
 import '../../domain/use_cases/get_products_by_brand_use_case.dart' as _i208;
 import '../../domain/use_cases/get_profile_use_case.dart' as _i305;
@@ -755,8 +752,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i282.DeleteTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i720.EditTopBrandUseCase>(
         () => _i720.EditTopBrandUseCase(gh<_i68.TopBrandRepository>()));
-    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
-        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.factory<_i752.AddPointRequestCubit>(() => _i752.AddPointRequestCubit(
         addPointRequestUseCase: gh<_i391.AddPointRequestUseCase>()));
     gh.factory<_i247.SendInstallmentRequestUseCase>(() =>
@@ -950,14 +945,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i280.EmailVerificationUseCase>(),
           gh<_i358.ResentEmailVerficationUseCase>(),
         ));
-    gh.factory<_i458.ForgetPasswordUseCase>(
-        () => _i458.ForgetPasswordUseCase(gh<_i255.ForgetPasswordRepositry>()));
     gh.factory<_i731.AddProductNameUseCase>(
         () => _i731.AddProductNameUseCase(gh<_i756.ProductNameRepository>()));
-    gh.factory<_i90.GetProductNamesUseCase>(
-        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i479.DeleteProductNameUseCase>(() =>
         _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
+    gh.factory<_i90.GetProductNamesUseCase>(
+        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i208.GetProductsByBrandUseCase>(() =>
         _i208.GetProductsByBrandUseCase(gh<_i129.ProductsByBrandRepository>()));
     gh.factory<_i941.CsRolesUseCase>(
@@ -1031,8 +1024,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i731.AddProductNameUseCase>(),
           gh<_i479.DeleteProductNameUseCase>(),
         ));
-    gh.factory<_i809.ResetPasswordCubit>(
-        () => _i809.ResetPasswordCubit(gh<_i416.ResetPasswordUseCase>()));
     gh.factory<_i1031.PushNotificationCubit>(() => _i1031.PushNotificationCubit(
           gh<_i172.PushNotificationUseCase>(),
           gh<_i349.PostNotificationUseCase>(),
@@ -1041,8 +1032,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i225.GetNotificationCubit(gh<_i186.GetNotificationUseCase>()));
     gh.factory<_i245.ProductNamesDropdownCubit>(() =>
         _i245.ProductNamesDropdownCubit(gh<_i90.GetProductNamesUseCase>()));
-    gh.factory<_i155.ForgetPassworsCubit>(
-        () => _i155.ForgetPassworsCubit(gh<_i458.ForgetPasswordUseCase>()));
     gh.factory<_i578.DeleteProductUseCase>(() =>
         _i578.DeleteProductUseCase(gh<_i127.ProductManagementRepository>()));
     gh.factory<_i683.GetAllProductsUseCase>(() =>
