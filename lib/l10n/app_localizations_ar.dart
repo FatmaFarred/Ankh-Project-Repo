@@ -1250,6 +1250,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aggredPrice => 'السعر المتفق عليه';
 
   @override
+  String get commissionRate => 'نسبة العمولة';
+
+  @override
+  String get commissionRateDescription =>
+      'نسبة العمولة التي ستحصل عليها من كل عملية بيع';
+
+  @override
+  String get commissionRateRequired => 'نسبة العمولة مطلوبة';
+
+  @override
+  String get enterCommissionRate => 'أدخل نسبة العمولة';
+
+  @override
+  String get totalCommission => 'إجمالي العمولة';
+
+  @override
   String get editCarDetails => 'تعديل تفاصيل السيارة';
 
   @override
@@ -1510,6 +1526,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get s => 'ث';
 
   @override
+  String get commissionDetails => 'تفاصيل العمولة';
+
+  @override
+  String get requestedCommission => 'العمولة المطلوبة';
+
+  @override
+  String get requestCommission => 'سحب العمولة';
+
+  @override
+  String get enterCommissionAmount => 'أدخل مبلغ العمولة';
+
+  @override
+  String get commissionRateManagement => ' إدارة نسبة العمولة';
+
+  @override
+  String get editCommissionRate => 'تعديل نسبة العمولة';
+
+  @override
+
   String get productRating => 'تقييم المنتج';
 
   @override

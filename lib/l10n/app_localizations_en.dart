@@ -1251,7 +1251,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerWithInvitationCode => 'Register with Invitation Code';
 
   @override
-  String get aggredPrice => 'Aggred Price';
+  String get aggredPrice => 'Agreed Price';
+
+  @override
+  String get commissionRate => 'Commission Rate';
+
+  @override
+  String get commissionRateDescription =>
+      ' The commission rate is the percentage of the total price that will be charged as a commission for the service provided.';
+
+  @override
+  String get commissionRateRequired => ' Commission rate is required';
+
+  @override
+  String get enterCommissionRate => ' Enter Commission Rate';
+
+  @override
+  String get totalCommission => ' Total Commission';
 
   @override
   String get editCarDetails => 'Edit Car Details';
@@ -1513,6 +1529,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get s => 'S';
+
+  @override
+  String get commissionDetails => ' Commission Details';
+
+  @override
+  String get requestedCommission => ' Requested Commission';
+
+  @override
+  String get requestCommission => ' Withdraw Commission';
+
+  @override
+  String get enterCommissionAmount => ' Enter Commission Amount';
+
+  @override
+  String get commissionRateManagement => ' Commission Rate Management';
+
+  @override
+  String get editCommissionRate => 'Edit Commission Rate';
 
   @override
   String get productRating => 'Product Rating';

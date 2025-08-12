@@ -13,17 +13,20 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities/all_point_price_entity.dart';
 import '../../../l10n/app_localizations.dart';
+import 'cubit/commission_rate_cubit.dart';
+import 'cubit/commission_rate_states.dart';
 
-class PointPricesScreen extends StatefulWidget {
-  const PointPricesScreen({Key? key}) : super(key: key);
+class CommissiomManagmentScreen extends StatefulWidget {
+  const CommissiomManagmentScreen({Key? key}) : super(key: key);
 
   @override
-  State<PointPricesScreen> createState() => _PointPricesScreenState();
+  State<CommissiomManagmentScreen> createState() => _CommissiomManagmentScreenState();
 }
 
-class _PointPricesScreenState extends State<PointPricesScreen> {
+class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
   String selectedFilter = '';
   PointPricesCubit pointPricesCubit = getIt<PointPricesCubit>();
+  CommissionRateCubit commissionRateCubit = getIt<CommissionRateCubit>();
   String? userToken;
 
   List<String> filterOptions = [];
@@ -69,11 +72,11 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
     return [];
   }
 
-  void _showEditPriceBottomSheet(BuildContext context, AllPointPriceEntity priceData) {
-    final TextEditingController priceController = TextEditingController(
-      text: priceData.pricePerPoint.toString(),
+  void _showAdjustCommissionBottomSheet(BuildContext context, AllPointPriceEntity roleData) {
+    final TextEditingController rateControler = TextEditingController(
+
     );
-    
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -97,7 +100,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                   Icon(Icons.edit, color: ColorManager.lightprimary, size: 24.sp),
                   SizedBox(width: 12.w),
                   Text(
-                    AppLocalizations.of(context)!.editPointPrice,
+                    AppLocalizations.of(context)!.editCommissionRate,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -106,7 +109,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-              
+
               // Role info
               Container(
                 padding: EdgeInsets.all(12.w),
@@ -119,7 +122,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                     Icon(Icons.person, color: ColorManager.lightprimary, size: 20.sp),
                     SizedBox(width: 8.w),
                     Text(
-                      '${priceData.roleName}',
+                      '${roleData.roleName}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
@@ -130,10 +133,10 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                 ),
               ),
               SizedBox(height: 20.h),
-              
+
               // Price input field
               Text(
-                '${AppLocalizations.of(context)!.pointPrice} (${AppLocalizations.of(context)!.egp}):',
+                '${AppLocalizations.of(context)!.commissionRate}',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -142,12 +145,12 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
               ),
               SizedBox(height: 8.h),
               CustomTextField(
-                controller: priceController,
-                hintText: AppLocalizations.of(context)!.pointsRequest,
+                controller: rateControler,
+                hintText: AppLocalizations.of(context)!.enterCommissionRate,
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 24.h),
-              
+
               // Action buttons
               Row(
                 children: [
@@ -178,8 +181,8 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                         ),
                       ),
                       onPressed: () {
-                        final newPrice = double.tryParse(priceController.text.trim());
-                        if (newPrice == null || newPrice <= 0) {
+                        final newRate = num.tryParse(rateControler.text.trim());
+                        if (newRate == null || newRate <= 0) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(AppLocalizations.of(context)!.enterPointPrice),
@@ -189,7 +192,10 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                           return;
                         }
                         if (userToken != null) {
-                          pointPricesCubit.editPointPrice( priceData.roleName??"", newPrice);
+                          roleData.roleName == 'Leadermarketer'
+                              ?  commissionRateCubit.editRateForTeamLeader(userToken!, newRate)
+                              : commissionRateCubit.editRateForRoles(userToken!, newRate, roleData.roleName!);
+
                         }
                         Navigator.pop(context);
                       },
@@ -209,21 +215,21 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PointPricesCubit, PointPricesState>(
-      bloc: pointPricesCubit,
+    return BlocListener<CommissionRateCubit, CommissionRateStates>(
+      bloc: commissionRateCubit,
       listener: (context, state) {
-        if (state is EditPriceLoading) {
+        if (state is CommissionRateLoading) {
           CustomDialog.loading(
             context: context,
             message: AppLocalizations.of(context)!.loading,
             cancelable: false,
           );
-        } else if (state is EditPriceSuccess) {
+        } else if (state is CommissionRateSuccess) {
           Navigator.of(context).pop(); // Close loading dialog
           CustomDialog.positiveButton(
             context: context,
             title: AppLocalizations.of(context)!.success,
-            message: state.response ?? '',
+            message: state.response,
             positiveOnClick: () {
               // Refresh the data
               if (userToken != null) {
@@ -231,12 +237,12 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
               }
             },
           );
-        } else if (state is EditPriceError) {
+        } else if (state is CommissionRateError) {
           Navigator.of(context).pop(); // Close loading dialog
           CustomDialog.positiveButton(
             context: context,
             title: AppLocalizations.of(context)!.error,
-            message: state.error.errorMessage ?? "",
+            message: state.error.errorMessage,
             positiveOnClick: () {
               Navigator.of(context).pop();
             },
@@ -253,7 +259,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
-              AppLocalizations.of(context)!.pointPriceManagement,
+              AppLocalizations.of(context)!.commissionRateManagement,
 
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: Colors.white,
@@ -276,7 +282,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                 itemBuilder: (context, index) {
                   final filter = filterOptions[index];
                   final isSelected = selectedFilter == filter;
-                  
+
                   return Container(
                     margin: EdgeInsets.only(right: 12.w),
                     child: GestureDetector(
@@ -380,8 +386,8 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                     );
                   } else if (state is PointPricesSuccess) {
                     final allPrices = state.pointPrices;
-                    final filteredPrices = selectedFilter == AppLocalizations.of(context)!.all 
-                        ? allPrices 
+                    final filteredPrices = selectedFilter == AppLocalizations.of(context)!.all
+                        ? allPrices
                         : allPrices.where((price) {
                             // Map localized filter names to actual role names
                             if (selectedFilter == AppLocalizations.of(context)!.marketer) {
@@ -411,8 +417,8 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                         itemCount: filteredPrices.length,
                         physics: AlwaysScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final priceData = filteredPrices[index];
-                          
+                          final roleData = filteredPrices[index];
+
                           return Container(
                             margin: EdgeInsets.only(bottom: 16.h),
                             padding: EdgeInsets.all(16.w),
@@ -442,7 +448,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            priceData.roleName??"",
+                                            roleData.roleName??"",
                                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.bold,
@@ -468,7 +474,7 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () => _showEditPriceBottomSheet(context, priceData),
+                                      onPressed: () => _showAdjustCommissionBottomSheet(context, roleData),
                                       icon: Icon(
                                         Icons.edit,
                                         color: ColorManager.lightprimary,
@@ -477,57 +483,12 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
                                     ),
                                   ],
                                 ),
-                                
-                                SizedBox(height: 16.h),
-                                
+
+
                                 // Price display
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.attach_money,
-                                      color: ColorManager.lightprimary,
-                                      size: 20.sp,
-                                    ),
-                                    SizedBox(width: 8.w),
-                                    Text(
-                                      '${priceData.pricePerPoint} ${AppLocalizations.of(context)!.egp}',
-                                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                        fontSize: 24.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: ColorManager.lightprimary,
-                                      ),
-                                    ),
-                                    SizedBox(width: 8.w),
-                                    Text(
-                                      AppLocalizations.of(context)!.perPoint,
-                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                        fontSize: 14.sp,
-                                        color: ColorManager.textBlack,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                
-                                SizedBox(height: 12.h),
-                                
+
+
                                 // Additional info
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.info_outline,
-                                      size: 14.sp,
-                                      color: ColorManager.textBlack,
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      '${AppLocalizations.of(context)!.lastUpdated}: ${DateFormat('MMM DD yyyy hh:mm a').format(DateTime.parse(priceData?.priceUpdatedAt??""))}',
-                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                        fontSize: 12.sp,
-                                        color: ColorManager.textBlack,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
                           );
@@ -544,4 +505,4 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
       ),
     );
   }
-} 
+}

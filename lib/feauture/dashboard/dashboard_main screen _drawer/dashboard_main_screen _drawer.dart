@@ -62,7 +62,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
 
         actions: [Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
-          child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
+          child: CircleAvatar(radius: 27.r,backgroundColor: ColorManager.black,
+              child:Image.asset(ImageAssets.appIcon,width: 60.w,fit: BoxFit.cover,)),
         )],
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(

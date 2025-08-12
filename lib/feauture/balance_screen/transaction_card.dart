@@ -108,7 +108,10 @@ class TransactionCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                  "${AppLocalizations.of(context)!.egp} ${transaction.amount?.toStringAsFixed(2) ?? '0.00'}",
+                      transaction.amount==0.00?
+                                  " ${transaction.points ?? '0.00'}${AppLocalizations.of(context)!.point}":
+
+                                  " ${transaction.amount?.toStringAsFixed(2) ?? '0.00'}${AppLocalizations.of(context)!.egp}",
                                   style: GoogleFonts.poppins(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w500,

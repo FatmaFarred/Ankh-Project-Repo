@@ -61,6 +61,9 @@ abstract class EndPoints {
   static const String resendEmailVerification = "Auth/resend-confirmation";
   static const String forgetPassword = "Auth/forgot-password";
   static const String resetPassword = "Auth/reset-password";
+  static const String adjustCommissionForRoles = "Point/update-per-commission";
+  static const String adjustCommissionForTeamLeader = "Point/update-teamleader-commission";
+
 
 
 

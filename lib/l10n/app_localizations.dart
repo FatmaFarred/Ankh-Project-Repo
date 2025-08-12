@@ -2501,8 +2501,38 @@ abstract class AppLocalizations {
   /// No description provided for @aggredPrice.
   ///
   /// In en, this message translates to:
-  /// **'Aggred Price'**
+  /// **'Agreed Price'**
   String get aggredPrice;
+
+  /// No description provided for @commissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission Rate'**
+  String get commissionRate;
+
+  /// No description provided for @commissionRateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **' The commission rate is the percentage of the total price that will be charged as a commission for the service provided.'**
+  String get commissionRateDescription;
+
+  /// No description provided for @commissionRateRequired.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission rate is required'**
+  String get commissionRateRequired;
+
+  /// No description provided for @enterCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Commission Rate'**
+  String get enterCommissionRate;
+
+  /// No description provided for @totalCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Total Commission'**
+  String get totalCommission;
 
   /// No description provided for @editCarDetails.
   ///
@@ -3019,6 +3049,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'S'**
   String get s;
+
+  /// No description provided for @commissionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission Details'**
+  String get commissionDetails;
+
+  /// No description provided for @requestedCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Requested Commission'**
+  String get requestedCommission;
+
+  /// No description provided for @requestCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Withdraw Commission'**
+  String get requestCommission;
+
+  /// No description provided for @enterCommissionAmount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Commission Amount'**
+  String get enterCommissionAmount;
+
+  /// No description provided for @commissionRateManagement.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission Rate Management'**
+  String get commissionRateManagement;
+
+  /// No description provided for @editCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Commission Rate'**
+  String get editCommissionRate;
 
   /// No description provided for @productRating.
   ///

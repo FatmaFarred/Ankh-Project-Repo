@@ -713,7 +713,7 @@ class _AccountScreenState extends State<AccountScreen>
                                 ],
                               )
                             : const SizedBox.shrink(),
-                        _tableSection(
+                        /*_tableSection(
                           title: AppLocalizations.of(context)!.manageAccount,
                           rows: [
                             // SettingsTile(title:  AppLocalizations.of(context)!.personalDetails, icon: Iconsax.user),
@@ -730,7 +730,7 @@ class _AccountScreenState extends State<AccountScreen>
                               icon: Iconsax.notification,
                             ),
                           ],
-                        ),
+                        ),*/
                         _tableSection(
                           title: AppLocalizations.of(
                             context,
@@ -754,10 +754,6 @@ class _AccountScreenState extends State<AccountScreen>
                           title: AppLocalizations.of(context)!.preferences,
                           rows: [
                             // SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
-                            SettingsTile(
-                              title: AppLocalizations.of(context)!.myFavorites,
-                              icon: Iconsax.heart,
-                            ),
                             DarkModeSwitchTile(),
                             SettingsTile(
                               title: AppLocalizations.of(context)!.language,
@@ -773,10 +769,6 @@ class _AccountScreenState extends State<AccountScreen>
                                 context,
                               )!.contactSupport,
                               icon: Iconsax.call,
-                            ),
-                            SettingsTile(
-                              title: AppLocalizations.of(context)!.saftyCenter,
-                              icon: Icons.info_outline_rounded,
                             ),
                           ],
                         ),

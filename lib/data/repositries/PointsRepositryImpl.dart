@@ -42,8 +42,8 @@ import '../../domain/repositries_and_data_sources/repositries/points_repositry.d
   }
 
   @override
-  Future<Either<Failure, String?>> addPointRequest(String token, String description, num points)async {
-    var either = await pointsRemoteDataSource.addPointRequest(token, description, points);
+  Future<Either<Failure, String?>> addPointRequest(String token, String description, num? points,num? commission)async {
+    var either = await pointsRemoteDataSource.addPointRequest(token, description, points, commission);
     return either.fold((error) => left(error), (response) => right(response));
   }
 
@@ -56,6 +56,19 @@ import '../../domain/repositries_and_data_sources/repositries/points_repositry.d
   @override
   Future<Either<Failure, String?>> adjustUserPoints(String userId, num points, String reason)async {
     var either = await pointsRemoteDataSource.adjustUserPoints(userId, points, reason);
+    return either.fold((error) => left(error), (response) => right(response));
+  }
+
+  @override
+  Future<Either<Failure, String?>> adjustCommissionForRoles(String token, num commissionRate, String roleName)async {
+    var either = await pointsRemoteDataSource.adjustCommissionForRoles(token, commissionRate, roleName);
+    return either.fold((error) => left(error), (response) => right(response));
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String?>> adjustCommissionForTeamLeader(String token, num commissionRate) async{
+    var either = await pointsRemoteDataSource.adjustCommissionForTeamLeader(token, commissionRate);
     return either.fold((error) => left(error), (response) => right(response));
   }
 

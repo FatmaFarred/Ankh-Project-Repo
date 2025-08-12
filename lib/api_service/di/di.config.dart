@@ -247,6 +247,10 @@ import '../../domain/use_cases/add_point_request_use_case.dart' as _i391;
 import '../../domain/use_cases/add_product_name_use_case.dart' as _i731;
 import '../../domain/use_cases/add_product_rating_use_case.dart' as _i395;
 import '../../domain/use_cases/add_top_brand_use_case.dart' as _i422;
+import '../../domain/use_cases/adjust_commission_for_roles_use_case.dart'
+    as _i991;
+import '../../domain/use_cases/adjust_commission_for_team_leader_use_case.dart'
+    as _i122;
 import '../../domain/use_cases/adjust_user_points.dart' as _i286;
 import '../../domain/use_cases/appoint_as_team_leader_use_case.dart' as _i416;
 import '../../domain/use_cases/authentication/client_register_use_case.dart'
@@ -398,6 +402,8 @@ import '../../feauture/dashboard/notification/push_notification/cubit/push_notif
     as _i1031;
 import '../../feauture/dashboard/offers_management/cubit/price_offer_cubit.dart'
     as _i413;
+import '../../feauture/dashboard/points_management/cubit/commission_rate_cubit.dart'
+    as _i898;
 import '../../feauture/dashboard/points_management/cubit/point_prices_cubit.dart'
     as _i614;
 import '../../feauture/dashboard/points_management/cubit/points_cubit.dart'
@@ -744,14 +750,19 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i78.GetBalanceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i552.RejectPointRequestUseCase>(
         () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i122.AdjustCommissionForTeamLeaderUseCase>(() =>
+        _i122.AdjustCommissionForTeamLeaderUseCase(
+            gh<_i147.PointsRepositry>()));
+    gh.factory<_i991.AdjustCommissionForRolesUseCase>(() =>
+        _i991.AdjustCommissionForRolesUseCase(gh<_i147.PointsRepositry>()));
+    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
+        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i422.AddTopBrandUseCase>(
         () => _i422.AddTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i282.DeleteTopBrandUseCase>(
         () => _i282.DeleteTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i720.EditTopBrandUseCase>(
         () => _i720.EditTopBrandUseCase(gh<_i68.TopBrandRepository>()));
-    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
-        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.factory<_i752.AddPointRequestCubit>(() => _i752.AddPointRequestCubit(
         addPointRequestUseCase: gh<_i391.AddPointRequestUseCase>()));
     gh.factory<_i247.SendInstallmentRequestUseCase>(() =>
@@ -759,6 +770,12 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i500.InstallmentRequestRepository>()));
     gh.factory<_i527.SendPriceOfferUseCase>(() =>
         _i527.SendPriceOfferUseCase(gh<_i807.MarketerRequestRepository>()));
+    gh.factory<_i898.CommissionRateCubit>(() => _i898.CommissionRateCubit(
+          adjustCommissionForRolesUseCase:
+              gh<_i991.AdjustCommissionForRolesUseCase>(),
+          adjustCommissionForTeamLeaderUseCase:
+              gh<_i122.AdjustCommissionForTeamLeaderUseCase>(),
+        ));
     gh.factory<_i614.PointPricesCubit>(() => _i614.PointPricesCubit(
           getAllPointPriceUseCase: gh<_i429.GetAllPointPriceUseCase>(),
           editPointPriceUseCase: gh<_i341.EditPointPriceUseCase>(),
@@ -947,10 +964,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i731.AddProductNameUseCase>(
         () => _i731.AddProductNameUseCase(gh<_i756.ProductNameRepository>()));
-    gh.factory<_i90.GetProductNamesUseCase>(
-        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i479.DeleteProductNameUseCase>(() =>
         _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
+    gh.factory<_i90.GetProductNamesUseCase>(
+        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i208.GetProductsByBrandUseCase>(() =>
         _i208.GetProductsByBrandUseCase(gh<_i129.ProductsByBrandRepository>()));
     gh.factory<_i941.CsRolesUseCase>(

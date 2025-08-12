@@ -16,7 +16,7 @@ import '../../../api_service/di/di.dart';
 class EmailVerficationScreen extends StatefulWidget {
   const EmailVerficationScreen({super.key, this.email});
   static String emailVerficationScreenRouteName = "EmailVerficationScreen";
-
+  
   final String? email;
 
   @override
@@ -28,17 +28,17 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
   List.generate(6, (_) => TextEditingController());
 
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
-
+  
   late final EmailVerificationCubit _emailVerificationCubit;
 
   @override
   void initState() {
     super.initState();
-
+    
     try {
       // Get the cubit instance once and reuse it
       _emailVerificationCubit = getIt<EmailVerificationCubit>();
-
+      
       // Set email in cubit if provided
       if (widget.email != null) {
         _emailVerificationCubit.setEmail(widget.email!);
@@ -63,7 +63,7 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
 
   void _onConfirm() {
     String code = _codeControllers.map((c) => c.text).join();
-
+    
     if (code.length == 6) {
       try {
         _emailVerificationCubit.verifyEmail(code);
@@ -134,7 +134,7 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    
     return BlocListener<EmailVerificationCubit, EmailVerificationState>(
       bloc: _emailVerificationCubit,
       listener: (context, state) {
@@ -160,7 +160,7 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
               );
             },
           );
-        } else if (state is EmailVerificationFailure) {
+                  } else if (state is EmailVerificationFailure) {
           // Close loading dialog first
           Navigator.of(context).pop();
           
@@ -176,8 +176,8 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
             context: context,
             message: AppLocalizations.of(context)!.loading,
             cancelable: false,
-          );
-        } else if (state is ResendEmailVerificationSuccess) {
+            );
+          } else if (state is ResendEmailVerificationSuccess) {
           // Close loading dialog first
           Navigator.of(context).pop();
           
@@ -186,8 +186,8 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
             context: context,
             title: AppLocalizations.of(context)!.success,
             message: state.message ?? 'Verification code resent successfully!',
-          );
-        } else if (state is ResendEmailVerificationFailure) {
+            );
+          } else if (state is ResendEmailVerificationFailure) {
           // Close loading dialog first
           Navigator.of(context).pop();
           
@@ -196,7 +196,7 @@ class _EmailVerificationScreenState extends State<EmailVerficationScreen> {
             context: context,
             title: 'Failed to Resend',
             message: state.error.errorMessage ?? 'Failed to resend code',
-          );
+            );
         }
       },
       child: BlocBuilder<EmailVerificationCubit, EmailVerificationState>(

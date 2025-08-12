@@ -19,6 +19,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../myrequest/status_handler_widgets.dart';
 import 'package:ankh_project/feauture/dashboard/points_management/point_prices_screen.dart';
 
+import 'commissiom_managment_screen.dart';
+
 class PointsScreen extends StatefulWidget {
   const PointsScreen({Key? key}) : super(key: key);
 
@@ -81,7 +83,6 @@ class _PointsScreenState extends State<PointsScreen> {
         confirmText: AppLocalizations.of(context)!.approve,
         onCancel: () => Navigator.pop(context),
         onConfirm: () {
-          Navigator.pop(context);
           _approveRequest(requestId);
         },
         icon: Icon(Icons.check_circle, color: ColorManager.error),
@@ -91,7 +92,7 @@ class _PointsScreenState extends State<PointsScreen> {
 
   void _showRejectBottomSheet(BuildContext context, String requestId) {
     final TextEditingController reasonController = TextEditingController();
-    
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -124,7 +125,7 @@ class _PointsScreenState extends State<PointsScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-              
+
               // Description
               Text(
                 AppLocalizations.of(context)!.rejectSubTitle,
@@ -134,7 +135,7 @@ class _PointsScreenState extends State<PointsScreen> {
                 ),
               ),
               SizedBox(height: 20.h),
-              
+
               // Reason input field
               Text(
                 AppLocalizations.of(context)!.rejectReason,
@@ -150,7 +151,7 @@ class _PointsScreenState extends State<PointsScreen> {
                 hintText: AppLocalizations.of(context)!.enterRejectReason,
               ),
               SizedBox(height: 24.h),
-              
+
               // Action buttons
               Row(
                 children: [
@@ -192,7 +193,6 @@ class _PointsScreenState extends State<PointsScreen> {
                           );
                           return;
                         }
-                        Navigator.pop(context);
                         _rejectRequest(requestId, reason);
                       },
                       color: ColorManager.error,
@@ -336,9 +336,51 @@ class _PointsScreenState extends State<PointsScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 8.h),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CommissiomManagmentScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                  decoration: BoxDecoration(
+
+                    color: ColorManager.lightprimary,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.percent_outlined,
+                        color: ColorManager.white,
+                        size: 18.sp,
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        AppLocalizations.of(context)!.commissionRate,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorManager.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 20.h),
 
-          // Points Requests List
+
+            // Points Requests List
           Expanded(
             child: BlocBuilder<PointsCubit, PointsState>(
               bloc: pointsCubit,
@@ -471,7 +513,9 @@ class _PointsScreenState extends State<PointsScreen> {
                       
                       // Points amount
                       Text(
-                        '+${request.points ?? 0}${AppLocalizations.of(context)!.points}',
+                        request.amount == 0.00?
+                        '+${request.points ?? 0}${AppLocalizations.of(context)!.points}':
+                        '+${request.amount ?? 0}${AppLocalizations.of(context)!.egp}',
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
