@@ -518,6 +518,18 @@
   "enterYourRate": "أدخل تقييمك",
   "verifyYourEmail": "تفعيل البريد",
   "s": "ث",
+  "commissionRate": "نسبة العمولة",
+    "commissionRateDescription": "نسبة العمولة التي ستحصل عليها من كل عملية بيع",
+    "commissionRateRequired": "نسبة العمولة مطلوبة",
+  "enterCommissionRate": "أدخل نسبة العمولة",
+  "totalCommission": "إجمالي العمولة",
+    "commissionDetails": "تفاصيل العمولة",
+  "requestedCommission": "العمولة المطلوبة",
+  "requestCommission": "سحب العمولة",
+  "enterCommissionAmount": "أدخل مبلغ العمولة",
+  "commissionRateManagement": " إدارة نسبة العمولة",
+  "editCommissionRate": "تعديل نسبة العمولة",
+
 
   "inspectorRate": "تقييم المعاين",
   "enterYourRate": "أدخل تقييمك",

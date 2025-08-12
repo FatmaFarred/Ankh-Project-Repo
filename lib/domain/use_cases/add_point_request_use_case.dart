@@ -13,8 +13,8 @@ class AddPointRequestUseCase{
   PointsRepositry repositry;
   AddPointRequestUseCase(this.repositry);
 
-  Future <Either<Failure,String?>>execute (String token, description, points)async{
-    return await repositry.addPointRequest(token, description, points);
+  Future <Either<Failure,String?>>execute (String token, String description,num? points, num? commission)async{
+    return await repositry.addPointRequest(token, description, points,commission);
 
   }
 

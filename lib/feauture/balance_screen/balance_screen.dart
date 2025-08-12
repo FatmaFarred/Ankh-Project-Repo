@@ -20,6 +20,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../data/models/authentication_response_dm.dart';
 import '../authentication/user_controller/user_cubit.dart';
 
+// Move enum to top-level
+enum _RequestType { points, commission }
 
 class BalanceScreen extends StatefulWidget {
   const BalanceScreen({super.key});
@@ -35,9 +37,14 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
   String? userToken;
   late TabController _tabController;
   int _currentTabIndex = 0;
-  
+
+  // Request type state
+  _RequestType _selectedRequestType = _RequestType.points;
+  late TabController _requestTabController;
+
   // Controllers for the bottom sheet
   final TextEditingController _pointsController = TextEditingController();
+  final TextEditingController _commissionController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -50,13 +57,21 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
         _currentTabIndex = _tabController.index;
       });
     });
+    _requestTabController = TabController(length: 2, vsync: this);
+    _requestTabController.addListener(() {
+      setState(() {
+        _selectedRequestType = _requestTabController.index == 0 ? _RequestType.points : _RequestType.commission;
+      });
+    });
     _loadTokenAndFetchData();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _requestTabController.dispose();
     _pointsController.dispose();
+    _commissionController.dispose();
     _descriptionController.dispose();
     super.dispose();
   }
@@ -96,8 +111,11 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
 
   void _showAddPointRequestBottomSheet() {
     _pointsController.clear();
+    _commissionController.clear();
     _descriptionController.clear();
-    
+    _requestTabController.index = 0;
+    _selectedRequestType = _RequestType.points;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -107,9 +125,6 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.8,
-          ),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -122,97 +137,186 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.add_circle_outline,
-                        size: 24.h,
-                        color: ColorManager.balanceColor,
+                  // TabBar for request type
+                  TabBar(
+                    controller: _requestTabController,
+                    labelColor: ColorManager.balanceColor,
+                    labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
+                    unselectedLabelColor: Colors.grey,
+                    indicatorColor: ColorManager.balanceColor,
+                    indicatorWeight: 2,
+                    tabs: [
+                      Tab(text: AppLocalizations.of(context)!.requestPoints,
+
                       ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        AppLocalizations.of(context)!.requestPoints,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Spacer(),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: Icon(Icons.close, size: 24.sp, color: ColorManager.darkGrey),
-                      ),
+                      Tab(text: AppLocalizations.of(context)!.requestCommission), // fallback for missing localization
                     ],
                   ),
-                SizedBox(height: 8.h),
-                Text(
-                  AppLocalizations.of(context)!.description,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
-                  style:Theme.of(context).textTheme.bodySmall ,
-
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.enterDescription,
-                    hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp,color: ColorManager.darkGrey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(color: ColorManager.lightGrey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(color: ColorManager.lightGrey),
+                  SizedBox(height: 16.h),
+                  // TabBarView for request type
+                  SizedBox(
+                    height: 220.h, // enough for both forms
+                    child: TabBarView(
+                      controller: _requestTabController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        // Points Request Form
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.description,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                              ),
+                              SizedBox(height: 8.h),
+                              TextFormField(
+                                style: Theme.of(context).textTheme.bodySmall,
+                                controller: _descriptionController,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.enterDescription,
+                                  hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  errorMaxLines: 2,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return AppLocalizations.of(context)!.fieldRequired;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 30.h),
+                              Text(
+                                AppLocalizations.of(context)!.points,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                              ),
+                              SizedBox(height: 8.h),
+                              TextFormField(
+                                style: Theme.of(context).textTheme.bodySmall,
+                                controller: _pointsController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.enterPointsCount,
+                                  hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  errorMaxLines: 2,
+                                ),
+                                validator: (value) {
+                                  if (_selectedRequestType != _RequestType.points) return null;
+                                  if (value == null || value.isEmpty) {
+                                    return AppLocalizations.of(context)!.fieldRequired;
+                                  }
+                                  if (num.tryParse(value) == null) {
+                                    return 'Please enter a valid number';
+                                  }
+                                  final points = num.tryParse(value);
+                                  if (points != null && points <= 0) {
+                                    return 'Points must be greater than 0';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20.h),
+                          
+                            ],
+                          ),
+                        ),
+                        // Commission Request Form
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.description,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                              ),
+                              SizedBox(height: 8.h),
+                              TextFormField(
+                                style: Theme.of(context).textTheme.bodySmall,
+                                controller: _descriptionController,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.enterDescription,
+                                  hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  errorMaxLines: 2,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return AppLocalizations.of(context)!.fieldRequired;
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20.h),
+                              Text(
+                                AppLocalizations.of(context)!.commission, // fallback for missing localization
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                              ),
+                              SizedBox(height: 8.h),
+                              TextFormField(
+                                style: Theme.of(context).textTheme.bodySmall,
+                                controller: _commissionController,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.enterCommissionAmount, // fallback for missing localization
+                                  hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                  ),
+                                  errorMaxLines: 2,
+                                ),
+                                validator: (value) {
+                                  if (_selectedRequestType != _RequestType.commission) return null;
+                                  if (value == null || value.isEmpty) {
+                                    return AppLocalizations.of(context)!.fieldRequired;
+                                  }
+                                  if (num.tryParse(value) == null) {
+                                    return 'Please enter a valid number';
+                                  }
+                                  final commission = num.tryParse(value);
+                                  if (commission != null && commission <= 0) {
+                                    return 'Commission must be greater than 0';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.fieldRequired;
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20.h),
-                Text(
-                  AppLocalizations.of(context)!.points,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
-                ),
-                SizedBox(height: 8.h),
-                TextFormField(
-                  style:Theme.of(context).textTheme.bodySmall ,
-                  controller: _pointsController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.enterPointsCount,
-                    hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14.sp,color: ColorManager.darkGrey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(color: ColorManager.lightGrey),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(color: ColorManager.lightGrey),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.fieldRequired;
-                    }
-                    if (num.tryParse(value) == null) {
-                      return 'Please enter a valid number';
-                    }
-                    final points = num.tryParse(value);
-                    if (points != null && points <= 0) {
-                      return 'Points must be greater than 0';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 24.h),
-                BlocListener<AddPointRequestCubit, AddPointRequestState>(
+                  SizedBox(height: 24.h),
+                  BlocListener<AddPointRequestCubit, AddPointRequestState>(
                     bloc: addPointRequestCubit,
                     listener: (context, state) {
                       if (state is AddPointRequestSuccess) {
@@ -222,9 +326,7 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                           message: state.message ?? 'Request submitted successfully',
                           positiveOnClick: () {
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-
-                            _refreshData(); // Refresh the balance data
+                            _refreshData();
                           },
                         );
                       } else if (state is AddPointRequestError) {
@@ -241,7 +343,7 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                     child: BlocBuilder<AddPointRequestCubit, AddPointRequestState>(
                       bloc: addPointRequestCubit,
                       builder: (context, state) {
-                                                return Row(
+                        return Row(
                           children: [
                             Expanded(
                               child: CustomizedElevatedButton(
@@ -278,15 +380,24 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                     : () {
                                         if (_formKey.currentState!.validate()) {
                                           if (userToken != null) {
-                                            final points = num.parse(_pointsController.text);
-                                            print('Submitting request with points: $points');
-                                            print('Description: ${_descriptionController.text}');
-                                            addPointRequestCubit.addPointRequest(
-                                              context,
-                                              userToken!,
-                                              _descriptionController.text,
-                                              points,
-                                            );
+                                            if (_selectedRequestType == _RequestType.points) {
+                                              final points = num.parse(_pointsController.text);
+                                              // addPointRequest expects 5 arguments, add a dummy value for the 5th if needed
+                                              addPointRequestCubit.addPointRequest(
+                                                context,
+                                                userToken!,
+                                                _descriptionController.text,
+                                                points,
+                                                null, // <-- add a dummy value for the 5th argument (replace with actual if needed)
+                                              );
+                                            } else if (_selectedRequestType == _RequestType.commission) {
+                                              final commission = num.parse(_commissionController.text);
+                                              addPointRequestCubit.addPointRequest(context,
+                                                  userToken!,
+                                                  _descriptionController.text,
+                                                  null,
+                                                  commission);
+                                            }
                                           }
                                         }
                                       },
@@ -299,8 +410,8 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                       },
                     ),
                   ),
-                ]),
-
+                ],
+              ),
             ),
           ),
         ),
@@ -398,7 +509,7 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.availableBalance,
+                                AppLocalizations.of(context)!.totalCommission,
                                 style: GoogleFonts.inter(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w400,
@@ -411,9 +522,10 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+
                                   Flexible(
                                     child: Text(
-                                      AppLocalizations.of(context)!.egp,
+                                      "${balance.commissions?.toStringAsFixed(0) ?? '0.00'}",
                                       style: GoogleFonts.inter(
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w700,
@@ -423,9 +535,10 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                     ),
                                   ),
                                   SizedBox(width: 4.w),
+
                                   Flexible(
                                     child: Text(
-                                      "${balance.availableBalance?.toStringAsFixed(0) ?? '0.00'}",
+                                      AppLocalizations.of(context)!.egp,
                                       style: GoogleFonts.inter(
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w700,
@@ -458,23 +571,23 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Flexible(
+
+                                           Flexible(
                                               child: Text(
-                                                AppLocalizations.of(context)!.point,
+                                                "${balance.totalPoints?.toString() ?? '0'}",
                                                 style: GoogleFonts.inter(
-                                                  fontSize: 14.sp,
+                                                  fontSize: 18.sp,
                                                   fontWeight: FontWeight.w700,
                                                   color: ColorManager.white,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            SizedBox(width: 4.w),
                                             Flexible(
                                               child: Text(
-                                                "${balance.totalPoints?.toString() ?? '0'}",
+                                                AppLocalizations.of(context)!.point,
                                                 style: GoogleFonts.inter(
-                                                  fontSize: 18.sp,
+                                                  fontSize: 14.sp,
                                                   fontWeight: FontWeight.w700,
                                                   color: ColorManager.white,
                                                 ),
@@ -512,6 +625,19 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
+
+                                            Flexible(
+                                              child: Text(
+                                                "${balance.perPointValue?.toStringAsFixed(0) ?? '0.00'}",
+                                                style: GoogleFonts.inter(
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: ColorManager.white,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 4.w),
+
                                             Flexible(
                                               child: Text(
                                                 AppLocalizations.of(context)!.egp,
@@ -521,17 +647,6 @@ class _BalanceScreenState extends State<BalanceScreen> with TickerProviderStateM
                                                   color: ColorManager.white,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            SizedBox(width: 4.w),
-                                            Flexible(
-                                              child: Text(
-                                                "${balance.perPointValue?.toStringAsFixed(0) ?? '0.00'}",
-                                                style: GoogleFonts.inter(
-                                                  fontSize: 18.sp,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: ColorManager.white,
-                                                ),
                                               ),
                                             ),
                                           ],

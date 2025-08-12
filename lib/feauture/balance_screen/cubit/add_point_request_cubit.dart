@@ -15,10 +15,10 @@ class AddPointRequestCubit extends Cubit<AddPointRequestState> {
     required this.addPointRequestUseCase,
   }) : super(AddPointRequestInitial());
 
-  Future<void> addPointRequest(BuildContext context, String token, String description, num points) async {
+  Future<void> addPointRequest(BuildContext context, String token, String description, num? points,num? commission) async {
     print('Cubit: Adding point request with points: $points');
     emit(AddPointRequestLoading());
-    var either = await addPointRequestUseCase.execute(token, description, points);
+    var either = await addPointRequestUseCase.execute(token, description, points, commission);
     either.fold((error) {
       print('Cubit: Error occurred: ${error.errorMessage}');
       emit(AddPointRequestError(error: error));

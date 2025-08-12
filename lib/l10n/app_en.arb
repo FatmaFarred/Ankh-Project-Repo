@@ -407,8 +407,12 @@
   "doYouHaveInvitationCode": "Do you have an invitation code?",
   "registerWithInvitationCode": "Register with Invitation Code",
   "tryAgain": "Try Again",
-  "aggredPrice": "Aggred Price",
-
+  "aggredPrice": "Agreed Price",
+  "commissionRate": "Commission Rate",
+  "commissionRateDescription": " The commission rate is the percentage of the total price that will be charged as a commission for the service provided.",
+  "commissionRateRequired": " Commission rate is required",
+  "enterCommissionRate": " Enter Commission Rate",
+  "totalCommission": " Total Commission",
   "editCarDetails": "Edit Car Details",
   "addCar": "Add Car",
   "basicInformation": "Basic Information",
@@ -503,9 +507,13 @@
   "inspectorRate": "Inspector Rate",
   "enterYourRate": "Enter Your Rate",
   "verifyYourEmail": "Verify Email",
-  "s": "S"
-
-
+  "s": "S",
+  "commissionDetails": " Commission Details",
+  "requestedCommission": " Requested Commission",
+  "requestCommission": " Withdraw Commission",
+  "enterCommissionAmount": " Enter Commission Amount",
+  "commissionRateManagement": " Commission Rate Management",
+  "editCommissionRate": "Edit Commission Rate",
 
 
 

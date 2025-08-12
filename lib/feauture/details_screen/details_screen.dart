@@ -337,10 +337,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                             ),
 
-                            product.status == "Available" ? Positioned(
+                             Positioned(
                               right: 13.w,
                               child: Chip(label: Text(
-                                AppLocalizations.of(context)!.active, style:
+                                product?.status??"", style:
                               Theme
                                   .of(context)
                                   .textTheme
@@ -356,7 +356,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         .transparent)), // makes it circular
 
                               ),
-                            ) : SizedBox.shrink(),
+                            ) ,
                             user?.roles?[0] == "Admin" ||
                                 user?.roles?[0] == "LeaderMarketer" ||
                                 user?.roles?[0] == "Marketer" ||
