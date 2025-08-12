@@ -24,20 +24,8 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   File? _selectedImage;
-  final _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   late final TopBrandsManagementCubit _cubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _cubit = getIt<TopBrandsManagementCubit>();
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -48,6 +36,19 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
     }
   }
 
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<TopBrandsManagementCubit>();
+  }
   void _submitForm() {
     if (_formKey.currentState!.validate() && _selectedImage != null) {
       _cubit.addTopBrand(
@@ -69,9 +70,9 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
         listener: (context, state) {
           if (state is TopBrandAddSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(AppLocalizations.of(context)!.topBrandAddedSuccessfully)),
+              SnackBar(content: Text('Top brand added successfully')),
             );
-            Navigator.pop(context);
+            Navigator.pop(context, true); // Return true to indicate success
           } else if (state is TopBrandsManagementError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -86,7 +87,7 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
                 color: Colors.white,
                 onPressed: () => Navigator.pop(context),
               ),
-              title: Text(AppLocalizations.of(context)!.addBrand),
+              title: Text(AppLocalizations.of(context)!.add),
               backgroundColor: ColorManager.lightprimary,
             ),
             body: Padding(
@@ -97,27 +98,24 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Brand Name Field
                       Text(
-                        AppLocalizations.of(context)!.brandName,
+                        'Brand Name',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(height: 8.h),
                       CustomTextFormField(
                         controller: _nameController,
-                        hintText: AppLocalizations.of(context)!.brandName,
+                        hintText: 'Enter brand name',
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return AppLocalizations.of(context)!.brandNameRequired;
+                            return 'Brand name is required';
                           }
                           return null;
                         },
                       ),
-                      SizedBox(height: 24.h),
-                      
-                      // Brand Image Field
+                      SizedBox(height: 20.h),
                       Text(
-                        AppLocalizations.of(context)!.brandImage,
+                        'Brand Image',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       SizedBox(height: 8.h),
@@ -127,15 +125,15 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
                           height: 200.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: ColorManager.lightGrey.withOpacity(0.3),
+                            color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: ColorManager.lightGrey),
+                            border: Border.all(color: Colors.grey),
                           ),
                           child: _selectedImage != null
                               ? ClipRRect(
                                   borderRadius: BorderRadius.circular(8.r),
                                   child: Image.file(
-                                    _selectedImage!,
+                                    File(_selectedImage!.path),
                                     fit: BoxFit.cover,
                                   ),
                                 )
@@ -143,27 +141,33 @@ class _AddNewTopBrandState extends State<AddNewTopBrand> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
-                                      Icons.add_photo_alternate_outlined,
-                                      size: 48.sp,
-                                      color: ColorManager.lightprimary,
+                                      Icons.cloud_upload,
+                                      size: 50.sp,
+                                      color: Colors.grey,
                                     ),
                                     SizedBox(height: 8.h),
                                     Text(
-                                      AppLocalizations.of(context)!.tapToSelectImage,
-                                      style: Theme.of(context).textTheme.bodyMedium,
+                                      'Tap to select an image',
+                                      style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
                         ),
                       ),
-                      SizedBox(height: 32.h),
-                      
-                      // Submit Button
+                      if (_selectedImage == null)
+                        Padding(
+                          padding: EdgeInsets.only(top: 8.h),
+                          child: Text(
+                            'Please select an image',
+                            style: TextStyle(color: Colors.red, fontSize: 12.sp),
+                          ),
+                        ),
+                      SizedBox(height: 30.h),
                       CustomizedElevatedButton(
                         bottonWidget: state is TopBrandsManagementLoading
-                            ? CircularProgressIndicator(color: ColorManager.white)
+                            ? CircularProgressIndicator(color: Colors.white)
                             : Text(
-                                AppLocalizations.of(context)!.addBrand,
+                                'Add Brand',
                                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontSize: 16.sp,
                                       color: ColorManager.white,

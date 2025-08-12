@@ -1544,6 +1544,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get editCommissionRate => 'تعديل نسبة العمولة';
 
   @override
+
   String get productRating => 'تقييم المنتج';
 
   @override

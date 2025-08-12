@@ -72,7 +72,7 @@ class _EditTopBrandState extends State<EditTopBrand> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(AppLocalizations.of(context)!.edited)),
             );
-            Navigator.pop(context);
+            Navigator.pop(context, true); // Return true to indicate success
           } else if (state is TopBrandsManagementError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
