@@ -25,6 +25,7 @@ import 'cubit/commission_rate_cubit.dart';
 import 'cubit/commission_rate_states.dart';
 
 // Simple data model for static roles
+//
 class StaticRoleData {
   final String roleName;
   final bool isActive;
