@@ -763,6 +763,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i282.DeleteTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i720.EditTopBrandUseCase>(
         () => _i720.EditTopBrandUseCase(gh<_i68.TopBrandRepository>()));
+    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
+        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.factory<_i752.AddPointRequestCubit>(() => _i752.AddPointRequestCubit(
         addPointRequestUseCase: gh<_i391.AddPointRequestUseCase>()));
     gh.factory<_i247.SendInstallmentRequestUseCase>(() =>
@@ -968,6 +970,11 @@ extension GetItInjectableX on _i174.GetIt {
         _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i90.GetProductNamesUseCase>(
         () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
+
+    gh.factory<_i90.GetProductNamesUseCase>(
+        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
+    gh.factory<_i479.DeleteProductNameUseCase>(() =>
+        _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i208.GetProductsByBrandUseCase>(() =>
         _i208.GetProductsByBrandUseCase(gh<_i129.ProductsByBrandRepository>()));
     gh.factory<_i941.CsRolesUseCase>(
