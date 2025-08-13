@@ -738,6 +738,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i962.AcceptPointRequestUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i391.AddPointRequestUseCase>(
         () => _i391.AddPointRequestUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i991.AdjustCommissionForRolesUseCase>(() =>
+        _i991.AdjustCommissionForRolesUseCase(gh<_i147.PointsRepositry>()));
+    gh.factory<_i122.AdjustCommissionForTeamLeaderUseCase>(() =>
+        _i122.AdjustCommissionForTeamLeaderUseCase(
+            gh<_i147.PointsRepositry>()));
     gh.factory<_i286.AdjustUserPointsUseCase>(
         () => _i286.AdjustUserPointsUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i341.EditPointPriceUseCase>(
@@ -750,13 +755,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i78.GetBalanceUseCase(gh<_i147.PointsRepositry>()));
     gh.factory<_i552.RejectPointRequestUseCase>(
         () => _i552.RejectPointRequestUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i991.AdjustCommissionForRolesUseCase>(() =>
-        _i991.AdjustCommissionForRolesUseCase(gh<_i147.PointsRepositry>()));
-    gh.factory<_i122.AdjustCommissionForTeamLeaderUseCase>(() =>
-        _i122.AdjustCommissionForTeamLeaderUseCase(
-            gh<_i147.PointsRepositry>()));
-    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
-        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i422.AddTopBrandUseCase>(
         () => _i422.AddTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i282.DeleteTopBrandUseCase>(
@@ -784,21 +782,21 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i920.ClientRegisterUseCase>(
         () => _i920.ClientRegisterUseCase(gh<_i817.AuthenticationRepositry>()));
-    gh.factory<_i456.RegisterUseCase>(
-        () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
-    gh.factory<_i96.SignInUseCase>(
-        () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
-    gh.factory<_i370.TeamMemberRegister>(
-        () => _i370.TeamMemberRegister(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i280.EmailVerificationUseCase>(() =>
         _i280.EmailVerificationUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i1062.ForgetPasswordUseCase>(() =>
         _i1062.ForgetPasswordUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i456.RegisterUseCase>(
+        () => _i456.RegisterUseCase(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i358.ResentEmailVerficationUseCase>(() =>
         _i358.ResentEmailVerficationUseCase(
             gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i217.ResetPasswordUseCase>(
         () => _i217.ResetPasswordUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i96.SignInUseCase>(
+        () => _i96.SignInUseCase(gh<_i817.AuthenticationRepositry>()));
+    gh.factory<_i370.TeamMemberRegister>(
+        () => _i370.TeamMemberRegister(gh<_i817.AuthenticationRepositry>()));
     gh.factory<_i954.MarketerProductCubit>(
         () => _i954.MarketerProductCubit(gh<_i527.MarketerProductsUseCase>()));
     gh.factory<_i270.AppointAsTeamLeaderCubit>(() =>
@@ -970,11 +968,6 @@ extension GetItInjectableX on _i174.GetIt {
         _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i90.GetProductNamesUseCase>(
         () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
-
-    gh.factory<_i90.GetProductNamesUseCase>(
-        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
-    gh.factory<_i479.DeleteProductNameUseCase>(() =>
-        _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i208.GetProductsByBrandUseCase>(() =>
         _i208.GetProductsByBrandUseCase(gh<_i129.ProductsByBrandRepository>()));
     gh.factory<_i941.CsRolesUseCase>(
