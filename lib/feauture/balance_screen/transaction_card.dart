@@ -108,7 +108,7 @@ class TransactionCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                      transaction.amount==0.00?
+                      transaction.amount==0.00|| transaction.amount==null?
                                   " ${transaction.points ?? '0.00'}${AppLocalizations.of(context)!.point}":
 
                                   " ${transaction.amount?.toStringAsFixed(2) ?? '0.00'}${AppLocalizations.of(context)!.egp}",

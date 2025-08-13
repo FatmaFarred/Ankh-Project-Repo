@@ -168,7 +168,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginNow => 'سجل دخول الان!';
 
   @override
-  String get enterYourEmailOrPhone => 'ادخل البريد الالكتروني او كلمة المرور ';
+  String get enterYourEmailOrPhone => 'ادخل البريد الالكتروني او رقم الهاتف';
 
   @override
   String get dontHaveAccount => 'ليس لديك حساب؟';
@@ -185,7 +185,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'أدخل البيانات التالية لتتمكن من الوصول إلى حسابك!';
 
   @override
-  String get yourEmailOrPhone => 'البريد الالكتروني او كلمة المرور ';
+  String get yourEmailOrPhone => 'البريد الالكتروني او رقم الهاتف';
 
   @override
   String get verifyEmailTitle => 'تحقق من بريدك الإلكتروني';
