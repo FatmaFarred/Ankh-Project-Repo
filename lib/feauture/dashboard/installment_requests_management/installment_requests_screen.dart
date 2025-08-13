@@ -137,23 +137,62 @@ Widget _buildOfferList(
                                 SizedBox(height: 8.h),
                                 _buildIconText(
                                   context,
-                                  ImageAssets.callIcon,
-                                  offer.marketerName,
+                                  ImageAssets.userIcon,
+                                  " المسوق : ${offer.marketerName}",
                                 ),
+                                SizedBox(height: 8.h),
+
+                                _buildIconText(
+                                  context,
+                                  ImageAssets.userIcon,
+                                  " العميل : ${offer.clientName}",
+                                ),
+                                SizedBox(height: 8.h),
+
                                 _buildIconText(
                                   context,
                                   ImageAssets.callIcon,
-                                  offer.clientName,
+                                  "رقم الهاتف : ${offer.clientPhone}",
                                 ),
-                                _buildIconText(
-                                  context,
-                                  ImageAssets.callIcon,
-                                  offer.clientPhone,
+                                SizedBox(height: 8.h),
+
+                                Row(
+                                  children: [
+                                    Icon(Icons.money,size: 18.sp,color: ColorManager.lightprimary,),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "سعر المنتج : ${offer.productPrice}",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                                    ),
+                                  ],
                                 ),
-                                _buildIconText(
-                                  context,
-                                  ImageAssets.callIcon,
-                                  offer.productPrice,
+                                SizedBox(height: 8.h),
+                                Row(
+                                  children: [
+                                    Icon(Icons.calendar_month_rounded,size: 18.sp,color: ColorManager.lightprimary,),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "عدد الشهور : ${offer.requestedMonths}",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8.h),
+                                Row(
+                                  children: [
+                                    Icon(Icons.wallet_rounded,size: 18.sp,color: ColorManager.lightprimary,),
+                                    SizedBox(width: 6.w),
+                                    Text(
+                                      "مقدم : ${offer.downPayment}",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 8.h),
                               ],

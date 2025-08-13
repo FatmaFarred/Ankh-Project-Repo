@@ -70,7 +70,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     'Fahmy',
     'Mohamed Ahmed',
   ];
-  final List<String> status = ['Choose Status', 'Available', 'Sold', 'Reserved'];
+  final List<String> status = [
+    'Choose Status',
+    'Available',
+    'Sold',
+    'Reserved',
+  ];
 
   int currentIndex = 0;
 
@@ -86,8 +91,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController commissionController = TextEditingController();
-  final TextEditingController marketerPointsController = TextEditingController();
-  final TextEditingController inspectorPointsController = TextEditingController();
+  final TextEditingController marketerPointsController =
+      TextEditingController();
+  final TextEditingController inspectorPointsController =
+      TextEditingController();
   final TextEditingController requiredPointsController =
       TextEditingController();
   final TextEditingController horsepowerController = TextEditingController();
@@ -136,11 +143,11 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     super.initState();
     // Fetch top brands when the widget initializes
     context.read<TopBrandCubit>().fetchTopBrands();
-    
+
     // Initialize and load product names for dropdown
     _productNamesDropdownCubit = getIt<ProductNamesDropdownCubit>();
     _productNamesDropdownCubit.loadProductNames();
-    
+
     // Listen for product names to be loaded
     _productNamesDropdownCubit.stream.listen((state) {
       if (state is ProductNamesDropdownLoaded) {
@@ -319,46 +326,93 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           ),
                                         ),
                                         SizedBox(height: 6.h),
-                                        BlocBuilder<ProductNamesDropdownCubit, ProductNamesDropdownState>(
+                                        BlocBuilder<
+                                          ProductNamesDropdownCubit,
+                                          ProductNamesDropdownState
+                                        >(
                                           bloc: _productNamesDropdownCubit,
                                           builder: (context, state) {
-                                            if (state is ProductNamesDropdownLoading) {
+                                            if (state
+                                                is ProductNamesDropdownLoading) {
                                               return const Center(
-                                                child: CircularProgressIndicator(),
+                                                child:
+                                                    CircularProgressIndicator(),
                                               );
-                                            } else if (state is ProductNamesDropdownError) {
-                                              return Text('Error: ${state.message}');
-                                            } else if (state is ProductNamesDropdownLoaded) {
-                                              final productNames = state.productNames;
-                                              return DropdownButtonFormField<int>(
+                                            } else if (state
+                                                is ProductNamesDropdownError) {
+                                              return Text(
+                                                'Error: ${state.message}',
+                                              );
+                                            } else if (state
+                                                is ProductNamesDropdownLoaded) {
+                                              final productNames =
+                                                  state.productNames;
+                                              return DropdownButtonFormField<
+                                                int
+                                              >(
                                                 value: selectedProductId,
                                                 decoration: InputDecoration(
-                                                  hintText: AppLocalizations.of(context)!.carName,
-                                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                                  hintText: AppLocalizations.of(
+                                                    context,
+                                                  )!.carName,
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 16,
+                                                      ),
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: ColorManager
+                                                          .lightGrey,
+                                                    ),
                                                   ),
-                                                  enabledBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
-                                                  ),
-                                                  focusedBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
-                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: ColorManager
+                                                              .lightGrey,
+                                                        ),
+                                                      ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: ColorManager
+                                                              .lightprimary,
+                                                        ),
+                                                      ),
                                                   errorBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: Colors.red),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.red,
+                                                    ),
                                                   ),
                                                 ),
                                                 validator: (value) {
                                                   if (value == null) {
-                                                    return AppLocalizations.of(context)!.carNameRequired;
+                                                    return AppLocalizations.of(
+                                                      context,
+                                                    )!.carNameRequired;
                                                   }
                                                   return null;
                                                 },
-                                                items: productNames.map((ProductNameEntity product) {
+                                                items: productNames.map((
+                                                  ProductNameEntity product,
+                                                ) {
                                                   return DropdownMenuItem<int>(
                                                     value: product.id,
                                                     child: Text(product.name),
@@ -366,43 +420,89 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                 }).toList(),
                                                 onChanged: (int? newValue) {
                                                   setState(() {
-                                                    selectedProductId = newValue;
+                                                    selectedProductId =
+                                                        newValue;
                                                     // Find the product name that corresponds to the selected ID
-                                                    final selectedProduct = productNames.firstWhere(
-                                                      (product) => product.id == newValue,
-                                                      orElse: () => ProductNameEntity(id: 0, name: ''),
-                                                    );
-                                                    selectedCarName = selectedProduct.name;
-                                                    carNameController.text = selectedProduct.name;
+                                                    final selectedProduct =
+                                                        productNames.firstWhere(
+                                                          (product) =>
+                                                              product.id ==
+                                                              newValue,
+                                                          orElse: () =>
+                                                              ProductNameEntity(
+                                                                id: 0,
+                                                                name: '',
+                                                              ),
+                                                        );
+                                                    selectedCarName =
+                                                        selectedProduct.name;
+                                                    carNameController.text =
+                                                        selectedProduct.name;
                                                   });
                                                 },
                                               );
                                             } else {
-                                              return DropdownButtonFormField<String>(
+                                              return DropdownButtonFormField<
+                                                String
+                                              >(
                                                 value: selectedCarName,
                                                 decoration: InputDecoration(
-                                                  hintText: AppLocalizations.of(context)!.carName,
-                                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                                  hintText: AppLocalizations.of(
+                                                    context,
+                                                  )!.carName,
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 16,
+                                                      ),
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: ColorManager
+                                                          .lightGrey,
+                                                    ),
                                                   ),
-                                                  enabledBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
-                                                  ),
-                                                  focusedBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
-                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: ColorManager
+                                                              .lightGrey,
+                                                        ),
+                                                      ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: ColorManager
+                                                              .lightprimary,
+                                                        ),
+                                                      ),
                                                   errorBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                    borderSide: BorderSide(color: Colors.red),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.red,
+                                                    ),
                                                   ),
                                                 ),
                                                 validator: (value) {
-                                                  if (value == null || value.isEmpty) {
-                                                    return AppLocalizations.of(context)!.carNameRequired;
+                                                  if (value == null ||
+                                                      value.isEmpty) {
+                                                    return AppLocalizations.of(
+                                                      context,
+                                                    )!.carNameRequired;
                                                   }
                                                   return null;
                                                 },
@@ -410,7 +510,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                 onChanged: (String? newValue) {
                                                   setState(() {
                                                     selectedCarName = newValue;
-                                                    carNameController.text = newValue ?? '';
+                                                    carNameController.text =
+                                                        newValue ?? '';
                                                   });
                                                 },
                                               );
@@ -418,7 +519,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           },
                                         ),
                                         SizedBox(height: 16.h),
-                                        
+
                                         Text(
                                           "Top Brand",
                                           style: GoogleFonts.inter(
@@ -427,57 +528,108 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           ),
                                         ),
                                         SizedBox(height: 6.h),
-                                        BlocBuilder<TopBrandCubit, TopBrandState>(
+                                        BlocBuilder<
+                                          TopBrandCubit,
+                                          TopBrandState
+                                        >(
                                           builder: (context, state) {
                                             if (state is TopBrandLoading) {
-                                              return const Center(child: CircularProgressIndicator());
-                                            } else if (state is TopBrandLoaded) {
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            } else if (state
+                                                is TopBrandLoaded) {
                                               final brands = state.brands;
-                                              return DropdownButtonFormField<TopBrandEntity>(
+                                              return DropdownButtonFormField<
+                                                TopBrandEntity
+                                              >(
                                                 decoration: InputDecoration(
                                                   filled: true,
                                                   fillColor: Colors.white,
-                                                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                        horizontal: 16.w,
+                                                        vertical: 14.h,
+                                                      ),
                                                   border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8.r),
-                                                    borderSide: BorderSide(color: Colors.grey.shade300),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          8.r,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
                                                   ),
-                                                  enabledBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8.r),
-                                                    borderSide: BorderSide(color: Colors.grey.shade300),
-                                                  ),
-                                                  focusedBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(8.r),
-                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
-                                                  ),
-                                                  hintText: AppLocalizations.of(context)!.selectTopBrand,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8.r,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .grey
+                                                              .shade300,
+                                                        ),
+                                                      ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8.r,
+                                                            ),
+                                                        borderSide: BorderSide(
+                                                          color: ColorManager
+                                                              .lightprimary,
+                                                        ),
+                                                      ),
+                                                  hintText: AppLocalizations.of(
+                                                    context,
+                                                  )!.selectTopBrand,
                                                 ),
                                                 value: selectedTopBrand,
                                                 validator: (value) {
                                                   if (value == null) {
-                                                    return AppLocalizations.of(context)!.pleaseSelectTopBrand;
+                                                    return AppLocalizations.of(
+                                                      context,
+                                                    )!.pleaseSelectTopBrand;
                                                   }
                                                   return null;
                                                 },
-                                                items: brands.map((TopBrandEntity brand) {
-                                                  return DropdownMenuItem<TopBrandEntity>(
+                                                items: brands.map((
+                                                  TopBrandEntity brand,
+                                                ) {
+                                                  return DropdownMenuItem<
+                                                    TopBrandEntity
+                                                  >(
                                                     value: brand,
                                                     child: Text(brand.name),
                                                   );
                                                 }).toList(),
-                                                onChanged: (TopBrandEntity? newValue) {
-                                                  setState(() {
-                                                    selectedTopBrand = newValue;
-                                                  });
-                                                },
+                                                onChanged:
+                                                    (TopBrandEntity? newValue) {
+                                                      setState(() {
+                                                        selectedTopBrand =
+                                                            newValue;
+                                                      });
+                                                    },
                                               );
                                             } else if (state is TopBrandError) {
-                                              return Text("Error: ${state.message}", style: TextStyle(color: Colors.red));
+                                              return Text(
+                                                "Error: ${state.message}",
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                ),
+                                              );
                                             }
-                                            return const Text("No brands available");
+                                            return const Text(
+                                              "No brands available",
+                                            );
                                           },
                                         ),
-                                        
+
                                         SizedBox(height: 16.h),
                                         Row(
                                           children: [
@@ -507,9 +659,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                       }
                                                       return null;
                                                     },
-                                                    hintText: AppLocalizations.of(
-                                                      context,
-                                                    )!.category,
+                                                    hintText:
+                                                        AppLocalizations.of(
+                                                          context,
+                                                        )!.category,
                                                     controller:
                                                         categoryController,
                                                   ),
@@ -782,7 +935,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             color: ColorManager.black,
                                           ),
                                           iconSize: 20.sp,
-                                          value:selectedTransmission ,
+                                          value: selectedTransmission,
                                           // AppLocalizations.of(
                                           //   context,
                                           // )!.chooseTransmissionType,
@@ -798,13 +951,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                               //         context,
                                               //       )!.manual,
                                               //     ]
-                                                  .map(
-                                                    (type) => DropdownMenuItem(
-                                                      value: type,
-                                                      child: Text(type),
-                                                    ),
-                                                  )
-                                                  .toList(),
+                                              .map(
+                                                (type) => DropdownMenuItem(
+                                                  value: type,
+                                                  child: Text(type),
+                                                ),
+                                              )
+                                              .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedTransmission = value;
@@ -867,13 +1020,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                               //         context,
                                               //       )!.gas,
                                               //     ]
-                                                  .map(
-                                                    (type) => DropdownMenuItem(
-                                                      value: type,
-                                                      child: Text(type),
-                                                    ),
-                                                  )
-                                                  .toList(),
+                                              .map(
+                                                (type) => DropdownMenuItem(
+                                                  value: type,
+                                                  child: Text(type),
+                                                ),
+                                              )
+                                              .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedFuel = value!;
@@ -937,13 +1090,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                               //         context,
                                               //       )!.allWheel,
                                               //     ]
-                                                  .map(
-                                                    (type) => DropdownMenuItem(
-                                                      value: type,
-                                                      child: Text(type),
-                                                    ),
-                                                  )
-                                                  .toList(),
+                                              .map(
+                                                (type) => DropdownMenuItem(
+                                                  value: type,
+                                                  child: Text(type),
+                                                ),
+                                              )
+                                              .toList(),
                                           onChanged: (value) {
                                             setState(() {
                                               selectedDriveType = value!;
@@ -1108,7 +1261,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             return null;
                                           },
                                           keyBoardType:
-                                          TextInputType.numberWithOptions(),
+                                              TextInputType.numberWithOptions(),
                                           hintText: AppLocalizations.of(
                                             context,
                                           )!.marketerPoints,
@@ -1135,7 +1288,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                             return null;
                                           },
                                           keyBoardType:
-                                          TextInputType.numberWithOptions(),
+                                              TextInputType.numberWithOptions(),
                                           hintText: AppLocalizations.of(
                                             context,
                                           )!.inspectorPoints,
@@ -1436,55 +1589,59 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            final productEntity =
-                                                ProductPostEntity(
-                                                  rating: "3",
-                                                  topBrandId: selectedTopBrand?.id.toString() ?? '1',
-                                                  requiredPoints:
-                                                      requiredPointsController
-                                                          .text
-                                                          .trim(),
-                                                  commission:
-                                                      commissionController.text
-                                                          .trim(),
-                                                  model: yearController.text
+                                            final productEntity = ProductPostEntity(
+                                              rating: "3",
+                                              topBrandId:
+                                                  selectedTopBrand?.id
+                                                      .toString() ??
+                                                  '1',
+                                              requiredPoints:
+                                                  requiredPointsController.text
                                                       .trim(),
-                                                  make: selectedFuel!,
-                                                  driveType: selectedDriveType!,
-                                                  nameProductId: selectedProductId?.toString() ?? carNameController.text.trim(), // Using product ID instead of name
-                                                  description:
-                                                      descriptionController.text
-                                                          .trim(),
-                                                  price: priceController.text
+                                              commission: commissionController
+                                                  .text
+                                                  .trim(),
+                                              model: yearController.text.trim(),
+                                              make: selectedFuel!,
+                                              driveType: selectedDriveType!,
+                                              nameProductId:
+                                                  selectedProductId
+                                                      ?.toString() ??
+                                                  carNameController.text.trim(),
+                                              // Using product ID instead of name
+                                              description: descriptionController
+                                                  .text
+                                                  .trim(),
+                                              price: priceController.text
+                                                  .trim(),
+                                              category: categoryController.text
+                                                  .trim(),
+                                              transmission:
+                                                  selectedTransmission!,
+                                              engineType: selectedFuel!,
+                                              year: yearController.text.trim(),
+                                              mileage: odometerController.text
+                                                  .trim(),
+                                              color: colorController.text
+                                                  .trim(),
+                                              status: statusNum.toString(),
+                                              images: imagePaths,
+                                              fuelType: selectedFuel!,
+                                              horsepower: horsepowerController
+                                                  .text
+                                                  .trim(),
+                                              batteryCapacity:
+                                                  batteryCapacityController.text
                                                       .trim(),
-                                                  category: categoryController
-                                                      .text
+                                              inspectorPoints:
+                                                  inspectorPointsController.text
                                                       .trim(),
-                                                  transmission:
-                                                      selectedTransmission!,
-                                                  engineType: selectedFuel!,
-                                                  year: yearController.text
+                                              marketerPoints:
+                                                  marketerPointsController.text
                                                       .trim(),
-                                                  mileage: odometerController
-                                                      .text
-                                                      .trim(),
-                                                  color: colorController.text
-                                                      .trim(),
-                                                  status: statusNum.toString(),
-                                                  images: imagePaths,
-                                                  fuelType: selectedFuel!,
-                                                  horsepower:
-                                                      horsepowerController.text
-                                                          .trim(),
-                                                  batteryCapacity:
-                                                      batteryCapacityController
-                                                          .text
-                                                          .trim(),
-                                                  inspectorPoints: inspectorPointsController.text.trim(),
-                                                  marketerPoints: marketerPointsController.text.trim(),
-                                                  isUsedVehicle: false,
-                                                  usedDetails: null,
-                                                );
+                                              isUsedVehicle: false,
+                                              usedDetails: null,
+                                            );
 
                                             context
                                                 .read<PostProductCubit>()
@@ -1503,10 +1660,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                               title: "Added",
                                               // you may define this key in your l10n
                                               message:
-                                              "the products have  been Added successfully.",
+                                                  "the products have  been Added successfully.",
                                               positiveText: "OK",
                                               positiveOnClick: () {
-                                                Navigator.of(context).pop();
+                                                context.read<ProductsManagementCubit>().fetchAllProducts();
                                               },
                                             );
                                           }
