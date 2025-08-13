@@ -50,7 +50,21 @@
     </application>
 
     <!-- 🧠 Needed for Flutter engine text processing -->
+    <!-- 🧠 Required for url_launcher to work (WhatsApp, phone, etc.) -->
     <queries>
+        <!-- For opening WhatsApp (https) -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+
+        <!-- For opening dialer (tel:) -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+
+        <!-- Existing: For text processing -->
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />
             <data android:mimeType="text/plain" />

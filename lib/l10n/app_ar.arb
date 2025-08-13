@@ -542,6 +542,7 @@
   "productNamesManagement": "إدارة اسماء المنتجات",
   "addNewProductName": "إضافة اسم منتج جديد",
   "noProductNamesFound": "لا توجد اسماء منتجات",
+  "phoneOrEmail": " رقم الهاتف أو البريد الإلكتروني",
   "enterProductName": "أدخل اسم المنتج",
   "productNameCannotBeEmpty": "لا يمكن أن يكون اسم المنتج فارغًا",
   "add": "إضافة",

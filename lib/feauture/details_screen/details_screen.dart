@@ -21,6 +21,7 @@ import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized
 import 'package:ankh_project/feauture/home_screen/section_header.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../api_service/di/di.dart';
 import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
@@ -238,7 +239,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               : */
           FloatingActionButton(
             onPressed: () {
-              //todo:go to whatsapp
+              _openWhatsApp('01558780486');
 
             },
             tooltip: AppLocalizations.of(context)!.haveADeal,
@@ -701,4 +702,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
         ),
       ));
   }
+  Future<void> _openWhatsApp(String phoneNumber) async {
+    final String normalized = phoneNumber.replaceAll(RegExp(r'\D'), '');
+    final String url = 'https://wa.me/20$normalized'; // Adjust country code as needed
+    final Uri whatsappUri = Uri.parse(url);
+    if (await canLaunchUrl(whatsappUri)) {
+      await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch WhatsApp. Make sure the app is installed or number is valid.';
+    }
+  }
+
 }
