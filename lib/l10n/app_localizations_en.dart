@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get next => 'Next';
 
   @override
+  String get editTeamLeaderCommissionRate => 'Team Leader Commission Rate';
+
+  @override
   String get onBoarding1Title =>
       'Everything You Need to Buy, Sell, and Manage in One App';
 
@@ -118,6 +121,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAccount => 'Create Account';
 
   @override
+  String get notAvailableNow => ' Not Available Now';
+
+  @override
   String get fullName => 'Full Name';
 
   @override
@@ -191,6 +197,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get codeWasSentTo => 'A code has been sent to your email';
+
+  @override
+  String get resendCodeIn => 'resend in';
 
   @override
   String get resendCode => 'resend';
@@ -1248,7 +1257,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerWithInvitationCode => 'Register with Invitation Code';
 
   @override
-  String get aggredPrice => 'Aggred Price';
+  String get aggredPrice => 'Agreed Price';
+
+  @override
+  String get commissionRate => 'Commission Rate';
+
+  @override
+  String get commissionRateDescription =>
+      ' The commission rate is the percentage of the total price that will be charged as a commission for the service provided.';
+
+  @override
+  String get commissionRateRequired => ' Commission rate is required';
+
+  @override
+  String get enterCommissionRate => ' Enter Commission Rate';
+
+  @override
+  String get totalCommission => ' Total Commission';
 
   @override
   String get editCarDetails => 'Edit Car Details';
@@ -1504,4 +1529,78 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterYourRate => 'Enter Your Rate';
+
+  @override
+  String get verifyYourEmail => 'Verify Email';
+
+  @override
+  String get s => 'S';
+
+  @override
+  String get commissionDetails => ' Commission Details';
+
+  @override
+  String get requestedCommission => ' Requested Commission';
+
+  @override
+  String get requestCommission => ' Withdraw Commission';
+
+  @override
+  String get enterCommissionAmount => ' Enter Commission Amount';
+
+  @override
+  String get commissionRateManagement => ' Commission Rate Management';
+
+  @override
+  String get editCommissionRate => 'Edit Commission Rate';
+
+  @override
+  String get productRating => 'Product Rating';
+
+  @override
+  String get rateThisProduct => 'Rate This Product';
+
+  @override
+  String get submitRating => 'Submit Rating';
+
+  @override
+  String get ratingComment => 'Comment (Optional)';
+
+  @override
+  String get ratingSuccess => 'Rating submitted successfully';
+
+  @override
+  String get tapToRate => 'Tap to rate this product';
+
+  @override
+  String get productNames => 'Product Names';
+
+  @override
+  String get productNamesManagement => 'Product Names Management';
+
+  @override
+  String get addNewProductName => 'Add New Product Name';
+
+  @override
+  String get noProductNamesFound => 'No Product Names Found';
+
+  @override
+  String get enterProductName => 'Enter Product Name';
+
+  @override
+  String get productNameCannotBeEmpty => 'Product name cannot be empty';
+
+  @override
+  String get productNameAddedSuccessfully => 'Product name added successfully';
+
+  @override
+  String get deleteProductName => 'Delete Product Name';
+
+  @override
+  String get confirmDeleteProductName =>
+      'Are you sure you want to delete this product name?';
+
+  @override
+  String get productNameDeletedSuccessfully =>
+      'Product name deleted successfully';
 }

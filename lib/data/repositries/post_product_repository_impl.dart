@@ -16,7 +16,7 @@ class PostProductRepositoryImpl implements PostProductRepository {
       final formData = FormData();
 
       // --- Add core fields ---
-      _addIfNotNull(formData, 'Title', entity.title);
+      _addIfNotNull(formData, 'nameProductId', entity.nameProductId);
       _addIfNotNull(formData, 'Description', entity.description);
       _addIfNotNull(formData, 'Price', entity.price);
       _addIfNotNull(formData, 'Category', entity.category);
@@ -155,7 +155,7 @@ class PostProductRepositoryImpl implements PostProductRepository {
       final formData = FormData();
 
       // Reuse the same logic
-      _addIfNotNull(formData, 'Title', entity.title);
+      _addIfNotNull(formData, 'nameProductId', entity.nameProductId);
       _addIfNotNull(formData, 'Description', entity.description);
       _addIfNotNull(formData, 'Price', entity.price);
       _addIfNotNull(formData, 'Category', entity.category);

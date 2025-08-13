@@ -10,12 +10,17 @@ class BalanceResponseEntity {
       this.totalPoints, 
       this.perPointValue, 
       this.availableBalance, 
-      this.transactions,});
+      this.transactions,
+      this.commissions
+
+  });
 
   String? userType;
   num? totalPoints;
   num? perPointValue;
   num? availableBalance;
+  num? commissions;
+
   List<TransactionsEntity>? transactions;
 
 
@@ -32,13 +37,15 @@ class TransactionsEntity {
       this.description, 
       this.points, 
       this.status, 
-      this.amount, 
+      this.amount,
+      this.amountPoints,
       this.createdAt,});
 
   String? description;
   num? points;
   String? status;
   num? amount;
+  num? amountPoints;
   String? createdAt;
 
 

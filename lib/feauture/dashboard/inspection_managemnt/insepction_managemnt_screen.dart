@@ -91,7 +91,6 @@ class _InspectionsManagementScreenState
             title: AppLocalizations.of(context)!.success,
             message: state.message ?? AppLocalizations.of(context)!.success,
             positiveOnClick: () {
-              Navigator.of(context).pop();
               // Refresh the marketers list
             },
           );

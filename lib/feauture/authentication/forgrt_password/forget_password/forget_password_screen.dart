@@ -27,32 +27,32 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  ForgetPassworsCubit forgetPassworsCubit = getIt<ForgetPassworsCubit>();
+  ForgetPasswordCubit forgetPassworsCubit = getIt<ForgetPasswordCubit>();
 
 
 
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ForgetPassworsCubit, ForgetPasswordState>(
+    return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
         bloc: forgetPassworsCubit,
         listener: (context, state) {
           if (state is ForgetPasswordLoading) {
             CustomDialog.loading(
                 context: context,
-                message: "loading",
+                message: AppLocalizations.of(context)!.loading,
                 cancelable: false);
           } else if (state is ForgetPasswordFailure) {
             Navigator.of(context).pop();
             CustomDialog.positiveButton(
                 context: context,
-                title: "error",
+                title: AppLocalizations.of(context)!.error,
                 message: state.errorMessage);
           } else if (state is ForgetPasswordSuccess) {
             Navigator.of(context).pop();
             CustomDialog.positiveButton(
                 context: context,
-                title: "getTranslations(context).success",
+                title: AppLocalizations.of(context)!.success,
                 message: state.message,
                 positiveOnClick: () =>
                     Navigator.of(context).pushNamed(

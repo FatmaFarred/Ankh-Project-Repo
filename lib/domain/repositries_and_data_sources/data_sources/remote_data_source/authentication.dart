@@ -13,6 +13,11 @@ abstract class AuthenticationRemoteDataSource {
   Future <Either<Failure,AuthenticationResponseEntity>>signIn (String email,String password );
   Future <Either<Failure,AuthenticationResponseEntity>>registerClient (String name , String email,String password ,String phone);
   Future <Either<Failure,String?>>registerMarketerTeamMember (String name , String email,String password ,String phone,String code);
+  Future <Either<Failure,String?>>emailVerification ( String email,String code);
+  Future <Either<Failure,String?>>resendEmailVerification ( String email);
+
+  Future <Either<Failure,String?>>forgetPassword ( String email);
+  Future <Either<Failure,String?>>resetPassword ( String email,String newPassword ,String code);
 
 
 

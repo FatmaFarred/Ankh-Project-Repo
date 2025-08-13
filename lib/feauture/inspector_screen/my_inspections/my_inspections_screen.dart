@@ -5,6 +5,7 @@ import 'package:ankh_project/feauture/inspector_screen/inspection_details/inspec
 import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_cubit.dart';
 import 'package:ankh_project/feauture/inspector_screen/my_inspections/my_inspections_state.dart';
 import 'package:ankh_project/feauture/marketer_home/home_app_bar.dart';
+import 'package:ankh_project/feauture/myrequest/status_handler_widgets.dart';
 import 'package:ankh_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -284,14 +285,14 @@ class _MyInspectionsScreenState extends State<MyInspectionsScreen>
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.r),
-                  color: Color(0xFFFEF9C3),
+                  color: getStatusColor(getRequestStatusFromString(inspection.status)??RequestStatus.pending),
                 ),
                 child: Text(
                   inspection.status ?? '',
                   style: GoogleFonts.inter(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFF166534),
+                    color: getTextStatusColor(getRequestStatusFromString(inspection.status)??RequestStatus.pending),
                   ),
                 ),
               ),

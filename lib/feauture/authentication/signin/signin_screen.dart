@@ -25,7 +25,8 @@ import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
 
   class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+    final bool showRegietrButton ;
+   SignInScreen({super.key, this.showRegietrButton= true});
   static String signInScreenRouteName = "SignInScreen";
 
   @override
@@ -52,18 +53,29 @@ class _SignInScreenState extends State<SignInScreen> {
             message: AppLocalizations.of(context)!.loading,
             cancelable: false);
       } else if (state is SignInFailure) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(); // Close any loading dialog
         CustomDialog.positiveAndNegativeButton(
-            context: context,
-            positiveText:  AppLocalizations.of(context)!.tryAgain,
-            positiveOnClick: () {
-              Navigator.of(context).pop();
+          context: context,
+          title: AppLocalizations.of(context)!.error,
+          message: state.error.errorMessage,
+          positiveText: AppLocalizations.of(context)!.tryAgain,
+          positiveOnClick: () {
+            signInViewModel.signIn();
+          },
+          negativeText: AppLocalizations.of(context)!.verifyYourEmail,
+          negativeOnClick: () {
 
-              signInViewModel.signIn();
+            final email = signInViewModel.email.text;
+            if (email.isEmpty) return;
 
-            },
-            title: AppLocalizations.of(context)!.error,
-            message: state.error.errorMessage);
+            Navigator.pushNamed(
+              context,
+              EmailVerficationScreen.emailVerficationScreenRouteName,
+              arguments: email,
+            );
+          },
+        );
+
       } else if (state is SignInSuccess) {
         print("ttttttttttttttttt${state.response?.user?.deviceTokens}");
         print("message: ${state.response.message}");
@@ -226,7 +238,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 ),
                 SizedBox(height: 50.h),
-                Row(
+                widget.showRegietrButton?Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -257,9 +269,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             .bodyLarge
                             ?.copyWith(fontSize: 14.sp, color: ColorManager.lightprimary),
                       ),
-                    ),
+                    )
                   ],
-                ),
+                ): const SizedBox.shrink(),
 
               ],
             ),

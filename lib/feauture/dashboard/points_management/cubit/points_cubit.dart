@@ -4,7 +4,6 @@ import 'package:ankh_project/domain/use_cases/reject_point_request_use_case.dart
 import 'package:ankh_project/feauture/dashboard/points_management/cubit/points_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../domain/entities/request_point_entitty.dart';
 import '../../../../api_service/failure/error_handling.dart';
@@ -22,14 +21,14 @@ class PointsCubit extends Cubit<PointsState> {
     required this.rejectPointRequestUseCase,
   }) : super(PointsInitial());
 
-  Future<void> fetchPointsRequests(BuildContext context,String token, {String? status}) async {
+  Future<void> fetchPointsRequests(BuildContext context, String token, {String? status}) async {
     emit(PointsLoading());
     var either = await getAllPointRequestUseCase.execute(token);
     either.fold((error) {
       emit(PointsError(error: error));
     }, (response) {
       if (response.isEmpty) {
-        emit(PointsEmpty(message:AppLocalizations.of(context)!.noRequestsFound));
+        emit(PointsEmpty(message: AppLocalizations.of(context)!.noRequestsFound));
       } else {
         List<RequestPointEntity> filteredRequests = response;
         // Only filter if status is provided and not 'All'
@@ -51,21 +50,21 @@ class PointsCubit extends Cubit<PointsState> {
     });
   }
 
-  Future<void> rejectPointRequest(String token, String requestId,String reason) async {
+  Future<void> rejectPointRequest(String token, String requestId, String reason) async {
     emit(RejectPointLoading());
-    var either = await rejectPointRequestUseCase.execute(token, requestId,reason);
+    var either = await rejectPointRequestUseCase.execute(token, requestId, reason);
     either.fold((error) {
       emit(RejectPointError(error: error));
     }, (response) {
-      emit(RejectPointSuccess(response: response, ));
+      emit(RejectPointSuccess(response: response));
     });
   }
 
   String _getErrorMessage(PointsState state) {
     if (state is ApprovePointError) {
-      return state.error?.errorMessage??"";
+      return state.error?.errorMessage ?? "";
     } else if (state is RejectPointError) {
-      return state?.error?.errorMessage??"";
+      return state.error?.errorMessage ?? "";
     }
     return 'Unknown error';
   }

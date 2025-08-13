@@ -308,6 +308,16 @@ class _TeamsAndCodesScreenState extends State<TeamsAndCodesScreen>
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
+                                  member.code ?? 'Unknown',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: ColorManager.darkGrey,
+                                  ),
+                                ),
+                                SizedBox(height: 4.h),
+
+                                Text(
                                   member.email ?? '',
                                   style: GoogleFonts.poppins(
                                     fontSize: 14.sp,

@@ -6,15 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../api_service/di/di.dart';
+import '../../../../api_service/di/injection.dart';
 import '../../../../core/constants/color_manager.dart';
 import '../../../../core/constants/font_manager/font_manager.dart';
 import '../../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import '../../../../domain/entities/product_name_entity.dart';
 import '../../../../domain/entities/product_post_entity.dart';
 import '../../../../domain/entities/top_brand_entity.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../home_screen/top_brands/cubit/top_brand_cubit.dart';
 import '../../../inspector_screen/widgets/custom_text_form_field.dart';
 import '../../dashboard_main screen _drawer/dashboard_main_screen _drawer.dart';
+import '../../products_management/cubit/product_names_dropdown_cubit.dart';
 import 'cubit/post_product_cubit.dart';
 
 class AddUsedProduct extends StatefulWidget {
@@ -36,31 +40,9 @@ class _AddUsedProductState extends State<AddUsedProduct> {
   String? selectedDriveType = 'FrontWheel';
   
   String? selectedCarName;
+  int? selectedProductId;
   TopBrandEntity? selectedTopBrand;
-  
-  final List<String> carNames = [ 
-    // Hyundai 
-    'HB20','i10','i20','i30','Accent','Verna','Solaris','Aura','Grand i10 Sedan', 
-    'Grand Metro','Elantra','Avante','i30 Sedan','Grandeur','Azera','HB20S', 
-    'i30 Fastback','Ioniq 6','Sonata','i30 wagon','Alcazar','Grand Creta','Bayon', 
-    'Casper','Casper Electric','Creta','Cantus', 
-  
-    // Kia 
-    'Ceed','EV4','K3','K4','Picanto','Morning','Ray','K5','K8','K9','Pegas','Soluto', 
-    'Ceed SW','Proceed','EV3','EV5','EV6','EV9','Niro','Seltos','Sonet','Sorento', 
-    'Soul','Sportage', 
-  
-    // Chevrolet 
-    'Blazer','Blazer EV','Captiva','Captiva PHEV','Captiva EV','Equinox','Equinox EV', 
-    'Groove','Spark EUV','Tracker', 
-  
-    // BMW 
-    '1 Series','2 Series Gran Coupé','3 Series','4 Series Gran Coupé','5 Series', 
-    '7 Series','8 Series Gran Coupé','i3','i4','i5','i7','3 Series Wagon','5 Series Wagon', 
-    'i5 Wagon','X1','X2','X3','X4','X5','X6','X7','XM','iX1','iX2','iX3','iX', 
-    '2 Series Coupé','4 Series Coupé','4 Series Convertible','8 Series Coupé', 
-    '8 Series Convertible','Z4','2 Series Active Tourer', 
-  ];
+  late ProductNamesDropdownCubit _productNamesDropdownCubit;
 
   late int statusNum;
 
@@ -183,6 +165,26 @@ class _AddUsedProductState extends State<AddUsedProduct> {
   final TextEditingController safetyStatusController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize and load product names
+    _productNamesDropdownCubit = sl<ProductNamesDropdownCubit>();
+    _productNamesDropdownCubit.loadProductNames();
+    
+    // Listen for product names to be loaded
+    _productNamesDropdownCubit.stream.listen((state) {
+      if (state is ProductNamesDropdownLoaded) {
+        // We don't need to check for a numeric title here since this is an add screen,
+        // but we'll keep the structure similar to edit_product_screen.dart for consistency
+        // This will be useful if we need to pre-select a product in the future
+      }
+    });
+    
+    // Fetch top brands when the widget initializes
+    context.read<TopBrandCubit>().fetchTopBrands();
+  }
+
+  @override
   void dispose() {
     carNameController.dispose();
     categoryController.dispose();
@@ -218,6 +220,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
     brakesConditionController.dispose();
     gearConditionController.dispose();
     driveSystemConditionController.dispose();
+    _productNamesDropdownCubit.close();
     tagsController.dispose();
     safetyStatusController.dispose();
     taxStatusController.dispose();
@@ -282,12 +285,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
 
   final _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    // Fetch top brands when the widget initializes
-    context.read<TopBrandCubit>().fetchTopBrands();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -334,43 +332,86 @@ class _AddUsedProductState extends State<AddUsedProduct> {
                     ),
                   ),
                   SizedBox(height: 6.h),
-                  DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                        borderSide: BorderSide(color: ColorManager.lightprimary),
-                      ),
-                      hintText: AppLocalizations.of(context)!.carName,
-                    ),
-                    value: selectedCarName,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return AppLocalizations.of(context)!.carNameRequired;
+                  BlocBuilder<ProductNamesDropdownCubit, ProductNamesDropdownState>(
+                    bloc: _productNamesDropdownCubit,
+                    builder: (context, state) {
+                      if (state is ProductNamesDropdownLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is ProductNamesDropdownError) {
+                        return Text('Error: ${state.message}', style: TextStyle(color: Colors.red));
+                      } else if (state is ProductNamesDropdownLoaded) {
+                        final productNames = state.productNames;
+                        
+                        return DropdownButtonFormField<int>(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: ColorManager.lightprimary),
+                            ),
+                            hintText: AppLocalizations.of(context)!.carName,
+                          ),
+                          value: selectedProductId,
+                          validator: (value) {
+                            if (value == null) {
+                              return AppLocalizations.of(context)!.carNameRequired;
+                            }
+                            return null;
+                          },
+                          items: productNames.map((ProductNameEntity product) {
+                            return DropdownMenuItem<int>(
+                              value: product.id,
+                              child: Text(product.name),
+                            );
+                          }).toList(),
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              selectedProductId = newValue;
+                              // Find the product name that corresponds to the selected ID
+                              final selectedProduct = productNames.firstWhere(
+                                (product) => product.id == newValue,
+                                orElse: () => ProductNameEntity(id: 0, name: ''),
+                              );
+                              selectedCarName = selectedProduct.name;
+                              carNameController.text = selectedProduct.name;
+                            });
+                          },
+                        );
+                      } else {
+                        return DropdownButtonFormField<String>(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                              borderSide: BorderSide(color: ColorManager.lightprimary),
+                            ),
+                            hintText: AppLocalizations.of(context)!.carName,
+                          ),
+                          value: null,
+                          items: const [],
+                          onChanged: null,
+                        );
                       }
-                      return null;
-                    },
-                    items: carNames.map((String car) {
-                      return DropdownMenuItem<String>(
-                        value: car,
-                        child: Text(car),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedCarName = newValue;
-                        carNameController.text = newValue ?? '';
-                      });
                     },
                   ),
                   
@@ -2059,7 +2100,7 @@ class _AddUsedProductState extends State<AddUsedProduct> {
                         model: yearController.text.trim(),
                         make: selectedFuel!,
                         driveType: selectedDriveType!,
-                        title: carNameController.text.trim(),
+                        nameProductId: selectedProductId?.toString() ?? carNameController.text.trim(), // Using product ID instead of name
                         description: descriptionController.text.trim(),
                         price: priceController.text.trim(),
                         category: categoryController.text.trim(),

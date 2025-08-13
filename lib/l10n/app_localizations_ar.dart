@@ -18,6 +18,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get next => 'التالي';
 
   @override
+  String get editTeamLeaderCommissionRate => '  نسبة عمولة قائد الفريق';
+
+  @override
   String get onBoarding1Title =>
       'كل ما تحتاجه للبيع، الشراء، والإدارة في تطبيق واحد';
 
@@ -114,7 +117,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continu => 'متابعة';
 
   @override
-  String get createAccount => 'سجّل الدخول الان!';
+  String get createAccount => ' إنشاء حساب';
+
+  @override
+  String get notAvailableNow => 'عذرًا، هذه الميزة غير متاحة الآن.';
 
   @override
   String get fullName => 'الاسم الكامل';
@@ -192,7 +198,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get codeWasSentTo => 'تم إرسال الرمز إلى بريدك الإلكتروني';
 
   @override
-  String get resendCode => 'إعادة إلارسال خلال';
+  String get resendCodeIn => 'إعادة إلارسال خلال';
+
+  @override
+  String get resendCode => 'إعادة إلارسال ';
 
   @override
   String get n => 'خلال';
@@ -1247,6 +1256,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aggredPrice => 'السعر المتفق عليه';
 
   @override
+  String get commissionRate => 'نسبة العمولة';
+
+  @override
+  String get commissionRateDescription =>
+      'نسبة العمولة التي ستحصل عليها من كل عملية بيع';
+
+  @override
+  String get commissionRateRequired => 'نسبة العمولة مطلوبة';
+
+  @override
+  String get enterCommissionRate => 'أدخل نسبة العمولة';
+
+  @override
+  String get totalCommission => 'إجمالي العمولة';
+
+  @override
   String get editCarDetails => 'تعديل تفاصيل السيارة';
 
   @override
@@ -1439,7 +1464,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get marketerPoints => 'نقاط المسوق';
 
   @override
-  String get inspectorPoints => 'نقاط الفاحص';
+  String get inspectorPoints => 'نقاط المعاين';
 
   @override
   String get offersManagement => 'إدارة العروض';
@@ -1499,4 +1524,77 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterYourRate => 'أدخل تقييمك';
+
+  @override
+  String get verifyYourEmail => 'تفعيل البريد';
+
+  @override
+  String get s => 'ث';
+
+  @override
+  String get commissionDetails => 'تفاصيل العمولة';
+
+  @override
+  String get requestedCommission => 'العمولة المطلوبة';
+
+  @override
+  String get requestCommission => 'سحب العمولة';
+
+  @override
+  String get enterCommissionAmount => 'أدخل مبلغ العمولة';
+
+  @override
+  String get commissionRateManagement => ' إدارة نسبة العمولة';
+
+  @override
+  String get editCommissionRate => 'تعديل نسبة العمولة';
+
+  @override
+  String get productRating => 'تقييم المنتج';
+
+  @override
+  String get rateThisProduct => 'قيم هذا المنتج';
+
+  @override
+  String get submitRating => 'إرسال التقييم';
+
+  @override
+  String get ratingComment => 'تعليق (اختياري)';
+
+  @override
+  String get ratingSuccess => 'تم إرسال التقييم بنجاح';
+
+  @override
+  String get tapToRate => 'اضغط لتقييم هذا المنتج';
+
+  @override
+  String get productNames => 'اسماء المنتجات';
+
+  @override
+  String get productNamesManagement => 'إدارة اسماء المنتجات';
+
+  @override
+  String get addNewProductName => 'إضافة اسم منتج جديد';
+
+  @override
+  String get noProductNamesFound => 'لا توجد اسماء منتجات';
+
+  @override
+  String get enterProductName => 'أدخل اسم المنتج';
+
+  @override
+  String get productNameCannotBeEmpty => 'لا يمكن أن يكون اسم المنتج فارغًا';
+
+  @override
+  String get productNameAddedSuccessfully => 'تمت إضافة اسم المنتج بنجاح';
+
+  @override
+  String get deleteProductName => 'حذف اسم المنتج';
+
+  @override
+  String get confirmDeleteProductName =>
+      'هل أنت متأكد أنك تريد حذف اسم المنتج هذا؟';
+
+  @override
+  String get productNameDeletedSuccessfully => 'تم حذف اسم المنتج بنجاح';
 }

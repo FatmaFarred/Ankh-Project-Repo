@@ -9,6 +9,7 @@ import '../../domain/entities/balance_response_entity.dart';
 class BalanceResponseDm extends BalanceResponseEntity {
   BalanceResponseDm({
       super.userType,
+    super.commissions,
       super.totalPoints,
       super.perPointValue,
       super.availableBalance,
@@ -24,7 +25,8 @@ class BalanceResponseDm extends BalanceResponseEntity {
       json['transactions'].forEach((v) {
         transactions?.add(TransactionsDm.fromJson(v));
       });
-    }
+    };
+    commissions = json['commissions'];
   }
 
 
@@ -43,7 +45,10 @@ class TransactionsDm extends TransactionsEntity {
     super.points,
     super.status,
     super.amount,
-    super.createdAt,});
+    super.createdAt,
+    super.amountPoints,
+
+  });
 
   TransactionsDm.fromJson(dynamic json) {
     description = json['description'];
@@ -51,6 +56,7 @@ class TransactionsDm extends TransactionsEntity {
     status = json['status'];
     amount = json['amount'];
     createdAt = json['createdAt'];
+    amountPoints = json['amountPoints'];
   }
 
 

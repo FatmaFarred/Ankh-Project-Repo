@@ -43,6 +43,7 @@ abstract class ImageAssets {
   static const String brokenImage = "$imagePath/broken-image.png";
   static const String carIcon="$imagePath/caricon.png";
   static const String assignedIcon = "$imagePath/assigned.svg";
+  static const String appLogoHigh = "$imagePath/app_logo_high.svg";
   static const String completedIcon = "$imagePath/comleted.svg";
   static const String calenderIcon = "$imagePath/calender.svg";
   static const String usersIcon = "$imagePath/clarity_users-solid.svg";

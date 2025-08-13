@@ -17,6 +17,7 @@ import '../../../api_service/di/di.dart';
 import '../../../api_service/api_constants.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
+import '../../../domain/entities/product_details_entity.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../details_screen/details_screen.dart';
 import '../../inspector_screen/widgets/photo_list_view.dart';
@@ -200,12 +201,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                             itemBuilder: (context, index) {
                               final product = state.favoritesList[index];
                               return AssignedProductCard(
-                                image:
-                                "${ApiConstant.imageBaseUrl}${product?.imageUrls}" ,
-                                name: product.title ?? '',
-                                price: "${AppLocalizations.of(context)!.egp} ${product.price ?? ''}",
+                                product: product,
                                 onButtonClick: () {
-                                  "image:${ApiConstant.imageBaseUrl}${[product?.imageUrls]}";
+                                  print(" ${ApiConstant.imageBaseUrl}${product?.imageUrls}");
                                   Navigator.of(context).pushNamed(DetailsScreen.detailsScreenRouteName,
                                       arguments: product.productId
                                   );
@@ -616,18 +614,15 @@ class UserDetailsCard extends StatelessWidget {
 }
 
 class AssignedProductCard extends StatelessWidget {
-  final String image;
-  final String name;
-  final String price;
+  ProductDetailsEntity product;
+
   final VoidCallback onButtonClick;
   final String TextButton;
   final Color TextColor;
   final Color backgroundColor;
 
-  const AssignedProductCard({
-    required this.image,
-    required this.name,
-    required this.price,
+   AssignedProductCard({
+    required this.product,
     required this.onButtonClick,
     required this.TextButton,
     required this.TextColor,
@@ -651,7 +646,7 @@ class AssignedProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child:
                 Image.network(
-                        image,
+                  '${ApiConstant.imageBaseUrl}${product.image}',
                         width: 60,
                         height: 60,
                         fit: BoxFit.contain,
@@ -671,13 +666,13 @@ class AssignedProductCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(product?.price??"", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   SizedBox(height: 6),
                   Row(
                     children: [
                       SvgPicture.asset(ImageAssets.tagPriceIcon, height: 18.h, width: 18.w, color: Colors.grey),
                       SizedBox(width: 4),
-                      Text(price,
+                      Text(product?.price??"",
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12.sp,color: ColorManager.lightprimary),
                       ),
                     ],
