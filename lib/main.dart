@@ -16,6 +16,7 @@ import 'feauture/authentication/email_verfication/email_verfication_screen.dart'
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
+import 'feauture/authentication/marketer_register_without_code/marketer_register_screen.dart';
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
 import 'feauture/chat_screen/cubit/team_chat_list_cubit.dart';
@@ -257,7 +258,11 @@ class _MyAppState extends State<MyApp> {
         create: (context) => TeamChatListCubit(getIt<GetTeamMemberUseCase>()),
         child: const TeamChatListScreen(),
       ),
-            
+
+            MarketerRegisterScreen.registerScreenRouteName: (context) =>
+                MarketerRegisterScreen(),
+
+
           },
         );
       },

@@ -16,6 +16,7 @@ import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_text_field.dart';
 import '../../../core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../authentication/marketer_register_without_code/marketer_register_screen.dart';
 import '../users_management/users_management_screen.dart';
 import 'cubit/marketer_management_cubit.dart';
 import 'cubit/marketer_management_states.dart';
@@ -128,6 +129,24 @@ class _MarketersManagementScreenState extends State<MarketersManagementScreen> {
 
             )
             ),
+          Padding(
+              padding:  EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
+              child: CustomizedElevatedButton(
+                bottonWidget: Text(
+                  AppLocalizations.of(context)!.addNewMarketer,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ColorManager.white,
+                  ),
+                ),
+                color: ColorManager.lightprimary,
+                borderColor: ColorManager.lightprimary,
+                onPressed:()=>Navigator.of(context).pushNamed(MarketerRegisterScreen.registerScreenRouteName) ,
+                prefixIcon: Icon(Icons.add_circle_outline,color: ColorManager.white,),
+
+              )
+          
+          ),
+
 
           Expanded(
             child: BlocBuilder<MarketerManagementCubit, MarketerManagementState>(

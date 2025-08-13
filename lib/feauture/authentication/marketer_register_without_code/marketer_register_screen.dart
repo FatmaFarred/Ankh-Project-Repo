@@ -15,31 +15,28 @@ import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
 import '../email_verfication/email_verfication_screen.dart';
+import '../register/controller/register_cubit.dart';
+import '../register/controller/register_states.dart';
 import '../signin/signin_screen.dart';
-import 'controller/register_cubit.dart';
-import 'controller/register_states.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
-  static String registerScreenRouteName = "RegisterScreen";
+class MarketerRegisterScreen extends StatefulWidget {
+  const MarketerRegisterScreen({super.key});
+  static String registerScreenRouteName = "MarketerRegisterScreen";
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<MarketerRegisterScreen> createState() => _MarketerRegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _MarketerRegisterScreenState extends State<MarketerRegisterScreen> {
   RegisterCubit registerViewModel = getIt<RegisterCubit>();
   CsRolesResponseEntity? selectedCSRole; // ✅ Add this
 
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
-  bool _showInvitationCode = false;
-  bool _isTeamMemberRegistration = false;
 
   @override
   void initState() {
     super.initState();
-    _showInvitationCode = false; // Start with false
   }
 
   @override
@@ -48,41 +45,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
     print("selectedRole:${selectedRole}");
 
     return BlocListener<RegisterCubit, RegisterState>(
-        bloc: registerViewModel,
-        listener: (context, state) {
-      if (state is RegisterLoading) {
-        CustomDialog.loading(
-            context: context,
-            message: AppLocalizations.of(context)!.loading,
-            cancelable: false);
-      } else if (state is RegisterFailure) {
-        Navigator.of(context).pop();
-        CustomDialog.positiveAndNegativeButton(
-            context: context,
-            positiveText:  AppLocalizations.of(context)!.tryAgain,
-            positiveOnClick: () {
-              Navigator.of(context).pop();
-              if (selectedRole == UserRole.Client) {
-                registerViewModel.clientRegister();
-              } else  {
-                registerViewModel.teamMemberRegister();
-              }
-            },
-            title: AppLocalizations.of(context)!.error,
-            message: state.error.errorMessage);
-      } else if (state is RegisterSuccess) {
-        Navigator.of(context).pop();
-        CustomDialog.positiveButton(
-            context: context,
-            title: AppLocalizations.of(context)!.success,
-            message: state.response.message,
-            positiveOnClick: () =>
-                Navigator.of(context).pushNamed(
-                  EmailVerficationScreen.emailVerficationScreenRouteName,
-                  arguments: registerViewModel.emailController.text,
-                ));
-      }
-        },
+      bloc: registerViewModel,
+      listener: (context, state) {
+        if (state is RegisterLoading) {
+          CustomDialog.loading(
+              context: context,
+              message: AppLocalizations.of(context)!.loading,
+              cancelable: false);
+        } else if (state is RegisterFailure) {
+          Navigator.of(context).pop();
+          CustomDialog.positiveAndNegativeButton(
+              context: context,
+              positiveText:  AppLocalizations.of(context)!.tryAgain,
+              positiveOnClick: () {
+                Navigator.of(context).pop();
+
+                  registerViewModel.register();
+
+              },
+              title: AppLocalizations.of(context)!.error,
+              message: state.error.errorMessage);
+        } else if (state is RegisterSuccess) {
+          Navigator.of(context).pop();
+          CustomDialog.positiveButton(
+              context: context,
+              title: AppLocalizations.of(context)!.success,
+              message: state.response.message,
+              positiveOnClick: () =>Navigator.pop(context)
+                );
+        }
+      },
 
 
 
@@ -91,9 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.pushReplacementNamed(context,
-                  WelcomeScreen.welcomeScreenRouteName
-              );
+              Navigator.pop(context);
             },
           ),
         ),
@@ -209,42 +199,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 20.h),
                   // Team Member Registration Option
-              if (selectedRole == UserRole.customerService)
-                 ...[
-
-
-                    Text(
-                      AppLocalizations.of(context)!.invitationCode,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium
-                          ?.copyWith(fontSize: 16.sp),
-                    ),
-                    SizedBox(height: 10.h),
-                    CustomTextField(
-                      controller: registerViewModel.invitationCodeController,
-                      hintText: AppLocalizations.of(context)!.enterInvitationCode,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.done,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.fieldRequired;
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20.h),
-                 ],
-
                   CustomizedElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        if (selectedRole == UserRole.Client) {
-                          registerViewModel.clientRegister();
 
-                        } else {
-                          registerViewModel.teamMemberRegister();
-                        }
+                          registerViewModel.register();
+
                       }
                     },
                     borderColor: ColorManager.lightprimary,
@@ -258,33 +218,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 20.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.alreadyHaveAccount,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(fontSize: 14.sp, color: ColorManager.darkGrey),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            SignInScreen.signInScreenRouteName,
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.loginNow,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(fontSize: 14.sp, color: ColorManager.lightprimary),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

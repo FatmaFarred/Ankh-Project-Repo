@@ -238,7 +238,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               : */
           FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(context, TeamChatListScreen.routeName);
+              //todo:go to whatsapp
+
             },
             tooltip: AppLocalizations.of(context)!.haveADeal,
             backgroundColor: ColorManager.lightprimary,
@@ -358,8 +359,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ) ,
                             user?.roles?[0] == "Admin" ||
-                                user?.roles?[0] == "LeaderMarketer" ||
-                                user?.roles?[0] == "Marketer" ||
                                 user?.roles?[0] == "Inspector" ?
                             SizedBox.shrink() :
                             Positioned(

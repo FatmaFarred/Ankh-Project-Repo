@@ -1543,7 +1543,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get requestedCommission => ' Requested Commission';
 
   @override
-  String get requestCommission => ' Withdraw Commission';
+  String get requestCommission => ' Withdraw balance ';
 
   @override
   String get enterCommissionAmount => ' Enter Commission Amount';
@@ -1603,4 +1603,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get productNameDeletedSuccessfully =>
       'Product name deleted successfully';
+
+  @override
+  String get addNewMarketer => 'Add New Marketer';
+
+  @override
+  String get marketerMail => ' Marketer Email';
 }
