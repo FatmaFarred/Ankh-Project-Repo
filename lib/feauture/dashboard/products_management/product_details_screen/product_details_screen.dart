@@ -319,22 +319,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       SizedBox(height: 6.h),
 
                       // --- Unassign Button (not implemented) ---
-                      Padding(
-                        padding: REdgeInsets.symmetric(horizontal: 16.0),
-                        child: CustomizedElevatedButton(
-                          bottonWidget: Text(
-                            AppLocalizations.of(context)!.edit,
-                            style: Theme.of(context).textTheme.bodyLarge!
-                                .copyWith(
-                                  fontSize: 16.sp,
-                                  color: ColorManager.white,
-                                ),
-                          ),
-                          onPressed: () {},
-                          color: ColorManager.lightprimary,
-                          borderColor: ColorManager.lightprimary,
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: REdgeInsets.symmetric(horizontal: 16.0),
+                      //   child: CustomizedElevatedButton(
+                      //     bottonWidget: Text(
+                      //       AppLocalizations.of(context)!.edit,
+                      //       style: Theme.of(context).textTheme.bodyLarge!
+                      //           .copyWith(
+                      //             fontSize: 16.sp,
+                      //             color: ColorManager.white,
+                      //           ),
+                      //     ),
+                      //     onPressed: () {},
+                      //     color: ColorManager.lightprimary,
+                      //     borderColor: ColorManager.lightprimary,
+                      //   ),
+                      // ),
                       SizedBox(height: 74.h),
                     ],
                   ),
