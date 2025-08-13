@@ -14,6 +14,7 @@ class RequestPointDm extends RequestPointEntity {
       super.id,
       super.userName,
       super.points,
+    super.amount,
       super.roleName,
     super.createdAt,
     super.phoneNumber,
@@ -29,15 +30,8 @@ class RequestPointDm extends RequestPointEntity {
     phoneNumber = json['phoneNumber'];
     description = json['description'];
     status = json['status'];
+    amount = json['amount'];
   }
-  String? id;
-  String? userName;
-  num? points;
-  String? roleName;
-  String? createdAt;
-  String? phoneNumber;
-  String? description;
-  String? status;
 
 
 }

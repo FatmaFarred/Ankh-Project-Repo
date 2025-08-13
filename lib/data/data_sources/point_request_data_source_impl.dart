@@ -302,7 +302,7 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
   }
 
   @override
-  Future<Either<Failure, String?>> addPointRequest(String token, String description, num points) async{
+  Future<Either<Failure, String?>> addPointRequest(String token, String description, num? points, num? commission) async {
     try {
       print('🔌 Checking internet connection...');
       final List<ConnectivityResult> connectivityResult =
@@ -310,13 +310,22 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
 
       if (connectivityResult.contains(ConnectivityResult.wifi) ||
           connectivityResult.contains(ConnectivityResult.mobile)) {
-        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+        print('✅ Internet connected via  [32m${connectivityResult.join(", ")} [0m');
 
         final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.addPointRequest}";
         print('🌐 Full URL: $fullUrl');
 
-        print('📤 Sending GET request with headers:');
+        print('📤 Sending POST request with headers:');
 
+        // Build the request data according to which value is present
+        final Map<String, dynamic> data = {
+          'description': description,
+        };
+        if (points != null) {
+          data['points'] = points;
+        } else if (commission != null) {
+          data['amount'] = commission;
+        }
 
         var response = await apiManager.postData(
           url: ApiConstant.baseUrl,
@@ -326,13 +335,7 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
             'Authorization': 'Bearer $token',
             'Content-Type': 'application/json',
           },
-          data: {'points': points,
-            'description': description,
-
-          },
-
-
-
+          data: data,
         );
 
         print('📥 Response received!');
@@ -347,13 +350,11 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
         }
 
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
-
-
           print('✅ Request successful. Message: ${myResponse['message']}');
           return right(myResponse['message']);
         } else {
           print('⚠️ Request failed with status ${response.statusCode}');
-          return left(ServerError(errorMessage: myResponse['message']));
+          return left(ServerError(errorMessage: myResponse));
         }
       } else {
         print('❌ No internet connection!');
@@ -487,6 +488,137 @@ class PointRemoteDataSourceImpl implements PointsRemoteDataSource{
       return left(ServerError(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String?>> adjustCommissionForRoles(String token, num commissionRate, String roleName)async {
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.adjustCommissionForRoles}";
+        print('🌐 Full URL: $fullUrl');
+
+        print('📤 Sending GET request with headers:');
+
+
+        var response = await apiManager.putData(
+            url: ApiConstant.baseUrl,
+            endPoint: EndPoints.adjustCommissionForRoles,
+            options: Options(validateStatus: (_) => true),
+
+            data:{
+              "roleName": roleName,
+              "commissionPercentage": commissionRate
+            },
+          headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+        },
+
+
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        final myResponse = response.data;
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+
+
+          print('✅ Request successful. Message: ${myResponse['message']}');
+          return right(myResponse['message']);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: myResponse));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String?>> adjustCommissionForTeamLeader(String token, num commissionRate) async{
+    try {
+      print('🔌 Checking internet connection...');
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        print('✅ Internet connected via ${connectivityResult.join(", ")}');
+
+        final fullUrl = "${ApiConstant.baseUrl}/${EndPoints.adjustCommissionForTeamLeader}";
+        print('🌐 Full URL: $fullUrl');
+
+        print('📤 Sending GET request with headers:');
+
+
+        var response = await apiManager.putData(
+          url: ApiConstant.baseUrl,
+          endPoint: EndPoints.adjustCommissionForTeamLeader,
+          options: Options(validateStatus: (_) => true),
+
+          data:{
+            "roleName": "LeaderMarketer",
+            "teamLeaderCommissionPercentage": commissionRate
+          },
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+          },
+
+
+
+        );
+
+        print('📥 Response received!');
+        print('🔢 Status code: ${response.statusCode}');
+        print('📦 Headers: ${response.headers}');
+        print('📨 Raw body: ${response.data}');
+        print('🔍 Response type: ${response.data.runtimeType}');
+
+        final myResponse = response.data;
+        if (response.statusCode == 401 || response.statusCode == 403) {
+          return left(ServerError(errorMessage: "Session expired. Please log in again."));
+        }
+
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+
+
+          print('✅ Request successful. Message: ${myResponse['message']}');
+          return right(myResponse['message']);
+        } else {
+          print('⚠️ Request failed with status ${response.statusCode}');
+          return left(ServerError(errorMessage: myResponse));
+        }
+      } else {
+        print('❌ No internet connection!');
+        return left(NetworkError(errorMessage: GlobalLocalization.noInternet));
+      }
+    } catch (e, stackTrace) {
+      print('🛑 Exception caught: $e');
+      print('📚 Stack trace:\n$stackTrace');
+      return left(ServerError(errorMessage: e.toString()));
+    }  }
 
 
 

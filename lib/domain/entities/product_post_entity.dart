@@ -1,5 +1,5 @@
 class ProductPostEntity {
-  final String title;
+  final String nameProductId;
   final String description;
   final String price;
   final String category;
@@ -27,7 +27,7 @@ class ProductPostEntity {
   final Map<String, dynamic>? usedDetails;
 
   ProductPostEntity({
-    required this.title,
+    required this.nameProductId,
     required this.description,
     required this.price,
     required this.category,

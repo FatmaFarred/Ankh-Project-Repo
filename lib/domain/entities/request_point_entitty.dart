@@ -11,7 +11,8 @@ class RequestPointEntity {
   RequestPointEntity({
       this.id, 
       this.userName, 
-      this.points, 
+      this.points,
+      this.amount,
       this.roleName, 
       this.createdAt, 
       this.phoneNumber, 
@@ -21,6 +22,8 @@ class RequestPointEntity {
   String? id;
   String? userName;
   num? points;
+  num? amount;
+
   String? roleName;
   String? createdAt;
   String? phoneNumber;

@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get next;
 
+  /// No description provided for @editTeamLeaderCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Leader Commission Rate'**
+  String get editTeamLeaderCommissionRate;
+
   /// No description provided for @onBoarding1Title.
   ///
   /// In en, this message translates to:
@@ -296,6 +302,12 @@ abstract class AppLocalizations {
   /// **'Create Account'**
   String get createAccount;
 
+  /// No description provided for @notAvailableNow.
+  ///
+  /// In en, this message translates to:
+  /// **' Not Available Now'**
+  String get notAvailableNow;
+
   /// No description provided for @fullName.
   ///
   /// In en, this message translates to:
@@ -439,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A code has been sent to your email'**
   String get codeWasSentTo;
+
+  /// No description provided for @resendCodeIn.
+  ///
+  /// In en, this message translates to:
+  /// **'resend in'**
+  String get resendCodeIn;
 
   /// No description provided for @resendCode.
   ///
@@ -2495,8 +2513,38 @@ abstract class AppLocalizations {
   /// No description provided for @aggredPrice.
   ///
   /// In en, this message translates to:
-  /// **'Aggred Price'**
+  /// **'Agreed Price'**
   String get aggredPrice;
+
+  /// No description provided for @commissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Commission Rate'**
+  String get commissionRate;
+
+  /// No description provided for @commissionRateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **' The commission rate is the percentage of the total price that will be charged as a commission for the service provided.'**
+  String get commissionRateDescription;
+
+  /// No description provided for @commissionRateRequired.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission rate is required'**
+  String get commissionRateRequired;
+
+  /// No description provided for @enterCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Commission Rate'**
+  String get enterCommissionRate;
+
+  /// No description provided for @totalCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Total Commission'**
+  String get totalCommission;
 
   /// No description provided for @editCarDetails.
   ///
@@ -3001,6 +3049,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Your Rate'**
   String get enterYourRate;
+
+  /// No description provided for @verifyYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Email'**
+  String get verifyYourEmail;
+
+  /// No description provided for @s.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get s;
+
+  /// No description provided for @commissionDetails.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission Details'**
+  String get commissionDetails;
+
+  /// No description provided for @requestedCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Requested Commission'**
+  String get requestedCommission;
+
+  /// No description provided for @requestCommission.
+  ///
+  /// In en, this message translates to:
+  /// **' Withdraw balance '**
+  String get requestCommission;
+
+  /// No description provided for @enterCommissionAmount.
+  ///
+  /// In en, this message translates to:
+  /// **' Enter Commission Amount'**
+  String get enterCommissionAmount;
+
+  /// No description provided for @commissionRateManagement.
+  ///
+  /// In en, this message translates to:
+  /// **' Commission Rate Management'**
+  String get commissionRateManagement;
+
+  /// No description provided for @editCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Commission Rate'**
+  String get editCommissionRate;
+
+  /// No description provided for @productRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Rating'**
+  String get productRating;
+
+  /// No description provided for @rateThisProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate This Product'**
+  String get rateThisProduct;
+
+  /// No description provided for @submitRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Rating'**
+  String get submitRating;
+
+  /// No description provided for @ratingComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment (Optional)'**
+  String get ratingComment;
+
+  /// No description provided for @ratingSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating submitted successfully'**
+  String get ratingSuccess;
+
+  /// No description provided for @tapToRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to rate this product'**
+  String get tapToRate;
+
+  /// No description provided for @productNames.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Names'**
+  String get productNames;
+
+  /// No description provided for @productNamesManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Names Management'**
+  String get productNamesManagement;
+
+  /// No description provided for @addNewProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Product Name'**
+  String get addNewProductName;
+
+  /// No description provided for @noProductNamesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Product Names Found'**
+  String get noProductNamesFound;
+
+  /// No description provided for @enterProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Product Name'**
+  String get enterProductName;
+
+  /// No description provided for @productNameCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name cannot be empty'**
+  String get productNameCannotBeEmpty;
+
+  /// No description provided for @productNameAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name added successfully'**
+  String get productNameAddedSuccessfully;
+
+  /// No description provided for @deleteProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Product Name'**
+  String get deleteProductName;
+
+  /// No description provided for @confirmDeleteProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this product name?'**
+  String get confirmDeleteProductName;
+
+  /// No description provided for @productNameDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name deleted successfully'**
+  String get productNameDeletedSuccessfully;
+
+  /// No description provided for @addNewMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Marketer'**
+  String get addNewMarketer;
+
+  /// No description provided for @marketerMail.
+  ///
+  /// In en, this message translates to:
+  /// **' Marketer Email'**
+  String get marketerMail;
 }
 
 class _AppLocalizationsDelegate

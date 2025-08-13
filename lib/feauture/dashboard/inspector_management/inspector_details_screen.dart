@@ -112,9 +112,7 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.response,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
                   // Refresh the screen or navigate back
-                  Navigator.of(context).pop();
                 },
               );
             }
@@ -151,8 +149,6 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
                 message: state.response ?? "User unblocked successfully",
                 positiveText: AppLocalizations.of(context)!.ok,
                 positiveOnClick: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
                 },
               );
             }
@@ -183,7 +179,7 @@ class _InspectorDetailsScreenState extends State<InspectorDetailsScreen> {
                 title: AppLocalizations.of(context)!.success,
                 message: state.message ?? "Points adjusted successfully",
                 positiveText: AppLocalizations.of(context)!.ok,
-                positiveOnClick: () => Navigator.of(context).pop(),
+                positiveOnClick: () {},
               );
             }
           },

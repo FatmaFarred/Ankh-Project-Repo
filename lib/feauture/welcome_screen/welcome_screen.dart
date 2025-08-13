@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
             SizedBox(height: 13.7.h,),
             CustomizedElevatedButton(
 
-              bottonWidget: Text(AppLocalizations.of(context)!.registerNow,style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.lightprimary,fontSize: 16.sp),),
+              bottonWidget: Text(AppLocalizations.of(context)!.createAccount,style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.lightprimary,fontSize: 16.sp),),
               color: Theme.of(context).scaffoldBackgroundColor,
               borderColor: Theme.of(context).primaryColor,
               onPressed: () {
@@ -58,6 +58,24 @@ class WelcomeScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed(ChooseRoleScreen.chooseRoleScreenRouteName);
               },
             ),
+              SizedBox(height: 13.7.h,),
+              CustomizedElevatedButton(
+
+                bottonWidget: Text(AppLocalizations.of(context)!.loginNow,style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: ColorManager.lightprimary,fontSize: 16.sp),),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderColor: Theme.of(context).primaryColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SignInScreen(showRegietrButton: false,),
+
+                        )
+
+                  );
+                },
+              ),
+
             ],),
           )
 

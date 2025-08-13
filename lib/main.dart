@@ -16,6 +16,7 @@ import 'feauture/authentication/email_verfication/email_verfication_screen.dart'
 import 'feauture/authentication/forgrt_password/forget_password/forget_password_screen.dart';
 import 'feauture/authentication/forgrt_password/set_new_password/reset_password.dart';
 import 'feauture/authentication/forgrt_password/verify_otp/verify_otp_screen/verify_otp_screen.dart';
+import 'feauture/authentication/marketer_register_without_code/marketer_register_screen.dart';
 import 'feauture/authentication/register/register _screen.dart';
 import 'feauture/chat_screen/chat_screen.dart';
 import 'feauture/chat_screen/cubit/team_chat_list_cubit.dart';
@@ -150,57 +151,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _initDynamicLinks();
   }
 
-  Future<void> _initDynamicLinks() async {
-    // Handle dynamic link when app is opened from terminated state
-    final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks
-        .instance
-        .getInitialLink();
-    _handleDynamicLink(initialLink?.link);
 
-    // Handle dynamic link when app is opened from background
-    FirebaseDynamicLinks.instance.onLink
-        .listen((dynamicLinkData) {
-          _handleDynamicLink(dynamicLinkData.link);
-        })
-        .onError((error) {
-          print('Dynamic Link Failed: $error');
-        });
-  }
-
-  void _handleDynamicLink(Uri? uri) {
-    if (uri == null) return;
-
-    print('Received dynamic link: $uri');
-
-    // Unwrap Firebase link if needed
-    final deepLink = uri.queryParameters['link'];
-    if (deepLink != null) {
-      final innerUri = Uri.parse(deepLink);
-      print('Unwrapped deep link: $innerUri');
-      _handleDynamicLink(innerUri);
-      return;
-    }
-
-    if (uri.path == '/reset-password') {
-      final token = uri.queryParameters['token'];
-      final email = uri.queryParameters['email'];
-
-      if (token != null && email != null) {
-        print('Deep Link - Email: $email, Token: $token');
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context).pushNamed(
-            ResetPasswordScreen.resetPasswordScreenRouteName,
-            arguments: {'email': email, 'token': token},
-          );
-        });
-      } else {
-        print('Invalid link: missing token or eemail');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,8 +203,10 @@ class _MyAppState extends State<MyApp> {
             ChooseCsTypeScreen.chooseCsTypeScreenRouteName: (context) =>
                 ChooseCsTypeScreen(),
             SignInScreen.signInScreenRouteName: (context) => SignInScreen(),
-            EmailVerficationScreen.emailVerficationScreenRouteName: (context) =>
-                EmailVerficationScreen(),
+            EmailVerficationScreen.emailVerficationScreenRouteName: (context) {
+              final args = ModalRoute.of(context)?.settings.arguments as String?;
+              return EmailVerficationScreen(email: args);
+            },
             ForgetPasswordScreen.forgetPasswordScreenRouteName: (context) =>
                 ForgetPasswordScreen(),
             OtpVerficationScreen.otpVerficationScreenRouteName: (context) =>
@@ -303,7 +258,11 @@ class _MyAppState extends State<MyApp> {
         create: (context) => TeamChatListCubit(getIt<GetTeamMemberUseCase>()),
         child: const TeamChatListScreen(),
       ),
-            
+
+            MarketerRegisterScreen.registerScreenRouteName: (context) =>
+                MarketerRegisterScreen(),
+
+
           },
         );
       },

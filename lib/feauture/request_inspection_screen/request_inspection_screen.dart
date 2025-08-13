@@ -57,6 +57,14 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
   void initState() {
     super.initState();
     // No default values for controllers, will use hint text instead
+    // Add listeners to track changes in the text fields
+    requestedMonthsController.addListener(() {
+      print('Debug - requestedMonthsController changed: "${requestedMonthsController.text}"');
+    });
+    
+    downPaymentController.addListener(() {
+      print('Debug - downPaymentController changed: "${downPaymentController.text}"');
+    });
   }
 
   List<Widget> _buildTabContent(int index) {
@@ -353,7 +361,14 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
             color: Theme.of(context).primaryColor,
             borderColor: Theme.of(context).primaryColor,
             onPressed: () async {
-              if (_formKey.currentState?.validate() ?? false) {
+              print('Debug - Submit button pressed (price offer)');
+              print('Debug - Form key: $_formKey');
+              print('Debug - Form state: ${_formKey.currentState}');
+              
+              final isValid = _formKey.currentState?.validate() ?? false;
+              print('Debug - Form validation result: $isValid');
+              
+              if (isValid) {
                 final request = PriceOfferRequestEntity(
                   marketerId: user?.id ?? '',
                   productId: product?.id?.toInt() ?? 0,
@@ -479,27 +494,32 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           CustomTextField(
             controller: requestedMonthsController,
             hintText: "${AppLocalizations.of(context)!.requestedMonths} (e.g. 12)",
-            keyboardType: TextInputType.phone,
+            keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
+                print('Debug - Months validator: empty value');
                 return AppLocalizations.of(context)!.required;
               }
 
               // Check if the input is a valid integer
               if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+                print('Debug - Months validator: not a valid integer format');
                 return AppLocalizations.of(context)!.invalidInteger;
               }
 
               final parsed = int.tryParse(value.trim());
               if (parsed == null) {
+                print('Debug - Months validator: could not parse to int');
                 return AppLocalizations.of(context)!.invalidNumber;
               }
 
               if (parsed <= 0) {
+                print('Debug - Months validator: value <= 0');
                 return AppLocalizations.of(context)!.numberMustBeGreaterThanZero;
               }
 
+              print('Debug - Months validator: valid value: $parsed');
               return null;
             },
           ),
@@ -516,27 +536,32 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
           CustomTextField(
             controller: downPaymentController,
             hintText: "${AppLocalizations.of(context)!.downPayment} (e.g. 1000)",
-            keyboardType: TextInputType.phone,
+            keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
+                print('Debug - DownPayment validator: empty value');
                 return AppLocalizations.of(context)!.required;
               }
 
               // Check if the input is a valid integer
               if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+                print('Debug - DownPayment validator: not a valid integer format');
                 return AppLocalizations.of(context)!.invalidInteger;
               }
 
               final parsed = int.tryParse(value.trim());
               if (parsed == null) {
+                print('Debug - DownPayment validator: could not parse to int');
                 return AppLocalizations.of(context)!.invalidNumber;
               }
 
               if (parsed <= 0) {
+                print('Debug - DownPayment validator: value <= 0');
                 return AppLocalizations.of(context)!.numberMustBeGreaterThanZero;
               }
 
+              print('Debug - DownPayment validator: valid value: $parsed');
               return null;
             },
           ),
@@ -552,20 +577,44 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
             color: Theme.of(context).primaryColor,
             borderColor: Theme.of(context).primaryColor,
             onPressed: () async {
-              if (_formKey.currentState?.validate() ?? false) {
+              print('Debug - Submit button pressed (installment)');
+              print('Debug - Form key: $_formKey');
+              print('Debug - Form state: ${_formKey.currentState}');
+              
+              final isValid = _formKey.currentState?.validate() ?? false;
+              print('Debug - Form validation result: $isValid');
+              
+              if (isValid) {
                 // Parse values with proper error handling
-                int installmentPeriod;
-                int downPayment;
+                int installmentPeriod = 0;
+                int downPayment = 0;
                 
                 try {
+                  print('Debug - Form validation passed');
                   print('Debug - requestedMonthsController.text: "${requestedMonthsController.text}"');
                   print('Debug - downPaymentController.text: "${downPaymentController.text}"');
                   
-                  installmentPeriod = int.parse(requestedMonthsController.text.trim());
-                  downPayment = int.parse(downPaymentController.text.trim());
+                  if (requestedMonthsController.text.trim().isNotEmpty) {
+                    installmentPeriod = int.parse(requestedMonthsController.text.trim());
+                    print('Debug - parsed installmentPeriod: $installmentPeriod');
+                  } else {
+                    print('Debug - requestedMonthsController is empty');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("${AppLocalizations.of(context)!.requestedMonths} is required")),
+                    );
+                    return;
+                  }
                   
-                  print('Debug - parsed installmentPeriod: $installmentPeriod');
-                  print('Debug - parsed downPayment: $downPayment');
+                  if (downPaymentController.text.trim().isNotEmpty) {
+                    downPayment = int.parse(downPaymentController.text.trim());
+                    print('Debug - parsed downPayment: $downPayment');
+                  } else {
+                    print('Debug - downPaymentController is empty');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("${AppLocalizations.of(context)!.downPayment} is required")),
+                    );
+                    return;
+                  }
                 } catch (e) {
                   // Show error message if parsing fails
                   print('Debug - Error parsing values: $e');
@@ -580,11 +629,11 @@ class _RequestInspectionScreenState extends State<RequestInspectionScreen> {
                   productId: product?.id?.toInt() ?? 0,
                   clientName: nameController.text,
                   clientPhone: phoneController.text,
-                  installmentPeriod: installmentPeriod,
+                  requestedMonths: installmentPeriod,
                   downPayment: downPayment,
                 );
                 print("clicked");
-                print('Debug - Request object: marketerId=${request.marketerId}, productId=${request.productId}, clientName=${request.clientName}, clientPhone=${request.clientPhone}, installmentPeriod=${request.installmentPeriod}, downPayment=${request.downPayment}');
+                print('Debug - Request object: marketerId=${request.marketerId}, productId=${request.productId}, clientName=${request.clientName}, clientPhone=${request.clientPhone}, installmentPeriod=${request.requestedMonths}, downPayment=${request.downPayment}');
 
                 final result = await context
                     .read<MarketerAddRequestCubit>()

@@ -225,7 +225,6 @@ class _PointPricesScreenState extends State<PointPricesScreen> {
             title: AppLocalizations.of(context)!.success,
             message: state.response ?? '',
             positiveOnClick: () {
-              Navigator.of(context).pop();
               // Refresh the data
               if (userToken != null) {
                 pointPricesCubit.fetchPointPrices(context);

@@ -4,8 +4,10 @@ import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/core/constants/font_manager/font_manager.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+import 'package:ankh_project/domain/entities/product_name_entity.dart';
 import 'package:ankh_project/domain/entities/product_post_entity.dart';
 import 'package:ankh_project/domain/entities/top_brand_entity.dart';
+import 'package:ankh_project/feauture/dashboard/products_management/cubit/product_names_dropdown_cubit.dart';
 import 'package:ankh_project/feauture/home_screen/top_brands/cubit/top_brand_cubit.dart';
 import 'package:ankh_project/feauture/inspector_screen/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,31 +41,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   String? selectedStatus = 'Choose Status';
   String? selectedDriveType = 'Choose Drive Type';
   String? selectedCarName;
+  int? selectedProductId;
   TopBrandEntity? selectedTopBrand;
-  
-  final List<String> carNames = [ 
-    // Hyundai 
-    'HB20','i10','i20','i30','Accent','Verna','Solaris','Aura','Grand i10 Sedan', 
-    'Grand Metro','Elantra','Avante','i30 Sedan','Grandeur','Azera','HB20S', 
-    'i30 Fastback','Ioniq 6','Sonata','i30 wagon','Alcazar','Grand Creta','Bayon', 
-    'Casper','Casper Electric','Creta','Cantus', 
-  
-    // Kia 
-    'Ceed','EV4','K3','K4','Picanto','Morning','Ray','K5','K8','K9','Pegas','Soluto', 
-    'Ceed SW','Proceed','EV3','EV5','EV6','EV9','Niro','Seltos','Sonet','Sorento', 
-    'Soul','Sportage', 
-  
-    // Chevrolet 
-    'Blazer','Blazer EV','Captiva','Captiva PHEV','Captiva EV','Equinox','Equinox EV', 
-    'Groove','Spark EUV','Tracker', 
-  
-    // BMW 
-    '1 Series','2 Series Gran Coupé','3 Series','4 Series Gran Coupé','5 Series', 
-    '7 Series','8 Series Gran Coupé','i3','i4','i5','i7','3 Series Wagon','5 Series Wagon', 
-    'i5 Wagon','X1','X2','X3','X4','X5','X6','X7','XM','iX1','iX2','iX3','iX', 
-    '2 Series Coupé','4 Series Coupé','4 Series Convertible','8 Series Coupé', 
-    '8 Series Convertible','Z4','2 Series Active Tourer', 
-  ];
+  late ProductNamesDropdownCubit _productNamesDropdownCubit;
 
   late int statusNum;
 
@@ -156,6 +136,19 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     super.initState();
     // Fetch top brands when the widget initializes
     context.read<TopBrandCubit>().fetchTopBrands();
+    
+    // Initialize and load product names for dropdown
+    _productNamesDropdownCubit = getIt<ProductNamesDropdownCubit>();
+    _productNamesDropdownCubit.loadProductNames();
+    
+    // Listen for product names to be loaded
+    _productNamesDropdownCubit.stream.listen((state) {
+      if (state is ProductNamesDropdownLoaded) {
+        // We don't need to check for a numeric title here since this is an add screen,
+        // but we'll keep the structure similar to edit_product_screen.dart for consistency
+        // This listener could be useful if we need to pre-select a product in the future
+      }
+    });
   }
 
   @override
@@ -326,45 +319,102 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                           ),
                                         ),
                                         SizedBox(height: 6.h),
-                                        DropdownButtonFormField<String>(
-                                          value: selectedCarName,
-                                          decoration: InputDecoration(
-                                            hintText: AppLocalizations.of(context)!.carName,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
-                                              borderSide: BorderSide(color: ColorManager.lightGrey),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
-                                              borderSide: BorderSide(color: ColorManager.lightGrey),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
-                                              borderSide: BorderSide(color: ColorManager.lightprimary),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(8),
-                                              borderSide: BorderSide(color: Colors.red),
-                                            ),
-                                          ),
-                                          validator: (value) {
-                                            if (value == null || value.isEmpty) {
-                                              return AppLocalizations.of(context)!.carNameRequired;
+                                        BlocBuilder<ProductNamesDropdownCubit, ProductNamesDropdownState>(
+                                          bloc: _productNamesDropdownCubit,
+                                          builder: (context, state) {
+                                            if (state is ProductNamesDropdownLoading) {
+                                              return const Center(
+                                                child: CircularProgressIndicator(),
+                                              );
+                                            } else if (state is ProductNamesDropdownError) {
+                                              return Text('Error: ${state.message}');
+                                            } else if (state is ProductNamesDropdownLoaded) {
+                                              final productNames = state.productNames;
+                                              return DropdownButtonFormField<int>(
+                                                value: selectedProductId,
+                                                decoration: InputDecoration(
+                                                  hintText: AppLocalizations.of(context)!.carName,
+                                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
+                                                  ),
+                                                  errorBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: Colors.red),
+                                                  ),
+                                                ),
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return AppLocalizations.of(context)!.carNameRequired;
+                                                  }
+                                                  return null;
+                                                },
+                                                items: productNames.map((ProductNameEntity product) {
+                                                  return DropdownMenuItem<int>(
+                                                    value: product.id,
+                                                    child: Text(product.name),
+                                                  );
+                                                }).toList(),
+                                                onChanged: (int? newValue) {
+                                                  setState(() {
+                                                    selectedProductId = newValue;
+                                                    // Find the product name that corresponds to the selected ID
+                                                    final selectedProduct = productNames.firstWhere(
+                                                      (product) => product.id == newValue,
+                                                      orElse: () => ProductNameEntity(id: 0, name: ''),
+                                                    );
+                                                    selectedCarName = selectedProduct.name;
+                                                    carNameController.text = selectedProduct.name;
+                                                  });
+                                                },
+                                              );
+                                            } else {
+                                              return DropdownButtonFormField<String>(
+                                                value: selectedCarName,
+                                                decoration: InputDecoration(
+                                                  hintText: AppLocalizations.of(context)!.carName,
+                                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightGrey),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: ColorManager.lightprimary),
+                                                  ),
+                                                  errorBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                    borderSide: BorderSide(color: Colors.red),
+                                                  ),
+                                                ),
+                                                validator: (value) {
+                                                  if (value == null || value.isEmpty) {
+                                                    return AppLocalizations.of(context)!.carNameRequired;
+                                                  }
+                                                  return null;
+                                                },
+                                                items: const [],
+                                                onChanged: (String? newValue) {
+                                                  setState(() {
+                                                    selectedCarName = newValue;
+                                                    carNameController.text = newValue ?? '';
+                                                  });
+                                                },
+                                              );
                                             }
-                                            return null;
-                                          },
-                                          items: carNames.map((String carName) {
-                                            return DropdownMenuItem<String>(
-                                              value: carName,
-                                              child: Text(carName),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              selectedCarName = newValue;
-                                              carNameController.text = newValue ?? '';
-                                            });
                                           },
                                         ),
                                         SizedBox(height: 16.h),
@@ -1401,8 +1451,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                                       .trim(),
                                                   make: selectedFuel!,
                                                   driveType: selectedDriveType!,
-                                                  title: carNameController.text
-                                                      .trim(),
+                                                  nameProductId: selectedProductId?.toString() ?? carNameController.text.trim(), // Using product ID instead of name
                                                   description:
                                                       descriptionController.text
                                                           .trim(),

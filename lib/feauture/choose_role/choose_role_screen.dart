@@ -47,8 +47,22 @@ class ChooseRoleScreen extends StatelessWidget {
               image: ImageAssets.ownerIcon,
               isSelected: selectedRole == UserRole.owner,
               onTap: (){
-                //todo: navigate to owner screen
-                context.read<RoleCubit>().selectRole(UserRole.owner);
+                // Show alert that owner role is not available yet
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                    duration: Duration(seconds: 3),
+                    backgroundColor: ColorManager.error,
+                    behavior: SnackBarBehavior.floating,
+                    margin: EdgeInsets.symmetric(vertical: 200.h, horizontal: 16.w),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                  ),
+                );
+                
+                // Don't select the role since it's not available
+                // context.read<RoleCubit>().selectRole(UserRole.owner);
               },
             ),
 
@@ -84,6 +98,23 @@ class ChooseRoleScreen extends StatelessWidget {
                   if (selectedRole == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(AppLocalizations.of(context)!.chooseRole)),
+                    );
+                    return;
+                  }
+
+                  // Check if owner role is selected (shouldn't happen but just in case)
+                  if (selectedRole == UserRole.owner) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('${AppLocalizations.of(context)!.owner} ${AppLocalizations.of(context)!.notAvailable}'),
+                        duration: Duration(seconds: 3),
+                        backgroundColor: ColorManager.error,
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.all(16.w),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                      ),
                     );
                     return;
                   }

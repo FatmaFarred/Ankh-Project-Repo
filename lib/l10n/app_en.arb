@@ -2,6 +2,8 @@
   "language": "Language",
   "getStarted": "Get Started",
   "next": "Next",
+  "editTeamLeaderCommissionRate": "Team Leader Commission Rate",
+
   "onBoarding1Title": "Everything You Need to Buy, Sell, and Manage in One App",
   "onBoarding1SubTitle": "Connect seamlessly with owners, marketers, and inspectors, all in one powerful platform.",
   "onBoarding2Title": "Easily List Your Property or Car and Stay in Control",
@@ -32,6 +34,8 @@
   "marketerDescription": "Promote listings and grow visibility",
   "continu": "Continue",
   "createAccount": "Create Account",
+  "notAvailableNow": " Not Available Now",
+
   "fullName": "Full Name",
   "enterYourName": "Enter Your Name",
   "email": "Email",
@@ -56,7 +60,9 @@
   "verifyEmailTitle": "Verify your email",
   "verifyEmailSubTitle": "Enter the verification code that we have sent to your email",
   "codeWasSentTo": "A code has been sent to your email",
+  "resendCodeIn": "resend in",
   "resendCode": "resend",
+
   "n": "in",
   "confirm": "confirm",
   "forgetPasswordSubTitle": "Enter your email to recover your password!",
@@ -405,13 +411,12 @@
   "doYouHaveInvitationCode": "Do you have an invitation code?",
   "registerWithInvitationCode": "Register with Invitation Code",
   "tryAgain": "Try Again",
-  "aggredPrice": "Aggred Price",
-
-
-
-
-
-
+  "aggredPrice": "Agreed Price",
+  "commissionRate": "Commission Rate",
+  "commissionRateDescription": " The commission rate is the percentage of the total price that will be charged as a commission for the service provided.",
+  "commissionRateRequired": " Commission rate is required",
+  "enterCommissionRate": " Enter Commission Rate",
+  "totalCommission": " Total Commission",
   "editCarDetails": "Edit Car Details",
   "addCar": "Add Car",
   "basicInformation": "Basic Information",
@@ -504,9 +509,38 @@
   "writeYourMessage": " Write your message...",
   "marketerRate": "Marketer Rate",
   "inspectorRate": "Inspector Rate",
-  "enterYourRate": "Enter Your Rate"
+  "enterYourRate": "Enter Your Rate",
+  "verifyYourEmail": "Verify Email",
+  "s": "S",
+  "commissionDetails": " Commission Details",
+  "requestedCommission": " Requested Commission",
+  "requestCommission": " Withdraw balance ",
+  "enterCommissionAmount": " Enter Commission Amount",
+  "commissionRateManagement": " Commission Rate Management",
+  "editCommissionRate": "Edit Commission Rate",
 
 
 
+
+  "productRating": "Product Rating",
+  "rateThisProduct": "Rate This Product",
+  "submitRating": "Submit Rating",
+  "ratingComment": "Comment (Optional)",
+  "ratingSuccess": "Rating submitted successfully",
+  "tapToRate": "Tap to rate this product",
+  "productNames": "Product Names",
+  "productNamesManagement": "Product Names Management",
+  "addNewProductName": "Add New Product Name",
+  "noProductNamesFound": "No Product Names Found",
+  "enterProductName": "Enter Product Name",
+  "productNameCannotBeEmpty": "Product name cannot be empty",
+  "add": "Add",
+  "cancel": "Cancel",
+  "productNameAddedSuccessfully": "Product name added successfully",
+  "deleteProductName": "Delete Product Name",
+  "confirmDeleteProductName": "Are you sure you want to delete this product name?",
+  "productNameDeletedSuccessfully": "Product name deleted successfully",
+  "addNewMarketer": "Add New Marketer",
+  "marketerMail": " Marketer Email"
 
 }

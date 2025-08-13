@@ -3,7 +3,7 @@ class InstallmentRequestEntity {
   final int productId;
   final String clientName;
   final String clientPhone;
-  final int installmentPeriod;
+  final int requestedMonths;
   final int downPayment;
 
   InstallmentRequestEntity({
@@ -11,7 +11,7 @@ class InstallmentRequestEntity {
     required this.productId,
     required this.clientName,
     required this.clientPhone,
-    required this.installmentPeriod,
+    required this.requestedMonths,
     required this.downPayment,
   });
 }

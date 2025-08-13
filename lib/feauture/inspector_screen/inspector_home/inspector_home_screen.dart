@@ -299,21 +299,6 @@ class InspectionRequestCard extends StatelessWidget {
                 inspectionRequest?.clientName ?? "",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.r),
-                  color: Color(0xFFC5FEC3),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.active,
-                  style: GoogleFonts.inter(
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF279C07),
-                  ),
-                ),
-              ),
             ],
           ),
           Text(

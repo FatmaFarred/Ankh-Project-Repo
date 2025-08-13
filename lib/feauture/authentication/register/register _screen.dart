@@ -10,6 +10,7 @@ import '../../../api_service/di/di.dart';
 import '../../../core/constants/assets_manager.dart';
 import '../../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../../core/validator/my_validator.dart';
+import '../../../domain/entities/cs_roles_response_entity.dart';
 import '../../choose_cs_role/choose_cs_role_cubit/choose_cs_role_cubit.dart';
 import '../../choose_role/choose_role_cubit/choose_role_cubit.dart';
 import '../../welcome_screen/welcome_screen.dart';
@@ -28,6 +29,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   RegisterCubit registerViewModel = getIt<RegisterCubit>();
+  CsRolesResponseEntity? selectedCSRole; // ✅ Add this
 
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
@@ -43,9 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final selectedRole = context.watch<RoleCubit>().state;
-    final selectedCSRole = context.watch<RoleCsCubit>().state;
-
-    print("selectedRole:${selectedCSRole}");
+    print("selectedRole:${selectedRole}");
 
     return BlocListener<RegisterCubit, RegisterState>(
         bloc: registerViewModel,
@@ -64,10 +64,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Navigator.of(context).pop();
               if (selectedRole == UserRole.Client) {
                 registerViewModel.clientRegister();
-              } else if (_isTeamMemberRegistration) {
+              } else  {
                 registerViewModel.teamMemberRegister();
-              } else {
-                registerViewModel.register();
               }
             },
             title: AppLocalizations.of(context)!.error,
@@ -80,7 +78,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             message: state.response.message,
             positiveOnClick: () =>
                 Navigator.of(context).pushNamed(
-                    SignInScreen.signInScreenRouteName,
+                  EmailVerficationScreen.emailVerficationScreenRouteName,
+                  arguments: registerViewModel.emailController.text,
                 ));
       }
         },
@@ -210,40 +209,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 20.h),
                   // Team Member Registration Option
+              if (selectedRole == UserRole.customerService)
+                 ...[
 
-                  if (!_isTeamMemberRegistration) ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _isTeamMemberRegistration = true;
-                              _showInvitationCode = true;
-                            });
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.registerWithInvitationCode,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontSize: 12.sp, color: ColorManager.lightprimary, fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.doYouHaveInvitationCode,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontSize: 12.sp, color: ColorManager.darkGrey),
-                        ),
 
-                      ],
-                    ),
-                    SizedBox(height: 20.h),
-                  ],
-
-                  if (_showInvitationCode) ...[
                     Text(
                       AppLocalizations.of(context)!.invitationCode,
                       style: Theme.of(context)
@@ -265,16 +234,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     SizedBox(height: 20.h),
-                  ],
+                 ],
+
                   CustomizedElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         if (selectedRole == UserRole.Client) {
                           registerViewModel.clientRegister();
-                        } else if (_isTeamMemberRegistration) {
-                          registerViewModel.teamMemberRegister();
+
                         } else {
-                          registerViewModel.register();
+                          registerViewModel.teamMemberRegister();
                         }
                       }
                     },
@@ -288,6 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ?.copyWith(color: ColorManager.white, fontSize: 16.sp),
                     ),
                   ),
+
                   SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

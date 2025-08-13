@@ -19,7 +19,7 @@ class PostProductRemoteDataSourceImpl implements PostProductRemoteDataSource {
 
       // --- الحقول الأساسية (PascalCase كما في السواجر) ---
       formData.fields
-        ..add(MapEntry('Title', entity.title ?? ''))
+        ..add(MapEntry('nameProductId', entity.nameProductId ?? ''))
         ..add(MapEntry('Description', entity.description ?? ''))
         ..add(MapEntry('Commission', (entity.commission ?? 0).toString()))
         ..add(MapEntry('RequiredPoints', (entity.requiredPoints ?? 0).toString()))

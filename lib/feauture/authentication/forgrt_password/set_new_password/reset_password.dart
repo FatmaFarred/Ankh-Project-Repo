@@ -54,24 +54,28 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           if (state is ResetPasswordLoading) {
             CustomDialog.loading(
                 context: context,
-                message: "loading",
+                message: AppLocalizations.of(context)!.loading,
                 cancelable: false);
           } else if (state is ResetPasswordFailure) {
             Navigator.of(context).pop();
             CustomDialog.positiveButton(
                 context: context,
-                title: "error",
+                title: AppLocalizations.of(context)!.error,
                 message: state.errorMessage);
           } else if (state is ResetPasswordSuccess) {
             Navigator.of(context).pop();
             CustomDialog.positiveButton(
                 context: context,
-                title: "getTranslations(context).success",
+                title: AppLocalizations.of(context)!.success,
                 message: state.message,
-                positiveOnClick: () {}
-                      // print("${state.message}");
-
-                    );
+                positiveOnClick: () {
+                  // Navigate to sign-in screen after successful password reset
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    SignInScreen.signInScreenRouteName,
+                    (route) => false,
+                  );
+                },
+              );
           }
         },
 
@@ -147,13 +151,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
-                  controller: resetPassworsCubit.passwordController,
+                  controller: resetPassworsCubit.confirmPasswordController,
                   hintText: AppLocalizations.of(context)!.reEnterNewPassword,
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                   obscureText: !_isConfirmPasswordVisible,
                   validator: (value) => ValidatorUtils.validateConfirmPassword(
-    resetPassworsCubit.passwordController.text,
+                    resetPassworsCubit.passwordController.text,
                     context,
                     value,
                   ),
@@ -173,15 +177,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 CustomizedElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Here you would typically call your API to reset the password
-                      // using widget.email, widget.token, and passwordController.text
-                      print('Resetting password for: ${widget.email}');
-                      print('Using token: ${widget.token}');
-                      print('New password: ${resetPassworsCubit.passwordController.text}');
-
-                      // After successful reset, navigate to login
-                      Navigator.of(context).pushNamed(
-                        SignInScreen.signInScreenRouteName,
+                      // Call the reset password cubit
+                      resetPassworsCubit.resetPassword(
+                        widget.email,
+                        widget.token,
+                        resetPassworsCubit.passwordController.text,
                       );
                     }
                   },

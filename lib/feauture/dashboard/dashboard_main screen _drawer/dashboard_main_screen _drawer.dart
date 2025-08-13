@@ -2,8 +2,9 @@ import 'package:ankh_project/core/constants/assets_manager.dart';
 import 'package:ankh_project/core/constants/color_manager.dart';
 import 'package:ankh_project/feauture/dashboard/installment_requests_management/installment_requests_screen.dart';
 import 'package:ankh_project/feauture/dashboard/offers_management/offers_management_screen.dart';
+import 'package:ankh_project/feauture/dashboard/product_names_management/product_names_management.dart';
 import 'package:ankh_project/feauture/dashboard/products_management/products_management_screen.dart';
-import 'package:ankh_project/feauture/dashboard/top_brands/top_brands_managment_screen.dart';
+import 'package:ankh_project/feauture/dashboard/top_brands/top_brands_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +21,7 @@ import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../notification/notification_screen/notification_screen.dart';
 import '../points_management/points_screen.dart';
 import '../points_management/point_prices_screen.dart';
+import '../top_brands/top_brands_management_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -42,7 +44,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
     PointsScreen(),
     OffersManagementScreen(),
     InstallmentRequestsScreen(),
-    TopBrandsManagmentScreen()
+    TopBrandsManagementScreen(),
+    ProductNamesManagement()
   ];
 
 
@@ -60,7 +63,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
 
         actions: [Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
-          child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
+          child: CircleAvatar(radius: 27.r,backgroundColor: ColorManager.black,
+              child:Image.asset(ImageAssets.appIcon,width: 60.w,fit: BoxFit.cover,)),
         )],
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(
@@ -81,7 +85,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
 
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: 22.w,
-          vertical: 42.h
+          vertical: 29.h
           ),
           child: Column(
             children: [
@@ -291,6 +295,25 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
                 title: Text(
                   AppLocalizations.of(context)!.topBrands,
                   style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 9 ? Colors.white : null), // Text color
+                ),
+              ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                selected: _selectedIndex == 10,
+                selectedTileColor: ColorManager.lightprimary, // Background when selected
+                onTap: () => _onDrawerItemTapped(10),
+                leading: SvgPicture.asset(
+                  ImageAssets.productIcon,
+                  height:20.h, // Adjust height as needed,
+                  width:20.w, // Adjust width as needed,
+
+                  color: _selectedIndex == 10 ? Colors.white : Colors.black, // Icon color
+                ),
+                title: Text(
+                  AppLocalizations.of(context)!.productNames,
+                  style:Theme.of(context).textTheme.bodyMedium!.copyWith(color: _selectedIndex == 10 ? Colors.white : null), // Text color
                 ),
               ),
 

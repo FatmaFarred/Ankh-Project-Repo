@@ -57,6 +57,13 @@ abstract class EndPoints {
   static const String postNotification = "Notifications/create";
   static const String getNotification = "Notifications/get-all";
   static const String rateUser = "Auth/rating-user";
+  static const String emailVerification = "Auth/confirm";
+  static const String resendEmailVerification = "Auth/resend-confirmation";
+  static const String forgetPassword = "Auth/forgot-password";
+  static const String resetPassword = "Auth/reset-password";
+  static const String adjustCommissionForRoles = "Point/update-per-commission";
+  static const String adjustCommissionForTeamLeader = "Point/update-teamleader-commission";
+
 
 
 

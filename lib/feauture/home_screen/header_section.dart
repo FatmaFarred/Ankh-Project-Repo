@@ -116,21 +116,14 @@ class _HeaderSectionState extends State<HeaderSection> with WidgetsBindingObserv
                     Row(
                       children: [
                         // Show app logo for visitor
-                        Container(
-                          width: 50.w,
-                          height: 50.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.9),
-                            borderRadius: BorderRadius.circular(25.r),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(25.r),
-                            child: Image.asset(
-                              ImageAssets.appLogo, // Using app logo
-                              width: 50.w,
-                              height: 50.w,
-                              fit: BoxFit.cover,
-                            ),
+                        CircleAvatar(
+                          radius: 30.r,
+                          backgroundColor: Colors.black,
+                          child: Image.asset(
+                            ImageAssets.appIcon, // Using app logo
+                            width: 80.w,
+                            height: 100.h,
+                            fit: BoxFit.fill,
                           ),
                         ),
                         SizedBox(width: 12.w),

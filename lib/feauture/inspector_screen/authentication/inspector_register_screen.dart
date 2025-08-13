@@ -72,9 +72,11 @@ class _InspectorRegisterScreenState extends State<InspectorRegisterScreen> {
             context: context,
             title: AppLocalizations.of(context)!.success,
             message: state.response.message,
-            positiveOnClick: () => Navigator.of(context).pushNamed(
-              SignInScreen.signInScreenRouteName
-            ),
+              positiveOnClick: () =>
+                  Navigator.of(context).pushNamed(
+                    EmailVerficationScreen.emailVerficationScreenRouteName,
+                    arguments: inspectorRegisterCubit.emailController.text,
+                  )
           );
         }
       },
