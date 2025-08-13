@@ -13,8 +13,8 @@ import '../../../profile/cubit/profile_cubit.dart';
 class SignInCubit extends Cubit<SignInState> {
   final SignInUseCase signInUseCase;
 
-  final email = TextEditingController(text: "admin@system.com");
-  final password = TextEditingController(text: "Admin@123");
+  final email = TextEditingController();
+  final password = TextEditingController();
   bool isPasswordVisible = false;
 
   SignInCubit(this.signInUseCase) : super(SignInInitial());
