@@ -514,7 +514,7 @@
   "s": "S",
   "commissionDetails": " Commission Details",
   "requestedCommission": " Requested Commission",
-  "requestCommission": " Withdraw Commission",
+  "requestCommission": " Withdraw balance ",
   "enterCommissionAmount": " Enter Commission Amount",
   "commissionRateManagement": " Commission Rate Management",
   "editCommissionRate": "Edit Commission Rate",
@@ -539,5 +539,8 @@
   "productNameAddedSuccessfully": "Product name added successfully",
   "deleteProductName": "Delete Product Name",
   "confirmDeleteProductName": "Are you sure you want to delete this product name?",
-  "productNameDeletedSuccessfully": "Product name deleted successfully"
+  "productNameDeletedSuccessfully": "Product name deleted successfully",
+  "addNewMarketer": "Add New Marketer",
+  "marketerMail": " Marketer Email"
+
 }

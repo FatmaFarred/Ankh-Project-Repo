@@ -18,6 +18,7 @@ import '../../core/customized_widgets/reusable_widgets/custom_dialog.dart';
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../../l10n/app_localizations.dart';
 import '../authentication/user_controller/user_cubit.dart';
+import '../client_favourite_screen/client_favourite_screen.dart';
 import '../invite_team_member/invite_team_member_screen.dart';
 import '../teams_and_codes/teams_and_codes_screen.dart';
 import '../marketer_price_offers/marketer_price_offers.dart';
@@ -800,7 +801,23 @@ class _AccountScreenState extends State<AccountScreen>
                               },
 
                             ),
+                            SettingsTile(
+                              title: AppLocalizations.of(
+                                context,
+                              )!.favoriteProducts,
+                              icon: Iconsax.heart,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ClientFavouriteScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+
                           ],
+
                         ),
                         _tableSection(
                           title: AppLocalizations.of(context)!.helpAndSupport,

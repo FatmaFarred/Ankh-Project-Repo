@@ -528,6 +528,15 @@ class _PointsScreenState extends State<PointsScreen> {
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
+                                  request.phoneNumber ?? '',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontSize: 12.sp,
+                                    color: ColorManager.textBlack,
+                                  ),
+                                ),
+                                SizedBox(height: 4.h),
+
+                                Text(
                                   request.roleName ?? '',
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     fontSize: 12.sp,

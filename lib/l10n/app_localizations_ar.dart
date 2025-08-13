@@ -1538,7 +1538,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get requestedCommission => 'العمولة المطلوبة';
 
   @override
-  String get requestCommission => 'سحب العمولة';
+  String get requestCommission => 'سحب الرصيد';
 
   @override
   String get enterCommissionAmount => 'أدخل مبلغ العمولة';
@@ -1597,4 +1597,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get productNameDeletedSuccessfully => 'تم حذف اسم المنتج بنجاح';
+
+  @override
+  String get addNewMarketer => 'إضافة مسوق جديد';
+
+  @override
+  String get marketerMail => 'البريد الإلكتروني للمسوق';
 }

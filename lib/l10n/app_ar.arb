@@ -527,7 +527,7 @@
   "totalCommission": "إجمالي العمولة",
     "commissionDetails": "تفاصيل العمولة",
   "requestedCommission": "العمولة المطلوبة",
-  "requestCommission": "سحب العمولة",
+  "requestCommission": "سحب الرصيد",
   "enterCommissionAmount": "أدخل مبلغ العمولة",
   "commissionRateManagement": " إدارة نسبة العمولة",
   "editCommissionRate": "تعديل نسبة العمولة",
@@ -549,5 +549,7 @@
   "productNameAddedSuccessfully": "تمت إضافة اسم المنتج بنجاح",
   "deleteProductName": "حذف اسم المنتج",
   "confirmDeleteProductName": "هل أنت متأكد أنك تريد حذف اسم المنتج هذا؟",
-  "productNameDeletedSuccessfully": "تم حذف اسم المنتج بنجاح"
+  "productNameDeletedSuccessfully": "تم حذف اسم المنتج بنجاح",
+  "addNewMarketer": "إضافة مسوق جديد",
+  "marketerMail": "البريد الإلكتروني للمسوق"
 }

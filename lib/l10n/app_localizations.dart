@@ -3077,7 +3077,7 @@ abstract class AppLocalizations {
   /// No description provided for @requestCommission.
   ///
   /// In en, this message translates to:
-  /// **' Withdraw Commission'**
+  /// **' Withdraw balance '**
   String get requestCommission;
 
   /// No description provided for @enterCommissionAmount.
@@ -3193,6 +3193,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Product name deleted successfully'**
   String get productNameDeletedSuccessfully;
+
+  /// No description provided for @addNewMarketer.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Marketer'**
+  String get addNewMarketer;
+
+  /// No description provided for @marketerMail.
+  ///
+  /// In en, this message translates to:
+  /// **' Marketer Email'**
+  String get marketerMail;
 }
 
 class _AppLocalizationsDelegate
