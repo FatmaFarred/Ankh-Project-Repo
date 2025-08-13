@@ -34,10 +34,12 @@ class ProductRatingRemoteDataSourceImpl implements ProductRatingRemoteDataSource
           print('📤 Sending POST request to: ${ApiConstant.baseUrl}Home/product-rating');
           print('📦 Headers: ${{"Authorization": "Bearer $token"}}');
           print('📨 Payload: ${{
-            "productId": productId,
-            "userId": userId,
-            "stars": stars,
-            "comment": comment,
+            "dto": {
+              "productId": productId,
+              "userId": userId,
+              "stars": stars.toInt(),
+              "comment": comment,
+            }
           }}');
         }
 
@@ -45,10 +47,10 @@ class ProductRatingRemoteDataSourceImpl implements ProductRatingRemoteDataSource
           url: ApiConstant.baseUrl,
           endPoint: "Home/product-rating",
           data: {
-            "productId": productId,
-            "userId": userId,
-            "stars": stars,
-            "comment": comment,
+              "productId": productId,
+              "userId": userId,
+              "stars": stars.toInt(),
+              "comment": comment,
           },
           headers: {
             'Authorization': 'Bearer $token',

@@ -197,6 +197,7 @@ class _PointsScreenState extends State<PointsScreen> {
                             _rejectRequest(requestId, reason);
                             Navigator.pop(context);
                           }
+
                       },
                       color: ColorManager.error,
                       borderColor: ColorManager.error,
@@ -421,6 +422,7 @@ class _PointsScreenState extends State<PointsScreen> {
                 ),
               ),
             ),
+
             SizedBox(height: 20.h),
 
 

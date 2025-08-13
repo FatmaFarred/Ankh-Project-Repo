@@ -4,6 +4,7 @@ import 'package:ankh_project/feauture/dashboard/installment_requests_management/
 import 'package:ankh_project/feauture/dashboard/offers_management/offers_management_screen.dart';
 import 'package:ankh_project/feauture/dashboard/product_names_management/product_names_management.dart';
 import 'package:ankh_project/feauture/dashboard/products_management/products_management_screen.dart';
+import 'package:ankh_project/feauture/dashboard/top_brands/top_brands_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

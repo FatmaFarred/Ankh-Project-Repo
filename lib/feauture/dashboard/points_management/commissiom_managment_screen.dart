@@ -52,6 +52,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
     StaticRoleData(roleName: 'Inspector'),
   ];
 
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -86,6 +87,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
   void _showEditPriceBottomSheet(BuildContext context, StaticRoleData roleData) {
     final TextEditingController rateControler = TextEditingController();
     
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -120,7 +122,6 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-              
               // Role info
               Container(
                 padding: EdgeInsets.all(12.w),
@@ -144,7 +145,6 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                 ),
               ),
               SizedBox(height: 20.h),
-              
               // Price input field
               Text(
                 '${AppLocalizations.of(context)!.commissionRate}',
@@ -209,6 +209,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                               Navigator.pop(context);
                             }
                           }
+
                       },
                       color: ColorManager.lightprimary,
                       borderColor: ColorManager.lightprimary,
@@ -224,6 +225,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
       ),
     );
   }
+
 
 
   @override
@@ -271,7 +273,6 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
           title: Text(
               AppLocalizations.of(context)!.commissionRateManagement,
 
-
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: Colors.white,
               fontSize: 18.sp,
@@ -286,6 +287,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
             // Point Prices List
             Expanded(
               child: RefreshIndicator(
+
                       color: ColorManager.lightprimary,
                       onRefresh: _refreshData,
                       child: ListView.builder(
@@ -295,6 +297,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                         itemBuilder: (context, index) {
                     final roleData = _getFilteredRoles()[index];
                           
+
                           return Container(
                             margin: EdgeInsets.only(bottom: 16.h),
                             padding: EdgeInsets.all(16.w),
@@ -372,3 +375,4 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
     );
   }
 } 
+
