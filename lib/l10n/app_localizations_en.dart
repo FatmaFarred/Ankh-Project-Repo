@@ -1579,6 +1579,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get productNamesManagement => 'Product Names Management';
 
   @override
+  String get phoneOrEmail => 'Phone or Email';
+
+  @override
   String get addNewProductName => 'Add New Product Name';
 
   @override

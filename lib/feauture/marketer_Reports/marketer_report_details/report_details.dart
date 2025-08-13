@@ -84,34 +84,34 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
           } else if (state is MarketerReportDetailsError) {
             return Center(
                 child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(state.error?.errorMessage ?? "",
-                      style: Theme.of(context).textTheme.bodyMedium),
-                  CustomizedElevatedButton(
-                    bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(color: ColorManager.white, fontSize: 14.sp)),
-                    color: ColorManager.lightprimary,
-                    borderColor: ColorManager.lightprimary,
-                    onPressed: () => getMarketerReportDetailsCubit
-                        .fetchReportDetails(requestId: requestId ?? 0),
-                  )
-                ],
-              ),
-            ));
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(state.error?.errorMessage ?? "",
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      CustomizedElevatedButton(
+                        bottonWidget: Text(AppLocalizations.of(context)!.tryAgain,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(color: ColorManager.white, fontSize: 14.sp)),
+                        color: ColorManager.lightprimary,
+                        borderColor: ColorManager.lightprimary,
+                        onPressed: () => getMarketerReportDetailsCubit
+                            .fetchReportDetails(requestId: requestId ?? 0),
+                      )
+                    ],
+                  ),
+                ));
           } else if (state is MarketerReportDetailsLoaded) {
             final details = state.reportDetails;
-            
+
             // Set the selected status from API response
             if (selectedStatus == null && details?.status != null) {
               selectedStatus = details!.status;
             }
-            
+
             return RefreshIndicator(
               onRefresh: () async {
                 await getMarketerReportDetailsCubit
@@ -123,43 +123,43 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   user?.roles?[0]=="Marketer"?CarReportDetailsCard(
-                       details: details, paddingVertical: 0, paddingHorizontal: 0):
+                    user?.roles?[0]=="Marketer"?CarReportDetailsCard(
+                        details: details, paddingVertical: 0, paddingHorizontal: 0):
                     ClientProductInfoCard(
                       clientName: details.clientName??"",
                       phoneNumber: details.phoneNumber??"",
                       address: details.address??"",
                       productName: details.productName??"",
                       appointment:
-                          (details.appointmentDate != null &&
-                              details.appointmentTime != null)
-                              ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(details.appointmentDate!))} – ${details.appointmentTime}"
-                              : AppLocalizations.of(context)!.noDataFound,),
+                      (details.appointmentDate != null &&
+                          details.appointmentTime != null)
+                          ? "${DateFormat('MMMM d, yyyy').format(DateTime.parse(details.appointmentDate!))} – ${details.appointmentTime}"
+                          : AppLocalizations.of(context)!.noDataFound,),
 
 
                     SizedBox(height: 20.h),
-                       Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(12.r),
-                              decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(12.r),
-                                          border: Border.all(color: Color(0xff777777).withOpacity(0.5), width: 1.2.w),
-                                        ),
-                              child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                              Text(AppLocalizations.of(context)!.aggredPrice,),
-                              SizedBox(height: 8.h),
-                              Text("${AppLocalizations.of(context)!.price}  : ${details.agreedPrice}  ${AppLocalizations.of(context)!.egp}",
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 14.sp),
-                              ),
-                              ],),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.all(12.r),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              border: Border.all(color: Color(0xff777777).withOpacity(0.5), width: 1.2.w),
                             ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(AppLocalizations.of(context)!.aggredPrice,),
+                                SizedBox(height: 8.h),
+                                Text("${AppLocalizations.of(context)!.price}  : ${details.agreedPrice}  ${AppLocalizations.of(context)!.egp}",
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: ColorManager.darkGrey,fontSize: 14.sp),
+                                ),
+                              ],),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
 
 
                     SizedBox(height: 20.h),
@@ -187,14 +187,14 @@ class _MarketerReportDetailsState extends State<MarketerReportDetails> {
                           },
                         ),
 
-                    SizedBox(height: 20.h),
-                    CustomTextFormField(
-                      hintText: "",
-                      maxLines: 4,
-                      enabled: false, // Make it read-only
-                      initialValue: details?.inspectorComment ?? "", // Display comment from API
-                    ),
-                    SizedBox(height: 64.h),
+                        SizedBox(height: 20.h),
+                        CustomTextFormField(
+                          hintText: "",
+                          maxLines: 4,
+                          enabled: false, // Make it read-only
+                          initialValue: details?.inspectorComment ?? "", // Display comment from API
+                        ),
+                        SizedBox(height: 64.h),
                       ],
                     ),
                   ],
@@ -275,7 +275,7 @@ class CarReportDetailsCard extends StatelessWidget {
                 ),
               ],
             ),
-           // SizedBox(height: 4.h),
+            // SizedBox(height: 4.h),
             Row(children: [
               Icon(Icons.person_rounded,
 
@@ -329,4 +329,3 @@ class CarReportDetailsCard extends StatelessWidget {
     );
   }
 }
-

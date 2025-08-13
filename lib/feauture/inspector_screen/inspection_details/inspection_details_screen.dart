@@ -90,8 +90,8 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
         },
         builder: (context, submitState) {
           return BlocBuilder<
-            InspectionRequestDetailsCubit,
-            InspectionRequestDetailsState
+              InspectionRequestDetailsCubit,
+              InspectionRequestDetailsState
           >(
             builder: (context, state) {
               if (state is InspectionRequestDetailsLoading) {
@@ -176,44 +176,44 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                         /// Image Preview or Upload
                         _selectedImages.isEmpty
                             ? CustomPhotoButtons(
-                                onImagesSelected: (List<XFile> images) {
-                                  setState(() {
-                                    _selectedImages = images;
-                                  });
-                                },
-                              )
+                          onImagesSelected: (List<XFile> images) {
+                            setState(() {
+                              _selectedImages = images;
+                            });
+                          },
+                        )
                             : Container(
-                                padding: REdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(
-                                      0xff777777,
-                                    ).withOpacity(0.5),
+                          padding: REdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(
+                                0xff777777,
+                              ).withOpacity(0.5),
+                            ),
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: _selectedImages
+                                .map(
+                                  (img) => Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                    8,
                                   ),
-                                  borderRadius: BorderRadius.circular(16.r),
-                                ),
-                                child: Wrap(
-                                  spacing: 10,
-                                  runSpacing: 10,
-                                  children: _selectedImages
-                                      .map(
-                                        (img) => Center(
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              8,
-                                            ),
-                                            child: Image.file(
-                                              File(img.path),
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
+                                  child: Image.file(
+                                    File(img.path),
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
+                            )
+                                .toList(),
+                          ),
+                        ),
 
                         SizedBox(height: 20.h),
                         CustomTextFormField(
@@ -225,68 +225,68 @@ class _InspectionDetailsScreenState extends State<InspectionDetailsScreen> {
                         CustomizedElevatedButton(
                           bottonWidget: submitState is SubmitInspectionLoading
                               ? const CircularProgressIndicator(
-                                  color: Colors.white,
-                                )
+                            color: Colors.white,
+                          )
                               : Text(
-                                  AppLocalizations.of(context)!.submitRequest,
-                                  style: Theme.of(context).textTheme.bodyLarge
-                                      ?.copyWith(
-                                        color: ColorManager.white,
-                                        fontSize: 16.sp,
-                                      ),
-                                ),
+                            AppLocalizations.of(context)!.submitRequest,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                              color: ColorManager.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
                           color: Theme.of(context).primaryColor,
                           borderColor: Theme.of(context).primaryColor,
                           onPressed: submitState is SubmitInspectionLoading
                               ? null
                               : () {
-                                  if (selectedIndex == null ||
-                                      commentController.text.isEmpty) {
-                                    String missing = '';
-                                    if (selectedIndex == null && commentController.text.isEmpty) {
-                                      missing = 'status and comment';
-                                    } else if (selectedIndex == null) {
-                                      missing = 'status';
-                                    } else {
-                                      missing = 'comment';
-                                    }
-                                    CustomDialog.positiveButton(
-                                      context: context,
-                                      title: "attention", // you may define this key in your l10n
-                                      message: "Please provide the $missing before submitting.",
-                                      positiveText: "OK",
-                                      positiveOnClick: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    );
-                                    return;
-
-                                  }
-                                  print("clicked");
-                                  print("inspection Id: ${widget.requestId}");
-                                  print("result status : ${statusOptions[selectedIndex!]}");
-                                  print("inspection index: ${selectedIndex!+1}");
-
-                                  print(
-                                    "selected images : ${_selectedImages.map((file) => file.path).toList()}",
-                                  );
-                                  print("comment : ${commentController.text}");
-
-                                  final entity = InspectionSubmissionEntity(
-                                    requestInspectionId: widget.requestId!
-                                        .toInt(),
-                                    status: selectedIndex!+1,
-                                    inspectorComment: commentController.text
-                                        .trim(),
-                                    images: _selectedImages
-                                        .map((file) => file.path)
-                                        .toList(),
-                                  );
-
-                                  context
-                                      .read<SubmitInspectionCubit>()
-                                      .submitReport(entity);
+                            if (selectedIndex == null ||
+                                commentController.text.isEmpty) {
+                              String missing = '';
+                              if (selectedIndex == null && commentController.text.isEmpty) {
+                                missing = 'status and comment';
+                              } else if (selectedIndex == null) {
+                                missing = 'status';
+                              } else {
+                                missing = 'comment';
+                              }
+                              CustomDialog.positiveButton(
+                                context: context,
+                                title: "attention", // you may define this key in your l10n
+                                message: "Please provide the $missing before submitting.",
+                                positiveText: "OK",
+                                positiveOnClick: () {
+                                  Navigator.of(context).pop();
                                 },
+                              );
+                              return;
+
+                            }
+                            print("clicked");
+                            print("inspection Id: ${widget.requestId}");
+                            print("result status : ${statusOptions[selectedIndex!]}");
+                            print("inspection index: ${selectedIndex!+1}");
+
+                            print(
+                              "selected images : ${_selectedImages.map((file) => file.path).toList()}",
+                            );
+                            print("comment : ${commentController.text}");
+
+                            final entity = InspectionSubmissionEntity(
+                              requestInspectionId: widget.requestId!
+                                  .toInt(),
+                              status: selectedIndex!+1,
+                              inspectorComment: commentController.text
+                                  .trim(),
+                              images: _selectedImages
+                                  .map((file) => file.path)
+                                  .toList(),
+                            );
+
+                            context
+                                .read<SubmitInspectionCubit>()
+                                .submitReport(entity);
+                          },
                         ),
                       ],
                     ),

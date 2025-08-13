@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../api_service/api_constants.dart';
 import '../../core/constants/assets_manager.dart';
@@ -827,6 +828,7 @@ class _AccountScreenState extends State<AccountScreen>
                                 context,
                               )!.contactSupport,
                               icon: Iconsax.call,
+                              onTap:()=>_openDialer('01558780486') ,
                             ),
                           ],
                         ),
@@ -865,6 +867,15 @@ class _AccountScreenState extends State<AccountScreen>
       },
     );
   }
+  Future<void> _openDialer(String phoneNumber) async {
+    final Uri telUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(telUri)) {
+      await launchUrl(telUri);
+    } else {
+      throw 'Could not launch $telUri';
+    }
+  }
+
 }
 
 // Widget: Profile Statistic

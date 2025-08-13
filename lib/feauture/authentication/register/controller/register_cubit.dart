@@ -18,10 +18,10 @@ class RegisterCubit extends Cubit<RegisterState> {
   final ClientRegisterUseCase clientRegisterUseCase;
   final TeamMemberRegister teamMemberRegisterUseCase;
 
-  final TextEditingController fullNameController = TextEditingController(text: "fares");
-  final TextEditingController phoneController = TextEditingController(text:"01277165514");
-  final TextEditingController emailController = TextEditingController(text:"faresfaread34@gmail.com");
-  final TextEditingController passwordController = TextEditingController(text:"Fares1234@");
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController invitationCodeController = TextEditingController();
 
   bool isPasswordVisible = false;

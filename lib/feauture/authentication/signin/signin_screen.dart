@@ -159,7 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 SizedBox(height: 55.h),
                 Text(
-                  AppLocalizations.of(context)!.email,
+                  AppLocalizations.of(context)!.phoneOrEmail,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
@@ -169,12 +169,16 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 10.h),
                 CustomTextField(
                   controller: signInViewModel.email,
-                  hintText: AppLocalizations.of(context)!.enterYourEmail,
+                  hintText: AppLocalizations.of(context)!.enterYourEmailOrPhone,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  validator: (value) => ValidatorUtils.validateEmail(value, context),
-                ),
-                SizedBox(height: 20.h),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.fieldRequired; // Or a hardcoded string like 'This field is required.'
+                    }
+                    return null; // Return null if valid
+                  },
+                ),                SizedBox(height: 20.h),
                 Text(
                   AppLocalizations.of(context)!.password,
                   style: Theme.of(context)

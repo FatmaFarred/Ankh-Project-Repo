@@ -530,6 +530,8 @@
   "tapToRate": "Tap to rate this product",
   "productNames": "Product Names",
   "productNamesManagement": "Product Names Management",
+  "phoneOrEmail": "Phone or Email",
+
   "addNewProductName": "Add New Product Name",
   "noProductNamesFound": "No Product Names Found",
   "enterProductName": "Enter Product Name",

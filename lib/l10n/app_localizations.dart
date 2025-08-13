@@ -3146,6 +3146,12 @@ abstract class AppLocalizations {
   /// **'Product Names Management'**
   String get productNamesManagement;
 
+  /// No description provided for @phoneOrEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone or Email'**
+  String get phoneOrEmail;
+
   /// No description provided for @addNewProductName.
   ///
   /// In en, this message translates to:

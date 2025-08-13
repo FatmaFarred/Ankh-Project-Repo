@@ -1574,6 +1574,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get productNamesManagement => 'إدارة اسماء المنتجات';
 
   @override
+  String get phoneOrEmail => ' رقم الهاتف أو البريد الإلكتروني';
+
+  @override
   String get addNewProductName => 'إضافة اسم منتج جديد';
 
   @override
