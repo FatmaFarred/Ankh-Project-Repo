@@ -29,16 +29,21 @@ class ChatsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: ColorManager.lightprimary,
       ),
-      body: Padding(
-        padding: REdgeInsets.all(20.0),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: 6,
-          separatorBuilder: (context, index) => SizedBox(height: 10.h),
-          itemBuilder: (context, index) {
-            return ChatCard();
-          },
-        ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+          Icon(
+            Icons.chat_bubble_outline,
+            size: 100.sp,
+            color: ColorManager.lightprimary,
+          ),
+          Text(AppLocalizations.of(context)!.notAvailableNow,
+            style: Theme.of(context).textTheme.titleMedium,
+
+          )
+        ],),
       ),
     );
   }

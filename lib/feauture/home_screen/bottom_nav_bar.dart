@@ -173,7 +173,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       pages = [
         HomeScreen(),
         ClientFavouriteScreen(),
-        TeamChatScreen(),
+        ChatsScreen(),
         AccountScreen(),
       ];
       items = [
