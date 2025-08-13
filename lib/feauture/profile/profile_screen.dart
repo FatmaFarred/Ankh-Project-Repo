@@ -732,21 +732,47 @@ class _AccountScreenState extends State<AccountScreen>
                           ],
                         ),*/
                         _tableSection(
-                          title: AppLocalizations.of(
-                            context,
-                          )!.paymentAndWallets,
+                          title: AppLocalizations.of(context,)!.paymentAndWallets,
                           rows: [
                             SettingsTile(
                               title: AppLocalizations.of(
                                 context,
                               )!.walletAndCommissions,
                               icon: Iconsax.empty_wallet,
+                              onTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                                    duration: Duration(seconds: 3),
+                                    backgroundColor: ColorManager.error,
+                                    behavior: SnackBarBehavior.floating,
+                                    margin: EdgeInsets.symmetric(vertical: 100.h, horizontal: 16.w),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                             SettingsTile(
                               title: AppLocalizations.of(
                                 context,
                               )!.paymentMethods,
                               icon: Iconsax.card,
+                              onTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                                    duration: Duration(seconds: 3),
+                                    backgroundColor: ColorManager.error,
+                                    behavior: SnackBarBehavior.floating,
+                                    margin: EdgeInsets.symmetric(vertical: 100.h, horizontal: 16.w),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -754,10 +780,25 @@ class _AccountScreenState extends State<AccountScreen>
                           title: AppLocalizations.of(context)!.preferences,
                           rows: [
                             // SettingsTile(title:AppLocalizations.of(context)!.devicePreferences, icon: Icons.phone_android_rounded),
-                            DarkModeSwitchTile(),
+                           // DarkModeSwitchTile(),
                             SettingsTile(
                               title: AppLocalizations.of(context)!.language,
                               icon: Icons.language,
+                              onTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                                    duration: Duration(seconds: 3),
+                                    backgroundColor: ColorManager.error,
+                                    behavior: SnackBarBehavior.floating,
+                                    margin: EdgeInsets.symmetric(vertical: 100.h, horizontal: 16.w),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                  ),
+                                );
+                              },
+
                             ),
                           ],
                         ),
@@ -897,6 +938,22 @@ class _DarkModeSwitchTileState extends State<DarkModeSwitchTile> {
         value: isDark,
         onChanged: (val) {
           setState(() => isDark = val);
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                duration: Duration(seconds: 3),
+                backgroundColor: ColorManager.error,
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.symmetric(vertical: 100.h, horizontal: 16.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+              ),
+            );
+          };
+
+
         },
       ),
     );

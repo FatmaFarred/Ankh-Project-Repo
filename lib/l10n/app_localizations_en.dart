@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get next => 'Next';
 
   @override
+  String get editTeamLeaderCommissionRate => 'Team Leader Commission Rate';
+
+  @override
   String get onBoarding1Title =>
       'Everything You Need to Buy, Sell, and Manage in One App';
 
@@ -116,6 +119,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createAccount => 'Create Account';
+
+  @override
+  String get notAvailableNow => ' Not Available Now';
 
   @override
   String get fullName => 'Full Name';

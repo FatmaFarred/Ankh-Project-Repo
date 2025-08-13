@@ -552,7 +552,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
 
-                        Row(
+                        user?.roles?[0] == "Admin" ||
+                            user?.roles?[0] == "Marketer" ||
+                            user?.roles?[0] == "LeaderMarketer"?Row(
                           children: [
                             SectionTitle(
                                 title: "نقاط المسوق:"),
@@ -564,7 +566,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 color: const Color(0xff404147),
                               ),),
                           ],
-                        ),
+                        ):SizedBox.shrink(),
                         SizedBox(height: 4.h),
 
                         SectionTitle(

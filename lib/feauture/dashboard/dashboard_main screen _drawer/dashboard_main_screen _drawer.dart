@@ -21,6 +21,7 @@ import '../marketer_mangemnet/marketer_managment_screen.dart';
 import '../notification/notification_screen/notification_screen.dart';
 import '../points_management/points_screen.dart';
 import '../points_management/point_prices_screen.dart';
+import '../top_brands/top_brands_management_screen.dart';
 import '../users_management/users_management_screen.dart';
 
 class DashboardMainScreen  extends StatefulWidget {
@@ -62,7 +63,8 @@ class _DashboardMainScreenState extends State<DashboardMainScreen> {
 
         actions: [Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
-          child: CircleAvatar(radius: 25.r,child:Image.asset(ImageAssets.profilePic)),
+          child: CircleAvatar(radius: 27.r,backgroundColor: ColorManager.black,
+              child:Image.asset(ImageAssets.appIcon,width: 60.w,fit: BoxFit.cover,)),
         )],
         backgroundColor: ColorManager.lightprimary,
         leading: Builder(

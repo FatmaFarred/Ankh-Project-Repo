@@ -1,81 +1,92 @@
 import 'package:ankh_project/api_service/di/di.dart';
+
 import 'package:ankh_project/core/constants/color_manager.dart';
+
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_dialog.dart';
+
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/custom_text_field.dart';
+
 import 'package:ankh_project/core/customized_widgets/reusable_widgets/customized_elevated_button.dart';
+
 import 'package:ankh_project/core/customized_widgets/shared_preferences .dart';
-import 'package:ankh_project/feauture/dashboard/points_management/cubit/point_prices_cubit.dart';
-import 'package:ankh_project/feauture/dashboard/points_management/cubit/point_prices_states.dart';
+
+
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
-import '../../../domain/entities/all_point_price_entity.dart';
+
 import '../../../l10n/app_localizations.dart';
+
 import 'cubit/commission_rate_cubit.dart';
+
 import 'cubit/commission_rate_states.dart';
 
+// Simple data model for static roles
+class StaticRoleData {
+  final String roleName;
+  final bool isActive;
+
+  StaticRoleData({required this.roleName, this.isActive = true});
+}
+
 class CommissiomManagmentScreen extends StatefulWidget {
-  const CommissiomManagmentScreen({Key? key}) : super(key: key);
+  final String? roleName; // Add roleName parameter
+  
+  const CommissiomManagmentScreen({Key? key, this.roleName}) : super(key: key);
 
   @override
   State<CommissiomManagmentScreen> createState() => _CommissiomManagmentScreenState();
 }
 
 class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
-  String selectedFilter = '';
-  PointPricesCubit pointPricesCubit = getIt<PointPricesCubit>();
   CommissionRateCubit commissionRateCubit = getIt<CommissionRateCubit>();
   String? userToken;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+  // Static list of roles
+  List<StaticRoleData> staticRoles = [
+    StaticRoleData(roleName: 'Marketer'),
+    StaticRoleData(roleName: 'Inspector'),
+  ];
 
-  List<String> filterOptions = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    selectedFilter= AppLocalizations.of(context)!.all;
-    filterOptions = [
-      AppLocalizations.of(context)!.all,
-      AppLocalizations.of(context)!.marketer,
-      AppLocalizations.of(context)!.inspector,
-      AppLocalizations.of(context)!.leaderMarketer,
-
-
-
-    ];
+    // No filtering needed for static list
   }
+
 
   @override
   void initState() {
     super.initState();
-    _loadTokenAndFetchData();
+    _loadToken();
   }
 
-  Future<void> _loadTokenAndFetchData() async {
+  Future<void> _loadToken() async {
     userToken = await SharedPrefsManager.getData(key: 'user_token');
-    if (userToken != null) {
-      pointPricesCubit.fetchPointPrices(context);
-    }
   }
+
 
   Future<void> _refreshData() async {
-    print("🔄 Point Prices Refresh triggered!"); // Debug print
-    if (userToken != null) {
-      await pointPricesCubit.fetchPointPrices(context);
-    }
-    print("✅ Point Prices Refresh completed!"); // Debug print
+    print("🔄 Refresh triggered!"); // Debug print
+    setState(() {
+      // Refresh the UI if needed
+    });
+    print("✅ Refresh completed!"); // Debug print
   }
 
-  List<AllPointPriceEntity> get filteredPrices {
-    // This will be handled by the cubit state
-    return [];
+  List<StaticRoleData> _getFilteredRoles() {
+    return staticRoles;
   }
 
-  void _showAdjustCommissionBottomSheet(BuildContext context, AllPointPriceEntity roleData) {
-    final TextEditingController rateControler = TextEditingController(
 
-    );
+  void _showEditPriceBottomSheet(BuildContext context, StaticRoleData roleData) {
+    final TextEditingController rateControler = TextEditingController();
+    
 
     showModalBottomSheet(
       context: context,
@@ -90,6 +101,8 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
             color: ColorManager.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
           ),
+          child: Form(
+            key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +122,6 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-
               // Role info
               Container(
                 padding: EdgeInsets.all(12.w),
@@ -133,7 +145,6 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                 ),
               ),
               SizedBox(height: 20.h),
-
               // Price input field
               Text(
                 '${AppLocalizations.of(context)!.commissionRate}',
@@ -148,9 +159,19 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                 controller: rateControler,
                 hintText: AppLocalizations.of(context)!.enterCommissionRate,
                 keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.enterCommissionRate;
+                    }
+                    final rate = num.tryParse(value.trim());
+                    if (rate == null || rate <= 0) {
+                      return AppLocalizations.of(context)!.invalidNumber;
+                    }
+                    return null;
+                  },
               ),
               SizedBox(height: 24.h),
-
+              
               // Action buttons
               Row(
                 children: [
@@ -181,23 +202,14 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                         ),
                       ),
                       onPressed: () {
+                          if (_formKey.currentState!.validate()) {
                         final newRate = num.tryParse(rateControler.text.trim());
-                        if (newRate == null || newRate <= 0) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(AppLocalizations.of(context)!.enterPointPrice),
-                              backgroundColor: ColorManager.error,
-                            ),
-                          );
-                          return;
-                        }
-                        if (userToken != null) {
-                          roleData.roleName == 'Leadermarketer'
-                              ?  commissionRateCubit.editRateForTeamLeader(userToken!, newRate)
-                              : commissionRateCubit.editRateForRoles(userToken!, newRate, roleData.roleName!);
+                            if (newRate != null && newRate > 0 && userToken != null) {
+                              commissionRateCubit.editRateForRoles(userToken!, newRate, roleData.roleName);
+                              Navigator.pop(context);
+                            }
+                          }
 
-                        }
-                        Navigator.pop(context);
                       },
                       color: ColorManager.lightprimary,
                       borderColor: ColorManager.lightprimary,
@@ -207,11 +219,14 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
               ),
               SizedBox(height: 16.h),
             ],
+            ),
           ),
         ),
       ),
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -229,12 +244,9 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
           CustomDialog.positiveButton(
             context: context,
             title: AppLocalizations.of(context)!.success,
-            message: state.response,
+            message: state.response ?? AppLocalizations.of(context)!.success,
             positiveOnClick: () {
-              // Refresh the data
-              if (userToken != null) {
-                pointPricesCubit.fetchPointPrices(context);
-              }
+              Navigator.of(context).pop();
             },
           );
         } else if (state is CommissionRateError) {
@@ -242,7 +254,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
           CustomDialog.positiveButton(
             context: context,
             title: AppLocalizations.of(context)!.error,
-            message: state.error.errorMessage,
+            message: state.error.errorMessage ?? AppLocalizations.of(context)!.error,
             positiveOnClick: () {
               Navigator.of(context).pop();
             },
@@ -272,152 +284,19 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
           children: [
             SizedBox(height: 20.h),
 
-            // Filter Tabs
-            Container(
-              height: 50.h,
-              margin: EdgeInsets.symmetric(horizontal: 16.w),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: filterOptions.length,
-                itemBuilder: (context, index) {
-                  final filter = filterOptions[index];
-                  final isSelected = selectedFilter == filter;
-
-                  return Container(
-                    margin: EdgeInsets.only(right: 12.w),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedFilter = filter;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-                        decoration: BoxDecoration(
-                          color: isSelected ? ColorManager.lightprimary : ColorManager.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(
-                            color: isSelected ? ColorManager.lightprimary : ColorManager.lightGrey,
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          filter,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: 14.sp,
-                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                            color: isSelected ? ColorManager.white : ColorManager.textBlack,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-
             // Point Prices List
             Expanded(
-              child: BlocBuilder<PointPricesCubit, PointPricesState>(
-                bloc: pointPricesCubit,
-                builder: (context, state) {
-                  if (state is PointPricesLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state is PointPricesError) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(state.error.errorMessage ?? ''),
-                            CustomizedElevatedButton(
-                              bottonWidget: Text(
-                                AppLocalizations.of(context)!.tryAgain,
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: ColorManager.white,
-                                ),
-                              ),
-                              color: ColorManager.lightprimary,
-                              borderColor: ColorManager.lightprimary,
-                              onPressed: () {
-                                if (userToken != null) {
-                                  pointPricesCubit.fetchPointPrices(context);
-                                }
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  } else if (state is PointPricesEmpty) {
-                    return RefreshIndicator(
-                      color: ColorManager.lightprimary,
-                      onRefresh: _refreshData,
-                      child: ListView(
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.5,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.price_change,
-                                    size: 64,
-                                    color: ColorManager.darkGrey,
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                      AppLocalizations.of(context)!.noDataFound,
+              child: RefreshIndicator(
 
-                                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: ColorManager.darkGrey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else if (state is PointPricesSuccess) {
-                    final allPrices = state.pointPrices;
-                    final filteredPrices = selectedFilter == AppLocalizations.of(context)!.all
-                        ? allPrices
-                        : allPrices.where((price) {
-                            // Map localized filter names to actual role names
-                            if (selectedFilter == AppLocalizations.of(context)!.marketer) {
-                              return price.roleName?.toLowerCase() == 'marketer';
-                            } else if (selectedFilter == AppLocalizations.of(context)!.inspector) {
-                              return price.roleName?.toLowerCase() == 'inspector';
-                            } else if (selectedFilter == AppLocalizations.of(context)!.leaderMarketer) {
-                              return price.roleName?.toLowerCase() == 'leadermarketer';
-                            }
-                            return false;
-                          }).toList();
-
-                    if (filteredPrices.isEmpty) {
-                      return Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.noDataFound,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      );
-                    }
-
-                    return RefreshIndicator(
                       color: ColorManager.lightprimary,
                       onRefresh: _refreshData,
                       child: ListView.builder(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        itemCount: filteredPrices.length,
+                  itemCount: _getFilteredRoles().length,
                         physics: AlwaysScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final roleData = filteredPrices[index];
+                    final roleData = _getFilteredRoles()[index];
+                          
 
                           return Container(
                             margin: EdgeInsets.only(bottom: 16.h),
@@ -448,7 +327,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            roleData.roleName??"",
+                                      roleData.roleName,
                                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.bold,
@@ -474,7 +353,7 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () => _showAdjustCommissionBottomSheet(context, roleData),
+                                      onPressed: () => _showEditPriceBottomSheet(context, roleData),
                                       icon: Icon(
                                         Icons.edit,
                                         color: ColorManager.lightprimary,
@@ -483,21 +362,11 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
                                     ),
                                   ],
                                 ),
-
-
-                                // Price display
-
-
-                                // Additional info
                               ],
                             ),
                           );
                         },
                       ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
               ),
             ),
           ],
@@ -505,4 +374,5 @@ class _CommissiomManagmentScreenState extends State<CommissiomManagmentScreen> {
       ),
     );
   }
-}
+} 
+

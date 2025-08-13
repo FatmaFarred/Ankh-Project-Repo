@@ -755,6 +755,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i122.AdjustCommissionForTeamLeaderUseCase>(() =>
         _i122.AdjustCommissionForTeamLeaderUseCase(
             gh<_i147.PointsRepositry>()));
+    gh.lazySingleton<_i939.GetTopBrandsUseCase>(
+        () => _i939.GetTopBrandsUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i422.AddTopBrandUseCase>(
         () => _i422.AddTopBrandUseCase(gh<_i68.TopBrandRepository>()));
     gh.lazySingleton<_i282.DeleteTopBrandUseCase>(
@@ -964,6 +966,11 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i731.AddProductNameUseCase>(
         () => _i731.AddProductNameUseCase(gh<_i756.ProductNameRepository>()));
+    gh.factory<_i479.DeleteProductNameUseCase>(() =>
+        _i479.DeleteProductNameUseCase(gh<_i756.ProductNameRepository>()));
+    gh.factory<_i90.GetProductNamesUseCase>(
+        () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
+
     gh.factory<_i90.GetProductNamesUseCase>(
         () => _i90.GetProductNamesUseCase(gh<_i756.ProductNameRepository>()));
     gh.factory<_i479.DeleteProductNameUseCase>(() =>

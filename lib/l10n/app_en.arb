@@ -2,6 +2,8 @@
   "language": "Language",
   "getStarted": "Get Started",
   "next": "Next",
+  "editTeamLeaderCommissionRate": "Team Leader Commission Rate",
+
   "onBoarding1Title": "Everything You Need to Buy, Sell, and Manage in One App",
   "onBoarding1SubTitle": "Connect seamlessly with owners, marketers, and inspectors, all in one powerful platform.",
   "onBoarding2Title": "Easily List Your Property or Car and Stay in Control",
@@ -32,6 +34,8 @@
   "marketerDescription": "Promote listings and grow visibility",
   "continu": "Continue",
   "createAccount": "Create Account",
+  "notAvailableNow": " Not Available Now",
+
   "fullName": "Full Name",
   "enterYourName": "Enter Your Name",
   "email": "Email",

@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get next;
 
+  /// No description provided for @editTeamLeaderCommissionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Leader Commission Rate'**
+  String get editTeamLeaderCommissionRate;
+
   /// No description provided for @onBoarding1Title.
   ///
   /// In en, this message translates to:
@@ -295,6 +301,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Account'**
   String get createAccount;
+
+  /// No description provided for @notAvailableNow.
+  ///
+  /// In en, this message translates to:
+  /// **' Not Available Now'**
+  String get notAvailableNow;
 
   /// No description provided for @fullName.
   ///

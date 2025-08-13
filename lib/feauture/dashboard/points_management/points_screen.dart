@@ -8,6 +8,7 @@ import 'package:ankh_project/feauture/authentication/user_controller/user_cubit.
 import 'package:ankh_project/feauture/dashboard/custom_widgets/custom_bottom_sheet.dart';
 import 'package:ankh_project/feauture/dashboard/points_management/cubit/points_cubit.dart';
 import 'package:ankh_project/feauture/dashboard/points_management/cubit/points_states.dart';
+import 'package:ankh_project/feauture/dashboard/points_management/teamleader_commissiom_managment_screen.dart' show TeamleaderCommissiomManagmentScreen;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,7 @@ class PointsScreen extends StatefulWidget {
 class _PointsScreenState extends State<PointsScreen> {
   PointsCubit pointsCubit = getIt<PointsCubit>();
   String? userToken;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -106,6 +108,8 @@ class _PointsScreenState extends State<PointsScreen> {
             color: ColorManager.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
           ),
+          child: Form(
+            key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,6 +153,12 @@ class _PointsScreenState extends State<PointsScreen> {
               CustomTextField(
                 controller: reasonController,
                 hintText: AppLocalizations.of(context)!.enterRejectReason,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return AppLocalizations.of(context)!.enterRejectReason;
+                    }
+                    return null;
+                  },
               ),
               SizedBox(height: 24.h),
 
@@ -182,18 +192,12 @@ class _PointsScreenState extends State<PointsScreen> {
                         ),
                       ),
                       onPressed: () {
+                          if (_formKey.currentState!.validate()) {
                         final reason = reasonController.text.trim();
-                        if (reason.isEmpty) {
-                          // Show error for empty reason
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(AppLocalizations.of(context)!.enterRejectReason),
-                              backgroundColor: ColorManager.error,
-                            ),
-                          );
-                          return;
-                        }
-                        _rejectRequest(requestId, reason);
+                            _rejectRequest(requestId, reason);
+                            Navigator.pop(context);
+                          }
+
                       },
                       color: ColorManager.error,
                       borderColor: ColorManager.error,
@@ -203,6 +207,7 @@ class _PointsScreenState extends State<PointsScreen> {
               ),
               SizedBox(height: 16.h),
             ],
+            ),
           ),
         ),
       ),
@@ -248,7 +253,6 @@ class _PointsScreenState extends State<PointsScreen> {
             title: AppLocalizations.of(context)!.success,
             message: state.response ?? '',
             positiveOnClick: () {
-              Navigator.of(context).pop();
               // Refresh the data
               if (userToken != null) {
                 pointsCubit.fetchPointsRequests(context,userToken!);
@@ -377,6 +381,48 @@ class _PointsScreenState extends State<PointsScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 8.h),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TeamleaderCommissiomManagmentScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                  decoration: BoxDecoration(
+
+                    color: ColorManager.lightprimary,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.percent_outlined,
+                        color: ColorManager.white,
+                        size: 18.sp,
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        AppLocalizations.of(context)!.editTeamLeaderCommissionRate,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorManager.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             SizedBox(height: 20.h),
 
 

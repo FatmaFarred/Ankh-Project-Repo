@@ -134,7 +134,7 @@ class _ProductRatingWidgetState extends State<ProductRatingWidget> {
 
                           context.read<RatingCubit>().addProductRating(
                             productId: widget.productId,
-                            userId: _userId!.toString(),
+                            userId: _userId!,
                             stars: _rating,
                             comment: _commentController.text,
                             token: _userToken!,

@@ -18,6 +18,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get next => 'التالي';
 
   @override
+  String get editTeamLeaderCommissionRate => '  نسبة عمولة قائد الفريق';
+
+  @override
   String get onBoarding1Title =>
       'كل ما تحتاجه للبيع، الشراء، والإدارة في تطبيق واحد';
 
@@ -114,7 +117,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continu => 'متابعة';
 
   @override
-  String get createAccount => 'سجّل الدخول الان!';
+  String get createAccount => ' إنشاء حساب';
+
+  @override
+  String get notAvailableNow => 'عذرًا، هذه الميزة غير متاحة الآن.';
 
   @override
   String get fullName => 'الاسم الكامل';

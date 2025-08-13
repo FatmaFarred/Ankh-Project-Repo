@@ -98,7 +98,26 @@ class ChooseCsTypeScreen extends StatelessWidget {
                                 subtitle: role.description ?? '',
                                 image: imageUrl,
                                 isSelected: selectedRole?.id == role.id,
-                                onTap: () => cubit.selectRole(role),
+                                onTap: () {
+                                  if (role.name == "ServiceAgent") {
+                                    // Show alert that ServiceAgent role is not available yet
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('${AppLocalizations.of(context)!.notAvailableNow}'),
+                                        duration: Duration(seconds: 3),
+                                        backgroundColor: ColorManager.error,
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: EdgeInsets.symmetric(vertical: 200.h, horizontal: 16.w),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8.r),
+                                        ),
+                                      ),
+                                    );
+                                    // Don't select the role since it's not available
+                                  } else {
+                                    cubit.selectRole(role);
+                                  }
+                                },
                               );
                             },
                      ),
@@ -112,17 +131,41 @@ class ChooseCsTypeScreen extends StatelessWidget {
             borderColor: ColorManager.lightprimary,
             onPressed: () {
               final state = cubit.state;
-              if (state is RoleCsSuccess && state.selectedRole != null&& state.selectedRole!.name=="Marketer") {
-                Navigator.of(context).pushNamed(
-                  RegisterScreen.registerScreenRouteName,
-                  arguments: state.selectedRole,
-                );
-              } else  if (state is RoleCsSuccess && state.selectedRole != null&& state.selectedRole!.name=="Inspector") {
-    Navigator.of(context).pushNamed(
-    InspectorRegisterScreen.inspectorRegisterScreenRouteName,
-    arguments: state.selectedRole,
-    );
-    }else {
+              if (state is RoleCsSuccess && state.selectedRole != null) {
+                // Check if ServiceAgent role is selected (shouldn't happen but just in case)
+                if (state.selectedRole!.name == "ServiceAgent") {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${state.selectedRole!.name} ${AppLocalizations.of(context)!.notAvailable}'),
+                      duration: Duration(seconds: 3),
+                      backgroundColor: ColorManager.error,
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(16.w),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                    ),
+                  );
+                  return;
+                }
+                
+                if (state.selectedRole!.name == "Marketer") {
+                  Navigator.of(context).pushNamed(
+                    RegisterScreen.registerScreenRouteName,
+                    arguments: state.selectedRole,
+                  );
+                } else if (state.selectedRole!.name == "Inspector") {
+                  Navigator.of(context).pushNamed(
+                    InspectorRegisterScreen.inspectorRegisterScreenRouteName,
+                    arguments: state.selectedRole,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(
+                        AppLocalizations.of(context)!.chooseRole)),
+                  );
+                }
+              } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(
                       AppLocalizations.of(context)!.chooseRole)),

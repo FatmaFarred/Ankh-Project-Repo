@@ -25,7 +25,8 @@ import '../forgrt_password/forget_password/forget_password_screen.dart';
 import '../register/register _screen.dart';
 
   class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+    final bool showRegietrButton ;
+   SignInScreen({super.key, this.showRegietrButton= true});
   static String signInScreenRouteName = "SignInScreen";
 
   @override
@@ -237,7 +238,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 ),
                 SizedBox(height: 50.h),
-                Row(
+                widget.showRegietrButton?Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -268,9 +269,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             .bodyLarge
                             ?.copyWith(fontSize: 14.sp, color: ColorManager.lightprimary),
                       ),
-                    ),
+                    )
                   ],
-                ),
+                ): const SizedBox.shrink(),
 
               ],
             ),

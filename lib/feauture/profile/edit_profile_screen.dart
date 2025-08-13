@@ -13,7 +13,7 @@ import '../../core/customized_widgets/reusable_widgets/customized_elevated_butto
 import '../../core/customized_widgets/shared_preferences .dart';
 import '../../core/local_storage/my_shared_prefrence.dart';
 import '../../l10n/app_localizations.dart';
-import '../authentication/user_controller/user_cubit.dart';
+// import '../authentication/user_controller/user_cubit.dart';
 import 'cubit/edit_profile_cubit.dart';
 import 'cubit/edit_profile_states.dart';
 import 'cubit/profile_cubit.dart';
@@ -46,22 +46,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _loadCurrentProfileData() async {
-    // Load user data from preferences first
-    await context.read<UserCubit>().loadUserFromPrefs();
-    
-    // Get user data from UserCubit for initial values
-    final user = context.read<UserCubit>().state;
-    
-    // Set initial values for email and phone from UserCubit
-    if (user != null) {
-      setState(() {
-        _fullNameController.text = user.fullName ?? '';
-        _emailController.text = user.email ?? '';
-        _phoneController.text = user.phoneNumber ?? '';
-      });
-    }
-
-    // Fetch profile data for other fields (address, etc.)
+    // Fetch profile data for all fields
     final profileCubit = context.read<ProfileCubit>();
     final token = await SharedPrefsManager.getData(key: 'user_token');
     final userId = await SharedPrefsManager.getData(key: 'user_id');
@@ -120,11 +105,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       title: AppLocalizations.of(context)!.success,
       message: message,
       positiveOnClick: () async {
-        // Refresh both profile and user data after successful update
+        // Refresh profile data after successful update
         if (token != null && id != null) {
           await context.read<ProfileCubit>().fetchProfile(token, id);
-          // Refresh user data from preferences
-          await context.read<UserCubit>().loadUserFromPrefs();
         }
         Navigator.of(context).pop(); // Close dialog
         // Return to profile screen with result to trigger refresh
@@ -179,11 +162,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 if (state is ProfileLoaded) {
                   final profile = state.profile;
                   setState(() {
-                    // Only update fields that are available in profile
-                    // Keep email and phone from UserCubit as they are not in profile
-                    _fullNameController.text = profile.fullName ?? _fullNameController.text;
+                    // Update all fields from profile data
+                    _fullNameController.text = profile.fullName ?? '';
+                    _emailController.text = profile.email ?? '';
+                    _phoneController.text = profile.phone ?? '';
                     _addressController.text = profile.address ?? '';
-                    // Note: email and phone are kept from UserCubit initial values
                   });
                 } else if (state is ProfileError) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -274,6 +257,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       controller: _emailController,
                       hintText: AppLocalizations.of(context)!.email,
                       prefixIcon: Icon(Icons.email,color: ColorManager.lightprimary,),
+                      readOnly: true,
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
